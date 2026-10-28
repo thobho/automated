@@ -1,0 +1,131 @@
+[
+ {
+  "page": "echarts.html",
+  "run": 1,
+  "perf": {
+   "shapes": 2479,
+   "fetchMs": 43,
+   "toFirstRenderMs": 247
+  },
+  "errors": []
+ },
+ {
+  "page": "echarts.html",
+  "run": 2,
+  "perf": {
+   "shapes": 2479,
+   "fetchMs": 42,
+   "toFirstRenderMs": 415
+  },
+  "errors": []
+ },
+ {
+  "page": "echarts.html",
+  "run": 3,
+  "perf": {
+   "shapes": 2479,
+   "fetchMs": 38,
+   "toFirstRenderMs": 259
+  },
+  "errors": []
+ },
+ {
+  "page": "plot.html",
+  "run": 1,
+  "perf": {
+   "shapes": 2479,
+   "fetchMs": 49,
+   "toFirstRenderMs": 249,
+   "svgNodes": 2481
+  },
+  "errors": []
+ },
+ {
+  "page": "plot.html",
+  "run": 2,
+  "perf": {
+   "shapes": 2479,
+   "fetchMs": 37,
+   "toFirstRenderMs": 175,
+   "svgNodes": 2481
+  },
+  "errors": []
+ },
+ {
+  "page": "plot.html",
+  "run": 3,
+  "perf": {
+   "shapes": 2479,
+   "fetchMs": 40,
+   "toFirstRenderMs": 264,
+   "svgNodes": 2481
+  },
+  "errors": []
+ },
+ {
+  "page": "vega-lite.html",
+  "run": 1,
+  "perf": {
+   "shapes": 2479,
+   "renderer": "svg",
+   "embedToRenderMs": 465,
+   "svgNodes": 2486
+  },
+  "errors": []
+ },
+ {
+  "page": "vega-lite.html",
+  "run": 2,
+  "perf": {
+   "shapes": 2479,
+   "renderer": "svg",
+   "embedToRenderMs": 449,
+   "svgNodes": 2486
+  },
+  "errors": []
+ },
+ {
+  "page": "vega-lite.html",
+  "run": 3,
+  "perf": {
+   "shapes": 2479,
+   "renderer": "svg",
+   "embedToRenderMs": 438,
+   "svgNodes": 2486
+  },
+  "errors": []
+ },
+ {
+  "page": "vega-lite.html?renderer=canvas",
+  "run": 1,
+  "perf": {
+   "shapes": 2479,
+   "renderer": "canvas",
+   "embedToRenderMs": 375,
+   "svgNodes": 0
+  },
+  "errors": []
+ },
+ {
+  "page": "vega-lite.html?renderer=canvas",
+  "run": 2,
+  "perf": {
+   "shapes": 2479,
+   "renderer": "canvas",
+   "embedToRenderMs": 365,
+   "svgNodes": 0
+  },
+  "errors": []
+ },
+ {
+  "page": "vega-lite.html?renderer=canvas",
+  "run": 3,
+  "perf": {
+   "shapes": 2479,
+   "renderer": "canvas",
+   "embedToRenderMs": 390,
+   "svgNodes": 0
+  },
+  "errors": []
+ }
+]

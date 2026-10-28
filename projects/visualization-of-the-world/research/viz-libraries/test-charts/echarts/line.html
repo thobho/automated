@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECharts 6.1.0 - line chart test</title><link rel="stylesheet" href="../shared/page.css"></head><body>
+<header><h1>Line chart, 3 series (ECharts 6.1.0)</h1><p>SYNTHETIC DEMO DATA. Hover for tooltip, click legend entries to toggle series.</p></header>
+<div id="chart"></div>
+<script src="../vendor/echarts-6.1.0.min.js"></script>
+<script>
+fetch('../shared/demo-data.json').then(r => r.json()).then(d => {
+  const chart = echarts.init(document.getElementById('chart'));
+  chart.setOption({
+    color: ['#c2410c', '#0f766e', '#4338ca'],
+    tooltip: { trigger: 'axis' },
+    legend: { top: 0 },
+    grid: { left: 40, right: 16, top: 40, bottom: 28 },
+    xAxis: { type: 'category', data: d.years, boundaryGap: false },
+    yAxis: { type: 'value', scale: true },
+    series: Object.entries(d.line.series).map(([name, data]) => ({ name, type: 'line', data, smooth: true, showSymbol: false }))
+  });
+  window.addEventListener('resize', () => chart.resize());
+  window.__ready = true;
+}).catch(e => { document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00020;padding:16px">Failed to load data: ' + e.message + '</p>'); });
+</script></body></html>

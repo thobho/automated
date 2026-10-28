@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D3 7.9.0 + Plot 0.6.17 - voivodeship choropleth</title><link rel="stylesheet" href="../shared/page.css">
+<style>#chart svg{max-width:100%;height:auto}</style></head><body>
+<header><h1>Choropleth, 16 voivodeships (D3 7.9.0 + Plot 0.6.17)</h1><p>SYNTHETIC DEMO VALUES on real PRG boundaries (PR #19, simplified). Hover for tooltip.</p></header>
+<div id="chart"></div>
+<script src="../vendor/d3-7.9.0.min.js"></script>
+<script src="../vendor/plot-0.6.17.umd.min.js"></script>
+<script>
+Promise.all([d3.json('../shared/voivodeships.geojson'), d3.json('../shared/demo-data.json')]).then(([geo, d]) => {
+  // d3-geo expects clockwise outer rings (opposite of RFC 7946); reverse rings of features that cover more than a hemisphere.
+  const rewind = g => { const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates; polys.forEach(p => p.forEach(r => r.reverse())); };
+  for (const f of geo.features) if (d3.geoArea(f) > 2 * Math.PI) rewind(f.geometry);
+  for (const f of geo.features) f.properties.value = d.choropleth.byTeryt[f.properties.teryt];
+  const w = Math.min(document.getElementById('chart').clientWidth, 700);
+  document.getElementById('chart').replaceChildren(Plot.plot({
+    width: w, height: Math.round(w * 0.95),
+    projection: { type: 'mercator', domain: geo },
+    color: { type: 'linear', scheme: 'oranges', domain: [40, 95], legend: true, label: 'Demo index' },
+    marks: [Plot.geo(geo, { fill: d => d.properties.value, stroke: '#fff', strokeWidth: 0.6, title: d => d.properties.name + ': ' + d.properties.value, tip: true })]
+  }));
+  window.__ready = true;
+}).catch(e => { document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00020;padding:16px">Failed to load data: ' + e.message + '</p>'); });
+</script></body></html>

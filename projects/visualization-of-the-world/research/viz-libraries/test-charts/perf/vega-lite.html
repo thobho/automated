@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../shared/page.css"><title>Perf: Vega-Lite, 2479 gminas</title></head><body>
+<header><h1>Perf: 2,479 gminas (Vega-Lite 6.5.0)</h1><p id="out">running...</p></header><div id="chart"></div>
+<script src="../vendor/vega-6.4.0.min.js"></script><script src="../vendor/vega-lite-6.5.0.min.js"></script><script src="../vendor/vega-embed-7.3.0.min.js"></script>
+<script>
+const t0 = performance.now();
+const spec = { $schema: 'https://vega.github.io/schema/vega-lite/v6.json', width: 'container', height: 560, autosize: { type: 'fit', contains: 'padding' },
+  data: { url: '../shared/gminas.topojson', format: { type: 'topojson', feature: 'gminas' } },
+  transform: [{ calculate: '(toNumber(datum.properties.teryt) * 7919) % 100', as: 'value' }],
+  projection: { type: 'mercator' }, mark: { type: 'geoshape', stroke: '#fff', strokeWidth: 0.2 },
+  encoding: { color: { field: 'value', type: 'quantitative', scale: { scheme: 'oranges', domain: [0, 100] }, legend: null } } };
+vegaEmbed('#chart', spec, { actions: false, renderer: new URLSearchParams(location.search).get('renderer') || 'svg' }).then(() => {
+  const t1 = performance.now(); window.__perf = { shapes: 2479, renderer: new URLSearchParams(location.search).get('renderer') || 'svg', embedToRenderMs: Math.round(t1 - t0), svgNodes: document.querySelectorAll('#chart svg *').length };
+  document.getElementById('out').textContent = JSON.stringify(window.__perf); window.__ready = true; });
+</script></body></html>

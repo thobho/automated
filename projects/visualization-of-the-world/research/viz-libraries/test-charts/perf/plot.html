@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../shared/page.css"><title>Perf: Plot, 2479 gminas</title><style>#chart svg{max-width:100%;height:auto}</style></head><body>
+<header><h1>Perf: 2,479 gminas (D3 7.9.0 + Plot 0.6.17)</h1><p id="out">running...</p></header><div id="chart"></div>
+<script src="../vendor/d3-7.9.0.min.js"></script><script src="../vendor/plot-0.6.17.umd.min.js"></script><script src="../vendor/topojson-client-3.1.0.min.js"></script>
+<script>
+const t0 = performance.now();
+d3.json('../shared/gminas.topojson').then(topo => {
+  const t1 = performance.now();
+  const geo = topojson.feature(topo, topo.objects.gminas);
+  for (const f of geo.features) f.properties.value = (parseInt(f.properties.teryt, 10) * 7919) % 100;
+  const svg = Plot.plot({ width: 700, height: 660, projection: { type: 'mercator', domain: geo }, color: { scheme: 'oranges', domain: [0, 100] },
+    marks: [Plot.geo(geo, { fill: d => d.properties.value, stroke: '#fff', strokeWidth: 0.2 })] });
+  document.getElementById('chart').replaceChildren(svg);
+  requestAnimationFrame(() => requestAnimationFrame(() => { const t2 = performance.now(); window.__perf = { shapes: geo.features.length, fetchMs: Math.round(t1 - t0), toFirstRenderMs: Math.round(t2 - t1), svgNodes: svg.querySelectorAll('*').length }; document.getElementById('out').textContent = JSON.stringify(window.__perf); window.__ready = true; }));
+});
+</script></body></html>

@@ -1,0 +1,128 @@
+[
+ {
+  "lib": "echarts",
+  "name": "line",
+  "viewport": "375",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "echarts",
+  "name": "line",
+  "viewport": "desktop",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "echarts",
+  "name": "bar-animation",
+  "viewport": "375",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "echarts",
+  "name": "bar-animation",
+  "viewport": "desktop",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "echarts",
+  "name": "choropleth",
+  "viewport": "375",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "echarts",
+  "name": "choropleth",
+  "viewport": "desktop",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "d3-plot",
+  "name": "line",
+  "viewport": "375",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "d3-plot",
+  "name": "line",
+  "viewport": "desktop",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "d3-plot",
+  "name": "bar-animation",
+  "viewport": "375",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "d3-plot",
+  "name": "bar-animation",
+  "viewport": "desktop",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "d3-plot",
+  "name": "choropleth",
+  "viewport": "375",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "d3-plot",
+  "name": "choropleth",
+  "viewport": "desktop",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "vega-lite",
+  "name": "line",
+  "viewport": "375",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "vega-lite",
+  "name": "line",
+  "viewport": "desktop",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "vega-lite",
+  "name": "bar-animation",
+  "viewport": "375",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "vega-lite",
+  "name": "bar-animation",
+  "viewport": "desktop",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "vega-lite",
+  "name": "choropleth",
+  "viewport": "375",
+  "overflowPx": 0,
+  "errors": []
+ },
+ {
+  "lib": "vega-lite",
+  "name": "choropleth",
+  "viewport": "desktop",
+  "overflowPx": 0,
+  "errors": []
+ }
+]

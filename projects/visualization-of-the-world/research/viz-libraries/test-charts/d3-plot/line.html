@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D3 7.9.0 + Plot 0.6.17 - line chart test</title><link rel="stylesheet" href="../shared/page.css">
+<style>#chart svg{max-width:100%;height:auto}.legend{display:flex;gap:12px;padding:0 16px;flex-wrap:wrap}.legend label{cursor:pointer;display:flex;align-items:center;gap:4px}.sw{width:12px;height:12px;border-radius:2px;display:inline-block}</style></head><body>
+<header><h1>Line chart, 3 series (D3 7.9.0 + Plot 0.6.17)</h1><p>SYNTHETIC DEMO DATA. Hover for tooltip, tick the boxes to toggle series.</p></header>
+<div class="legend" id="legend"></div>
+<div id="chart"></div>
+<script src="../vendor/d3-7.9.0.min.js"></script>
+<script src="../vendor/plot-0.6.17.umd.min.js"></script>
+<script>
+const COLORS = ['#c2410c', '#0f766e', '#4338ca'];
+d3.json('../shared/demo-data.json').then(d => {
+  const names = Object.keys(d.line.series);
+  const rows = names.flatMap(s => d.years.map((y, i) => ({ series: s, year: y, value: d.line.series[s][i] })));
+  const on = new Set(names);
+  const width = () => Math.min(document.getElementById('chart').clientWidth, 900);
+  function draw() {
+    const data = rows.filter(r => on.has(r.series));
+    const plot = Plot.plot({
+      width: width(), height: 400, marginLeft: 44,
+      x: { tickFormat: 'd', label: null },
+      y: { grid: true, label: null, domain: [50, 400] },
+      color: { domain: names, range: COLORS },
+      marks: [
+        Plot.lineY(data, { x: 'year', y: 'value', stroke: 'series', strokeWidth: 2.5, curve: 'catmull-rom' }),
+        Plot.tip(data, Plot.pointerX({ x: 'year', y: 'value', stroke: 'series', title: r => `${r.series}\n${r.year}: ${r.value}` }))
+      ]
+    });
+    document.getElementById('chart').replaceChildren(plot);
+  }
+  const lg = d3.select('#legend').selectAll('label').data(names).join('label');
+  lg.append('input').attr('type', 'checkbox').property('checked', true).on('change', (e, s) => { e.target.checked ? on.add(s) : on.delete(s); draw(); });
+  lg.append('span').attr('class', 'sw').style('background', (s, i) => COLORS[i]);
+  lg.append('span').text(s => s);
+  draw(); window.addEventListener('resize', draw);
+  window.__ready = true;
+}).catch(e => { document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00020;padding:16px">Failed to load data: ' + e.message + '</p>'); });
+</script></body></html>

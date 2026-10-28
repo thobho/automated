@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vega-Lite 6.5.0 - voivodeship choropleth</title><link rel="stylesheet" href="../shared/page.css"><style>#chart{padding:0 0 0 0}</style></head><body>
+<header><h1>Choropleth, 16 voivodeships (Vega-Lite 6.5.0 + Vega 6.4.0)</h1><p>SYNTHETIC DEMO VALUES on real PRG boundaries (PR #19, simplified). Hover for tooltip.</p></header>
+<div id="chart"></div>
+<script src="../vendor/vega-6.4.0.min.js"></script><script src="../vendor/vega-lite-6.5.0.min.js"></script><script src="../vendor/vega-embed-7.3.0.min.js"></script>
+<script>
+fetch('../shared/demo-data.json').then(r => r.json()).then(d => {
+  const values = Object.entries(d.choropleth.byTeryt).map(([teryt, value]) => ({ teryt, value }));
+  const spec = {
+    $schema: 'https://vega.github.io/schema/vega-lite/v6.json',
+    width: 'container', height: 420, autosize: { type: 'fit', contains: 'padding' },
+    data: { url: '../shared/voivodeships.topojson', format: { type: 'topojson', feature: 'voivodeships' } },
+    transform: [{ lookup: 'properties.teryt', from: { data: { values }, key: 'teryt', fields: ['value'] } }],
+    projection: { type: 'mercator' },
+    mark: { type: 'geoshape', stroke: '#fff', strokeWidth: 0.6 },
+    encoding: {
+      color: { field: 'value', type: 'quantitative', scale: { scheme: 'oranges', domain: [40, 95] }, legend: { title: 'Demo index', orient: 'bottom' } },
+      tooltip: [{ field: 'properties.name', type: 'nominal', title: 'Voivodeship' }, { field: 'value', type: 'quantitative', title: 'Demo index' }]
+    }
+  };
+  // Vega logs data-load failures to the console and renders an empty chart instead of rejecting, so wrap the loader to surface them.
+  const loader = vega.loader(), load = loader.load.bind(loader);
+  loader.load = (uri, opt) => load(uri, opt).catch(e => { document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00020;padding:16px">Failed to load ' + uri + ': ' + e.message + '</p>'); throw e; });
+  return vegaEmbed('#chart', spec, { actions: false, loader }).then(() => { window.__ready = true; });
+}).catch(e => { document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00020;padding:16px">Failed: ' + e.message + '</p>'); });
+</script></body></html>

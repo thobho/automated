@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vega-Lite 6.5.0 - stacked bar with year animation</title><link rel="stylesheet" href="../shared/page.css"><style>#chart{padding:0 0 0 0}</style></head><body>
+<header><h1>Stacked bar, year animation (Vega-Lite 6.5.0 + Vega 6.4.0)</h1><p>SYNTHETIC DEMO DATA. Uses the built-in <code>time</code> channel with a <code>timer</code> selection.</p></header>
+<div id="chart"></div>
+<script src="../vendor/vega-6.4.0.min.js"></script><script src="../vendor/vega-lite-6.5.0.min.js"></script><script src="../vendor/vega-embed-7.3.0.min.js"></script>
+<script>
+fetch('../shared/demo-data.json').then(r => r.json()).then(d => {
+  const { categories, stacks, byYear } = d.bars;
+  const values = d.years.flatMap(year => stacks.flatMap(stack => categories.map((group, i) => ({ year, stack, group, value: byYear[year][stack][i] }))));
+  const spec = {
+    $schema: 'https://vega.github.io/schema/vega-lite/v6.json',
+    width: 'container', height: 340, autosize: { type: 'fit', contains: 'padding' },
+    data: { values },
+    params: [{ name: 'animation_frame', select: { type: 'point', fields: ['year'], on: 'timer' } }],
+    transform: [{ filter: { param: 'animation_frame' } }, { stack: 'value', groupby: ['group', 'year'], sort: [{ field: 'stack' }], as: ['v0', 'v1'] }],
+    mark: { type: 'bar', tooltip: true },
+    encoding: {
+      x: { field: 'group', type: 'nominal', axis: { title: null, labelAngle: 0 } },
+      y: { field: 'v0', type: 'quantitative', scale: { domain: [0, 180] }, axis: { title: null } },
+      y2: { field: 'v1' },
+      color: { field: 'stack', type: 'nominal', scale: { range: ['#c2410c', '#0f766e', '#4338ca'] }, legend: { title: null, orient: 'top' } },
+      time: { field: 'year', type: 'ordinal' }
+    }
+  };
+  return vegaEmbed('#chart', spec, { actions: false }).then(r => { window.__view = r.view; window.__vl = r.spec; window.__ready = true; });
+}).catch(e => { document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00020;padding:16px">Failed: ' + e.message + '</p>'); });
+</script></body></html>

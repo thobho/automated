@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECharts 6.1.0 - voivodeship choropleth</title><link rel="stylesheet" href="../shared/page.css"></head><body>
+<header><h1>Choropleth, 16 voivodeships (ECharts 6.1.0)</h1><p>SYNTHETIC DEMO VALUES on real PRG boundaries (PR #19, simplified). Hover for tooltip.</p></header>
+<div id="chart"></div>
+<script src="../vendor/echarts-6.1.0.min.js"></script>
+<script>
+Promise.all([fetch('../shared/voivodeships.geojson').then(r => r.json()), fetch('../shared/demo-data.json').then(r => r.json())]).then(([geo, d]) => {
+  echarts.registerMap('pl', geo);
+  const chart = echarts.init(document.getElementById('chart'));
+  const data = geo.features.map(f => ({ name: f.properties.name, value: d.choropleth.byTeryt[f.properties.teryt] }));
+  chart.setOption({
+    tooltip: { trigger: 'item', formatter: p => p.name + ': ' + (p.value ?? 'n/a') },
+    visualMap: { min: 40, max: 95, calculable: true, orient: 'horizontal', left: 'center', bottom: 4, inRange: { color: ['#fde8c8', '#e8743b', '#7a1f0f'] }, text: ['high', 'low'] },
+    series: [{ type: 'map', map: 'pl', roam: true, data, label: { show: false }, emphasis: { label: { show: true } }, itemStyle: { borderColor: '#fff', borderWidth: 0.6 } }]
+  });
+  window.addEventListener('resize', () => chart.resize());
+  window.__ready = true;
+}).catch(e => { document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00020;padding:16px">Failed to load data: ' + e.message + '</p>'); });
+</script></body></html>

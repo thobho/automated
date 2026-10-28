@@ -1,0 +1,16 @@
+echarts 200  1121883   368213 https://cdn.jsdelivr.net/npm/echarts@6.1.0/dist/echarts.min.js
+d3 200   279706    92465 https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js
+plot 200   209183    68693 https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.17/dist/plot.umd.min.js
+vega 200   521123   179615 https://cdn.jsdelivr.net/npm/vega@6.4.0/build/vega.min.js
+vegalite 200   257954    81918 https://cdn.jsdelivr.net/npm/vega-lite@6.5.0/build/vega-lite.min.js
+vegaembed 200    60298    20803 https://cdn.jsdelivr.net/npm/vega-embed@7.3.0/build/vega-embed.min.js
+plotly 200  4834409  1476171 https://cdn.jsdelivr.net/npm/plotly.js-dist-min@4.1.2/plotly.min.js
+highcharts 200   280199   102118 https://cdn.jsdelivr.net/npm/highcharts@13.1.1/highcharts.js
+highmaps 200    85741    29517 https://cdn.jsdelivr.net/npm/highcharts@13.1.1/modules/map.js
+chartjs 200   210082    71014 https://cdn.jsdelivr.net/npm/chart.js@4.6.1/dist/chart.umd.min.js
+amcharts 200     6578     1188 https://cdn.jsdelivr.net/npm/@amcharts/amcharts5@5.21.5/index.js
+amcharts_map 200     2607      710 https://cdn.jsdelivr.net/npm/@amcharts/amcharts5@5.21.5/map.js
+deckgl 200  2073497   574971 https://cdn.jsdelivr.net/npm/deck.gl@9.4.0/dist.min.js
+maplibre 404       69       90 https://cdn.jsdelivr.net/npm/maplibre-gl@6.16.0/dist/maplibre-gl.js
+leaflet 200   147552    42445 https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js
+ol 200  1070771   297888 https://cdn.jsdelivr.net/npm/ol@10.11.0/dist/ol.js

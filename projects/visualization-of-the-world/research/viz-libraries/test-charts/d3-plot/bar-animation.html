@@ -1,0 +1,44 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D3 7.9.0 + Plot 0.6.17 - stacked bar with year animation</title><link rel="stylesheet" href="../shared/page.css">
+<style>#chart svg{max-width:100%;height:auto}.legend{display:flex;gap:12px;padding:0 16px;flex-wrap:wrap}.sw{width:12px;height:12px;border-radius:2px;display:inline-block;margin-right:4px}</style></head><body>
+<header><h1>Stacked bar, year animation (D3 7.9.0 + Plot 0.6.17)</h1><p>SYNTHETIC DEMO DATA. Plot has no animation API: values are tweened by re-rendering each frame.</p></header>
+<div class="controls"><button id="play">Pause</button><input id="year" type="range" aria-label="Year"><b id="yl"></b></div>
+<div class="legend" id="legend"></div>
+<div id="chart"></div>
+<script src="../vendor/d3-7.9.0.min.js"></script>
+<script src="../vendor/plot-0.6.17.umd.min.js"></script>
+<script>
+const COLORS = ['#c2410c', '#0f766e', '#4338ca'];
+d3.json('../shared/demo-data.json').then(d => {
+  const { categories: cats, stacks, byYear } = d.bars;
+  let shown = JSON.parse(JSON.stringify(byYear[d.years[0]])); // values currently on screen
+  const draw = (yr) => {
+    const rows = stacks.flatMap(s => cats.map((c, i) => ({ group: c, stack: s, value: shown[s][i] })));
+    document.getElementById('yl').textContent = yr;
+    document.getElementById('chart').replaceChildren(Plot.plot({
+      width: Math.min(document.getElementById('chart').clientWidth, 900), height: 400, marginLeft: 44,
+      x: { label: null }, y: { grid: true, domain: [0, 180], label: null },
+      color: { domain: stacks, range: COLORS },
+      marks: [Plot.barY(rows, { x: 'group', y: 'value', fill: 'stack', tip: { channels: { stack: 'stack' } } }), Plot.ruleY([0])]
+    }));
+  };
+  let cur = 0, timer = null, raf = null;
+  const go = (i) => { // tween from what is shown to the target year
+    cur = i; const to = byYear[d.years[i]]; const from = JSON.parse(JSON.stringify(shown)); const t0 = performance.now();
+    cancelAnimationFrame(raf);
+    const step = now => {
+      const t = Math.min(1, (now - t0) / 500), e = d3.easeCubicInOut(t);
+      for (const s of stacks) shown[s] = to[s].map((v, k) => from[s][k] + (v - from[s][k]) * e);
+      draw(d.years[i]); if (t < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step); document.getElementById('year').value = i;
+  };
+  const sl = document.getElementById('year'); sl.min = 0; sl.max = d.years.length - 1; sl.value = 0;
+  sl.oninput = () => { stop(); go(+sl.value); };
+  const start = () => { timer = setInterval(() => go((cur + 1) % d.years.length), 700); document.getElementById('play').textContent = 'Pause'; };
+  const stop = () => { clearInterval(timer); timer = null; document.getElementById('play').textContent = 'Play'; };
+  document.getElementById('play').onclick = () => timer ? stop() : start();
+  d3.select('#legend').selectAll('span').data(stacks).join('span').html((s, i) => `<i class="sw" style="background:${COLORS[i]}"></i>${s}`);
+  draw(d.years[0]); start(); window.__ready = true;
+}).catch(e => { document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00020;padding:16px">Failed to load data: ' + e.message + '</p>'); });
+</script></body></html>
