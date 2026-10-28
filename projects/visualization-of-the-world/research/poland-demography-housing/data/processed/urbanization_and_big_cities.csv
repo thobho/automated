@@ -1,0 +1,27 @@
+year,population_total,population_urban,population_rural,urbanization_rate_pct,big_cities_fixed_list_count,big_cities_ge100k_in_year_count,big_cities_pop_share_pct,value_type,formula,source_id
+2000,38253955,23659690,14594265,61.85,34,41,27.75,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2001,38242197,23626816,14615381,61.78,34,41,27.68,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2002,38218531,23571225,14647306,61.67,34,40,27.66,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2003,38190608,23513389,14677219,61.57,34,40,27.60,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2004,38173835,23470086,14703749,61.48,34,39,27.54,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2005,38157055,23423740,14733315,61.39,34,39,27.48,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2006,38125479,23368878,14756601,61.29,34,39,27.43,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2007,38115641,23316885,14798756,61.17,34,39,27.35,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2008,38135876,23288181,14847695,61.07,34,39,27.28,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2009,38167329,23278187,14889142,60.99,34,39,27.22,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2010,38529866,23416505,15113361,60.77,34,39,26.87,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2011,38538447,23385828,15152619,60.68,34,39,26.83,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2012,38533299,23336289,15197010,60.56,34,39,26.78,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2013,38495659,23257909,15237750,60.42,34,39,26.74,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2014,38478602,23216352,15262250,60.34,34,39,26.72,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2015,38437239,23166429,15270810,60.27,34,39,26.75,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2016,38432992,23129492,15303500,60.18,34,39,26.74,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2017,38433558,23109253,15324305,60.13,34,39,26.74,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2018,38411148,23067244,15343904,60.05,34,38,26.74,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2019,38382576,23033066,15349510,60.01,34,38,26.78,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2020,38088564,22777275,15311289,59.80,34,37,27.05,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2021,37907704,22624014,15283690,59.68,34,37,27.03,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2022,37766327,22489926,15276401,59.55,34,37,26.99,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2023,37636508,22376547,15259961,59.45,34,37,26.98,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2024,37489087,22275967,15213120,59.42,34,34,26.99,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1
+2025,37332510,22152404,15180106,59.34,34,34,27.01,derived,urban/total; counts of urban gminas with >=100k that year; fixed-list sum/total,S1

@@ -1,0 +1,79 @@
+year,class,population,share_of_total_pct,value_type,formula,source_id
+2000,big_cities,10614664,27.75,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2000,small_cities,13045026,34.10,derived,urban total - big_cities,S1
+2000,villages,14594265,38.15,reported,BDL rural-areas total,S1
+2001,big_cities,10585426,27.68,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2001,small_cities,13041390,34.10,derived,urban total - big_cities,S1
+2001,villages,14615381,38.22,reported,BDL rural-areas total,S1
+2002,big_cities,10572771,27.66,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2002,small_cities,12998454,34.01,derived,urban total - big_cities,S1
+2002,villages,14647306,38.33,reported,BDL rural-areas total,S1
+2003,big_cities,10540907,27.60,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2003,small_cities,12972482,33.97,derived,urban total - big_cities,S1
+2003,villages,14677219,38.43,reported,BDL rural-areas total,S1
+2004,big_cities,10511774,27.54,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2004,small_cities,12958312,33.95,derived,urban total - big_cities,S1
+2004,villages,14703749,38.52,reported,BDL rural-areas total,S1
+2005,big_cities,10483903,27.48,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2005,small_cities,12939837,33.91,derived,urban total - big_cities,S1
+2005,villages,14733315,38.61,reported,BDL rural-areas total,S1
+2006,big_cities,10458602,27.43,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2006,small_cities,12910276,33.86,derived,urban total - big_cities,S1
+2006,villages,14756601,38.71,reported,BDL rural-areas total,S1
+2007,big_cities,10425830,27.35,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2007,small_cities,12891055,33.82,derived,urban total - big_cities,S1
+2007,villages,14798756,38.83,reported,BDL rural-areas total,S1
+2008,big_cities,10402127,27.28,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2008,small_cities,12886054,33.79,derived,urban total - big_cities,S1
+2008,villages,14847695,38.93,reported,BDL rural-areas total,S1
+2009,big_cities,10388753,27.22,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2009,small_cities,12889434,33.77,derived,urban total - big_cities,S1
+2009,villages,14889142,39.01,reported,BDL rural-areas total,S1
+2010,big_cities,10353166,26.87,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2010,small_cities,13063339,33.90,derived,urban total - big_cities,S1
+2010,villages,15113361,39.23,reported,BDL rural-areas total,S1
+2011,big_cities,10339737,26.83,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2011,small_cities,13046091,33.85,derived,urban total - big_cities,S1
+2011,villages,15152619,39.32,reported,BDL rural-areas total,S1
+2012,big_cities,10319980,26.78,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2012,small_cities,13016309,33.78,derived,urban total - big_cities,S1
+2012,villages,15197010,39.44,reported,BDL rural-areas total,S1
+2013,big_cities,10293728,26.74,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2013,small_cities,12964181,33.68,derived,urban total - big_cities,S1
+2013,villages,15237750,39.58,reported,BDL rural-areas total,S1
+2014,big_cities,10281061,26.72,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2014,small_cities,12935291,33.62,derived,urban total - big_cities,S1
+2014,villages,15262250,39.66,reported,BDL rural-areas total,S1
+2015,big_cities,10281007,26.75,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2015,small_cities,12885422,33.52,derived,urban total - big_cities,S1
+2015,villages,15270810,39.73,reported,BDL rural-areas total,S1
+2016,big_cities,10276494,26.74,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2016,small_cities,12852998,33.44,derived,urban total - big_cities,S1
+2016,villages,15303500,39.82,reported,BDL rural-areas total,S1
+2017,big_cities,10278665,26.74,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2017,small_cities,12830588,33.38,derived,urban total - big_cities,S1
+2017,villages,15324305,39.87,reported,BDL rural-areas total,S1
+2018,big_cities,10272677,26.74,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2018,small_cities,12794567,33.31,derived,urban total - big_cities,S1
+2018,villages,15343904,39.95,reported,BDL rural-areas total,S1
+2019,big_cities,10277560,26.78,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2019,small_cities,12755506,33.23,derived,urban total - big_cities,S1
+2019,villages,15349510,39.99,reported,BDL rural-areas total,S1
+2020,big_cities,10302514,27.05,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2020,small_cities,12474761,32.75,derived,urban total - big_cities,S1
+2020,villages,15311289,40.20,reported,BDL rural-areas total,S1
+2021,big_cities,10246489,27.03,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2021,small_cities,12377525,32.65,derived,urban total - big_cities,S1
+2021,villages,15283690,40.32,reported,BDL rural-areas total,S1
+2022,big_cities,10194589,26.99,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2022,small_cities,12295337,32.56,derived,urban total - big_cities,S1
+2022,villages,15276401,40.45,reported,BDL rural-areas total,S1
+2023,big_cities,10154244,26.98,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2023,small_cities,12222303,32.47,derived,urban total - big_cities,S1
+2023,villages,15259961,40.55,reported,BDL rural-areas total,S1
+2024,big_cities,10118054,26.99,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2024,small_cities,12157913,32.43,derived,urban total - big_cities,S1
+2024,villages,15213120,40.58,reported,BDL rural-areas total,S1
+2025,big_cities,10084486,27.01,derived,"sum of 34 city populations (list fixed at 2025, >= 100000)",S1
+2025,small_cities,12067918,32.33,derived,urban total - big_cities,S1
+2025,villages,15180106,40.66,reported,BDL rural-areas total,S1
