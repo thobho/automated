@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vega-Lite 6.5.0 - line chart test</title><link rel="stylesheet" href="../shared/page.css"><style>#chart{padding:0 0 0 0}</style></head><body>
+<header><h1>Line chart, 3 series (Vega-Lite 6.5.0 + Vega 6.4.0)</h1><p>SYNTHETIC DEMO DATA. Hover for tooltip, click legend entries to toggle series.</p></header>
+<div id="chart"></div>
+<script src="../vendor/vega-6.4.0.min.js"></script><script src="../vendor/vega-lite-6.5.0.min.js"></script><script src="../vendor/vega-embed-7.3.0.min.js"></script>
+<script>
+fetch('../shared/demo-data.json').then(r => r.json()).then(d => {
+  const values = Object.entries(d.line.series).flatMap(([series, v]) => v.map((value, i) => ({ series, year: d.years[i], value })));
+  const names = Object.keys(d.line.series);
+  const spec = {
+    $schema: 'https://vega.github.io/schema/vega-lite/v6.json',
+    width: 'container', height: 360, autosize: { type: 'fit', contains: 'padding' },
+    data: { values },
+    params: [{ name: 'pick', select: { type: 'point', fields: ['series'] }, bind: 'legend' }],
+    mark: { type: 'line', interpolate: 'monotone', strokeWidth: 2.5, point: { size: 30 }, tooltip: true },
+    encoding: {
+      x: { field: 'year', type: 'quantitative', axis: { format: 'd', title: null } },
+      y: { field: 'value', type: 'quantitative', scale: { domain: [50, 400] }, axis: { title: null } },
+      color: { field: 'series', type: 'nominal', scale: { domain: names, range: ['#c2410c', '#0f766e', '#4338ca'] }, legend: { title: null, orient: 'top' } },
+      opacity: { condition: { param: 'pick', value: 1 }, value: 0.15 }
+    }
+  };
+  return vegaEmbed('#chart', spec, { actions: false }).then(() => { window.__ready = true; });
+}).catch(e => { document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00020;padding:16px">Failed: ' + e.message + '</p>'); });
+</script></body></html>

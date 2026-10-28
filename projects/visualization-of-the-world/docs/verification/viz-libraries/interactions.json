@@ -1,0 +1,57 @@
+[
+ {
+  "lib": "echarts",
+  "check": "line tooltip+legend",
+  "tooltipTextOrElementFound": "2014 Series A (demo) 140.5 Series B (demo) 211.1 Series C (demo) 252.5 2014 Seri",
+  "screenshotChangedAfterToggle": true,
+  "state": {
+   "Series B (demo)": false,
+   "Series A (demo)": true,
+   "Series C (demo)": true
+  }
+ },
+ {
+  "lib": "echarts",
+  "check": "bar animation advances without input",
+  "frameChanged": true
+ },
+ {
+  "lib": "echarts",
+  "check": "choropleth hover screenshot taken",
+  "errors": []
+ },
+ {
+  "lib": "d3-plot",
+  "check": "line tooltip+legend",
+  "tooltipTextOrElementFound": "​Series C (demo)​2015: 259.3",
+  "screenshotChangedAfterToggle": true,
+  "state": "2 line paths"
+ },
+ {
+  "lib": "d3-plot",
+  "check": "bar animation advances without input",
+  "frameChanged": true
+ },
+ {
+  "lib": "d3-plot",
+  "check": "choropleth hover screenshot taken",
+  "errors": []
+ },
+ {
+  "lib": "vega-lite",
+  "check": "line tooltip+legend",
+  "tooltipTextOrElementFound": "year 2014 value 211.1 series Series B (demo)",
+  "screenshotChangedAfterToggle": true,
+  "state": "screenshot hash changed"
+ },
+ {
+  "lib": "vega-lite",
+  "check": "bar animation advances without input",
+  "frameChanged": true
+ },
+ {
+  "lib": "vega-lite",
+  "check": "choropleth hover screenshot taken",
+  "errors": []
+ }
+]

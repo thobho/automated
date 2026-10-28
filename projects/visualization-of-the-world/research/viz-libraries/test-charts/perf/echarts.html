@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../shared/page.css"><title>Perf: ECharts, 2479 gminas</title></head><body>
+<header><h1>Perf: 2,479 gminas (ECharts 6.1.0)</h1><p id="out">running...</p></header><div id="chart"></div>
+<script src="../vendor/echarts-6.1.0.min.js"></script><script src="../vendor/topojson-client-3.1.0.min.js"></script>
+<script>
+const t0 = performance.now();
+fetch('../shared/gminas.topojson').then(r => r.json()).then(topo => {
+  const t1 = performance.now();
+  const geo = topojson.feature(topo, topo.objects.gminas);
+  echarts.registerMap('gminas', geo);
+  const chart = echarts.init(document.getElementById('chart'));
+  const data = geo.features.map(f => ({ name: f.properties.teryt, value: (parseInt(f.properties.teryt, 10) * 7919) % 100 }));
+  chart.on('finished', () => { if (window.__ready) return; const t2 = performance.now(); window.__perf = { shapes: geo.features.length, fetchMs: Math.round(t1 - t0), toFirstRenderMs: Math.round(t2 - t1) }; document.getElementById('out').textContent = JSON.stringify(window.__perf); window.__ready = true; });
+  chart.setOption({ visualMap: { min: 0, max: 100, show: false, inRange: { color: ['#fde8c8', '#7a1f0f'] } },
+    series: [{ type: 'map', map: 'gminas', nameProperty: 'teryt', roam: true, data, label: { show: false }, itemStyle: { borderWidth: 0.2, borderColor: '#fff' }, emphasis: { label: { show: false } }, tooltip: { show: false } }] });
+});
+</script></body></html>

@@ -1,0 +1,40 @@
+name: visualization-of-the-world viz-libraries
+
+on:
+  pull_request:
+    paths:
+      - "projects/visualization-of-the-world/research/viz-libraries/**"
+      - ".github/workflows/visualization-of-the-world-viz-libraries.yml"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/visualization-of-the-world/research/viz-libraries
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Report and scoring tests
+        run: |
+          python3 scripts/check_report.py
+          python3 -m unittest discover -s tests
+      - name: Install Playwright
+        run: |
+          npm install --no-save --prefix "$RUNNER_TEMP/pw" playwright
+          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Load every test page in Chromium (no console errors, no horizontal scroll at 375 px, failure path)
+        run: |
+          cd test-charts
+          python3 -m http.server 8712 >/dev/null 2>&1 &
+          sleep 2
+          export NODE_PATH="$RUNNER_TEMP/pw/node_modules"
+          node scripts/check_pages.cjs http://localhost:8712 "$RUNNER_TEMP/pages.json"
+          mkdir -p "$RUNNER_TEMP/fail"
+          node scripts/check_failure.cjs http://localhost:8712 "$RUNNER_TEMP/fail"

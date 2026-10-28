@@ -1,0 +1,10 @@
+/* Minimal shared style for the test pages (library-neutral). */
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.4 system-ui,sans-serif;color:#1d2433;background:#fafaf7}
+header{padding:12px 16px 0}
+h1{font-size:16px;margin:0 0 2px}
+header p{margin:0;color:#5b6475;font-size:12px}
+#chart{width:100%;height:min(70vh,520px);min-height:340px;padding:0 8px}
+.controls{display:flex;gap:8px;align-items:center;padding:4px 16px;flex-wrap:wrap}
+.controls input[type=range]{flex:1;min-width:140px}
+button{font:inherit;padding:4px 10px}

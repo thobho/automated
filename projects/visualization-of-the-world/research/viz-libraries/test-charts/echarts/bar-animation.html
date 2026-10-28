@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECharts 6.1.0 - stacked bar with year animation</title><link rel="stylesheet" href="../shared/page.css"></head><body>
+<header><h1>Stacked bar, year timeline (ECharts 6.1.0)</h1><p>SYNTHETIC DEMO DATA. Timeline plays automatically; bars animate between years.</p></header>
+<div id="chart"></div>
+<script src="../vendor/echarts-6.1.0.min.js"></script>
+<script>
+fetch('../shared/demo-data.json').then(r => r.json()).then(d => {
+  const chart = echarts.init(document.getElementById('chart'));
+  const mk = y => ({
+    title: { text: String(y), left: 'center', top: 62, textStyle: { fontSize: 14 } },
+    series: d.bars.stacks.map(s => ({ name: s, type: 'bar', stack: 'total', data: d.bars.byYear[y][s] }))
+  });
+  chart.setOption({
+    baseOption: {
+      color: ['#c2410c', '#0f766e', '#4338ca'],
+      timeline: { axisType: 'category', autoPlay: true, playInterval: 700, data: d.years.map(String), left: 16, right: 16, bottom: 4 },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      legend: { top: 0, data: d.bars.stacks },
+      grid: { left: 40, right: 16, top: 96, bottom: 80 },
+      xAxis: { type: 'category', data: d.bars.categories },
+      yAxis: { type: 'value', max: 180 },
+      series: d.bars.stacks.map(s => ({ name: s, type: 'bar', stack: 'total' }))
+    },
+    options: d.years.map(mk)
+  });
+  window.addEventListener('resize', () => chart.resize());
+  window.__chart = chart; window.__ready = true;
+}).catch(e => { document.body.insertAdjacentHTML('beforeend', '<p style="color:#b00020;padding:16px">Failed to load data: ' + e.message + '</p>'); });
+</script></body></html>
