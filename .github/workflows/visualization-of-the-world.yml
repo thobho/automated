@@ -1,0 +1,32 @@
+name: visualization-of-the-world checks
+
+on:
+  pull_request:
+    paths:
+      - 'projects/visualization-of-the-world/**'
+      - '.github/workflows/visualization-of-the-world.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'projects/visualization-of-the-world/**'
+      - '.github/workflows/visualization-of-the-world.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/visualization-of-the-world/research/poland-demography-housing
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Source registry check
+        run: python3 scripts/check_sources.py
+      - name: Unit tests
+        run: python3 -m unittest discover -s tests
