@@ -5,7 +5,9 @@ Projects built continuously by a Claude Code worker, fed from this repo's GitHub
 ## Add a task
 - **Phone:** GitHub app → this repo → Issues → New → **Agent task**. The template adds `agent:todo` for you.
 - **Claude Code session in this folder:** `/new-task build a CLI that ...`
-- **Terminal:** `scripts/new-task.sh -p my-project -t "Do the thing" -b "Details" [--high]`
+- **Terminal:** `scripts/new-task.sh -p my-project -t "Do the thing" -b "Details" [-m haiku|sonnet|opus] [--high]`
+
+**Model per task:** add a `model:haiku`, `model:sonnet` or `model:opus` label (or edit the `Model:` line in the template). Default is Sonnet. The worker hands the building to a subagent on that model.
 
 ## Track it
 - **Pinned issue "🤖 Agent status"**: limits, reset times, whether the worker may run, and the queue. Updated on every worker run.

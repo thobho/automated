@@ -17,6 +17,9 @@ You are the scheduled worker for the `automated` repo at `/Users/user/Projects/a
 No task → update status ("Queue empty") and end.
 
 ## 3. Work the task
+The issue's model label decides who builds it: `model:haiku`, `model:sonnet` or `model:opus`. No label → look for a `Model:` line in the body → otherwise `sonnet`.
+You (the worker) do the bookkeeping: labels, the plan comment, the final comment. Steps 2–6 below (the building) go to **one subagent** started with the Agent tool and `model` set to that model. Give it the issue number, title, body, project folder, branch name and steps 2–6 verbatim, plus the "Never" list below. Wait for its result, then continue with step 7. Mention the model used in the plan comment.
+
 1. Swap labels: remove `agent:todo`, add `agent:doing`. Comment a short plan as a checklist (`- [ ] ...`).
 2. Branch `agent/<number>-<slug>` from `main` (reuse it if it exists).
 3. Work only in `projects/<project>/` (from the `project:` label). New project → create the folder with README.md and CLAUDE.md first.

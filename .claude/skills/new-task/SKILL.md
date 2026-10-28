@@ -10,7 +10,8 @@ description: Queue a task for the autonomous worker as a GitHub issue in the aut
    - **title**: short and imperative ("Add CSV export to reports").
    - **body**: what to build, plus a **Done when** list the worker can check on its own (commands that work, tests that pass).
    - **priority**: high only if the user says it's urgent or "first".
+   - **model**: what the user asked for; otherwise suggest one — `haiku` for small edits, `sonnet` (default) for most tasks, `opus` only for hard design or debugging, since it uses limits fastest.
 2. If the task is too vague for an unattended agent to finish, ask the user one or two short questions first. Split large requests into several small tasks (one PR each).
-3. Show the user the title, project and body, then create it:
-   `scripts/new-task.sh -p <project> -t "<title>" -b "<body>" [--high]`
+3. Show the user the title, project, model and body, then create it:
+   `scripts/new-task.sh -p <project> -t "<title>" -b "<body>" -m <model> [--high]`
 4. Reply with the issue link.
