@@ -9,6 +9,8 @@ labels: agent:todo
 
 **Model:** sonnet <!-- haiku = small/cheap, sonnet = default, opus = hard tasks (uses limits fastest). Or add a model: label. -->
 
+Depends on: <!-- e.g. #12, #14 — the agent waits until those are closed. Delete this line if none. -->
+
 **What to build:**
 
 

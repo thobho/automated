@@ -7,6 +7,8 @@ Projects built continuously by a Claude Code worker, fed from this repo's GitHub
 - **Claude Code session in this folder:** `/new-task build a CLI that ...`
 - **Terminal:** `scripts/new-task.sh -p my-project -t "Do the thing" -b "Details" [-m haiku|sonnet|opus] [--high]`
 
+**Order and dependencies:** write `Depends on: #12, #14` in the issue body and the agent won't start it until those issues are closed (PR merged). Among ready tasks: `priority:high` first, `priority:low` last, otherwise oldest first. `scripts/queue.sh` shows the order and what each task waits on.
+
 **Model per task:** add a `model:haiku`, `model:sonnet` or `model:opus` label (or edit the `Model:` line in the template). Default is Sonnet. The worker hands the building to a subagent on that model.
 
 ## Track it

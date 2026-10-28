@@ -9,12 +9,11 @@ You are the scheduled worker for the `automated` repo at `/Users/user/Projects/a
 3. If the decision is `WAIT`: run `scripts/update-status.sh "Skipped: <reason>" < /tmp/agent-budget.json` and **end the run immediately**.
 
 ## 2. Pick a task
-`git checkout main && git pull --ff-only`, then pick in this order:
-1. An open issue labelled `agent:doing` (an earlier run was interrupted; resume its branch).
-2. An `agent:blocked` issue whose newest comment is from the owner, not from you: they answered; swap the label to `agent:doing`.
-3. The first `agent:todo` issue: `priority:high` first, then oldest. Use `scripts/queue.sh`.
+`git checkout main && git pull --ff-only`, then:
+1. Check `agent:blocked` issues: if the newest comment is from the owner, not from you, they answered; swap the label to `agent:todo`.
+2. Run `agent/pick_task.py --next`. It prints the issue to work on (an interrupted `agent:doing` one first, then the first todo whose dependencies are all closed, by priority, then oldest). Follow it; never pick a todo it didn't print, since the others wait on unfinished dependencies.
 
-No task → update status ("Queue empty") and end.
+Exit code 1 → nothing is ready. Update status ("Nothing ready: <queue summary from `agent/pick_task.py`>") and end.
 
 ## 3. Work the task
 The issue's model label decides who builds it: `model:haiku`, `model:sonnet` or `model:opus`. No label → look for a `Model:` line in the body → otherwise `sonnet`.
