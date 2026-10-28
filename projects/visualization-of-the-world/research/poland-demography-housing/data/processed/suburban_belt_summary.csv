@@ -1,0 +1,9 @@
+core_city,core_pop_2000,core_pop_2025,core_change_pct,belt_gminas_with_data,belt_pop_2000,belt_pop_2025,belt_change_pct,belt_gminas_growing_over_20pct,belt_gminas_shrinking,radius_km,value_type,formula,source_id
+Warszawa,1672418,1866729,11.62,27,586727,865686,47.54,19,2,25.0,derived,sums over belt gminas with both 2000 and 2025 values; belt = gmina centroid within radius of the core city point,S1;S26
+Kraków,758715,816614,7.63,23,374610,495740,32.33,14,1,25.0,derived,sums over belt gminas with both 2000 and 2025 values; belt = gmina centroid within radius of the core city point,S1;S26
+Wrocław,640614,672601,4.99,10,116815,236039,102.06,9,1,25.0,derived,sums over belt gminas with both 2000 and 2025 values; belt = gmina centroid within radius of the core city point,S1;S26
+Łódź,798418,639890,-19.86,19,294708,314273,6.64,11,4,25.0,derived,sums over belt gminas with both 2000 and 2025 values; belt = gmina centroid within radius of the core city point,S1;S26
+Poznań,582254,534239,-8.25,16,248896,446389,79.35,13,0,25.0,derived,sums over belt gminas with both 2000 and 2025 values; belt = gmina centroid within radius of the core city point,S1;S26
+Gdańsk,462995,489328,5.69,9,137611,213265,54.98,6,1,25.0,derived,sums over belt gminas with both 2000 and 2025 values; belt = gmina centroid within radius of the core city point,S1;S26
+Szczecin,416657,383786,-7.89,7,126772,163496,28.97,3,3,25.0,derived,sums over belt gminas with both 2000 and 2025 values; belt = gmina centroid within radius of the core city point,S1;S26
+Lublin,358933,326685,-8.98,21,248973,277481,11.45,7,8,25.0,derived,sums over belt gminas with both 2000 and 2025 values; belt = gmina centroid within radius of the core city point,S1;S26

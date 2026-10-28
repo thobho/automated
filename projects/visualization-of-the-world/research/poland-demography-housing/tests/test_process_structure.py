@@ -160,6 +160,21 @@ class EurostatDecode(unittest.TestCase):
         self.assertEqual(got[1], ({"indic": "B", "time": "2001"}, 9.5, "p"))
 
 
+class MigrationGaps(unittest.TestCase):
+    def test_2015_zero_international_values_are_missing_not_zero(self):
+        def v(vals):
+            return {"subject": "P1350", "n1": "", "n2": "", "n3": "", "vals": vals}
+        bdl = {k: v({2014: 5, 2015: 0, 2016: 7}) for k in (1365224, 80121, 80122, 1365229, 80123, 80124, 80108)}
+        eu = {"immigration_all_citizenships": {}, "emigration_all_citizenships": {}, "net_migration_plus_adjustment": {}}
+        rows = ps.build_migration_national(bdl, eu)
+        ab = {r["year"]: r for r in rows if r["indicator"] == "permanent_registrations_from_abroad"}
+        self.assertEqual(ab[2015]["value"], "")
+        self.assertIn("MISSING", ab[2015]["note"])
+        self.assertEqual(ab[2016]["value"], 7)
+        internal = {r["year"]: r["value"] for r in rows if r["indicator"] == "permanent_registrations_internal"}
+        self.assertEqual(internal[2015], 0)  # internal series is not in the zero list: kept as reported
+
+
 class Households(unittest.TestCase):
     def test_census_average_derived_for_2002(self):
         def v(sub, val, year):
@@ -179,6 +194,33 @@ class Households(unittest.TestCase):
         self.assertEqual(r02["value_type"], "households reported; population and average derived")
         self.assertEqual([r["source_id"] for r in rows], ["S16", "S17", "S18", "S18", "S24"])
         self.assertEqual([r for r in rows if r["area"] == "villages"][0]["avg_persons_per_household"], 2.9)
+
+
+class ProcessedConsistency(unittest.TestCase):
+    """Checks on the committed processed files (skipped if they have not been built)."""
+
+    def read(self, name):
+        import csv
+        p = ROOT / "data" / "processed" / name
+        if not p.exists():
+            self.skipTest(name + " not built")
+        return list(csv.DictReader(open(p, encoding="utf-8")))
+
+    def test_internal_migration_nets_to_zero_and_matches_class_population(self):
+        mig = self.read("migration_by_place_class.csv")
+        pops = {(r["year"], r["class"]): int(r["population"]) for r in self.read("population_by_class.csv")}
+        for y in sorted({r["year"] for r in mig}):
+            net = sum(int(r["net_internal_migration"]) for r in mig if r["year"] == y)
+            self.assertEqual(net, 0, y)  # every internal move is one departure and one arrival
+        for r in mig:
+            self.assertEqual(int(r["population"]), pops[(r["year"], r["class"])])
+
+    def test_pyramid_sums_to_national_total(self):
+        pyr = self.read("age_sex_pyramid.csv")
+        nat = {r["year"]: int(r["population_total"]) for r in self.read("urbanization_and_big_cities.csv")}
+        for y in ("2000", "2010", "2020", "2025"):
+            tot = sum(int(r["population"]) for r in pyr if r["year"] == y and r["age_group"] not in ("70-74", "75-79", "80-84", "85+"))
+            self.assertEqual(tot, nat[y])
 
 
 if __name__ == "__main__":

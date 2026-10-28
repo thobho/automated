@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Warm the git-ignored cache with gmina-level (unit-level 6) BDL series used by process_structure.py.
 
-Variables: 60641 population total (31 Dec); 80125 net internal migration for permanent residence;
-80108 net migration abroad (permanent residence); 1652549 households (census 2021);
-1652555 population in households (census 2021). Roughly 25 requests per variable.
+Variables: 60641 population total (31 Dec); 80125 net internal migration for permanent residence.
+About 42 requests (100 units per page) per variable, ~10 s each.
 """
 import sys
 from pathlib import Path
@@ -14,10 +13,9 @@ import bdl  # noqa: E402
 GMINA_VARS = {
     60641: range(2000, 2026),
     80125: range(2000, 2026),
-    80108: range(2000, 2026),
-    1652549: [2021],
-    1652555: [2021],
 }
+# Not fetched (time-boxed, ~42 requests each at ~10 s): 80108 net migration abroad, 1652549/1652555 households 2021
+# at gmina level. Add them here to extend migration_by_place_class.csv (international) and households.csv (by class).
 
 
 def load_gmina_var(vid, years):

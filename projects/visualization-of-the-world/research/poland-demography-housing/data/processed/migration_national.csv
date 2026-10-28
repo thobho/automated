@@ -1,0 +1,259 @@
+year,indicator,area,value,unit,note,source_id
+2000,eurostat_emigration_all_citizenships,national,26999,persons,level break 2008/2009; flag none,S22
+2001,eurostat_emigration_all_citizenships,national,23368,persons,level break 2008/2009; flag none,S22
+2002,eurostat_emigration_all_citizenships,national,24532,persons,level break 2008/2009; flag none,S22
+2003,eurostat_emigration_all_citizenships,national,20813,persons,level break 2008/2009; flag none,S22
+2004,eurostat_emigration_all_citizenships,national,18877,persons,level break 2008/2009; flag none,S22
+2005,eurostat_emigration_all_citizenships,national,22242,persons,level break 2008/2009; flag none,S22
+2006,eurostat_emigration_all_citizenships,national,46936,persons,level break 2008/2009; flag none,S22
+2007,eurostat_emigration_all_citizenships,national,35480,persons,level break 2008/2009; flag none,S22
+2008,eurostat_emigration_all_citizenships,national,30140,persons,level break 2008/2009; flag none,S22
+2009,eurostat_emigration_all_citizenships,national,229320,persons,level break 2008/2009; flag b,S22
+2010,eurostat_emigration_all_citizenships,national,218126,persons,level break 2008/2009; flag none,S22
+2011,eurostat_emigration_all_citizenships,national,265798,persons,level break 2008/2009; flag none,S22
+2012,eurostat_emigration_all_citizenships,national,275603,persons,level break 2008/2009; flag none,S22
+2013,eurostat_emigration_all_citizenships,national,276446,persons,level break 2008/2009; flag none,S22
+2014,eurostat_emigration_all_citizenships,national,268299,persons,level break 2008/2009; flag p,S22
+2015,eurostat_emigration_all_citizenships,national,258837,persons,level break 2008/2009; flag p,S22
+2016,eurostat_emigration_all_citizenships,national,236441,persons,level break 2008/2009; flag ep,S22
+2017,eurostat_emigration_all_citizenships,national,218492,persons,level break 2008/2009; flag ep,S22
+2018,eurostat_emigration_all_citizenships,national,189794,persons,level break 2008/2009; flag ep,S22
+2019,eurostat_emigration_all_citizenships,national,180594,persons,level break 2008/2009; flag ep,S22
+2020,eurostat_emigration_all_citizenships,national,161666,persons,level break 2008/2009; flag ep,S22
+2021,eurostat_emigration_all_citizenships,national,201595,persons,level break 2008/2009; flag none,S22
+2022,eurostat_emigration_all_citizenships,national,228006,persons,level break 2008/2009; flag none,S22
+2023,eurostat_emigration_all_citizenships,national,194063,persons,level break 2008/2009; flag none,S22
+2024,eurostat_emigration_all_citizenships,national,205869,persons,level break 2008/2009; flag e,S22
+2000,eurostat_immigration_all_citizenships,national,7331,persons,level break 2008/2009; flag none,S22
+2001,eurostat_immigration_all_citizenships,national,6625,persons,level break 2008/2009; flag none,S22
+2002,eurostat_immigration_all_citizenships,national,6587,persons,level break 2008/2009; flag none,S22
+2003,eurostat_immigration_all_citizenships,national,7048,persons,level break 2008/2009; flag none,S22
+2004,eurostat_immigration_all_citizenships,national,9495,persons,level break 2008/2009; flag none,S22
+2005,eurostat_immigration_all_citizenships,national,9364,persons,level break 2008/2009; flag none,S22
+2006,eurostat_immigration_all_citizenships,national,10802,persons,level break 2008/2009; flag none,S22
+2007,eurostat_immigration_all_citizenships,national,14995,persons,level break 2008/2009; flag none,S22
+2008,eurostat_immigration_all_citizenships,national,15275,persons,level break 2008/2009; flag none,S22
+2009,eurostat_immigration_all_citizenships,national,189166,persons,level break 2008/2009; flag b,S22
+2010,eurostat_immigration_all_citizenships,national,155131,persons,level break 2008/2009; flag none,S22
+2011,eurostat_immigration_all_citizenships,national,157059,persons,level break 2008/2009; flag none,S22
+2012,eurostat_immigration_all_citizenships,national,217546,persons,level break 2008/2009; flag none,S22
+2013,eurostat_immigration_all_citizenships,national,220311,persons,level break 2008/2009; flag none,S22
+2014,eurostat_immigration_all_citizenships,national,222275,persons,level break 2008/2009; flag p,S22
+2015,eurostat_immigration_all_citizenships,national,218147,persons,level break 2008/2009; flag p,S22
+2016,eurostat_immigration_all_citizenships,national,208302,persons,level break 2008/2009; flag ep,S22
+2017,eurostat_immigration_all_citizenships,national,209353,persons,level break 2008/2009; flag ep,S22
+2018,eurostat_immigration_all_citizenships,national,214083,persons,level break 2008/2009; flag ep,S22
+2019,eurostat_immigration_all_citizenships,national,226649,persons,level break 2008/2009; flag ep,S22
+2020,eurostat_immigration_all_citizenships,national,210615,persons,level break 2008/2009; flag ep,S22
+2021,eurostat_immigration_all_citizenships,national,241116,persons,level break 2008/2009; flag none,S22
+2022,eurostat_immigration_all_citizenships,national,275515,persons,level break 2008/2009; flag p,S22
+2023,eurostat_immigration_all_citizenships,national,303275,persons,level break 2008/2009; flag p,S22
+2024,eurostat_immigration_all_citizenships,national,300496,persons,level break 2008/2009; flag e,S22
+2000,eurostat_net_migration_plus_statistical_adjustment,national,-19669,persons,residual: population change minus natural change; flag b,S20
+2001,eurostat_net_migration_plus_statistical_adjustment,national,-16743,persons,residual: population change minus natural change; flag none,S20
+2002,eurostat_net_migration_plus_statistical_adjustment,national,-17945,persons,residual: population change minus natural change; flag none,S20
+2003,eurostat_net_migration_plus_statistical_adjustment,national,-13765,persons,residual: population change minus natural change; flag none,S20
+2004,eurostat_net_migration_plus_statistical_adjustment,national,-9382,persons,residual: population change minus natural change; flag none,S20
+2005,eurostat_net_migration_plus_statistical_adjustment,national,-12878,persons,residual: population change minus natural change; flag none,S20
+2006,eurostat_net_migration_plus_statistical_adjustment,national,-36134,persons,residual: population change minus natural change; flag none,S20
+2007,eurostat_net_migration_plus_statistical_adjustment,national,-20485,persons,residual: population change minus natural change; flag none,S20
+2008,eurostat_net_migration_plus_statistical_adjustment,national,-14865,persons,residual: population change minus natural change; flag none,S20
+2009,eurostat_net_migration_plus_statistical_adjustment,national,-1196,persons,residual: population change minus natural change; flag none,S20
+2010,eurostat_net_migration_plus_statistical_adjustment,national,5027,persons,residual: population change minus natural change; flag b,S20
+2011,eurostat_net_migration_plus_statistical_adjustment,national,-11841,persons,residual: population change minus natural change; flag none,S20
+2012,eurostat_net_migration_plus_statistical_adjustment,national,-2726,persons,residual: population change minus natural change; flag none,S20
+2013,eurostat_net_migration_plus_statistical_adjustment,national,-26943,persons,residual: population change minus natural change; flag none,S20
+2014,eurostat_net_migration_plus_statistical_adjustment,national,-10935,persons,residual: population change minus natural change; flag none,S20
+2015,eurostat_net_migration_plus_statistical_adjustment,national,-12792,persons,residual: population change minus natural change; flag e,S20
+2016,eurostat_net_migration_plus_statistical_adjustment,national,11507,persons,residual: population change minus natural change; flag e,S20
+2017,eurostat_net_migration_plus_statistical_adjustment,national,4593,persons,residual: population change minus natural change; flag e,S20
+2018,eurostat_net_migration_plus_statistical_adjustment,national,22147,persons,residual: population change minus natural change; flag be,S20
+2019,eurostat_net_migration_plus_statistical_adjustment,national,20081,persons,residual: population change minus natural change; flag bep,S20
+2020,eurostat_net_migration_plus_statistical_adjustment,national,-762735,persons,residual: population change minus natural change; flag be,S20
+2021,eurostat_net_migration_plus_statistical_adjustment,national,4410,persons,residual: population change minus natural change; flag b,S20
+2022,eurostat_net_migration_plus_statistical_adjustment,national,7291,persons,residual: population change minus natural change; flag none,S20
+2023,eurostat_net_migration_plus_statistical_adjustment,national,3819,persons,residual: population change minus natural change; flag none,S20
+2024,eurostat_net_migration_plus_statistical_adjustment,national,33247,persons,residual: population change minus natural change; flag none,S20
+2025,eurostat_net_migration_plus_statistical_adjustment,national,2753,persons,residual: population change minus natural change; flag none,S20
+2000,net_international_migration,national,-19668,persons,registered changes of permanent residence only,S15
+2001,net_international_migration,national,-16743,persons,registered changes of permanent residence only,S15
+2002,net_international_migration,national,-17945,persons,registered changes of permanent residence only,S15
+2003,net_international_migration,national,-13765,persons,registered changes of permanent residence only,S15
+2004,net_international_migration,national,-9382,persons,registered changes of permanent residence only,S15
+2005,net_international_migration,national,-12878,persons,registered changes of permanent residence only,S15
+2006,net_international_migration,national,-36134,persons,registered changes of permanent residence only,S15
+2007,net_international_migration,national,-20485,persons,registered changes of permanent residence only,S15
+2008,net_international_migration,national,-14865,persons,registered changes of permanent residence only,S15
+2009,net_international_migration,national,-1196,persons,registered changes of permanent residence only,S15
+2010,net_international_migration,national,-2114,persons,registered changes of permanent residence only,S15
+2011,net_international_migration,national,-4334,persons,registered changes of permanent residence only,S15
+2012,net_international_migration,national,-6617,persons,registered changes of permanent residence only,S15
+2013,net_international_migration,national,-19904,persons,registered changes of permanent residence only,S15
+2014,net_international_migration,national,-15750,persons,registered changes of permanent residence only,S15
+2015,net_international_migration,national,,persons,MISSING: BDL reports 0 for 2015 (implausible; 2014 and 2016 are far from 0); not used,S15
+2016,net_international_migration,national,1505,persons,registered changes of permanent residence only,S15
+2017,net_international_migration,national,1436,persons,registered changes of permanent residence only,S15
+2018,net_international_migration,national,3612,persons,registered changes of permanent residence only,S15
+2019,net_international_migration,national,6183,persons,registered changes of permanent residence only,S15
+2020,net_international_migration,national,4483,persons,registered changes of permanent residence only,S15
+2021,net_international_migration,national,3404,persons,registered changes of permanent residence only,S15
+2022,net_international_migration,national,1939,persons,registered changes of permanent residence only,S15
+2023,net_international_migration,national,6766,persons,registered changes of permanent residence only,S15
+2024,net_international_migration,national,9301,persons,registered changes of permanent residence only,S15
+2025,net_international_migration,national,10906,persons,registered changes of permanent residence only,S15
+2000,permanent_deregistrations_internal,national,394093,persons,registered changes of permanent residence only,S15
+2001,permanent_deregistrations_internal,national,369274,persons,registered changes of permanent residence only,S15
+2002,permanent_deregistrations_internal,national,403562,persons,registered changes of permanent residence only,S15
+2003,permanent_deregistrations_internal,national,430475,persons,registered changes of permanent residence only,S15
+2004,permanent_deregistrations_internal,national,432632,persons,registered changes of permanent residence only,S15
+2005,permanent_deregistrations_internal,national,422779,persons,registered changes of permanent residence only,S15
+2006,permanent_deregistrations_internal,national,473548,persons,registered changes of permanent residence only,S15
+2007,permanent_deregistrations_internal,national,511254,persons,registered changes of permanent residence only,S15
+2008,permanent_deregistrations_internal,national,405474,persons,registered changes of permanent residence only,S15
+2009,permanent_deregistrations_internal,national,403837,persons,registered changes of permanent residence only,S15
+2010,permanent_deregistrations_internal,national,422621,persons,registered changes of permanent residence only,S15
+2011,permanent_deregistrations_internal,national,419946,persons,registered changes of permanent residence only,S15
+2012,permanent_deregistrations_internal,national,395278,persons,registered changes of permanent residence only,S15
+2013,permanent_deregistrations_internal,national,427279,persons,registered changes of permanent residence only,S15
+2014,permanent_deregistrations_internal,national,407604,persons,registered changes of permanent residence only,S15
+2015,permanent_deregistrations_internal,national,387546,persons,registered changes of permanent residence only,S15
+2016,permanent_deregistrations_internal,national,378196,persons,registered changes of permanent residence only,S15
+2017,permanent_deregistrations_internal,national,400352,persons,registered changes of permanent residence only,S15
+2018,permanent_deregistrations_internal,national,449771,persons,registered changes of permanent residence only,S15
+2019,permanent_deregistrations_internal,national,468326,persons,registered changes of permanent residence only,S15
+2020,permanent_deregistrations_internal,national,385027,persons,registered changes of permanent residence only,S15
+2021,permanent_deregistrations_internal,national,429719,persons,registered changes of permanent residence only,S15
+2022,permanent_deregistrations_internal,national,409058,persons,registered changes of permanent residence only,S15
+2023,permanent_deregistrations_internal,national,406099,persons,registered changes of permanent residence only,S15
+2024,permanent_deregistrations_internal,national,430262,persons,registered changes of permanent residence only,S15
+2025,permanent_deregistrations_internal,national,404266,persons,registered changes of permanent residence only,S15
+2000,permanent_deregistrations_to_abroad,national,26999,persons,registered changes of permanent residence only,S15
+2001,permanent_deregistrations_to_abroad,national,23368,persons,registered changes of permanent residence only,S15
+2002,permanent_deregistrations_to_abroad,national,24532,persons,registered changes of permanent residence only,S15
+2003,permanent_deregistrations_to_abroad,national,20813,persons,registered changes of permanent residence only,S15
+2004,permanent_deregistrations_to_abroad,national,18877,persons,registered changes of permanent residence only,S15
+2005,permanent_deregistrations_to_abroad,national,22242,persons,registered changes of permanent residence only,S15
+2006,permanent_deregistrations_to_abroad,national,46936,persons,registered changes of permanent residence only,S15
+2007,permanent_deregistrations_to_abroad,national,35480,persons,registered changes of permanent residence only,S15
+2008,permanent_deregistrations_to_abroad,national,30140,persons,registered changes of permanent residence only,S15
+2009,permanent_deregistrations_to_abroad,national,18620,persons,registered changes of permanent residence only,S15
+2010,permanent_deregistrations_to_abroad,national,17360,persons,registered changes of permanent residence only,S15
+2011,permanent_deregistrations_to_abroad,national,19858,persons,registered changes of permanent residence only,S15
+2012,permanent_deregistrations_to_abroad,national,21200,persons,registered changes of permanent residence only,S15
+2013,permanent_deregistrations_to_abroad,national,32103,persons,registered changes of permanent residence only,S15
+2014,permanent_deregistrations_to_abroad,national,28080,persons,registered changes of permanent residence only,S15
+2015,permanent_deregistrations_to_abroad,national,,persons,MISSING: BDL reports 0 for 2015 (implausible; 2014 and 2016 are far from 0); not used,S15
+2016,permanent_deregistrations_to_abroad,national,11970,persons,registered changes of permanent residence only,S15
+2017,permanent_deregistrations_to_abroad,national,11888,persons,registered changes of permanent residence only,S15
+2018,permanent_deregistrations_to_abroad,national,11849,persons,registered changes of permanent residence only,S15
+2019,permanent_deregistrations_to_abroad,national,10726,persons,registered changes of permanent residence only,S15
+2020,permanent_deregistrations_to_abroad,national,8780,persons,registered changes of permanent residence only,S15
+2021,permanent_deregistrations_to_abroad,national,12005,persons,registered changes of permanent residence only,S15
+2022,permanent_deregistrations_to_abroad,national,13633,persons,registered changes of permanent residence only,S15
+2023,permanent_deregistrations_to_abroad,national,9941,persons,registered changes of permanent residence only,S15
+2024,permanent_deregistrations_to_abroad,national,10214,persons,registered changes of permanent residence only,S15
+2025,permanent_deregistrations_to_abroad,national,10181,persons,registered changes of permanent residence only,S15
+2000,permanent_deregistrations_total,national,421092,persons,registered changes of permanent residence only,S15
+2001,permanent_deregistrations_total,national,392642,persons,registered changes of permanent residence only,S15
+2002,permanent_deregistrations_total,national,428094,persons,registered changes of permanent residence only,S15
+2003,permanent_deregistrations_total,national,451288,persons,registered changes of permanent residence only,S15
+2004,permanent_deregistrations_total,national,451509,persons,registered changes of permanent residence only,S15
+2005,permanent_deregistrations_total,national,445021,persons,registered changes of permanent residence only,S15
+2006,permanent_deregistrations_total,national,520484,persons,registered changes of permanent residence only,S15
+2007,permanent_deregistrations_total,national,546734,persons,registered changes of permanent residence only,S15
+2008,permanent_deregistrations_total,national,435614,persons,registered changes of permanent residence only,S15
+2009,permanent_deregistrations_total,national,422457,persons,registered changes of permanent residence only,S15
+2010,permanent_deregistrations_total,national,439981,persons,registered changes of permanent residence only,S15
+2011,permanent_deregistrations_total,national,439804,persons,registered changes of permanent residence only,S15
+2012,permanent_deregistrations_total,national,416478,persons,registered changes of permanent residence only,S15
+2013,permanent_deregistrations_total,national,459382,persons,registered changes of permanent residence only,S15
+2014,permanent_deregistrations_total,national,435684,persons,registered changes of permanent residence only,S15
+2015,permanent_deregistrations_total,national,,persons,MISSING: BDL reports 0 for 2015 (implausible; 2014 and 2016 are far from 0); not used,S15
+2016,permanent_deregistrations_total,national,390166,persons,registered changes of permanent residence only,S15
+2017,permanent_deregistrations_total,national,412240,persons,registered changes of permanent residence only,S15
+2018,permanent_deregistrations_total,national,461620,persons,registered changes of permanent residence only,S15
+2019,permanent_deregistrations_total,national,479052,persons,registered changes of permanent residence only,S15
+2020,permanent_deregistrations_total,national,393807,persons,registered changes of permanent residence only,S15
+2021,permanent_deregistrations_total,national,441724,persons,registered changes of permanent residence only,S15
+2022,permanent_deregistrations_total,national,422691,persons,registered changes of permanent residence only,S15
+2023,permanent_deregistrations_total,national,416040,persons,registered changes of permanent residence only,S15
+2024,permanent_deregistrations_total,national,440476,persons,registered changes of permanent residence only,S15
+2025,permanent_deregistrations_total,national,414447,persons,registered changes of permanent residence only,S15
+2000,permanent_registrations_from_abroad,national,7331,persons,registered changes of permanent residence only,S15
+2001,permanent_registrations_from_abroad,national,6625,persons,registered changes of permanent residence only,S15
+2002,permanent_registrations_from_abroad,national,6587,persons,registered changes of permanent residence only,S15
+2003,permanent_registrations_from_abroad,national,7048,persons,registered changes of permanent residence only,S15
+2004,permanent_registrations_from_abroad,national,9495,persons,registered changes of permanent residence only,S15
+2005,permanent_registrations_from_abroad,national,9364,persons,registered changes of permanent residence only,S15
+2006,permanent_registrations_from_abroad,national,10802,persons,registered changes of permanent residence only,S15
+2007,permanent_registrations_from_abroad,national,14995,persons,registered changes of permanent residence only,S15
+2008,permanent_registrations_from_abroad,national,15275,persons,registered changes of permanent residence only,S15
+2009,permanent_registrations_from_abroad,national,17424,persons,registered changes of permanent residence only,S15
+2010,permanent_registrations_from_abroad,national,15246,persons,registered changes of permanent residence only,S15
+2011,permanent_registrations_from_abroad,national,15524,persons,registered changes of permanent residence only,S15
+2012,permanent_registrations_from_abroad,national,14583,persons,registered changes of permanent residence only,S15
+2013,permanent_registrations_from_abroad,national,12199,persons,registered changes of permanent residence only,S15
+2014,permanent_registrations_from_abroad,national,12330,persons,registered changes of permanent residence only,S15
+2015,permanent_registrations_from_abroad,national,,persons,MISSING: BDL reports 0 for 2015 (implausible; 2014 and 2016 are far from 0); not used,S15
+2016,permanent_registrations_from_abroad,national,13475,persons,registered changes of permanent residence only,S15
+2017,permanent_registrations_from_abroad,national,13324,persons,registered changes of permanent residence only,S15
+2018,permanent_registrations_from_abroad,national,15461,persons,registered changes of permanent residence only,S15
+2019,permanent_registrations_from_abroad,national,16909,persons,registered changes of permanent residence only,S15
+2020,permanent_registrations_from_abroad,national,13263,persons,registered changes of permanent residence only,S15
+2021,permanent_registrations_from_abroad,national,15409,persons,registered changes of permanent residence only,S15
+2022,permanent_registrations_from_abroad,national,15572,persons,registered changes of permanent residence only,S15
+2023,permanent_registrations_from_abroad,national,16707,persons,registered changes of permanent residence only,S15
+2024,permanent_registrations_from_abroad,national,19515,persons,registered changes of permanent residence only,S15
+2025,permanent_registrations_from_abroad,national,21087,persons,registered changes of permanent residence only,S15
+2000,permanent_registrations_internal,national,394093,persons,registered changes of permanent residence only,S15
+2001,permanent_registrations_internal,national,369274,persons,registered changes of permanent residence only,S15
+2002,permanent_registrations_internal,national,403562,persons,registered changes of permanent residence only,S15
+2003,permanent_registrations_internal,national,430475,persons,registered changes of permanent residence only,S15
+2004,permanent_registrations_internal,national,432632,persons,registered changes of permanent residence only,S15
+2005,permanent_registrations_internal,national,422779,persons,registered changes of permanent residence only,S15
+2006,permanent_registrations_internal,national,473548,persons,registered changes of permanent residence only,S15
+2007,permanent_registrations_internal,national,511254,persons,registered changes of permanent residence only,S15
+2008,permanent_registrations_internal,national,405474,persons,registered changes of permanent residence only,S15
+2009,permanent_registrations_internal,national,403837,persons,registered changes of permanent residence only,S15
+2010,permanent_registrations_internal,national,422621,persons,registered changes of permanent residence only,S15
+2011,permanent_registrations_internal,national,419946,persons,registered changes of permanent residence only,S15
+2012,permanent_registrations_internal,national,395278,persons,registered changes of permanent residence only,S15
+2013,permanent_registrations_internal,national,427279,persons,registered changes of permanent residence only,S15
+2014,permanent_registrations_internal,national,407604,persons,registered changes of permanent residence only,S15
+2015,permanent_registrations_internal,national,387546,persons,registered changes of permanent residence only,S15
+2016,permanent_registrations_internal,national,378196,persons,registered changes of permanent residence only,S15
+2017,permanent_registrations_internal,national,400352,persons,registered changes of permanent residence only,S15
+2018,permanent_registrations_internal,national,449771,persons,registered changes of permanent residence only,S15
+2019,permanent_registrations_internal,national,468326,persons,registered changes of permanent residence only,S15
+2020,permanent_registrations_internal,national,385027,persons,registered changes of permanent residence only,S15
+2021,permanent_registrations_internal,national,429719,persons,registered changes of permanent residence only,S15
+2022,permanent_registrations_internal,national,409058,persons,registered changes of permanent residence only,S15
+2023,permanent_registrations_internal,national,406099,persons,registered changes of permanent residence only,S15
+2024,permanent_registrations_internal,national,430262,persons,registered changes of permanent residence only,S15
+2025,permanent_registrations_internal,national,404266,persons,registered changes of permanent residence only,S15
+2000,permanent_registrations_total,national,401424,persons,registered changes of permanent residence only,S15
+2001,permanent_registrations_total,national,375899,persons,registered changes of permanent residence only,S15
+2002,permanent_registrations_total,national,410149,persons,registered changes of permanent residence only,S15
+2003,permanent_registrations_total,national,437523,persons,registered changes of permanent residence only,S15
+2004,permanent_registrations_total,national,442127,persons,registered changes of permanent residence only,S15
+2005,permanent_registrations_total,national,432143,persons,registered changes of permanent residence only,S15
+2006,permanent_registrations_total,national,484350,persons,registered changes of permanent residence only,S15
+2007,permanent_registrations_total,national,526249,persons,registered changes of permanent residence only,S15
+2008,permanent_registrations_total,national,420749,persons,registered changes of permanent residence only,S15
+2009,permanent_registrations_total,national,421261,persons,registered changes of permanent residence only,S15
+2010,permanent_registrations_total,national,437867,persons,registered changes of permanent residence only,S15
+2011,permanent_registrations_total,national,435470,persons,registered changes of permanent residence only,S15
+2012,permanent_registrations_total,national,409861,persons,registered changes of permanent residence only,S15
+2013,permanent_registrations_total,national,439478,persons,registered changes of permanent residence only,S15
+2014,permanent_registrations_total,national,419934,persons,registered changes of permanent residence only,S15
+2015,permanent_registrations_total,national,,persons,MISSING: BDL reports 0 for 2015 (implausible; 2014 and 2016 are far from 0); not used,S15
+2016,permanent_registrations_total,national,391671,persons,registered changes of permanent residence only,S15
+2017,permanent_registrations_total,national,413676,persons,registered changes of permanent residence only,S15
+2018,permanent_registrations_total,national,465232,persons,registered changes of permanent residence only,S15
+2019,permanent_registrations_total,national,485235,persons,registered changes of permanent residence only,S15
+2020,permanent_registrations_total,national,398290,persons,registered changes of permanent residence only,S15
+2021,permanent_registrations_total,national,445128,persons,registered changes of permanent residence only,S15
+2022,permanent_registrations_total,national,424630,persons,registered changes of permanent residence only,S15
+2023,permanent_registrations_total,national,422806,persons,registered changes of permanent residence only,S15
+2024,permanent_registrations_total,national,449777,persons,registered changes of permanent residence only,S15
+2025,permanent_registrations_total,national,425353,persons,registered changes of permanent residence only,S15

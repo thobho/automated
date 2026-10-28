@@ -1,0 +1,24 @@
+year,area,kind,households,population_in_households,avg_persons_per_household,hh_1_person,hh_2_person,hh_3_person,hh_4_person,hh_5+_person,value_type,formula,source_id
+2002,national,census,13337040,37812741,2.84,3306688,3097102,2654169,2404799,1874282,households reported; population and average derived,population_in_households = sum of BDL 194830/194832/194834/194836/194838; average = population / households,S16
+2011,national,census,13567999,38291443,2.82,3254736,3483408,2741982,2203028,1884844,reported,,S17
+2021,national,census,12516459,37459332,2.99,2824558,3136684,2382882,2043511,2128824,reported,,S18
+2006,national,annual estimate (EU-LFS survey),,,3.0,,,,,,reported,,S24
+2007,national,annual estimate (EU-LFS survey),,,2.9,,,,,,reported,,S24
+2008,national,annual estimate (EU-LFS survey),,,2.9,,,,,,reported,,S24
+2009,national,annual estimate (EU-LFS survey),,,2.8,,,,,,reported,,S24
+2010,national,annual estimate (EU-LFS survey),,,2.8,,,,,,reported,,S24
+2011,national,annual estimate (EU-LFS survey),,,2.8,,,,,,reported,,S24
+2012,national,annual estimate (EU-LFS survey),,,2.8,,,,,,reported,,S24
+2013,national,annual estimate (EU-LFS survey),,,2.7,,,,,,reported,,S24
+2014,national,annual estimate (EU-LFS survey),,,2.7,,,,,,reported,,S24
+2015,national,annual estimate (EU-LFS survey),,,2.7,,,,,,reported,,S24
+2016,national,annual estimate (EU-LFS survey),,,2.6,,,,,,reported,,S24
+2017,national,annual estimate (EU-LFS survey),,,2.6,,,,,,reported,,S24
+2018,national,annual estimate (EU-LFS survey),,,2.6,,,,,,reported,,S24
+2019,national,annual estimate (EU-LFS survey),,,2.5,,,,,,reported,,S24
+2020,national,annual estimate (EU-LFS survey),,,2.6,,,,,,reported,,S24
+2021,national,annual estimate (EU-LFS survey),,,2.5,,,,,,reported,,S24
+2022,national,annual estimate (EU-LFS survey),,,2.5,,,,,,reported,,S24
+2023,national,annual estimate (EU-LFS survey),,,2.4,,,,,,reported,,S24
+2024,national,annual estimate (EU-LFS survey),,,2.3,,,,,,reported,,S24
+2025,national,annual estimate (EU-LFS survey),,,2.3,,,,,,reported,,S24

@@ -207,19 +207,26 @@ def build_vital(bdl, eu):
     return rows
 
 
+ZERO_2015 = {80122, 80124, 1365224, 1365229, 1365234, 80108}  # BDL reports 0 for 2015 although 2014 and 2016 are in the tens of thousands
+
+
 def build_migration_national(bdl, eu):
     rows = []
 
     def add(year, indicator, value, unit, sid, note=""):
-        if value is None:
-            return
-        rows.append(row(year=year, indicator=indicator, area="national", value=value, unit=unit, note=note, source_id=sid))
+        rows.append(row(year=year, indicator=indicator, area="national", value="" if value is None else value, unit=unit,
+                        note=note, source_id=sid))
+    # National net internal migration (80125) is 0 in every year by construction (every move is counted once as a
+    # departure and once as an arrival), so it is not output; class-level internal flows are in migration_by_place_class.csv.
     m = {1365224: "permanent_registrations_total", 80121: "permanent_registrations_internal", 80122: "permanent_registrations_from_abroad",
          1365229: "permanent_deregistrations_total", 80123: "permanent_deregistrations_internal", 80124: "permanent_deregistrations_to_abroad",
-         80125: "net_internal_migration", 80108: "net_international_migration", 1365234: "net_migration_total"}
+         80108: "net_international_migration"}
     for vid, ind in m.items():
         for y, val in bdl[vid]["vals"].items():
-            add(y, ind, val, "persons", "S15", "registered changes of permanent residence only")
+            if y == 2015 and vid in ZERO_2015:
+                add(y, ind, None, "persons", "S15", "MISSING: BDL reports 0 for 2015 (implausible; 2014 and 2016 are far from 0); not used")
+            else:
+                add(y, ind, val, "persons", "S15", "registered changes of permanent residence only")
     for p, (val, flag) in sorted(eu["immigration_all_citizenships"].items()):
         add(int(p), "eurostat_immigration_all_citizenships", val, "persons", "S22", "level break 2008/2009; flag " + (flag or "none"))
     for p, (val, flag) in sorted(eu["emigration_all_citizenships"].items()):
@@ -466,23 +473,21 @@ def households_rows(bdl, eu, hh_by_class):
     return [{k: r.get(k, "") for k in keys} for r in rows]
 
 
-def migration_class_rows(net_int, net_abroad, pop, big_ids):
-    use_parts = True
+def migration_class_rows(net_int, pop, big_ids):
+    """Net internal migration (permanent-residence registrations) summed by place class, with per-1000 rates."""
     rows = []
-    sp, cp = class_sums(pop, big_ids, YEARS, use_parts)
-    si, ci = class_sums(net_int, big_ids, YEARS, use_parts)
-    sa, ca = class_sums(net_abroad, big_ids, YEARS, use_parts)
-    for cls in ("big_cities", "small_cities", "villages", "urban_rural_gminas_whole"):
+    sp, cp = class_sums(pop, big_ids, YEARS, True)
+    si, ci = class_sums(net_int, big_ids, YEARS, True)
+    for cls in ("big_cities", "small_cities", "villages"):
         for y in YEARS:
-            p, i, a = sp[cls].get(y), si[cls].get(y), sa[cls].get(y)
+            p, i = sp[cls].get(y), si[cls].get(y)
             if p is None:
                 continue
             rows.append({"year": y, "class": cls, "population": p, "net_internal_migration": "" if i is None else i,
-                         "net_international_migration": "" if a is None else a,
                          "net_internal_per_1000": fmt(1000 * i / p) if i is not None else "",
-                         "net_international_per_1000": fmt(1000 * a / p) if a is not None else "",
-                         "gmina_units": cp[cls][y], "value_type": "derived",
-                         "formula": "sum over gmina-level BDL units of the class (80125, 80108); per 1000 = net / population (60641) x 1000",
+                         "gmina_units_with_migration": ci[cls][y], "gmina_units_with_population": cp[cls][y],
+                         "value_type": "derived",
+                         "formula": "sum over gmina-level BDL units of the class (var 80125, urban parts type 4 and rural parts type 5 where BDL has them); per 1000 = net / population (60641) x 1000",
                          "source_id": "S15;S1"})
     return rows
 
@@ -504,16 +509,8 @@ def main():
     write(OUT / "suburban_belt_summary.csv", belt_summary(brows, pop, big))
     write(OUT / "small_towns_change.csv", small_town_rows(pop, big))
     net_int = merged_series(fg.load_gmina_var(80125, YEARS))
-    net_abroad = merged_series(fg.load_gmina_var(80108, YEARS))
-    write(OUT / "migration_by_place_class.csv", migration_class_rows(net_int, net_abroad, pop, big_ids))
-    hh = merged_series(fg.load_gmina_var(1652549, [2021]))
-    hp = merged_series(fg.load_gmina_var(1652555, [2021]))
-    hh_by_class = {}
-    sh, _ = class_sums(hh, big_ids, [2021], True)
-    sp_, _ = class_sums(hp, big_ids, [2021], True)
-    for cls in sh:
-        hh_by_class[cls] = (sh[cls][2021], sp_[cls][2021])
-    write(OUT / "households.csv", households_rows(bdl, eu, hh_by_class))
+    write(OUT / "migration_by_place_class.csv", migration_class_rows(net_int, pop, big_ids))
+    write(OUT / "households.csv", households_rows(bdl, eu, {}))
     print("done")
 
 
