@@ -1,0 +1,2121 @@
+subject_id,variable_id,n1,n2,n3,year,value
+P1350,80108,net migration abroad,total,,2000,-19668
+P1350,80108,net migration abroad,total,,2001,-16743
+P1350,80108,net migration abroad,total,,2002,-17945
+P1350,80108,net migration abroad,total,,2003,-13765
+P1350,80108,net migration abroad,total,,2004,-9382
+P1350,80108,net migration abroad,total,,2005,-12878
+P1350,80108,net migration abroad,total,,2006,-36134
+P1350,80108,net migration abroad,total,,2007,-20485
+P1350,80108,net migration abroad,total,,2008,-14865
+P1350,80108,net migration abroad,total,,2009,-1196
+P1350,80108,net migration abroad,total,,2010,-2114
+P1350,80108,net migration abroad,total,,2011,-4334
+P1350,80108,net migration abroad,total,,2012,-6617
+P1350,80108,net migration abroad,total,,2013,-19904
+P1350,80108,net migration abroad,total,,2014,-15750
+P1350,80108,net migration abroad,total,,2015,0
+P1350,80108,net migration abroad,total,,2016,1505
+P1350,80108,net migration abroad,total,,2017,1436
+P1350,80108,net migration abroad,total,,2018,3612
+P1350,80108,net migration abroad,total,,2019,6183
+P1350,80108,net migration abroad,total,,2020,4483
+P1350,80108,net migration abroad,total,,2021,3404
+P1350,80108,net migration abroad,total,,2022,1939
+P1350,80108,net migration abroad,total,,2023,6766
+P1350,80108,net migration abroad,total,,2024,9301
+P1350,80108,net migration abroad,total,,2025,10906
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2000,394093
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2001,369274
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2002,403562
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2003,430475
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2004,432632
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2005,422779
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2006,473548
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2007,511254
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2008,405474
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2009,403837
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2010,422621
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2011,419946
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2012,395278
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2013,427279
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2014,407604
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2015,387546
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2016,378196
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2017,400352
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2018,449771
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2019,468326
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2020,385027
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2021,429719
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2022,409058
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2023,406099
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2024,430262
+P1350,80121,"registrations for permanent residence, in internal movement",total,,2025,404266
+P1350,80122,"registrations for permanent residence, from abroad",total,,2000,7331
+P1350,80122,"registrations for permanent residence, from abroad",total,,2001,6625
+P1350,80122,"registrations for permanent residence, from abroad",total,,2002,6587
+P1350,80122,"registrations for permanent residence, from abroad",total,,2003,7048
+P1350,80122,"registrations for permanent residence, from abroad",total,,2004,9495
+P1350,80122,"registrations for permanent residence, from abroad",total,,2005,9364
+P1350,80122,"registrations for permanent residence, from abroad",total,,2006,10802
+P1350,80122,"registrations for permanent residence, from abroad",total,,2007,14995
+P1350,80122,"registrations for permanent residence, from abroad",total,,2008,15275
+P1350,80122,"registrations for permanent residence, from abroad",total,,2009,17424
+P1350,80122,"registrations for permanent residence, from abroad",total,,2010,15246
+P1350,80122,"registrations for permanent residence, from abroad",total,,2011,15524
+P1350,80122,"registrations for permanent residence, from abroad",total,,2012,14583
+P1350,80122,"registrations for permanent residence, from abroad",total,,2013,12199
+P1350,80122,"registrations for permanent residence, from abroad",total,,2014,12330
+P1350,80122,"registrations for permanent residence, from abroad",total,,2015,0
+P1350,80122,"registrations for permanent residence, from abroad",total,,2016,13475
+P1350,80122,"registrations for permanent residence, from abroad",total,,2017,13324
+P1350,80122,"registrations for permanent residence, from abroad",total,,2018,15461
+P1350,80122,"registrations for permanent residence, from abroad",total,,2019,16909
+P1350,80122,"registrations for permanent residence, from abroad",total,,2020,13263
+P1350,80122,"registrations for permanent residence, from abroad",total,,2021,15409
+P1350,80122,"registrations for permanent residence, from abroad",total,,2022,15572
+P1350,80122,"registrations for permanent residence, from abroad",total,,2023,16707
+P1350,80122,"registrations for permanent residence, from abroad",total,,2024,19515
+P1350,80122,"registrations for permanent residence, from abroad",total,,2025,21087
+P1350,80123,"registrations of departure, in internal movement",total,,2000,394093
+P1350,80123,"registrations of departure, in internal movement",total,,2001,369274
+P1350,80123,"registrations of departure, in internal movement",total,,2002,403562
+P1350,80123,"registrations of departure, in internal movement",total,,2003,430475
+P1350,80123,"registrations of departure, in internal movement",total,,2004,432632
+P1350,80123,"registrations of departure, in internal movement",total,,2005,422779
+P1350,80123,"registrations of departure, in internal movement",total,,2006,473548
+P1350,80123,"registrations of departure, in internal movement",total,,2007,511254
+P1350,80123,"registrations of departure, in internal movement",total,,2008,405474
+P1350,80123,"registrations of departure, in internal movement",total,,2009,403837
+P1350,80123,"registrations of departure, in internal movement",total,,2010,422621
+P1350,80123,"registrations of departure, in internal movement",total,,2011,419946
+P1350,80123,"registrations of departure, in internal movement",total,,2012,395278
+P1350,80123,"registrations of departure, in internal movement",total,,2013,427279
+P1350,80123,"registrations of departure, in internal movement",total,,2014,407604
+P1350,80123,"registrations of departure, in internal movement",total,,2015,387546
+P1350,80123,"registrations of departure, in internal movement",total,,2016,378196
+P1350,80123,"registrations of departure, in internal movement",total,,2017,400352
+P1350,80123,"registrations of departure, in internal movement",total,,2018,449771
+P1350,80123,"registrations of departure, in internal movement",total,,2019,468326
+P1350,80123,"registrations of departure, in internal movement",total,,2020,385027
+P1350,80123,"registrations of departure, in internal movement",total,,2021,429719
+P1350,80123,"registrations of departure, in internal movement",total,,2022,409058
+P1350,80123,"registrations of departure, in internal movement",total,,2023,406099
+P1350,80123,"registrations of departure, in internal movement",total,,2024,430262
+P1350,80123,"registrations of departure, in internal movement",total,,2025,404266
+P1350,80124,registrations of departure to abroad,total,,2000,26999
+P1350,80124,registrations of departure to abroad,total,,2001,23368
+P1350,80124,registrations of departure to abroad,total,,2002,24532
+P1350,80124,registrations of departure to abroad,total,,2003,20813
+P1350,80124,registrations of departure to abroad,total,,2004,18877
+P1350,80124,registrations of departure to abroad,total,,2005,22242
+P1350,80124,registrations of departure to abroad,total,,2006,46936
+P1350,80124,registrations of departure to abroad,total,,2007,35480
+P1350,80124,registrations of departure to abroad,total,,2008,30140
+P1350,80124,registrations of departure to abroad,total,,2009,18620
+P1350,80124,registrations of departure to abroad,total,,2010,17360
+P1350,80124,registrations of departure to abroad,total,,2011,19858
+P1350,80124,registrations of departure to abroad,total,,2012,21200
+P1350,80124,registrations of departure to abroad,total,,2013,32103
+P1350,80124,registrations of departure to abroad,total,,2014,28080
+P1350,80124,registrations of departure to abroad,total,,2015,0
+P1350,80124,registrations of departure to abroad,total,,2016,11970
+P1350,80124,registrations of departure to abroad,total,,2017,11888
+P1350,80124,registrations of departure to abroad,total,,2018,11849
+P1350,80124,registrations of departure to abroad,total,,2019,10726
+P1350,80124,registrations of departure to abroad,total,,2020,8780
+P1350,80124,registrations of departure to abroad,total,,2021,12005
+P1350,80124,registrations of departure to abroad,total,,2022,13633
+P1350,80124,registrations of departure to abroad,total,,2023,9941
+P1350,80124,registrations of departure to abroad,total,,2024,10214
+P1350,80124,registrations of departure to abroad,total,,2025,10181
+P1350,80125,net migration in internal movement,total,,2000,0
+P1350,80125,net migration in internal movement,total,,2001,0
+P1350,80125,net migration in internal movement,total,,2002,0
+P1350,80125,net migration in internal movement,total,,2003,0
+P1350,80125,net migration in internal movement,total,,2004,0
+P1350,80125,net migration in internal movement,total,,2005,0
+P1350,80125,net migration in internal movement,total,,2006,0
+P1350,80125,net migration in internal movement,total,,2007,0
+P1350,80125,net migration in internal movement,total,,2008,0
+P1350,80125,net migration in internal movement,total,,2009,0
+P1350,80125,net migration in internal movement,total,,2010,0
+P1350,80125,net migration in internal movement,total,,2011,0
+P1350,80125,net migration in internal movement,total,,2012,0
+P1350,80125,net migration in internal movement,total,,2013,0
+P1350,80125,net migration in internal movement,total,,2014,0
+P1350,80125,net migration in internal movement,total,,2015,0
+P1350,80125,net migration in internal movement,total,,2016,0
+P1350,80125,net migration in internal movement,total,,2017,0
+P1350,80125,net migration in internal movement,total,,2018,0
+P1350,80125,net migration in internal movement,total,,2019,0
+P1350,80125,net migration in internal movement,total,,2020,0
+P1350,80125,net migration in internal movement,total,,2021,0
+P1350,80125,net migration in internal movement,total,,2022,0
+P1350,80125,net migration in internal movement,total,,2023,0
+P1350,80125,net migration in internal movement,total,,2024,0
+P1350,80125,net migration in internal movement,total,,2025,0
+P1350,1365224,"registrations for permanent residence, total",total,,2000,401424
+P1350,1365224,"registrations for permanent residence, total",total,,2001,375899
+P1350,1365224,"registrations for permanent residence, total",total,,2002,410149
+P1350,1365224,"registrations for permanent residence, total",total,,2003,437523
+P1350,1365224,"registrations for permanent residence, total",total,,2004,442127
+P1350,1365224,"registrations for permanent residence, total",total,,2005,432143
+P1350,1365224,"registrations for permanent residence, total",total,,2006,484350
+P1350,1365224,"registrations for permanent residence, total",total,,2007,526249
+P1350,1365224,"registrations for permanent residence, total",total,,2008,420749
+P1350,1365224,"registrations for permanent residence, total",total,,2009,421261
+P1350,1365224,"registrations for permanent residence, total",total,,2010,437867
+P1350,1365224,"registrations for permanent residence, total",total,,2011,435470
+P1350,1365224,"registrations for permanent residence, total",total,,2012,409861
+P1350,1365224,"registrations for permanent residence, total",total,,2013,439478
+P1350,1365224,"registrations for permanent residence, total",total,,2014,419934
+P1350,1365224,"registrations for permanent residence, total",total,,2015,0
+P1350,1365224,"registrations for permanent residence, total",total,,2016,391671
+P1350,1365224,"registrations for permanent residence, total",total,,2017,413676
+P1350,1365224,"registrations for permanent residence, total",total,,2018,465232
+P1350,1365224,"registrations for permanent residence, total",total,,2019,485235
+P1350,1365224,"registrations for permanent residence, total",total,,2020,398290
+P1350,1365224,"registrations for permanent residence, total",total,,2021,445128
+P1350,1365224,"registrations for permanent residence, total",total,,2022,424630
+P1350,1365224,"registrations for permanent residence, total",total,,2023,422806
+P1350,1365224,"registrations for permanent residence, total",total,,2024,449777
+P1350,1365224,"registrations for permanent residence, total",total,,2025,425353
+P1350,1365229,"registrations of departure, total",total,,2000,421092
+P1350,1365229,"registrations of departure, total",total,,2001,392642
+P1350,1365229,"registrations of departure, total",total,,2002,428094
+P1350,1365229,"registrations of departure, total",total,,2003,451288
+P1350,1365229,"registrations of departure, total",total,,2004,451509
+P1350,1365229,"registrations of departure, total",total,,2005,445021
+P1350,1365229,"registrations of departure, total",total,,2006,520484
+P1350,1365229,"registrations of departure, total",total,,2007,546734
+P1350,1365229,"registrations of departure, total",total,,2008,435614
+P1350,1365229,"registrations of departure, total",total,,2009,422457
+P1350,1365229,"registrations of departure, total",total,,2010,439981
+P1350,1365229,"registrations of departure, total",total,,2011,439804
+P1350,1365229,"registrations of departure, total",total,,2012,416478
+P1350,1365229,"registrations of departure, total",total,,2013,459382
+P1350,1365229,"registrations of departure, total",total,,2014,435684
+P1350,1365229,"registrations of departure, total",total,,2015,0
+P1350,1365229,"registrations of departure, total",total,,2016,390166
+P1350,1365229,"registrations of departure, total",total,,2017,412240
+P1350,1365229,"registrations of departure, total",total,,2018,461620
+P1350,1365229,"registrations of departure, total",total,,2019,479052
+P1350,1365229,"registrations of departure, total",total,,2020,393807
+P1350,1365229,"registrations of departure, total",total,,2021,441724
+P1350,1365229,"registrations of departure, total",total,,2022,422691
+P1350,1365229,"registrations of departure, total",total,,2023,416040
+P1350,1365229,"registrations of departure, total",total,,2024,440476
+P1350,1365229,"registrations of departure, total",total,,2025,414447
+P1350,1365234,total net migration,total,,2000,-19668
+P1350,1365234,total net migration,total,,2001,-16743
+P1350,1365234,total net migration,total,,2002,-17945
+P1350,1365234,total net migration,total,,2003,-13765
+P1350,1365234,total net migration,total,,2004,-9382
+P1350,1365234,total net migration,total,,2005,-12878
+P1350,1365234,total net migration,total,,2006,-36134
+P1350,1365234,total net migration,total,,2007,-20485
+P1350,1365234,total net migration,total,,2008,-14865
+P1350,1365234,total net migration,total,,2009,-1196
+P1350,1365234,total net migration,total,,2010,-2114
+P1350,1365234,total net migration,total,,2011,-4334
+P1350,1365234,total net migration,total,,2012,-6617
+P1350,1365234,total net migration,total,,2013,-19904
+P1350,1365234,total net migration,total,,2014,-15750
+P1350,1365234,total net migration,total,,2015,0
+P1350,1365234,total net migration,total,,2016,1505
+P1350,1365234,total net migration,total,,2017,1436
+P1350,1365234,total net migration,total,,2018,3612
+P1350,1365234,total net migration,total,,2019,6183
+P1350,1365234,total net migration,total,,2020,4483
+P1350,1365234,total net migration,total,,2021,3404
+P1350,1365234,total net migration,total,,2022,1939
+P1350,1365234,total net migration,total,,2023,6766
+P1350,1365234,total net migration,total,,2024,9301
+P1350,1365234,total net migration,total,,2025,10906
+P1873,59,Live births,total,,2000,378348
+P1873,59,Live births,total,,2001,368205
+P1873,59,Live births,total,,2002,353765
+P1873,59,Live births,total,,2003,351072
+P1873,59,Live births,total,,2004,356131
+P1873,59,Live births,total,,2005,364383
+P1873,59,Live births,total,,2006,374244
+P1873,59,Live births,total,,2007,387873
+P1873,59,Live births,total,,2008,414499
+P1873,59,Live births,total,,2009,417589
+P1873,59,Live births,total,,2010,413300
+P1873,59,Live births,total,,2011,388416
+P1873,59,Live births,total,,2012,386257
+P1873,59,Live births,total,,2013,369576
+P1873,59,Live births,total,,2014,375160
+P1873,59,Live births,total,,2015,369308
+P1873,59,Live births,total,,2016,382257
+P1873,59,Live births,total,,2017,401982
+P1873,59,Live births,total,,2018,388178
+P1873,59,Live births,total,,2019,374954
+P1873,59,Live births,total,,2020,355309
+P1873,59,Live births,total,,2021,331511
+P1873,59,Live births,total,,2022,305132
+P1873,59,Live births,total,,2023,272451
+P1873,59,Live births,total,,2024,251782
+P1873,59,Live births,total,,2025,238264
+P1873,60,Live births,males,,2000,194824
+P1873,60,Live births,males,,2001,189521
+P1873,60,Live births,males,,2002,182136
+P1873,60,Live births,males,,2003,180634
+P1873,60,Live births,males,,2004,183422
+P1873,60,Live births,males,,2005,187385
+P1873,60,Live births,males,,2006,192518
+P1873,60,Live births,males,,2007,199338
+P1873,60,Live births,males,,2008,212946
+P1873,60,Live births,males,,2009,214908
+P1873,60,Live births,males,,2010,214428
+P1873,60,Live births,males,,2011,199921
+P1873,60,Live births,males,,2012,198696
+P1873,60,Live births,males,,2013,189917
+P1873,60,Live births,males,,2014,193091
+P1873,60,Live births,males,,2015,189677
+P1873,60,Live births,males,,2016,196221
+P1873,60,Live births,males,,2017,206410
+P1873,60,Live births,males,,2018,199820
+P1873,60,Live births,males,,2019,192685
+P1873,60,Live births,males,,2020,182300
+P1873,60,Live births,males,,2021,170136
+P1873,60,Live births,males,,2022,156445
+P1873,60,Live births,males,,2023,139446
+P1873,60,Live births,males,,2024,129750
+P1873,60,Live births,males,,2025,122269
+P1873,61,Live births,females,,2000,183524
+P1873,61,Live births,females,,2001,178684
+P1873,61,Live births,females,,2002,171629
+P1873,61,Live births,females,,2003,170438
+P1873,61,Live births,females,,2004,172709
+P1873,61,Live births,females,,2005,176998
+P1873,61,Live births,females,,2006,181726
+P1873,61,Live births,females,,2007,188535
+P1873,61,Live births,females,,2008,201553
+P1873,61,Live births,females,,2009,202681
+P1873,61,Live births,females,,2010,198872
+P1873,61,Live births,females,,2011,188495
+P1873,61,Live births,females,,2012,187561
+P1873,61,Live births,females,,2013,179659
+P1873,61,Live births,females,,2014,182069
+P1873,61,Live births,females,,2015,179631
+P1873,61,Live births,females,,2016,186036
+P1873,61,Live births,females,,2017,195572
+P1873,61,Live births,females,,2018,188358
+P1873,61,Live births,females,,2019,182269
+P1873,61,Live births,females,,2020,173009
+P1873,61,Live births,females,,2021,161375
+P1873,61,Live births,females,,2022,148687
+P1873,61,Live births,females,,2023,133005
+P1873,61,Live births,females,,2024,122032
+P1873,61,Live births,females,,2025,115995
+P1873,62,Infant deaths,total,,2000,3068
+P1873,62,Infant deaths,total,,2001,2823
+P1873,62,Infant deaths,total,,2002,2662
+P1873,62,Infant deaths,total,,2003,2470
+P1873,62,Infant deaths,total,,2004,2423
+P1873,62,Infant deaths,total,,2005,2340
+P1873,62,Infant deaths,total,,2006,2238
+P1873,62,Infant deaths,total,,2007,2322
+P1873,62,Infant deaths,total,,2008,2338
+P1873,62,Infant deaths,total,,2009,2327
+P1873,62,Infant deaths,total,,2010,2057
+P1873,62,Infant deaths,total,,2011,1836
+P1873,62,Infant deaths,total,,2012,1791
+P1873,62,Infant deaths,total,,2013,1684
+P1873,62,Infant deaths,total,,2014,1583
+P1873,62,Infant deaths,total,,2015,1476
+P1873,62,Infant deaths,total,,2016,1522
+P1873,62,Infant deaths,total,,2017,1604
+P1873,62,Infant deaths,total,,2018,1494
+P1873,62,Infant deaths,total,,2019,1412
+P1873,62,Infant deaths,total,,2020,1270
+P1873,62,Infant deaths,total,,2021,1306
+P1873,62,Infant deaths,total,,2022,1171
+P1873,62,Infant deaths,total,,2023,1051
+P1873,62,Infant deaths,total,,2024,898
+P1873,62,Infant deaths,total,,2025,777
+P1873,65,"Deaths, grand total",total,,2000,368028
+P1873,65,"Deaths, grand total",total,,2001,363220
+P1873,65,"Deaths, grand total",total,,2002,359486
+P1873,65,"Deaths, grand total",total,,2003,365230
+P1873,65,"Deaths, grand total",total,,2004,363522
+P1873,65,"Deaths, grand total",total,,2005,368285
+P1873,65,"Deaths, grand total",total,,2006,369686
+P1873,65,"Deaths, grand total",total,,2007,377226
+P1873,65,"Deaths, grand total",total,,2008,379399
+P1873,65,"Deaths, grand total",total,,2009,384940
+P1873,65,"Deaths, grand total",total,,2010,378478
+P1873,65,"Deaths, grand total",total,,2011,375501
+P1873,65,"Deaths, grand total",total,,2012,384788
+P1873,65,"Deaths, grand total",total,,2013,387312
+P1873,65,"Deaths, grand total",total,,2014,376467
+P1873,65,"Deaths, grand total",total,,2015,394921
+P1873,65,"Deaths, grand total",total,,2016,388009
+P1873,65,"Deaths, grand total",total,,2017,402852
+P1873,65,"Deaths, grand total",total,,2018,414200
+P1873,65,"Deaths, grand total",total,,2019,409709
+P1873,65,"Deaths, grand total",total,,2020,477355
+P1873,65,"Deaths, grand total",total,,2021,519517
+P1873,65,"Deaths, grand total",total,,2022,448448
+P1873,65,"Deaths, grand total",total,,2023,409036
+P1873,65,"Deaths, grand total",total,,2024,408504
+P1873,65,"Deaths, grand total",total,,2025,405747
+P1873,66,"Deaths, grand total",males,,2000,195437
+P1873,66,"Deaths, grand total",males,,2001,192951
+P1873,66,"Deaths, grand total",males,,2002,191668
+P1873,66,"Deaths, grand total",males,,2003,193919
+P1873,66,"Deaths, grand total",males,,2004,194683
+P1873,66,"Deaths, grand total",males,,2005,196776
+P1873,66,"Deaths, grand total",males,,2006,198299
+P1873,66,"Deaths, grand total",males,,2007,202241
+P1873,66,"Deaths, grand total",males,,2008,202343
+P1873,66,"Deaths, grand total",males,,2009,203826
+P1873,66,"Deaths, grand total",males,,2010,199833
+P1873,66,"Deaths, grand total",males,,2011,198178
+P1873,66,"Deaths, grand total",males,,2012,202094
+P1873,66,"Deaths, grand total",males,,2013,201696
+P1873,66,"Deaths, grand total",males,,2014,195791
+P1873,66,"Deaths, grand total",males,,2015,204469
+P1873,66,"Deaths, grand total",males,,2016,202150
+P1873,66,"Deaths, grand total",males,,2017,207671
+P1873,66,"Deaths, grand total",males,,2018,213647
+P1873,66,"Deaths, grand total",males,,2019,211423
+P1873,66,"Deaths, grand total",males,,2020,249744
+P1873,66,"Deaths, grand total",males,,2021,268658
+P1873,66,"Deaths, grand total",males,,2022,229746
+P1873,66,"Deaths, grand total",males,,2023,209486
+P1873,66,"Deaths, grand total",males,,2024,209103
+P1873,66,"Deaths, grand total",males,,2025,207357
+P1873,67,"Deaths, grand total",females,,2000,172591
+P1873,67,"Deaths, grand total",females,,2001,170269
+P1873,67,"Deaths, grand total",females,,2002,167818
+P1873,67,"Deaths, grand total",females,,2003,171311
+P1873,67,"Deaths, grand total",females,,2004,168839
+P1873,67,"Deaths, grand total",females,,2005,171509
+P1873,67,"Deaths, grand total",females,,2006,171387
+P1873,67,"Deaths, grand total",females,,2007,174985
+P1873,67,"Deaths, grand total",females,,2008,177056
+P1873,67,"Deaths, grand total",females,,2009,181114
+P1873,67,"Deaths, grand total",females,,2010,178645
+P1873,67,"Deaths, grand total",females,,2011,177323
+P1873,67,"Deaths, grand total",females,,2012,182694
+P1873,67,"Deaths, grand total",females,,2013,185616
+P1873,67,"Deaths, grand total",females,,2014,180676
+P1873,67,"Deaths, grand total",females,,2015,190452
+P1873,67,"Deaths, grand total",females,,2016,185859
+P1873,67,"Deaths, grand total",females,,2017,195181
+P1873,67,"Deaths, grand total",females,,2018,200553
+P1873,67,"Deaths, grand total",females,,2019,198286
+P1873,67,"Deaths, grand total",females,,2020,227611
+P1873,67,"Deaths, grand total",females,,2021,250859
+P1873,67,"Deaths, grand total",females,,2022,218702
+P1873,67,"Deaths, grand total",females,,2023,199550
+P1873,67,"Deaths, grand total",females,,2024,199401
+P1873,67,"Deaths, grand total",females,,2025,198390
+P2115,9199,total,,,2002,13337040
+P2115,9200,"one-family, total",,,2002,9205189
+P2115,9201,"one-family, 2-person",,,2002,2911939
+P2115,9202,"one-family, 3-person",,,2002,2633484
+P2115,9203,"one-family, number of persons equal to 4 or more",,,2002,3659766
+P2115,9204,two-family,,,2002,586491
+P2115,9205,three-family and over,,,2002,26122
+P2115,9206,"non-family, total",,,2002,3519238
+P2115,9207,"non-family, 1-person",,,2002,3306688
+P2115,9208,"non-family, 2-person",,,2002,185163
+P2115,9209,"non-family, 3-person",,,2002,20685
+P2115,9210,"non-family, number of persons equal to 4 or more",,,2002,6702
+P2137,47693,60-64,females,,2000,934272
+P2137,47693,60-64,females,,2010,1265217
+P2137,47693,60-64,females,,2020,1407955
+P2137,47693,60-64,females,,2025,1145854
+P2137,47694,25-29,total,,2000,2772495
+P2137,47694,25-29,total,,2010,3268594
+P2137,47694,25-29,total,,2020,2385246
+P2137,47694,25-29,total,,2025,1936614
+P2137,47695,30-34,females,,2000,1184524
+P2137,47695,30-34,females,,2010,1543444
+P2137,47695,30-34,females,,2020,1380360
+P2137,47695,30-34,females,,2025,1172347
+P2137,47696,25-29,females,,2000,1366182
+P2137,47696,25-29,females,,2010,1610901
+P2137,47696,25-29,females,,2020,1172578
+P2137,47696,25-29,females,,2025,951279
+P2137,47698,40-44,females,,2000,1542376
+P2137,47698,40-44,females,,2010,1176598
+P2137,47698,40-44,females,,2020,1522398
+P2137,47698,40-44,females,,2025,1580977
+P2137,47701,35-39,total,,2000,2532760
+P2137,47701,35-39,total,,2010,2763465
+P2137,47701,35-39,total,,2020,3219110
+P2137,47701,35-39,total,,2025,2789458
+P2137,47702,55-59,females,,2000,844693
+P2137,47702,55-59,females,,2010,1509459
+P2137,47702,55-59,females,,2020,1180994
+P2137,47702,55-59,females,,2025,1120501
+P2137,47706,50-54,males,,2000,1257708
+P2137,47706,50-54,males,,2010,1450268
+P2137,47706,50-54,males,,2020,1125709
+P2137,47706,50-54,males,,2025,1309267
+P2137,47707,40-44,total,,2000,3076974
+P2137,47707,40-44,total,,2010,2374794
+P2137,47707,40-44,total,,2020,3073336
+P2137,47707,40-44,total,,2025,3191762
+P2137,47711,20-24,males,,2000,1589584
+P2137,47711,20-24,males,,2010,1450103
+P2137,47711,20-24,males,,2020,990472
+P2137,47711,20-24,males,,2025,897398
+P2137,47712,35-39,males,,2000,1277923
+P2137,47712,35-39,males,,2010,1399739
+P2137,47712,35-39,males,,2020,1631181
+P2137,47712,35-39,males,,2025,1412005
+P2137,47715,55-59,males,,2000,742630
+P2137,47715,55-59,males,,2010,1383927
+P2137,47715,55-59,males,,2020,1120055
+P2137,47715,55-59,males,,2025,1074331
+P2137,47716,35-39,females,,2000,1254837
+P2137,47716,35-39,females,,2010,1363726
+P2137,47716,35-39,females,,2020,1587929
+P2137,47716,35-39,females,,2025,1377453
+P2137,47717,50-54,total,,2000,2602592
+P2137,47717,50-54,total,,2010,2954334
+P2137,47717,50-54,total,,2020,2266487
+P2137,47717,50-54,total,,2025,2632611
+P2137,47721,60-64,males,,2000,762397
+P2137,47721,60-64,males,,2010,1086943
+P2137,47721,60-64,males,,2020,1246601
+P2137,47721,60-64,males,,2025,1040919
+P2137,47722,30-34,total,,2000,2403327
+P2137,47722,30-34,total,,2010,3131690
+P2137,47722,30-34,total,,2020,2804287
+P2137,47722,30-34,total,,2025,2378342
+P2137,47723,50-54,females,,2000,1344884
+P2137,47723,50-54,females,,2010,1504066
+P2137,47723,50-54,females,,2020,1140778
+P2137,47723,50-54,females,,2025,1323344
+P2137,47724,30-34,males,,2000,1218803
+P2137,47724,30-34,males,,2010,1588246
+P2137,47724,30-34,males,,2020,1423927
+P2137,47724,30-34,males,,2025,1205995
+P2137,47725,40-44,males,,2000,1534598
+P2137,47725,40-44,males,,2010,1198196
+P2137,47725,40-44,males,,2020,1550938
+P2137,47725,40-44,males,,2025,1610785
+P2137,47726,45-49,total,,2000,3090482
+P2137,47726,45-49,total,,2010,2472401
+P2137,47726,45-49,total,,2020,2685717
+P2137,47726,45-49,total,,2025,3034950
+P2137,47727,45-49,females,,2000,1571639
+P2137,47727,45-49,females,,2010,1235301
+P2137,47727,45-49,females,,2020,1337981
+P2137,47727,45-49,females,,2025,1512092
+P2137,47728,45-49,males,,2000,1518843
+P2137,47728,45-49,males,,2010,1237100
+P2137,47728,45-49,males,,2020,1347736
+P2137,47728,45-49,males,,2025,1522858
+P2137,47732,55-59,total,,2000,1587323
+P2137,47732,55-59,total,,2010,2893386
+P2137,47732,55-59,total,,2020,2301049
+P2137,47732,55-59,total,,2025,2194832
+P2137,47734,20-24,total,,2000,3128737
+P2137,47734,20-24,total,,2010,2848527
+P2137,47734,20-24,total,,2020,1942429
+P2137,47734,20-24,total,,2025,1756350
+P2137,47736,25-29,males,,2000,1406313
+P2137,47736,25-29,males,,2010,1657693
+P2137,47736,25-29,males,,2020,1212668
+P2137,47736,25-29,males,,2025,985335
+P2137,47738,20-24,females,,2000,1539153
+P2137,47738,20-24,females,,2010,1398424
+P2137,47738,20-24,females,,2020,951957
+P2137,47738,20-24,females,,2025,858952
+P2137,47739,60-64,total,,2000,1696669
+P2137,47739,60-64,total,,2010,2352160
+P2137,47739,60-64,total,,2020,2654556
+P2137,47739,60-64,total,,2025,2186773
+P2137,72238,70 and more,males,,2000,1096425
+P2137,72238,70 and more,males,,2010,1366734
+P2137,72238,70 and more,males,,2020,1702255
+P2137,72238,70 and more,males,,2025,2081468
+P2137,72239,65-69,total,,2000,1608166
+P2137,72239,65-69,total,,2010,1359829
+P2137,72239,65-69,total,,2020,2484447
+P2137,72239,65-69,total,,2025,2446741
+P2137,72240,70 and more,total,,2000,3117609
+P2137,72240,70 and more,total,,2010,3830580
+P2137,72240,70 and more,total,,2020,4567318
+P2137,72240,70 and more,total,,2025,5421241
+P2137,72241,65-69,females,,2000,917533
+P2137,72241,65-69,females,,2010,767372
+P2137,72241,65-69,females,,2020,1372234
+P2137,72241,65-69,females,,2025,1338092
+P2137,72242,70 and more,females,,2000,2021184
+P2137,72242,70 and more,females,,2010,2463846
+P2137,72242,70 and more,females,,2020,2865063
+P2137,72242,70 and more,females,,2025,3339773
+P2137,72243,65-69,males,,2000,690633
+P2137,72243,65-69,males,,2010,592457
+P2137,72243,65-69,males,,2020,1112213
+P2137,72243,65-69,males,,2025,1108649
+P2137,72295,total,females,,2000,19716616
+P2137,72295,total,females,,2010,19876741
+P2137,72295,total,females,,2020,19671402
+P2137,72295,total,females,,2025,19305606
+P2137,72296,0-4,females,,2000,966935
+P2137,72296,0-4,females,,2010,1006816
+P2137,72296,0-4,females,,2020,931832
+P2137,72296,0-4,females,,2025,680816
+P2137,72297,5-9,females,,2000,1187199
+P2137,72297,5-9,females,,2010,878297
+P2137,72297,5-9,females,,2020,956955
+P2137,72297,5-9,females,,2025,941215
+P2137,72298,10-14,females,,2000,1405565
+P2137,72298,10-14,females,,2010,967340
+P2137,72298,10-14,females,,2020,1002810
+P2137,72298,10-14,females,,2025,960152
+P2137,72299,15-19,females,,2000,1635640
+P2137,72299,15-19,females,,2010,1185934
+P2137,72299,15-19,females,,2020,859578
+P2137,72299,15-19,females,,2025,1002759
+P2137,72300,total,males,,2000,18537339
+P2137,72300,total,males,,2010,18653125
+P2137,72300,total,males,,2020,18417162
+P2137,72300,total,males,,2025,18026904
+P2137,72301,0-4,males,,2000,1017933
+P2137,72301,0-4,males,,2010,1059807
+P2137,72301,0-4,males,,2020,984063
+P2137,72301,0-4,males,,2025,717090
+P2137,72302,5-9,males,,2000,1241704
+P2137,72302,5-9,males,,2010,925178
+P2137,72302,5-9,males,,2020,1011147
+P2137,72302,5-9,males,,2025,993876
+P2137,72303,10-14,males,,2000,1475115
+P2137,72303,10-14,males,,2010,1018328
+P2137,72303,10-14,males,,2020,1054842
+P2137,72303,10-14,males,,2025,1014161
+P2137,72304,15-19,males,,2000,1706730
+P2137,72304,15-19,males,,2010,1238406
+P2137,72304,15-19,males,,2020,903355
+P2137,72304,15-19,males,,2025,1052767
+P2137,72305,total,total,,2000,38253955
+P2137,72305,total,total,,2010,38529866
+P2137,72305,total,total,,2020,38088564
+P2137,72305,total,total,,2025,37332510
+P2137,72306,0-4,total,,2000,1984868
+P2137,72306,0-4,total,,2010,2066623
+P2137,72306,0-4,total,,2020,1915895
+P2137,72306,0-4,total,,2025,1397906
+P2137,72307,5-9,total,,2000,2428903
+P2137,72307,5-9,total,,2010,1803475
+P2137,72307,5-9,total,,2020,1968102
+P2137,72307,5-9,total,,2025,1935091
+P2137,72308,10-14,total,,2000,2880680
+P2137,72308,10-14,total,,2010,1985668
+P2137,72308,10-14,total,,2020,2057652
+P2137,72308,10-14,total,,2025,1974313
+P2137,72309,15-19,total,,2000,3342370
+P2137,72309,15-19,total,,2010,2424340
+P2137,72309,15-19,total,,2020,1762933
+P2137,72309,15-19,total,,2025,2055526
+P2137,76014,70-74,females,,2010,809476
+P2137,76014,70-74,females,,2020,1100069
+P2137,76014,70-74,females,,2025,1267251
+P2137,76015,75-79,females,,2010,722715
+P2137,76015,75-79,females,,2020,619313
+P2137,76015,75-79,females,,2025,965685
+P2137,76016,80-84,females,,2010,546582
+P2137,76016,80-84,females,,2020,569135
+P2137,76016,80-84,females,,2025,495642
+P2137,76017,85 and more,females,,2010,385073
+P2137,76017,85 and more,females,,2020,576546
+P2137,76017,85 and more,females,,2025,611195
+P2137,76018,70-74,males,,2010,546873
+P2137,76018,70-74,males,,2020,803718
+P2137,76018,70-74,males,,2025,938663
+P2137,76019,75-79,males,,2010,423535
+P2137,76019,75-79,males,,2020,386790
+P2137,76019,75-79,males,,2025,632836
+P2137,76020,80-84,males,,2010,260916
+P2137,76020,80-84,males,,2020,289567
+P2137,76020,80-84,males,,2025,269078
+P2137,76021,85 and more,males,,2010,135410
+P2137,76021,85 and more,males,,2020,222180
+P2137,76021,85 and more,males,,2025,240891
+P2137,76022,70-74,total,,2010,1356349
+P2137,76022,70-74,total,,2020,1903787
+P2137,76022,70-74,total,,2025,2205914
+P2137,76023,75-79,total,,2010,1146250
+P2137,76023,75-79,total,,2020,1006103
+P2137,76023,75-79,total,,2025,1598521
+P2137,76024,80-84,total,,2010,807498
+P2137,76024,80-84,total,,2020,858702
+P2137,76024,80-84,total,,2025,764720
+P2137,76025,85 and more,total,,2010,520483
+P2137,76025,85 and more,total,,2020,798726
+P2137,76025,85 and more,total,,2025,852086
+P2137,454046,0-14,females,,2020,2891597
+P2137,454046,0-14,females,,2025,2582183
+P2137,454047,0-14,males,,2020,3050052
+P2137,454047,0-14,males,,2025,2725127
+P2137,454048,0-14,total,,2020,5941649
+P2137,454048,0-14,total,,2025,5307310
+P2346,59048,gross reproduction,,,2002,0.606
+P2346,59048,gross reproduction,,,2003,0.594
+P2346,59048,gross reproduction,,,2004,0.595
+P2346,59048,gross reproduction,,,2005,0.604
+P2346,59048,gross reproduction,,,2006,0.615
+P2346,59048,gross reproduction,,,2007,0.635
+P2346,59048,gross reproduction,,,2008,0.676
+P2346,59048,gross reproduction,,,2009,0.678
+P2346,59048,gross reproduction,,,2010,0.662
+P2346,59048,gross reproduction,,,2011,0.63
+P2346,59048,gross reproduction,,,2012,0.631
+P2346,59048,gross reproduction,,,2013,0.611
+P2346,59048,gross reproduction,,,2014,0.626
+P2346,59048,gross reproduction,,,2015,0.627
+P2346,59048,gross reproduction,,,2016,0.66
+P2346,59048,gross reproduction,,,2017,0.707
+P2346,59048,gross reproduction,,,2018,0.696
+P2346,59048,gross reproduction,,,2019,0.69
+P2346,59048,gross reproduction,,,2020,0.675
+P2346,59048,gross reproduction,,,2021,0.647
+P2346,59048,gross reproduction,,,2022,0.614
+P2346,59048,gross reproduction,,,2023,0.565
+P2346,59048,gross reproduction,,,2024,0.533
+P2346,59048,gross reproduction,,,2025,0.52
+P2346,59049,fertility,,,2002,1.249
+P2346,59049,fertility,,,2003,1.222
+P2346,59049,fertility,,,2004,1.227
+P2346,59049,fertility,,,2005,1.243
+P2346,59049,fertility,,,2006,1.267
+P2346,59049,fertility,,,2007,1.306
+P2346,59049,fertility,,,2008,1.39
+P2346,59049,fertility,,,2009,1.398
+P2346,59049,fertility,,,2010,1.376
+P2346,59049,fertility,,,2011,1.297
+P2346,59049,fertility,,,2012,1.299
+P2346,59049,fertility,,,2013,1.256
+P2346,59049,fertility,,,2014,1.29
+P2346,59049,fertility,,,2015,1.289
+P2346,59049,fertility,,,2016,1.357
+P2346,59049,fertility,,,2017,1.453
+P2346,59049,fertility,,,2018,1.435
+P2346,59049,fertility,,,2019,1.419
+P2346,59049,fertility,,,2020,1.387
+P2346,59049,fertility,,,2021,1.33
+P2346,59049,fertility,,,2022,1.261
+P2346,59049,fertility,,,2023,1.158
+P2346,59049,fertility,,,2024,1.099
+P2346,59049,fertility,,,2025,1.068
+P2426,60562,post-working age population per 100 persons of working age,,,2002,24.2
+P2426,60562,post-working age population per 100 persons of working age,,,2003,24.1
+P2426,60562,post-working age population per 100 persons of working age,,,2004,24.1
+P2426,60562,post-working age population per 100 persons of working age,,,2005,24.1
+P2426,60562,post-working age population per 100 persons of working age,,,2006,24.4
+P2426,60562,post-working age population per 100 persons of working age,,,2007,24.8
+P2426,60562,post-working age population per 100 persons of working age,,,2008,25.2
+P2426,60562,post-working age population per 100 persons of working age,,,2009,25.6
+P2426,60562,post-working age population per 100 persons of working age,,,2010,26.0
+P2426,60562,post-working age population per 100 persons of working age,,,2011,26.9
+P2426,60562,post-working age population per 100 persons of working age,,,2012,27.9
+P2426,60562,post-working age population per 100 persons of working age,,,2013,29.0
+P2426,60562,post-working age population per 100 persons of working age,,,2014,30.2
+P2426,60562,post-working age population per 100 persons of working age,,,2015,31.4
+P2426,60562,post-working age population per 100 persons of working age,,,2016,32.7
+P2426,60562,post-working age population per 100 persons of working age,,,2017,34.0
+P2426,60562,post-working age population per 100 persons of working age,,,2018,35.3
+P2426,60562,post-working age population per 100 persons of working age,,,2019,36.5
+P2426,60562,post-working age population per 100 persons of working age,,,2020,37.4
+P2426,60562,post-working age population per 100 persons of working age,,,2021,38.1
+P2426,60562,post-working age population per 100 persons of working age,,,2022,39.0
+P2426,60562,post-working age population per 100 persons of working age,,,2023,40.0
+P2426,60562,post-working age population per 100 persons of working age,,,2024,40.8
+P2426,60562,post-working age population per 100 persons of working age,,,2025,41.5
+P2426,60563,non-working age population per 100 persons of working age,,,2002,60.7
+P2426,60563,non-working age population per 100 persons of working age,,,2003,58.9
+P2426,60563,non-working age population per 100 persons of working age,,,2004,57.5
+P2426,60563,non-working age population per 100 persons of working age,,,2005,56.3
+P2426,60563,non-working age population per 100 persons of working age,,,2006,55.7
+P2426,60563,non-working age population per 100 persons of working age,,,2007,55.3
+P2426,60563,non-working age population per 100 persons of working age,,,2008,55.1
+P2426,60563,non-working age population per 100 persons of working age,,,2009,55.0
+P2426,60563,non-working age population per 100 persons of working age,,,2010,55.2
+P2426,60563,non-working age population per 100 persons of working age,,,2011,55.8
+P2426,60563,non-working age population per 100 persons of working age,,,2012,56.6
+P2426,60563,non-working age population per 100 persons of working age,,,2013,57.6
+P2426,60563,non-working age population per 100 persons of working age,,,2014,58.8
+P2426,60563,non-working age population per 100 persons of working age,,,2015,60.1
+P2426,60563,non-working age population per 100 persons of working age,,,2016,61.7
+P2426,60563,non-working age population per 100 persons of working age,,,2017,63.4
+P2426,60563,non-working age population per 100 persons of working age,,,2018,65.1
+P2426,60563,non-working age population per 100 persons of working age,,,2019,66.7
+P2426,60563,non-working age population per 100 persons of working age,,,2020,68.3
+P2426,60563,non-working age population per 100 persons of working age,,,2021,69.3
+P2426,60563,non-working age population per 100 persons of working age,,,2022,70.4
+P2426,60563,non-working age population per 100 persons of working age,,,2023,71.2
+P2426,60563,non-working age population per 100 persons of working age,,,2024,71.7
+P2426,60563,non-working age population per 100 persons of working age,,,2025,71.8
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2002,66.5
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2003,69.5
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2004,72.3
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2005,74.9
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2006,78.1
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2007,81.2
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2008,84.3
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2009,87.3
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2010,89.1
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2011,93.1
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2012,97.1
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2013,101.2
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2014,105.2
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2015,109.1
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2016,112.7
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2017,115.5
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2018,118.3
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2019,121.0
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2020,120.9
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2021,122.0
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2022,124.4
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2023,128.0
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2024,132.1
+P2426,60564,post-working age population per 100 persons of pre-working age,,,2025,136.8
+P2426,634067,old-age dependency ratio,,,2003,18.6
+P2426,634067,old-age dependency ratio,,,2004,18.7
+P2426,634067,old-age dependency ratio,,,2005,18.9
+P2426,634067,old-age dependency ratio,,,2006,19.0
+P2426,634067,old-age dependency ratio,,,2007,18.9
+P2426,634067,old-age dependency ratio,,,2008,18.9
+P2426,634067,old-age dependency ratio,,,2009,19.0
+P2426,634067,old-age dependency ratio,,,2010,18.9
+P2426,634067,old-age dependency ratio,,,2011,19.4
+P2426,634067,old-age dependency ratio,,,2012,20.1
+P2426,634067,old-age dependency ratio,,,2013,21.0
+P2426,634067,old-age dependency ratio,,,2014,21.9
+P2426,634067,old-age dependency ratio,,,2015,22.8
+P2426,634067,old-age dependency ratio,,,2016,23.9
+P2426,634067,old-age dependency ratio,,,2017,25.0
+P2426,634067,old-age dependency ratio,,,2018,26.1
+P2426,634067,old-age dependency ratio,,,2019,27.2
+P2426,634067,old-age dependency ratio,,,2020,28.1
+P2426,634067,old-age dependency ratio,,,2021,28.9
+P2426,634067,old-age dependency ratio,,,2022,29.9
+P2426,634067,old-age dependency ratio,,,2023,30.9
+P2426,634067,old-age dependency ratio,,,2024,31.8
+P2426,634067,old-age dependency ratio,,,2025,32.6
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2003,13.0
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2004,13.1
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2005,13.3
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2006,13.4
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2007,13.5
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2008,13.5
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2009,13.5
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2010,13.5
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2011,13.8
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2012,14.2
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2013,14.7
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2014,15.3
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2015,15.8
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2016,16.4
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2017,17.0
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2018,17.5
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2019,18.1
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2020,18.5
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2021,18.9
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2022,19.5
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2023,20.1
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2024,20.6
+P2426,634989,ageing ratio (percentage of people aged 65 and more),,,2025,21.1
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2003,10.1
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2004,10.3
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2005,10.4
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2006,10.5
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2007,10.5
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2008,10.5
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2009,10.6
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2010,10.5
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2011,10.8
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2012,11.2
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2013,11.7
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2014,12.2
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2015,12.7
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2016,13.3
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2017,13.8
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2018,14.4
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2019,14.9
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2020,15.3
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2021,15.7
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2022,16.2
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2023,16.7
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2024,17.3
+P2426,1621910,ageing ratio (percentage of people aged 65 and more) - men,,,2025,17.7
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2003,15.6
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2004,15.8
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2005,16.0
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2006,16.2
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2007,16.2
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2008,16.3
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2009,16.3
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2010,16.3
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2011,16.6
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2012,17.1
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2013,17.6
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2014,18.1
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2015,18.7
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2016,19.3
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2017,19.9
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2018,20.5
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2019,21.1
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2020,21.5
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2021,22.0
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2022,22.6
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2023,23.2
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2024,23.7
+P2426,1621911,ageing ratio (percentage of people aged 65 and more) - women,,,2025,24.2
+P2730,101548,males,in rural areas,0,2000,69.4
+P2730,101548,males,in rural areas,0,2001,69.9
+P2730,101548,males,in rural areas,0,2002,70.0
+P2730,101548,males,in rural areas,0,2003,70.0
+P2730,101548,males,in rural areas,0,2004,70.3
+P2730,101548,males,in rural areas,0,2005,70.3
+P2730,101548,males,in rural areas,0,2006,70.6
+P2730,101548,males,in rural areas,0,2007,70.4
+P2730,101548,males,in rural areas,0,2008,70.7
+P2730,101548,males,in rural areas,0,2009,71.0
+P2730,101548,males,in rural areas,0,2010,71.4
+P2730,101548,males,in rural areas,0,2011,71.6
+P2730,101548,males,in rural areas,0,2012,72.1
+P2730,101548,males,in rural areas,0,2013,72.4
+P2730,101548,males,in rural areas,0,2014,73.1
+P2730,101548,males,in rural areas,0,2015,73.0
+P2730,101548,males,in rural areas,0,2016,73.2
+P2730,101548,males,in rural areas,0,2017,73.3
+P2730,101548,males,in rural areas,0,2018,73.2
+P2730,101548,males,in rural areas,0,2019,73.4
+P2730,101548,males,in rural areas,0,2020,72.1
+P2730,101548,males,in rural areas,0,2021,71.4
+P2730,101548,males,in rural areas,0,2022,73.0
+P2730,101548,males,in rural areas,0,2023,74.2
+P2730,101548,males,in rural areas,0,2024,74.68
+P2730,101548,males,in rural areas,0,2025,74.88
+P2730,101549,females,in rural areas,0,2000,78.4
+P2730,101549,females,in rural areas,0,2001,78.7
+P2730,101549,females,in rural areas,0,2002,79.1
+P2730,101549,females,in rural areas,0,2003,79.2
+P2730,101549,females,in rural areas,0,2004,79.5
+P2730,101549,females,in rural areas,0,2005,79.6
+P2730,101549,females,in rural areas,0,2006,79.9
+P2730,101549,females,in rural areas,0,2007,80.1
+P2730,101549,females,in rural areas,0,2008,80.2
+P2730,101549,females,in rural areas,0,2009,80.2
+P2730,101549,females,in rural areas,0,2010,80.7
+P2730,101549,females,in rural areas,0,2011,80.9
+P2730,101549,females,in rural areas,0,2012,81.0
+P2730,101549,females,in rural areas,0,2013,81.1
+P2730,101549,females,in rural areas,0,2014,81.7
+P2730,101549,females,in rural areas,0,2015,81.7
+P2730,101549,females,in rural areas,0,2016,81.9
+P2730,101549,females,in rural areas,0,2017,81.8
+P2730,101549,females,in rural areas,0,2018,81.6
+P2730,101549,females,in rural areas,0,2019,81.8
+P2730,101549,females,in rural areas,0,2020,80.6
+P2730,101549,females,in rural areas,0,2021,79.6
+P2730,101549,females,in rural areas,0,2022,81.1
+P2730,101549,females,in rural areas,0,2023,82.1
+P2730,101549,females,in rural areas,0,2024,82.21
+P2730,101549,females,in rural areas,0,2025,82.39
+P2730,101551,males,in urban areas,0,2000,70.0
+P2730,101551,males,in urban areas,0,2001,70.4
+P2730,101551,males,in urban areas,0,2002,70.7
+P2730,101551,males,in urban areas,0,2003,70.9
+P2730,101551,males,in urban areas,0,2004,70.9
+P2730,101551,males,in urban areas,0,2005,71.2
+P2730,101551,males,in urban areas,0,2006,71.2
+P2730,101551,males,in urban areas,0,2007,71.4
+P2730,101551,males,in urban areas,0,2008,71.6
+P2730,101551,males,in urban areas,0,2009,71.9
+P2730,101551,males,in urban areas,0,2010,72.6
+P2730,101551,males,in urban areas,0,2011,73.0
+P2730,101551,males,in urban areas,0,2012,73.1
+P2730,101551,males,in urban areas,0,2013,73.5
+P2730,101551,males,in urban areas,0,2014,74.2
+P2730,101551,males,in urban areas,0,2015,74.0
+P2730,101551,males,in urban areas,0,2016,74.4
+P2730,101551,males,in urban areas,0,2017,74.4
+P2730,101551,males,in urban areas,0,2018,74.2
+P2730,101551,males,in urban areas,0,2019,74.5
+P2730,101551,males,in urban areas,0,2020,72.9
+P2730,101551,males,in urban areas,0,2021,72.0
+P2730,101551,males,in urban areas,0,2022,73.7
+P2730,101551,males,in urban areas,0,2023,75.0
+P2730,101551,males,in urban areas,0,2024,75.07
+P2730,101551,males,in urban areas,0,2025,75.67
+P2730,101552,females,in urban areas,0,2000,77.8
+P2730,101552,females,in urban areas,0,2001,78.2
+P2730,101552,females,in urban areas,0,2002,78.6
+P2730,101552,females,in urban areas,0,2003,78.8
+P2730,101552,females,in urban areas,0,2004,79.1
+P2730,101552,females,in urban areas,0,2005,79.3
+P2730,101552,females,in urban areas,0,2006,79.5
+P2730,101552,females,in urban areas,0,2007,79.6
+P2730,101552,females,in urban areas,0,2008,79.8
+P2730,101552,females,in urban areas,0,2009,80.0
+P2730,101552,females,in urban areas,0,2010,80.6
+P2730,101552,females,in urban areas,0,2011,80.9
+P2730,101552,females,in urban areas,0,2012,81.0
+P2730,101552,females,in urban areas,0,2013,81.1
+P2730,101552,females,in urban areas,0,2014,81.5
+P2730,101552,females,in urban areas,0,2015,81.5
+P2730,101552,females,in urban areas,0,2016,81.9
+P2730,101552,females,in urban areas,0,2017,81.8
+P2730,101552,females,in urban areas,0,2018,81.6
+P2730,101552,females,in urban areas,0,2019,81.7
+P2730,101552,females,in urban areas,0,2020,80.8
+P2730,101552,females,in urban areas,0,2021,79.8
+P2730,101552,females,in urban areas,0,2022,81.0
+P2730,101552,females,in urban areas,0,2023,81.9
+P2730,101552,females,in urban areas,0,2024,82.27
+P2730,101552,females,in urban areas,0,2025,82.5
+P2730,101554,males,total,0,2000,69.7
+P2730,101554,males,total,0,2001,70.2
+P2730,101554,males,total,0,2002,70.4
+P2730,101554,males,total,0,2003,70.5
+P2730,101554,males,total,0,2004,70.7
+P2730,101554,males,total,0,2005,70.8
+P2730,101554,males,total,0,2006,70.9
+P2730,101554,males,total,0,2007,71.0
+P2730,101554,males,total,0,2008,71.3
+P2730,101554,males,total,0,2009,71.5
+P2730,101554,males,total,0,2010,72.1
+P2730,101554,males,total,0,2011,72.4
+P2730,101554,males,total,0,2012,72.7
+P2730,101554,males,total,0,2013,73.1
+P2730,101554,males,total,0,2014,73.8
+P2730,101554,males,total,0,2015,73.6
+P2730,101554,males,total,0,2016,73.9
+P2730,101554,males,total,0,2017,74.0
+P2730,101554,males,total,0,2018,73.8
+P2730,101554,males,total,0,2019,74.1
+P2730,101554,males,total,0,2020,72.6
+P2730,101554,males,total,0,2021,71.8
+P2730,101554,males,total,0,2022,73.4
+P2730,101554,males,total,0,2023,74.7
+P2730,101554,males,total,0,2024,74.93
+P2730,101554,males,total,0,2025,75.37
+P2730,101555,females,total,0,2000,78.0
+P2730,101555,females,total,0,2001,78.4
+P2730,101555,females,total,0,2002,78.8
+P2730,101555,females,total,0,2003,78.9
+P2730,101555,females,total,0,2004,79.2
+P2730,101555,females,total,0,2005,79.4
+P2730,101555,females,total,0,2006,79.6
+P2730,101555,females,total,0,2007,79.7
+P2730,101555,females,total,0,2008,80.0
+P2730,101555,females,total,0,2009,80.1
+P2730,101555,females,total,0,2010,80.6
+P2730,101555,females,total,0,2011,80.9
+P2730,101555,females,total,0,2012,81.0
+P2730,101555,females,total,0,2013,81.1
+P2730,101555,females,total,0,2014,81.6
+P2730,101555,females,total,0,2015,81.6
+P2730,101555,females,total,0,2016,81.9
+P2730,101555,females,total,0,2017,81.8
+P2730,101555,females,total,0,2018,81.7
+P2730,101555,females,total,0,2019,81.8
+P2730,101555,females,total,0,2020,80.7
+P2730,101555,females,total,0,2021,79.7
+P2730,101555,females,total,0,2022,81.1
+P2730,101555,females,total,0,2023,82.0
+P2730,101555,females,total,0,2024,82.26
+P2730,101555,females,total,0,2025,82.48
+P2871,194829,households,5 persons and more,,2002,1874282
+P2871,194830,population in households,5 persons and more,,2002,10730146
+P2871,194831,households,4 persons,,2002,2404799
+P2871,194832,population in households,4 persons,,2002,9619196
+P2871,194833,households,3 persons,,2002,2654169
+P2871,194834,population in households,3 persons,,2002,7962507
+P2871,194835,households,2 persons,,2002,3097102
+P2871,194836,population in households,2 persons,,2002,6194204
+P2871,194837,households,1 person,,2002,3306688
+P2871,194838,population in households,1 person,,2002,3306688
+P2871,194839,households,total,,2002,13337040
+P2871,194840,population in households,total,,2002,37812741
+P3361,399967,at pre-working age,in rural areas,,2012,3150329
+P3361,399967,at pre-working age,in rural areas,,2013,3104596
+P3361,399967,at pre-working age,in rural areas,,2014,3067325
+P3361,399967,at pre-working age,in rural areas,,2015,3032311
+P3361,399967,at pre-working age,in rural areas,,2016,3014714
+P3361,399967,at pre-working age,in rural areas,,2017,3008573
+P3361,399967,at pre-working age,in rural areas,,2018,3003078
+P3361,399967,at pre-working age,in rural areas,,2019,2995528
+P3361,399967,at pre-working age,in rural areas,,2020,3149903
+P3361,399967,at pre-working age,in rural areas,,2021,3145267
+P3361,399967,at pre-working age,in rural areas,,2022,3122562
+P3361,399967,at pre-working age,in rural areas,,2023,3080428
+P3361,399967,at pre-working age,in rural areas,,2024,3023353
+P3361,399967,at pre-working age,in rural areas,,2025,2956160
+P3361,399968,at working age,in rural areas,,2012,9627994
+P3361,399968,at working age,in rural areas,,2013,9658987
+P3361,399968,at working age,in rural areas,,2014,9661673
+P3361,399968,at working age,in rural areas,,2015,9643781
+P3361,399968,at working age,in rural areas,,2016,9624855
+P3361,399968,at working age,in rural areas,,2017,9583667
+P3361,399968,at working age,in rural areas,,2018,9540123
+P3361,399968,at working age,in rural areas,,2019,9483700
+P3361,399968,at working age,in rural areas,,2020,9222839
+P3361,399968,at working age,in rural areas,,2021,9166878
+P3361,399968,at working age,in rural areas,,2022,9125598
+P3361,399968,at working age,in rural areas,,2023,9083865
+P3361,399968,at working age,in rural areas,,2024,9035337
+P3361,399968,at working age,in rural areas,,2025,9011727
+P3361,399969,at post-working age,in rural areas,,2012,2418687
+P3361,399969,at post-working age,in rural areas,,2013,2474167
+P3361,399969,at post-working age,in rural areas,,2014,2533252
+P3361,399969,at post-working age,in rural areas,,2015,2594718
+P3361,399969,at post-working age,in rural areas,,2016,2663931
+P3361,399969,at post-working age,in rural areas,,2017,2732065
+P3361,399969,at post-working age,in rural areas,,2018,2800703
+P3361,399969,at post-working age,in rural areas,,2019,2870282
+P3361,399969,at post-working age,in rural areas,,2020,2938547
+P3361,399969,at post-working age,in rural areas,,2021,2971545
+P3361,399969,at post-working age,in rural areas,,2022,3028241
+P3361,399969,at post-working age,in rural areas,,2023,3095668
+P3361,399969,at post-working age,in rural areas,,2024,3154430
+P3361,399969,at post-working age,in rural areas,,2025,3212219
+P3361,399970,total,in rural areas,,2012,15197010
+P3361,399970,total,in rural areas,,2013,15237750
+P3361,399970,total,in rural areas,,2014,15262250
+P3361,399970,total,in rural areas,,2015,15270810
+P3361,399970,total,in rural areas,,2016,15303500
+P3361,399970,total,in rural areas,,2017,15324305
+P3361,399970,total,in rural areas,,2018,15343904
+P3361,399970,total,in rural areas,,2019,15349510
+P3361,399970,total,in rural areas,,2020,15311289
+P3361,399970,total,in rural areas,,2021,15283690
+P3361,399970,total,in rural areas,,2022,15276401
+P3361,399970,total,in rural areas,,2023,15259961
+P3361,399970,total,in rural areas,,2024,15213120
+P3361,399970,total,in rural areas,,2025,15180106
+P3361,399971,at mobile working age,in rural areas,,2012,6148375
+P3361,399971,at mobile working age,in rural areas,,2013,6171282
+P3361,399971,at mobile working age,in rural areas,,2014,6169291
+P3361,399971,at mobile working age,in rural areas,,2015,6155258
+P3361,399971,at mobile working age,in rural areas,,2016,6133112
+P3361,399971,at mobile working age,in rural areas,,2017,6091466
+P3361,399971,at mobile working age,in rural areas,,2018,6042202
+P3361,399971,at mobile working age,in rural areas,,2019,5974854
+P3361,399971,at mobile working age,in rural areas,,2020,5683014
+P3361,399971,at mobile working age,in rural areas,,2021,5605861
+P3361,399971,at mobile working age,in rural areas,,2022,5538368
+P3361,399971,at mobile working age,in rural areas,,2023,5468390
+P3361,399971,at mobile working age,in rural areas,,2024,5385527
+P3361,399971,at mobile working age,in rural areas,,2025,5315276
+P3361,399972,at non-mobile working age,in rural areas,,2012,3479619
+P3361,399972,at non-mobile working age,in rural areas,,2013,3487705
+P3361,399972,at non-mobile working age,in rural areas,,2014,3492382
+P3361,399972,at non-mobile working age,in rural areas,,2015,3488523
+P3361,399972,at non-mobile working age,in rural areas,,2016,3491743
+P3361,399972,at non-mobile working age,in rural areas,,2017,3492201
+P3361,399972,at non-mobile working age,in rural areas,,2018,3497921
+P3361,399972,at non-mobile working age,in rural areas,,2019,3508846
+P3361,399972,at non-mobile working age,in rural areas,,2020,3539825
+P3361,399972,at non-mobile working age,in rural areas,,2021,3561017
+P3361,399972,at non-mobile working age,in rural areas,,2022,3587230
+P3361,399972,at non-mobile working age,in rural areas,,2023,3615475
+P3361,399972,at non-mobile working age,in rural areas,,2024,3649810
+P3361,399972,at non-mobile working age,in rural areas,,2025,3696451
+P3361,399973,at pre-working age,in urban areas,,2012,3916439
+P3361,399973,at pre-working age,in urban areas,,2013,3890766
+P3361,399973,at pre-working age,in urban areas,,2014,3875671
+P3361,399973,at pre-working age,in urban areas,,2015,3869484
+P3361,399973,at pre-working age,in urban areas,,2016,3881164
+P3361,399973,at pre-working age,in urban areas,,2017,3912079
+P3361,399973,at pre-working age,in urban areas,,2018,3932445
+P3361,399973,at pre-working age,in urban areas,,2019,3953178
+P3361,399973,at pre-working age,in urban areas,,2020,3847634
+P3361,399973,at pre-working age,in urban areas,,2021,3847374
+P3361,399973,at pre-working age,in urban areas,,2022,3828264
+P3361,399973,at pre-working age,in urban areas,,2023,3784453
+P3361,399973,at pre-working age,in urban areas,,2024,3721608
+P3361,399973,at pre-working age,in urban areas,,2025,3635158
+P3361,399974,at working age,in urban areas,,2012,14977564
+P3361,399974,at working age,in urban areas,,2013,14763159
+P3361,399974,at working age,in urban areas,,2014,14568489
+P3361,399974,at working age,in urban areas,,2015,14358387
+P3361,399974,at working age,in urban areas,,2016,14142759
+P3361,399974,at working age,in urban areas,,2017,13933976
+P3361,399974,at working age,in urban areas,,2018,13729602
+P3361,399974,at working age,in urban areas,,2019,13542227
+P3361,399974,at working age,in urban areas,,2020,13408468
+P3361,399974,at working age,in urban areas,,2021,13218522
+P3361,399974,at working age,in urban areas,,2022,13043706
+P3361,399974,at working age,in urban areas,,2023,12901595
+P3361,399974,at working age,in urban areas,,2024,12798780
+P3361,399974,at working age,in urban areas,,2025,12715629
+P3361,399975,at post-working age,in urban areas,,2012,4442286
+P3361,399975,at post-working age,in urban areas,,2013,4603984
+P3361,399975,at post-working age,in urban areas,,2014,4772192
+P3361,399975,at post-working age,in urban areas,,2015,4938558
+P3361,399975,at post-working age,in urban areas,,2016,5105569
+P3361,399975,at post-working age,in urban areas,,2017,5263198
+P3361,399975,at post-working age,in urban areas,,2018,5405197
+P3361,399975,at post-working age,in urban areas,,2019,5537661
+P3361,399975,at post-working age,in urban areas,,2020,5521173
+P3361,399975,at post-working age,in urban areas,,2021,5558118
+P3361,399975,at post-working age,in urban areas,,2022,5617956
+P3361,399975,at post-working age,in urban areas,,2023,5690499
+P3361,399975,at post-working age,in urban areas,,2024,5755579
+P3361,399975,at post-working age,in urban areas,,2025,5801617
+P3361,399976,total,in urban areas,,2012,23336289
+P3361,399976,total,in urban areas,,2013,23257909
+P3361,399976,total,in urban areas,,2014,23216352
+P3361,399976,total,in urban areas,,2015,23166429
+P3361,399976,total,in urban areas,,2016,23129492
+P3361,399976,total,in urban areas,,2017,23109253
+P3361,399976,total,in urban areas,,2018,23067244
+P3361,399976,total,in urban areas,,2019,23033066
+P3361,399976,total,in urban areas,,2020,22777275
+P3361,399976,total,in urban areas,,2021,22624014
+P3361,399976,total,in urban areas,,2022,22489926
+P3361,399976,total,in urban areas,,2023,22376547
+P3361,399976,total,in urban areas,,2024,22275967
+P3361,399976,total,in urban areas,,2025,22152404
+P3361,399977,at mobile working age,in urban areas,,2012,9248608
+P3361,399977,at mobile working age,in urban areas,,2013,9166570
+P3361,399977,at mobile working age,in urban areas,,2014,9092832
+P3361,399977,at mobile working age,in urban areas,,2015,8997855
+P3361,399977,at mobile working age,in urban areas,,2016,8888822
+P3361,399977,at mobile working age,in urban areas,,2017,8768288
+P3361,399977,at mobile working age,in urban areas,,2018,8633564
+P3361,399977,at mobile working age,in urban areas,,2019,8486403
+P3361,399977,at mobile working age,in urban areas,,2020,8448439
+P3361,399977,at mobile working age,in urban areas,,2021,8245656
+P3361,399977,at mobile working age,in urban areas,,2022,8042432
+P3361,399977,at mobile working age,in urban areas,,2023,7854593
+P3361,399977,at mobile working age,in urban areas,,2024,7678615
+P3361,399977,at mobile working age,in urban areas,,2025,7508768
+P3361,399978,at non-mobile working age,in urban areas,,2012,5728956
+P3361,399978,at non-mobile working age,in urban areas,,2013,5596589
+P3361,399978,at non-mobile working age,in urban areas,,2014,5475657
+P3361,399978,at non-mobile working age,in urban areas,,2015,5360532
+P3361,399978,at non-mobile working age,in urban areas,,2016,5253937
+P3361,399978,at non-mobile working age,in urban areas,,2017,5165688
+P3361,399978,at non-mobile working age,in urban areas,,2018,5096038
+P3361,399978,at non-mobile working age,in urban areas,,2019,5055824
+P3361,399978,at non-mobile working age,in urban areas,,2020,4960029
+P3361,399978,at non-mobile working age,in urban areas,,2021,4972866
+P3361,399978,at non-mobile working age,in urban areas,,2022,5001274
+P3361,399978,at non-mobile working age,in urban areas,,2023,5047002
+P3361,399978,at non-mobile working age,in urban areas,,2024,5120165
+P3361,399978,at non-mobile working age,in urban areas,,2025,5206861
+P3361,399979,at pre-working age,total,,2012,7066768
+P3361,399979,at pre-working age,total,,2013,6995362
+P3361,399979,at pre-working age,total,,2014,6942996
+P3361,399979,at pre-working age,total,,2015,6901795
+P3361,399979,at pre-working age,total,,2016,6895878
+P3361,399979,at pre-working age,total,,2017,6920652
+P3361,399979,at pre-working age,total,,2018,6935523
+P3361,399979,at pre-working age,total,,2019,6948706
+P3361,399979,at pre-working age,total,,2020,6997537
+P3361,399979,at pre-working age,total,,2021,6992641
+P3361,399979,at pre-working age,total,,2022,6950826
+P3361,399979,at pre-working age,total,,2023,6864881
+P3361,399979,at pre-working age,total,,2024,6744961
+P3361,399979,at pre-working age,total,,2025,6591318
+P3361,399980,at working age,total,,2012,24605558
+P3361,399980,at working age,total,,2013,24422146
+P3361,399980,at working age,total,,2014,24230162
+P3361,399980,at working age,total,,2015,24002168
+P3361,399980,at working age,total,,2016,23767614
+P3361,399980,at working age,total,,2017,23517643
+P3361,399980,at working age,total,,2018,23269725
+P3361,399980,at working age,total,,2019,23025927
+P3361,399980,at working age,total,,2020,22631307
+P3361,399980,at working age,total,,2021,22385400
+P3361,399980,at working age,total,,2022,22169304
+P3361,399980,at working age,total,,2023,21985460
+P3361,399980,at working age,total,,2024,21834117
+P3361,399980,at working age,total,,2025,21727356
+P3361,399981,at post-working age,total,,2012,6860973
+P3361,399981,at post-working age,total,,2013,7078151
+P3361,399981,at post-working age,total,,2014,7305444
+P3361,399981,at post-working age,total,,2015,7533276
+P3361,399981,at post-working age,total,,2016,7769500
+P3361,399981,at post-working age,total,,2017,7995263
+P3361,399981,at post-working age,total,,2018,8205900
+P3361,399981,at post-working age,total,,2019,8407943
+P3361,399981,at post-working age,total,,2020,8459720
+P3361,399981,at post-working age,total,,2021,8529663
+P3361,399981,at post-working age,total,,2022,8646197
+P3361,399981,at post-working age,total,,2023,8786167
+P3361,399981,at post-working age,total,,2024,8910009
+P3361,399981,at post-working age,total,,2025,9013836
+P3361,399982,total,total,,2012,38533299
+P3361,399982,total,total,,2013,38495659
+P3361,399982,total,total,,2014,38478602
+P3361,399982,total,total,,2015,38437239
+P3361,399982,total,total,,2016,38432992
+P3361,399982,total,total,,2017,38433558
+P3361,399982,total,total,,2018,38411148
+P3361,399982,total,total,,2019,38382576
+P3361,399982,total,total,,2020,38088564
+P3361,399982,total,total,,2021,37907704
+P3361,399982,total,total,,2022,37766327
+P3361,399982,total,total,,2023,37636508
+P3361,399982,total,total,,2024,37489087
+P3361,399982,total,total,,2025,37332510
+P3361,399983,at mobile working age,total,,2012,15396983
+P3361,399983,at mobile working age,total,,2013,15337852
+P3361,399983,at mobile working age,total,,2014,15262123
+P3361,399983,at mobile working age,total,,2015,15153113
+P3361,399983,at mobile working age,total,,2016,15021934
+P3361,399983,at mobile working age,total,,2017,14859754
+P3361,399983,at mobile working age,total,,2018,14675766
+P3361,399983,at mobile working age,total,,2019,14461257
+P3361,399983,at mobile working age,total,,2020,14131453
+P3361,399983,at mobile working age,total,,2021,13851517
+P3361,399983,at mobile working age,total,,2022,13580800
+P3361,399983,at mobile working age,total,,2023,13322983
+P3361,399983,at mobile working age,total,,2024,13064142
+P3361,399983,at mobile working age,total,,2025,12824044
+P3361,399984,at non-mobile working age,total,,2012,9208575
+P3361,399984,at non-mobile working age,total,,2013,9084294
+P3361,399984,at non-mobile working age,total,,2014,8968039
+P3361,399984,at non-mobile working age,total,,2015,8849055
+P3361,399984,at non-mobile working age,total,,2016,8745680
+P3361,399984,at non-mobile working age,total,,2017,8657889
+P3361,399984,at non-mobile working age,total,,2018,8593959
+P3361,399984,at non-mobile working age,total,,2019,8564670
+P3361,399984,at non-mobile working age,total,,2020,8499854
+P3361,399984,at non-mobile working age,total,,2021,8533883
+P3361,399984,at non-mobile working age,total,,2022,8588504
+P3361,399984,at non-mobile working age,total,,2023,8662477
+P3361,399984,at non-mobile working age,total,,2024,8769975
+P3361,399984,at non-mobile working age,total,,2025,8903312
+P3420,450472,people in household - 1,numerical data,,2011,3254736
+P3420,450473,total,numerical data,,2011,13567999
+P3420,450474,people in household - 2,numerical data,,2011,3483408
+P3420,450475,people in household - 3,numerical data,,2011,2741982
+P3420,450476,people in household - 4,numerical data,,2011,2203028
+P3420,450477,people in household - 5 and more,numerical data,,2011,1884844
+P3420,450478,population in households,numerical data,,2011,38291443
+P3420,450479,the average number of person in household,numerical data,,2011,2.82
+P3428,450540,live births per 1000 population,,,2002,9.25
+P3428,450540,live births per 1000 population,,,2003,9.19
+P3428,450540,live births per 1000 population,,,2004,9.33
+P3428,450540,live births per 1000 population,,,2005,9.55
+P3428,450540,live births per 1000 population,,,2006,9.81
+P3428,450540,live births per 1000 population,,,2007,10.18
+P3428,450540,live births per 1000 population,,,2008,10.87
+P3428,450540,live births per 1000 population,,,2009,10.95
+P3428,450540,live births per 1000 population,,,2010,10.73
+P3428,450540,live births per 1000 population,,,2011,10.08
+P3428,450540,live births per 1000 population,,,2012,10.02
+P3428,450540,live births per 1000 population,,,2013,9.6
+P3428,450540,live births per 1000 population,,,2014,9.75
+P3428,450540,live births per 1000 population,,,2015,9.6
+P3428,450540,live births per 1000 population,,,2016,9.95
+P3428,450540,live births per 1000 population,,,2017,10.46
+P3428,450540,live births per 1000 population,,,2018,10.11
+P3428,450540,live births per 1000 population,,,2019,9.77
+P3428,450540,live births per 1000 population,,,2020,9.31
+P3428,450540,live births per 1000 population,,,2021,8.73
+P3428,450540,live births per 1000 population,,,2022,8.07
+P3428,450540,live births per 1000 population,,,2023,7.23
+P3428,450540,live births per 1000 population,,,2024,6.7
+P3428,450540,live births per 1000 population,,,2025,6.37
+P3428,450541,deaths per 1000 population,,,2002,9.4
+P3428,450541,deaths per 1000 population,,,2003,9.56
+P3428,450541,deaths per 1000 population,,,2004,9.52
+P3428,450541,deaths per 1000 population,,,2005,9.65
+P3428,450541,deaths per 1000 population,,,2006,9.69
+P3428,450541,deaths per 1000 population,,,2007,9.9
+P3428,450541,deaths per 1000 population,,,2008,9.95
+P3428,450541,deaths per 1000 population,,,2009,10.09
+P3428,450541,deaths per 1000 population,,,2010,9.83
+P3428,450541,deaths per 1000 population,,,2011,9.75
+P3428,450541,deaths per 1000 population,,,2012,9.99
+P3428,450541,deaths per 1000 population,,,2013,10.06
+P3428,450541,deaths per 1000 population,,,2014,9.78
+P3428,450541,deaths per 1000 population,,,2015,10.27
+P3428,450541,deaths per 1000 population,,,2016,10.1
+P3428,450541,deaths per 1000 population,,,2017,10.48
+P3428,450541,deaths per 1000 population,,,2018,10.78
+P3428,450541,deaths per 1000 population,,,2019,10.67
+P3428,450541,deaths per 1000 population,,,2020,12.5
+P3428,450541,deaths per 1000 population,,,2021,13.68
+P3428,450541,deaths per 1000 population,,,2022,11.86
+P3428,450541,deaths per 1000 population,,,2023,10.85
+P3428,450541,deaths per 1000 population,,,2024,10.88
+P3428,450541,deaths per 1000 population,,,2025,10.85
+P3428,450551,natural increase per 1000 population,,,2002,-0.15
+P3428,450551,natural increase per 1000 population,,,2003,-0.37
+P3428,450551,natural increase per 1000 population,,,2004,-0.19
+P3428,450551,natural increase per 1000 population,,,2005,-0.1
+P3428,450551,natural increase per 1000 population,,,2006,0.12
+P3428,450551,natural increase per 1000 population,,,2007,0.28
+P3428,450551,natural increase per 1000 population,,,2008,0.92
+P3428,450551,natural increase per 1000 population,,,2009,0.86
+P3428,450551,natural increase per 1000 population,,,2010,0.9
+P3428,450551,natural increase per 1000 population,,,2011,0.34
+P3428,450551,natural increase per 1000 population,,,2012,0.04
+P3428,450551,natural increase per 1000 population,,,2013,-0.46
+P3428,450551,natural increase per 1000 population,,,2014,-0.03
+P3428,450551,natural increase per 1000 population,,,2015,-0.67
+P3428,450551,natural increase per 1000 population,,,2016,-0.15
+P3428,450551,natural increase per 1000 population,,,2017,-0.02
+P3428,450551,natural increase per 1000 population,,,2018,-0.68
+P3428,450551,natural increase per 1000 population,,,2019,-0.91
+P3428,450551,natural increase per 1000 population,,,2020,-3.2
+P3428,450551,natural increase per 1000 population,,,2021,-4.95
+P3428,450551,natural increase per 1000 population,,,2022,-3.79
+P3428,450551,natural increase per 1000 population,,,2023,-3.62
+P3428,450551,natural increase per 1000 population,,,2024,-4.17
+P3428,450551,natural increase per 1000 population,,,2025,-4.48
+P3813,746280,total,total,,2016,40.2
+P3813,746280,total,total,,2017,40.6
+P3813,746280,total,total,,2018,40.9
+P3813,746280,total,total,,2019,41.3
+P3813,746280,total,total,,2020,41.6
+P3813,746280,total,total,,2021,41.9
+P3813,746280,total,total,,2022,42.3
+P3813,746280,total,total,,2023,42.8
+P3813,746280,total,total,,2024,43.3
+P3813,746280,total,total,,2025,43.8
+P3813,746281,total,males,,2016,38.6
+P3813,746281,total,males,,2017,38.9
+P3813,746281,total,males,,2018,39.3
+P3813,746281,total,males,,2019,39.7
+P3813,746281,total,males,,2020,40.0
+P3813,746281,total,males,,2021,40.3
+P3813,746281,total,males,,2022,40.7
+P3813,746281,total,males,,2023,41.2
+P3813,746281,total,males,,2024,41.7
+P3813,746281,total,males,,2025,42.3
+P3813,746282,total,females,,2016,41.9
+P3813,746282,total,females,,2017,42.2
+P3813,746282,total,females,,2018,42.6
+P3813,746282,total,females,,2019,43.0
+P3813,746282,total,females,,2020,43.2
+P3813,746282,total,females,,2021,43.5
+P3813,746282,total,females,,2022,44.0
+P3813,746282,total,females,,2023,44.4
+P3813,746282,total,females,,2024,44.9
+P3813,746282,total,females,,2025,45.4
+P3813,746283,in urban areas,total,,2016,41.4
+P3813,746283,in urban areas,total,,2017,41.7
+P3813,746283,in urban areas,total,,2018,42.1
+P3813,746283,in urban areas,total,,2019,42.5
+P3813,746283,in urban areas,total,,2020,42.5
+P3813,746283,in urban areas,total,,2021,42.9
+P3813,746283,in urban areas,total,,2022,43.3
+P3813,746283,in urban areas,total,,2023,43.8
+P3813,746283,in urban areas,total,,2024,44.3
+P3813,746283,in urban areas,total,,2025,44.8
+P3813,746284,in urban areas,males,,2016,39.4
+P3813,746284,in urban areas,males,,2017,39.7
+P3813,746284,in urban areas,males,,2018,40.1
+P3813,746284,in urban areas,males,,2019,40.5
+P3813,746284,in urban areas,males,,2020,40.6
+P3813,746284,in urban areas,males,,2021,41.0
+P3813,746284,in urban areas,males,,2022,41.4
+P3813,746284,in urban areas,males,,2023,41.9
+P3813,746284,in urban areas,males,,2024,42.4
+P3813,746284,in urban areas,males,,2025,42.9
+P3813,746285,in urban areas,females,,2016,43.5
+P3813,746285,in urban areas,females,,2017,43.8
+P3813,746285,in urban areas,females,,2018,44.1
+P3813,746285,in urban areas,females,,2019,44.5
+P3813,746285,in urban areas,females,,2020,44.5
+P3813,746285,in urban areas,females,,2021,44.9
+P3813,746285,in urban areas,females,,2022,45.3
+P3813,746285,in urban areas,females,,2023,45.8
+P3813,746285,in urban areas,females,,2024,46.2
+P3813,746285,in urban areas,females,,2025,46.7
+P3813,746286,in rural areas,total,,2016,38.4
+P3813,746286,in rural areas,total,,2017,38.7
+P3813,746286,in rural areas,total,,2018,39.1
+P3813,746286,in rural areas,total,,2019,39.5
+P3813,746286,in rural areas,total,,2020,40.1
+P3813,746286,in rural areas,total,,2021,40.4
+P3813,746286,in rural areas,total,,2022,40.8
+P3813,746286,in rural areas,total,,2023,41.3
+P3813,746286,in rural areas,total,,2024,41.8
+P3813,746286,in rural areas,total,,2025,42.3
+P3813,746287,in rural areas,males,,2016,37.4
+P3813,746287,in rural areas,males,,2017,37.7
+P3813,746287,in rural areas,males,,2018,38.1
+P3813,746287,in rural areas,males,,2019,38.5
+P3813,746287,in rural areas,males,,2020,39.0
+P3813,746287,in rural areas,males,,2021,39.4
+P3813,746287,in rural areas,males,,2022,39.8
+P3813,746287,in rural areas,males,,2023,40.3
+P3813,746287,in rural areas,males,,2024,40.8
+P3813,746287,in rural areas,males,,2025,41.3
+P3813,746288,in rural areas,females,,2016,39.5
+P3813,746288,in rural areas,females,,2017,39.9
+P3813,746288,in rural areas,females,,2018,40.2
+P3813,746288,in rural areas,females,,2019,40.6
+P3813,746288,in rural areas,females,,2020,41.2
+P3813,746288,in rural areas,females,,2021,41.5
+P3813,746288,in rural areas,females,,2022,41.9
+P3813,746288,in rural areas,females,,2023,42.4
+P3813,746288,in rural areas,females,,2024,42.8
+P3813,746288,in rural areas,females,,2025,43.3
+P3814,746289,total,,,2018,40.9
+P3814,746289,total,,,2019,41.3
+P3814,746289,total,,,2020,41.6
+P3814,746289,total,,,2021,41.9
+P3814,746289,total,,,2022,42.3
+P3814,746289,total,,,2023,42.8
+P3814,746289,total,,,2024,43.3
+P3814,746289,total,,,2025,43.8
+P3814,746290,males,,,2018,39.3
+P3814,746290,males,,,2019,39.7
+P3814,746290,males,,,2020,40.0
+P3814,746290,males,,,2021,40.3
+P3814,746290,males,,,2022,40.7
+P3814,746290,males,,,2023,41.2
+P3814,746290,males,,,2024,41.7
+P3814,746290,males,,,2025,42.3
+P3814,746291,females,,,2018,42.6
+P3814,746291,females,,,2019,43.0
+P3814,746291,females,,,2020,43.2
+P3814,746291,females,,,2021,43.5
+P3814,746291,females,,,2022,44.0
+P3814,746291,females,,,2023,44.4
+P3814,746291,females,,,2024,44.9
+P3814,746291,females,,,2025,45.4
+P3992,1616435,live births total,total,,2000,378348
+P3992,1616435,live births total,total,,2001,368205
+P3992,1616435,live births total,total,,2002,353765
+P3992,1616435,live births total,total,,2003,351072
+P3992,1616435,live births total,total,,2004,356131
+P3992,1616435,live births total,total,,2005,364383
+P3992,1616435,live births total,total,,2006,374244
+P3992,1616435,live births total,total,,2007,387873
+P3992,1616435,live births total,total,,2008,414499
+P3992,1616435,live births total,total,,2009,417589
+P3992,1616435,live births total,total,,2010,413300
+P3992,1616435,live births total,total,,2011,388416
+P3992,1616435,live births total,total,,2012,386257
+P3992,1616435,live births total,total,,2013,369576
+P3992,1616435,live births total,total,,2014,375160
+P3992,1616435,live births total,total,,2015,369308
+P3992,1616435,live births total,total,,2016,382257
+P3992,1616435,live births total,total,,2017,401982
+P3992,1616435,live births total,total,,2018,388178
+P3992,1616435,live births total,total,,2019,374954
+P3992,1616435,live births total,total,,2020,355309
+P3992,1616435,live births total,total,,2021,331511
+P3992,1616435,live births total,total,,2022,305132
+P3992,1616435,live births total,total,,2023,272451
+P3992,1616435,live births total,total,,2024,251782
+P3992,1616435,live births total,total,,2025,238264
+P3992,1616436,live births total,in urban areas,,2000,208328
+P3992,1616436,live births total,in urban areas,,2001,205708
+P3992,1616436,live births total,in urban areas,,2002,197434
+P3992,1616436,live births total,in urban areas,,2003,199583
+P3992,1616436,live births total,in urban areas,,2004,204898
+P3992,1616436,live births total,in urban areas,,2005,211200
+P3992,1616436,live births total,in urban areas,,2006,218000
+P3992,1616436,live births total,in urban areas,,2007,225638
+P3992,1616436,live births total,in urban areas,,2008,241288
+P3992,1616436,live births total,in urban areas,,2009,246429
+P3992,1616436,live births total,in urban areas,,2010,241920
+P3992,1616436,live births total,in urban areas,,2011,225701
+P3992,1616436,live births total,in urban areas,,2012,223712
+P3992,1616436,live births total,in urban areas,,2013,213749
+P3992,1616436,live births total,in urban areas,,2014,217699
+P3992,1616436,live births total,in urban areas,,2015,217391
+P3992,1616436,live births total,in urban areas,,2016,226296
+P3992,1616436,live births total,in urban areas,,2017,236143
+P3992,1616436,live births total,in urban areas,,2018,228714
+P3992,1616436,live births total,in urban areas,,2019,220300
+P3992,1616436,live births total,in urban areas,,2020,208135
+P3992,1616436,live births total,in urban areas,,2021,194319
+P3992,1616436,live births total,in urban areas,,2022,178492
+P3992,1616436,live births total,in urban areas,,2023,158175
+P3992,1616436,live births total,in urban areas,,2024,148016
+P3992,1616436,live births total,in urban areas,,2025,140257
+P3992,1616437,live births total,in rural areas,,2000,170020
+P3992,1616437,live births total,in rural areas,,2001,162497
+P3992,1616437,live births total,in rural areas,,2002,156331
+P3992,1616437,live births total,in rural areas,,2003,151489
+P3992,1616437,live births total,in rural areas,,2004,151233
+P3992,1616437,live births total,in rural areas,,2005,153183
+P3992,1616437,live births total,in rural areas,,2006,156244
+P3992,1616437,live births total,in rural areas,,2007,162235
+P3992,1616437,live births total,in rural areas,,2008,173211
+P3992,1616437,live births total,in rural areas,,2009,171160
+P3992,1616437,live births total,in rural areas,,2010,171380
+P3992,1616437,live births total,in rural areas,,2011,162715
+P3992,1616437,live births total,in rural areas,,2012,162545
+P3992,1616437,live births total,in rural areas,,2013,155827
+P3992,1616437,live births total,in rural areas,,2014,157461
+P3992,1616437,live births total,in rural areas,,2015,151917
+P3992,1616437,live births total,in rural areas,,2016,155961
+P3992,1616437,live births total,in rural areas,,2017,165839
+P3992,1616437,live births total,in rural areas,,2018,159464
+P3992,1616437,live births total,in rural areas,,2019,154654
+P3992,1616437,live births total,in rural areas,,2020,147174
+P3992,1616437,live births total,in rural areas,,2021,137192
+P3992,1616437,live births total,in rural areas,,2022,126640
+P3992,1616437,live births total,in rural areas,,2023,114276
+P3992,1616437,live births total,in rural areas,,2024,103766
+P3992,1616437,live births total,in rural areas,,2025,98007
+P3992,1616438,live births per 1000 population,total,,2000,9.89
+P3992,1616438,live births per 1000 population,total,,2001,9.63
+P3992,1616438,live births per 1000 population,total,,2002,9.25
+P3992,1616438,live births per 1000 population,total,,2003,9.19
+P3992,1616438,live births per 1000 population,total,,2004,9.33
+P3992,1616438,live births per 1000 population,total,,2005,9.55
+P3992,1616438,live births per 1000 population,total,,2006,9.81
+P3992,1616438,live births per 1000 population,total,,2007,10.18
+P3992,1616438,live births per 1000 population,total,,2008,10.87
+P3992,1616438,live births per 1000 population,total,,2009,10.95
+P3992,1616438,live births per 1000 population,total,,2010,10.73
+P3992,1616438,live births per 1000 population,total,,2011,10.08
+P3992,1616438,live births per 1000 population,total,,2012,10.02
+P3992,1616438,live births per 1000 population,total,,2013,9.6
+P3992,1616438,live births per 1000 population,total,,2014,9.75
+P3992,1616438,live births per 1000 population,total,,2015,9.6
+P3992,1616438,live births per 1000 population,total,,2016,9.95
+P3992,1616438,live births per 1000 population,total,,2017,10.46
+P3992,1616438,live births per 1000 population,total,,2018,10.11
+P3992,1616438,live births per 1000 population,total,,2019,9.77
+P3992,1616438,live births per 1000 population,total,,2020,9.31
+P3992,1616438,live births per 1000 population,total,,2021,8.73
+P3992,1616438,live births per 1000 population,total,,2022,8.07
+P3992,1616438,live births per 1000 population,total,,2023,7.23
+P3992,1616438,live births per 1000 population,total,,2024,6.7
+P3992,1616438,live births per 1000 population,total,,2025,6.37
+P3992,1616439,live births per 1000 population,in urban areas,,2000,8.84
+P3992,1616439,live births per 1000 population,in urban areas,,2001,8.74
+P3992,1616439,live births per 1000 population,in urban areas,,2002,8.4
+P3992,1616439,live births per 1000 population,in urban areas,,2003,8.51
+P3992,1616439,live births per 1000 population,in urban areas,,2004,8.76
+P3992,1616439,live births per 1000 population,in urban areas,,2005,9.04
+P3992,1616439,live births per 1000 population,in urban areas,,2006,9.36
+P3992,1616439,live births per 1000 population,in urban areas,,2007,9.7
+P3992,1616439,live births per 1000 population,in urban areas,,2008,10.4
+P3992,1616439,live births per 1000 population,in urban areas,,2009,10.62
+P3992,1616439,live births per 1000 population,in urban areas,,2010,10.32
+P3992,1616439,live births per 1000 population,in urban areas,,2011,9.64
+P3992,1616439,live births per 1000 population,in urban areas,,2012,9.58
+P3992,1616439,live births per 1000 population,in urban areas,,2013,9.18
+P3992,1616439,live births per 1000 population,in urban areas,,2014,9.37
+P3992,1616439,live births per 1000 population,in urban areas,,2015,9.37
+P3992,1616439,live births per 1000 population,in urban areas,,2016,9.78
+P3992,1616439,live births per 1000 population,in urban areas,,2017,10.21
+P3992,1616439,live births per 1000 population,in urban areas,,2018,9.9
+P3992,1616439,live births per 1000 population,in urban areas,,2019,9.56
+P3992,1616439,live births per 1000 population,in urban areas,,2020,9.1
+P3992,1616439,live births per 1000 population,in urban areas,,2021,8.56
+P3992,1616439,live births per 1000 population,in urban areas,,2022,7.91
+P3992,1616439,live births per 1000 population,in urban areas,,2023,7.05
+P3992,1616439,live births per 1000 population,in urban areas,,2024,6.62
+P3992,1616439,live births per 1000 population,in urban areas,,2025,6.31
+P3992,1616440,live births per 1000 population,in rural areas,,2000,11.57
+P3992,1616440,live births per 1000 population,in rural areas,,2001,11.05
+P3992,1616440,live births per 1000 population,in rural areas,,2002,10.62
+P3992,1616440,live births per 1000 population,in rural areas,,2003,10.27
+P3992,1616440,live births per 1000 population,in rural areas,,2004,10.23
+P3992,1616440,live births per 1000 population,in rural areas,,2005,10.34
+P3992,1616440,live births per 1000 population,in rural areas,,2006,10.54
+P3992,1616440,live births per 1000 population,in rural areas,,2007,10.92
+P3992,1616440,live births per 1000 population,in rural areas,,2008,11.62
+P3992,1616440,live births per 1000 population,in rural areas,,2009,11.44
+P3992,1616440,live births per 1000 population,in rural areas,,2010,11.36
+P3992,1616440,live births per 1000 population,in rural areas,,2011,10.76
+P3992,1616440,live births per 1000 population,in rural areas,,2012,10.71
+P3992,1616440,live births per 1000 population,in rural areas,,2013,10.24
+P3992,1616440,live births per 1000 population,in rural areas,,2014,10.33
+P3992,1616440,live births per 1000 population,in rural areas,,2015,9.96
+P3992,1616440,live births per 1000 population,in rural areas,,2016,10.21
+P3992,1616440,live births per 1000 population,in rural areas,,2017,10.84
+P3992,1616440,live births per 1000 population,in rural areas,,2018,10.41
+P3992,1616440,live births per 1000 population,in rural areas,,2019,10.09
+P3992,1616440,live births per 1000 population,in rural areas,,2020,9.62
+P3992,1616440,live births per 1000 population,in rural areas,,2021,8.98
+P3992,1616440,live births per 1000 population,in rural areas,,2022,8.3
+P3992,1616440,live births per 1000 population,in rural areas,,2023,7.49
+P3992,1616440,live births per 1000 population,in rural areas,,2024,6.82
+P3992,1616440,live births per 1000 population,in rural areas,,2025,6.45
+P3992,1616441,deaths total,total,,2000,368028
+P3992,1616441,deaths total,total,,2001,363220
+P3992,1616441,deaths total,total,,2002,359486
+P3992,1616441,deaths total,total,,2003,365230
+P3992,1616441,deaths total,total,,2004,363522
+P3992,1616441,deaths total,total,,2005,368285
+P3992,1616441,deaths total,total,,2006,369686
+P3992,1616441,deaths total,total,,2007,377226
+P3992,1616441,deaths total,total,,2008,379399
+P3992,1616441,deaths total,total,,2009,384940
+P3992,1616441,deaths total,total,,2010,378478
+P3992,1616441,deaths total,total,,2011,375501
+P3992,1616441,deaths total,total,,2012,384788
+P3992,1616441,deaths total,total,,2013,387312
+P3992,1616441,deaths total,total,,2014,376467
+P3992,1616441,deaths total,total,,2015,394921
+P3992,1616441,deaths total,total,,2016,388009
+P3992,1616441,deaths total,total,,2017,402852
+P3992,1616441,deaths total,total,,2018,414200
+P3992,1616441,deaths total,total,,2019,409709
+P3992,1616441,deaths total,total,,2020,477355
+P3992,1616441,deaths total,total,,2021,519517
+P3992,1616441,deaths total,total,,2022,448448
+P3992,1616441,deaths total,total,,2023,409036
+P3992,1616441,deaths total,total,,2024,408504
+P3992,1616441,deaths total,total,,2025,405747
+P3992,1616442,deaths total,in urban areas,,2000,218212
+P3992,1616442,deaths total,in urban areas,,2001,215615
+P3992,1616442,deaths total,in urban areas,,2002,213629
+P3992,1616442,deaths total,in urban areas,,2003,216349
+P3992,1616442,deaths total,in urban areas,,2004,216515
+P3992,1616442,deaths total,in urban areas,,2005,219403
+P3992,1616442,deaths total,in urban areas,,2006,222219
+P3992,1616442,deaths total,in urban areas,,2007,226495
+P3992,1616442,deaths total,in urban areas,,2008,228650
+P3992,1616442,deaths total,in urban areas,,2009,231772
+P3992,1616442,deaths total,in urban areas,,2010,227452
+P3992,1616442,deaths total,in urban areas,,2011,225524
+P3992,1616442,deaths total,in urban areas,,2012,233015
+P3992,1616442,deaths total,in urban areas,,2013,235097
+P3992,1616442,deaths total,in urban areas,,2014,229697
+P3992,1616442,deaths total,in urban areas,,2015,242067
+P3992,1616442,deaths total,in urban areas,,2016,236749
+P3992,1616442,deaths total,in urban areas,,2017,247346
+P3992,1616442,deaths total,in urban areas,,2018,255280
+P3992,1616442,deaths total,in urban areas,,2019,253198
+P3992,1616442,deaths total,in urban areas,,2020,295371
+P3992,1616442,deaths total,in urban areas,,2021,322595
+P3992,1616442,deaths total,in urban areas,,2022,278434
+P3992,1616442,deaths total,in urban areas,,2023,255532
+P3992,1616442,deaths total,in urban areas,,2024,254811
+P3992,1616442,deaths total,in urban areas,,2025,251588
+P3992,1616443,deaths total,in rural areas,,2000,149816
+P3992,1616443,deaths total,in rural areas,,2001,147605
+P3992,1616443,deaths total,in rural areas,,2002,145857
+P3992,1616443,deaths total,in rural areas,,2003,148881
+P3992,1616443,deaths total,in rural areas,,2004,147007
+P3992,1616443,deaths total,in rural areas,,2005,148882
+P3992,1616443,deaths total,in rural areas,,2006,147467
+P3992,1616443,deaths total,in rural areas,,2007,150731
+P3992,1616443,deaths total,in rural areas,,2008,150749
+P3992,1616443,deaths total,in rural areas,,2009,153168
+P3992,1616443,deaths total,in rural areas,,2010,151026
+P3992,1616443,deaths total,in rural areas,,2011,149977
+P3992,1616443,deaths total,in rural areas,,2012,151773
+P3992,1616443,deaths total,in rural areas,,2013,152215
+P3992,1616443,deaths total,in rural areas,,2014,146770
+P3992,1616443,deaths total,in rural areas,,2015,152854
+P3992,1616443,deaths total,in rural areas,,2016,151260
+P3992,1616443,deaths total,in rural areas,,2017,155506
+P3992,1616443,deaths total,in rural areas,,2018,158920
+P3992,1616443,deaths total,in rural areas,,2019,156511
+P3992,1616443,deaths total,in rural areas,,2020,181984
+P3992,1616443,deaths total,in rural areas,,2021,196922
+P3992,1616443,deaths total,in rural areas,,2022,170014
+P3992,1616443,deaths total,in rural areas,,2023,153504
+P3992,1616443,deaths total,in rural areas,,2024,153693
+P3992,1616443,deaths total,in rural areas,,2025,154159
+P3992,1616444,deaths per 1000 population,total,,2000,9.62
+P3992,1616444,deaths per 1000 population,total,,2001,9.5
+P3992,1616444,deaths per 1000 population,total,,2002,9.4
+P3992,1616444,deaths per 1000 population,total,,2003,9.56
+P3992,1616444,deaths per 1000 population,total,,2004,9.52
+P3992,1616444,deaths per 1000 population,total,,2005,9.65
+P3992,1616444,deaths per 1000 population,total,,2006,9.69
+P3992,1616444,deaths per 1000 population,total,,2007,9.9
+P3992,1616444,deaths per 1000 population,total,,2008,9.95
+P3992,1616444,deaths per 1000 population,total,,2009,10.09
+P3992,1616444,deaths per 1000 population,total,,2010,9.83
+P3992,1616444,deaths per 1000 population,total,,2011,9.75
+P3992,1616444,deaths per 1000 population,total,,2012,9.99
+P3992,1616444,deaths per 1000 population,total,,2013,10.06
+P3992,1616444,deaths per 1000 population,total,,2014,9.78
+P3992,1616444,deaths per 1000 population,total,,2015,10.27
+P3992,1616444,deaths per 1000 population,total,,2016,10.1
+P3992,1616444,deaths per 1000 population,total,,2017,10.48
+P3992,1616444,deaths per 1000 population,total,,2018,10.78
+P3992,1616444,deaths per 1000 population,total,,2019,10.67
+P3992,1616444,deaths per 1000 population,total,,2020,12.5
+P3992,1616444,deaths per 1000 population,total,,2021,13.68
+P3992,1616444,deaths per 1000 population,total,,2022,11.86
+P3992,1616444,deaths per 1000 population,total,,2023,10.85
+P3992,1616444,deaths per 1000 population,total,,2024,10.88
+P3992,1616444,deaths per 1000 population,total,,2025,10.85
+P3992,1616445,deaths per 1000 population,in urban areas,,2000,9.26
+P3992,1616445,deaths per 1000 population,in urban areas,,2001,9.16
+P3992,1616445,deaths per 1000 population,in urban areas,,2002,9.09
+P3992,1616445,deaths per 1000 population,in urban areas,,2003,9.23
+P3992,1616445,deaths per 1000 population,in urban areas,,2004,9.25
+P3992,1616445,deaths per 1000 population,in urban areas,,2005,9.4
+P3992,1616445,deaths per 1000 population,in urban areas,,2006,9.54
+P3992,1616445,deaths per 1000 population,in urban areas,,2007,9.74
+P3992,1616445,deaths per 1000 population,in urban areas,,2008,9.85
+P3992,1616445,deaths per 1000 population,in urban areas,,2009,9.99
+P3992,1616445,deaths per 1000 population,in urban areas,,2010,9.71
+P3992,1616445,deaths per 1000 population,in urban areas,,2011,9.64
+P3992,1616445,deaths per 1000 population,in urban areas,,2012,9.97
+P3992,1616445,deaths per 1000 population,in urban areas,,2013,10.09
+P3992,1616445,deaths per 1000 population,in urban areas,,2014,9.88
+P3992,1616445,deaths per 1000 population,in urban areas,,2015,10.43
+P3992,1616445,deaths per 1000 population,in urban areas,,2016,10.23
+P3992,1616445,deaths per 1000 population,in urban areas,,2017,10.7
+P3992,1616445,deaths per 1000 population,in urban areas,,2018,11.05
+P3992,1616445,deaths per 1000 population,in urban areas,,2019,10.98
+P3992,1616445,deaths per 1000 population,in urban areas,,2020,12.91
+P3992,1616445,deaths per 1000 population,in urban areas,,2021,14.21
+P3992,1616445,deaths per 1000 population,in urban areas,,2022,12.34
+P3992,1616445,deaths per 1000 population,in urban areas,,2023,11.38
+P3992,1616445,deaths per 1000 population,in urban areas,,2024,11.4
+P3992,1616445,deaths per 1000 population,in urban areas,,2025,11.33
+P3992,1616446,deaths per 1000 population,in rural areas,,2000,10.19
+P3992,1616446,deaths per 1000 population,in rural areas,,2001,10.03
+P3992,1616446,deaths per 1000 population,in rural areas,,2002,9.9
+P3992,1616446,deaths per 1000 population,in rural areas,,2003,10.1
+P3992,1616446,deaths per 1000 population,in rural areas,,2004,9.95
+P3992,1616446,deaths per 1000 population,in rural areas,,2005,10.05
+P3992,1616446,deaths per 1000 population,in rural areas,,2006,9.94
+P3992,1616446,deaths per 1000 population,in rural areas,,2007,10.14
+P3992,1616446,deaths per 1000 population,in rural areas,,2008,10.11
+P3992,1616446,deaths per 1000 population,in rural areas,,2009,10.24
+P3992,1616446,deaths per 1000 population,in rural areas,,2010,10.01
+P3992,1616446,deaths per 1000 population,in rural areas,,2011,9.92
+P3992,1616446,deaths per 1000 population,in rural areas,,2012,10.0
+P3992,1616446,deaths per 1000 population,in rural areas,,2013,10.01
+P3992,1616446,deaths per 1000 population,in rural areas,,2014,9.63
+P3992,1616446,deaths per 1000 population,in rural areas,,2015,10.02
+P3992,1616446,deaths per 1000 population,in rural areas,,2016,9.9
+P3992,1616446,deaths per 1000 population,in rural areas,,2017,10.17
+P3992,1616446,deaths per 1000 population,in rural areas,,2018,10.37
+P3992,1616446,deaths per 1000 population,in rural areas,,2019,10.21
+P3992,1616446,deaths per 1000 population,in rural areas,,2020,11.89
+P3992,1616446,deaths per 1000 population,in rural areas,,2021,12.88
+P3992,1616446,deaths per 1000 population,in rural areas,,2022,11.14
+P3992,1616446,deaths per 1000 population,in rural areas,,2023,10.06
+P3992,1616446,deaths per 1000 population,in rural areas,,2024,10.1
+P3992,1616446,deaths per 1000 population,in rural areas,,2025,10.15
+P3992,1616447,infant deaths total,total,,2000,3068
+P3992,1616447,infant deaths total,total,,2001,2823
+P3992,1616447,infant deaths total,total,,2002,2662
+P3992,1616447,infant deaths total,total,,2003,2470
+P3992,1616447,infant deaths total,total,,2004,2423
+P3992,1616447,infant deaths total,total,,2005,2340
+P3992,1616447,infant deaths total,total,,2006,2238
+P3992,1616447,infant deaths total,total,,2007,2322
+P3992,1616447,infant deaths total,total,,2008,2338
+P3992,1616447,infant deaths total,total,,2009,2327
+P3992,1616447,infant deaths total,total,,2010,2057
+P3992,1616447,infant deaths total,total,,2011,1836
+P3992,1616447,infant deaths total,total,,2012,1791
+P3992,1616447,infant deaths total,total,,2013,1684
+P3992,1616447,infant deaths total,total,,2014,1583
+P3992,1616447,infant deaths total,total,,2015,1476
+P3992,1616447,infant deaths total,total,,2016,1522
+P3992,1616447,infant deaths total,total,,2017,1604
+P3992,1616447,infant deaths total,total,,2018,1494
+P3992,1616447,infant deaths total,total,,2019,1412
+P3992,1616447,infant deaths total,total,,2020,1270
+P3992,1616447,infant deaths total,total,,2021,1306
+P3992,1616447,infant deaths total,total,,2022,1171
+P3992,1616447,infant deaths total,total,,2023,1051
+P3992,1616447,infant deaths total,total,,2024,898
+P3992,1616447,infant deaths total,total,,2025,777
+P3992,1616448,infant deaths total,in urban areas,,2000,1725
+P3992,1616448,infant deaths total,in urban areas,,2001,1575
+P3992,1616448,infant deaths total,in urban areas,,2002,1551
+P3992,1616448,infant deaths total,in urban areas,,2003,1446
+P3992,1616448,infant deaths total,in urban areas,,2004,1462
+P3992,1616448,infant deaths total,in urban areas,,2005,1339
+P3992,1616448,infant deaths total,in urban areas,,2006,1343
+P3992,1616448,infant deaths total,in urban areas,,2007,1371
+P3992,1616448,infant deaths total,in urban areas,,2008,1363
+P3992,1616448,infant deaths total,in urban areas,,2009,1385
+P3992,1616448,infant deaths total,in urban areas,,2010,1198
+P3992,1616448,infant deaths total,in urban areas,,2011,1059
+P3992,1616448,infant deaths total,in urban areas,,2012,1006
+P3992,1616448,infant deaths total,in urban areas,,2013,928
+P3992,1616448,infant deaths total,in urban areas,,2014,885
+P3992,1616448,infant deaths total,in urban areas,,2015,859
+P3992,1616448,infant deaths total,in urban areas,,2016,876
+P3992,1616448,infant deaths total,in urban areas,,2017,931
+P3992,1616448,infant deaths total,in urban areas,,2018,823
+P3992,1616448,infant deaths total,in urban areas,,2019,812
+P3992,1616448,infant deaths total,in urban areas,,2020,726
+P3992,1616448,infant deaths total,in urban areas,,2021,769
+P3992,1616448,infant deaths total,in urban areas,,2022,697
+P3992,1616448,infant deaths total,in urban areas,,2023,589
+P3992,1616448,infant deaths total,in urban areas,,2024,529
+P3992,1616448,infant deaths total,in urban areas,,2025,449
+P3992,1616449,infant deaths total,in rural areas,,2000,1343
+P3992,1616449,infant deaths total,in rural areas,,2001,1248
+P3992,1616449,infant deaths total,in rural areas,,2002,1111
+P3992,1616449,infant deaths total,in rural areas,,2003,1024
+P3992,1616449,infant deaths total,in rural areas,,2004,961
+P3992,1616449,infant deaths total,in rural areas,,2005,1001
+P3992,1616449,infant deaths total,in rural areas,,2006,895
+P3992,1616449,infant deaths total,in rural areas,,2007,951
+P3992,1616449,infant deaths total,in rural areas,,2008,975
+P3992,1616449,infant deaths total,in rural areas,,2009,942
+P3992,1616449,infant deaths total,in rural areas,,2010,859
+P3992,1616449,infant deaths total,in rural areas,,2011,777
+P3992,1616449,infant deaths total,in rural areas,,2012,785
+P3992,1616449,infant deaths total,in rural areas,,2013,756
+P3992,1616449,infant deaths total,in rural areas,,2014,698
+P3992,1616449,infant deaths total,in rural areas,,2015,617
+P3992,1616449,infant deaths total,in rural areas,,2016,646
+P3992,1616449,infant deaths total,in rural areas,,2017,673
+P3992,1616449,infant deaths total,in rural areas,,2018,671
+P3992,1616449,infant deaths total,in rural areas,,2019,600
+P3992,1616449,infant deaths total,in rural areas,,2020,544
+P3992,1616449,infant deaths total,in rural areas,,2021,537
+P3992,1616449,infant deaths total,in rural areas,,2022,474
+P3992,1616449,infant deaths total,in rural areas,,2023,462
+P3992,1616449,infant deaths total,in rural areas,,2024,369
+P3992,1616449,infant deaths total,in rural areas,,2025,328
+P3992,1616450,infant deths per 1000 live births,total,,2000,8.11
+P3992,1616450,infant deths per 1000 live births,total,,2001,7.67
+P3992,1616450,infant deths per 1000 live births,total,,2002,7.52
+P3992,1616450,infant deths per 1000 live births,total,,2003,7.04
+P3992,1616450,infant deths per 1000 live births,total,,2004,6.8
+P3992,1616450,infant deths per 1000 live births,total,,2005,6.42
+P3992,1616450,infant deths per 1000 live births,total,,2006,5.98
+P3992,1616450,infant deths per 1000 live births,total,,2007,5.99
+P3992,1616450,infant deths per 1000 live births,total,,2008,5.64
+P3992,1616450,infant deths per 1000 live births,total,,2009,5.57
+P3992,1616450,infant deths per 1000 live births,total,,2010,4.98
+P3992,1616450,infant deths per 1000 live births,total,,2011,4.73
+P3992,1616450,infant deths per 1000 live births,total,,2012,4.64
+P3992,1616450,infant deths per 1000 live births,total,,2013,4.56
+P3992,1616450,infant deths per 1000 live births,total,,2014,4.22
+P3992,1616450,infant deths per 1000 live births,total,,2015,4.0
+P3992,1616450,infant deths per 1000 live births,total,,2016,3.98
+P3992,1616450,infant deths per 1000 live births,total,,2017,3.99
+P3992,1616450,infant deths per 1000 live births,total,,2018,3.85
+P3992,1616450,infant deths per 1000 live births,total,,2019,3.77
+P3992,1616450,infant deths per 1000 live births,total,,2020,3.57
+P3992,1616450,infant deths per 1000 live births,total,,2021,3.94
+P3992,1616450,infant deths per 1000 live births,total,,2022,3.84
+P3992,1616450,infant deths per 1000 live births,total,,2023,3.86
+P3992,1616450,infant deths per 1000 live births,total,,2024,3.57
+P3992,1616450,infant deths per 1000 live births,total,,2025,3.26
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2000,8.28
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2001,7.66
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2002,7.86
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2003,7.25
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2004,7.14
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2005,6.34
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2006,6.16
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2007,6.08
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2008,5.65
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2009,5.62
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2010,4.95
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2011,4.69
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2012,4.5
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2013,4.34
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2014,4.07
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2015,3.95
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2016,3.87
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2017,3.94
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2018,3.6
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2019,3.69
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2020,3.49
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2021,3.96
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2022,3.9
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2023,3.72
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2024,3.57
+P3992,1616451,infant deths per 1000 live births,in urban areas,,2025,3.2
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2000,7.9
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2001,7.68
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2002,7.11
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2003,6.76
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2004,6.35
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2005,6.53
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2006,5.73
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2007,5.86
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2008,5.63
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2009,5.5
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2010,5.01
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2011,4.78
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2012,4.83
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2013,4.85
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2014,4.43
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2015,4.06
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2016,4.14
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2017,4.06
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2018,4.21
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2019,3.88
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2020,3.7
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2021,3.91
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2022,3.74
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2023,4.04
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2024,3.56
+P3992,1616452,infant deths per 1000 live births,in rural areas,,2025,3.35
+P3992,1616453,natural increase total,total,,2000,10320
+P3992,1616453,natural increase total,total,,2001,4985
+P3992,1616453,natural increase total,total,,2002,-5721
+P3992,1616453,natural increase total,total,,2003,-14158
+P3992,1616453,natural increase total,total,,2004,-7391
+P3992,1616453,natural increase total,total,,2005,-3902
+P3992,1616453,natural increase total,total,,2006,4558
+P3992,1616453,natural increase total,total,,2007,10647
+P3992,1616453,natural increase total,total,,2008,35100
+P3992,1616453,natural increase total,total,,2009,32649
+P3992,1616453,natural increase total,total,,2010,34822
+P3992,1616453,natural increase total,total,,2011,12915
+P3992,1616453,natural increase total,total,,2012,1469
+P3992,1616453,natural increase total,total,,2013,-17736
+P3992,1616453,natural increase total,total,,2014,-1307
+P3992,1616453,natural increase total,total,,2015,-25613
+P3992,1616453,natural increase total,total,,2016,-5752
+P3992,1616453,natural increase total,total,,2017,-870
+P3992,1616453,natural increase total,total,,2018,-26022
+P3992,1616453,natural increase total,total,,2019,-34755
+P3992,1616453,natural increase total,total,,2020,-122046
+P3992,1616453,natural increase total,total,,2021,-188006
+P3992,1616453,natural increase total,total,,2022,-143316
+P3992,1616453,natural increase total,total,,2023,-136585
+P3992,1616453,natural increase total,total,,2024,-156722
+P3992,1616453,natural increase total,total,,2025,-167483
+P3992,1616454,natural increase total,in urban areas,,2000,-9884
+P3992,1616454,natural increase total,in urban areas,,2001,-9907
+P3992,1616454,natural increase total,in urban areas,,2002,-16195
+P3992,1616454,natural increase total,in urban areas,,2003,-16766
+P3992,1616454,natural increase total,in urban areas,,2004,-11617
+P3992,1616454,natural increase total,in urban areas,,2005,-8203
+P3992,1616454,natural increase total,in urban areas,,2006,-4219
+P3992,1616454,natural increase total,in urban areas,,2007,-857
+P3992,1616454,natural increase total,in urban areas,,2008,12638
+P3992,1616454,natural increase total,in urban areas,,2009,14657
+P3992,1616454,natural increase total,in urban areas,,2010,14468
+P3992,1616454,natural increase total,in urban areas,,2011,177
+P3992,1616454,natural increase total,in urban areas,,2012,-9303
+P3992,1616454,natural increase total,in urban areas,,2013,-21348
+P3992,1616454,natural increase total,in urban areas,,2014,-11998
+P3992,1616454,natural increase total,in urban areas,,2015,-24676
+P3992,1616454,natural increase total,in urban areas,,2016,-10453
+P3992,1616454,natural increase total,in urban areas,,2017,-11203
+P3992,1616454,natural increase total,in urban areas,,2018,-26566
+P3992,1616454,natural increase total,in urban areas,,2019,-32898
+P3992,1616454,natural increase total,in urban areas,,2020,-87236
+P3992,1616454,natural increase total,in urban areas,,2021,-128276
+P3992,1616454,natural increase total,in urban areas,,2022,-99942
+P3992,1616454,natural increase total,in urban areas,,2023,-97357
+P3992,1616454,natural increase total,in urban areas,,2024,-106795
+P3992,1616454,natural increase total,in urban areas,,2025,-111331
+P3992,1616455,natural increase total,in rural areas,,2000,20204
+P3992,1616455,natural increase total,in rural areas,,2001,14892
+P3992,1616455,natural increase total,in rural areas,,2002,10474
+P3992,1616455,natural increase total,in rural areas,,2003,2608
+P3992,1616455,natural increase total,in rural areas,,2004,4226
+P3992,1616455,natural increase total,in rural areas,,2005,4301
+P3992,1616455,natural increase total,in rural areas,,2006,8777
+P3992,1616455,natural increase total,in rural areas,,2007,11504
+P3992,1616455,natural increase total,in rural areas,,2008,22462
+P3992,1616455,natural increase total,in rural areas,,2009,17992
+P3992,1616455,natural increase total,in rural areas,,2010,20354
+P3992,1616455,natural increase total,in rural areas,,2011,12738
+P3992,1616455,natural increase total,in rural areas,,2012,10772
+P3992,1616455,natural increase total,in rural areas,,2013,3612
+P3992,1616455,natural increase total,in rural areas,,2014,10691
+P3992,1616455,natural increase total,in rural areas,,2015,-937
+P3992,1616455,natural increase total,in rural areas,,2016,4701
+P3992,1616455,natural increase total,in rural areas,,2017,10333
+P3992,1616455,natural increase total,in rural areas,,2018,544
+P3992,1616455,natural increase total,in rural areas,,2019,-1857
+P3992,1616455,natural increase total,in rural areas,,2020,-34810
+P3992,1616455,natural increase total,in rural areas,,2021,-59730
+P3992,1616455,natural increase total,in rural areas,,2022,-43374
+P3992,1616455,natural increase total,in rural areas,,2023,-39228
+P3992,1616455,natural increase total,in rural areas,,2024,-49927
+P3992,1616455,natural increase total,in rural areas,,2025,-56152
+P3992,1616456,natural increase per 1000 population,total,,2000,0.27
+P3992,1616456,natural increase per 1000 population,total,,2001,0.13
+P3992,1616456,natural increase per 1000 population,total,,2002,-0.15
+P3992,1616456,natural increase per 1000 population,total,,2003,-0.37
+P3992,1616456,natural increase per 1000 population,total,,2004,-0.19
+P3992,1616456,natural increase per 1000 population,total,,2005,-0.1
+P3992,1616456,natural increase per 1000 population,total,,2006,0.12
+P3992,1616456,natural increase per 1000 population,total,,2007,0.28
+P3992,1616456,natural increase per 1000 population,total,,2008,0.92
+P3992,1616456,natural increase per 1000 population,total,,2009,0.86
+P3992,1616456,natural increase per 1000 population,total,,2010,0.9
+P3992,1616456,natural increase per 1000 population,total,,2011,0.34
+P3992,1616456,natural increase per 1000 population,total,,2012,0.04
+P3992,1616456,natural increase per 1000 population,total,,2013,-0.46
+P3992,1616456,natural increase per 1000 population,total,,2014,-0.03
+P3992,1616456,natural increase per 1000 population,total,,2015,-0.67
+P3992,1616456,natural increase per 1000 population,total,,2016,-0.15
+P3992,1616456,natural increase per 1000 population,total,,2017,-0.02
+P3992,1616456,natural increase per 1000 population,total,,2018,-0.68
+P3992,1616456,natural increase per 1000 population,total,,2019,-0.91
+P3992,1616456,natural increase per 1000 population,total,,2020,-3.2
+P3992,1616456,natural increase per 1000 population,total,,2021,-4.95
+P3992,1616456,natural increase per 1000 population,total,,2022,-3.79
+P3992,1616456,natural increase per 1000 population,total,,2023,-3.62
+P3992,1616456,natural increase per 1000 population,total,,2024,-4.17
+P3992,1616456,natural increase per 1000 population,total,,2025,-4.48
+P3992,1616457,natural increase per 1000 population,in urban areas,,2000,-0.42
+P3992,1616457,natural increase per 1000 population,in urban areas,,2001,-0.42
+P3992,1616457,natural increase per 1000 population,in urban areas,,2002,-0.69
+P3992,1616457,natural increase per 1000 population,in urban areas,,2003,-0.71
+P3992,1616457,natural increase per 1000 population,in urban areas,,2004,-0.5
+P3992,1616457,natural increase per 1000 population,in urban areas,,2005,-0.35
+P3992,1616457,natural increase per 1000 population,in urban areas,,2006,-0.18
+P3992,1616457,natural increase per 1000 population,in urban areas,,2007,-0.04
+P3992,1616457,natural increase per 1000 population,in urban areas,,2008,0.54
+P3992,1616457,natural increase per 1000 population,in urban areas,,2009,0.63
+P3992,1616457,natural increase per 1000 population,in urban areas,,2010,0.62
+P3992,1616457,natural increase per 1000 population,in urban areas,,2011,0.01
+P3992,1616457,natural increase per 1000 population,in urban areas,,2012,-0.4
+P3992,1616457,natural increase per 1000 population,in urban areas,,2013,-0.92
+P3992,1616457,natural increase per 1000 population,in urban areas,,2014,-0.52
+P3992,1616457,natural increase per 1000 population,in urban areas,,2015,-1.06
+P3992,1616457,natural increase per 1000 population,in urban areas,,2016,-0.45
+P3992,1616457,natural increase per 1000 population,in urban areas,,2017,-0.48
+P3992,1616457,natural increase per 1000 population,in urban areas,,2018,-1.15
+P3992,1616457,natural increase per 1000 population,in urban areas,,2019,-1.43
+P3992,1616457,natural increase per 1000 population,in urban areas,,2020,-3.81
+P3992,1616457,natural increase per 1000 population,in urban areas,,2021,-5.65
+P3992,1616457,natural increase per 1000 population,in urban areas,,2022,-4.43
+P3992,1616457,natural increase per 1000 population,in urban areas,,2023,-4.34
+P3992,1616457,natural increase per 1000 population,in urban areas,,2024,-4.78
+P3992,1616457,natural increase per 1000 population,in urban areas,,2025,-5.01
+P3992,1616458,natural increase per 1000 population,in rural areas,,2000,1.37
+P3992,1616458,natural increase per 1000 population,in rural areas,,2001,1.01
+P3992,1616458,natural increase per 1000 population,in rural areas,,2002,0.71
+P3992,1616458,natural increase per 1000 population,in rural areas,,2003,0.18
+P3992,1616458,natural increase per 1000 population,in rural areas,,2004,0.29
+P3992,1616458,natural increase per 1000 population,in rural areas,,2005,0.29
+P3992,1616458,natural increase per 1000 population,in rural areas,,2006,0.59
+P3992,1616458,natural increase per 1000 population,in rural areas,,2007,0.77
+P3992,1616458,natural increase per 1000 population,in rural areas,,2008,1.51
+P3992,1616458,natural increase per 1000 population,in rural areas,,2009,1.2
+P3992,1616458,natural increase per 1000 population,in rural areas,,2010,1.35
+P3992,1616458,natural increase per 1000 population,in rural areas,,2011,0.84
+P3992,1616458,natural increase per 1000 population,in rural areas,,2012,0.71
+P3992,1616458,natural increase per 1000 population,in rural areas,,2013,0.24
+P3992,1616458,natural increase per 1000 population,in rural areas,,2014,0.7
+P3992,1616458,natural increase per 1000 population,in rural areas,,2015,-0.06
+P3992,1616458,natural increase per 1000 population,in rural areas,,2016,0.31
+P3992,1616458,natural increase per 1000 population,in rural areas,,2017,0.68
+P3992,1616458,natural increase per 1000 population,in rural areas,,2018,0.04
+P3992,1616458,natural increase per 1000 population,in rural areas,,2019,-0.12
+P3992,1616458,natural increase per 1000 population,in rural areas,,2020,-2.27
+P3992,1616458,natural increase per 1000 population,in rural areas,,2021,-3.91
+P3992,1616458,natural increase per 1000 population,in rural areas,,2022,-2.84
+P3992,1616458,natural increase per 1000 population,in rural areas,,2023,-2.57
+P3992,1616458,natural increase per 1000 population,in rural areas,,2024,-3.28
+P3992,1616458,natural increase per 1000 population,in rural areas,,2025,-3.7
+P4287,1652549,total,,,2021,12516459
+P4287,1652550,1-person households,,,2021,2824558
+P4287,1652551,2-person households,,,2021,3136684
+P4287,1652552,3-person households,,,2021,2382882
+P4287,1652553,4-person households,,,2021,2043511
+P4287,1652554,5 and more person households,,,2021,2128824
+P4287,1652555,population in households,,,2021,37459332
+P4287,1652556,the average number of person in household,,,2021,2.99
