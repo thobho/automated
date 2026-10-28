@@ -1,0 +1,30 @@
+name: visualization-of-the-world geography checks
+
+on:
+  pull_request:
+    paths:
+      - 'projects/visualization-of-the-world/research/poland-geography/**'
+      - '.github/workflows/visualization-of-the-world-geography.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'projects/visualization-of-the-world/research/poland-geography/**'
+      - '.github/workflows/visualization-of-the-world-geography.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/visualization-of-the-world/research/poland-geography
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests and checks on the committed data
+        run: python3 -m unittest discover -s tests

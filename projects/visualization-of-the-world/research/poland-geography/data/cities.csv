@@ -1,0 +1,1021 @@
+teryt,bdl_unit_id,name,voivodeship_teryt,voivodeship,powiat_teryt,powiat,gmina_type,population,population_year,big_city,coord_source_id,source_id,lon,lat
+0201011,030210101011,Bolesławiec,02,dolnośląskie,0201,powiat bolesławiecki,1,36642,2025,False,S4,S3,15.5697,51.26418
+0201044,030210101044,Nowogrodziec,02,dolnośląskie,0201,powiat bolesławiecki,4,4027,2025,False,S4,S3,15.39854,51.19543
+0202011,030210302011,Bielawa,02,dolnośląskie,0202,powiat dzierżoniowski,1,27480,2025,False,S4,S3,16.623,50.69075
+0202021,030210302021,Dzierżoniów,02,dolnośląskie,0202,powiat dzierżoniowski,1,30014,2025,False,S4,S3,16.65141,50.7282
+0202034,030210302034,Pieszyce,02,dolnośląskie,0202,powiat dzierżoniowski,4,6710,2025,False,S4,S3,16.58232,50.71287
+0202041,030210302041,Piława Górna,02,dolnośląskie,0202,powiat dzierżoniowski,1,5753,2025,False,S4,S3,16.74359,50.68357
+0202074,030210302074,Niemcza,02,dolnośląskie,0202,powiat dzierżoniowski,4,2618,2025,False,S4,S3,16.83573,50.72007
+0203011,030210203011,Głogów,02,dolnośląskie,0203,powiat głogowski,1,60605,2025,False,S4,S3,16.0845,51.66361
+0204014,030210204014,Góra,02,dolnośląskie,0204,powiat górowski,4,10472,2025,False,S4,S3,16.53494,51.66638
+0204044,030210204044,Wąsosz,02,dolnośląskie,0204,powiat górowski,4,2486,2025,False,S4,S3,16.69059,51.56224
+0205011,030210105011,Jawor,02,dolnośląskie,0205,powiat jaworski,1,19945,2025,False,S4,S3,16.19347,51.05132
+0205024,030210105024,Bolków,02,dolnośląskie,0205,powiat jaworski,4,4523,2025,False,S4,S3,16.10111,50.92203
+0206011,030210106011,Karpacz,02,dolnośląskie,0206,powiat karkonoski,1,4090,2025,False,S4,S3,15.75594,50.77669
+0206021,030210106021,Kowary,02,dolnośląskie,0206,powiat karkonoski,1,9363,2025,False,S4,S3,15.83559,50.79313
+0206031,030210106031,Piechowice,02,dolnośląskie,0206,powiat karkonoski,1,5601,2025,False,S4,S3,15.59887,50.84963
+0206041,030210106041,Szklarska Poręba,02,dolnośląskie,0206,powiat karkonoski,1,5427,2025,False,S4,S3,15.52274,50.82567
+0207011,030210107011,Kamienna Góra,02,dolnośląskie,0207,powiat kamiennogórski,1,16710,2025,False,S4,S3,16.03037,50.78314
+0207034,030210107034,Lubawka,02,dolnośląskie,0207,powiat kamiennogórski,4,5373,2025,False,S4,S3,16.00026,50.70456
+0208011,030210308011,Duszniki-Zdrój,02,dolnośląskie,0208,powiat kłodzki,1,3777,2025,False,S4,S3,16.39091,50.40327
+0208021,030210308021,Kłodzko,02,dolnośląskie,0208,powiat kłodzki,1,24187,2025,False,S4,S3,16.66145,50.43488
+0208031,030210308031,Kudowa-Zdrój,02,dolnośląskie,0208,powiat kłodzki,1,9021,2025,False,S4,S3,16.24397,50.44297
+0208041,030210308041,Nowa Ruda,02,dolnośląskie,0208,powiat kłodzki,1,19816,2025,False,S4,S3,16.50164,50.58008
+0208051,030210308051,Polanica-Zdrój,02,dolnośląskie,0208,powiat kłodzki,1,5727,2025,False,S4,S3,16.51271,50.40373
+0208064,030210308064,Bystrzyca Kłodzka,02,dolnośląskie,0208,powiat kłodzki,4,8639,2025,False,S4,S3,16.64231,50.30179
+0208084,030210308084,Lądek-Zdrój,02,dolnośląskie,0208,powiat kłodzki,4,4818,2025,False,S4,S3,16.87946,50.34371
+0208104,030210308104,Międzylesie,02,dolnośląskie,0208,powiat kłodzki,4,2335,2025,False,S4,S3,16.66712,50.14778
+0208124,030210308124,Radków,02,dolnośląskie,0208,powiat kłodzki,4,2196,2025,False,S4,S3,16.40061,50.50426
+0208134,030210308134,Stronie Śląskie,02,dolnośląskie,0208,powiat kłodzki,4,4772,2025,False,S4,S3,16.87397,50.29554
+0208144,030210308144,Szczytna,02,dolnośląskie,0208,powiat kłodzki,4,4718,2025,False,S4,S3,16.44743,50.41343
+0209011,030210209011,Chojnów,02,dolnośląskie,0209,powiat legnicki,1,12052,2025,False,S4,S3,15.93661,51.27373
+0209074,030210209074,Prochowice,02,dolnośląskie,0209,powiat legnicki,4,3445,2025,False,S4,S3,16.36532,51.27307
+0210011,030210110011,Lubań,02,dolnośląskie,0210,powiat lubański,1,19031,2025,False,S4,S3,15.28768,51.12014
+0210021,030210110021,Świeradów-Zdrój,02,dolnośląskie,0210,powiat lubański,1,3850,2025,False,S4,S3,15.34309,50.9092
+0210034,030210110034,Leśna,02,dolnośląskie,0210,powiat lubański,4,3879,2025,False,S4,S3,15.26413,51.02431
+0210054,030210110054,Olszyna,02,dolnośląskie,0210,powiat lubański,4,4245,2025,False,S4,S3,15.37228,51.0671
+0211011,030210211011,Lubin,02,dolnośląskie,0211,powiat lubiński,1,65961,2025,False,S4,S3,16.20149,51.40089
+0211044,030210211044,Ścinawa,02,dolnośląskie,0211,powiat lubiński,4,5179,2025,False,S4,S3,16.4251,51.41626
+0212014,030210112014,Gryfów Śląski,02,dolnośląskie,0212,powiat lwówecki,4,5936,2025,False,S4,S3,15.42017,51.03081
+0212024,030210112024,Lubomierz,02,dolnośląskie,0212,powiat lwówecki,4,1758,2025,False,S4,S3,15.50969,51.01278
+0212034,030210112034,Lwówek Śląski,02,dolnośląskie,0212,powiat lwówecki,4,7858,2025,False,S4,S3,15.58582,51.11074
+0212044,030210112044,Mirsk,02,dolnośląskie,0212,powiat lwówecki,4,3516,2025,False,S4,S3,15.38567,50.97054
+0212054,030210112054,Wleń,02,dolnośląskie,0212,powiat lwówecki,4,1530,2025,False,S4,S3,15.67474,51.01635
+0213034,030210413034,Milicz,02,dolnośląskie,0213,powiat milicki,4,10499,2025,False,S4,S3,17.27137,51.5277
+0214011,030210414011,Oleśnica,02,dolnośląskie,0214,powiat oleśnicki,1,34676,2025,False,S4,S3,17.38986,51.21338
+0214024,030210414024,Bierutów,02,dolnośląskie,0214,powiat oleśnicki,4,4348,2025,False,S4,S3,17.54607,51.12443
+0214054,030210414054,Międzybórz,02,dolnośląskie,0214,powiat oleśnicki,4,2279,2025,False,S4,S3,17.6661,51.39626
+0214074,030210414074,Syców,02,dolnośląskie,0214,powiat oleśnicki,4,9819,2025,False,S4,S3,17.71979,51.30814
+0214084,030210414084,Twardogóra,02,dolnośląskie,0214,powiat oleśnicki,4,6059,2025,False,S4,S3,17.46878,51.36487
+0215011,030210415011,Oława,02,dolnośląskie,0215,powiat oławski,1,32928,2025,False,S4,S3,17.2926,50.9466
+0215034,030210415034,Jelcz-Laskowice,02,dolnośląskie,0215,powiat oławski,4,14738,2025,False,S4,S3,17.31649,51.02134
+0216014,030210216014,Chocianów,02,dolnośląskie,0216,powiat polkowicki,4,7206,2025,False,S4,S3,15.90172,51.41867
+0216044,030210216044,Polkowice,02,dolnośląskie,0216,powiat polkowicki,4,20832,2025,False,S4,S3,16.07261,51.50391
+0216054,030210216054,Przemków,02,dolnośląskie,0216,powiat polkowicki,4,5472,2025,False,S4,S3,15.79441,51.5253
+0217044,030210417044,Strzelin,02,dolnośląskie,0217,powiat strzeliński,4,11798,2025,False,S4,S3,17.06477,50.78157
+0217054,030210417054,Wiązów,02,dolnośląskie,0217,powiat strzeliński,4,2209,2025,False,S4,S3,17.20214,50.81399
+0218034,030210418034,Miękinia,02,dolnośląskie,0218,powiat średzki,4,2254,2025,False,S4,S3,16.73595,51.18844
+0218044,030210418044,Środa Śląska,02,dolnośląskie,0218,powiat średzki,4,9496,2025,False,S4,S3,16.59508,51.16406
+0219011,030210319011,Świdnica,02,dolnośląskie,0219,powiat świdnicki,1,51357,2025,False,S4,S3,16.48859,50.84378
+0219021,030210319021,Świebodzice,02,dolnośląskie,0219,powiat świdnicki,1,21469,2025,False,S4,S3,16.31966,50.85974
+0219044,030210319044,Jaworzyna Śląska,02,dolnośląskie,0219,powiat świdnicki,4,5020,2025,False,S4,S3,16.43241,50.9134
+0219064,030210319064,Strzegom,02,dolnośląskie,0219,powiat świdnicki,4,14637,2025,False,S4,S3,16.35006,50.96264
+0219084,030210319084,Żarów,02,dolnośląskie,0219,powiat świdnicki,4,6264,2025,False,S4,S3,16.49466,50.94116
+0220014,030210420014,Oborniki Śląskie,02,dolnośląskie,0220,powiat trzebnicki,4,8831,2025,False,S4,S3,16.91465,51.30137
+0220024,030210420024,Prusice,02,dolnośląskie,0220,powiat trzebnicki,4,2089,2025,False,S4,S3,16.96025,51.37116
+0220034,030210420034,Trzebnica,02,dolnośląskie,0220,powiat trzebnicki,4,13565,2025,False,S4,S3,17.06331,51.31076
+0220064,030210420064,Żmigród,02,dolnośląskie,0220,powiat trzebnicki,4,6172,2025,False,S4,S3,16.90564,51.46672
+0221011,030210321011,Boguszów-Gorce,02,dolnośląskie,0221,powiat wałbrzyski,1,13959,2025,False,S4,S3,16.20494,50.75514
+0221021,030210321021,Jedlina-Zdrój,02,dolnośląskie,0221,powiat wałbrzyski,1,4560,2025,False,S4,S3,16.34645,50.72005
+0221031,030210321031,Szczawno-Zdrój,02,dolnośląskie,0221,powiat wałbrzyski,1,5090,2025,False,S4,S3,16.25655,50.80352
+0221054,030210321054,Głuszyca,02,dolnośląskie,0221,powiat wałbrzyski,4,5757,2025,False,S4,S3,16.37173,50.68743
+0221064,030210321064,Mieroszów,02,dolnośląskie,0221,powiat wałbrzyski,4,3624,2025,False,S4,S3,16.18883,50.66589
+0222014,030210422014,Brzeg Dolny,02,dolnośląskie,0222,powiat wołowski,4,12258,2025,False,S4,S3,16.70815,51.27299
+0222034,030210422034,Wołów,02,dolnośląskie,0222,powiat wołowski,4,11865,2025,False,S4,S3,16.64429,51.33656
+0223044,030210423044,Kąty Wrocławskie,02,dolnośląskie,0223,powiat wrocławski,4,7057,2025,False,S4,S3,16.76767,51.03098
+0223074,030210423074,Sobótka,02,dolnośląskie,0223,powiat wrocławski,4,7098,2025,False,S4,S3,16.74441,50.89992
+0223084,030210423084,Siechnice,02,dolnośląskie,0223,powiat wrocławski,4,11627,2025,False,S4,S3,17.14743,51.03384
+0224014,030210324014,Bardo,02,dolnośląskie,0224,powiat ząbkowicki,4,2239,2025,False,S4,S3,16.73986,50.50589
+0224034,030210324034,Kamieniec Ząbkowicki,02,dolnośląskie,0224,powiat ząbkowicki,4,4272,2025,False,S4,S3,16.87921,50.52541
+0224054,030210324054,Ząbkowice Śląskie,02,dolnośląskie,0224,powiat ząbkowicki,4,13819,2025,False,S4,S3,16.81239,50.58969
+0224064,030210324064,Ziębice,02,dolnośląskie,0224,powiat ząbkowicki,4,7760,2025,False,S4,S3,17.04065,50.60122
+0224074,030210324074,Złoty Stok,02,dolnośląskie,0224,powiat ząbkowicki,4,2375,2025,False,S4,S3,16.87586,50.44472
+0225011,030210125011,Zawidów,02,dolnośląskie,0225,powiat zgorzelecki,1,3689,2025,False,S4,S3,15.06213,51.02546
+0225021,030210125021,Zgorzelec,02,dolnośląskie,0225,powiat zgorzelecki,1,28095,2025,False,S4,S3,15.00835,51.14942
+0225034,030210125034,Bogatynia,02,dolnośląskie,0225,powiat zgorzelecki,4,15649,2025,False,S4,S3,14.95634,50.90747
+0225044,030210125044,Pieńsk,02,dolnośląskie,0225,powiat zgorzelecki,4,5364,2025,False,S4,S3,15.04685,51.249
+0225064,030210125064,Węgliniec,02,dolnośląskie,0225,powiat zgorzelecki,4,2604,2025,False,S4,S3,15.22894,51.28753
+0226011,030210126011,Wojcieszów,02,dolnośląskie,0226,powiat złotoryjski,1,3366,2025,False,S4,S3,15.92185,50.95194
+0226021,030210126021,Złotoryja,02,dolnośląskie,0226,powiat złotoryjski,1,13784,2025,False,S4,S3,15.91979,51.12637
+0226044,030210126044,Świerzawa,02,dolnośląskie,0226,powiat złotoryjski,4,1935,2025,False,S4,S3,15.89516,51.01375
+0261011,030210161011,Jelenia Góra,02,dolnośląskie,0261,powiat Jelenia Góra,1,73470,2025,False,S4,S3,15.72899,50.89973
+0262011,030210262011,Legnica,02,dolnośląskie,0262,powiat Legnica,1,89919,2025,False,S4,S3,16.1619,51.21006
+0264011,030210564011,Wrocław,02,dolnośląskie,0264,powiat Wrocław,1,672601,2025,True,S4,S3,17.03006,51.10286
+0265011,030210365011,Wałbrzych,02,dolnośląskie,0265,powiat Wałbrzych,1,97546,2025,False,S4,S3,16.28432,50.77141
+0401011,040410801011,Aleksandrów Kujawski,04,kujawsko-pomorskie,0401,powiat aleksandrowski,1,11303,2025,False,S4,S3,18.69345,52.87659
+0401021,040410801021,Ciechocinek,04,kujawsko-pomorskie,0401,powiat aleksandrowski,1,9889,2025,False,S4,S3,18.79505,52.87908
+0401031,040410801031,Nieszawa,04,kujawsko-pomorskie,0401,powiat aleksandrowski,1,1713,2025,False,S4,S3,18.89921,52.83452
+0402011,040410702011,Brodnica,04,kujawsko-pomorskie,0402,powiat brodnicki,1,27695,2025,False,S4,S3,19.39653,53.25967
+0402054,040410702054,Górzno,04,kujawsko-pomorskie,0402,powiat brodnicki,4,1329,2025,False,S4,S3,19.64317,53.19779
+0402074,040410702074,Jabłonowo Pomorskie,04,kujawsko-pomorskie,0402,powiat brodnicki,4,3587,2025,False,S4,S3,19.15509,53.39137
+0403044,040410603044,Koronowo,04,kujawsko-pomorskie,0403,powiat bydgoski,4,10533,2025,False,S4,S3,17.93698,53.3137
+0403084,040410603084,Solec Kujawski,04,kujawsko-pomorskie,0403,powiat bydgoski,4,15039,2025,False,S4,S3,18.22572,53.08371
+0404011,040410704011,Chełmno,04,kujawsko-pomorskie,0404,powiat chełmiński,1,17540,2025,False,S4,S3,18.4251,53.34855
+0405011,040410705011,Golub-Dobrzyń,04,kujawsko-pomorskie,0405,powiat golubsko-dobrzyński,1,10945,2025,False,S4,S3,19.05381,53.11087
+0405044,040410705044,Kowalewo Pomorskie,04,kujawsko-pomorskie,0405,powiat golubsko-dobrzyński,4,3989,2025,False,S4,S3,18.89868,53.15432
+0406034,040410706034,Łasin,04,kujawsko-pomorskie,0406,powiat grudziądzki,4,2938,2025,False,S4,S3,19.08832,53.51794
+0406044,040410706044,Radzyń Chełmiński,04,kujawsko-pomorskie,0406,powiat grudziądzki,4,1713,2025,False,S4,S3,18.93725,53.38509
+0407011,040416707011,Inowrocław,04,kujawsko-pomorskie,0407,powiat inowrocławski,1,65742,2025,False,S4,S3,18.26387,52.79886
+0407034,040416707034,Gniewkowo,04,kujawsko-pomorskie,0407,powiat inowrocławski,4,6541,2025,False,S4,S3,18.40785,52.89461
+0407054,040416707054,Janikowo,04,kujawsko-pomorskie,0407,powiat inowrocławski,4,7935,2025,False,S4,S3,18.11328,52.75328
+0407064,040416707064,Kruszwica,04,kujawsko-pomorskie,0407,powiat inowrocławski,4,8893,2025,False,S4,S3,18.33131,52.67562
+0407074,040416707074,Pakość,04,kujawsko-pomorskie,0407,powiat inowrocławski,4,4993,2025,False,S4,S3,18.0853,52.80178
+0408011,040410808011,Lipno,04,kujawsko-pomorskie,0408,powiat lipnowski,1,13191,2025,False,S4,S3,19.17852,52.84436
+0408024,040410808024,Bobrowniki,04,kujawsko-pomorskie,0408,powiat lipnowski,4,1133,2025,False,S4,S3,18.96026,52.78086
+0408044,040410808044,Dobrzyń nad Wisłą,04,kujawsko-pomorskie,0408,powiat lipnowski,4,1915,2025,False,S4,S3,19.31875,52.63814
+0408054,040410808054,Kikół,04,kujawsko-pomorskie,0408,powiat lipnowski,4,1998,2025,False,S4,S3,19.12016,52.90994
+0408074,040410808074,Skępe,04,kujawsko-pomorskie,0408,powiat lipnowski,4,3354,2025,False,S4,S3,19.35604,52.86798
+0409034,040416709034,Mogilno,04,kujawsko-pomorskie,0409,powiat mogileński,4,10680,2025,False,S4,S3,17.95578,52.65806
+0409044,040416709044,Strzelno,04,kujawsko-pomorskie,0409,powiat mogileński,4,5117,2025,False,S4,S3,18.17246,52.62789
+0410014,040416710014,Kcynia,04,kujawsko-pomorskie,0410,powiat nakielski,4,4153,2025,False,S4,S3,17.4883,52.99192
+0410024,040416710024,Mrocza,04,kujawsko-pomorskie,0410,powiat nakielski,4,4030,2025,False,S4,S3,17.60405,53.24313
+0410034,040416710034,Nakło nad Notecią,04,kujawsko-pomorskie,0410,powiat nakielski,4,16638,2025,False,S4,S3,17.60181,53.14214
+0410054,040416710054,Szubin,04,kujawsko-pomorskie,0410,powiat nakielski,4,9267,2025,False,S4,S3,17.74,53.00967
+0411011,040410811011,Radziejów,04,kujawsko-pomorskie,0411,powiat radziejowski,1,4934,2025,False,S4,S3,18.52771,52.62481
+0411054,040410811054,Piotrków Kujawski,04,kujawsko-pomorskie,0411,powiat radziejowski,4,4101,2025,False,S4,S3,18.49905,52.55111
+0412011,040410712011,Rypin,04,kujawsko-pomorskie,0412,powiat rypiński,1,15143,2025,False,S4,S3,19.40941,53.06603
+0413014,040416813014,Kamień Krajeński,04,kujawsko-pomorskie,0413,powiat sępoleński,4,2311,2025,False,S4,S3,17.52019,53.53352
+0413024,040416813024,Sępólno Krajeńskie,04,kujawsko-pomorskie,0413,powiat sępoleński,4,8526,2025,False,S4,S3,17.53169,53.45198
+0413044,040416813044,Więcbork,04,kujawsko-pomorskie,0413,powiat sępoleński,4,5497,2025,False,S4,S3,17.49064,53.35384
+0414064,040416814064,Nowe,04,kujawsko-pomorskie,0414,powiat świecki,4,5317,2025,False,S4,S3,18.72716,53.64906
+0414084,040416814084,Pruszcz,04,kujawsko-pomorskie,0414,powiat świecki,4,2808,2025,False,S4,S3,18.19894,53.33021
+0414094,040416814094,Świecie,04,kujawsko-pomorskie,0414,powiat świecki,4,24472,2025,False,S4,S3,18.44742,53.40953
+0415011,040410615011,Chełmża,04,kujawsko-pomorskie,0415,powiat toruński,1,13386,2025,False,S4,S3,18.60466,53.18463
+0416064,040416816064,Tuchola,04,kujawsko-pomorskie,0416,powiat tucholski,4,12677,2025,False,S4,S3,17.85905,53.58792
+0417011,040410717011,Wąbrzeźno,04,kujawsko-pomorskie,0417,powiat wąbrzeski,1,12593,2025,False,S4,S3,18.94773,53.27989
+0418011,040410818011,Kowal,04,kujawsko-pomorskie,0418,powiat włocławski,1,3225,2025,False,S4,S3,19.14767,52.53019
+0418044,040410818044,Brześć Kujawski,04,kujawsko-pomorskie,0418,powiat włocławski,4,4528,2025,False,S4,S3,18.90173,52.60532
+0418064,040410818064,Chodecz,04,kujawsko-pomorskie,0418,powiat włocławski,4,1656,2025,False,S4,S3,19.02759,52.40513
+0418084,040410818084,Izbica Kujawska,04,kujawsko-pomorskie,0418,powiat włocławski,4,2371,2025,False,S4,S3,18.7627,52.42073
+0418114,040410818114,Lubień Kujawski,04,kujawsko-pomorskie,0418,powiat włocławski,4,1289,2025,False,S4,S3,19.1644,52.40574
+0418124,040410818124,Lubraniec,04,kujawsko-pomorskie,0418,powiat włocławski,4,2549,2025,False,S4,S3,18.83254,52.54178
+0419014,040416719014,Barcin,04,kujawsko-pomorskie,0419,powiat żniński,4,6714,2025,False,S4,S3,17.94625,52.86607
+0419024,040416719024,Gąsawa,04,kujawsko-pomorskie,0419,powiat żniński,4,1394,2025,False,S4,S3,17.75579,52.76757
+0419034,040416719034,Janowiec Wielkopolski,04,kujawsko-pomorskie,0419,powiat żniński,4,3586,2025,False,S4,S3,17.48981,52.75583
+0419044,040416719044,Łabiszyn,04,kujawsko-pomorskie,0419,powiat żniński,4,4229,2025,False,S4,S3,17.91971,52.9521
+0419064,040416719064,Żnin,04,kujawsko-pomorskie,0419,powiat żniński,4,12656,2025,False,S4,S3,17.71992,52.84958
+0461011,040410661011,Bydgoszcz,04,kujawsko-pomorskie,0461,powiat Bydgoszcz,1,321100,2025,True,S4,S3,18.00762,53.1235
+0462011,040410762011,Grudziądz,04,kujawsko-pomorskie,0462,powiat Grudziądz,1,86811,2025,False,S4,S3,18.75366,53.48411
+0463011,040410663011,Toruń,04,kujawsko-pomorskie,0463,powiat Toruń,1,192784,2025,True,S4,S3,18.59814,53.01375
+0464011,040410864011,Włocławek,04,kujawsko-pomorskie,0464,powiat Włocławek,1,98038,2025,False,S4,S3,19.0678,52.64817
+0601011,060610901011,Międzyrzec Podlaski,06,lubelskie,0601,powiat bialski,1,15107,2025,False,S4,S3,22.78248,51.9864
+0601021,060610901021,Terespol,06,lubelskie,0601,powiat bialski,1,5018,2025,False,S4,S3,23.61614,52.0755
+0601114,060610901114,Piszczac,06,lubelskie,0601,powiat bialski,4,2045,2025,False,S4,S3,23.37719,51.98118
+0602011,060611002011,Biłgoraj,06,lubelskie,0602,powiat biłgorajski,1,24312,2025,False,S4,S3,22.72204,50.54114
+0602054,060611002054,Frampol,06,lubelskie,0602,powiat biłgorajski,4,1296,2025,False,S4,S3,22.67061,50.67159
+0602064,060611002064,Goraj,06,lubelskie,0602,powiat biłgorajski,4,868,2025,False,S4,S3,22.66651,50.72184
+0602074,060611002074,Józefów,06,lubelskie,0602,powiat biłgorajski,4,2254,2025,False,S4,S3,23.05404,50.48119
+0602124,060611002124,Tarnogród,06,lubelskie,0602,powiat biłgorajski,4,3041,2025,False,S4,S3,22.74174,50.3609
+0602144,060611002144,Turobin,06,lubelskie,0602,powiat biłgorajski,4,792,2025,False,S4,S3,22.74273,50.82367
+0603011,060611003011,Rejowiec Fabryczny,06,lubelskie,0603,powiat chełmski,1,3918,2025,False,S4,S3,23.24724,51.11414
+0603114,060611003114,Siedliszcze,06,lubelskie,0603,powiat chełmski,4,1311,2025,False,S4,S3,23.1639,51.19468
+0603154,060611003154,Rejowiec,06,lubelskie,0603,powiat chełmski,4,2045,2025,False,S4,S3,23.28192,51.09134
+0604011,060611004011,Hrubieszów,06,lubelskie,0604,powiat hrubieszowski,1,15422,2025,False,S4,S3,23.89251,50.80502
+0605054,060611205054,Janów Lubelski,06,lubelskie,0605,powiat janowski,4,10618,2025,False,S4,S3,22.41039,50.70695
+0605064,060611205064,Modliborzyce,06,lubelskie,0605,powiat janowski,4,1383,2025,False,S4,S3,22.32945,50.75416
+0606011,060611006011,Krasnystaw,06,lubelskie,0606,powiat krasnostawski,1,16850,2025,False,S4,S3,23.1742,50.98464
+0606044,060611006044,Izbica,06,lubelskie,0606,powiat krasnostawski,4,1628,2025,False,S4,S3,23.15248,50.88728
+0607011,060611207011,Kraśnik,06,lubelskie,0607,powiat kraśnicki,1,30525,2025,False,S4,S3,22.22706,50.9236
+0607024,060611207024,Annopol,06,lubelskie,0607,powiat kraśnicki,4,2252,2025,False,S4,S3,21.85678,50.88551
+0607084,060611207084,Urzędów,06,lubelskie,0607,powiat kraśnicki,4,1712,2025,False,S4,S3,22.1426,50.99323
+0608011,060611108011,Lubartów,06,lubelskie,0608,powiat lubartowski,1,19371,2025,False,S4,S3,22.60952,51.46026
+0608054,060611108054,Kamionka,06,lubelskie,0608,powiat lubartowski,4,1717,2025,False,S4,S3,22.46275,51.47165
+0608064,060611108064,Kock,06,lubelskie,0608,powiat lubartowski,4,2799,2025,False,S4,S3,22.44391,51.63997
+0608104,060611108104,Ostrów Lubelski,06,lubelskie,0608,powiat lubartowski,4,1890,2025,False,S4,S3,22.85287,51.49416
+0609014,060611109014,Bełżyce,06,lubelskie,0609,powiat lubelski,4,5735,2025,False,S4,S3,22.28027,51.17415
+0609034,060611109034,Bychawa,06,lubelskie,0609,powiat lubelski,4,4336,2025,False,S4,S3,22.53296,51.01608
+0610034,060611110034,Łęczna,06,lubelskie,0610,powiat łęczyński,4,17203,2025,False,S4,S3,22.88135,51.30121
+0611011,060611211011,Łuków,06,lubelskie,0611,powiat łukowski,1,26637,2025,False,S4,S3,22.37956,51.929
+0611021,060611211021,Stoczek Łukowski,06,lubelskie,0611,powiat łukowski,1,2278,2025,False,S4,S3,21.97137,51.96135
+0612024,060611212024,Józefów nad Wisłą,06,lubelskie,0612,powiat opolski,4,779,2025,False,S4,S3,21.83018,51.04183
+0612054,060611212054,Opole Lubelskie,06,lubelskie,0612,powiat opolski,4,7637,2025,False,S4,S3,21.96897,51.14775
+0612064,060611212064,Poniatowa,06,lubelskie,0612,powiat opolski,4,8000,2025,False,S4,S3,22.13093,51.17983
+0613044,060610913044,Parczew,06,lubelskie,0613,powiat parczewski,4,10026,2025,False,S4,S3,22.90057,51.64021
+0614011,060611214011,Puławy,06,lubelskie,0614,powiat puławski,1,42996,2025,False,S4,S3,21.96939,51.41655
+0614044,060611214044,Kazimierz Dolny,06,lubelskie,0614,powiat puławski,4,3148,2025,False,S4,S3,21.95502,51.31911
+0614054,060611214054,Końskowola,06,lubelskie,0614,powiat puławski,4,1956,2025,False,S4,S3,22.05175,51.40922
+0614064,060611214064,Kurów,06,lubelskie,0614,powiat puławski,4,2595,2025,False,S4,S3,22.18637,51.38941
+0614084,060611214084,Nałęczów,06,lubelskie,0614,powiat puławski,4,3536,2025,False,S4,S3,22.21539,51.28581
+0614104,060611214104,Wąwolnica,06,lubelskie,0614,powiat puławski,4,867,2025,False,S4,S3,22.14681,51.29467
+0615011,060610915011,Radzyń Podlaski,06,lubelskie,0615,powiat radzyński,1,13839,2025,False,S4,S3,22.61667,51.78333
+0615034,060610915034,Czemierniki,06,lubelskie,0615,powiat radzyński,4,1284,2025,False,S4,S3,22.63887,51.67298
+0616011,060611216011,Dęblin,06,lubelskie,0616,powiat rycki,1,13669,2025,False,S4,S3,21.84829,51.55912
+0616044,060611216044,Ryki,06,lubelskie,0616,powiat rycki,4,8799,2025,False,S4,S3,21.93274,51.62574
+0617011,060611117011,Świdnik,06,lubelskie,0617,powiat świdnicki,1,36215,2025,False,S4,S3,22.69621,51.21898
+0617034,060611117034,Piaski,06,lubelskie,0617,powiat świdnicki,4,2396,2025,False,S4,S3,22.84856,51.13892
+0618011,060611018011,Tomaszów Lubelski,06,lubelskie,0618,powiat tomaszowski,1,17292,2025,False,S4,S3,23.41616,50.44767
+0618054,060611018054,Lubycza Królewska,06,lubelskie,0618,powiat tomaszowski,4,2063,2025,False,S4,S3,23.51941,50.34102
+0618064,060611018064,Łaszczów,06,lubelskie,0618,powiat tomaszowski,4,1905,2025,False,S4,S3,23.72562,50.53332
+0618124,060611018124,Tyszowce,06,lubelskie,0618,powiat tomaszowski,4,1775,2025,False,S4,S3,23.69927,50.61699
+0619011,060610919011,Włodawa,06,lubelskie,0619,powiat włodawski,1,11761,2025,False,S4,S3,23.55,51.55
+0620044,060611020044,Krasnobród,06,lubelskie,0620,powiat zamojski,4,2918,2025,False,S4,S3,23.21308,50.54551
+0620134,060611020134,Szczebrzeszyn,06,lubelskie,0620,powiat zamojski,4,4656,2025,False,S4,S3,22.97954,50.69499
+0620154,060611020154,Zwierzyniec,06,lubelskie,0620,powiat zamojski,4,2682,2025,False,S4,S3,22.97512,50.614
+0661011,060610961011,Biała Podlaska,06,lubelskie,0661,powiat Biała Podlaska,1,53470,2025,False,S4,S3,23.11652,52.03238
+0662011,060611062011,Chełm,06,lubelskie,0662,powiat Chełm,1,55661,2025,False,S4,S3,23.4716,51.14312
+0663011,060611163011,Lublin,06,lubelskie,0663,powiat Lublin,1,326685,2025,True,S4,S3,22.57009,51.25058
+0664011,060611064011,Zamość,06,lubelskie,0664,powiat Zamość,1,56844,2025,False,S4,S3,23.25196,50.72314
+0801011,020811301011,Kostrzyn nad Odrą,08,lubuskie,0801,powiat gorzowski,1,17261,2025,False,S4,S3,14.64953,52.58713
+0801074,020811301074,Witnica,08,lubuskie,0801,powiat gorzowski,4,6327,2025,False,S4,S3,14.89765,52.67318
+0802011,020811402011,Gubin,08,lubuskie,0802,powiat krośnieński,1,15212,2025,False,S4,S3,14.72837,51.94956
+0802064,020811402064,Krosno Odrzańskie,08,lubuskie,0802,powiat krośnieński,4,10209,2025,False,S4,S3,15.09882,52.05492
+0803024,020811303024,Międzyrzecz,08,lubuskie,0803,powiat międzyrzecki,4,16372,2025,False,S4,S3,15.57801,52.44461
+0803054,020811303054,Skwierzyna,08,lubuskie,0803,powiat międzyrzecki,4,8874,2025,False,S4,S3,15.50652,52.59914
+0803064,020811303064,Trzciel,08,lubuskie,0803,powiat międzyrzecki,4,2194,2025,False,S4,S3,15.87306,52.36504
+0804011,020811404011,Nowa Sól,08,lubuskie,0804,powiat nowosolski,1,35230,2025,False,S4,S3,15.71702,51.80333
+0804024,020811404024,Bytom Odrzański,08,lubuskie,0804,powiat nowosolski,4,3854,2025,False,S4,S3,15.82362,51.73062
+0804044,020811404044,Kożuchów,08,lubuskie,0804,powiat nowosolski,4,8754,2025,False,S4,S3,15.59492,51.74558
+0804064,020811404064,Nowe Miasteczko,08,lubuskie,0804,powiat nowosolski,4,2578,2025,False,S4,S3,15.73174,51.69097
+0804074,020811404074,Otyń,08,lubuskie,0804,powiat nowosolski,4,1814,2025,False,S4,S3,15.71105,51.84766
+0805014,020811305014,Cybinka,08,lubuskie,0805,powiat słubicki,4,2619,2025,False,S4,S3,14.79567,52.19446
+0805034,020811305034,Ośno Lubuskie,08,lubuskie,0805,powiat słubicki,4,3848,2025,False,S4,S3,14.87549,52.4536
+0805044,020811305044,Rzepin,08,lubuskie,0805,powiat słubicki,4,6319,2025,False,S4,S3,14.83227,52.3464
+0805054,020811305054,Słubice,08,lubuskie,0805,powiat słubicki,4,15997,2025,False,S4,S3,14.56065,52.35088
+0806014,020811306014,Dobiegniew,08,lubuskie,0806,powiat strzelecko-drezdenecki,4,2998,2025,False,S4,S3,15.75362,52.96947
+0806024,020811306024,Drezdenko,08,lubuskie,0806,powiat strzelecko-drezdenecki,4,9206,2025,False,S4,S3,15.83079,52.83831
+0806044,020811306044,Strzelce Krajeńskie,08,lubuskie,0806,powiat strzelecko-drezdenecki,4,9517,2025,False,S4,S3,15.52978,52.87726
+0807024,020811307024,Lubniewice,08,lubuskie,0807,powiat sulęciński,4,1988,2025,False,S4,S3,15.25005,52.51638
+0807044,020811307044,Sulęcin,08,lubuskie,0807,powiat sulęciński,4,9495,2025,False,S4,S3,15.11676,52.44429
+0807054,020811307054,Torzym,08,lubuskie,0807,powiat sulęciński,4,2356,2025,False,S4,S3,15.08243,52.31331
+0808054,020811408054,Świebodzin,08,lubuskie,0808,powiat świebodziński,4,20480,2025,False,S4,S3,15.53355,52.24751
+0808064,020811408064,Zbąszynek,08,lubuskie,0808,powiat świebodziński,4,4809,2025,False,S4,S3,15.81654,52.24315
+0809014,020811409014,Babimost,08,lubuskie,0809,powiat zielonogórski,4,3743,2025,False,S4,S3,15.82769,52.16488
+0809034,020811409034,Czerwieńsk,08,lubuskie,0809,powiat zielonogórski,4,3667,2025,False,S4,S3,15.42317,52.01289
+0809044,020811409044,Kargowa,08,lubuskie,0809,powiat zielonogórski,4,3786,2025,False,S4,S3,15.86138,52.0714
+0809054,020811409054,Nowogród Bobrzański,08,lubuskie,0809,powiat zielonogórski,4,4623,2025,False,S4,S3,15.2352,51.79856
+0809064,020811409064,Sulechów,08,lubuskie,0809,powiat zielonogórski,4,15203,2025,False,S4,S3,15.62513,52.08362
+0810011,020811410011,Gozdnica,08,lubuskie,0810,powiat żagański,1,2636,2025,False,S4,S3,15.09856,51.4363
+0810021,020811410021,Żagań,08,lubuskie,0810,powiat żagański,1,22800,2025,False,S4,S3,15.31486,51.61759
+0810044,020811410044,Iłowa,08,lubuskie,0810,powiat żagański,4,3476,2025,False,S4,S3,15.1998,51.5006
+0810054,020811410054,Małomice,08,lubuskie,0810,powiat żagański,4,3397,2025,False,S4,S3,15.45004,51.55597
+0810074,020811410074,Szprotawa,08,lubuskie,0810,powiat żagański,4,10229,2025,False,S4,S3,15.53664,51.56563
+0811011,020811411011,Łęknica,08,lubuskie,0811,powiat żarski,1,2172,2025,False,S4,S3,14.73584,51.54148
+0811021,020811411021,Żary,08,lubuskie,0811,powiat żarski,1,33949,2025,False,S4,S3,15.13727,51.64205
+0811034,020811411034,Brody,08,lubuskie,0811,powiat żarski,4,832,2025,False,S4,S3,14.77335,51.79046
+0811044,020811411044,Jasień,08,lubuskie,0811,powiat żarski,4,3910,2025,False,S4,S3,15.01419,51.75142
+0811064,020811411064,Lubsko,08,lubuskie,0811,powiat żarski,4,12543,2025,False,S4,S3,14.97196,51.78467
+0812014,020811412014,Sława,08,lubuskie,0812,powiat wschowski,4,4012,2025,False,S4,S3,16.07205,51.87623
+0812024,020811412024,Szlichtyngowa,08,lubuskie,0812,powiat wschowski,4,1216,2025,False,S4,S3,16.24427,51.71222
+0812034,020811412034,Wschowa,08,lubuskie,0812,powiat wschowski,4,12738,2025,False,S4,S3,16.31663,51.80705
+0861011,020811361011,Gorzów Wielkopolski,08,lubuskie,0861,powiat Gorzów Wielkopolski,1,113569,2025,True,S4,S3,15.22505,52.73371
+0862011,020811462011,Zielona Góra,08,lubuskie,0862,powiat Zielona Góra,1,138476,2025,True,S4,S3,15.50643,51.93548
+1001011,051011701011,Bełchatów,10,łódzkie,1001,powiat bełchatowski,1,50961,2025,False,S4,S3,19.35671,51.36883
+1001084,051011701084,Zelów,10,łódzkie,1001,powiat bełchatowski,4,6835,2025,False,S4,S3,19.21972,51.46452
+1002011,051011902011,Kutno,10,łódzkie,1002,powiat kutnowski,1,39973,2025,False,S4,S3,19.36409,52.23064
+1002034,051011902034,Dąbrowice,10,łódzkie,1002,powiat kutnowski,4,931,2025,False,S4,S3,19.08437,52.31142
+1002044,051011902044,Krośniewice,10,łódzkie,1002,powiat kutnowski,4,3870,2025,False,S4,S3,19.17037,52.25592
+1002114,051011902114,Żychlin,10,łódzkie,1002,powiat kutnowski,4,7289,2025,False,S4,S3,19.62613,52.24404
+1003024,051011803024,Łask,10,łódzkie,1003,powiat łaski,4,15628,2025,False,S4,S3,19.13278,51.59056
+1004011,051011904011,Łęczyca,10,łódzkie,1004,powiat łęczycki,1,12645,2025,False,S4,S3,19.19972,52.05959
+1004044,051011904044,Grabów,10,łódzkie,1004,powiat łęczycki,4,1000,2025,False,S4,S3,19.00257,52.12717
+1004064,051011904064,Piątek,10,łódzkie,1004,powiat łęczycki,4,1499,2025,False,S4,S3,19.4797,52.0689
+1005011,051011905011,Łowicz,10,łódzkie,1005,powiat łowicki,1,25313,2025,False,S4,S3,19.94525,52.10714
+1005054,051011905054,Kiernozia,10,łódzkie,1005,powiat łowicki,4,794,2025,False,S4,S3,19.87092,52.26858
+1006074,051011506074,Koluszki,10,łódzkie,1006,powiat łódzki wschodni,4,11785,2025,False,S4,S3,19.81994,51.73872
+1006104,051011506104,Rzgów,10,łódzkie,1006,powiat łódzki wschodni,4,3454,2025,False,S4,S3,19.49181,51.66345
+1006114,051011506114,Tuszyn,10,łódzkie,1006,powiat łódzki wschodni,4,7114,2025,False,S4,S3,19.53009,51.60949
+1007014,051011707014,Białaczów,10,łódzkie,1007,powiat opoczyński,4,1090,2025,False,S4,S3,20.29724,51.29815
+1007024,051011707024,Drzewica,10,łódzkie,1007,powiat opoczyński,4,3399,2025,False,S4,S3,20.47701,51.45085
+1007044,051011707044,Opoczno,10,łódzkie,1007,powiat opoczyński,4,18407,2025,False,S4,S3,20.27827,51.37569
+1007084,051011707084,Żarnów,10,łódzkie,1007,powiat opoczyński,4,1100,2025,False,S4,S3,20.17476,51.24607
+1008011,051011508011,Konstantynów Łódzki,10,łódzkie,1008,powiat pabianicki,1,19278,2025,False,S4,S3,19.32564,51.74776
+1008021,051011508021,Pabianice,10,łódzkie,1008,powiat pabianicki,1,59302,2025,False,S4,S3,19.35473,51.66446
+1008064,051011508064,Lutomiersk,10,łódzkie,1008,powiat pabianicki,4,1557,2025,False,S4,S3,19.21097,51.75376
+1009014,051011809014,Działoszyn,10,łódzkie,1009,powiat pajęczański,4,5102,2025,False,S4,S3,18.86524,51.11699
+1009044,051011809044,Pajęczno,10,łódzkie,1009,powiat pajęczański,4,6189,2025,False,S4,S3,18.99612,51.14449
+1010084,051011710084,Rozprza,10,łódzkie,1010,powiat piotrkowski,4,1629,2025,False,S4,S3,19.6457,51.30266
+1010094,051011710094,Sulejów,10,łódzkie,1010,powiat piotrkowski,4,5829,2025,False,S4,S3,19.88538,51.35436
+1010114,051011710114,Wolbórz,10,łódzkie,1010,powiat piotrkowski,4,2211,2025,False,S4,S3,19.83049,51.50196
+1011034,051011811034,Poddębice,10,łódzkie,1011,powiat poddębicki,4,6586,2025,False,S4,S3,18.9573,51.89344
+1011044,051011811044,Uniejów,10,łódzkie,1011,powiat poddębicki,4,2966,2025,False,S4,S3,18.79308,51.97428
+1012011,051011712011,Radomsko,10,łódzkie,1012,powiat radomszczański,1,41909,2025,False,S4,S3,19.44477,51.06713
+1012054,051011712054,Kamieńsk,10,łódzkie,1012,powiat radomszczański,4,2581,2025,False,S4,S3,19.49661,51.20242
+1012114,051011712114,Przedbórz,10,łódzkie,1012,powiat radomszczański,4,3054,2025,False,S4,S3,19.87384,51.08789
+1013011,051011913011,Rawa Mazowiecka,10,łódzkie,1013,powiat rawski,1,15553,2025,False,S4,S3,20.25493,51.76437
+1013024,051011913024,Biała Rawska,10,łódzkie,1013,powiat rawski,4,2896,2025,False,S4,S3,20.47259,51.80779
+1014011,051011814011,Sieradz,10,łódzkie,1014,powiat sieradzki,1,37764,2025,False,S4,S3,18.73023,51.59584
+1014024,051011814024,Błaszki,10,łódzkie,1014,powiat sieradzki,4,1897,2025,False,S4,S3,18.43472,51.65163
+1014094,051011814094,Warta,10,łódzkie,1014,powiat sieradzki,4,2852,2025,False,S4,S3,18.62483,51.71049
+1014114,051011814114,Złoczew,10,łódzkie,1014,powiat sieradzki,4,3353,2025,False,S4,S3,18.60363,51.41719
+1015014,051011915014,Bolimów,10,łódzkie,1015,powiat skierniewicki,4,889,2025,False,S4,S3,20.16352,52.07671
+1016011,051011716011,Tomaszów Mazowiecki,10,łódzkie,1016,powiat tomaszowski,1,56055,2025,False,S4,S3,20.00855,51.53131
+1016054,051011716054,Inowłódz,10,łódzkie,1016,powiat tomaszowski,4,772,2025,False,S4,S3,20.223,51.52717
+1016104,051011716104,Ujazd,10,łódzkie,1016,powiat tomaszowski,4,1463,2025,False,S4,S3,19.92225,51.59781
+1017054,051011817054,Osjaków,10,łódzkie,1017,powiat wieluński,4,1344,2025,False,S4,S3,18.79151,51.28946
+1017094,051011817094,Wieluń,10,łódzkie,1017,powiat wieluński,4,19771,2025,False,S4,S3,18.56964,51.22097
+1018014,051011818014,Bolesławiec,10,łódzkie,1018,powiat wieruszowski,4,870,2025,False,S4,S3,18.19147,51.19866
+1018044,051011818044,Lututów,10,łódzkie,1018,powiat wieruszowski,4,2157,2025,False,S4,S3,18.4348,51.37033
+1018074,051011818074,Wieruszów,10,łódzkie,1018,powiat wieruszowski,4,8130,2025,False,S4,S3,18.15547,51.29488
+1019011,051011819011,Zduńska Wola,10,łódzkie,1019,powiat zduńskowolski,1,37532,2025,False,S4,S3,18.93974,51.59915
+1019024,051011819024,Szadek,10,łódzkie,1019,powiat zduńskowolski,4,1751,2025,False,S4,S3,18.97549,51.69174
+1020011,051011520011,Głowno,10,łódzkie,1020,powiat zgierski,1,12830,2025,False,S4,S3,19.71565,51.96463
+1020021,051011520021,Ozorków,10,łódzkie,1020,powiat zgierski,1,17643,2025,False,S4,S3,19.29139,51.96336
+1020031,051011520031,Zgierz,10,łódzkie,1020,powiat zgierski,1,52418,2025,False,S4,S3,19.40623,51.85561
+1020044,051011520044,Aleksandrów Łódzki,10,łódzkie,1020,powiat zgierski,4,21929,2025,False,S4,S3,19.30384,51.81965
+1020074,051011520074,Parzęczew,10,łódzkie,1020,powiat zgierski,4,918,2025,False,S4,S3,19.20608,51.94855
+1020084,051011520084,Stryków,10,łódzkie,1020,powiat zgierski,4,3287,2025,False,S4,S3,19.60536,51.90224
+1021011,051011521011,Brzeziny,10,łódzkie,1021,powiat brzeziński,1,11750,2025,False,S4,S3,19.75144,51.80023
+1021044,051011521044,Jeżów,10,łódzkie,1021,powiat brzeziński,4,1261,2025,False,S4,S3,19.96877,51.81376
+1061011,051011661011,Łódź,10,łódzkie,1061,powiat Łódź,1,639890,2025,True,S4,S3,19.47395,51.77058
+1062011,051011762011,Piotrków Trybunalski,10,łódzkie,1062,powiat Piotrków Trybunalski,1,65435,2025,False,S4,S3,19.70321,51.40547
+1063011,051011963011,Skierniewice,10,łódzkie,1063,powiat Skierniewice,1,44814,2025,False,S4,S3,20.15837,51.95485
+1201011,011212001011,Bochnia,12,małopolskie,1201,powiat bocheński,1,28187,2025,False,S4,S3,20.43028,49.96905
+1201064,011212001064,Nowy Wiśnicz,12,małopolskie,1201,powiat bocheński,4,2695,2025,False,S4,S3,20.46109,49.91465
+1202024,011212402024,Brzesko,12,małopolskie,1202,powiat brzeski,4,15738,2025,False,S4,S3,20.60606,49.96911
+1202034,011212402034,Czchów,12,małopolskie,1202,powiat brzeski,4,2223,2025,False,S4,S3,20.68056,49.83726
+1203014,011212303014,Alwernia,12,małopolskie,1203,powiat chrzanowski,4,3129,2025,False,S4,S3,19.53953,50.06056
+1203034,011212303034,Chrzanów,12,małopolskie,1203,powiat chrzanowski,4,33193,2025,False,S4,S3,19.40203,50.13546
+1203044,011212303044,Libiąż,12,małopolskie,1203,powiat chrzanowski,4,15615,2025,False,S4,S3,19.31568,50.10396
+1203054,011212303054,Trzebinia,12,małopolskie,1203,powiat chrzanowski,4,18121,2025,False,S4,S3,19.46966,50.15931
+1204024,011212404024,Dąbrowa Tarnowska,12,małopolskie,1204,powiat dąbrowski,4,11350,2025,False,S4,S3,20.98633,50.17462
+1204074,011212404074,Szczucin,12,małopolskie,1204,powiat dąbrowski,4,4043,2025,False,S4,S3,21.07444,50.30957
+1205011,011212205011,Gorlice,12,małopolskie,1205,powiat gorlicki,1,24825,2025,False,S4,S3,21.16035,49.65563
+1205024,011212205024,Biecz,12,małopolskie,1205,powiat gorlicki,4,4200,2025,False,S4,S3,21.26301,49.73596
+1205034,011212205034,Bobowa,12,małopolskie,1205,powiat gorlicki,4,3045,2025,False,S4,S3,20.94767,49.70866
+1206064,011212006064,Krzeszowice,12,małopolskie,1206,powiat krakowski,4,9722,2025,False,S4,S3,19.63223,50.14248
+1206104,011212006104,Skała,12,małopolskie,1206,powiat krakowski,4,3833,2025,False,S4,S3,19.85363,50.23052
+1206114,011212006114,Skawina,12,małopolskie,1206,powiat krakowski,4,23766,2025,False,S4,S3,19.82869,49.97524
+1206124,011212006124,Słomniki,12,małopolskie,1206,powiat krakowski,4,4134,2025,False,S4,S3,20.08224,50.24012
+1206144,011212006144,Świątniki Górne,12,małopolskie,1206,powiat krakowski,4,2383,2025,False,S4,S3,19.95364,49.93429
+1207011,011212207011,Limanowa,12,małopolskie,1207,powiat limanowski,1,14224,2025,False,S4,S3,20.42204,49.70594
+1207021,011212207021,Mszana Dolna,12,małopolskie,1207,powiat limanowski,1,7808,2025,False,S4,S3,20.07992,49.67432
+1208044,011212008044,Książ Wielki,12,małopolskie,1208,powiat miechowski,4,821,2025,False,S4,S3,20.14026,50.44351
+1208054,011212008054,Miechów,12,małopolskie,1208,powiat miechowski,4,10755,2025,False,S4,S3,20.02788,50.35648
+1209014,011212009014,Dobczyce,12,małopolskie,1209,powiat myślenicki,4,6096,2025,False,S4,S3,20.08936,49.88109
+1209034,011212009034,Myślenice,12,małopolskie,1209,powiat myślenicki,4,17548,2025,False,S4,S3,19.9383,49.83383
+1209074,011212009074,Sułkowice,12,małopolskie,1209,powiat myślenicki,4,6523,2025,False,S4,S3,19.80097,49.84053
+1210011,011212210011,Grybów,12,małopolskie,1210,powiat nowosądecki,1,5857,2025,False,S4,S3,20.94797,49.62439
+1210074,011212210074,Krynica-Zdrój,12,małopolskie,1210,powiat nowosądecki,4,9294,2025,False,S4,S3,20.95942,49.42225
+1210114,011212210114,Muszyna,12,małopolskie,1210,powiat nowosądecki,4,4373,2025,False,S4,S3,20.89718,49.35661
+1210134,011212210134,Piwniczna-Zdrój,12,małopolskie,1210,powiat nowosądecki,4,5267,2025,False,S4,S3,20.71423,49.44056
+1210164,011212210164,Stary Sącz,12,małopolskie,1210,powiat nowosądecki,4,8555,2025,False,S4,S3,20.63496,49.56364
+1211011,011216911011,Nowy Targ,12,małopolskie,1211,powiat nowotarski,1,32956,2025,False,S4,S3,20.03228,49.47783
+1211024,011216911024,Szczawnica,12,małopolskie,1211,powiat nowotarski,4,5120,2025,False,S4,S3,20.48487,49.42437
+1211034,011216911034,Czarny Dunajec,12,małopolskie,1211,powiat nowotarski,4,3636,2025,False,S4,S3,19.85161,49.43663
+1211124,011216911124,Rabka-Zdrój,12,małopolskie,1211,powiat nowotarski,4,12072,2025,False,S4,S3,19.96654,49.60889
+1212011,011212312011,Bukowno,12,małopolskie,1212,powiat olkuski,1,9104,2025,False,S4,S3,19.45962,50.26474
+1212054,011212312054,Olkusz,12,małopolskie,1212,powiat olkuski,4,31538,2025,False,S4,S3,19.56503,50.2813
+1212074,011212312074,Wolbrom,12,małopolskie,1212,powiat olkuski,4,7910,2025,False,S4,S3,19.75831,50.37957
+1213011,011212313011,Oświęcim,12,małopolskie,1213,powiat oświęcimski,1,35005,2025,False,S4,S3,19.21037,50.03437
+1213024,011212313024,Brzeszcze,12,małopolskie,1213,powiat oświęcimski,4,10411,2025,False,S4,S3,19.15157,49.98203
+1213034,011212313034,Chełmek,12,małopolskie,1213,powiat oświęcimski,4,8175,2025,False,S4,S3,19.24801,50.10163
+1213044,011212313044,Kęty,12,małopolskie,1213,powiat oświęcimski,4,17419,2025,False,S4,S3,19.22333,49.88214
+1213094,011212313094,Zator,12,małopolskie,1213,powiat oświęcimski,4,3538,2025,False,S4,S3,19.43799,49.99604
+1214024,011212014024,Koszyce,12,małopolskie,1214,powiat proszowicki,4,757,2025,False,S4,S3,20.57911,50.17008
+1214034,011212014034,Nowe Brzesko,12,małopolskie,1214,powiat proszowicki,4,1583,2025,False,S4,S3,20.37663,50.13222
+1214054,011212014054,Proszowice,12,małopolskie,1214,powiat proszowicki,4,5655,2025,False,S4,S3,20.28909,50.19275
+1215011,011216915011,Jordanów,12,małopolskie,1215,powiat suski,1,5365,2025,False,S4,S3,19.82981,49.64935
+1215021,011216915021,Sucha Beskidzka,12,małopolskie,1215,powiat suski,1,8688,2025,False,S4,S3,19.59429,49.74188
+1215064,011216915064,Maków Podhalański,12,małopolskie,1215,powiat suski,4,5450,2025,False,S4,S3,19.67711,49.73008
+1216014,011212416014,Ciężkowice,12,małopolskie,1216,powiat tarnowski,4,2464,2025,False,S4,S3,20.97324,49.78575
+1216054,011212416054,Radłów,12,małopolskie,1216,powiat tarnowski,4,2695,2025,False,S4,S3,20.84967,50.08419
+1216064,011212416064,Ryglice,12,małopolskie,1216,powiat tarnowski,4,2627,2025,False,S4,S3,21.13748,49.87887
+1216104,011212416104,Tuchów,12,małopolskie,1216,powiat tarnowski,4,6074,2025,False,S4,S3,21.05407,49.89485
+1216134,011212416134,Wojnicz,12,małopolskie,1216,powiat tarnowski,4,3082,2025,False,S4,S3,20.83785,49.958
+1216144,011212416144,Zakliczyn,12,małopolskie,1216,powiat tarnowski,4,1561,2025,False,S4,S3,20.80935,49.85589
+1216154,011212416154,Żabno,12,małopolskie,1216,powiat tarnowski,4,4061,2025,False,S4,S3,20.88615,50.13334
+1217011,011216917011,Zakopane,12,małopolskie,1217,powiat tatrzański,1,24921,2025,False,S4,S3,19.94885,49.29899
+1218014,011212318014,Andrychów,12,małopolskie,1218,powiat wadowicki,4,17867,2025,False,S4,S3,19.33834,49.85497
+1218034,011212318034,Kalwaria Zebrzydowska,12,małopolskie,1218,powiat wadowicki,4,4233,2025,False,S4,S3,19.6772,49.86759
+1218094,011212318094,Wadowice,12,małopolskie,1218,powiat wadowicki,4,16748,2025,False,S4,S3,19.49292,49.88335
+1219044,011212019044,Niepołomice,12,małopolskie,1219,powiat wielicki,4,17572,2025,False,S4,S3,20.22257,50.04066
+1219054,011212019054,Wieliczka,12,małopolskie,1219,powiat wielicki,4,28485,2025,False,S4,S3,20.06473,49.98738
+1261011,011212161011,Kraków,12,małopolskie,1261,powiat Kraków,1,816614,2025,True,S4,S3,19.93658,50.06143
+1262011,011212262011,Nowy Sącz,12,małopolskie,1262,powiat Nowy Sącz,1,79416,2025,False,S4,S3,20.69705,49.62177
+1263011,011212463011,Tarnów,12,małopolskie,1263,powiat Tarnów,1,101177,2025,True,S4,S3,20.98698,50.01381
+1401014,071422701014,Białobrzegi,14,mazowieckie,1401,powiat białobrzeski,4,6329,2025,False,S4,S3,20.95041,51.64695
+1401064,071422701064,Wyśmierzyce,14,mazowieckie,1401,powiat białobrzeski,4,858,2025,False,S4,S3,20.81394,51.62494
+1402011,071422502011,Ciechanów,14,mazowieckie,1402,powiat ciechanowski,1,41234,2025,False,S4,S3,20.61996,52.88141
+1402034,071422502034,Glinojeck,14,mazowieckie,1402,powiat ciechanowski,4,2721,2025,False,S4,S3,20.29198,52.81983
+1403011,071427103011,Garwolin,14,mazowieckie,1403,powiat garwoliński,1,17244,2025,False,S4,S3,21.61466,51.89747
+1403021,071427103021,Łaskarzew,14,mazowieckie,1403,powiat garwoliński,1,4400,2025,False,S4,S3,21.59122,51.78993
+1403074,071427103074,Maciejowice,14,mazowieckie,1403,powiat garwoliński,4,1404,2025,False,S4,S3,21.55342,51.69222
+1403104,071427103104,Pilawa,14,mazowieckie,1403,powiat garwoliński,4,4418,2025,False,S4,S3,21.53089,51.95945
+1403144,071427103144,Żelechów,14,mazowieckie,1403,powiat garwoliński,4,3608,2025,False,S4,S3,21.89721,51.81051
+1404011,071427004011,Gostynin,14,mazowieckie,1404,powiat gostyniński,1,16458,2025,False,S4,S3,19.46194,52.42938
+1404044,071427004044,Sanniki,14,mazowieckie,1404,powiat gostyniński,4,1695,2025,False,S4,S3,19.86766,52.33046
+1405011,071413005011,Milanówek,14,mazowieckie,1405,powiat grodziski,1,16244,2025,False,S4,S3,20.67155,52.11879
+1405021,071413005021,Podkowa Leśna,14,mazowieckie,1405,powiat grodziski,1,3708,2025,False,S4,S3,20.72665,52.12237
+1405044,071413005044,Grodzisk Mazowiecki,14,mazowieckie,1405,powiat grodziski,4,35516,2025,False,S4,S3,20.6337,52.10387
+1406054,071427306054,Grójec,14,mazowieckie,1406,powiat grójecki,4,16681,2025,False,S4,S3,20.86757,51.86252
+1406074,071427306074,Mogielnica,14,mazowieckie,1406,powiat grójecki,4,2098,2025,False,S4,S3,20.72227,51.69432
+1406084,071427306084,Nowe Miasto nad Pilicą,14,mazowieckie,1406,powiat grójecki,4,3372,2025,False,S4,S3,20.57619,51.61812
+1406114,071427306114,Warka,14,mazowieckie,1406,powiat grójecki,4,11850,2025,False,S4,S3,21.19091,51.7843
+1407024,071422707024,Głowaczów,14,mazowieckie,1407,powiat kozienicki,4,801,2025,False,S4,S3,21.31785,51.62308
+1407054,071422707054,Kozienice,14,mazowieckie,1407,powiat kozienicki,4,15009,2025,False,S4,S3,21.54779,51.58294
+1407064,071422707064,Magnuszew,14,mazowieckie,1407,powiat kozienicki,4,971,2025,False,S4,S3,21.37991,51.76481
+1408011,071412908011,Legionowo,14,mazowieckie,1408,powiat legionowski,1,51869,2025,False,S4,S3,20.92664,52.40149
+1408044,071412908044,Serock,14,mazowieckie,1408,powiat legionowski,4,5487,2025,False,S4,S3,21.0691,52.51036
+1409024,071422709024,Ciepielów,14,mazowieckie,1409,powiat lipski,4,716,2025,False,S4,S3,21.57475,51.24838
+1409034,071422709034,Lipsko,14,mazowieckie,1409,powiat lipski,4,4812,2025,False,S4,S3,21.64933,51.15954
+1409054,071422709054,Sienno,14,mazowieckie,1409,powiat lipski,4,928,2025,False,S4,S3,21.48325,51.08773
+1409064,071422709064,Solec nad Wisłą,14,mazowieckie,1409,powiat lipski,4,876,2025,False,S4,S3,21.76563,51.13633
+1410024,071427110024,Łosice,14,mazowieckie,1410,powiat łosicki,4,6745,2025,False,S4,S3,22.71801,52.21129
+1411011,071422611011,Maków Mazowiecki,14,mazowieckie,1411,powiat makowski,1,8699,2025,False,S4,S3,21.10053,52.86493
+1411074,071422611074,Różan,14,mazowieckie,1411,powiat makowski,4,2578,2025,False,S4,S3,21.39105,52.88757
+1412011,071412912011,Mińsk Mazowiecki,14,mazowieckie,1412,powiat miński,1,39467,2025,False,S4,S3,21.57251,52.17935
+1412044,071412912044,Cegłów,14,mazowieckie,1412,powiat miński,4,2358,2025,False,S4,S3,21.73739,52.14782
+1412064,071412912064,Dobre,14,mazowieckie,1412,powiat miński,4,1810,2025,False,S4,S3,21.67881,52.32097
+1412074,071412912074,Halinów,14,mazowieckie,1412,powiat miński,4,3656,2025,False,S4,S3,21.3551,52.2288
+1412094,071412912094,Kałuszyn,14,mazowieckie,1412,powiat miński,4,2652,2025,False,S4,S3,21.80838,52.20669
+1412104,071412912104,Latowicz,14,mazowieckie,1412,powiat miński,4,1331,2025,False,S4,S3,21.80829,52.02636
+1412124,071412912124,Mrozy,14,mazowieckie,1412,powiat miński,4,3618,2025,False,S4,S3,21.80263,52.16609
+1412134,071412912134,Siennica,14,mazowieckie,1412,powiat miński,4,2288,2025,False,S4,S3,21.61921,52.09164
+1412151,071412912151,Sulejówek,14,mazowieckie,1412,powiat miński,1,21693,2025,False,S4,S3,21.26902,52.25221
+1413011,071422513011,Mława,14,mazowieckie,1413,powiat mławski,1,30607,2025,False,S4,S3,20.3841,53.11278
+1414011,071413014011,Nowy Dwór Mazowiecki,14,mazowieckie,1414,powiat nowodworski,1,28422,2025,False,S4,S3,20.71652,52.43022
+1414044,071413014044,Nasielsk,14,mazowieckie,1414,powiat nowodworski,4,7279,2025,False,S4,S3,20.80553,52.58887
+1414064,071413014064,Zakroczym,14,mazowieckie,1414,powiat nowodworski,4,3093,2025,False,S4,S3,20.61207,52.43351
+1415084,071422615084,Myszyniec,14,mazowieckie,1415,powiat ostrołęcki,4,3134,2025,False,S4,S3,21.34961,53.38055
+1416011,071422616011,Ostrów Mazowiecka,14,mazowieckie,1416,powiat ostrowski,1,21251,2025,False,S4,S3,21.89507,52.80245
+1416044,071422616044,Brok,14,mazowieckie,1416,powiat ostrowski,4,1684,2025,False,S4,S3,21.85704,52.69948
+1417011,071412917011,Józefów,14,mazowieckie,1417,powiat otwocki,1,21139,2025,False,S4,S3,21.23589,52.13707
+1417021,071412917021,Otwock,14,mazowieckie,1417,powiat otwocki,1,43118,2025,False,S4,S3,21.26129,52.10577
+1417044,071412917044,Karczew,14,mazowieckie,1417,powiat otwocki,4,9054,2025,False,S4,S3,21.24962,52.07655
+1417064,071412917064,Osieck,14,mazowieckie,1417,powiat otwocki,4,1115,2025,False,S4,S3,21.41913,51.96653
+1418014,071413018014,Góra Kalwaria,14,mazowieckie,1418,powiat piaseczyński,4,12254,2025,False,S4,S3,21.21537,51.97653
+1418024,071413018024,Konstancin-Jeziorna,14,mazowieckie,1418,powiat piaseczyński,4,16598,2025,False,S4,S3,21.11761,52.0938
+1418044,071413018044,Piaseczno,14,mazowieckie,1418,powiat piaseczyński,4,51449,2025,False,S4,S3,21.02397,52.0814
+1418064,071413018064,Tarczyn,14,mazowieckie,1418,powiat piaseczyński,4,4433,2025,False,S4,S3,20.83394,51.98197
+1419024,071427019024,Bodzanów,14,mazowieckie,1419,powiat płocki,4,1123,2025,False,S4,S3,20.02945,52.49992
+1419054,071427019054,Drobin,14,mazowieckie,1419,powiat płocki,4,2568,2025,False,S4,S3,19.98928,52.73775
+1419064,071427019064,Gąbin,14,mazowieckie,1419,powiat płocki,4,4058,2025,False,S4,S3,19.73509,52.39849
+1419154,071427019154,Wyszogród,14,mazowieckie,1419,powiat płocki,4,2314,2025,False,S4,S3,20.19081,52.38988
+1420011,071422520011,Płońsk,14,mazowieckie,1420,powiat płoński,1,21280,2025,False,S4,S3,20.37552,52.62348
+1420021,071422520021,Raciąż,14,mazowieckie,1420,powiat płoński,1,3870,2025,False,S4,S3,20.1177,52.78152
+1420044,071422520044,Czerwińsk nad Wisłą,14,mazowieckie,1420,powiat płoński,4,970,2025,False,S4,S3,20.3096,52.39828
+1420084,071422520084,Nowe Miasto,14,mazowieckie,1420,powiat płoński,4,1499,2025,False,S4,S3,20.62838,52.65691
+1420114,071422520114,Sochocin,14,mazowieckie,1420,powiat płoński,4,1874,2025,False,S4,S3,20.47259,52.68715
+1421011,071413021011,Piastów,14,mazowieckie,1421,powiat pruszkowski,1,22567,2025,False,S4,S3,20.83952,52.18435
+1421021,071413021021,Pruszków,14,mazowieckie,1421,powiat pruszkowski,1,65936,2025,False,S4,S3,20.81214,52.17072
+1421034,071413021034,Brwinów,14,mazowieckie,1421,powiat pruszkowski,4,14648,2025,False,S4,S3,20.71697,52.14269
+1422011,071422622011,Przasnysz,14,mazowieckie,1422,powiat przasnyski,1,16077,2025,False,S4,S3,20.88029,53.01907
+1422024,071422622024,Chorzele,14,mazowieckie,1422,powiat przasnyski,4,2867,2025,False,S4,S3,20.89728,53.26075
+1423024,071422723024,Gielniów,14,mazowieckie,1423,powiat przysuski,4,768,2025,False,S4,S3,20.48126,51.40076
+1423044,071422723044,Odrzywół,14,mazowieckie,1423,powiat przysuski,4,982,2025,False,S4,S3,20.55559,51.51953
+1423064,071422723064,Przysucha,14,mazowieckie,1423,powiat przysuski,4,5121,2025,False,S4,S3,20.62889,51.35858
+1424044,071422524044,Pułtusk,14,mazowieckie,1424,powiat pułtuski,4,18852,2025,False,S4,S3,21.08276,52.7025
+1425011,071422725011,Pionki,14,mazowieckie,1425,powiat radomski,1,15566,2025,False,S4,S3,21.44995,51.47604
+1425034,071422725034,Iłża,14,mazowieckie,1425,powiat radomski,4,4113,2025,False,S4,S3,21.23979,51.16313
+1425064,071422725064,Jedlnia-Letnisko,14,mazowieckie,1425,powiat radomski,4,3958,2025,False,S4,S3,21.33536,51.43074
+1425094,071422725094,Przytyk,14,mazowieckie,1425,powiat radomski,4,899,2025,False,S4,S3,20.90587,51.46567
+1425104,071422725104,Skaryszew,14,mazowieckie,1425,powiat radomski,4,4459,2025,False,S4,S3,21.25233,51.31075
+1426054,071427126054,Mordy,14,mazowieckie,1426,powiat siedlecki,4,1552,2025,False,S4,S3,22.51725,52.2116
+1427011,071427027011,Sierpc,14,mazowieckie,1427,powiat sierpecki,1,16540,2025,False,S4,S3,19.66913,52.8568
+1428011,071427328011,Sochaczew,14,mazowieckie,1428,powiat sochaczewski,1,32786,2025,False,S4,S3,20.23838,52.22944
+1429011,071427129011,Sokołów Podlaski,14,mazowieckie,1429,powiat sokołowski,1,18048,2025,False,S4,S3,22.25307,52.40677
+1429054,071427129054,Kosów Lacki,14,mazowieckie,1429,powiat sokołowski,4,1953,2025,False,S4,S3,22.14707,52.59541
+1430024,071422730024,Jastrząb,14,mazowieckie,1430,powiat szydłowiecki,4,1181,2025,False,S4,S3,20.94758,51.24725
+1430054,071422730054,Szydłowiec,14,mazowieckie,1430,powiat szydłowiecki,4,10214,2025,False,S4,S3,20.86106,51.22823
+1432014,071413032014,Błonie,14,mazowieckie,1432,powiat warszawski zachodni,4,12226,2025,False,S4,S3,20.61709,52.19849
+1432054,071413032054,Łomianki,14,mazowieckie,1432,powiat warszawski zachodni,4,18142,2025,False,S4,S3,20.88602,52.33413
+1432064,071413032064,Ożarów Mazowiecki,14,mazowieckie,1432,powiat warszawski zachodni,4,16380,2025,False,S4,S3,20.79716,52.21039
+1433011,071427133011,Węgrów,14,mazowieckie,1433,powiat węgrowski,1,11653,2025,False,S4,S3,22.01634,52.39954
+1433054,071427133054,Łochów,14,mazowieckie,1433,powiat węgrowski,4,6509,2025,False,S4,S3,21.68158,52.53076
+1434011,071412934011,Kobyłka,14,mazowieckie,1434,powiat wołomiński,1,28850,2025,False,S4,S3,21.19589,52.33953
+1434021,071412934021,Marki,14,mazowieckie,1434,powiat wołomiński,1,46963,2025,False,S4,S3,21.10474,52.32065
+1434031,071412934031,Ząbki,14,mazowieckie,1434,powiat wołomiński,1,45654,2025,False,S4,S3,21.10539,52.29271
+1434041,071412934041,Zielonka,14,mazowieckie,1434,powiat wołomiński,1,17992,2025,False,S4,S3,21.16018,52.30376
+1434064,071412934064,Jadów,14,mazowieckie,1434,powiat wołomiński,4,886,2025,False,S4,S3,21.63199,52.47849
+1434094,071412934094,Radzymin,14,mazowieckie,1434,powiat wołomiński,4,15821,2025,False,S4,S3,21.18415,52.41592
+1434114,071412934114,Tłuszcz,14,mazowieckie,1434,powiat wołomiński,4,8058,2025,False,S4,S3,21.43561,52.43058
+1434124,071412934124,Wołomin,14,mazowieckie,1434,powiat wołomiński,4,35115,2025,False,S4,S3,21.24207,52.34006
+1435054,071422635054,Wyszków,14,mazowieckie,1435,powiat wyszkowski,4,25656,2025,False,S4,S3,21.4584,52.59278
+1436014,071422736014,Kazanów,14,mazowieckie,1436,powiat zwoleński,4,396,2025,False,S4,S3,21.46737,51.27593
+1436054,071422736054,Zwoleń,14,mazowieckie,1436,powiat zwoleński,4,6964,2025,False,S4,S3,21.58768,51.35542
+1437014,071422537014,Bieżuń,14,mazowieckie,1437,powiat żuromiński,4,1646,2025,False,S4,S3,19.88976,52.96107
+1437034,071422537034,Lubowidz,14,mazowieckie,1437,powiat żuromiński,4,1457,2025,False,S4,S3,19.84594,53.11865
+1437064,071422537064,Żuromin,14,mazowieckie,1437,powiat żuromiński,4,8298,2025,False,S4,S3,19.90894,53.06611
+1438011,071427338011,Żyrardów,14,mazowieckie,1438,powiat żyrardowski,1,38281,2025,False,S4,S3,20.44599,52.0488
+1438024,071427338024,Mszczonów,14,mazowieckie,1438,powiat żyrardowski,4,5978,2025,False,S4,S3,20.52083,51.97415
+1438054,071427338054,Wiskitki,14,mazowieckie,1438,powiat żyrardowski,4,1476,2025,False,S4,S3,20.38708,52.08831
+1461011,071422661011,Ostrołęka,14,mazowieckie,1461,powiat Ostrołęka,1,47351,2025,False,S4,S3,21.57566,53.08621
+1462011,071427062011,Płock,14,mazowieckie,1462,powiat Płock,1,108772,2025,True,S4,S3,19.70638,52.54682
+1463011,071422763011,Radom,14,mazowieckie,1463,powiat Radom,1,191819,2025,True,S4,S3,21.14714,51.40253
+1464011,071427164011,Siedlce,14,mazowieckie,1464,powiat Siedlce,1,74251,2025,False,S4,S3,22.29006,52.16772
+1465011,071412865011,Warszawa,14,mazowieckie,1465,powiat Warszawa,1,1866729,2025,True,S4,S3,21.01178,52.22977
+1601011,031613101011,Brzeg,16,opolskie,1601,powiat brzeski,1,32724,2025,False,S4,S3,17.4674,50.86079
+1601034,031613101034,Grodków,16,opolskie,1601,powiat brzeski,4,7671,2025,False,S4,S3,17.38449,50.69836
+1601044,031613101044,Lewin Brzeski,16,opolskie,1601,powiat brzeski,4,5485,2025,False,S4,S3,17.61688,50.7487
+1602014,031613102014,Baborów,16,opolskie,1602,powiat głubczycki,4,2659,2025,False,S4,S3,17.98513,50.1576
+1602034,031613102034,Głubczyce,16,opolskie,1602,powiat głubczycki,4,11300,2025,False,S4,S3,17.82858,50.20086
+1602044,031613102044,Kietrz,16,opolskie,1602,powiat głubczycki,4,5329,2025,False,S4,S3,18.00432,50.08042
+1603011,031613203011,Kędzierzyn-Koźle,16,opolskie,1603,powiat kędzierzyńsko-kozielski,1,53140,2025,False,S4,S3,18.22606,50.34984
+1604014,031613204014,Byczyna,16,opolskie,1604,powiat kluczborski,4,3263,2025,False,S4,S3,18.21413,51.11387
+1604024,031613204024,Kluczbork,16,opolskie,1604,powiat kluczborski,4,21232,2025,False,S4,S3,18.21816,50.97281
+1604044,031613204044,Wołczyn,16,opolskie,1604,powiat kluczborski,4,5193,2025,False,S4,S3,18.04994,51.01845
+1605014,031613205014,Gogolin,16,opolskie,1605,powiat krapkowicki,4,6404,2025,False,S4,S3,18.01994,50.49222
+1605024,031613205024,Krapkowice,16,opolskie,1605,powiat krapkowicki,4,15031,2025,False,S4,S3,17.96539,50.47515
+1605034,031613205034,Strzeleczki,16,opolskie,1605,powiat krapkowicki,4,1514,2025,False,S4,S3,17.85665,50.46215
+1605054,031613205054,Zdzieszowice,16,opolskie,1605,powiat krapkowicki,4,9908,2025,False,S4,S3,18.12349,50.42482
+1606024,031613106024,Namysłów,16,opolskie,1606,powiat namysłowski,4,16712,2025,False,S4,S3,17.72284,51.07592
+1607014,031613107014,Głuchołazy,16,opolskie,1607,powiat nyski,4,12298,2025,False,S4,S3,17.38355,50.31505
+1607034,031613107034,Korfantów,16,opolskie,1607,powiat nyski,4,1682,2025,False,S4,S3,17.59898,50.48894
+1607054,031613107054,Nysa,16,opolskie,1607,powiat nyski,4,39887,2025,False,S4,S3,17.33437,50.47379
+1607064,031613107064,Otmuchów,16,opolskie,1607,powiat nyski,4,6038,2025,False,S4,S3,17.17348,50.46627
+1607074,031613107074,Paczków,16,opolskie,1607,powiat nyski,4,6423,2025,False,S4,S3,17.00658,50.46395
+1608014,031613208014,Dobrodzień,16,opolskie,1608,powiat oleski,4,3402,2025,False,S4,S3,18.44501,50.72874
+1608024,031613208024,Gorzów Śląski,16,opolskie,1608,powiat oleski,4,2417,2025,False,S4,S3,18.42304,51.02871
+1608034,031613208034,Olesno,16,opolskie,1608,powiat oleski,4,8938,2025,False,S4,S3,18.42094,50.87698
+1608044,031613208044,Praszka,16,opolskie,1608,powiat oleski,4,6873,2025,False,S4,S3,18.45317,51.05375
+1609074,031613209074,Niemodlin,16,opolskie,1609,powiat opolski,4,5618,2025,False,S4,S3,17.61932,50.642
+1609084,031613209084,Ozimek,16,opolskie,1609,powiat opolski,4,7659,2025,False,S4,S3,18.2137,50.67944
+1609104,031613209104,Prószków,16,opolskie,1609,powiat opolski,4,2542,2025,False,S4,S3,17.87143,50.5767
+1609124,031613209124,Tułowice,16,opolskie,1609,powiat opolski,4,3575,2025,False,S4,S3,17.65323,50.59577
+1610014,031613110014,Biała,16,opolskie,1610,powiat prudnicki,4,2195,2025,False,S4,S3,17.66035,50.38587
+1610024,031613110024,Głogówek,16,opolskie,1610,powiat prudnicki,4,5325,2025,False,S4,S3,17.86405,50.35355
+1610044,031613110044,Prudnik,16,opolskie,1610,powiat prudnicki,4,18424,2025,False,S4,S3,17.57461,50.32124
+1611034,031613211034,Kolonowskie,16,opolskie,1611,powiat strzelecki,4,3171,2025,False,S4,S3,18.38493,50.65338
+1611044,031613211044,Leśnica,16,opolskie,1611,powiat strzelecki,4,2505,2025,False,S4,S3,18.18684,50.43083
+1611054,031613211054,Strzelce Opolskie,16,opolskie,1611,powiat strzelecki,4,16529,2025,False,S4,S3,18.30056,50.5107
+1611064,031613211064,Ujazd,16,opolskie,1611,powiat strzelecki,4,1835,2025,False,S4,S3,18.34929,50.38938
+1611074,031613211074,Zawadzkie,16,opolskie,1611,powiat strzelecki,4,6206,2025,False,S4,S3,18.48467,50.60503
+1661011,031613261011,Opole,16,opolskie,1661,powiat Opole,1,124563,2025,True,S4,S3,17.92604,50.67119
+1801084,061813301084,Ustrzyki Dolne,18,podkarpackie,1801,powiat bieszczadzki,4,8150,2025,False,S4,S3,22.59381,49.4304
+1802014,061813302014,Brzozów,18,podkarpackie,1802,powiat brzozowski,4,7149,2025,False,S4,S3,22.01926,49.69501
+1803011,061813603011,Dębica,18,podkarpackie,1803,powiat dębicki,1,42223,2025,False,S4,S3,21.41141,50.05146
+1803024,061813603024,Brzostek,18,podkarpackie,1803,powiat dębicki,4,2648,2025,False,S4,S3,21.41102,49.87954
+1803064,061813603064,Pilzno,18,podkarpackie,1803,powiat dębicki,4,4955,2025,False,S4,S3,21.29228,49.97883
+1804011,061813404011,Jarosław,18,podkarpackie,1804,powiat jarosławski,1,34707,2025,False,S4,S3,22.67776,50.01623
+1804021,061813404021,Radymno,18,podkarpackie,1804,powiat jarosławski,1,4814,2025,False,S4,S3,22.82375,49.9472
+1804074,061813404074,Pruchnik,18,podkarpackie,1804,powiat jarosławski,4,3604,2025,False,S4,S3,22.51554,49.9062
+1805011,061813305011,Jasło,18,podkarpackie,1805,powiat jasielski,1,32042,2025,False,S4,S3,21.47252,49.74506
+1805054,061813305054,Kołaczyce,18,podkarpackie,1805,powiat jasielski,4,1349,2025,False,S4,S3,21.43407,49.80743
+1806024,061813506024,Kolbuszowa,18,podkarpackie,1806,powiat kolbuszowski,4,8316,2025,False,S4,S3,21.7761,50.2441
+1807024,061813307024,Dukla,18,podkarpackie,1807,powiat krośnieński,4,1904,2025,False,S4,S3,21.68317,49.55554
+1807034,061813307034,Iwonicz-Zdrój,18,podkarpackie,1807,powiat krośnieński,4,1494,2025,False,S4,S3,21.78992,49.56319
+1807044,061813307044,Jedlicze,18,podkarpackie,1807,powiat krośnieński,4,5424,2025,False,S4,S3,21.64886,49.71749
+1807084,061813307084,Rymanów,18,podkarpackie,1807,powiat krośnieński,4,3456,2025,False,S4,S3,21.86811,49.57649
+1808011,061813608011,Leżajsk,18,podkarpackie,1808,powiat leżajski,1,12395,2025,False,S4,S3,22.41932,50.26257
+1808054,061813608054,Nowa Sarzyna,18,podkarpackie,1808,powiat leżajski,4,5190,2025,False,S4,S3,22.34456,50.32086
+1809011,061813409011,Lubaczów,18,podkarpackie,1809,powiat lubaczowski,1,11125,2025,False,S4,S3,23.12339,50.157
+1809024,061813409024,Cieszanów,18,podkarpackie,1809,powiat lubaczowski,4,1776,2025,False,S4,S3,23.13163,50.24564
+1809054,061813409054,Narol,18,podkarpackie,1809,powiat lubaczowski,4,1908,2025,False,S4,S3,23.32679,50.34925
+1809064,061813409064,Oleszyce,18,podkarpackie,1809,powiat lubaczowski,4,2721,2025,False,S4,S3,23.03481,50.1675
+1810011,061813510011,Łańcut,18,podkarpackie,1810,powiat łańcucki,1,17809,2025,False,S4,S3,22.22912,50.06871
+1811011,061813611011,Mielec,18,podkarpackie,1811,powiat mielecki,1,56032,2025,False,S4,S3,21.4239,50.28709
+1811074,061813611074,Przecław,18,podkarpackie,1811,powiat mielecki,4,1833,2025,False,S4,S3,21.48007,50.19339
+1811084,061813611084,Radomyśl Wielki,18,podkarpackie,1811,powiat mielecki,4,3489,2025,False,S4,S3,21.27693,50.19693
+1812054,061813612054,Nisko,18,podkarpackie,1812,powiat niżański,4,14117,2025,False,S4,S3,22.13968,50.51987
+1812064,061813612064,Rudnik nad Sanem,18,podkarpackie,1812,powiat niżański,4,6238,2025,False,S4,S3,22.24856,50.44152
+1812074,061813612074,Ulanów,18,podkarpackie,1812,powiat niżański,4,1340,2025,False,S4,S3,22.26362,50.49031
+1813014,061813413014,Bircza,18,podkarpackie,1813,powiat przemyski,4,961,2025,False,S4,S3,22.47854,49.69173
+1813024,061813413024,Dubiecko,18,podkarpackie,1813,powiat przemyski,4,786,2025,False,S4,S3,22.39117,49.82608
+1814011,061813414011,Przeworsk,18,podkarpackie,1814,powiat przeworski,1,14354,2025,False,S4,S3,22.49408,50.05912
+1814044,061813414044,Jawornik Polski,18,podkarpackie,1814,powiat przeworski,4,1147,2025,False,S4,S3,22.28868,49.89082
+1814054,061813414054,Kańczuga,18,podkarpackie,1814,powiat przeworski,4,2871,2025,False,S4,S3,22.41168,49.98346
+1814074,061813414074,Sieniawa,18,podkarpackie,1814,powiat przeworski,4,1947,2025,False,S4,S3,22.60954,50.1779
+1815034,061813515034,Ropczyce,18,podkarpackie,1815,powiat ropczycko-sędziszowski,4,15834,2025,False,S4,S3,21.60891,50.05229
+1815044,061813515044,Sędziszów Małopolski,18,podkarpackie,1815,powiat ropczycko-sędziszowski,4,12472,2025,False,S4,S3,21.70062,50.07069
+1816011,061813516011,Dynów,18,podkarpackie,1816,powiat rzeszowski,1,5925,2025,False,S4,S3,22.23388,49.81506
+1816024,061813516024,Błażowa,18,podkarpackie,1816,powiat rzeszowski,4,2054,2025,False,S4,S3,22.10037,49.88521
+1816034,061813516034,Boguchwała,18,podkarpackie,1816,powiat rzeszowski,4,6351,2025,False,S4,S3,21.94528,49.98473
+1816064,061813516064,Głogów Małopolski,18,podkarpackie,1816,powiat rzeszowski,4,11112,2025,False,S4,S3,21.96287,50.15122
+1816114,061813516114,Sokołów Małopolski,18,podkarpackie,1816,powiat rzeszowski,4,4395,2025,False,S4,S3,22.11968,50.22909
+1816144,061813516144,Tyczyn,18,podkarpackie,1816,powiat rzeszowski,4,4700,2025,False,S4,S3,22.03398,49.96384
+1817011,061813317011,Sanok,18,podkarpackie,1817,powiat sanocki,1,33488,2025,False,S4,S3,22.2056,49.55573
+1817074,061813317074,Zagórz,18,podkarpackie,1817,powiat sanocki,4,4809,2025,False,S4,S3,22.26706,49.51457
+1818011,061813618011,Stalowa Wola,18,podkarpackie,1818,powiat stalowowolski,1,53540,2025,False,S4,S3,22.05334,50.58286
+1818054,061813618054,Zaklików,18,podkarpackie,1818,powiat stalowowolski,4,2707,2025,False,S4,S3,22.10226,50.75769
+1819044,061813519044,Strzyżów,18,podkarpackie,1819,powiat strzyżowski,4,8253,2025,False,S4,S3,21.79413,49.87074
+1820014,061813620014,Baranów Sandomierski,18,podkarpackie,1820,powiat tarnobrzeski,4,1381,2025,False,S4,S3,21.54204,50.49912
+1820044,061813620044,Nowa Dęba,18,podkarpackie,1820,powiat tarnobrzeski,4,10091,2025,False,S4,S3,21.75078,50.42974
+1821034,061813321034,Lesko,18,podkarpackie,1821,powiat leski,4,4978,2025,False,S4,S3,22.33042,49.4701
+1861011,061813361011,Krosno,18,podkarpackie,1861,powiat Krosno,1,43274,2025,False,S4,S3,21.77058,49.68866
+1862011,061813462011,Przemyśl,18,podkarpackie,1862,powiat Przemyśl,1,54352,2025,False,S4,S3,22.76728,49.78498
+1863011,061813563011,Rzeszów,18,podkarpackie,1863,powiat Rzeszów,1,199436,2025,True,S4,S3,21.99901,50.04132
+1864011,061813664011,Tarnobrzeg,18,podkarpackie,1864,powiat Tarnobrzeg,1,42730,2025,False,S4,S3,21.67937,50.57304
+2001011,062013901011,Augustów,20,podlaskie,2001,powiat augustowski,1,28518,2025,False,S4,S3,22.97979,53.84321
+2001044,062013901044,Lipsk,20,podlaskie,2001,powiat augustowski,4,1996,2025,False,S4,S3,23.40225,53.73312
+2002014,062013702014,Choroszcz,20,podlaskie,2002,powiat białostocki,4,6288,2025,False,S4,S3,22.98889,53.14332
+2002024,062013702024,Czarna Białostocka,20,podlaskie,2002,powiat białostocki,4,8425,2025,False,S4,S3,23.28146,53.30509
+2002064,062013702064,Łapy,20,podlaskie,2002,powiat białostocki,4,14106,2025,False,S4,S3,22.88422,52.9911
+2002074,062013702074,Michałowo,20,podlaskie,2002,powiat białostocki,4,2679,2025,False,S4,S3,23.60996,53.03492
+2002094,062013702094,Supraśl,20,podlaskie,2002,powiat białostocki,4,4255,2025,False,S4,S3,23.33934,53.20526
+2002104,062013702104,Suraż,20,podlaskie,2002,powiat białostocki,4,948,2025,False,S4,S3,22.95653,52.94908
+2002124,062013702124,Tykocin,20,podlaskie,2002,powiat białostocki,4,1835,2025,False,S4,S3,22.77457,53.20567
+2002134,062013702134,Wasilków,20,podlaskie,2002,powiat białostocki,4,12919,2025,False,S4,S3,23.20776,53.19909
+2002144,062013702144,Zabłudów,20,podlaskie,2002,powiat białostocki,4,2518,2025,False,S4,S3,23.33831,53.01442
+2003011,062013803011,Bielsk Podlaski,20,podlaskie,2003,powiat bielski,1,23241,2025,False,S4,S3,23.18647,52.76512
+2003021,062013803021,Brańsk,20,podlaskie,2003,powiat bielski,1,3407,2025,False,S4,S3,22.83774,52.7444
+2004011,062013904011,Grajewo,20,podlaskie,2004,powiat grajewski,1,20551,2025,False,S4,S3,22.45537,53.64728
+2004044,062013904044,Rajgród,20,podlaskie,2004,powiat grajewski,4,1345,2025,False,S4,S3,22.70515,53.73102
+2004054,062013904054,Szczuczyn,20,podlaskie,2004,powiat grajewski,4,3040,2025,False,S4,S3,22.28534,53.5633
+2005011,062013805011,Hajnówka,20,podlaskie,2005,powiat hajnowski,1,18452,2025,False,S4,S3,23.58122,52.74328
+2005074,062013805074,Kleszczele,20,podlaskie,2005,powiat hajnowski,4,1002,2025,False,S4,S3,23.32539,52.57314
+2006011,062013806011,Kolno,20,podlaskie,2006,powiat kolneński,1,9685,2025,False,S4,S3,21.92905,53.41148
+2006054,062013806054,Stawiski,20,podlaskie,2006,powiat kolneński,4,1960,2025,False,S4,S3,22.15462,53.37987
+2007014,062013807014,Jedwabne,20,podlaskie,2007,powiat łomżyński,4,1659,2025,False,S4,S3,22.30353,53.28554
+2007044,062013807044,Nowogród,20,podlaskie,2007,powiat łomżyński,4,2078,2025,False,S4,S3,21.8821,53.22698
+2008014,062013908014,Goniądz,20,podlaskie,2008,powiat moniecki,4,1655,2025,False,S4,S3,22.73578,53.48953
+2008044,062013908044,Knyszyn,20,podlaskie,2008,powiat moniecki,4,2619,2025,False,S4,S3,22.91963,53.31406
+2008064,062013908064,Mońki,20,podlaskie,2008,powiat moniecki,4,9247,2025,False,S4,S3,22.79791,53.40496
+2009011,062013909011,Sejny,20,podlaskie,2009,powiat sejneński,1,4739,2025,False,S4,S3,23.34698,54.10802
+2010011,062013810011,Siemiatycze,20,podlaskie,2010,powiat siemiatycki,1,13171,2025,False,S4,S3,22.86231,52.42719
+2010024,062013810024,Drohiczyn,20,podlaskie,2010,powiat siemiatycki,4,1707,2025,False,S4,S3,22.65853,52.40011
+2011014,062013711014,Dąbrowa Białostocka,20,podlaskie,2011,powiat sokólski,4,4890,2025,False,S4,S3,23.34792,53.65364
+2011044,062013711044,Krynki,20,podlaskie,2011,powiat sokólski,4,2071,2025,False,S4,S3,23.77304,53.26444
+2011084,062013711084,Sokółka,20,podlaskie,2011,powiat sokólski,4,16735,2025,False,S4,S3,23.50228,53.40715
+2011094,062013711094,Suchowola,20,podlaskie,2011,powiat sokólski,4,1954,2025,False,S4,S3,23.10596,53.57753
+2013011,062013813011,Wysokie Mazowieckie,20,podlaskie,2013,powiat wysokomazowiecki,1,8915,2025,False,S4,S3,22.51712,52.91661
+2013024,062013813024,Ciechanowiec,20,podlaskie,2013,powiat wysokomazowiecki,4,4298,2025,False,S4,S3,22.49815,52.67828
+2013034,062013813034,Czyżew,20,podlaskie,2013,powiat wysokomazowiecki,4,2439,2025,False,S4,S3,22.31237,52.79768
+2013094,062013813094,Szepietowo,20,podlaskie,2013,powiat wysokomazowiecki,4,1951,2025,False,S4,S3,22.54392,52.87032
+2014011,062013814011,Zambrów,20,podlaskie,2014,powiat zambrowski,1,20503,2025,False,S4,S3,22.24319,52.9855
+2061011,062013761011,Białystok,20,podlaskie,2061,powiat Białystok,1,289217,2025,True,S4,S3,23.16433,53.13333
+2062011,062013862011,Łomża,20,podlaskie,2062,powiat Łomża,1,58925,2025,False,S4,S3,22.05935,53.17806
+2063011,062013963011,Suwałki,20,podlaskie,2063,powiat Suwałki,1,67879,2025,False,S4,S3,22.93087,54.11175
+2201024,042214101024,Bytów,22,pomorskie,2201,powiat bytowski,4,16047,2025,False,S4,S3,17.49187,54.17057
+2201064,042214101064,Miastko,22,pomorskie,2201,powiat bytowski,4,9014,2025,False,S4,S3,16.98263,54.00283
+2202011,042217202011,Chojnice,22,pomorskie,2202,powiat chojnicki,1,38109,2025,False,S4,S3,17.55701,53.69554
+2202024,042217202024,Brusy,22,pomorskie,2202,powiat chojnicki,4,5030,2025,False,S4,S3,17.71786,53.88446
+2202044,042217202044,Czersk,22,pomorskie,2202,powiat chojnicki,4,9777,2025,False,S4,S3,17.97647,53.79589
+2203011,042217203011,Człuchów,22,pomorskie,2203,powiat człuchowski,1,12778,2025,False,S4,S3,17.35883,53.66722
+2203024,042217203024,Czarne,22,pomorskie,2203,powiat człuchowski,4,5462,2025,False,S4,S3,16.93834,53.6842
+2203044,042217203044,Debrzno,22,pomorskie,2203,powiat człuchowski,4,4763,2025,False,S4,S3,17.23643,53.53817
+2204011,042214004011,Pruszcz Gdański,22,pomorskie,2204,powiat gdański,1,32339,2025,False,S4,S3,18.63625,54.26217
+2205024,042214005024,Kartuzy,22,pomorskie,2205,powiat kartuski,4,13415,2025,False,S4,S3,18.19735,54.33424
+2205084,042214005084,Żukowo,22,pomorskie,2205,powiat kartuski,4,6723,2025,False,S4,S3,18.36476,54.3422
+2206011,042217206011,Kościerzyna,22,pomorskie,2206,powiat kościerski,1,23131,2025,False,S4,S3,17.98119,54.12226
+2207011,042214207011,Kwidzyn,22,pomorskie,2207,powiat kwidzyński,1,36192,2025,False,S4,S3,18.93114,53.72495
+2207044,042214207044,Prabuty,22,pomorskie,2207,powiat kwidzyński,4,7939,2025,False,S4,S3,19.20547,53.755
+2208011,042214108011,Lębork,22,pomorskie,2208,powiat lęborski,1,33541,2025,False,S4,S3,17.75012,54.53921
+2208021,042214108021,Łeba,22,pomorskie,2208,powiat lęborski,1,2966,2025,False,S4,S3,17.55547,54.76099
+2209011,042214209011,Malbork,22,pomorskie,2209,powiat malborski,1,36147,2025,False,S4,S3,19.0266,54.03591
+2209074,042214209074,Nowy Staw,22,pomorskie,2209,powiat malborski,4,3892,2025,False,S4,S3,19.00909,54.13609
+2210011,042214010011,Krynica Morska,22,pomorskie,2210,powiat nowodworski,1,1127,2025,False,S4,S3,19.44413,54.38051
+2210024,042214010024,Nowy Dwór Gdański,22,pomorskie,2210,powiat nowodworski,4,9335,2025,False,S4,S3,19.11771,54.21305
+2211011,042214011011,Hel,22,pomorskie,2211,powiat pucki,1,2666,2025,False,S4,S3,18.80351,54.60384
+2211024,042214011024,Jastarnia,22,pomorskie,2211,powiat pucki,4,2533,2025,False,S4,S3,18.6773,54.6983
+2211031,042214011031,Puck,22,pomorskie,2211,powiat pucki,1,10230,2025,False,S4,S3,18.40841,54.7179
+2211044,042214011044,Władysławowo,22,pomorskie,2211,powiat pucki,4,8992,2025,False,S4,S3,18.4009,54.79086
+2212011,042214112011,Ustka,22,pomorskie,2212,powiat słupski,1,13211,2025,False,S4,S3,16.86194,54.58048
+2212054,042214112054,Kępice,22,pomorskie,2212,powiat słupski,4,3207,2025,False,S4,S3,16.88968,54.24111
+2212064,042214112064,Kobylnica,22,pomorskie,2212,powiat słupski,4,5174,2025,False,S4,S3,16.99782,54.43975
+2213014,042214213014,Czarna Woda,22,pomorskie,2213,powiat starogardzki,4,2620,2025,False,S4,S3,18.10006,53.84458
+2213021,042214213021,Skórcz,22,pomorskie,2213,powiat starogardzki,1,3388,2025,False,S4,S3,18.52561,53.79436
+2213031,042214213031,Starogard Gdański,22,pomorskie,2213,powiat starogardzki,1,44672,2025,False,S4,S3,18.52638,53.96396
+2213094,042214213094,Skarszewy,22,pomorskie,2213,powiat starogardzki,4,6497,2025,False,S4,S3,18.44416,54.06911
+2214011,042214214011,Tczew,22,pomorskie,2214,powiat tczewski,1,55922,2025,False,S4,S3,18.77787,54.09242
+2214024,042214214024,Gniew,22,pomorskie,2214,powiat tczewski,4,5948,2025,False,S4,S3,18.8231,53.83602
+2214044,042214214044,Pelplin,22,pomorskie,2214,powiat tczewski,4,7040,2025,False,S4,S3,18.6977,53.92834
+2215011,042214015011,Reda,22,pomorskie,2215,powiat wejherowski,1,29066,2025,False,S4,S3,18.34717,54.60528
+2215021,042214015021,Rumia,22,pomorskie,2215,powiat wejherowski,1,54107,2025,False,S4,S3,18.38802,54.57092
+2215031,042214015031,Wejherowo,22,pomorskie,2215,powiat wejherowski,1,44983,2025,False,S4,S3,18.23559,54.60568
+2216014,042214216014,Dzierzgoń,22,pomorskie,2216,powiat sztumski,4,4754,2025,False,S4,S3,19.34705,53.92196
+2216054,042214216054,Sztum,22,pomorskie,2216,powiat sztumski,4,8713,2025,False,S4,S3,19.03072,53.92077
+2261011,042214361011,Gdańsk,22,pomorskie,2261,powiat Gdańsk,1,489328,2025,True,S4,S3,18.64912,54.35227
+2262011,042214362011,Gdynia,22,pomorskie,2262,powiat Gdynia,1,238712,2025,True,S4,S3,18.53188,54.51889
+2263011,042214163011,Słupsk,22,pomorskie,2263,powiat Słupsk,1,84217,2025,False,S4,S3,17.02872,54.46405
+2264011,042214364011,Sopot,22,pomorskie,2264,powiat Sopot,1,31205,2025,False,S4,S3,18.56003,54.4418
+2401011,012415001011,Będzin,24,śląskie,2401,powiat będziński,1,52460,2025,False,S4,S3,19.12565,50.32607
+2401021,012415001021,Czeladź,24,śląskie,2401,powiat będziński,1,29373,2025,False,S4,S3,19.07824,50.31542
+2401031,012415001031,Wojkowice,24,śląskie,2401,powiat będziński,1,8317,2025,False,S4,S3,19.03652,50.36509
+2401074,012415001074,Siewierz,24,śląskie,2401,powiat będziński,4,5779,2025,False,S4,S3,19.23028,50.46657
+2401081,012415001081,Sławków,24,śląskie,2401,powiat będziński,1,6762,2025,False,S4,S3,19.38967,50.29943
+2402011,012414402011,Szczyrk,24,śląskie,2402,powiat bielski,1,5110,2025,False,S4,S3,19.03183,49.71724
+2402044,012414402044,Czechowice-Dziedzice,24,śląskie,2402,powiat bielski,4,34564,2025,False,S4,S3,19.00479,49.91342
+2402094,012414402094,Wilamowice,24,śląskie,2402,powiat bielski,4,3148,2025,False,S4,S3,19.15237,49.91701
+2403011,012414403011,Cieszyn,24,śląskie,2403,powiat cieszyński,1,32217,2025,False,S4,S3,18.63213,49.75133
+2403021,012414403021,Ustroń,24,śląskie,2403,powiat cieszyński,1,15871,2025,False,S4,S3,18.80198,49.72153
+2403031,012414403031,Wisła,24,śląskie,2403,powiat cieszyński,1,10416,2025,False,S4,S3,18.8591,49.65629
+2403104,012414403104,Skoczów,24,śląskie,2403,powiat cieszyński,4,13033,2025,False,S4,S3,18.7877,49.80089
+2403114,012414403114,Strumień,24,śląskie,2403,powiat cieszyński,4,3493,2025,False,S4,S3,18.76637,49.92103
+2404014,012414604014,Blachownia,24,śląskie,2404,powiat częstochowski,4,8875,2025,False,S4,S3,18.96389,50.78015
+2404064,012414604064,Koniecpol,24,śląskie,2404,powiat częstochowski,4,5161,2025,False,S4,S3,19.68896,50.77468
+2404124,012414604124,Olsztyn,24,śląskie,2404,powiat częstochowski,4,2436,2025,False,S4,S3,19.26737,50.75185
+2404144,012414604144,Przyrów,24,śląskie,2404,powiat częstochowski,4,1079,2025,False,S4,S3,19.52794,50.80051
+2405011,012414705011,Knurów,24,śląskie,2405,powiat gliwicki,1,34919,2025,False,S4,S3,18.65067,50.21971
+2405021,012414705021,Pyskowice,24,śląskie,2405,powiat gliwicki,1,17160,2025,False,S4,S3,18.63333,50.4
+2405064,012414705064,Sośnicowice,24,śląskie,2405,powiat gliwicki,4,1968,2025,False,S4,S3,18.52982,50.27214
+2405074,012414705074,Toszek,24,śląskie,2405,powiat gliwicki,4,3441,2025,False,S4,S3,18.52209,50.45442
+2406014,012414606014,Kłobuck,24,śląskie,2406,powiat kłobucki,4,12012,2025,False,S4,S3,18.93674,50.90081
+2406024,012414606024,Krzepice,24,śląskie,2406,powiat kłobucki,4,4032,2025,False,S4,S3,18.72886,50.97059
+2407011,012414507011,Lubliniec,24,śląskie,2407,powiat lubliniecki,1,22931,2025,False,S4,S3,18.6844,50.66897
+2407084,012414507084,Woźniki,24,śląskie,2407,powiat lubliniecki,4,4064,2025,False,S4,S3,19.05991,50.58934
+2408011,012415108011,Łaziska Górne,24,śląskie,2408,powiat mikołowski,1,20826,2025,False,S4,S3,18.84215,50.14952
+2408021,012415108021,Mikołów,24,śląskie,2408,powiat mikołowski,1,41478,2025,False,S4,S3,18.9041,50.17103
+2408031,012415108031,Orzesze,24,śląskie,2408,powiat mikołowski,1,22242,2025,False,S4,S3,18.77923,50.15595
+2409011,012414609011,Myszków,24,śląskie,2409,powiat myszkowski,1,28660,2025,False,S4,S3,19.32461,50.5752
+2409024,012414609024,Koziegłowy,24,śląskie,2409,powiat myszkowski,4,2359,2025,False,S4,S3,19.16299,50.60035
+2409054,012414609054,Żarki,24,śląskie,2409,powiat myszkowski,4,4313,2025,False,S4,S3,19.36357,50.62518
+2410054,012415110054,Pszczyna,24,śląskie,2410,powiat pszczyński,4,24478,2025,False,S4,S3,18.95382,49.98037
+2411011,012414911011,Racibórz,24,śląskie,2411,powiat raciborski,1,48750,2025,False,S4,S3,18.21928,50.09195
+2411034,012414911034,Krzanowice,24,śląskie,2411,powiat raciborski,4,1951,2025,False,S4,S3,18.12251,50.01822
+2411054,012414911054,Kuźnia Raciborska,24,śląskie,2411,powiat raciborski,4,4541,2025,False,S4,S3,18.31146,50.20058
+2412014,012414912014,Czerwionka-Leszczyny,24,śląskie,2412,powiat rybnicki,4,26031,2025,False,S4,S3,18.67762,50.15007
+2413011,012414513011,Kalety,24,śląskie,2413,powiat tarnogórski,1,7989,2025,False,S4,S3,18.8926,50.5627
+2413021,012414513021,Miasteczko Śląskie,24,śląskie,2413,powiat tarnogórski,1,6805,2025,False,S4,S3,18.93949,50.50262
+2413031,012414513031,Radzionków,24,śląskie,2413,powiat tarnogórski,1,15926,2025,False,S4,S3,18.90232,50.40026
+2413041,012414513041,Tarnowskie Góry,24,śląskie,2413,powiat tarnogórski,1,61001,2025,False,S4,S3,18.86147,50.44548
+2414011,012415114011,Bieruń,24,śląskie,2414,powiat bieruńsko-lędziński,1,18627,2025,False,S4,S3,19.09291,50.09
+2414021,012415114021,Imielin,24,śląskie,2414,powiat bieruńsko-lędziński,1,9467,2025,False,S4,S3,19.18599,50.14534
+2414031,012415114031,Lędziny,24,śląskie,2414,powiat bieruńsko-lędziński,1,16167,2025,False,S4,S3,19.13149,50.14264
+2415011,012414915011,Pszów,24,śląskie,2415,powiat wodzisławski,1,12767,2025,False,S4,S3,18.39472,50.03994
+2415021,012414915021,Radlin,24,śląskie,2415,powiat wodzisławski,1,16594,2025,False,S4,S3,18.47626,50.0502
+2415031,012414915031,Rydułtowy,24,śląskie,2415,powiat wodzisławski,1,19756,2025,False,S4,S3,18.41703,50.05857
+2415041,012414915041,Wodzisław Śląski,24,śląskie,2415,powiat wodzisławski,1,44017,2025,False,S4,S3,18.47205,50.00377
+2416011,012415016011,Poręba,24,śląskie,2416,powiat zawierciański,1,7949,2025,False,S4,S3,19.33903,50.48831
+2416021,012415016021,Zawiercie,24,śląskie,2416,powiat zawierciański,1,44922,2025,False,S4,S3,19.41679,50.48766
+2416054,012415016054,Łazy,24,śląskie,2416,powiat zawierciański,4,6239,2025,False,S4,S3,19.39465,50.42769
+2416064,012415016064,Ogrodzieniec,24,śląskie,2416,powiat zawierciański,4,3678,2025,False,S4,S3,19.51987,50.45177
+2416074,012415016074,Pilica,24,śląskie,2416,powiat zawierciański,4,1714,2025,False,S4,S3,19.65729,50.46799
+2416084,012415016084,Szczekociny,24,śląskie,2416,powiat zawierciański,4,3269,2025,False,S4,S3,19.825,50.62669
+2416094,012415016094,Włodowice,24,śląskie,2416,powiat zawierciański,4,1149,2025,False,S4,S3,19.45155,50.5556
+2417011,012414417011,Żywiec,24,śląskie,2417,powiat żywiecki,1,29085,2025,False,S4,S3,19.19243,49.68529
+2461011,012414461011,Bielsko-Biała,24,śląskie,2461,powiat Bielsko-Biała,1,163164,2025,True,S4,S3,19.04686,49.82245
+2462011,012414562011,Bytom,24,śląskie,2462,powiat Bytom,1,144598,2025,True,S4,S3,18.93282,50.34802
+2463011,012414863011,Chorzów,24,śląskie,2463,powiat Chorzów,1,98418,2025,False,S4,S3,18.9742,50.30582
+2464011,012414664011,Częstochowa,24,śląskie,2464,powiat Częstochowa,1,201439,2025,True,S4,S3,19.12409,50.79646
+2465011,012415065011,Dąbrowa Górnicza,24,śląskie,2465,powiat Dąbrowa Górnicza,1,111309,2025,True,S4,S3,19.20479,50.33394
+2466011,012414766011,Gliwice,24,śląskie,2466,powiat Gliwice,1,166942,2025,True,S4,S3,18.67658,50.29761
+2467011,012414967011,Jastrzębie-Zdrój,24,śląskie,2467,powiat Jastrzębie-Zdrój,1,80527,2025,False,S4,S3,18.57479,49.95542
+2468011,012415068011,Jaworzno,24,śląskie,2468,powiat Jaworzno,1,85253,2025,False,S4,S3,19.27498,50.20528
+2469011,012414869011,Katowice,24,śląskie,2469,powiat Katowice,1,277415,2025,True,S4,S3,19.02173,50.2597
+2470011,012414870011,Mysłowice,24,śląskie,2470,powiat Mysłowice,1,70160,2025,False,S4,S3,19.16668,50.20745
+2471011,012414571011,Piekary Śląskie,24,śląskie,2471,powiat Piekary Śląskie,1,51030,2025,False,S4,S3,18.92653,50.38017
+2472011,012414872011,Ruda Śląska,24,śląskie,2472,powiat Ruda Śląska,1,127601,2025,True,S4,S3,18.85632,50.2584
+2473011,012414973011,Rybnik,24,śląskie,2473,powiat Rybnik,1,128788,2025,True,S4,S3,18.54179,50.09713
+2474011,012414874011,Siemianowice Śląskie,24,śląskie,2474,powiat Siemianowice Śląskie,1,62311,2025,False,S4,S3,19.02901,50.32738
+2475011,012415075011,Sosnowiec,24,śląskie,2475,powiat Sosnowiec,1,182971,2025,True,S4,S3,19.10385,50.28682
+2476011,012414876011,Świętochłowice,24,śląskie,2476,powiat Świętochłowice,1,44621,2025,False,S4,S3,18.91726,50.29636
+2477011,012415177011,Tychy,24,śląskie,2477,powiat Tychy,1,120081,2025,True,S4,S3,18.96641,50.13717
+2478011,012414778011,Zabrze,24,śląskie,2478,powiat Zabrze,1,150780,2025,True,S4,S3,18.78576,50.32492
+2479011,012414979011,Żory,24,śląskie,2479,powiat Żory,1,61857,2025,False,S4,S3,18.70062,50.04523
+2601014,052615301014,Busko-Zdrój,26,świętokrzyskie,2601,powiat buski,4,13844,2025,False,S4,S3,20.71884,50.47078
+2601034,052615301034,Nowy Korczyn,26,świętokrzyskie,2601,powiat buski,4,879,2025,False,S4,S3,20.80759,50.30124
+2601044,052615301044,Pacanów,26,świętokrzyskie,2601,powiat buski,4,1016,2025,False,S4,S3,21.04148,50.40031
+2601064,052615301064,Stopnica,26,świętokrzyskie,2601,powiat buski,4,1081,2025,False,S4,S3,20.9378,50.44018
+2601084,052615301084,Wiślica,26,świętokrzyskie,2601,powiat buski,4,441,2025,False,S4,S3,20.67438,50.34891
+2602024,052615302024,Jędrzejów,26,świętokrzyskie,2602,powiat jędrzejowski,4,13652,2025,False,S4,S3,20.30454,50.63945
+2602034,052615302034,Małogoszcz,26,świętokrzyskie,2602,powiat jędrzejowski,4,3271,2025,False,S4,S3,20.26407,50.81214
+2602064,052615302064,Sędziszów,26,świętokrzyskie,2602,powiat jędrzejowski,4,5986,2025,False,S4,S3,20.05563,50.5659
+2602084,052615302084,Sobków,26,świętokrzyskie,2602,powiat jędrzejowski,4,985,2025,False,S4,S3,20.45062,50.69999
+2602094,052615302094,Wodzisław,26,świętokrzyskie,2602,powiat jędrzejowski,4,908,2025,False,S4,S3,20.1915,50.52047
+2603034,052615303034,Kazimierza Wielka,26,świętokrzyskie,2603,powiat kazimierski,4,4912,2025,False,S4,S3,20.49358,50.26564
+2603044,052615303044,Opatowiec,26,świętokrzyskie,2603,powiat kazimierski,4,305,2025,False,S4,S3,20.72348,50.24314
+2603054,052615303054,Skalbmierz,26,świętokrzyskie,2603,powiat kazimierski,4,1162,2025,False,S4,S3,20.39929,50.31993
+2604024,052615204024,Bodzentyn,26,świętokrzyskie,2604,powiat kielecki,4,2025,2025,False,S4,S3,20.95719,50.94115
+2604034,052615204034,Chęciny,26,świętokrzyskie,2604,powiat kielecki,4,4268,2025,False,S4,S3,20.46229,50.80021
+2604044,052615204044,Chmielnik,26,świętokrzyskie,2604,powiat kielecki,4,3299,2025,False,S4,S3,20.75206,50.6144
+2604054,052615204054,Daleszyce,26,świętokrzyskie,2604,powiat kielecki,4,2689,2025,False,S4,S3,20.80791,50.80229
+2604074,052615204074,Łagów,26,świętokrzyskie,2604,powiat kielecki,4,1497,2025,False,S4,S3,21.08431,50.77517
+2604084,052615204084,Łopuszno,26,świętokrzyskie,2604,powiat kielecki,4,1441,2025,False,S4,S3,20.25081,50.94864
+2604124,052615204124,Morawica,26,świętokrzyskie,2604,powiat kielecki,4,1702,2025,False,S4,S3,20.61756,50.74678
+2604134,052615204134,Nowa Słupia,26,świętokrzyskie,2604,powiat kielecki,4,1253,2025,False,S4,S3,21.09049,50.86432
+2604144,052615204144,Piekoszów,26,świętokrzyskie,2604,powiat kielecki,4,2973,2025,False,S4,S3,20.46418,50.88035
+2604154,052615204154,Pierzchnica,26,świętokrzyskie,2604,powiat kielecki,4,1145,2025,False,S4,S3,20.75489,50.69754
+2605024,052615205024,Gowarczów,26,świętokrzyskie,2605,powiat konecki,4,1293,2025,False,S4,S3,20.43835,51.27845
+2605034,052615205034,Końskie,26,świętokrzyskie,2605,powiat konecki,4,16901,2025,False,S4,S3,20.40607,51.19166
+2605044,052615205044,Radoszyce,26,świętokrzyskie,2605,powiat konecki,4,2700,2025,False,S4,S3,20.25836,51.07392
+2605084,052615205084,Stąporków,26,świętokrzyskie,2605,powiat konecki,4,4952,2025,False,S4,S3,20.57173,51.13762
+2606024,052615306024,Iwaniska,26,świętokrzyskie,2606,powiat opatowski,4,1193,2025,False,S4,S3,21.2806,50.73146
+2606044,052615306044,Opatów,26,świętokrzyskie,2606,powiat opatowski,4,5732,2025,False,S4,S3,21.42538,50.80058
+2606054,052615306054,Ożarów,26,świętokrzyskie,2606,powiat opatowski,4,4059,2025,False,S4,S3,21.66658,50.88798
+2607011,052615207011,Ostrowiec Świętokrzyski,26,świętokrzyskie,2607,powiat ostrowiecki,1,60246,2025,False,S4,S3,21.38525,50.92936
+2607044,052615207044,Ćmielów,26,świętokrzyskie,2607,powiat ostrowiecki,4,2702,2025,False,S4,S3,21.51426,50.89028
+2607054,052615207054,Kunów,26,świętokrzyskie,2607,powiat ostrowiecki,4,2671,2025,False,S4,S3,21.28058,50.96156
+2608014,052615308014,Działoszyce,26,świętokrzyskie,2608,powiat pińczowski,4,811,2025,False,S4,S3,20.35226,50.36534
+2608044,052615308044,Pińczów,26,świętokrzyskie,2608,powiat pińczowski,4,9439,2025,False,S4,S3,20.52649,50.52052
+2609011,052615309011,Sandomierz,26,świętokrzyskie,2609,powiat sandomierski,1,20709,2025,False,S4,S3,21.74898,50.68265
+2609034,052615309034,Klimontów,26,świętokrzyskie,2609,powiat sandomierski,4,1696,2025,False,S4,S3,21.45587,50.65588
+2609044,052615309044,Koprzywnica,26,świętokrzyskie,2609,powiat sandomierski,4,2312,2025,False,S4,S3,21.5838,50.5934
+2609094,052615309094,Zawichost,26,świętokrzyskie,2609,powiat sandomierski,4,1559,2025,False,S4,S3,21.85408,50.80743
+2610011,052615210011,Skarżysko-Kamienna,26,świętokrzyskie,2610,powiat skarżyski,1,40099,2025,False,S4,S3,20.87162,51.11311
+2610054,052615210054,Suchedniów,26,świętokrzyskie,2610,powiat skarżyski,4,7253,2025,False,S4,S3,20.82922,51.04776
+2611011,052615211011,Starachowice,26,świętokrzyskie,2611,powiat starachowicki,1,43278,2025,False,S4,S3,21.07126,51.0374
+2611054,052615211054,Wąchock,26,świętokrzyskie,2611,powiat starachowicki,4,2381,2025,False,S4,S3,21.01243,51.07391
+2612014,052615312014,Bogoria,26,świętokrzyskie,2612,powiat staszowski,4,1086,2025,False,S4,S3,21.26,50.65175
+2612034,052615312034,Oleśnica,26,świętokrzyskie,2612,powiat staszowski,4,1701,2025,False,S4,S3,21.06457,50.45357
+2612044,052615312044,Osiek,26,świętokrzyskie,2612,powiat staszowski,4,1950,2025,False,S4,S3,21.44192,50.51996
+2612054,052615312054,Połaniec,26,świętokrzyskie,2612,powiat staszowski,4,7241,2025,False,S4,S3,21.2812,50.43324
+2612074,052615312074,Staszów,26,świętokrzyskie,2612,powiat staszowski,4,13203,2025,False,S4,S3,21.16593,50.56307
+2612084,052615312084,Szydłów,26,świętokrzyskie,2612,powiat staszowski,4,944,2025,False,S4,S3,21.0068,50.59114
+2613064,052615313064,Włoszczowa,26,świętokrzyskie,2613,powiat włoszczowski,4,9311,2025,False,S4,S3,19.96593,50.85256
+2661011,052615261011,Kielce,26,świętokrzyskie,2661,powiat Kielce,1,178837,2025,True,S4,S3,20.62752,50.87033
+2801011,042815601011,Bartoszyce,28,warmińsko-mazurskie,2801,powiat bartoszycki,1,20767,2025,False,S4,S3,20.80819,54.25354
+2801021,042815601021,Górowo Iławeckie,28,warmińsko-mazurskie,2801,powiat bartoszycki,1,3509,2025,False,S4,S3,20.48886,54.28559
+2801044,042815601044,Bisztynek,28,warmińsko-mazurskie,2801,powiat bartoszycki,4,2074,2025,False,S4,S3,20.90192,54.08633
+2801064,042815601064,Sępopol,28,warmińsko-mazurskie,2801,powiat bartoszycki,4,1838,2025,False,S4,S3,21.01453,54.26903
+2802011,042815402011,Braniewo,28,warmińsko-mazurskie,2802,powiat braniewski,1,15625,2025,False,S4,S3,19.81959,54.37971
+2802034,042815402034,Frombork,28,warmińsko-mazurskie,2802,powiat braniewski,4,1952,2025,False,S4,S3,19.68029,54.35766
+2802054,042815402054,Pieniężno,28,warmińsko-mazurskie,2802,powiat braniewski,4,2329,2025,False,S4,S3,20.12833,54.23649
+2803011,042815403011,Działdowo,28,warmińsko-mazurskie,2803,powiat działdowski,1,19777,2025,False,S4,S3,20.17004,53.23958
+2803044,042815403044,Lidzbark,28,warmińsko-mazurskie,2803,powiat działdowski,4,7006,2025,False,S4,S3,19.82663,53.26283
+2804064,042815404064,Młynary,28,warmińsko-mazurskie,2804,powiat elbląski,4,1618,2025,False,S4,S3,19.72149,54.1869
+2804074,042815404074,Pasłęk,28,warmińsko-mazurskie,2804,powiat elbląski,4,11460,2025,False,S4,S3,19.65932,54.0616
+2804094,042815404094,Tolkmicko,28,warmińsko-mazurskie,2804,powiat elbląski,4,2355,2025,False,S4,S3,19.52695,54.32038
+2805011,042815505011,Ełk,28,warmińsko-mazurskie,2805,powiat ełcki,1,58889,2025,False,S4,S3,22.36469,53.82824
+2806011,042815506011,Giżycko,28,warmińsko-mazurskie,2806,powiat giżycki,1,26482,2025,False,S4,S3,21.76441,54.03811
+2806084,042815506084,Ryn,28,warmińsko-mazurskie,2806,powiat giżycki,4,2594,2025,False,S4,S3,21.54642,53.9377
+2807011,042815407011,Iława,28,warmińsko-mazurskie,2807,powiat iławski,1,31798,2025,False,S4,S3,19.56849,53.59601
+2807021,042815407021,Lubawa,28,warmińsko-mazurskie,2807,powiat iławski,1,10649,2025,False,S4,S3,19.74966,53.50428
+2807044,042815407044,Kisielice,28,warmińsko-mazurskie,2807,powiat iławski,4,1965,2025,False,S4,S3,19.2635,53.60855
+2807064,042815407064,Susz,28,warmińsko-mazurskie,2807,powiat iławski,4,5150,2025,False,S4,S3,19.33645,53.71743
+2807074,042815407074,Zalewo,28,warmińsko-mazurskie,2807,powiat iławski,4,1962,2025,False,S4,S3,19.60519,53.84534
+2808011,042815608011,Kętrzyn,28,warmińsko-mazurskie,2808,powiat kętrzyński,1,24427,2025,False,S4,S3,21.37527,54.07676
+2808044,042815608044,Korsze,28,warmińsko-mazurskie,2808,powiat kętrzyński,4,3811,2025,False,S4,S3,21.13915,54.17002
+2808054,042815608054,Reszel,28,warmińsko-mazurskie,2808,powiat kętrzyński,4,3853,2025,False,S4,S3,21.14585,54.05042
+2809011,042815609011,Lidzbark Warmiński,28,warmińsko-mazurskie,2809,powiat lidzbarski,1,14117,2025,False,S4,S3,20.57954,54.12588
+2809054,042815609054,Orneta,28,warmińsko-mazurskie,2809,powiat lidzbarski,4,7773,2025,False,S4,S3,20.13328,54.11483
+2810011,042815610011,Mrągowo,28,warmińsko-mazurskie,2810,powiat mrągowski,1,20008,2025,False,S4,S3,21.30507,53.86437
+2810024,042815610024,Mikołajki,28,warmińsko-mazurskie,2810,powiat mrągowski,4,3229,2025,False,S4,S3,21.57011,53.80288
+2811044,042815611044,Nidzica,28,warmińsko-mazurskie,2811,powiat nidzicki,4,12260,2025,False,S4,S3,20.42749,53.36052
+2812011,042815412011,Nowe Miasto Lubawskie,28,warmińsko-mazurskie,2812,powiat nowomiejski,1,9878,2025,False,S4,S3,19.59515,53.42079
+2813044,042815513044,Olecko,28,warmińsko-mazurskie,2813,powiat olecki,4,15494,2025,False,S4,S3,22.50704,54.03374
+2814014,042815614014,Barczewo,28,warmińsko-mazurskie,2814,powiat olsztyński,4,7250,2025,False,S4,S3,20.69112,53.83055
+2814024,042815614024,Biskupiec,28,warmińsko-mazurskie,2814,powiat olsztyński,4,9752,2025,False,S4,S3,20.95692,53.86467
+2814034,042815614034,Dobre Miasto,28,warmińsko-mazurskie,2814,powiat olsztyński,4,9117,2025,False,S4,S3,20.39749,53.98668
+2814064,042815614064,Jeziorany,28,warmińsko-mazurskie,2814,powiat olsztyński,4,2870,2025,False,S4,S3,20.74639,53.97578
+2814094,042815614094,Olsztynek,28,warmińsko-mazurskie,2814,powiat olsztyński,4,7162,2025,False,S4,S3,20.28471,53.58374
+2815011,042815415011,Ostróda,28,warmińsko-mazurskie,2815,powiat ostródzki,1,30755,2025,False,S4,S3,19.96486,53.69671
+2815064,042815415064,Miłakowo,28,warmińsko-mazurskie,2815,powiat ostródzki,4,2355,2025,False,S4,S3,20.07125,54.00923
+2815074,042815415074,Miłomłyn,28,warmińsko-mazurskie,2815,powiat ostródzki,4,2416,2025,False,S4,S3,19.838,53.76449
+2815084,042815415084,Morąg,28,warmińsko-mazurskie,2815,powiat ostródzki,4,12392,2025,False,S4,S3,19.92602,53.91711
+2816014,042815516014,Biała Piska,28,warmińsko-mazurskie,2816,powiat piski,4,3599,2025,False,S4,S3,22.06321,53.61191
+2816024,042815516024,Orzysz,28,warmińsko-mazurskie,2816,powiat piski,4,5175,2025,False,S4,S3,21.94811,53.80967
+2816034,042815516034,Pisz,28,warmińsko-mazurskie,2816,powiat piski,4,17160,2025,False,S4,S3,21.81253,53.62744
+2816044,042815516044,Ruciane-Nida,28,warmińsko-mazurskie,2816,powiat piski,4,3927,2025,False,S4,S3,21.53964,53.64161
+2817011,042815617011,Szczytno,28,warmińsko-mazurskie,2817,powiat szczycieński,1,21323,2025,False,S4,S3,20.98747,53.56259
+2817044,042815617044,Pasym,28,warmińsko-mazurskie,2817,powiat szczycieński,4,2360,2025,False,S4,S3,20.79188,53.65069
+2817084,042815617084,Wielbark,28,warmińsko-mazurskie,2817,powiat szczycieński,4,2938,2025,False,S4,S3,20.94629,53.39858
+2818034,042815518034,Gołdap,28,warmińsko-mazurskie,2818,powiat gołdapski,4,12960,2025,False,S4,S3,22.30362,54.30631
+2819034,042815519034,Węgorzewo,28,warmińsko-mazurskie,2819,powiat węgorzewski,4,10336,2025,False,S4,S3,21.7372,54.21567
+2861011,042815461011,Elbląg,28,warmińsko-mazurskie,2861,powiat Elbląg,1,111089,2025,True,S4,S3,19.40884,54.1522
+2862011,042815662011,Olsztyn,28,warmińsko-mazurskie,2862,powiat Olsztyn,1,165393,2025,True,S4,S3,20.49272,53.78376
+3001011,023016001011,Chodzież,30,wielkopolskie,3001,powiat chodzieski,1,16812,2025,False,S4,S3,16.9198,52.99505
+3001024,023016001024,Budzyń,30,wielkopolskie,3001,powiat chodzieski,4,4622,2025,False,S4,S3,16.98812,52.88954
+3001044,023016001044,Margonin,30,wielkopolskie,3001,powiat chodzieski,4,2922,2025,False,S4,S3,17.09464,52.97335
+3001054,023016001054,Szamocin,30,wielkopolskie,3001,powiat chodzieski,4,3856,2025,False,S4,S3,17.12653,53.02795
+3002011,023016002011,Czarnków,30,wielkopolskie,3002,powiat czarnkowsko-trzcianecki,1,9638,2025,False,S4,S3,16.56413,52.90214
+3002044,023016002044,Krzyż Wielkopolski,30,wielkopolskie,3002,powiat czarnkowsko-trzcianecki,4,5762,2025,False,S4,S3,16.01116,52.88097
+3002074,023016002074,Trzcianka,30,wielkopolskie,3002,powiat czarnkowsko-trzcianecki,4,16200,2025,False,S4,S3,16.45629,53.04063
+3002084,023016002084,Wieleń,30,wielkopolskie,3002,powiat czarnkowsko-trzcianecki,4,5473,2025,False,S4,S3,16.17136,52.89461
+3003011,023015803011,Gniezno,30,wielkopolskie,3003,powiat gnieźnieński,1,62018,2025,False,S4,S3,17.58259,52.53481
+3003024,023015803024,Czerniejewo,30,wielkopolskie,3003,powiat gnieźnieński,4,2542,2025,False,S4,S3,17.48925,52.4264
+3003054,023015803054,Kłecko,30,wielkopolskie,3003,powiat gnieźnieński,4,2455,2025,False,S4,S3,17.43075,52.63181
+3003094,023015803094,Trzemeszno,30,wielkopolskie,3003,powiat gnieźnieński,4,7132,2025,False,S4,S3,17.82311,52.56139
+3003104,023015803104,Witkowo,30,wielkopolskie,3003,powiat gnieźnieński,4,7300,2025,False,S4,S3,17.77264,52.43964
+3004014,023015904014,Borek Wielkopolski,30,wielkopolskie,3004,powiat gostyński,4,2404,2025,False,S4,S3,17.24133,51.91674
+3004024,023015904024,Gostyń,30,wielkopolskie,3004,powiat gostyński,4,19484,2025,False,S4,S3,17.01225,51.88247
+3004034,023015904034,Krobia,30,wielkopolskie,3004,powiat gostyński,4,4539,2025,False,S4,S3,16.98237,51.77405
+3004064,023015904064,Pogorzela,30,wielkopolskie,3004,powiat gostyński,4,2031,2025,False,S4,S3,17.23017,51.8222
+3004074,023015904074,Poniec,30,wielkopolskie,3004,powiat gostyński,4,2896,2025,False,S4,S3,16.80867,51.76343
+3005024,023015905024,Grodzisk Wielkopolski,30,wielkopolskie,3005,powiat grodziski,4,15033,2025,False,S4,S3,16.36534,52.22762
+3005044,023015905044,Rakoniewice,30,wielkopolskie,3005,powiat grodziski,4,3637,2025,False,S4,S3,16.27346,52.13906
+3005054,023015905054,Wielichowo,30,wielkopolskie,3005,powiat grodziski,4,1635,2025,False,S4,S3,16.3518,52.11573
+3006014,023015706014,Jaraczewo,30,wielkopolskie,3006,powiat jarociński,4,1350,2025,False,S4,S3,17.29707,51.96854
+3006024,023015706024,Jarocin,30,wielkopolskie,3006,powiat jarociński,4,26240,2025,False,S4,S3,17.50256,51.97266
+3006044,023015706044,Żerków,30,wielkopolskie,3006,powiat jarociński,4,2069,2025,False,S4,S3,17.56349,52.06877
+3007054,023015707054,Koźminek,30,wielkopolskie,3007,powiat kaliski,4,1800,2025,False,S4,S3,18.33893,51.79874
+3007084,023015707084,Opatówek,30,wielkopolskie,3007,powiat kaliski,4,3450,2025,False,S4,S3,18.21653,51.73989
+3007094,023015707094,Stawiszyn,30,wielkopolskie,3007,powiat kaliski,4,1335,2025,False,S4,S3,18.11171,51.91786
+3008034,023015708034,Kępno,30,wielkopolskie,3008,powiat kępiński,4,13322,2025,False,S4,S3,17.98908,51.2784
+3008064,023015708064,Rychtal,30,wielkopolskie,3008,powiat kępiński,4,1331,2025,False,S4,S3,17.85132,51.14533
+3009011,023015809011,Koło,30,wielkopolskie,3009,powiat kolski,1,18773,2025,False,S4,S3,18.63865,52.20024
+3009044,023015809044,Dąbie,30,wielkopolskie,3009,powiat kolski,4,1669,2025,False,S4,S3,18.8225,52.08668
+3009064,023015809064,Kłodawa,30,wielkopolskie,3009,powiat kolski,4,5719,2025,False,S4,S3,18.91352,52.25447
+3009114,023015809114,Przedecz,30,wielkopolskie,3009,powiat kolski,4,1478,2025,False,S4,S3,18.89915,52.3344
+3010014,023015810014,Golina,30,wielkopolskie,3010,powiat koniński,4,4206,2025,False,S4,S3,18.09268,52.24315
+3010044,023015810044,Kleczew,30,wielkopolskie,3010,powiat koniński,4,3803,2025,False,S4,S3,18.17714,52.37057
+3010074,023015810074,Rychwał,30,wielkopolskie,3010,powiat koniński,4,2347,2025,False,S4,S3,18.1651,52.07149
+3010104,023015810104,Sompolno,30,wielkopolskie,3010,powiat koniński,4,3279,2025,False,S4,S3,18.50282,52.38832
+3010124,023015810124,Ślesin,30,wielkopolskie,3010,powiat koniński,4,3068,2025,False,S4,S3,18.30644,52.37039
+3011011,023015911011,Kościan,30,wielkopolskie,3011,powiat kościański,1,22956,2025,False,S4,S3,16.64866,52.08829
+3011024,023015911024,Czempiń,30,wielkopolskie,3011,powiat kościański,4,4959,2025,False,S4,S3,16.76408,52.14404
+3011044,023015911044,Krzywiń,30,wielkopolskie,3011,powiat kościański,4,1653,2025,False,S4,S3,16.81985,51.96296
+3011054,023015911054,Śmigiel,30,wielkopolskie,3011,powiat kościański,4,5558,2025,False,S4,S3,16.52704,52.01339
+3012011,023015712011,Sulmierzyce,30,wielkopolskie,3012,powiat krotoszyński,1,2690,2025,False,S4,S3,17.53053,51.60594
+3012024,023015712024,Kobylin,30,wielkopolskie,3012,powiat krotoszyński,4,3180,2025,False,S4,S3,17.22682,51.71645
+3012034,023015712034,Koźmin Wielkopolski,30,wielkopolskie,3012,powiat krotoszyński,4,6002,2025,False,S4,S3,17.45391,51.82712
+3012044,023015712044,Krotoszyn,30,wielkopolskie,3012,powiat krotoszyński,4,27786,2025,False,S4,S3,17.43738,51.69868
+3012064,023015712064,Zduny,30,wielkopolskie,3012,powiat krotoszyński,4,4232,2025,False,S4,S3,17.37694,51.6458
+3013034,023015913034,Osieczna,30,wielkopolskie,3013,powiat leszczyński,4,2420,2025,False,S4,S3,16.67862,51.9042
+3013044,023015913044,Rydzyna,30,wielkopolskie,3013,powiat leszczyński,4,2870,2025,False,S4,S3,16.66761,51.78651
+3014034,023015914034,Międzychód,30,wielkopolskie,3014,powiat międzychodzki,4,9792,2025,False,S4,S3,15.89696,52.59882
+3014044,023015914044,Sieraków,30,wielkopolskie,3014,powiat międzychodzki,4,5693,2025,False,S4,S3,16.08047,52.65134
+3015024,023015915024,Lwówek,30,wielkopolskie,3015,powiat nowotomyski,4,2874,2025,False,S4,S3,16.18106,52.44798
+3015044,023015915044,Nowy Tomyśl,30,wielkopolskie,3015,powiat nowotomyski,4,13282,2025,False,S4,S3,16.12844,52.3195
+3015054,023015915054,Opalenica,30,wielkopolskie,3015,powiat nowotomyski,4,9179,2025,False,S4,S3,16.41278,52.30887
+3015064,023015915064,Zbąszyń,30,wielkopolskie,3015,powiat nowotomyski,4,6947,2025,False,S4,S3,15.9252,52.2509
+3016014,023016116014,Oborniki,30,wielkopolskie,3016,powiat obornicki,4,16896,2025,False,S4,S3,16.81406,52.64739
+3016024,023016116024,Rogoźno,30,wielkopolskie,3016,powiat obornicki,4,10674,2025,False,S4,S3,16.99049,52.75226
+3017011,023015717011,Ostrów Wielkopolski,30,wielkopolskie,3017,powiat ostrowski,1,68111,2025,False,S4,S3,17.80686,51.65501
+3017024,023015717024,Nowe Skalmierzyce,30,wielkopolskie,3017,powiat ostrowski,4,4493,2025,False,S4,S3,17.99337,51.71038
+3017034,023015717034,Odolanów,30,wielkopolskie,3017,powiat ostrowski,4,4876,2025,False,S4,S3,17.67434,51.57419
+3017064,023015717064,Raszków,30,wielkopolskie,3017,powiat ostrowski,4,2056,2025,False,S4,S3,17.72571,51.71828
+3018034,023015718034,Grabów nad Prosną,30,wielkopolskie,3018,powiat ostrzeszowski,4,1883,2025,False,S4,S3,18.11929,51.50596
+3018064,023015718064,Mikstat,30,wielkopolskie,3018,powiat ostrzeszowski,4,1643,2025,False,S4,S3,17.97378,51.53236
+3018074,023015718074,Ostrzeszów,30,wielkopolskie,3018,powiat ostrzeszowski,4,13333,2025,False,S4,S3,17.93355,51.4264
+3019011,023016019011,Piła,30,wielkopolskie,3019,powiat pilski,1,68762,2025,False,S4,S3,16.73782,53.15145
+3019034,023016019034,Kaczory,30,wielkopolskie,3019,powiat pilski,4,2769,2025,False,S4,S3,16.88169,53.10348
+3019044,023016019044,Łobżenica,30,wielkopolskie,3019,powiat pilski,4,2692,2025,False,S4,S3,17.25574,53.26244
+3019054,023016019054,Miasteczko Krajeńskie,30,wielkopolskie,3019,powiat pilski,4,1067,2025,False,S4,S3,17.00478,53.09784
+3019074,023016019074,Ujście,30,wielkopolskie,3019,powiat pilski,4,3274,2025,False,S4,S3,16.73201,53.05339
+3019084,023016019084,Wyrzysk,30,wielkopolskie,3019,powiat pilski,4,5030,2025,False,S4,S3,17.26802,53.153
+3019094,023016019094,Wysoka,30,wielkopolskie,3019,powiat pilski,4,2462,2025,False,S4,S3,17.08353,53.18091
+3020014,023015720014,Chocz,30,wielkopolskie,3020,powiat pleszewski,4,1578,2025,False,S4,S3,17.86995,51.97642
+3020034,023015720034,Dobrzyca,30,wielkopolskie,3020,powiat pleszewski,4,2884,2025,False,S4,S3,17.60336,51.86663
+3020064,023015720064,Pleszew,30,wielkopolskie,3020,powiat pleszewski,4,16385,2025,False,S4,S3,17.78549,51.89636
+3021011,023016121011,Luboń,30,wielkopolskie,3021,powiat poznański,1,32727,2025,False,S4,S3,16.89267,52.34705
+3021021,023016121021,Puszczykowo,30,wielkopolskie,3021,powiat poznański,1,9158,2025,False,S4,S3,16.84925,52.2857
+3021034,023016121034,Buk,30,wielkopolskie,3021,powiat poznański,4,5420,2025,False,S4,S3,16.51958,52.35532
+3021084,023016121084,Kostrzyn,30,wielkopolskie,3021,powiat poznański,4,9861,2025,False,S4,S3,17.22811,52.39847
+3021094,023016121094,Kórnik,30,wielkopolskie,3021,powiat poznański,4,8107,2025,False,S4,S3,17.08949,52.24772
+3021104,023016121104,Mosina,30,wielkopolskie,3021,powiat poznański,4,14491,2025,False,S4,S3,16.84709,52.24543
+3021114,023016121114,Murowana Goślina,30,wielkopolskie,3021,powiat poznański,4,10278,2025,False,S4,S3,17.00933,52.57463
+3021124,023016121124,Pobiedziska,30,wielkopolskie,3021,powiat poznański,4,9943,2025,False,S4,S3,17.28767,52.47753
+3021144,023016121144,Stęszew,30,wielkopolskie,3021,powiat poznański,4,5800,2025,False,S4,S3,16.70085,52.2837
+3021164,023016121164,Swarzędz,30,wielkopolskie,3021,powiat poznański,4,27504,2025,False,S4,S3,17.08503,52.41289
+3022014,023015922014,Bojanowo,30,wielkopolskie,3022,powiat rawicki,4,2751,2025,False,S4,S3,16.74827,51.70749
+3022024,023015922024,Jutrosin,30,wielkopolskie,3022,powiat rawicki,4,1827,2025,False,S4,S3,17.16957,51.65009
+3022034,023015922034,Miejska Górka,30,wielkopolskie,3022,powiat rawicki,4,3029,2025,False,S4,S3,16.95826,51.65573
+3022054,023015922054,Rawicz,30,wielkopolskie,3022,powiat rawicki,4,19275,2025,False,S4,S3,16.85852,51.60946
+3023011,023015823011,Słupca,30,wielkopolskie,3023,powiat słupecki,1,12674,2025,False,S4,S3,17.87192,52.28733
+3023084,023015823084,Zagórów,30,wielkopolskie,3023,powiat słupecki,4,2664,2025,False,S4,S3,17.89561,52.16835
+3024011,023016124011,Obrzycko,30,wielkopolskie,3024,powiat szamotulski,1,2405,2025,False,S4,S3,16.52807,52.70338
+3024054,023016124054,Ostroróg,30,wielkopolskie,3024,powiat szamotulski,4,1802,2025,False,S4,S3,16.44988,52.6265
+3024064,023016124064,Pniewy,30,wielkopolskie,3024,powiat szamotulski,4,7995,2025,False,S4,S3,16.25668,52.50943
+3024074,023016124074,Szamotuły,30,wielkopolskie,3024,powiat szamotulski,4,17909,2025,False,S4,S3,16.57794,52.61201
+3024084,023016124084,Wronki,30,wielkopolskie,3024,powiat szamotulski,4,10272,2025,False,S4,S3,16.38044,52.71051
+3025044,023016125044,Środa Wielkopolska,30,wielkopolskie,3025,powiat średzki,4,24284,2025,False,S4,S3,17.27617,52.22843
+3025054,023016125054,Zaniemyśl,30,wielkopolskie,3025,powiat średzki,4,2429,2025,False,S4,S3,17.16228,52.15561
+3026024,023016126024,Dolsk,30,wielkopolskie,3026,powiat śremski,4,1527,2025,False,S4,S3,17.06273,51.9818
+3026034,023016126034,Książ Wielkopolski,30,wielkopolskie,3026,powiat śremski,4,2940,2025,False,S4,S3,17.23952,52.06167
+3026044,023016126044,Śrem,30,wielkopolskie,3026,powiat śremski,4,27110,2025,False,S4,S3,17.01508,52.08868
+3027011,023015827011,Turek,30,wielkopolskie,3027,powiat turecki,1,23811,2025,False,S4,S3,18.50055,52.01548
+3027034,023015827034,Dobra,30,wielkopolskie,3027,powiat turecki,4,1282,2025,False,S4,S3,18.61556,51.91664
+3027074,023015827074,Tuliszków,30,wielkopolskie,3027,powiat turecki,4,2928,2025,False,S4,S3,18.29549,52.07658
+3028011,023016028011,Wągrowiec,30,wielkopolskie,3028,powiat wągrowiecki,1,25223,2025,False,S4,S3,17.19961,52.80842
+3028034,023016028034,Gołańcz,30,wielkopolskie,3028,powiat wągrowiecki,4,3110,2025,False,S4,S3,17.29995,52.94326
+3028044,023016028044,Mieścisko,30,wielkopolskie,3028,powiat wągrowiecki,4,2391,2025,False,S4,S3,17.33213,52.74357
+3028054,023016028054,Skoki,30,wielkopolskie,3028,powiat wągrowiecki,4,4843,2025,False,S4,S3,17.16107,52.67222
+3029034,023015929034,Wolsztyn,30,wielkopolskie,3029,powiat wolsztyński,4,11595,2025,False,S4,S3,16.11712,52.11552
+3030024,023015830024,Miłosław,30,wielkopolskie,3030,powiat wrzesiński,4,3339,2025,False,S4,S3,17.48955,52.20318
+3030034,023015830034,Nekla,30,wielkopolskie,3030,powiat wrzesiński,4,3862,2025,False,S4,S3,17.41329,52.36496
+3030044,023015830044,Pyzdry,30,wielkopolskie,3030,powiat wrzesiński,4,2886,2025,False,S4,S3,17.69005,52.17056
+3030054,023015830054,Września,30,wielkopolskie,3030,powiat wrzesiński,4,31595,2025,False,S4,S3,17.56519,52.32512
+3031011,023016031011,Złotów,30,wielkopolskie,3031,powiat złotowski,1,17801,2025,False,S4,S3,17.04082,53.36346
+3031024,023016031024,Jastrowie,30,wielkopolskie,3031,powiat złotowski,4,8140,2025,False,S4,S3,16.81756,53.42048
+3031034,023016031034,Krajenka,30,wielkopolskie,3031,powiat złotowski,4,3399,2025,False,S4,S3,16.99079,53.29759
+3031054,023016031054,Okonek,30,wielkopolskie,3031,powiat złotowski,4,3516,2025,False,S4,S3,16.85158,53.53618
+3061011,023015761011,Kalisz,30,wielkopolskie,3061,powiat Kalisz,1,91059,2025,False,S4,S3,18.09102,51.76109
+3062011,023015862011,Konin,30,wielkopolskie,3062,powiat Konin,1,65233,2025,False,S4,S3,18.25121,52.22338
+3063011,023015963011,Leszno,30,wielkopolskie,3063,powiat Leszno,1,58766,2025,False,S4,S3,16.57494,51.84034
+3064011,023016264011,Poznań,30,wielkopolskie,3064,powiat Poznań,1,534239,2025,True,S4,S3,16.92993,52.40692
+3201011,023216301011,Białogard,32,zachodniopomorskie,3201,powiat białogardzki,1,21919,2025,False,S4,S3,15.98751,54.00696
+3201034,023216301034,Karlino,32,zachodniopomorskie,3201,powiat białogardzki,4,5390,2025,False,S4,S3,15.87739,54.03515
+3201044,023216301044,Tychowo,32,zachodniopomorskie,3201,powiat białogardzki,4,2280,2025,False,S4,S3,16.25771,53.92774
+3202024,023216402024,Choszczno,32,zachodniopomorskie,3202,powiat choszczeński,4,13618,2025,False,S4,S3,15.42054,53.16905
+3202034,023216402034,Drawno,32,zachodniopomorskie,3202,powiat choszczeński,4,2120,2025,False,S4,S3,15.75946,53.21986
+3202054,023216402054,Pełczyce,32,zachodniopomorskie,3202,powiat choszczeński,4,2440,2025,False,S4,S3,15.30447,53.04354
+3202064,023216402064,Recz,32,zachodniopomorskie,3202,powiat choszczeński,4,2582,2025,False,S4,S3,15.54713,53.25989
+3203014,023216403014,Czaplinek,32,zachodniopomorskie,3203,powiat drawski,4,6593,2025,False,S4,S3,16.23333,53.55775
+3203024,023216403024,Drawsko Pomorskie,32,zachodniopomorskie,3203,powiat drawski,4,11054,2025,False,S4,S3,15.80967,53.53056
+3203034,023216403034,Kalisz Pomorski,32,zachodniopomorskie,3203,powiat drawski,4,3936,2025,False,S4,S3,15.90631,53.29908
+3203064,023216403064,Złocieniec,32,zachodniopomorskie,3203,powiat drawski,4,11810,2025,False,S4,S3,16.01132,53.53286
+3204024,023216604024,Goleniów,32,zachodniopomorskie,3204,powiat goleniowski,4,21241,2025,False,S4,S3,14.82854,53.56392
+3204034,023216604034,Maszewo,32,zachodniopomorskie,3204,powiat goleniowski,4,3275,2025,False,S4,S3,15.06166,53.49615
+3204044,023216604044,Nowogard,32,zachodniopomorskie,3204,powiat goleniowski,4,15405,2025,False,S4,S3,15.1163,53.67437
+3204074,023216604074,Stepnica,32,zachodniopomorskie,3204,powiat goleniowski,4,2470,2025,False,S4,S3,14.62555,53.65187
+3205024,023216605024,Gryfice,32,zachodniopomorskie,3205,powiat gryficki,4,15041,2025,False,S4,S3,15.20027,53.9165
+3205044,023216605044,Płoty,32,zachodniopomorskie,3205,powiat gryficki,4,3646,2025,False,S4,S3,15.2667,53.80182
+3205084,023216605084,Trzebiatów,32,zachodniopomorskie,3205,powiat gryficki,4,9181,2025,False,S4,S3,15.26475,54.06147
+3206024,023216606024,Cedynia,32,zachodniopomorskie,3206,powiat gryfiński,4,1419,2025,False,S4,S3,14.20249,52.87931
+3206034,023216606034,Chojna,32,zachodniopomorskie,3206,powiat gryfiński,4,7318,2025,False,S4,S3,14.42797,52.96389
+3206044,023216606044,Gryfino,32,zachodniopomorskie,3206,powiat gryfiński,4,19430,2025,False,S4,S3,14.48831,53.25243
+3206054,023216606054,Mieszkowice,32,zachodniopomorskie,3206,powiat gryfiński,4,3282,2025,False,S4,S3,14.49346,52.7873
+3206064,023216606064,Moryń,32,zachodniopomorskie,3206,powiat gryfiński,4,1606,2025,False,S4,S3,14.39297,52.85769
+3206084,023216606084,Trzcińsko-Zdrój,32,zachodniopomorskie,3206,powiat gryfiński,4,2118,2025,False,S4,S3,14.60667,52.96487
+3207014,023216607014,Dziwnów,32,zachodniopomorskie,3207,powiat kamieński,4,2266,2025,False,S4,S3,14.76691,54.02819
+3207024,023216607024,Golczewo,32,zachodniopomorskie,3207,powiat kamieński,4,2465,2025,False,S4,S3,14.97847,53.82426
+3207034,023216607034,Kamień Pomorski,32,zachodniopomorskie,3207,powiat kamieński,4,8021,2025,False,S4,S3,14.77262,53.96849
+3207044,023216607044,Międzyzdroje,32,zachodniopomorskie,3207,powiat kamieński,4,4807,2025,False,S4,S3,14.45097,53.92921
+3207064,023216607064,Wolin,32,zachodniopomorskie,3207,powiat kamieński,4,4520,2025,False,S4,S3,14.61465,53.84214
+3208011,023216308011,Kołobrzeg,32,zachodniopomorskie,3208,powiat kołobrzeski,1,43362,2025,False,S4,S3,15.58342,54.17565
+3208034,023216308034,Gościno,32,zachodniopomorskie,3208,powiat kołobrzeski,4,2813,2025,False,S4,S3,15.65256,54.05123
+3209034,023216309034,Bobolice,32,zachodniopomorskie,3209,powiat koszaliński,4,3590,2025,False,S4,S3,16.58893,53.95508
+3209054,023216309054,Mielno,32,zachodniopomorskie,3209,powiat koszaliński,4,2676,2025,False,S4,S3,16.0621,54.26086
+3209064,023216309064,Polanów,32,zachodniopomorskie,3209,powiat koszaliński,4,2784,2025,False,S4,S3,16.68512,54.1193
+3209074,023216309074,Sianów,32,zachodniopomorskie,3209,powiat koszaliński,4,6658,2025,False,S4,S3,16.29127,54.22646
+3210014,023216410014,Barlinek,32,zachodniopomorskie,3210,powiat myśliborski,4,12624,2025,False,S4,S3,15.21864,52.99464
+3210034,023216410034,Dębno,32,zachodniopomorskie,3210,powiat myśliborski,4,12639,2025,False,S4,S3,14.698,52.73901
+3210044,023216410044,Myślibórz,32,zachodniopomorskie,3210,powiat myśliborski,4,10222,2025,False,S4,S3,14.86785,52.92382
+3211034,023216611034,Nowe Warpno,32,zachodniopomorskie,3211,powiat policki,4,1029,2025,False,S4,S3,14.28961,53.72256
+3211044,023216611044,Police,32,zachodniopomorskie,3211,powiat policki,4,28919,2025,False,S4,S3,14.57182,53.55214
+3212034,023216412034,Lipiany,32,zachodniopomorskie,3212,powiat pyrzycki,4,3688,2025,False,S4,S3,14.96919,53.00336
+3212054,023216412054,Pyrzyce,32,zachodniopomorskie,3212,powiat pyrzycki,4,11591,2025,False,S4,S3,14.89257,53.1462
+3213011,023216313011,Darłowo,32,zachodniopomorskie,3213,powiat sławieński,1,12199,2025,False,S4,S3,16.4107,54.42095
+3213021,023216313021,Sławno,32,zachodniopomorskie,3213,powiat sławieński,1,11451,2025,False,S4,S3,16.67888,54.36276
+3214011,023216614011,Stargard,32,zachodniopomorskie,3214,powiat stargardzki,1,65699,2025,False,S4,S3,15.0499,53.33672
+3214024,023216614024,Chociwel,32,zachodniopomorskie,3214,powiat stargardzki,4,2897,2025,False,S4,S3,15.33342,53.46696
+3214034,023216614034,Dobrzany,32,zachodniopomorskie,3214,powiat stargardzki,4,2121,2025,False,S4,S3,15.42886,53.35914
+3214054,023216614054,Ińsko,32,zachodniopomorskie,3214,powiat stargardzki,4,1711,2025,False,S4,S3,15.5502,53.43613
+3214114,023216614114,Suchań,32,zachodniopomorskie,3214,powiat stargardzki,4,1395,2025,False,S4,S3,15.32541,53.28003
+3215011,023216415011,Szczecinek,32,zachodniopomorskie,3215,powiat szczecinecki,1,37101,2025,False,S4,S3,16.69937,53.70791
+3215024,023216415024,Barwice,32,zachodniopomorskie,3215,powiat szczecinecki,4,3329,2025,False,S4,S3,16.3553,53.7449
+3215034,023216415034,Biały Bór,32,zachodniopomorskie,3215,powiat szczecinecki,4,2053,2025,False,S4,S3,16.83543,53.8967
+3215044,023216415044,Borne Sulinowo,32,zachodniopomorskie,3215,powiat szczecinecki,4,4789,2025,False,S4,S3,16.53395,53.57661
+3216011,023216416011,Świdwin,32,zachodniopomorskie,3216,powiat świdwiński,1,14217,2025,False,S4,S3,15.77671,53.77464
+3216034,023216416034,Połczyn-Zdrój,32,zachodniopomorskie,3216,powiat świdwiński,4,7050,2025,False,S4,S3,16.09574,53.76424
+3217011,023216417011,Wałcz,32,zachodniopomorskie,3217,powiat wałecki,1,22972,2025,False,S4,S3,16.47122,53.27787
+3217024,023216417024,Człopa,32,zachodniopomorskie,3217,powiat wałecki,4,2086,2025,False,S4,S3,16.12098,53.08856
+3217034,023216417034,Mirosławiec,32,zachodniopomorskie,3217,powiat wałecki,4,2946,2025,False,S4,S3,16.08793,53.34071
+3217044,023216417044,Tuczno,32,zachodniopomorskie,3217,powiat wałecki,4,1740,2025,False,S4,S3,16.15368,53.19374
+3218014,023216418014,Dobra,32,zachodniopomorskie,3218,powiat łobeski,4,1991,2025,False,S4,S3,15.30977,53.58625
+3218024,023216418024,Łobez,32,zachodniopomorskie,3218,powiat łobeski,4,9332,2025,False,S4,S3,15.62129,53.63918
+3218044,023216418044,Resko,32,zachodniopomorskie,3218,powiat łobeski,4,3743,2025,False,S4,S3,15.40607,53.77307
+3218054,023216418054,Węgorzyno,32,zachodniopomorskie,3218,powiat łobeski,4,2559,2025,False,S4,S3,15.55964,53.54101
+3261011,023216361011,Koszalin,32,zachodniopomorskie,3261,powiat Koszalin,1,104582,2025,True,S4,S3,16.17222,54.19438
+3262011,023216562011,Szczecin,32,zachodniopomorskie,3262,powiat Szczecin,1,383786,2025,True,S4,S3,14.55302,53.42894
+3263011,023216663011,Świnoujście,32,zachodniopomorskie,3263,powiat Świnoujście,1,38188,2025,False,S4,S3,14.24712,53.91053
