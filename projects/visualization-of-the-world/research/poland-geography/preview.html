@@ -1,0 +1,95 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Poland geography preview (throwaway)</title>
+<style>
+  body{margin:0;font:14px system-ui,sans-serif}
+  #bar{padding:8px 16px}
+  label{margin-right:12px;white-space:nowrap}
+  #msg{padding:0 16px 8px;color:#444}
+  #err{padding:8px 16px;color:#b00020;font-weight:bold}
+  canvas{display:block;width:100%}
+</style>
+<div id="bar">
+  <label><input type="checkbox" id="g"> gminas</label>
+  <label><input type="checkbox" id="p" checked> powiats</label>
+  <label><input type="checkbox" id="v" checked> voivodeships</label>
+  <label><input type="checkbox" id="c" checked> cities</label>
+  <label><input type="checkbox" id="t"> use TopoJSON</label>
+</div>
+<div id="msg">loading...</div>
+<div id="err" hidden></div>
+<canvas id="cv"></canvas>
+<script>
+// Throwaway preview: plain canvas, no libraries, no styling effort.
+const K = Math.cos(52 * Math.PI / 180);          // equirectangular, scaled at 52 N
+const cache = {};
+const $ = id => document.getElementById(id);
+
+function decodeTopo(t) {                          // minimal TopoJSON -> GeoJSON features
+  const [sx, sy] = t.transform.scale, [tx, ty] = t.transform.translate;
+  const arcs = t.arcs.map(a => { let x = 0, y = 0; return a.map(([dx, dy]) => (x += dx, y += dy, [x * sx + tx, y * sy + ty])); });
+  const arc = i => i >= 0 ? arcs[i] : arcs[~i].slice().reverse();
+  const ring = r => r.flatMap((i, n) => arc(i).slice(n ? 1 : 0));
+  const geom = g => g.type === 'Polygon' ? { type: 'Polygon', coordinates: g.arcs.map(ring) }
+                  : { type: 'MultiPolygon', coordinates: g.arcs.map(p => p.map(ring)) };
+  const obj = Object.values(t.objects)[0];
+  return { features: obj.geometries.map(g => ({ properties: g.properties, geometry: geom(g) })) };
+}
+
+async function load(name, topo) {
+  const key = name + topo;
+  if (cache[key]) return cache[key];
+  const url = 'data/' + name + (topo ? '.topojson' : '.geojson');
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('Cannot load ' + url + ' (HTTP ' + r.status + ')');
+  const j = await r.json();
+  return cache[key] = topo && name !== 'cities' ? decodeTopo(j) : j;
+}
+
+function draw(ctx, W, H, feats, project, stroke, lw, fill) {
+  ctx.lineWidth = lw; ctx.strokeStyle = stroke;
+  for (const f of feats) {
+    const g = f.geometry, polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
+    ctx.beginPath();
+    for (const poly of polys) for (const ring of poly) ring.forEach(([x, y], i) => { const [px, py] = project(x, y); i ? ctx.lineTo(px, py) : ctx.moveTo(px, py); });
+    if (fill) { ctx.fillStyle = fill; ctx.fill('evenodd'); }
+    ctx.stroke();
+  }
+}
+
+async function render() {
+  const topo = $('t').checked;
+  try {
+    $('err').hidden = true;
+    const want = { g: 'gminas', p: 'powiats', v: 'voivodeships' };
+    const layers = {};
+    for (const k in want) if ($(k).checked) layers[k] = (await load(want[k], topo)).features;
+    const cities = $('c').checked ? (await load('cities', false)).features : [];
+    const cv = $('cv'), W = cv.clientWidth, H = Math.round(W * 0.95), dpr = devicePixelRatio || 1;
+    cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px';
+    const ctx = cv.getContext('2d'); ctx.scale(dpr, dpr); ctx.clearRect(0, 0, W, H);
+    const [x0, x1, y0, y1] = [14.1, 24.2, 49.0, 54.9];
+    const s = Math.min((W - 8) / ((x1 - x0) * K), (H - 8) / (y1 - y0));
+    const project = (x, y) => [4 + (x - x0) * K * s, 4 + (y1 - y) * s];
+    if (layers.g) draw(ctx, W, H, layers.g, project, '#ddd', 0.3);
+    if (layers.p) draw(ctx, W, H, layers.p, project, '#999', 0.5);
+    if (layers.v) draw(ctx, W, H, layers.v, project, '#222', 1.2);
+    let big = 0;
+    for (const f of cities) {
+      const [px, py] = project(...f.geometry.coordinates), isBig = f.properties.big_city;
+      big += isBig;
+      ctx.fillStyle = isBig ? '#d11' : 'rgba(30,90,200,.55)';
+      ctx.beginPath(); ctx.arc(px, py, isBig ? 3 : 1.2, 0, 7); ctx.fill();
+    }
+    const n = k => layers[k] ? layers[k].length : '-';
+    $('msg').textContent = `voivodeships ${n('v')}, powiats ${n('p')}, gminas ${n('g')}, cities ${cities.length} (${big} red = 100k+), source: ${topo ? 'TopoJSON' : 'GeoJSON'}`;
+  } catch (e) {
+    $('err').hidden = false; $('err').textContent = 'Map data failed to load: ' + e.message;
+    $('msg').textContent = '';
+  }
+}
+document.querySelectorAll('input').forEach(i => i.addEventListener('change', render));
+addEventListener('resize', render);
+render();
+</script>
