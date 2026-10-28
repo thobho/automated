@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weather in Smolec</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+  <h1>Smolec <small>Lower Silesia, Poland</small></h1>
+  <p id="error" class="error" role="alert" hidden></p>
+  <p id="loading" class="muted">Loading weather&hellip;</p>
+  <section id="current" class="card" hidden aria-label="Current weather"></section>
+  <section id="forecast" hidden aria-label="7-day forecast">
+    <h2>7-day forecast</h2>
+    <ul id="days" class="days"></ul>
+  </section>
+  <p class="muted foot">Data: <a href="https://open-meteo.com/">Open-Meteo</a>. Times: Europe/Warsaw.</p>
+</main>
+<noscript><p class="error">This page needs JavaScript to load the weather.</p></noscript>
+<script src="app.js"></script>
+</body>
+</html>
