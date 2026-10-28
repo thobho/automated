@@ -1,0 +1,854 @@
+year,indicator,area,sex,value,unit,value_type,formula,source_id
+2000,deaths,national,total,368028,persons,reported,,S12
+2001,deaths,national,total,363220,persons,reported,,S12
+2002,deaths,national,total,359486,persons,reported,,S12
+2003,deaths,national,total,365230,persons,reported,,S12
+2004,deaths,national,total,363522,persons,reported,,S12
+2005,deaths,national,total,368285,persons,reported,,S12
+2006,deaths,national,total,369686,persons,reported,,S12
+2007,deaths,national,total,377226,persons,reported,,S12
+2008,deaths,national,total,379399,persons,reported,,S12
+2009,deaths,national,total,384940,persons,reported,,S12
+2010,deaths,national,total,378478,persons,reported,,S12
+2011,deaths,national,total,375501,persons,reported,,S12
+2012,deaths,national,total,384788,persons,reported,,S12
+2013,deaths,national,total,387312,persons,reported,,S12
+2014,deaths,national,total,376467,persons,reported,,S12
+2015,deaths,national,total,394921,persons,reported,,S12
+2016,deaths,national,total,388009,persons,reported,,S12
+2017,deaths,national,total,402852,persons,reported,,S12
+2018,deaths,national,total,414200,persons,reported,,S12
+2019,deaths,national,total,409709,persons,reported,,S12
+2020,deaths,national,total,477355,persons,reported,,S12
+2021,deaths,national,total,519517,persons,reported,,S12
+2022,deaths,national,total,448448,persons,reported,,S12
+2023,deaths,national,total,409036,persons,reported,,S12
+2024,deaths,national,total,408504,persons,reported,,S12
+2025,deaths,national,total,405747,persons,reported,,S12
+2000,deaths,rural,total,149816,persons,reported,,S12
+2001,deaths,rural,total,147605,persons,reported,,S12
+2002,deaths,rural,total,145857,persons,reported,,S12
+2003,deaths,rural,total,148881,persons,reported,,S12
+2004,deaths,rural,total,147007,persons,reported,,S12
+2005,deaths,rural,total,148882,persons,reported,,S12
+2006,deaths,rural,total,147467,persons,reported,,S12
+2007,deaths,rural,total,150731,persons,reported,,S12
+2008,deaths,rural,total,150749,persons,reported,,S12
+2009,deaths,rural,total,153168,persons,reported,,S12
+2010,deaths,rural,total,151026,persons,reported,,S12
+2011,deaths,rural,total,149977,persons,reported,,S12
+2012,deaths,rural,total,151773,persons,reported,,S12
+2013,deaths,rural,total,152215,persons,reported,,S12
+2014,deaths,rural,total,146770,persons,reported,,S12
+2015,deaths,rural,total,152854,persons,reported,,S12
+2016,deaths,rural,total,151260,persons,reported,,S12
+2017,deaths,rural,total,155506,persons,reported,,S12
+2018,deaths,rural,total,158920,persons,reported,,S12
+2019,deaths,rural,total,156511,persons,reported,,S12
+2020,deaths,rural,total,181984,persons,reported,,S12
+2021,deaths,rural,total,196922,persons,reported,,S12
+2022,deaths,rural,total,170014,persons,reported,,S12
+2023,deaths,rural,total,153504,persons,reported,,S12
+2024,deaths,rural,total,153693,persons,reported,,S12
+2025,deaths,rural,total,154159,persons,reported,,S12
+2000,deaths,urban,total,218212,persons,reported,,S12
+2001,deaths,urban,total,215615,persons,reported,,S12
+2002,deaths,urban,total,213629,persons,reported,,S12
+2003,deaths,urban,total,216349,persons,reported,,S12
+2004,deaths,urban,total,216515,persons,reported,,S12
+2005,deaths,urban,total,219403,persons,reported,,S12
+2006,deaths,urban,total,222219,persons,reported,,S12
+2007,deaths,urban,total,226495,persons,reported,,S12
+2008,deaths,urban,total,228650,persons,reported,,S12
+2009,deaths,urban,total,231772,persons,reported,,S12
+2010,deaths,urban,total,227452,persons,reported,,S12
+2011,deaths,urban,total,225524,persons,reported,,S12
+2012,deaths,urban,total,233015,persons,reported,,S12
+2013,deaths,urban,total,235097,persons,reported,,S12
+2014,deaths,urban,total,229697,persons,reported,,S12
+2015,deaths,urban,total,242067,persons,reported,,S12
+2016,deaths,urban,total,236749,persons,reported,,S12
+2017,deaths,urban,total,247346,persons,reported,,S12
+2018,deaths,urban,total,255280,persons,reported,,S12
+2019,deaths,urban,total,253198,persons,reported,,S12
+2020,deaths,urban,total,295371,persons,reported,,S12
+2021,deaths,urban,total,322595,persons,reported,,S12
+2022,deaths,urban,total,278434,persons,reported,,S12
+2023,deaths,urban,total,255532,persons,reported,,S12
+2024,deaths,urban,total,254811,persons,reported,,S12
+2025,deaths,urban,total,251588,persons,reported,,S12
+2000,deaths_per_1000,national,total,9.62,per 1000,reported,,S12
+2001,deaths_per_1000,national,total,9.5,per 1000,reported,,S12
+2002,deaths_per_1000,national,total,9.4,per 1000,reported,,S12
+2003,deaths_per_1000,national,total,9.56,per 1000,reported,,S12
+2004,deaths_per_1000,national,total,9.52,per 1000,reported,,S12
+2005,deaths_per_1000,national,total,9.65,per 1000,reported,,S12
+2006,deaths_per_1000,national,total,9.69,per 1000,reported,,S12
+2007,deaths_per_1000,national,total,9.9,per 1000,reported,,S12
+2008,deaths_per_1000,national,total,9.95,per 1000,reported,,S12
+2009,deaths_per_1000,national,total,10.09,per 1000,reported,,S12
+2010,deaths_per_1000,national,total,9.83,per 1000,reported,,S12
+2011,deaths_per_1000,national,total,9.75,per 1000,reported,,S12
+2012,deaths_per_1000,national,total,9.99,per 1000,reported,,S12
+2013,deaths_per_1000,national,total,10.06,per 1000,reported,,S12
+2014,deaths_per_1000,national,total,9.78,per 1000,reported,,S12
+2015,deaths_per_1000,national,total,10.27,per 1000,reported,,S12
+2016,deaths_per_1000,national,total,10.1,per 1000,reported,,S12
+2017,deaths_per_1000,national,total,10.48,per 1000,reported,,S12
+2018,deaths_per_1000,national,total,10.78,per 1000,reported,,S12
+2019,deaths_per_1000,national,total,10.67,per 1000,reported,,S12
+2020,deaths_per_1000,national,total,12.5,per 1000,reported,,S12
+2021,deaths_per_1000,national,total,13.68,per 1000,reported,,S12
+2022,deaths_per_1000,national,total,11.86,per 1000,reported,,S12
+2023,deaths_per_1000,national,total,10.85,per 1000,reported,,S12
+2024,deaths_per_1000,national,total,10.88,per 1000,reported,,S12
+2025,deaths_per_1000,national,total,10.85,per 1000,reported,,S12
+2000,deaths_per_1000,rural,total,10.19,per 1000,reported,,S12
+2001,deaths_per_1000,rural,total,10.03,per 1000,reported,,S12
+2002,deaths_per_1000,rural,total,9.9,per 1000,reported,,S12
+2003,deaths_per_1000,rural,total,10.1,per 1000,reported,,S12
+2004,deaths_per_1000,rural,total,9.95,per 1000,reported,,S12
+2005,deaths_per_1000,rural,total,10.05,per 1000,reported,,S12
+2006,deaths_per_1000,rural,total,9.94,per 1000,reported,,S12
+2007,deaths_per_1000,rural,total,10.14,per 1000,reported,,S12
+2008,deaths_per_1000,rural,total,10.11,per 1000,reported,,S12
+2009,deaths_per_1000,rural,total,10.24,per 1000,reported,,S12
+2010,deaths_per_1000,rural,total,10.01,per 1000,reported,,S12
+2011,deaths_per_1000,rural,total,9.92,per 1000,reported,,S12
+2012,deaths_per_1000,rural,total,10.0,per 1000,reported,,S12
+2013,deaths_per_1000,rural,total,10.01,per 1000,reported,,S12
+2014,deaths_per_1000,rural,total,9.63,per 1000,reported,,S12
+2015,deaths_per_1000,rural,total,10.02,per 1000,reported,,S12
+2016,deaths_per_1000,rural,total,9.9,per 1000,reported,,S12
+2017,deaths_per_1000,rural,total,10.17,per 1000,reported,,S12
+2018,deaths_per_1000,rural,total,10.37,per 1000,reported,,S12
+2019,deaths_per_1000,rural,total,10.21,per 1000,reported,,S12
+2020,deaths_per_1000,rural,total,11.89,per 1000,reported,,S12
+2021,deaths_per_1000,rural,total,12.88,per 1000,reported,,S12
+2022,deaths_per_1000,rural,total,11.14,per 1000,reported,,S12
+2023,deaths_per_1000,rural,total,10.06,per 1000,reported,,S12
+2024,deaths_per_1000,rural,total,10.1,per 1000,reported,,S12
+2025,deaths_per_1000,rural,total,10.15,per 1000,reported,,S12
+2000,deaths_per_1000,urban,total,9.26,per 1000,reported,,S12
+2001,deaths_per_1000,urban,total,9.16,per 1000,reported,,S12
+2002,deaths_per_1000,urban,total,9.09,per 1000,reported,,S12
+2003,deaths_per_1000,urban,total,9.23,per 1000,reported,,S12
+2004,deaths_per_1000,urban,total,9.25,per 1000,reported,,S12
+2005,deaths_per_1000,urban,total,9.4,per 1000,reported,,S12
+2006,deaths_per_1000,urban,total,9.54,per 1000,reported,,S12
+2007,deaths_per_1000,urban,total,9.74,per 1000,reported,,S12
+2008,deaths_per_1000,urban,total,9.85,per 1000,reported,,S12
+2009,deaths_per_1000,urban,total,9.99,per 1000,reported,,S12
+2010,deaths_per_1000,urban,total,9.71,per 1000,reported,,S12
+2011,deaths_per_1000,urban,total,9.64,per 1000,reported,,S12
+2012,deaths_per_1000,urban,total,9.97,per 1000,reported,,S12
+2013,deaths_per_1000,urban,total,10.09,per 1000,reported,,S12
+2014,deaths_per_1000,urban,total,9.88,per 1000,reported,,S12
+2015,deaths_per_1000,urban,total,10.43,per 1000,reported,,S12
+2016,deaths_per_1000,urban,total,10.23,per 1000,reported,,S12
+2017,deaths_per_1000,urban,total,10.7,per 1000,reported,,S12
+2018,deaths_per_1000,urban,total,11.05,per 1000,reported,,S12
+2019,deaths_per_1000,urban,total,10.98,per 1000,reported,,S12
+2020,deaths_per_1000,urban,total,12.91,per 1000,reported,,S12
+2021,deaths_per_1000,urban,total,14.21,per 1000,reported,,S12
+2022,deaths_per_1000,urban,total,12.34,per 1000,reported,,S12
+2023,deaths_per_1000,urban,total,11.38,per 1000,reported,,S12
+2024,deaths_per_1000,urban,total,11.4,per 1000,reported,,S12
+2025,deaths_per_1000,urban,total,11.33,per 1000,reported,,S12
+2002,gross_reproduction_rate,national,female,0.606,daughters per woman,reported,,S13
+2003,gross_reproduction_rate,national,female,0.594,daughters per woman,reported,,S13
+2004,gross_reproduction_rate,national,female,0.595,daughters per woman,reported,,S13
+2005,gross_reproduction_rate,national,female,0.604,daughters per woman,reported,,S13
+2006,gross_reproduction_rate,national,female,0.615,daughters per woman,reported,,S13
+2007,gross_reproduction_rate,national,female,0.635,daughters per woman,reported,,S13
+2008,gross_reproduction_rate,national,female,0.676,daughters per woman,reported,,S13
+2009,gross_reproduction_rate,national,female,0.678,daughters per woman,reported,,S13
+2010,gross_reproduction_rate,national,female,0.662,daughters per woman,reported,,S13
+2011,gross_reproduction_rate,national,female,0.63,daughters per woman,reported,,S13
+2012,gross_reproduction_rate,national,female,0.631,daughters per woman,reported,,S13
+2013,gross_reproduction_rate,national,female,0.611,daughters per woman,reported,,S13
+2014,gross_reproduction_rate,national,female,0.626,daughters per woman,reported,,S13
+2015,gross_reproduction_rate,national,female,0.627,daughters per woman,reported,,S13
+2016,gross_reproduction_rate,national,female,0.66,daughters per woman,reported,,S13
+2017,gross_reproduction_rate,national,female,0.707,daughters per woman,reported,,S13
+2018,gross_reproduction_rate,national,female,0.696,daughters per woman,reported,,S13
+2019,gross_reproduction_rate,national,female,0.69,daughters per woman,reported,,S13
+2020,gross_reproduction_rate,national,female,0.675,daughters per woman,reported,,S13
+2021,gross_reproduction_rate,national,female,0.647,daughters per woman,reported,,S13
+2022,gross_reproduction_rate,national,female,0.614,daughters per woman,reported,,S13
+2023,gross_reproduction_rate,national,female,0.565,daughters per woman,reported,,S13
+2024,gross_reproduction_rate,national,female,0.533,daughters per woman,reported,,S13
+2025,gross_reproduction_rate,national,female,0.52,daughters per woman,reported,,S13
+2000,infant_deaths,national,total,3068,persons,reported,,S12
+2001,infant_deaths,national,total,2823,persons,reported,,S12
+2002,infant_deaths,national,total,2662,persons,reported,,S12
+2003,infant_deaths,national,total,2470,persons,reported,,S12
+2004,infant_deaths,national,total,2423,persons,reported,,S12
+2005,infant_deaths,national,total,2340,persons,reported,,S12
+2006,infant_deaths,national,total,2238,persons,reported,,S12
+2007,infant_deaths,national,total,2322,persons,reported,,S12
+2008,infant_deaths,national,total,2338,persons,reported,,S12
+2009,infant_deaths,national,total,2327,persons,reported,,S12
+2010,infant_deaths,national,total,2057,persons,reported,,S12
+2011,infant_deaths,national,total,1836,persons,reported,,S12
+2012,infant_deaths,national,total,1791,persons,reported,,S12
+2013,infant_deaths,national,total,1684,persons,reported,,S12
+2014,infant_deaths,national,total,1583,persons,reported,,S12
+2015,infant_deaths,national,total,1476,persons,reported,,S12
+2016,infant_deaths,national,total,1522,persons,reported,,S12
+2017,infant_deaths,national,total,1604,persons,reported,,S12
+2018,infant_deaths,national,total,1494,persons,reported,,S12
+2019,infant_deaths,national,total,1412,persons,reported,,S12
+2020,infant_deaths,national,total,1270,persons,reported,,S12
+2021,infant_deaths,national,total,1306,persons,reported,,S12
+2022,infant_deaths,national,total,1171,persons,reported,,S12
+2023,infant_deaths,national,total,1051,persons,reported,,S12
+2024,infant_deaths,national,total,898,persons,reported,,S12
+2025,infant_deaths,national,total,777,persons,reported,,S12
+2000,infant_deaths,rural,total,1343,persons,reported,,S12
+2001,infant_deaths,rural,total,1248,persons,reported,,S12
+2002,infant_deaths,rural,total,1111,persons,reported,,S12
+2003,infant_deaths,rural,total,1024,persons,reported,,S12
+2004,infant_deaths,rural,total,961,persons,reported,,S12
+2005,infant_deaths,rural,total,1001,persons,reported,,S12
+2006,infant_deaths,rural,total,895,persons,reported,,S12
+2007,infant_deaths,rural,total,951,persons,reported,,S12
+2008,infant_deaths,rural,total,975,persons,reported,,S12
+2009,infant_deaths,rural,total,942,persons,reported,,S12
+2010,infant_deaths,rural,total,859,persons,reported,,S12
+2011,infant_deaths,rural,total,777,persons,reported,,S12
+2012,infant_deaths,rural,total,785,persons,reported,,S12
+2013,infant_deaths,rural,total,756,persons,reported,,S12
+2014,infant_deaths,rural,total,698,persons,reported,,S12
+2015,infant_deaths,rural,total,617,persons,reported,,S12
+2016,infant_deaths,rural,total,646,persons,reported,,S12
+2017,infant_deaths,rural,total,673,persons,reported,,S12
+2018,infant_deaths,rural,total,671,persons,reported,,S12
+2019,infant_deaths,rural,total,600,persons,reported,,S12
+2020,infant_deaths,rural,total,544,persons,reported,,S12
+2021,infant_deaths,rural,total,537,persons,reported,,S12
+2022,infant_deaths,rural,total,474,persons,reported,,S12
+2023,infant_deaths,rural,total,462,persons,reported,,S12
+2024,infant_deaths,rural,total,369,persons,reported,,S12
+2025,infant_deaths,rural,total,328,persons,reported,,S12
+2000,infant_deaths,urban,total,1725,persons,reported,,S12
+2001,infant_deaths,urban,total,1575,persons,reported,,S12
+2002,infant_deaths,urban,total,1551,persons,reported,,S12
+2003,infant_deaths,urban,total,1446,persons,reported,,S12
+2004,infant_deaths,urban,total,1462,persons,reported,,S12
+2005,infant_deaths,urban,total,1339,persons,reported,,S12
+2006,infant_deaths,urban,total,1343,persons,reported,,S12
+2007,infant_deaths,urban,total,1371,persons,reported,,S12
+2008,infant_deaths,urban,total,1363,persons,reported,,S12
+2009,infant_deaths,urban,total,1385,persons,reported,,S12
+2010,infant_deaths,urban,total,1198,persons,reported,,S12
+2011,infant_deaths,urban,total,1059,persons,reported,,S12
+2012,infant_deaths,urban,total,1006,persons,reported,,S12
+2013,infant_deaths,urban,total,928,persons,reported,,S12
+2014,infant_deaths,urban,total,885,persons,reported,,S12
+2015,infant_deaths,urban,total,859,persons,reported,,S12
+2016,infant_deaths,urban,total,876,persons,reported,,S12
+2017,infant_deaths,urban,total,931,persons,reported,,S12
+2018,infant_deaths,urban,total,823,persons,reported,,S12
+2019,infant_deaths,urban,total,812,persons,reported,,S12
+2020,infant_deaths,urban,total,726,persons,reported,,S12
+2021,infant_deaths,urban,total,769,persons,reported,,S12
+2022,infant_deaths,urban,total,697,persons,reported,,S12
+2023,infant_deaths,urban,total,589,persons,reported,,S12
+2024,infant_deaths,urban,total,529,persons,reported,,S12
+2025,infant_deaths,urban,total,449,persons,reported,,S12
+2000,infant_deaths_per_1000_live_births,national,total,8.11,per 1000 live births,reported,,S12
+2001,infant_deaths_per_1000_live_births,national,total,7.67,per 1000 live births,reported,,S12
+2002,infant_deaths_per_1000_live_births,national,total,7.52,per 1000 live births,reported,,S12
+2003,infant_deaths_per_1000_live_births,national,total,7.04,per 1000 live births,reported,,S12
+2004,infant_deaths_per_1000_live_births,national,total,6.8,per 1000 live births,reported,,S12
+2005,infant_deaths_per_1000_live_births,national,total,6.42,per 1000 live births,reported,,S12
+2006,infant_deaths_per_1000_live_births,national,total,5.98,per 1000 live births,reported,,S12
+2007,infant_deaths_per_1000_live_births,national,total,5.99,per 1000 live births,reported,,S12
+2008,infant_deaths_per_1000_live_births,national,total,5.64,per 1000 live births,reported,,S12
+2009,infant_deaths_per_1000_live_births,national,total,5.57,per 1000 live births,reported,,S12
+2010,infant_deaths_per_1000_live_births,national,total,4.98,per 1000 live births,reported,,S12
+2011,infant_deaths_per_1000_live_births,national,total,4.73,per 1000 live births,reported,,S12
+2012,infant_deaths_per_1000_live_births,national,total,4.64,per 1000 live births,reported,,S12
+2013,infant_deaths_per_1000_live_births,national,total,4.56,per 1000 live births,reported,,S12
+2014,infant_deaths_per_1000_live_births,national,total,4.22,per 1000 live births,reported,,S12
+2015,infant_deaths_per_1000_live_births,national,total,4.0,per 1000 live births,reported,,S12
+2016,infant_deaths_per_1000_live_births,national,total,3.98,per 1000 live births,reported,,S12
+2017,infant_deaths_per_1000_live_births,national,total,3.99,per 1000 live births,reported,,S12
+2018,infant_deaths_per_1000_live_births,national,total,3.85,per 1000 live births,reported,,S12
+2019,infant_deaths_per_1000_live_births,national,total,3.77,per 1000 live births,reported,,S12
+2020,infant_deaths_per_1000_live_births,national,total,3.57,per 1000 live births,reported,,S12
+2021,infant_deaths_per_1000_live_births,national,total,3.94,per 1000 live births,reported,,S12
+2022,infant_deaths_per_1000_live_births,national,total,3.84,per 1000 live births,reported,,S12
+2023,infant_deaths_per_1000_live_births,national,total,3.86,per 1000 live births,reported,,S12
+2024,infant_deaths_per_1000_live_births,national,total,3.57,per 1000 live births,reported,,S12
+2025,infant_deaths_per_1000_live_births,national,total,3.26,per 1000 live births,reported,,S12
+2000,infant_deaths_per_1000_live_births,rural,total,7.9,per 1000 live births,reported,,S12
+2001,infant_deaths_per_1000_live_births,rural,total,7.68,per 1000 live births,reported,,S12
+2002,infant_deaths_per_1000_live_births,rural,total,7.11,per 1000 live births,reported,,S12
+2003,infant_deaths_per_1000_live_births,rural,total,6.76,per 1000 live births,reported,,S12
+2004,infant_deaths_per_1000_live_births,rural,total,6.35,per 1000 live births,reported,,S12
+2005,infant_deaths_per_1000_live_births,rural,total,6.53,per 1000 live births,reported,,S12
+2006,infant_deaths_per_1000_live_births,rural,total,5.73,per 1000 live births,reported,,S12
+2007,infant_deaths_per_1000_live_births,rural,total,5.86,per 1000 live births,reported,,S12
+2008,infant_deaths_per_1000_live_births,rural,total,5.63,per 1000 live births,reported,,S12
+2009,infant_deaths_per_1000_live_births,rural,total,5.5,per 1000 live births,reported,,S12
+2010,infant_deaths_per_1000_live_births,rural,total,5.01,per 1000 live births,reported,,S12
+2011,infant_deaths_per_1000_live_births,rural,total,4.78,per 1000 live births,reported,,S12
+2012,infant_deaths_per_1000_live_births,rural,total,4.83,per 1000 live births,reported,,S12
+2013,infant_deaths_per_1000_live_births,rural,total,4.85,per 1000 live births,reported,,S12
+2014,infant_deaths_per_1000_live_births,rural,total,4.43,per 1000 live births,reported,,S12
+2015,infant_deaths_per_1000_live_births,rural,total,4.06,per 1000 live births,reported,,S12
+2016,infant_deaths_per_1000_live_births,rural,total,4.14,per 1000 live births,reported,,S12
+2017,infant_deaths_per_1000_live_births,rural,total,4.06,per 1000 live births,reported,,S12
+2018,infant_deaths_per_1000_live_births,rural,total,4.21,per 1000 live births,reported,,S12
+2019,infant_deaths_per_1000_live_births,rural,total,3.88,per 1000 live births,reported,,S12
+2020,infant_deaths_per_1000_live_births,rural,total,3.7,per 1000 live births,reported,,S12
+2021,infant_deaths_per_1000_live_births,rural,total,3.91,per 1000 live births,reported,,S12
+2022,infant_deaths_per_1000_live_births,rural,total,3.74,per 1000 live births,reported,,S12
+2023,infant_deaths_per_1000_live_births,rural,total,4.04,per 1000 live births,reported,,S12
+2024,infant_deaths_per_1000_live_births,rural,total,3.56,per 1000 live births,reported,,S12
+2025,infant_deaths_per_1000_live_births,rural,total,3.35,per 1000 live births,reported,,S12
+2000,infant_deaths_per_1000_live_births,urban,total,8.28,per 1000 live births,reported,,S12
+2001,infant_deaths_per_1000_live_births,urban,total,7.66,per 1000 live births,reported,,S12
+2002,infant_deaths_per_1000_live_births,urban,total,7.86,per 1000 live births,reported,,S12
+2003,infant_deaths_per_1000_live_births,urban,total,7.25,per 1000 live births,reported,,S12
+2004,infant_deaths_per_1000_live_births,urban,total,7.14,per 1000 live births,reported,,S12
+2005,infant_deaths_per_1000_live_births,urban,total,6.34,per 1000 live births,reported,,S12
+2006,infant_deaths_per_1000_live_births,urban,total,6.16,per 1000 live births,reported,,S12
+2007,infant_deaths_per_1000_live_births,urban,total,6.08,per 1000 live births,reported,,S12
+2008,infant_deaths_per_1000_live_births,urban,total,5.65,per 1000 live births,reported,,S12
+2009,infant_deaths_per_1000_live_births,urban,total,5.62,per 1000 live births,reported,,S12
+2010,infant_deaths_per_1000_live_births,urban,total,4.95,per 1000 live births,reported,,S12
+2011,infant_deaths_per_1000_live_births,urban,total,4.69,per 1000 live births,reported,,S12
+2012,infant_deaths_per_1000_live_births,urban,total,4.5,per 1000 live births,reported,,S12
+2013,infant_deaths_per_1000_live_births,urban,total,4.34,per 1000 live births,reported,,S12
+2014,infant_deaths_per_1000_live_births,urban,total,4.07,per 1000 live births,reported,,S12
+2015,infant_deaths_per_1000_live_births,urban,total,3.95,per 1000 live births,reported,,S12
+2016,infant_deaths_per_1000_live_births,urban,total,3.87,per 1000 live births,reported,,S12
+2017,infant_deaths_per_1000_live_births,urban,total,3.94,per 1000 live births,reported,,S12
+2018,infant_deaths_per_1000_live_births,urban,total,3.6,per 1000 live births,reported,,S12
+2019,infant_deaths_per_1000_live_births,urban,total,3.69,per 1000 live births,reported,,S12
+2020,infant_deaths_per_1000_live_births,urban,total,3.49,per 1000 live births,reported,,S12
+2021,infant_deaths_per_1000_live_births,urban,total,3.96,per 1000 live births,reported,,S12
+2022,infant_deaths_per_1000_live_births,urban,total,3.9,per 1000 live births,reported,,S12
+2023,infant_deaths_per_1000_live_births,urban,total,3.72,per 1000 live births,reported,,S12
+2024,infant_deaths_per_1000_live_births,urban,total,3.57,per 1000 live births,reported,,S12
+2025,infant_deaths_per_1000_live_births,urban,total,3.2,per 1000 live births,reported,,S12
+2000,life_expectancy_at_birth,national,female,78.0,years,reported,,S14
+2001,life_expectancy_at_birth,national,female,78.4,years,reported,,S14
+2002,life_expectancy_at_birth,national,female,78.8,years,reported,,S14
+2003,life_expectancy_at_birth,national,female,78.9,years,reported,,S14
+2004,life_expectancy_at_birth,national,female,79.2,years,reported,,S14
+2005,life_expectancy_at_birth,national,female,79.4,years,reported,,S14
+2006,life_expectancy_at_birth,national,female,79.6,years,reported,,S14
+2007,life_expectancy_at_birth,national,female,79.7,years,reported,,S14
+2008,life_expectancy_at_birth,national,female,80.0,years,reported,,S14
+2009,life_expectancy_at_birth,national,female,80.1,years,reported,,S14
+2010,life_expectancy_at_birth,national,female,80.6,years,reported,,S14
+2011,life_expectancy_at_birth,national,female,80.9,years,reported,,S14
+2012,life_expectancy_at_birth,national,female,81.0,years,reported,,S14
+2013,life_expectancy_at_birth,national,female,81.1,years,reported,,S14
+2014,life_expectancy_at_birth,national,female,81.6,years,reported,,S14
+2015,life_expectancy_at_birth,national,female,81.6,years,reported,,S14
+2016,life_expectancy_at_birth,national,female,81.9,years,reported,,S14
+2017,life_expectancy_at_birth,national,female,81.8,years,reported,,S14
+2018,life_expectancy_at_birth,national,female,81.7,years,reported,,S14
+2019,life_expectancy_at_birth,national,female,81.8,years,reported,,S14
+2020,life_expectancy_at_birth,national,female,80.7,years,reported,,S14
+2021,life_expectancy_at_birth,national,female,79.7,years,reported,,S14
+2022,life_expectancy_at_birth,national,female,81.1,years,reported,,S14
+2023,life_expectancy_at_birth,national,female,82.0,years,reported,,S14
+2024,life_expectancy_at_birth,national,female,82.26,years,reported,,S14
+2025,life_expectancy_at_birth,national,female,82.48,years,reported,,S14
+2000,life_expectancy_at_birth,national,male,69.7,years,reported,,S14
+2001,life_expectancy_at_birth,national,male,70.2,years,reported,,S14
+2002,life_expectancy_at_birth,national,male,70.4,years,reported,,S14
+2003,life_expectancy_at_birth,national,male,70.5,years,reported,,S14
+2004,life_expectancy_at_birth,national,male,70.7,years,reported,,S14
+2005,life_expectancy_at_birth,national,male,70.8,years,reported,,S14
+2006,life_expectancy_at_birth,national,male,70.9,years,reported,,S14
+2007,life_expectancy_at_birth,national,male,71.0,years,reported,,S14
+2008,life_expectancy_at_birth,national,male,71.3,years,reported,,S14
+2009,life_expectancy_at_birth,national,male,71.5,years,reported,,S14
+2010,life_expectancy_at_birth,national,male,72.1,years,reported,,S14
+2011,life_expectancy_at_birth,national,male,72.4,years,reported,,S14
+2012,life_expectancy_at_birth,national,male,72.7,years,reported,,S14
+2013,life_expectancy_at_birth,national,male,73.1,years,reported,,S14
+2014,life_expectancy_at_birth,national,male,73.8,years,reported,,S14
+2015,life_expectancy_at_birth,national,male,73.6,years,reported,,S14
+2016,life_expectancy_at_birth,national,male,73.9,years,reported,,S14
+2017,life_expectancy_at_birth,national,male,74.0,years,reported,,S14
+2018,life_expectancy_at_birth,national,male,73.8,years,reported,,S14
+2019,life_expectancy_at_birth,national,male,74.1,years,reported,,S14
+2020,life_expectancy_at_birth,national,male,72.6,years,reported,,S14
+2021,life_expectancy_at_birth,national,male,71.8,years,reported,,S14
+2022,life_expectancy_at_birth,national,male,73.4,years,reported,,S14
+2023,life_expectancy_at_birth,national,male,74.7,years,reported,,S14
+2024,life_expectancy_at_birth,national,male,74.93,years,reported,,S14
+2025,life_expectancy_at_birth,national,male,75.37,years,reported,,S14
+2000,life_expectancy_at_birth,rural,female,78.4,years,reported,,S14
+2001,life_expectancy_at_birth,rural,female,78.7,years,reported,,S14
+2002,life_expectancy_at_birth,rural,female,79.1,years,reported,,S14
+2003,life_expectancy_at_birth,rural,female,79.2,years,reported,,S14
+2004,life_expectancy_at_birth,rural,female,79.5,years,reported,,S14
+2005,life_expectancy_at_birth,rural,female,79.6,years,reported,,S14
+2006,life_expectancy_at_birth,rural,female,79.9,years,reported,,S14
+2007,life_expectancy_at_birth,rural,female,80.1,years,reported,,S14
+2008,life_expectancy_at_birth,rural,female,80.2,years,reported,,S14
+2009,life_expectancy_at_birth,rural,female,80.2,years,reported,,S14
+2010,life_expectancy_at_birth,rural,female,80.7,years,reported,,S14
+2011,life_expectancy_at_birth,rural,female,80.9,years,reported,,S14
+2012,life_expectancy_at_birth,rural,female,81.0,years,reported,,S14
+2013,life_expectancy_at_birth,rural,female,81.1,years,reported,,S14
+2014,life_expectancy_at_birth,rural,female,81.7,years,reported,,S14
+2015,life_expectancy_at_birth,rural,female,81.7,years,reported,,S14
+2016,life_expectancy_at_birth,rural,female,81.9,years,reported,,S14
+2017,life_expectancy_at_birth,rural,female,81.8,years,reported,,S14
+2018,life_expectancy_at_birth,rural,female,81.6,years,reported,,S14
+2019,life_expectancy_at_birth,rural,female,81.8,years,reported,,S14
+2020,life_expectancy_at_birth,rural,female,80.6,years,reported,,S14
+2021,life_expectancy_at_birth,rural,female,79.6,years,reported,,S14
+2022,life_expectancy_at_birth,rural,female,81.1,years,reported,,S14
+2023,life_expectancy_at_birth,rural,female,82.1,years,reported,,S14
+2024,life_expectancy_at_birth,rural,female,82.21,years,reported,,S14
+2025,life_expectancy_at_birth,rural,female,82.39,years,reported,,S14
+2000,life_expectancy_at_birth,rural,male,69.4,years,reported,,S14
+2001,life_expectancy_at_birth,rural,male,69.9,years,reported,,S14
+2002,life_expectancy_at_birth,rural,male,70.0,years,reported,,S14
+2003,life_expectancy_at_birth,rural,male,70.0,years,reported,,S14
+2004,life_expectancy_at_birth,rural,male,70.3,years,reported,,S14
+2005,life_expectancy_at_birth,rural,male,70.3,years,reported,,S14
+2006,life_expectancy_at_birth,rural,male,70.6,years,reported,,S14
+2007,life_expectancy_at_birth,rural,male,70.4,years,reported,,S14
+2008,life_expectancy_at_birth,rural,male,70.7,years,reported,,S14
+2009,life_expectancy_at_birth,rural,male,71.0,years,reported,,S14
+2010,life_expectancy_at_birth,rural,male,71.4,years,reported,,S14
+2011,life_expectancy_at_birth,rural,male,71.6,years,reported,,S14
+2012,life_expectancy_at_birth,rural,male,72.1,years,reported,,S14
+2013,life_expectancy_at_birth,rural,male,72.4,years,reported,,S14
+2014,life_expectancy_at_birth,rural,male,73.1,years,reported,,S14
+2015,life_expectancy_at_birth,rural,male,73.0,years,reported,,S14
+2016,life_expectancy_at_birth,rural,male,73.2,years,reported,,S14
+2017,life_expectancy_at_birth,rural,male,73.3,years,reported,,S14
+2018,life_expectancy_at_birth,rural,male,73.2,years,reported,,S14
+2019,life_expectancy_at_birth,rural,male,73.4,years,reported,,S14
+2020,life_expectancy_at_birth,rural,male,72.1,years,reported,,S14
+2021,life_expectancy_at_birth,rural,male,71.4,years,reported,,S14
+2022,life_expectancy_at_birth,rural,male,73.0,years,reported,,S14
+2023,life_expectancy_at_birth,rural,male,74.2,years,reported,,S14
+2024,life_expectancy_at_birth,rural,male,74.68,years,reported,,S14
+2025,life_expectancy_at_birth,rural,male,74.88,years,reported,,S14
+2000,life_expectancy_at_birth,urban,female,77.8,years,reported,,S14
+2001,life_expectancy_at_birth,urban,female,78.2,years,reported,,S14
+2002,life_expectancy_at_birth,urban,female,78.6,years,reported,,S14
+2003,life_expectancy_at_birth,urban,female,78.8,years,reported,,S14
+2004,life_expectancy_at_birth,urban,female,79.1,years,reported,,S14
+2005,life_expectancy_at_birth,urban,female,79.3,years,reported,,S14
+2006,life_expectancy_at_birth,urban,female,79.5,years,reported,,S14
+2007,life_expectancy_at_birth,urban,female,79.6,years,reported,,S14
+2008,life_expectancy_at_birth,urban,female,79.8,years,reported,,S14
+2009,life_expectancy_at_birth,urban,female,80.0,years,reported,,S14
+2010,life_expectancy_at_birth,urban,female,80.6,years,reported,,S14
+2011,life_expectancy_at_birth,urban,female,80.9,years,reported,,S14
+2012,life_expectancy_at_birth,urban,female,81.0,years,reported,,S14
+2013,life_expectancy_at_birth,urban,female,81.1,years,reported,,S14
+2014,life_expectancy_at_birth,urban,female,81.5,years,reported,,S14
+2015,life_expectancy_at_birth,urban,female,81.5,years,reported,,S14
+2016,life_expectancy_at_birth,urban,female,81.9,years,reported,,S14
+2017,life_expectancy_at_birth,urban,female,81.8,years,reported,,S14
+2018,life_expectancy_at_birth,urban,female,81.6,years,reported,,S14
+2019,life_expectancy_at_birth,urban,female,81.7,years,reported,,S14
+2020,life_expectancy_at_birth,urban,female,80.8,years,reported,,S14
+2021,life_expectancy_at_birth,urban,female,79.8,years,reported,,S14
+2022,life_expectancy_at_birth,urban,female,81.0,years,reported,,S14
+2023,life_expectancy_at_birth,urban,female,81.9,years,reported,,S14
+2024,life_expectancy_at_birth,urban,female,82.27,years,reported,,S14
+2025,life_expectancy_at_birth,urban,female,82.5,years,reported,,S14
+2000,life_expectancy_at_birth,urban,male,70.0,years,reported,,S14
+2001,life_expectancy_at_birth,urban,male,70.4,years,reported,,S14
+2002,life_expectancy_at_birth,urban,male,70.7,years,reported,,S14
+2003,life_expectancy_at_birth,urban,male,70.9,years,reported,,S14
+2004,life_expectancy_at_birth,urban,male,70.9,years,reported,,S14
+2005,life_expectancy_at_birth,urban,male,71.2,years,reported,,S14
+2006,life_expectancy_at_birth,urban,male,71.2,years,reported,,S14
+2007,life_expectancy_at_birth,urban,male,71.4,years,reported,,S14
+2008,life_expectancy_at_birth,urban,male,71.6,years,reported,,S14
+2009,life_expectancy_at_birth,urban,male,71.9,years,reported,,S14
+2010,life_expectancy_at_birth,urban,male,72.6,years,reported,,S14
+2011,life_expectancy_at_birth,urban,male,73.0,years,reported,,S14
+2012,life_expectancy_at_birth,urban,male,73.1,years,reported,,S14
+2013,life_expectancy_at_birth,urban,male,73.5,years,reported,,S14
+2014,life_expectancy_at_birth,urban,male,74.2,years,reported,,S14
+2015,life_expectancy_at_birth,urban,male,74.0,years,reported,,S14
+2016,life_expectancy_at_birth,urban,male,74.4,years,reported,,S14
+2017,life_expectancy_at_birth,urban,male,74.4,years,reported,,S14
+2018,life_expectancy_at_birth,urban,male,74.2,years,reported,,S14
+2019,life_expectancy_at_birth,urban,male,74.5,years,reported,,S14
+2020,life_expectancy_at_birth,urban,male,72.9,years,reported,,S14
+2021,life_expectancy_at_birth,urban,male,72.0,years,reported,,S14
+2022,life_expectancy_at_birth,urban,male,73.7,years,reported,,S14
+2023,life_expectancy_at_birth,urban,male,75.0,years,reported,,S14
+2024,life_expectancy_at_birth,urban,male,75.07,years,reported,,S14
+2025,life_expectancy_at_birth,urban,male,75.67,years,reported,,S14
+2000,live_births,national,total,378348,persons,reported,,S12
+2001,live_births,national,total,368205,persons,reported,,S12
+2002,live_births,national,total,353765,persons,reported,,S12
+2003,live_births,national,total,351072,persons,reported,,S12
+2004,live_births,national,total,356131,persons,reported,,S12
+2005,live_births,national,total,364383,persons,reported,,S12
+2006,live_births,national,total,374244,persons,reported,,S12
+2007,live_births,national,total,387873,persons,reported,,S12
+2008,live_births,national,total,414499,persons,reported,,S12
+2009,live_births,national,total,417589,persons,reported,,S12
+2010,live_births,national,total,413300,persons,reported,,S12
+2011,live_births,national,total,388416,persons,reported,,S12
+2012,live_births,national,total,386257,persons,reported,,S12
+2013,live_births,national,total,369576,persons,reported,,S12
+2014,live_births,national,total,375160,persons,reported,,S12
+2015,live_births,national,total,369308,persons,reported,,S12
+2016,live_births,national,total,382257,persons,reported,,S12
+2017,live_births,national,total,401982,persons,reported,,S12
+2018,live_births,national,total,388178,persons,reported,,S12
+2019,live_births,national,total,374954,persons,reported,,S12
+2020,live_births,national,total,355309,persons,reported,,S12
+2021,live_births,national,total,331511,persons,reported,,S12
+2022,live_births,national,total,305132,persons,reported,,S12
+2023,live_births,national,total,272451,persons,reported,,S12
+2024,live_births,national,total,251782,persons,reported,,S12
+2025,live_births,national,total,238264,persons,reported,,S12
+2000,live_births,rural,total,170020,persons,reported,,S12
+2001,live_births,rural,total,162497,persons,reported,,S12
+2002,live_births,rural,total,156331,persons,reported,,S12
+2003,live_births,rural,total,151489,persons,reported,,S12
+2004,live_births,rural,total,151233,persons,reported,,S12
+2005,live_births,rural,total,153183,persons,reported,,S12
+2006,live_births,rural,total,156244,persons,reported,,S12
+2007,live_births,rural,total,162235,persons,reported,,S12
+2008,live_births,rural,total,173211,persons,reported,,S12
+2009,live_births,rural,total,171160,persons,reported,,S12
+2010,live_births,rural,total,171380,persons,reported,,S12
+2011,live_births,rural,total,162715,persons,reported,,S12
+2012,live_births,rural,total,162545,persons,reported,,S12
+2013,live_births,rural,total,155827,persons,reported,,S12
+2014,live_births,rural,total,157461,persons,reported,,S12
+2015,live_births,rural,total,151917,persons,reported,,S12
+2016,live_births,rural,total,155961,persons,reported,,S12
+2017,live_births,rural,total,165839,persons,reported,,S12
+2018,live_births,rural,total,159464,persons,reported,,S12
+2019,live_births,rural,total,154654,persons,reported,,S12
+2020,live_births,rural,total,147174,persons,reported,,S12
+2021,live_births,rural,total,137192,persons,reported,,S12
+2022,live_births,rural,total,126640,persons,reported,,S12
+2023,live_births,rural,total,114276,persons,reported,,S12
+2024,live_births,rural,total,103766,persons,reported,,S12
+2025,live_births,rural,total,98007,persons,reported,,S12
+2000,live_births,urban,total,208328,persons,reported,,S12
+2001,live_births,urban,total,205708,persons,reported,,S12
+2002,live_births,urban,total,197434,persons,reported,,S12
+2003,live_births,urban,total,199583,persons,reported,,S12
+2004,live_births,urban,total,204898,persons,reported,,S12
+2005,live_births,urban,total,211200,persons,reported,,S12
+2006,live_births,urban,total,218000,persons,reported,,S12
+2007,live_births,urban,total,225638,persons,reported,,S12
+2008,live_births,urban,total,241288,persons,reported,,S12
+2009,live_births,urban,total,246429,persons,reported,,S12
+2010,live_births,urban,total,241920,persons,reported,,S12
+2011,live_births,urban,total,225701,persons,reported,,S12
+2012,live_births,urban,total,223712,persons,reported,,S12
+2013,live_births,urban,total,213749,persons,reported,,S12
+2014,live_births,urban,total,217699,persons,reported,,S12
+2015,live_births,urban,total,217391,persons,reported,,S12
+2016,live_births,urban,total,226296,persons,reported,,S12
+2017,live_births,urban,total,236143,persons,reported,,S12
+2018,live_births,urban,total,228714,persons,reported,,S12
+2019,live_births,urban,total,220300,persons,reported,,S12
+2020,live_births,urban,total,208135,persons,reported,,S12
+2021,live_births,urban,total,194319,persons,reported,,S12
+2022,live_births,urban,total,178492,persons,reported,,S12
+2023,live_births,urban,total,158175,persons,reported,,S12
+2024,live_births,urban,total,148016,persons,reported,,S12
+2025,live_births,urban,total,140257,persons,reported,,S12
+2000,live_births_per_1000,national,total,9.89,per 1000,reported,,S12
+2001,live_births_per_1000,national,total,9.63,per 1000,reported,,S12
+2002,live_births_per_1000,national,total,9.25,per 1000,reported,,S12
+2003,live_births_per_1000,national,total,9.19,per 1000,reported,,S12
+2004,live_births_per_1000,national,total,9.33,per 1000,reported,,S12
+2005,live_births_per_1000,national,total,9.55,per 1000,reported,,S12
+2006,live_births_per_1000,national,total,9.81,per 1000,reported,,S12
+2007,live_births_per_1000,national,total,10.18,per 1000,reported,,S12
+2008,live_births_per_1000,national,total,10.87,per 1000,reported,,S12
+2009,live_births_per_1000,national,total,10.95,per 1000,reported,,S12
+2010,live_births_per_1000,national,total,10.73,per 1000,reported,,S12
+2011,live_births_per_1000,national,total,10.08,per 1000,reported,,S12
+2012,live_births_per_1000,national,total,10.02,per 1000,reported,,S12
+2013,live_births_per_1000,national,total,9.6,per 1000,reported,,S12
+2014,live_births_per_1000,national,total,9.75,per 1000,reported,,S12
+2015,live_births_per_1000,national,total,9.6,per 1000,reported,,S12
+2016,live_births_per_1000,national,total,9.95,per 1000,reported,,S12
+2017,live_births_per_1000,national,total,10.46,per 1000,reported,,S12
+2018,live_births_per_1000,national,total,10.11,per 1000,reported,,S12
+2019,live_births_per_1000,national,total,9.77,per 1000,reported,,S12
+2020,live_births_per_1000,national,total,9.31,per 1000,reported,,S12
+2021,live_births_per_1000,national,total,8.73,per 1000,reported,,S12
+2022,live_births_per_1000,national,total,8.07,per 1000,reported,,S12
+2023,live_births_per_1000,national,total,7.23,per 1000,reported,,S12
+2024,live_births_per_1000,national,total,6.7,per 1000,reported,,S12
+2025,live_births_per_1000,national,total,6.37,per 1000,reported,,S12
+2000,live_births_per_1000,rural,total,11.57,per 1000,reported,,S12
+2001,live_births_per_1000,rural,total,11.05,per 1000,reported,,S12
+2002,live_births_per_1000,rural,total,10.62,per 1000,reported,,S12
+2003,live_births_per_1000,rural,total,10.27,per 1000,reported,,S12
+2004,live_births_per_1000,rural,total,10.23,per 1000,reported,,S12
+2005,live_births_per_1000,rural,total,10.34,per 1000,reported,,S12
+2006,live_births_per_1000,rural,total,10.54,per 1000,reported,,S12
+2007,live_births_per_1000,rural,total,10.92,per 1000,reported,,S12
+2008,live_births_per_1000,rural,total,11.62,per 1000,reported,,S12
+2009,live_births_per_1000,rural,total,11.44,per 1000,reported,,S12
+2010,live_births_per_1000,rural,total,11.36,per 1000,reported,,S12
+2011,live_births_per_1000,rural,total,10.76,per 1000,reported,,S12
+2012,live_births_per_1000,rural,total,10.71,per 1000,reported,,S12
+2013,live_births_per_1000,rural,total,10.24,per 1000,reported,,S12
+2014,live_births_per_1000,rural,total,10.33,per 1000,reported,,S12
+2015,live_births_per_1000,rural,total,9.96,per 1000,reported,,S12
+2016,live_births_per_1000,rural,total,10.21,per 1000,reported,,S12
+2017,live_births_per_1000,rural,total,10.84,per 1000,reported,,S12
+2018,live_births_per_1000,rural,total,10.41,per 1000,reported,,S12
+2019,live_births_per_1000,rural,total,10.09,per 1000,reported,,S12
+2020,live_births_per_1000,rural,total,9.62,per 1000,reported,,S12
+2021,live_births_per_1000,rural,total,8.98,per 1000,reported,,S12
+2022,live_births_per_1000,rural,total,8.3,per 1000,reported,,S12
+2023,live_births_per_1000,rural,total,7.49,per 1000,reported,,S12
+2024,live_births_per_1000,rural,total,6.82,per 1000,reported,,S12
+2025,live_births_per_1000,rural,total,6.45,per 1000,reported,,S12
+2000,live_births_per_1000,urban,total,8.84,per 1000,reported,,S12
+2001,live_births_per_1000,urban,total,8.74,per 1000,reported,,S12
+2002,live_births_per_1000,urban,total,8.4,per 1000,reported,,S12
+2003,live_births_per_1000,urban,total,8.51,per 1000,reported,,S12
+2004,live_births_per_1000,urban,total,8.76,per 1000,reported,,S12
+2005,live_births_per_1000,urban,total,9.04,per 1000,reported,,S12
+2006,live_births_per_1000,urban,total,9.36,per 1000,reported,,S12
+2007,live_births_per_1000,urban,total,9.7,per 1000,reported,,S12
+2008,live_births_per_1000,urban,total,10.4,per 1000,reported,,S12
+2009,live_births_per_1000,urban,total,10.62,per 1000,reported,,S12
+2010,live_births_per_1000,urban,total,10.32,per 1000,reported,,S12
+2011,live_births_per_1000,urban,total,9.64,per 1000,reported,,S12
+2012,live_births_per_1000,urban,total,9.58,per 1000,reported,,S12
+2013,live_births_per_1000,urban,total,9.18,per 1000,reported,,S12
+2014,live_births_per_1000,urban,total,9.37,per 1000,reported,,S12
+2015,live_births_per_1000,urban,total,9.37,per 1000,reported,,S12
+2016,live_births_per_1000,urban,total,9.78,per 1000,reported,,S12
+2017,live_births_per_1000,urban,total,10.21,per 1000,reported,,S12
+2018,live_births_per_1000,urban,total,9.9,per 1000,reported,,S12
+2019,live_births_per_1000,urban,total,9.56,per 1000,reported,,S12
+2020,live_births_per_1000,urban,total,9.1,per 1000,reported,,S12
+2021,live_births_per_1000,urban,total,8.56,per 1000,reported,,S12
+2022,live_births_per_1000,urban,total,7.91,per 1000,reported,,S12
+2023,live_births_per_1000,urban,total,7.05,per 1000,reported,,S12
+2024,live_births_per_1000,urban,total,6.62,per 1000,reported,,S12
+2025,live_births_per_1000,urban,total,6.31,per 1000,reported,,S12
+2000,natural_increase,national,total,10320,persons,reported,,S12
+2001,natural_increase,national,total,4985,persons,reported,,S12
+2002,natural_increase,national,total,-5721,persons,reported,,S12
+2003,natural_increase,national,total,-14158,persons,reported,,S12
+2004,natural_increase,national,total,-7391,persons,reported,,S12
+2005,natural_increase,national,total,-3902,persons,reported,,S12
+2006,natural_increase,national,total,4558,persons,reported,,S12
+2007,natural_increase,national,total,10647,persons,reported,,S12
+2008,natural_increase,national,total,35100,persons,reported,,S12
+2009,natural_increase,national,total,32649,persons,reported,,S12
+2010,natural_increase,national,total,34822,persons,reported,,S12
+2011,natural_increase,national,total,12915,persons,reported,,S12
+2012,natural_increase,national,total,1469,persons,reported,,S12
+2013,natural_increase,national,total,-17736,persons,reported,,S12
+2014,natural_increase,national,total,-1307,persons,reported,,S12
+2015,natural_increase,national,total,-25613,persons,reported,,S12
+2016,natural_increase,national,total,-5752,persons,reported,,S12
+2017,natural_increase,national,total,-870,persons,reported,,S12
+2018,natural_increase,national,total,-26022,persons,reported,,S12
+2019,natural_increase,national,total,-34755,persons,reported,,S12
+2020,natural_increase,national,total,-122046,persons,reported,,S12
+2021,natural_increase,national,total,-188006,persons,reported,,S12
+2022,natural_increase,national,total,-143316,persons,reported,,S12
+2023,natural_increase,national,total,-136585,persons,reported,,S12
+2024,natural_increase,national,total,-156722,persons,reported,,S12
+2025,natural_increase,national,total,-167483,persons,reported,,S12
+2000,natural_increase,rural,total,20204,persons,reported,,S12
+2001,natural_increase,rural,total,14892,persons,reported,,S12
+2002,natural_increase,rural,total,10474,persons,reported,,S12
+2003,natural_increase,rural,total,2608,persons,reported,,S12
+2004,natural_increase,rural,total,4226,persons,reported,,S12
+2005,natural_increase,rural,total,4301,persons,reported,,S12
+2006,natural_increase,rural,total,8777,persons,reported,,S12
+2007,natural_increase,rural,total,11504,persons,reported,,S12
+2008,natural_increase,rural,total,22462,persons,reported,,S12
+2009,natural_increase,rural,total,17992,persons,reported,,S12
+2010,natural_increase,rural,total,20354,persons,reported,,S12
+2011,natural_increase,rural,total,12738,persons,reported,,S12
+2012,natural_increase,rural,total,10772,persons,reported,,S12
+2013,natural_increase,rural,total,3612,persons,reported,,S12
+2014,natural_increase,rural,total,10691,persons,reported,,S12
+2015,natural_increase,rural,total,-937,persons,reported,,S12
+2016,natural_increase,rural,total,4701,persons,reported,,S12
+2017,natural_increase,rural,total,10333,persons,reported,,S12
+2018,natural_increase,rural,total,544,persons,reported,,S12
+2019,natural_increase,rural,total,-1857,persons,reported,,S12
+2020,natural_increase,rural,total,-34810,persons,reported,,S12
+2021,natural_increase,rural,total,-59730,persons,reported,,S12
+2022,natural_increase,rural,total,-43374,persons,reported,,S12
+2023,natural_increase,rural,total,-39228,persons,reported,,S12
+2024,natural_increase,rural,total,-49927,persons,reported,,S12
+2025,natural_increase,rural,total,-56152,persons,reported,,S12
+2000,natural_increase,urban,total,-9884,persons,reported,,S12
+2001,natural_increase,urban,total,-9907,persons,reported,,S12
+2002,natural_increase,urban,total,-16195,persons,reported,,S12
+2003,natural_increase,urban,total,-16766,persons,reported,,S12
+2004,natural_increase,urban,total,-11617,persons,reported,,S12
+2005,natural_increase,urban,total,-8203,persons,reported,,S12
+2006,natural_increase,urban,total,-4219,persons,reported,,S12
+2007,natural_increase,urban,total,-857,persons,reported,,S12
+2008,natural_increase,urban,total,12638,persons,reported,,S12
+2009,natural_increase,urban,total,14657,persons,reported,,S12
+2010,natural_increase,urban,total,14468,persons,reported,,S12
+2011,natural_increase,urban,total,177,persons,reported,,S12
+2012,natural_increase,urban,total,-9303,persons,reported,,S12
+2013,natural_increase,urban,total,-21348,persons,reported,,S12
+2014,natural_increase,urban,total,-11998,persons,reported,,S12
+2015,natural_increase,urban,total,-24676,persons,reported,,S12
+2016,natural_increase,urban,total,-10453,persons,reported,,S12
+2017,natural_increase,urban,total,-11203,persons,reported,,S12
+2018,natural_increase,urban,total,-26566,persons,reported,,S12
+2019,natural_increase,urban,total,-32898,persons,reported,,S12
+2020,natural_increase,urban,total,-87236,persons,reported,,S12
+2021,natural_increase,urban,total,-128276,persons,reported,,S12
+2022,natural_increase,urban,total,-99942,persons,reported,,S12
+2023,natural_increase,urban,total,-97357,persons,reported,,S12
+2024,natural_increase,urban,total,-106795,persons,reported,,S12
+2025,natural_increase,urban,total,-111331,persons,reported,,S12
+2000,natural_increase_per_1000,national,total,0.27,per 1000,reported,,S12
+2001,natural_increase_per_1000,national,total,0.13,per 1000,reported,,S12
+2002,natural_increase_per_1000,national,total,-0.15,per 1000,reported,,S12
+2003,natural_increase_per_1000,national,total,-0.37,per 1000,reported,,S12
+2004,natural_increase_per_1000,national,total,-0.19,per 1000,reported,,S12
+2005,natural_increase_per_1000,national,total,-0.1,per 1000,reported,,S12
+2006,natural_increase_per_1000,national,total,0.12,per 1000,reported,,S12
+2007,natural_increase_per_1000,national,total,0.28,per 1000,reported,,S12
+2008,natural_increase_per_1000,national,total,0.92,per 1000,reported,,S12
+2009,natural_increase_per_1000,national,total,0.86,per 1000,reported,,S12
+2010,natural_increase_per_1000,national,total,0.9,per 1000,reported,,S12
+2011,natural_increase_per_1000,national,total,0.34,per 1000,reported,,S12
+2012,natural_increase_per_1000,national,total,0.04,per 1000,reported,,S12
+2013,natural_increase_per_1000,national,total,-0.46,per 1000,reported,,S12
+2014,natural_increase_per_1000,national,total,-0.03,per 1000,reported,,S12
+2015,natural_increase_per_1000,national,total,-0.67,per 1000,reported,,S12
+2016,natural_increase_per_1000,national,total,-0.15,per 1000,reported,,S12
+2017,natural_increase_per_1000,national,total,-0.02,per 1000,reported,,S12
+2018,natural_increase_per_1000,national,total,-0.68,per 1000,reported,,S12
+2019,natural_increase_per_1000,national,total,-0.91,per 1000,reported,,S12
+2020,natural_increase_per_1000,national,total,-3.2,per 1000,reported,,S12
+2021,natural_increase_per_1000,national,total,-4.95,per 1000,reported,,S12
+2022,natural_increase_per_1000,national,total,-3.79,per 1000,reported,,S12
+2023,natural_increase_per_1000,national,total,-3.62,per 1000,reported,,S12
+2024,natural_increase_per_1000,national,total,-4.17,per 1000,reported,,S12
+2025,natural_increase_per_1000,national,total,-4.48,per 1000,reported,,S12
+2000,natural_increase_per_1000,rural,total,1.37,per 1000,reported,,S12
+2001,natural_increase_per_1000,rural,total,1.01,per 1000,reported,,S12
+2002,natural_increase_per_1000,rural,total,0.71,per 1000,reported,,S12
+2003,natural_increase_per_1000,rural,total,0.18,per 1000,reported,,S12
+2004,natural_increase_per_1000,rural,total,0.29,per 1000,reported,,S12
+2005,natural_increase_per_1000,rural,total,0.29,per 1000,reported,,S12
+2006,natural_increase_per_1000,rural,total,0.59,per 1000,reported,,S12
+2007,natural_increase_per_1000,rural,total,0.77,per 1000,reported,,S12
+2008,natural_increase_per_1000,rural,total,1.51,per 1000,reported,,S12
+2009,natural_increase_per_1000,rural,total,1.2,per 1000,reported,,S12
+2010,natural_increase_per_1000,rural,total,1.35,per 1000,reported,,S12
+2011,natural_increase_per_1000,rural,total,0.84,per 1000,reported,,S12
+2012,natural_increase_per_1000,rural,total,0.71,per 1000,reported,,S12
+2013,natural_increase_per_1000,rural,total,0.24,per 1000,reported,,S12
+2014,natural_increase_per_1000,rural,total,0.7,per 1000,reported,,S12
+2015,natural_increase_per_1000,rural,total,-0.06,per 1000,reported,,S12
+2016,natural_increase_per_1000,rural,total,0.31,per 1000,reported,,S12
+2017,natural_increase_per_1000,rural,total,0.68,per 1000,reported,,S12
+2018,natural_increase_per_1000,rural,total,0.04,per 1000,reported,,S12
+2019,natural_increase_per_1000,rural,total,-0.12,per 1000,reported,,S12
+2020,natural_increase_per_1000,rural,total,-2.27,per 1000,reported,,S12
+2021,natural_increase_per_1000,rural,total,-3.91,per 1000,reported,,S12
+2022,natural_increase_per_1000,rural,total,-2.84,per 1000,reported,,S12
+2023,natural_increase_per_1000,rural,total,-2.57,per 1000,reported,,S12
+2024,natural_increase_per_1000,rural,total,-3.28,per 1000,reported,,S12
+2025,natural_increase_per_1000,rural,total,-3.7,per 1000,reported,,S12
+2000,natural_increase_per_1000,urban,total,-0.42,per 1000,reported,,S12
+2001,natural_increase_per_1000,urban,total,-0.42,per 1000,reported,,S12
+2002,natural_increase_per_1000,urban,total,-0.69,per 1000,reported,,S12
+2003,natural_increase_per_1000,urban,total,-0.71,per 1000,reported,,S12
+2004,natural_increase_per_1000,urban,total,-0.5,per 1000,reported,,S12
+2005,natural_increase_per_1000,urban,total,-0.35,per 1000,reported,,S12
+2006,natural_increase_per_1000,urban,total,-0.18,per 1000,reported,,S12
+2007,natural_increase_per_1000,urban,total,-0.04,per 1000,reported,,S12
+2008,natural_increase_per_1000,urban,total,0.54,per 1000,reported,,S12
+2009,natural_increase_per_1000,urban,total,0.63,per 1000,reported,,S12
+2010,natural_increase_per_1000,urban,total,0.62,per 1000,reported,,S12
+2011,natural_increase_per_1000,urban,total,0.01,per 1000,reported,,S12
+2012,natural_increase_per_1000,urban,total,-0.4,per 1000,reported,,S12
+2013,natural_increase_per_1000,urban,total,-0.92,per 1000,reported,,S12
+2014,natural_increase_per_1000,urban,total,-0.52,per 1000,reported,,S12
+2015,natural_increase_per_1000,urban,total,-1.06,per 1000,reported,,S12
+2016,natural_increase_per_1000,urban,total,-0.45,per 1000,reported,,S12
+2017,natural_increase_per_1000,urban,total,-0.48,per 1000,reported,,S12
+2018,natural_increase_per_1000,urban,total,-1.15,per 1000,reported,,S12
+2019,natural_increase_per_1000,urban,total,-1.43,per 1000,reported,,S12
+2020,natural_increase_per_1000,urban,total,-3.81,per 1000,reported,,S12
+2021,natural_increase_per_1000,urban,total,-5.65,per 1000,reported,,S12
+2022,natural_increase_per_1000,urban,total,-4.43,per 1000,reported,,S12
+2023,natural_increase_per_1000,urban,total,-4.34,per 1000,reported,,S12
+2024,natural_increase_per_1000,urban,total,-4.78,per 1000,reported,,S12
+2025,natural_increase_per_1000,urban,total,-5.01,per 1000,reported,,S12
+2002,total_fertility_rate,national,female,1.249,children per woman,reported,,S13
+2003,total_fertility_rate,national,female,1.222,children per woman,reported,,S13
+2004,total_fertility_rate,national,female,1.227,children per woman,reported,,S13
+2005,total_fertility_rate,national,female,1.243,children per woman,reported,,S13
+2006,total_fertility_rate,national,female,1.267,children per woman,reported,,S13
+2007,total_fertility_rate,national,female,1.306,children per woman,reported,,S13
+2008,total_fertility_rate,national,female,1.39,children per woman,reported,,S13
+2009,total_fertility_rate,national,female,1.398,children per woman,reported,,S13
+2010,total_fertility_rate,national,female,1.376,children per woman,reported,,S13
+2011,total_fertility_rate,national,female,1.297,children per woman,reported,,S13
+2012,total_fertility_rate,national,female,1.299,children per woman,reported,,S13
+2013,total_fertility_rate,national,female,1.256,children per woman,reported,,S13
+2014,total_fertility_rate,national,female,1.29,children per woman,reported,,S13
+2015,total_fertility_rate,national,female,1.289,children per woman,reported,,S13
+2016,total_fertility_rate,national,female,1.357,children per woman,reported,,S13
+2017,total_fertility_rate,national,female,1.453,children per woman,reported,,S13
+2018,total_fertility_rate,national,female,1.435,children per woman,reported,,S13
+2019,total_fertility_rate,national,female,1.419,children per woman,reported,,S13
+2020,total_fertility_rate,national,female,1.387,children per woman,reported,,S13
+2021,total_fertility_rate,national,female,1.33,children per woman,reported,,S13
+2022,total_fertility_rate,national,female,1.261,children per woman,reported,,S13
+2023,total_fertility_rate,national,female,1.158,children per woman,reported,,S13
+2024,total_fertility_rate,national,female,1.099,children per woman,reported,,S13
+2025,total_fertility_rate,national,female,1.068,children per woman,reported,,S13
+2000,total_fertility_rate,national,female,1.37,children per woman,reported,,S21
+2001,total_fertility_rate,national,female,1.31,children per woman,reported,,S21
+2002,total_fertility_rate,national,female,1.25,children per woman,reported,,S21
+2003,total_fertility_rate,national,female,1.22,children per woman,reported,,S21
+2004,total_fertility_rate,national,female,1.23,children per woman,reported,,S21
+2005,total_fertility_rate,national,female,1.24,children per woman,reported,,S21
+2006,total_fertility_rate,national,female,1.27,children per woman,reported,,S21
+2007,total_fertility_rate,national,female,1.31,children per woman,reported,,S21
+2008,total_fertility_rate,national,female,1.39,children per woman,reported,,S21
+2009,total_fertility_rate,national,female,1.4,children per woman,reported,,S21
+2010,total_fertility_rate,national,female,1.41,children per woman,reported,,S21
+2011,total_fertility_rate,national,female,1.33,children per woman,reported,,S21
+2012,total_fertility_rate,national,female,1.33,children per woman,reported,,S21
+2013,total_fertility_rate,national,female,1.29,children per woman,reported,,S21
+2014,total_fertility_rate,national,female,1.32,children per woman,reported,,S21
+2015,total_fertility_rate,national,female,1.32,children per woman,reported,,S21
+2016,total_fertility_rate,national,female,1.39,children per woman,reported,,S21
+2017,total_fertility_rate,national,female,1.48,children per woman,reported,,S21
+2018,total_fertility_rate,national,female,1.46,children per woman,reported,,S21
+2019,total_fertility_rate,national,female,1.44,children per woman,reported,,S21
+2020,total_fertility_rate,national,female,1.39,children per woman,reported,,S21
+2021,total_fertility_rate,national,female,1.33,children per woman,reported,,S21
+2022,total_fertility_rate,national,female,1.29,children per woman,reported,,S21
+2023,total_fertility_rate,national,female,1.2,children per woman,reported,,S21
+2024,total_fertility_rate,national,female,1.14,children per woman,reported,,S21
