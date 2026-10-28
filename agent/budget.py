@@ -6,6 +6,8 @@ Two gates, both must pass:
   2. Weekly pace: used% must stay below a line that rises evenly from the
      start of the week to WEEKLY_CAP (default 80) at the reset, plus a small
      PACE_BUFFER so the first hours of a week aren't blocked.
+  3. Parallel runs: a run in worker slot 2 or higher (AGENT_SLOT) starts only
+     while the 5-hour window is below PARALLEL_CAP (default 60).
 
 Input: the plan usage as JSON on stdin, in the shape the Claude desktop
 `get_usage` tool returns (`{"plan": {"windows": [...]}}`), or just the
@@ -22,6 +24,8 @@ from datetime import datetime, timedelta, timezone
 FIVE_HOUR_CAP = float(os.environ.get("AGENT_FIVE_HOUR_CAP", 80))
 WEEKLY_CAP = float(os.environ.get("AGENT_WEEKLY_CAP", 80))
 PACE_BUFFER = float(os.environ.get("AGENT_PACE_BUFFER", 5))
+PARALLEL_CAP = float(os.environ.get("AGENT_PARALLEL_CAP", 60))
+SLOT = int(os.environ.get("AGENT_SLOT", 1))
 
 
 def parse_time(value):
@@ -65,6 +69,8 @@ def decide(plan, now):
     }
     if five_used >= FIVE_HOUR_CAP:
         result.update(decision="WAIT", reason=f"5-hour window at {five_used:.0f}% (cap {FIVE_HOUR_CAP:.0f}%)")
+    elif SLOT > 1 and five_used >= PARALLEL_CAP:
+        result.update(decision="WAIT", reason=f"slot {SLOT}: 5-hour window at {five_used:.0f}% (parallel cap {PARALLEL_CAP:.0f}%)")
     elif weekly_used >= weekly_allowed:
         result.update(decision="WAIT", reason=f"weekly at {weekly_used:.0f}%, ahead of pace ({weekly_allowed:.0f}% allowed so far)")
     else:

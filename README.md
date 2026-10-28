@@ -26,5 +26,15 @@ A desktop-app scheduled task runs `agent/worker-prompt.md` every hour. Before ea
 
 That leaves at least 20% for your own work. Tune with `AGENT_FIVE_HOUR_CAP`, `AGENT_WEEKLY_CAP`, `AGENT_PACE_BUFFER`.
 
+## Parallel runs
+Up to two worker runs build at the same time, each on its own task.
+- **Slots:** `~/.config/automated/worker-lock.sh` (a copy of `scripts/worker-lock.sh`, outside the repo) hands each run a slot. When every slot is taken, the new run skips. The count comes from `~/.config/automated/state/slots.conf` (default 1).
+- **Claims:** a run claims its issue, so no other run picks it. Slots and claims free themselves when the run's process dies.
+- **Shared resources:** add a `Uses: gus-bdl` line (comma-separated names) to issues that hit the same API, data or tool. The picker won't start one while another issue using the same thing is running.
+- **Own folder per task:** `scripts/task-worktree.sh <issue> <slug>` gives each task a git worktree in `../automated-work/issue-<n>`. The shared checkout stays on `main`.
+- **Usage:** a second run starts only while the 5-hour window is below 60% (`AGENT_PARALLEL_CAP`). The 80% caps apply to both.
+
+Tests: `scripts/test-worker-lock.sh` and `python3 agent/test_pick_task.py`.
+
 ## Layout
 `projects/<name>/` holds independent projects, each with its own README, CLAUDE.md and dependencies. `agent/` and `scripts/` hold the worker tooling.

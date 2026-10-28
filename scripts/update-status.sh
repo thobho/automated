@@ -32,6 +32,7 @@ _Updated $(TZ="$tz" date '+%a %d %b %H:%M') ($tz)_
 
 **Last decision:** $(field decision) — $(field reason)
 **Last run:** ${note:-_no note_}
+**Worker slots:** $(bash "${AUTOMATED_LOCK_SCRIPT:-$HOME/.config/automated/worker-lock.sh}" status 2>/dev/null | paste -sd ';' - | sed 's/;/ · /g' || echo '?')
 
 ### Queue
 | State | Issues |
