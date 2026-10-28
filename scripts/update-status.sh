@@ -42,7 +42,8 @@ _Updated $(TZ="$tz" date '+%a %d %b %H:%M') ($tz)_
 | 🔵 review | $(queue_line review) |
 "
 
-num="$(gh issue list --label agent:status --state open --limit 1 --json number --jq '.[0].number // empty')"
+# REST lookup, not `gh issue list`: search can lag and would create a duplicate.
+num="$(gh api "repos/{owner}/{repo}/issues?labels=agent:status&state=open&per_page=1" --jq '.[0].number // empty')"
 if [[ -z "$num" ]]; then
   url="$(gh issue create --title "🤖 Agent status" --label agent:status --body "$body")"
   num="${url##*/}"
