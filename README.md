@@ -15,6 +15,8 @@ Projects built continuously by a Claude Code worker, fed from this repo's GitHub
 - **Pinned issue "🤖 Agent status"**: limits, reset times, whether the worker may run, and the queue. Updated on every worker run.
 - **Labels on each issue:** `agent:todo` → `agent:doing` → `agent:review` (PR open) → close it by merging. `agent:blocked` = the agent asked you something in the comments; answer there.
 - **Plan checklist** in each task's comments shows step-by-step progress.
+- **Each PR** has a **Verification** section (real API calls, headless-browser screenshots), **Decisions I made** and **Action for you**. Failures are posted as `❌` comments on the issue; a push notification goes out when a PR opens, a task blocks or something fails.
+- **API keys** for tasks go in `~/.config/automated/secrets.env` (never committed).
 - **Claude Code session:** `/agent-status`.
 
 ## How the worker spends your limits
