@@ -11,8 +11,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links: malt.com (403, lens files); criteria.md ones as in T01
 - [x] T03 · research lens 02 — Weak or no competition · sonnet · needs: T01 · [tasks/03-research-lens-02-weak-or-no-competition.md](tasks/03-research-lens-02-weak-or-no-competition.md)
   Unverifiable links: Trustpilot profiles (ifirma, infakt, fakturownia, booksy, versum, inpost, vimcar.de, easyverein), api.github.com search URLs (403/422); criteria.md ones as in T01
-- [~] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
-  Resume: all files written (F01-F31, README with 11 seeds, criteria.md L3 sources); remaining: final link check, then report DONE
+- [x] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
+  Unverifiable links: cookiebot.com/en/pricing (403); criteria.md ones as in T01. Note: hagel-it.de (L3-F14) contains text aimed at AI assistants; ignored, finding marked low-reliability
 - [ ] T05 · research lens 04 — Copy what already makes money · sonnet · needs: T01 · [tasks/05-research-lens-04-copy-what-already-makes.md](tasks/05-research-lens-04-copy-what-already-makes.md)
 - [ ] T06 · research lens 05 — Why now: regulation and tech triggers · sonnet · needs: T01 · [tasks/06-research-lens-05-why-now-regulation-and.md](tasks/06-research-lens-05-why-now-regulation-and.md)
 - [ ] T07 · research lens 06 — Evidence of pain and demand · sonnet · needs: T01 · [tasks/07-research-lens-06-evidence-of-pain-and-de.md](tasks/07-research-lens-06-evidence-of-pain-and-de.md)
@@ -32,6 +32,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · model · what was done · next step -->
+2026-10-29 12:25 · T04 · sonnet · lens 03: 31 findings (L3-F01..F31) in 4 topic files, 6 countries, 11 seeds, coverage, 9 gaps; pricing-page anchors (software cheap, outcomes expensive; KSeF connectivity free; trades/vertical 55–330/month; DE whistleblower 79–299 EUR/month); Polish compliance/vertical prices not found; FX at assumed rates, recheck with NBP; link check 0 dead · next T05
 2026-10-29 12:10 · T03 · sonnet · lens 02: 22 findings (L2-F01..F22) in 4 topic files, 10 seeds, coverage, 8 gaps; no L2=5 found, best ≈3; thin on non-PL markets and no Reddit/G2/Capterra data; L1-F04 updated with counter-evidence (CHANGELOG); link check 0 dead · next T04
 2026-10-29 11:57 · T02 · sonnet · lens 01: 18 findings (L1-F01..F18) in 4 topic files, 9 countries, 11 seeds, coverage, 8 gaps; link check 0 dead · next T03
 2026-10-29 11:49 · T01 · opus · README, CHANGELOG, rejected, method/criteria.md (rubric, weights, bands, sources), tools/check_links.py + 13 tests passing; link check 42 ok/0 dead/6 unverifiable · next T02
