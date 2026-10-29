@@ -6,7 +6,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 
 ## Tasks
 - [~] T01 · setup and method · opus · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
-  Resume: CHANGELOG, rejected, method/criteria.md done (links not yet checked); next: tools/check_links.py + test, then run it on criteria.md, README touch-up
+  Resume: CHANGELOG, rejected, criteria.md, tools/check_links.py + test (13 pass) done; link check on criteria.md: 0 dead, 6 unverifiable (producthunt, g2, allegro, trustpilot 403; bdl.stat.gov.pl, elektroda.pl timeout); next: README touch-up, then T01 can be marked done
 - [ ] T02 · research lens 01 — Proven abroad, missing in Poland · sonnet · needs: T01 · [tasks/02-research-lens-01-proven-abroad-missing-i.md](tasks/02-research-lens-01-proven-abroad-missing-i.md)
 - [ ] T03 · research lens 02 — Weak or no competition · sonnet · needs: T01 · [tasks/03-research-lens-02-weak-or-no-competition.md](tasks/03-research-lens-02-weak-or-no-competition.md)
 - [ ] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
