@@ -36,7 +36,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
   Unverifiable links: yadda.icm.edu.pl (403), wykop.pl, elektroda.pl (timeout, varies)
 - [~] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
-  Resume: reviewed 001–025; finishing: re-sort shortlist rank, final link check
+  Resume: reviewed 001–025, shortlist re-ranked, link check done (293 links, 0 dead, 7 unverifiable); T16 complete pending sign-off
 - [ ] T17 · Phase 1 summary and validation plans · opus · needs: T16 · [tasks/17-phase-1-summary-and-validation-plans.md](tasks/17-phase-1-summary-and-validation-plans.md)
 
 ## Blocked / questions for the owner
