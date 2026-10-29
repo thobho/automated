@@ -20,7 +20,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T07 · research lens 06 — Evidence of pain and demand · sonnet · needs: T01 · [tasks/07-research-lens-06-evidence-of-pain-and-de.md](tasks/07-research-lens-06-evidence-of-pain-and-de.md)
   Unverifiable links: news.ycombinator.com items (503, read via Algolia API), elektroda.pl topics 2508455/4133476 (timeout), api.github.com issues + Wikimedia pageviews API URLs; criteria.md ones as in T01/T03/T04/T05
 - [~] T08 · research lens 07 — Founder fit and feasibility · sonnet · needs: T01 · [tasks/08-research-lens-07-founder-fit-and-feasibi.md](tasks/08-research-lens-07-founder-fit-and-feasibi.md)
-  Resume: F01–F14 in api-access.md + licensing-and-regulation.md pushed; next: build-speed-and-libraries.md (solo/AI-built MVP examples, OSS libs: Mustang, ksef clients, Cal.com etc.), costs-and-ops.md (LLM/infra cost, support load), README, criteria.md
+  Resume: F01–F25 (minus F16,F18–F20,F26–F27) pushed: api-access, licensing-and-regulation, build-speed-and-libraries; next: costs-and-ops.md (F16 BaseLinker API, F18 Paddle MoR, F19 KSeF offline modes, F20 KSeF API churn, F26 LLM prices, F27 LLM cost estimate), README, criteria.md, link check
 - [ ] T09 · research lens 08 — Cheap distribution · sonnet · needs: T01 · [tasks/09-research-lens-08-cheap-distribution.md](tasks/09-research-lens-08-cheap-distribution.md)
 - [ ] T10 · research lens 09 — Unit economics and defensibility · sonnet · needs: T01 · [tasks/10-research-lens-09-unit-economics-and-defe.md](tasks/10-research-lens-09-unit-economics-and-defe.md)
 - [ ] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
