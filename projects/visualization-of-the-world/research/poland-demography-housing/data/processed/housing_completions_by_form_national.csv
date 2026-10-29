@@ -1,0 +1,299 @@
+year,form,table,dwellings,useful_floor_area_m2,value_type,variable_id,note,source_id
+2000,total,P1735,87789,7872700,reported,415,to 2017,S42
+2001,total,P1735,105967,9118237,reported,415,to 2017,S42
+2002,total,P1735,97595,9691798,reported,415,to 2017,S42
+2003,total,P1735,162686,18838485,reported,415,to 2017,S42
+2004,total,P1735,108117,11619777,reported,415,to 2017,S42
+2005,total,P1735,114066,12010635,reported,415,to 2017,S42
+2006,total,P1735,115353,11721159,reported,415,to 2017,S42
+2007,total,P1735,133698,14117500,reported,415,to 2017,S42
+2008,total,P1735,165189,17185370,reported,415,to 2017,S42
+2009,total,P1735,160002,15942523,reported,415,to 2017,S42
+2010,total,P1735,135835,14410837,reported,415,to 2017,S42
+2011,total,P1735,130954,14027775,reported,415,to 2017,S42
+2012,total,P1735,152904,15650743,reported,415,to 2017,S42
+2013,total,P1735,145136,15177604,reported,415,to 2017,S42
+2014,total,P1735,143166,14439710,reported,415,to 2017,S42
+2015,total,P1735,147711,14738636,reported,415,to 2017,S42
+2016,total,P1735,163325,15427066,reported,415,to 2017,S42
+2017,total,P1735,178342,16540332,reported,415,to 2017,S42
+2000,total,P3824,87789,7872700,reported,748601,1995-2025,S41
+2001,total,P3824,105967,9118237,reported,748601,1995-2025,S41
+2002,total,P3824,97595,9691798,reported,748601,1995-2025,S41
+2003,total,P3824,162686,18838485,reported,748601,1995-2025,S41
+2004,total,P3824,108117,11619777,reported,748601,1995-2025,S41
+2005,total,P3824,114066,12010635,reported,748601,1995-2025,S41
+2006,total,P3824,115353,11721159,reported,748601,1995-2025,S41
+2007,total,P3824,133698,14117500,reported,748601,1995-2025,S41
+2008,total,P3824,165189,17185370,reported,748601,1995-2025,S41
+2009,total,P3824,160002,15942523,reported,748601,1995-2025,S41
+2010,total,P3824,135835,14410837,reported,748601,1995-2025,S41
+2011,total,P3824,130954,14027775,reported,748601,1995-2025,S41
+2012,total,P3824,152904,15650743,reported,748601,1995-2025,S41
+2013,total,P3824,145136,15177604,reported,748601,1995-2025,S41
+2014,total,P3824,143166,14439710,reported,748601,1995-2025,S41
+2015,total,P3824,147711,14738636,reported,748601,1995-2025,S41
+2016,total,P3824,163325,15427066,reported,748601,1995-2025,S41
+2017,total,P3824,178342,16540332,reported,748601,1995-2025,S41
+2018,total,P3824,185063,16709440,reported,748601,1995-2025,S41
+2019,total,P3824,207425,18376582,reported,748601,1995-2025,S41
+2020,total,P3824,220831,19585408,reported,748601,1995-2025,S41
+2021,total,P3824,234680,21801737,reported,748601,1995-2025,S41
+2022,total,P3824,238490,22020958,reported,748601,1995-2025,S41
+2023,total,P3824,221259,19903392,reported,748601,1995-2025,S41
+2024,total,P3824,200106,17840809,reported,748601,1995-2025,S41
+2025,total,P3824,208297,18112293,reported,748601,1995-2025,S41
+2000,individual_incl_private_for_sale,P1735,35542,4646912,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2001,individual_incl_private_for_sale,P1735,40642,5323621,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2002,individual_incl_private_for_sale,P1735,52433,7067453,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2003,individual_incl_private_for_sale,P1735,118034,16229818,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2004,individual_incl_private_for_sale,P1735,64858,9114733,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2005,individual_incl_private_for_sale,P1735,63279,9018048,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2006,individual_incl_private_for_sale,P1735,57594,8237669,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2007,individual_incl_private_for_sale,P1735,71643,10191510,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2008,individual_incl_private_for_sale,P1735,83338,11829275,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2009,individual_incl_private_for_sale,P1735,71971,10375096,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2010,individual_incl_private_for_sale,P1735,70441,10261208,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2011,individual_incl_private_for_sale,P1735,73553,10431719,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2012,individual_incl_private_for_sale,P1735,81050,11256628,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2013,individual_incl_private_for_sale,P1735,81228,11348161,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2014,individual_incl_private_for_sale,P1735,76129,10503723,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2015,individual_incl_private_for_sale,P1735,79758,10807218,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2016,individual_incl_private_for_sale,P1735,78062,10507383,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2017,individual_incl_private_for_sale,P1735,82408,10938558,reported,430,"to 2017; 'private' = individual construction, includes private dwellings for sale or rent",S42
+2005,own_use_of_investor,P3824,58685,8703327,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2006,own_use_of_investor,P3824,53525,7937517,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2007,own_use_of_investor,P3824,66219,9768018,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2008,own_use_of_investor,P3824,75529,11172543,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2009,own_use_of_investor,P3824,64707,9808919,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2010,own_use_of_investor,P3824,64622,9782619,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2011,own_use_of_investor,P3824,65442,9835174,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2012,own_use_of_investor,P3824,70269,10467872,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2013,own_use_of_investor,P3824,71952,10683992,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2014,own_use_of_investor,P3824,66266,9790334,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2015,own_use_of_investor,P3824,67753,9915994,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2016,own_use_of_investor,P3824,65706,9579620,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2017,own_use_of_investor,P3824,67657,9817415,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2018,own_use_of_investor,P3824,66220,9553586,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2019,own_use_of_investor,P3824,69226,9942118,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2020,own_use_of_investor,P3824,73991,10576506,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2021,own_use_of_investor,P3824,88130,12606564,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2022,own_use_of_investor,P3824,90734,12842079,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2023,own_use_of_investor,P3824,79365,11236362,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2024,own_use_of_investor,P3824,69583,9864897,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2025,own_use_of_investor,P3824,67241,9411709,reported,748604,from 2005; private dwellings for the own use of the investor,S41
+2000,for_sale_or_rent_excl_private,P1735,20728,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2001,for_sale_or_rent_excl_private,P1735,29403,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2002,for_sale_or_rent_excl_private,P1735,21970,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2003,for_sale_or_rent_excl_private,P1735,23844,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2004,for_sale_or_rent_excl_private,P1735,24230,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2005,for_sale_or_rent_excl_private,P1735,33047,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2006,for_sale_or_rent_excl_private,P1735,37960,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2007,for_sale_or_rent_excl_private,P1735,45653,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2008,for_sale_or_rent_excl_private,P1735,66703,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2009,for_sale_or_rent_excl_private,P1735,72326,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2010,for_sale_or_rent_excl_private,P1735,53505,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2011,for_sale_or_rent_excl_private,P1735,48814,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2012,for_sale_or_rent_excl_private,P1735,63586,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2013,for_sale_or_rent_excl_private,P1735,56447,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2014,for_sale_or_rent_excl_private,P1735,59065,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2015,for_sale_or_rent_excl_private,P1735,62420,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2016,for_sale_or_rent_excl_private,P1735,79160,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2017,for_sale_or_rent_excl_private,P1735,90276,,reported,2250,"to 2017; developers etc., private dwellings for sale are in 'individual'",S42
+2005,for_sale_or_rent_incl_private,P3824,37641,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2006,for_sale_or_rent_incl_private,P3824,42029,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2007,for_sale_or_rent_incl_private,P3824,51077,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2008,for_sale_or_rent_incl_private,P3824,74512,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2009,for_sale_or_rent_incl_private,P3824,79590,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2010,for_sale_or_rent_incl_private,P3824,59324,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2011,for_sale_or_rent_incl_private,P3824,56925,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2012,for_sale_or_rent_incl_private,P3824,74367,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2013,for_sale_or_rent_incl_private,P3824,65723,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2014,for_sale_or_rent_incl_private,P3824,68928,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2015,for_sale_or_rent_incl_private,P3824,74425,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2016,for_sale_or_rent_incl_private,P3824,91516,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2017,for_sale_or_rent_incl_private,P3824,105027,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2018,for_sale_or_rent_incl_private,P3824,112317,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2019,for_sale_or_rent_incl_private,P3824,131435,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2020,for_sale_or_rent_incl_private,P3824,142691,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2021,for_sale_or_rent_incl_private,P3824,141941,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2022,for_sale_or_rent_incl_private,P3824,143971,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2023,for_sale_or_rent_incl_private,P3824,137583,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2024,for_sale_or_rent_incl_private,P3824,124653,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2025,for_sale_or_rent_incl_private,P3824,133906,,reported,748610,from 2005; includes private dwellings for sale or rent,S41
+2000,cooperative,P1735,24391,,reported,418,to 2017,S42
+2001,cooperative,P1735,25835,,reported,418,to 2017,S42
+2002,cooperative,P1735,15406,,reported,418,to 2017,S42
+2003,cooperative,P1735,11957,,reported,418,to 2017,S42
+2004,cooperative,P1735,9432,,reported,418,to 2017,S42
+2005,cooperative,P1735,8222,,reported,418,to 2017,S42
+2006,cooperative,P1735,9032,,reported,418,to 2017,S42
+2007,cooperative,P1735,8240,,reported,418,to 2017,S42
+2008,cooperative,P1735,8647,,reported,418,to 2017,S42
+2009,cooperative,P1735,7260,,reported,418,to 2017,S42
+2010,cooperative,P1735,5052,,reported,418,to 2017,S42
+2011,cooperative,P1735,3786,,reported,418,to 2017,S42
+2012,cooperative,P1735,4194,,reported,418,to 2017,S42
+2013,cooperative,P1735,3493,,reported,418,to 2017,S42
+2014,cooperative,P1735,3490,,reported,418,to 2017,S42
+2015,cooperative,P1735,2115,,reported,418,to 2017,S42
+2016,cooperative,P1735,2707,,reported,418,to 2017,S42
+2017,cooperative,P1735,2311,,reported,418,to 2017,S42
+2000,cooperative,P3824,24391,,reported,748607,from 2005,S41
+2001,cooperative,P3824,25835,,reported,748607,from 2005,S41
+2002,cooperative,P3824,15406,,reported,748607,from 2005,S41
+2003,cooperative,P3824,11957,,reported,748607,from 2005,S41
+2004,cooperative,P3824,9432,,reported,748607,from 2005,S41
+2005,cooperative,P3824,8222,,reported,748607,from 2005,S41
+2006,cooperative,P3824,9032,,reported,748607,from 2005,S41
+2007,cooperative,P3824,8240,,reported,748607,from 2005,S41
+2008,cooperative,P3824,8647,,reported,748607,from 2005,S41
+2009,cooperative,P3824,7260,,reported,748607,from 2005,S41
+2010,cooperative,P3824,5052,,reported,748607,from 2005,S41
+2011,cooperative,P3824,3786,,reported,748607,from 2005,S41
+2012,cooperative,P3824,4194,,reported,748607,from 2005,S41
+2013,cooperative,P3824,3493,,reported,748607,from 2005,S41
+2014,cooperative,P3824,3490,,reported,748607,from 2005,S41
+2015,cooperative,P3824,2115,,reported,748607,from 2005,S41
+2016,cooperative,P3824,2707,,reported,748607,from 2005,S41
+2017,cooperative,P3824,2311,,reported,748607,from 2005,S41
+2018,cooperative,P3824,3024,,reported,748607,from 2005,S41
+2019,cooperative,P3824,2167,,reported,748607,from 2005,S41
+2020,cooperative,P3824,1498,,reported,748607,from 2005,S41
+2021,cooperative,P3824,2019,,reported,748607,from 2005,S41
+2022,cooperative,P3824,1513,,reported,748607,from 2005,S41
+2023,cooperative,P3824,1006,,reported,748607,from 2005,S41
+2024,cooperative,P3824,1323,,reported,748607,from 2005,S41
+2025,cooperative,P3824,958,,reported,748607,from 2005,S41
+2000,municipal,P1735,1904,,reported,424,to 2017,S42
+2001,municipal,P1735,2318,,reported,424,to 2017,S42
+2002,municipal,P1735,2525,,reported,424,to 2017,S42
+2003,municipal,P1735,1998,,reported,424,to 2017,S42
+2004,municipal,P1735,1779,,reported,424,to 2017,S42
+2005,municipal,P1735,3563,,reported,424,to 2017,S42
+2006,municipal,P1735,4513,,reported,424,to 2017,S42
+2007,municipal,P1735,2452,,reported,424,to 2017,S42
+2008,municipal,P1735,2719,,reported,424,to 2017,S42
+2009,municipal,P1735,4202,,reported,424,to 2017,S42
+2010,municipal,P1735,3418,,reported,424,to 2017,S42
+2011,municipal,P1735,2500,,reported,424,to 2017,S42
+2012,municipal,P1735,2389,,reported,424,to 2017,S42
+2013,municipal,P1735,2218,,reported,424,to 2017,S42
+2014,municipal,P1735,2177,,reported,424,to 2017,S42
+2015,municipal,P1735,1686,,reported,424,to 2017,S42
+2016,municipal,P1735,1746,,reported,424,to 2017,S42
+2017,municipal,P1735,1715,,reported,424,to 2017,S42
+2000,municipal,P3824,1904,,reported,748616,from 2005,S41
+2001,municipal,P3824,2318,,reported,748616,from 2005,S41
+2002,municipal,P3824,2525,,reported,748616,from 2005,S41
+2003,municipal,P3824,1998,,reported,748616,from 2005,S41
+2004,municipal,P3824,1779,,reported,748616,from 2005,S41
+2005,municipal,P3824,3563,,reported,748616,from 2005,S41
+2006,municipal,P3824,4513,,reported,748616,from 2005,S41
+2007,municipal,P3824,2452,,reported,748616,from 2005,S41
+2008,municipal,P3824,2719,,reported,748616,from 2005,S41
+2009,municipal,P3824,4202,,reported,748616,from 2005,S41
+2010,municipal,P3824,3418,,reported,748616,from 2005,S41
+2011,municipal,P3824,2500,,reported,748616,from 2005,S41
+2012,municipal,P3824,2389,,reported,748616,from 2005,S41
+2013,municipal,P3824,2218,,reported,748616,from 2005,S41
+2014,municipal,P3824,2177,,reported,748616,from 2005,S41
+2015,municipal,P3824,1686,,reported,748616,from 2005,S41
+2016,municipal,P3824,1746,,reported,748616,from 2005,S41
+2017,municipal,P3824,1715,,reported,748616,from 2005,S41
+2018,municipal,P3824,1863,,reported,748616,from 2005,S41
+2019,municipal,P3824,1838,,reported,748616,from 2005,S41
+2020,municipal,P3824,1009,,reported,748616,from 2005,S41
+2021,municipal,P3824,1260,,reported,748616,from 2005,S41
+2022,municipal,P3824,629,,reported,748616,from 2005,S41
+2023,municipal,P3824,1232,,reported,748616,from 2005,S41
+2024,municipal,P3824,1907,,reported,748616,from 2005,S41
+2025,municipal,P3824,1644,,reported,748616,from 2005,S41
+2000,social_rental_tbs,P1735,4019,,reported,1554,to 2017,S42
+2001,social_rental_tbs,P1735,6765,,reported,1554,to 2017,S42
+2002,social_rental_tbs,P1735,4653,,reported,1554,to 2017,S42
+2003,social_rental_tbs,P1735,5856,,reported,1554,to 2017,S42
+2004,social_rental_tbs,P1735,7197,,reported,1554,to 2017,S42
+2005,social_rental_tbs,P1735,5412,,reported,1554,to 2017,S42
+2006,social_rental_tbs,P1735,6013,,reported,1554,to 2017,S42
+2007,social_rental_tbs,P1735,5281,,reported,1554,to 2017,S42
+2008,social_rental_tbs,P1735,3205,,reported,1554,to 2017,S42
+2009,social_rental_tbs,P1735,3600,,reported,1554,to 2017,S42
+2010,social_rental_tbs,P1735,3129,,reported,1554,to 2017,S42
+2011,social_rental_tbs,P1735,1980,,reported,1554,to 2017,S42
+2012,social_rental_tbs,P1735,1146,,reported,1554,to 2017,S42
+2013,social_rental_tbs,P1735,1308,,reported,1554,to 2017,S42
+2014,social_rental_tbs,P1735,1715,,reported,1554,to 2017,S42
+2015,social_rental_tbs,P1735,1265,,reported,1554,to 2017,S42
+2016,social_rental_tbs,P1735,1340,,reported,1554,to 2017,S42
+2017,social_rental_tbs,P1735,1486,,reported,1554,to 2017,S42
+2000,social_rental_tbs,P3824,4019,,reported,748619,from 2005,S41
+2001,social_rental_tbs,P3824,6765,,reported,748619,from 2005,S41
+2002,social_rental_tbs,P3824,4653,,reported,748619,from 2005,S41
+2003,social_rental_tbs,P3824,5856,,reported,748619,from 2005,S41
+2004,social_rental_tbs,P3824,7197,,reported,748619,from 2005,S41
+2005,social_rental_tbs,P3824,5412,,reported,748619,from 2005,S41
+2006,social_rental_tbs,P3824,6013,,reported,748619,from 2005,S41
+2007,social_rental_tbs,P3824,5281,,reported,748619,from 2005,S41
+2008,social_rental_tbs,P3824,3205,,reported,748619,from 2005,S41
+2009,social_rental_tbs,P3824,3600,,reported,748619,from 2005,S41
+2010,social_rental_tbs,P3824,3129,,reported,748619,from 2005,S41
+2011,social_rental_tbs,P3824,1980,,reported,748619,from 2005,S41
+2012,social_rental_tbs,P3824,1146,,reported,748619,from 2005,S41
+2013,social_rental_tbs,P3824,1308,,reported,748619,from 2005,S41
+2014,social_rental_tbs,P3824,1715,,reported,748619,from 2005,S41
+2015,social_rental_tbs,P3824,1265,,reported,748619,from 2005,S41
+2016,social_rental_tbs,P3824,1340,,reported,748619,from 2005,S41
+2017,social_rental_tbs,P3824,1486,,reported,748619,from 2005,S41
+2018,social_rental_tbs,P3824,1510,,reported,748619,from 2005,S41
+2019,social_rental_tbs,P3824,2467,,reported,748619,from 2005,S41
+2020,social_rental_tbs,P3824,1615,,reported,748619,from 2005,S41
+2021,social_rental_tbs,P3824,1215,,reported,748619,from 2005,S41
+2022,social_rental_tbs,P3824,1606,,reported,748619,from 2005,S41
+2023,social_rental_tbs,P3824,2017,,reported,748619,from 2005,S41
+2024,social_rental_tbs,P3824,2566,,reported,748619,from 2005,S41
+2025,social_rental_tbs,P3824,4383,,reported,748619,from 2005,S41
+2000,company,P1735,1205,,reported,421,to 2017,S42
+2001,company,P1735,1004,,reported,421,to 2017,S42
+2002,company,P1735,608,,reported,421,to 2017,S42
+2003,company,P1735,997,,reported,421,to 2017,S42
+2004,company,P1735,621,,reported,421,to 2017,S42
+2005,company,P1735,543,,reported,421,to 2017,S42
+2006,company,P1735,241,,reported,421,to 2017,S42
+2007,company,P1735,429,,reported,421,to 2017,S42
+2008,company,P1735,577,,reported,421,to 2017,S42
+2009,company,P1735,643,,reported,421,to 2017,S42
+2010,company,P1735,290,,reported,421,to 2017,S42
+2011,company,P1735,321,,reported,421,to 2017,S42
+2012,company,P1735,539,,reported,421,to 2017,S42
+2013,company,P1735,442,,reported,421,to 2017,S42
+2014,company,P1735,590,,reported,421,to 2017,S42
+2015,company,P1735,467,,reported,421,to 2017,S42
+2016,company,P1735,310,,reported,421,to 2017,S42
+2017,company,P1735,146,,reported,421,to 2017,S42
+2000,company,P3824,1205,,reported,748622,from 2005,S41
+2001,company,P3824,1004,,reported,748622,from 2005,S41
+2002,company,P3824,608,,reported,748622,from 2005,S41
+2003,company,P3824,997,,reported,748622,from 2005,S41
+2004,company,P3824,621,,reported,748622,from 2005,S41
+2005,company,P3824,543,,reported,748622,from 2005,S41
+2006,company,P3824,241,,reported,748622,from 2005,S41
+2007,company,P3824,429,,reported,748622,from 2005,S41
+2008,company,P3824,577,,reported,748622,from 2005,S41
+2009,company,P3824,643,,reported,748622,from 2005,S41
+2010,company,P3824,290,,reported,748622,from 2005,S41
+2011,company,P3824,321,,reported,748622,from 2005,S41
+2012,company,P3824,539,,reported,748622,from 2005,S41
+2013,company,P3824,442,,reported,748622,from 2005,S41
+2014,company,P3824,590,,reported,748622,from 2005,S41
+2015,company,P3824,467,,reported,748622,from 2005,S41
+2016,company,P3824,310,,reported,748622,from 2005,S41
+2017,company,P3824,146,,reported,748622,from 2005,S41
+2018,company,P3824,129,,reported,748622,from 2005,S41
+2019,company,P3824,292,,reported,748622,from 2005,S41
+2020,company,P3824,27,,reported,748622,from 2005,S41
+2021,company,P3824,115,,reported,748622,from 2005,S41
+2022,company,P3824,37,,reported,748622,from 2005,S41
+2023,company,P3824,56,,reported,748622,from 2005,S41
+2024,company,P3824,74,,reported,748622,from 2005,S41
+2025,company,P3824,165,,reported,748622,from 2005,S41
