@@ -9,3 +9,4 @@ One line per change to already-merged findings or scores, newest first:
 2026-10-29 · research/01-proven-abroad/more-markets.md + README.md · T11 gap pass: new topic file with 8 findings L1-F19..F26 from NL, FR, JP, CZ, NO, ES, BR; README topic table + gap-pass note · closes part of lens 1 gap 4
 
 2026-10-29 · research/01-proven-abroad/dach-niche-software.md (L1-F04) · added counter-evidence: Polish software-only mileage apps exist, gap is weaker · found in lens 02 (L2-F17, Google Play search)
+2026-10-29 · ideas/shortlist.csv + rejected.md · T13: I062 (KSeF PDF API) rejected after research (free OSS renderers incl. REST/Docker); I070 promoted to write-up 002 (batch A)

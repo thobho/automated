@@ -118,3 +118,6 @@ Format: `- <id or name> · <task that dropped it> · <reason>`
 - I169 Polish wedding planner and budget template · T12 · below shortlist cut, weighted 1.8 [1 1 1 2 1 1 5 3 1]; Consumer one-off; crowded.
 - I179 Total-cost view for Allegro buyers · T12 · below shortlist cut, weighted 1.7 [1 3 1 1 1 1 3 3 1]; Consumers expect it free; no demand found.
 - I186 Car cost and deadline tracker · T12 · below shortlist cut, weighted 1.6 [1 2 1 1 1 1 3 2 2]; Consumers expect it free.
+
+## T13 research rejections
+- I062 KSeF XML → PDF rendering API and Docker image · T13 · collapsed in write-up research (2026-10-29), est. weighted 2.7 [1 1 2 2 4 3 5 3 3] `<5%`; the job is already served free: the ministry's CIRFMF/ksef-pdf-generator (81 stars, MIT), ksef4dev/ksef-fop (Apache-2.0), LeMobi-Software/ksef-pdf-generator ("REST API i usługa Docker", MIT) and several others (GitHub API search, accessed 2026-10-29); the law does not require the seller to supply a PDF (podatki.biz); no paying buyer found, only developers asking the ministry for a better library (L6-F14). Replaced by I070 (next `write_up=n` idea with a free field slot, developer-tools-apis; I023 skipped because accounting already has 3 write-ups).
