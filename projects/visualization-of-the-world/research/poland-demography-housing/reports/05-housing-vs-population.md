@@ -1,5 +1,7 @@
 # Housing vs Population Analysis: Poland 2000-2025
 
+> **Erratum (final report):** several numbers below do not match `data/processed/housing_vs_population.csv` or `housing_completions_by_class.csv` (for example 2025 big cities: houses 1.10 and flats 6.84 per 1000 residents, not 4.8 and 6.8; villages: 4.38 and 0.47). The indexes also splice proxy and direct data. Use section 7 and section 8 (C14) of `final-report.md` instead; this file is kept for history.
+
 Analysis of housing construction in relation to population changes across place classes in Poland from 2000 to 2025.
 
 ## Key Findings
