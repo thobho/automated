@@ -19,3 +19,8 @@ Every factual claim carries a source URL. Before a task is marked done, its chan
 python3 tools/check_links.py <files>        # exit 1 only if a link is dead
 cd tools && python3 -m unittest             # tests for the checker
 ```
+
+## Phase 2: innovative LLM products to adapt for Poland
+Phase 1 ideas were solid but not innovative. Phase 2 scans 51 developed countries for fast-growing, mostly LLM-native products, checks each theme against Polish demand, competition and demographic change, and keeps ideas where knowing Polish realities is the edge.
+- **Brief:** [phase2/BRIEF.md](phase2/BRIEF.md) · **Status:** [phase2/PROGRESS.md](phase2/PROGRESS.md) · **Run procedure:** [phase2/RUNNER.md](phase2/RUNNER.md) (every task on fable, medium effort)
+- **Results:** `phase2/reports/phase2-summary.md` and the Polish `phase2/reports/podsumowanie-pl.md` once T25 is done.
