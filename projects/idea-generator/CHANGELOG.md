@@ -3,6 +3,7 @@
 One line per change to already-merged findings or scores, newest first:
 `YYYY-MM-DD · file · what changed · why (source URL if any)`
 
+2026-10-29 · ideas/developer-tools-apis/009 + rejected.md + ideas/shortlist.csv · T16 review: I059 rejected; L2 2→1, weighted 2.2→2.1, band <5% · 9+ free Allegro MCP servers pushed Jun–Oct 2026 (https://api.github.com/search/repositories?q=allegro+mcp&sort=updated); no swap-in (I068 overlaps 003)
 2026-10-29 · ideas/ecommerce-sellers/008 + rejected.md + ideas/shortlist.csv · T16 review: I050 rejected; L2 3→1, L3 3→2, L6 4→3, weighted 3.3→2.7, band 5–15%→<5% · WP Desk free KSeF add-on fixed OSS/foreign-currency/foreign-buyer cases May–Oct 2026 (https://wordpress.org/plugins/ksef-for-flexible-invoices/), PRO 229 PLN/year (https://www.wpdesk.pl/sklep/faktury-woocommerce/), B2Brouter 15 EUR/month (https://www.b2brouter.net/pl/woocommerce/)
 2026-10-29 · ideas/accounting-invoicing-tax/007 + 001 + rejected.md + ideas/shortlist.csv · T16 review: I012 merged into I010 as its permissions screen (scores unchanged 2.6, <5%); I010 merged_ids now I024 I012 · incumbents show per-client KSeF status as a by-product, no standalone payer (https://www.fakturaxl.pl/jak-zarzadzac-uprawnieniami-z-ksef)
 2026-10-29 · ideas/b2b-saas-pl-smes/006 + ideas/shortlist.csv · T16 review: I004 L2 3→2, weighted 2.9→2.7, band 5–15%→<5%; row now carries write-up L1–L9 · Google tests native AI review replies in Business Profile (https://location3.com/blog/google-ai-powered-review-responses/); booking tools bundle review requests

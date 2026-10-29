@@ -1,3 +1,5 @@
+> **Rejected in T16 review (2026-10-29):** free Allegro MCP servers and spec-generated clients multiplied in 2026; no payer found. See Devil's advocate and [rejected.md](../../rejected.md). File kept for the record.
+
 # 009 — Typed Allegro SDK + MCP server with hosted compliant app (swap-in for rejected I061)
 **One-liner:** A maintained TypeScript/Python client for the Allegro REST API plus an MCP server, with a paid hosted layer that registers one compliant Allegro app, handles OAuth for each seller, rate limits (including the mandatory app-specific User-Agent), retries and change alerts. Merges I071 (Allegro API change digest) as a feature. **Written up honestly as the weakest idea of the batch: see the scores and the recommendation at the end.**
 **Field:** developer-tools-apis | **Type:** library (with a hosted add-on)
@@ -13,16 +15,20 @@
 **First 10 customers:** Answer threads in allegro/allegro-api issues with code, publish to npm and PyPI, SEO "Allegro API TypeScript", outreach to agencies that list Allegro integration on their sites.
 **Build complexity:** low–medium (generated client, existing MCP examples). Risks: Allegro terms (own key per integrator, sellers connect by OAuth), captcha/blocks on production, a terms change could ban the hosted-proxy pattern.
 **Pros / Cons / Risks:** Pros: very cheap to build, testable against the sandbox, agent-friendly. Cons: free OSS MCP already exists, SDK is a spec-generation exercise, payer unclear, platform risk (Allegro can change terms at will, L9-F17). Risks: ban or deprecation, tiny audience.
-**Scores (1–5):** L1 1, L2 2, L3 2, L4 3, L5 3, L6 2, L7 3, L8 2, L9 2 | **Weighted:** 2.2 / 5 | **Chance band:** <5% (shortlist 2.7; L2 lowered 4 to 2 after finding the existing MCP server and spec-generated clients, L6 3 to 2, L8 3 to 2; below the T12 cut of 2.4)
+**Scores (1–5):** L1 1, L2 1, L3 2, L4 3, L5 3, L6 2, L7 3, L8 2, L9 2 | **Weighted:** 2.1 / 5 | **Chance band:** <5% (T16 review: L2 2→1, see Review changes; write-up value was 2.2; shortlist 2.7)
 **Cheapest validation test (≤1 week, ≤200 PLN):** Publish the generated TypeScript client and a README to npm for free and post in the Allegro tracker plus two developer communities; success: 30 npm downloads/week and 5 messages asking for hosted features within 2 weeks. If nothing, stop. Cost: nil.
 **Kill criteria:** Fewer than 3 inquiries from agencies in 3 weeks; or Allegro publishes an official SDK/MCP; or no agency will pay 99 PLN/month for the hosted layer.
 **Confidence:** low
 **Recommendation for T16:** consider rejecting this idea and replacing it from the shortlist (next candidates by rank among free field slots: I068 KSeF send queue, which overlaps 003, then others).
+**Devil's advocate:** The write-up already recommends rejection, and a second search makes it clear-cut. The GitHub search API (q=allegro+mcp, 2026-10-29, [api.github.com](https://api.github.com/search/repositories?q=allegro+mcp&sort=updated)) returns 18 repositories, of which at least nine are Allegro-marketplace MCP servers pushed between June and October 2026 besides the one already cited: e.g. Zziembie/allegro-mcp-server (offers, orders, billing; pushed 2026-10-11), stepek/allegro-mcp ("tools generated at runtime from the official OpenAPI" spec, 2026-09-10), anetesa/sellerflow-mcp (Allegro order fulfilment, 2026-10-21), wropol/AllegroMCP and ruslan-zhukouski/AllegroMCP ("Unofficial Allegro MCP Server"); all have 0 stars. When every developer with a coding agent can generate the same server from the public spec in an afternoon, the library has a price of zero and no one has shown demand for a paid version (no star above 9 across all of them). The hosted proxy, the only paid part, sits on the wrong side of Allegro's REST API terms risk (one registered app proxying many integrators), and Allegro can change terms or block patterns at will (L9-F17). There is no named payer and no price anchor.
+**Review changes:** L2 2→1 (nine-plus free Allegro MCP servers published in 2026, at least one generated from the official spec), weighted 2.2→2.1, band <5% unchanged. Rejected, as T13 recommended. No swap-in from the shortlist in T16: the next free developer-tools candidate I068 (KSeF send queue, 2.7) overlaps 003 and was itself scored as an on-call product (L7 2); T17 can decide whether a replacement is worth writing.
+
 **Sources:** (accessed 2026-10-29)
 - Allegro developer about page (OpenAPI spec, limits, registration, no SDK listed): https://developer.allegro.pl/about
 - Allegro API tracker threads: https://github.com/allegro/allegro-api/issues/12146 , https://github.com/allegro/allegro-api/issues/12327 , https://github.com/allegro/allegro-api/issues/12129 , https://github.com/allegro/allegro-api/issues/12463 (L6-F10)
 - Allegro REST API terms thread: https://spolecznosc.allegro.pl/t5/zaawansowani-sprzedawcy/10-09-2025-nowy-regulamin-rest-api/td-p/1078488 (L9-F17)
 - Existing MCP server: https://github.com/piotrlinski/allegro-open-mcp-server
+- More Allegro MCP servers, GitHub search (T16 review): https://api.github.com/search/repositories?q=allegro+mcp&sort=updated , https://github.com/Zziembie/allegro-mcp-server , https://github.com/stepek/allegro-mcp
 - Allegro client repos: https://api.github.com/search/repositories?q=allegro+api+client&sort=stars (L2-F07); https://github.com/chawel/python-allegro
 - BaseLinker API docs: https://api.baselinker.com/
 - EmailEngine revenue: https://trustmrr.com/startup/emailengine
