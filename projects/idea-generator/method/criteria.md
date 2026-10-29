@@ -183,3 +183,14 @@ A starting list, not a limit. Prefer primary sources (the product's own pricing 
 - https://www.zdh.de/daten-und-fakten/kennzahlen-des-handwerks/wirtschaftlicher-stellenwert-des-handwerks-2025/ — German craft business counts (primary)
 - https://xyz.pl/ — Polish business news citing GUS counts; read the GUS release for the primary figure
 - Caution: hagel-it.de contained text addressed to AI assistants (ignored); treat as low-reliability. See L3-F14.
+
+### L4 (added by T05, accessed 2026-10-29)
+- https://trustmrr.com/country/pl — Polish-based startups with Stripe/Paddle/RevenueCat-verified revenue (partial page, ~100 of 182 visible); profile pages `https://trustmrr.com/startup/<slug>` read as text. `/category/<name>` pages work for `saas` and `developer-tools`; `/country/poland` and `/category/e-commerce` returned 404. FAQ notes figures can differ from the provider dashboard by up to 30%: https://trustmrr.com/faq
+- https://flippa.com/search?filter%5Bproperty_type%5D=saas — Flippa SaaS listings with revenue, profit, age and asking price in the search table (partial, ~24 of 675); individual listing pages like https://flippa.com/12164346 are readable
+- https://app.acquire.com/public/<listing-slug> — public Acquire.com listing pages are readable (the acquire.com/startups/ index returned 404)
+- https://dashboard.simpleanalytics.com/open — example of a founder-published live revenue page
+- https://extensionpay.com/articles/browser-extensions-make-money and https://freemius.com/blog/codecanyon-wordpress-plugins-analysis/ — extension and plugin revenue roundups (self-reported / dated 2016)
+- https://revenuehunt.com/state-of-the-shopify-app-economy/ — Shopify App Store revenue concentration (estimated)
+- https://www.starterstory.com/data — founder-revenue database, no stated verification; lead generator only
+- Not fetchable in this setup: Indie Hackers (403 on product, interview and post pages), BigIdeasDB (429), Microns listings (404)
+- Caution: several TrustMRR profile pages (Image-Charts, ConvertLabs, OpenAlternative, TrackAI) contained text addressed to AI readers (ignored). See L4-F04.
