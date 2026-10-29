@@ -15,8 +15,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links: cookiebot.com/en/pricing (403); criteria.md ones as in T01. Note: hagel-it.de (L3-F14) contains text aimed at AI assistants; ignored, finding marked low-reliability
 - [x] T05 · research lens 04 — Copy what already makes money · sonnet · needs: T01 · [tasks/05-research-lens-04-copy-what-already-makes.md](tasks/05-research-lens-04-copy-what-already-makes.md)
   Unverifiable links: freemius.com/blog/codecanyon-wordpress-plugins-analysis (520); criteria.md ones as in T01/T04. Note: TrustMRR profiles (Image-Charts, ConvertLabs, OpenAlternative, TrackAI) contain text aimed at AI readers; ignored
-- [~] T06 · research lens 05 — Why now: regulation and tech triggers · sonnet · needs: T01 · [tasks/06-research-lens-05-why-now-regulation-and.md](tasks/06-research-lens-05-why-now-regulation-and.md)
-  Resume: all files written (F01-F24, README with 11 seeds, criteria.md updated); link check 0 dead (unverifiable: 403s); only final report left
+- [x] T06 · research lens 05 — Why now: regulation and tech triggers · sonnet · needs: T01 · [tasks/06-research-lens-05-why-now-regulation-and.md](tasks/06-research-lens-05-why-now-regulation-and.md)
+  Unverifiable links: paymentexpert.com, pwc.com/cz, rsm.global, hsfkramer.com (403); criteria.md ones as in T01/T04/T05
 - [ ] T07 · research lens 06 — Evidence of pain and demand · sonnet · needs: T01 · [tasks/07-research-lens-06-evidence-of-pain-and-de.md](tasks/07-research-lens-06-evidence-of-pain-and-de.md)
 - [ ] T08 · research lens 07 — Founder fit and feasibility · sonnet · needs: T01 · [tasks/08-research-lens-07-founder-fit-and-feasibi.md](tasks/08-research-lens-07-founder-fit-and-feasibi.md)
 - [ ] T09 · research lens 08 — Cheap distribution · sonnet · needs: T01 · [tasks/09-research-lens-08-cheap-distribution.md](tasks/09-research-lens-08-cheap-distribution.md)
@@ -34,6 +34,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · model · what was done · next step -->
+2026-10-29 12:55 · T06 · sonnet · lens 05: 24 findings (L5-F01..F24) in 4 topic files, 11 seeds, coverage, 9 gaps; dated triggers: KSeF 1 Jan 2027, DE E-Rechnung 2027/28, FR 2026/27, NIS2 3 Apr 2027, CRA reporting since 11 Sep 2026, CBAM 1 Feb 2027, EUDR 30 Dec 2026, MCP 2026-07-28; CSRD/AI Act high-risk softened; mostly secondary/snippet sources, no penalty amounts, voice/vision/Data Act/GPSR not covered; link check 0 dead · next T07
 2026-10-29 12:40 · T05 · sonnet · lens 04: 28 findings (L4-F01..F28) in 4 topic files, 12 seeds, coverage, 9 gaps; 7 Polish-founder TrustMRR profiles (Calendesk 20.8k USD MRR), dev licence/API products (EmailEngine, Conductor); Indie Hackers 403, Flippa F16–F19 from search table, no DE/CZ/Nordic product found, store top lists not read; link check 0 dead · next T06
 2026-10-29 12:25 · T04 · sonnet · lens 03: 31 findings (L3-F01..F31) in 4 topic files, 6 countries, 11 seeds, coverage, 9 gaps; pricing-page anchors (software cheap, outcomes expensive; KSeF connectivity free; trades/vertical 55–330/month; DE whistleblower 79–299 EUR/month); Polish compliance/vertical prices not found; FX at assumed rates, recheck with NBP; link check 0 dead · next T05
 2026-10-29 12:10 · T03 · sonnet · lens 02: 22 findings (L2-F01..F22) in 4 topic files, 10 seeds, coverage, 8 gaps; no L2=5 found, best ≈3; thin on non-PL markets and no Reddit/G2/Capterra data; L1-F04 updated with counter-evidence (CHANGELOG); link check 0 dead · next T04
