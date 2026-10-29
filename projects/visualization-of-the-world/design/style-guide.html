@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style guide · visualization-of-the-world</title>
+<meta name="description" content="Design tokens and components for the data stories about Poland.">
+<link rel="preload" href="fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="style-guide.css">
+<script>
+  // Apply ?dir= and ?theme= before first paint (handy for screenshots and links). The real switch is a class on <html>.
+  (function () {
+    var p = new URLSearchParams(location.search), c = document.documentElement.classList;
+    var d = p.get("dir"), t = p.get("theme");
+    if (d === "beton" || d === "noc") c.add("dir-" + d);
+    if (t === "light" || t === "dark") c.add("theme-" + t);
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Przejdź do treści</a>
+
+<header class="topbar">
+  <div class="container topbar__inner">
+    <a class="brand" href="#top">
+      <svg class="brand__mark" viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="12" width="5" height="9" rx="1" fill="var(--data-place-big-cities)"/><rect x="8.5" y="6" width="5" height="15" rx="1" fill="var(--data-place-small-cities)"/><rect x="16" y="1" width="5" height="20" rx="1" fill="var(--data-place-villages)"/></svg>
+      Polska w danych
+    </a>
+    <nav class="topbar__nav" aria-label="Główna">
+      <a href="#colour" aria-current="page">Kolor</a>
+      <a href="#type">Typografia</a>
+      <a href="#layout">Układ</a>
+      <a href="#navigation">Nawigacja</a>
+      <a href="#controls">Kontrolki</a>
+      <a href="#charts">Wykresy</a>
+      <a href="#states">Stany</a>
+    </nav>
+    <button class="btn btn--secondary topbar__menu-btn" type="button" data-menu-button aria-expanded="false" aria-controls="mobile-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <span data-menu-label>Menu</span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Główna (mobilna)" hidden>
+  <ul>
+    <li><a href="#colour" aria-current="page">Kolor</a></li>
+    <li><a href="#type">Typografia</a></li>
+    <li><a href="#layout">Układ</a></li>
+    <li><a href="#navigation">Nawigacja</a></li>
+    <li><a href="#controls">Kontrolki</a></li>
+    <li><a href="#charts">Wykresy</a></li>
+    <li><a href="#states">Stany</a></li>
+  </ul>
+</nav>
+<div class="scrim" data-menu-scrim hidden></div>
+
+<main id="main">
+<div class="container" id="top">
+
+  <section class="sg-hero" aria-labelledby="sg-title">
+    <h1 id="sg-title">Design system and style guide</h1>
+    <p class="lede">Tokens and components for the data stories about Poland: population, cities and housing. Calm, data-first, phone-first, light and dark. Everything here is driven by <a href="tokens.css">tokens.css</a> (generated from <a href="tokens.json">tokens.json</a>); the rules are in <a href="README.md">README.md</a>.</p>
+    <div class="sg-switcher">
+      <div class="field">
+        <label for="sg-direction">Visual direction</label>
+        <select class="select" id="sg-direction">
+          <option value="baltyk">Bałtyk (chosen)</option>
+          <option value="beton">Beton (alternative)</option>
+          <option value="noc">Noc (alternative)</option>
+        </select>
+        <span class="field__help">Sets <code>dir-beton</code> / <code>dir-noc</code> on &lt;html&gt;.</span>
+      </div>
+      <div class="field">
+        <label for="sg-theme">Theme</label>
+        <select class="select" id="sg-theme">
+          <option value="auto">Follow the system</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+        <span class="field__help">Sets <code>theme-light</code> / <code>theme-dark</code> on &lt;html&gt;.</span>
+      </div>
+    </div>
+    <ul class="sg-toc" aria-label="Sections">
+      <li><a href="#directions">Directions</a></li><li><a href="#colour">Colour</a></li><li><a href="#data-colour">Data colour</a></li>
+      <li><a href="#type">Typography</a></li><li><a href="#tokens">Space, radius, shadow, motion</a></li><li><a href="#layout">Layout</a></li>
+      <li><a href="#navigation">Navigation</a></li><li><a href="#controls">Controls</a></li><li><a href="#charts">Charts</a></li><li><a href="#states">States and access</a></li>
+    </ul>
+  </section>
+
+  <!-- ===================== DIRECTIONS ===================== -->
+  <section class="sg-section" id="directions" aria-labelledby="h-directions">
+    <h2 id="h-directions">Three directions</h2>
+    <p class="sg-intro">One is built completely; the other two are token-only alternatives on the same components. Data colours are shared by all three, so a chart means the same thing in every look.</p>
+    <div class="directions" data-directions></div>
+  </section>
+
+  <!-- ===================== COLOUR ===================== -->
+  <section class="sg-section" id="colour" aria-labelledby="h-colour">
+    <h2 id="h-colour">Colour</h2>
+    <p class="sg-intro">Swatches show the active direction and theme. The ratio is measured live against the page background; the full check is <code>scripts/check_contrast.py</code>.</p>
+    <div class="sg-sub">
+      <h3>Neutral scale</h3>
+      <p>Cool grey with a hint of the accent hue. Neutrals carry all text, borders and chart chrome.</p>
+      <div class="ramp" data-ramp="neutral"></div>
+    </div>
+    <div class="sg-sub">
+      <h3>Surfaces and text</h3>
+      <div class="swatches" data-swatches="bg-page bg-surface bg-sunken bg-raised bg-inverse text-primary text-secondary text-muted text-inverse border-subtle border-strong"></div>
+    </div>
+    <div class="sg-sub">
+      <h3>Accent</h3>
+      <p>One accent, for interaction only: links, selected state, primary button, focus ring, slider thumb. Never used as a data colour.</p>
+      <div class="swatches" data-swatches="accent accent-hover accent-subtle accent-text text-on-accent link focus-ring"></div>
+    </div>
+    <div class="sg-sub">
+      <h3>Semantic</h3>
+      <p>For messages and badges, always with an icon and words. Text variants pass 4.5:1 on every background and on their tint.</p>
+      <div class="swatches" data-swatches="success-text success-subtle warning-text warning-subtle danger-text danger-subtle info-text info-subtle"></div>
+      <p class="button-row" style="margin-top:var(--space-4)">
+        <span class="badge badge--good"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg>Aktualne</span>
+        <span class="badge badge--warning"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2 1.5 14h13L8 2zM8 7v3M8 12v.5"/></svg>Dane wstępne</span>
+        <span class="badge badge--danger"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M5.5 5.5l5 5m0-5-5 5"/></svg>Brak danych</span>
+        <span class="badge badge--info"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M8 7v4.5M8 4.5V5"/></svg>Zmiana metodologii</span>
+      </p>
+    </div>
+    <div class="sg-sub">
+      <h3>Chart and map chrome</h3>
+      <div class="swatches" data-swatches="chart-surface chart-grid chart-axis chart-text chart-annotation map-boundary map-nodata map-nodata-hatch"></div>
+    </div>
+  </section>
+
+  <section class="sg-section" id="data-colour" aria-labelledby="h-data">
+    <h2 id="h-data">Data colour</h2>
+    <p class="sg-intro">Each colour does one job: identity (categorical), magnitude (sequential and map), direction of change (diverging) or state (status). Validated with the dataviz method: lightness band, chroma floor, colour-blind separation (Machado 2009) and contrast, for light and dark.</p>
+    <div class="sg-sub">
+      <h3>Categorical: 8 hues, fixed order</h3>
+      <p>Assign in order, never cycle. A ninth series goes into "Inne" or small multiples. Slots 3, 4 and 5 are below 3:1 on white, so charts using them always carry direct labels or a table view.</p>
+      <div class="swatches" data-data-swatches="categorical"></div>
+    </div>
+    <div class="sg-sub">
+      <h3>Place type</h3>
+      <p>The three place types are slots 1-3, the only three that pass the colour-blind check on all pairs, so they work on maps and scatter plots too. The colour follows the place type everywhere, in every chart.</p>
+      <div class="swatches" data-data-swatches="placeType"></div>
+    </div>
+    <div class="sg-sub">
+      <h3>Sequential</h3>
+      <p>One hue, light to dark. Blue is the default; red is the second sequential context and the warm arm of the diverging scale.</p>
+      <p class="ramp-label">Blue 100-700</p><div class="ramp" data-seq="blue"></div>
+      <p class="ramp-label">Red 100-700</p><div class="ramp" data-seq="red"></div>
+    </div>
+    <div class="sg-sub">
+      <h3>Diverging</h3>
+      <p>Decrease (red) to increase (blue) around a neutral grey midpoint. Equal lightness on both arms.</p>
+      <div class="ramp" data-data-ramp="diverging"></div>
+    </div>
+    <div class="sg-sub">
+      <h3>Map (choropleth)</h3>
+      <p>Seven classes of the blue ramp. In dark mode the ramp flips so low values sink into the background. Missing data is hatched grey, never a ramp colour.</p>
+      <div class="ramp" data-data-ramp="map"></div>
+      <div class="legend-scale__nodata small"><span class="swatch-nodata" aria-hidden="true"></span>brak danych</div>
+    </div>
+    <div class="sg-sub">
+      <h3>Status (reserved)</h3>
+      <p>Only for state (good, warning, serious, critical), never for "series 4". Always with icon and label.</p>
+      <div class="swatches" data-status-swatches></div>
+    </div>
+  </section>
+
+  <!-- ===================== TYPOGRAPHY ===================== -->
+  <section class="sg-section" id="type" aria-labelledby="h-type">
+    <h2 id="h-type">Typography</h2>
+    <p class="sg-intro">Open-licence variable fonts (SIL OFL 1.1), self-hosted as woff2: latin plus latin-ext, so every Polish letter comes from the font, not a fallback. Display face for headings and big numbers, text face for everything else. Numbers in tables, axes and tooltips use tabular figures.</p>
+    <div class="sg-sub">
+      <h3>Scale</h3>
+      <div data-type-scale></div>
+    </div>
+    <div class="sg-sub">
+      <h3>Polish diacritics in every font</h3>
+      <p>Each line is set in one family. If a glyph were missing the browser would substitute a system font for it; the verification script checks that all four families loaded.</p>
+      <div class="font-test">
+        <p style="font-family:'Schibsted Grotesk Variable';font-weight:700">Zażółć gęślą jaźń. ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż<small>Schibsted Grotesk · display, Bałtyk</small></p>
+        <p style="font-family:'Public Sans Variable'">Łódź, Gdańsk, Kraków, Poznań, Wrocław, Białystok, Zielona Góra, Świętokrzyskie<small>Public Sans · text, Bałtyk</small></p>
+        <p style="font-family:'IBM Plex Sans Variable'">Mieszkańcy wsi: 15 284 tys. · ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż<small>IBM Plex Sans · Beton</small></p>
+        <p style="font-family:'Atkinson Hyperlegible Next Variable'">Gęstość zaludnienia: 122 os./km² · ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż<small>Atkinson Hyperlegible Next · Noc</small></p>
+      </div>
+    </div>
+    <div class="sg-sub">
+      <h3>Tabular numerals</h3>
+      <p>Use <code>font-variant-numeric: tabular-nums</code> (class <code>.num</code>; tables get it automatically) wherever numbers line up. Big standalone figures may stay proportional.</p>
+      <div class="numbers">
+        <div class="prop"><h4>Proportional</h4>1 111 111<br>8 808 080<br>4 147 200</div>
+        <div class="tab" data-tnum-sample><h4>Tabular</h4>1 111 111<br>8 808 080<br>4 147 200</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SPACE etc ===================== -->
+  <section class="sg-section" id="tokens" aria-labelledby="h-tokens">
+    <h2 id="h-tokens">Space, radius, shadow, motion</h2>
+    <div class="sg-sub">
+      <h3>Spacing (4 px base)</h3>
+      <p>Inside components: 1-4. Between components: 4-6. Between sections: 7-9.</p>
+      <div class="token-rows" data-space-rows></div>
+    </div>
+    <div class="sg-sub">
+      <h3>Radius</h3>
+      <p>Small and square-ish. Controls 6 px, cards 10 px, data marks 4 px on the value end only. No pill shapes.</p>
+      <div class="boxes" data-radius-boxes></div>
+    </div>
+    <div class="sg-sub">
+      <h3>Shadow</h3>
+      <p>Only for things that float over content: tooltip (md), mobile menu and popovers (lg). Cards use a hairline border, not a shadow.</p>
+      <div class="boxes">
+        <div class="box box--shadow" style="box-shadow:var(--shadow-sm)">shadow-sm</div>
+        <div class="box box--shadow" style="box-shadow:var(--shadow-md)">shadow-md</div>
+        <div class="box box--shadow" style="box-shadow:var(--shadow-lg)">shadow-lg</div>
+      </div>
+    </div>
+    <div class="sg-sub">
+      <h3>Motion</h3>
+      <p>Short and functional: state changes 140 ms, panels 220 ms, chart transitions 360 ms, story steps 600 ms. With <code>prefers-reduced-motion: reduce</code> every duration token becomes 0 ms. <span data-motion-status class="secondary"></span></p>
+      <div class="motion-demo" data-motion-demo></div>
+    </div>
+  </section>
+
+  <!-- ===================== LAYOUT ===================== -->
+  <section class="sg-section" id="layout" aria-labelledby="h-layout">
+    <h2 id="h-layout">Layout</h2>
+    <p class="sg-intro">Phone first: 4 columns, then 8 from 600 px and 12 from 960 px. Max content width 75 rem (1200 px). Reading text stays at 38 rem (about 70 characters) even on wide screens; charts may break out to the full grid.</p>
+    <div class="sg-sub">
+      <h3>Grid</h3>
+      <div class="grid grid-demo" aria-hidden="true">
+        <div class="col">1</div><div class="col">2</div><div class="col">3</div><div class="col">4</div>
+        <div class="col md-only">5</div><div class="col md-only">6</div><div class="col md-only">7</div><div class="col md-only">8</div>
+        <div class="col lg-only">9</div><div class="col lg-only">10</div><div class="col lg-only">11</div><div class="col lg-only">12</div>
+      </div>
+      <div class="table-scroll" style="margin-top:var(--space-4)" tabindex="0" role="region" aria-label="Breakpoints">
+        <table class="data-table bp-table">
+          <thead><tr><th scope="col">Name</th><th scope="col">From</th><th scope="col" class="n">Columns</th><th scope="col">Gutter / margin</th><th scope="col">Typical device</th></tr></thead>
+          <tbody>
+            <tr><td>base</td><td>0</td><td class="n">4</td><td>16 / 16 px</td><td>phone (designed at 375 px)</td></tr>
+            <tr><td>md</td><td>600 px</td><td class="n">8</td><td>24 / 24 px</td><td>large phone landscape, small tablet</td></tr>
+            <tr><td>lg</td><td>960 px</td><td class="n">12</td><td>24 / 32 px</td><td>tablet landscape, laptop</td></tr>
+            <tr><td>xl</td><td>1280 px</td><td class="n">12</td><td>24 / 32 px, centred</td><td>desktop</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="sg-sub">
+      <h3>Page templates</h3>
+      <p>Phone (left) and wide (right) for each template.</p>
+      <div class="templates">
+        <figure class="tpl" style="margin:0">
+          <div class="tpl__frames">
+            <div class="wf"><div class="wf-bar">top bar</div><div class="wf-text">headline + lede</div><div class="wf-accent">key figure</div><div class="wf-chart">teaser chart</div><div>story card</div><div>story card</div><div class="wf-bar">footer</div></div>
+            <div class="wf wf--wide"><div class="wf-bar">top bar</div><div class="c7 wf-text">headline + lede</div><div class="c5 wf-chart">teaser chart</div><div class="c4 wf-accent">key figure</div><div class="c4 wf-accent">key figure</div><div class="c4 wf-accent">key figure</div><div class="c4">story card</div><div class="c4">story card</div><div class="c4">story card</div><div class="wf-bar">footer: sources, licences</div></div>
+          </div>
+          <figcaption><b>Landing.</b> One headline, up to three key figures, story cards. No hero image.</figcaption>
+        </figure>
+        <figure class="tpl" style="margin:0">
+          <div class="tpl__frames">
+            <div class="wf"><div class="wf-bar">top bar</div><div class="wf-bar">chapter nav</div><div class="wf-text">story text</div><div class="wf-chart">sticky chart</div><div class="wf-text">step text</div><div class="wf-text">step text</div><div class="wf-bar">source + footer</div></div>
+            <div class="wf wf--wide"><div class="wf-bar">top bar</div><div class="wf-bar">chapter nav (all chapters)</div><div class="c5 wf-text">step text</div><div class="c7 wf-chart">sticky chart</div><div class="c5 wf-text">step text</div><div class="c7">source</div><div class="wf-bar">prev / next chapter, footer</div></div>
+          </div>
+          <figcaption><b>Scroll-story chapter.</b> Phone: chart sticks under the chapter nav, text steps scroll over it. Wide: text 5 columns, chart 7.</figcaption>
+        </figure>
+        <figure class="tpl" style="margin:0">
+          <div class="tpl__frames">
+            <div class="wf"><div class="wf-bar">top bar</div><div class="wf-accent">filters (place type, year)</div><div>tabs: chart / map / table</div><div class="wf-chart">chart</div><div class="wf-chart">chart</div><div class="wf-bar">footer</div></div>
+            <div class="wf wf--wide"><div class="wf-bar">top bar</div><div class="wf-accent">filters in one row: place type, year player, region</div><div class="c3 wf-accent">stat</div><div class="c3 wf-accent">stat</div><div class="c3 wf-accent">stat</div><div class="c3 wf-accent">stat</div><div class="c6 wf-chart">chart</div><div class="c6 wf-chart">chart</div><div class="wf-text">table</div><div class="wf-bar">footer</div></div>
+          </div>
+          <figcaption><b>Explorer / dashboard.</b> Filters above everything they affect, in one row on wide screens; stats, then charts, then table.</figcaption>
+        </figure>
+        <figure class="tpl" style="margin:0">
+          <div class="tpl__frames">
+            <div class="wf"><div class="wf-bar">top bar</div><div class="wf-accent">year player</div><div class="wf-map">map</div><div>legend</div><div>selected region sheet</div><div class="wf-bar">source</div></div>
+            <div class="wf wf--wide"><div class="wf-bar">top bar</div><div class="c9 wf-map">map</div><div class="c3">legend, selected region, ranking</div><div class="c9 wf-accent">year player</div><div class="c3">source</div><div class="wf-bar">footer</div></div>
+          </div>
+          <figcaption><b>Map view.</b> Map first, full width on phone, details in a bottom sheet; side panel on wide screens.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <section class="sg-section" id="navigation" aria-labelledby="h-nav">
+    <h2 id="h-nav">Navigation</h2>
+    <p class="sg-intro">The top bar of this page is the live component: links from 960 px, a "Menu" button below that. The menu opens as a sheet under the bar; <kbd>Esc</kbd> or the scrim closes it.</p>
+    <div class="controls-grid">
+      <div>
+        <h3 class="small" style="font-family:var(--font-text);letter-spacing:0">Top bar and mobile menu (open), phone</h3>
+        <div class="demo-frame">
+          <div class="topbar"><div class="container topbar__inner"><span class="brand"><svg class="brand__mark" viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="12" width="5" height="9" rx="1" fill="var(--data-place-big-cities)"/><rect x="8.5" y="6" width="5" height="15" rx="1" fill="var(--data-place-small-cities)"/><rect x="16" y="1" width="5" height="20" rx="1" fill="var(--data-place-villages)"/></svg>Polska w danych</span><span class="btn btn--secondary topbar__menu-btn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>Zamknij</span></div></div>
+          <div class="mobile-menu" aria-hidden="true"><ul><li><a tabindex="-1" aria-current="page">Ludność</a></li><li><a tabindex="-1">Miasta i wsie</a></li><li><a tabindex="-1">Mieszkania</a></li><li><a tabindex="-1">Eksplorator</a></li><li><a tabindex="-1">Mapa</a></li><li><a tabindex="-1">O danych i źródłach</a></li></ul></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="small" style="font-family:var(--font-text);letter-spacing:0">Chapter navigation (live)</h3>
+        <div class="demo-frame demo-frame--wide">
+          <nav class="chapter-nav" aria-label="Rozdziały" data-chapter-nav>
+            <div class="container">
+              <div class="chapter-nav__progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="chapter-nav__row">
+                <button class="btn btn--quiet btn--icon" type="button" data-chapter-prev aria-label="Poprzedni rozdział"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+                <p class="chapter-nav__title" aria-live="polite" style="margin:0"><span class="muted" data-chapter-count></span><strong data-chapter-title></strong></p>
+                <ul class="chapter-nav__list">
+                  <li><a href="#" data-chapter-link>Ile nas jest</a></li>
+                  <li><a href="#" data-chapter-link aria-current="step">Gdzie mieszkamy</a></li>
+                  <li><a href="#" data-chapter-link>Miasta się kurczą</a></li>
+                  <li><a href="#" data-chapter-link>Wieś rośnie</a></li>
+                  <li><a href="#" data-chapter-link>W czym mieszkamy</a></li>
+                </ul>
+                <button class="btn btn--quiet btn--icon" type="button" data-chapter-next aria-label="Następny rozdział"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <p class="small secondary" style="margin-top:var(--space-2)">Phone: progress segments, current chapter title, previous and next. From 960 px: every chapter as a link. Sticky under the top bar.</p>
+      </div>
+    </div>
+    <p class="small secondary">The footer with sources and licence notes is the live footer at the bottom of this page.</p>
+  </section>
+
+  <!-- ===================== CONTROLS ===================== -->
+  <section class="sg-section" id="controls" aria-labelledby="h-controls">
+    <h2 id="h-controls">Controls</h2>
+    <p class="sg-intro">Every control is at least 44 × 44 px, works with the keyboard and shows a 2 px focus ring.</p>
+    <div class="controls-grid">
+      <div class="card">
+        <h3 class="figure__title">Place-type toggle</h3>
+        <p class="figure__subtitle">Multi-select, at least one stays on. The swatch fills when on, so state is not colour alone; a check mark confirms.</p>
+        <fieldset class="place-toggle" data-place-toggle id="place-toggle-demo">
+          <legend>Typ miejscowości</legend>
+          <div class="place-toggle__options"><button type="button" data-place="big-cities" aria-pressed="true" style="--swatch:var(--data-place-big-cities)"><span class="place-toggle__swatch" aria-hidden="true"></span>Duże miasta<svg class="place-toggle__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg></button><button type="button" data-place="small-cities" aria-pressed="true" style="--swatch:var(--data-place-small-cities)"><span class="place-toggle__swatch" aria-hidden="true"></span>Małe miasta<svg class="place-toggle__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg></button><button type="button" data-place="villages" aria-pressed="true" style="--swatch:var(--data-place-villages)"><span class="place-toggle__swatch" aria-hidden="true"></span>Wsie<svg class="place-toggle__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg></button></div>
+          <p class="field__error" data-place-status aria-live="polite" style="margin-top:var(--space-2)"></p>
+        </fieldset>
+      </div>
+      <div class="card">
+        <h3 class="figure__title">Year slider with play</h3>
+        <p class="figure__subtitle">Arrow keys step one year, <kbd>Home</kbd>/<kbd>End</kbd> jump. Play steps every 450 ms and stops at the end. It drives the map below.</p>
+        <div class="year-player" data-year-player id="year-player">
+          <button class="btn btn--primary btn--icon" type="button" data-play aria-pressed="false" aria-label="Odtwórz zmiany w czasie">
+            <svg data-icon-play viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+            <svg data-icon-pause viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+          </button>
+          <input type="range" id="year-range" min="2000" max="2024" step="1" value="2024" aria-label="Rok">
+          <output class="year-player__year" for="year-range" aria-live="off">2024</output>
+          <div class="year-player__ticks" aria-hidden="true"><span>2000</span><span>2012</span><span>2024</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="figure__title">Legends</h3>
+        <p class="figure__subtitle">Categorical (swatch or line), binned sequential with tick values and a no-data key, diverging with a zero mark.</p>
+        <ul class="legend" style="margin-bottom:var(--space-4)">
+          <li class="legend__item"><span class="legend__line" style="--swatch:var(--data-place-big-cities)"></span>Duże miasta</li>
+          <li class="legend__item"><span class="legend__line" style="--swatch:var(--data-place-small-cities)"></span>Małe miasta</li>
+          <li class="legend__item"><span class="legend__line" style="--swatch:var(--data-place-villages)"></span>Wsie</li>
+        </ul>
+        <div class="legend-scale" data-map-legend-static></div>
+        <div class="legend-scale" style="margin-top:var(--space-4)">
+          <div class="legend-scale__title">Zmiana 2014-2024</div>
+          <div class="legend-scale__bins"><span style="--swatch:var(--data-div-1)"></span><span style="--swatch:var(--data-div-2)"></span><span style="--swatch:var(--data-div-3)"></span><span style="--swatch:var(--data-div-4)"></span><span style="--swatch:var(--data-div-5)"></span><span style="--swatch:var(--data-div-6)"></span><span style="--swatch:var(--data-div-7)"></span></div>
+          <div class="legend-scale__ticks"><span>spadek</span><span>0</span><span>wzrost</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="figure__title">Tooltip</h3>
+        <p class="figure__subtitle">Raised surface, hairline border, shadow-md. Title, then one row per series with the swatch and the value in text ink. Opens on hover and on keyboard focus; stays inside the chart.</p>
+        <div class="static-tooltip">
+          <div class="tooltip" role="presentation">
+            <div class="tooltip__title">2024</div>
+            <div class="tooltip__row"><span class="legend__swatch" style="--swatch:var(--data-place-big-cities)"></span>Duże miasta<span class="tooltip__value">29,2%</span></div>
+            <div class="tooltip__row"><span class="legend__swatch" style="--swatch:var(--data-place-small-cities)"></span>Małe miasta<span class="tooltip__value">28,7%</span></div>
+            <div class="tooltip__row"><span class="legend__swatch" style="--swatch:var(--data-place-villages)"></span>Wsie<span class="tooltip__value">42,5%</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="figure__title">Buttons</h3>
+        <p class="figure__subtitle">Primary (one per view), secondary, quiet, icon. Radius 6 px.</p>
+        <div class="button-row">
+          <button class="btn btn--primary" type="button">Pokaż mapę</button>
+          <button class="btn btn--secondary" type="button">Pobierz CSV</button>
+          <button class="btn btn--quiet" type="button">Resetuj filtry</button>
+          <button class="btn btn--secondary btn--icon" type="button" aria-label="Udostępnij"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="m8.2 10.8 7.6-3.6m-7.6 6 7.6 3.6"/></svg></button>
+          <button class="btn btn--primary" type="button" disabled>Niedostępne</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="figure__title">Tabs</h3>
+        <p class="figure__subtitle">Switch views of the same data. Arrow keys move between tabs. Used on the line chart below (chart / table).</p>
+        <div class="tabs" data-tabs>
+          <div class="tabs__list" role="tablist" aria-label="Widok">
+            <button role="tab" id="demo-tab-1" aria-controls="demo-panel-1" aria-selected="true" type="button">Wykres</button>
+            <button role="tab" id="demo-tab-2" aria-controls="demo-panel-2" aria-selected="false" tabindex="-1" type="button">Mapa</button>
+            <button role="tab" id="demo-tab-3" aria-controls="demo-panel-3" aria-selected="false" tabindex="-1" type="button">Tabela</button>
+          </div>
+          <div role="tabpanel" id="demo-panel-1" aria-labelledby="demo-tab-1" tabindex="0"><p class="small secondary" style="margin:0">Panel: wykres.</p></div>
+          <div role="tabpanel" id="demo-panel-2" aria-labelledby="demo-tab-2" tabindex="0" hidden><p class="small secondary" style="margin:0">Panel: mapa.</p></div>
+          <div role="tabpanel" id="demo-panel-3" aria-labelledby="demo-tab-3" tabindex="0" hidden><p class="small secondary" style="margin:0">Panel: tabela.</p></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="figure__title">Form fields</h3>
+        <p class="figure__subtitle">Label above, help text below, error in danger text with an icon. Inputs are 16 px so phones do not zoom.</p>
+        <div class="stack">
+          <div class="field"><label for="f-search">Szukaj gminy</label><input class="input" id="f-search" type="search" placeholder="np. Żółkiewka" aria-describedby="f-search-help"><span class="field__help" id="f-search-help">Nazwa gminy, powiatu lub miasta.</span></div>
+          <div class="field"><label for="f-voiv">Województwo</label><select class="select" id="f-voiv"><option>Wszystkie</option><option>Łódzkie</option><option>Śląskie</option><option>Świętokrzyskie</option></select></div>
+          <div class="field"><label for="f-year">Rok początkowy</label><input class="input" id="f-year" inputmode="numeric" value="1949" aria-invalid="true" aria-describedby="f-year-err"><span class="field__error" id="f-year-err"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.5V9M8 11v.5"/></svg>Rok musi być między 1950 a 2024.</span></div>
+          <div class="field"><label for="f-dis">Jednostka (zablokowane)</label><input class="input" id="f-dis" value="osoby" disabled></div>
+          <label class="choice"><input type="checkbox" checked> Pokaż średnią krajową</label>
+          <fieldset class="field"><legend>Wartości</legend>
+            <label class="choice"><input type="radio" name="unit" checked> Liczba osób</label>
+            <label class="choice"><input type="radio" name="unit"> Odsetek ludności</label>
+          </fieldset>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="figure__title">Stat tile</h3>
+        <p class="figure__subtitle">A single headline number is not a chart. Display face, proportional figures, a delta with an arrow and words.</p>
+        <div class="stat">
+          <span class="stat__label">Mieszkańcy wsi (dane przykładowe)</span>
+          <span class="stat__value">42,5%</span>
+          <span class="stat__delta" style="color:var(--color-info-text)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 13V3m-4 4 4-4 4 4"/></svg>+4,2 pkt proc. od 2000</span>
+        </div>
+        <footer class="chart-source"><span class="chart-source__label">Źródło:</span><a href="#sample-data-note">dane przykładowe, nie GUS</a></footer>
+      </div>
+    </div>
+    <div class="sg-sub">
+      <h3>Table</h3>
+      <p>Numbers right-aligned in tabular figures, text left; header sticky; missing values say "brak" in muted text, never 0. Wide tables scroll inside their own box, never the page.</p>
+      <div data-table-demo></div>
+    </div>
+  </section>
+
+  <!-- ===================== CHARTS ===================== -->
+  <section class="sg-section" id="charts" aria-labelledby="h-charts">
+    <h2 id="h-charts">Charts</h2>
+    <p class="sg-intro" id="sample-data-note">All numbers below are made up (<a href="sample/sample-data.json">sample/sample-data.json</a>) to show the styling. They are not GUS data.</p>
+    <div class="sg-sub">
+      <h3>Rules</h3>
+      <ol class="rules">
+        <li><b>Title says the finding</b>, subtitle says the measure and unit ("% ludności, 2000-2024").</li>
+        <li><b>Axes:</b> one value axis only (no dual axes). Tick labels 12 px in chart-text, tabular figures; a solid baseline at zero; no axis line on the value side.</li>
+        <li><b>Gridlines:</b> 1 px chart-grid hairlines on the value axis only, 3-5 of them. Never vertical gridlines on time.</li>
+        <li><b>Direct labels</b> at line ends for up to 4 series (the legend stays too). Label text is ink, not the series colour; a small mark carries the colour.</li>
+        <li><b>Values:</b> label only what the story needs (max, min, highlighted). Everything else in the tooltip and table view.</li>
+        <li><b>Annotations:</b> dashed 1 px rule plus a short text in chart-annotation ink, e.g. a census year or method change.</li>
+        <li><b>Marks:</b> lines 2 px; bars with a 2 px gap and 4 px rounding on the value end only; markers 8 px with a surface ring.</li>
+        <li><b>Every chart, map and table that shows data ends with the "Źródło:" footer</b>: publisher, dataset or table code as a link, date accessed. No source, no chart.</li>
+        <li><b>Hover and focus:</b> crosshair and tooltip on line charts, per-mark tooltip on bars and map regions; the chart can be focused and stepped with arrow keys; a table view exists for every chart.</li>
+      </ol>
+    </div>
+
+    <div class="grid" style="margin-top:var(--space-5)">
+      <figure class="card figure span-all lg-span-8" data-chart-card="line">
+        <h3 class="figure__title">Coraz więcej ludzi mieszka na wsi</h3>
+        <p class="figure__subtitle">Odsetek ludności według typu miejscowości, %, 2000-2024</p>
+        <div class="figure__controls">
+          <fieldset class="place-toggle" data-place-toggle id="place-toggle-line">
+            <legend class="visually-hidden">Pokaż typy miejscowości</legend>
+            <div class="place-toggle__options"><button type="button" data-place="big-cities" aria-pressed="true" style="--swatch:var(--data-place-big-cities)"><span class="place-toggle__swatch" aria-hidden="true"></span>Duże miasta<svg class="place-toggle__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg></button><button type="button" data-place="small-cities" aria-pressed="true" style="--swatch:var(--data-place-small-cities)"><span class="place-toggle__swatch" aria-hidden="true"></span>Małe miasta<svg class="place-toggle__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg></button><button type="button" data-place="villages" aria-pressed="true" style="--swatch:var(--data-place-villages)"><span class="place-toggle__swatch" aria-hidden="true"></span>Wsie<svg class="place-toggle__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg></button></div>
+            <p class="field__error" data-place-status aria-live="polite"></p>
+          </fieldset>
+        </div>
+        <div class="tabs" data-tabs>
+          <div class="tabs__list" role="tablist" aria-label="Widok wykresu">
+            <button role="tab" id="line-tab-chart" aria-controls="line-panel-chart" aria-selected="true" type="button">Wykres</button>
+            <button role="tab" id="line-tab-table" aria-controls="line-panel-table" aria-selected="false" tabindex="-1" type="button">Tabela</button>
+          </div>
+          <div role="tabpanel" id="line-panel-chart" aria-labelledby="line-tab-chart">
+            <div class="chart" data-chart="line"></div>
+          </div>
+          <div role="tabpanel" id="line-panel-table" aria-labelledby="line-tab-table" hidden>
+            <div data-chart="line-table"></div>
+          </div>
+        </div>
+        <footer class="chart-source"><span class="chart-source__label">Źródło:</span><a href="sample/sample-data.json">dane przykładowe do przewodnika stylu (nie są to dane GUS)</a><span class="chart-source__meta">Format w serwisie: wydawca, tabela z linkiem, data dostępu, np. „GUS, Bank Danych Lokalnych, tabela P2425, dostęp 29.10.2026”</span></footer>
+      </figure>
+
+      <figure class="card figure span-all lg-span-4" data-chart-card="map">
+        <h3 class="figure__title">Wieś najsilniejsza na południowym wschodzie</h3>
+        <p class="figure__subtitle">Odsetek ludności na wsi według województw, %, rok <span class="num" data-map-year>2024</span>. Kafelki zamiast granic.</p>
+        <div class="chart" data-chart="map"></div>
+        <div class="legend-scale" data-map-legend style="margin-top:var(--space-3)"></div>
+        <footer class="chart-source"><span class="chart-source__label">Źródło:</span><a href="sample/sample-data.json">dane przykładowe (nie GUS)</a><span class="chart-source__meta">Opolskie 2000-2005: brak danych (celowo, do pokazania stanu)</span></footer>
+      </figure>
+
+      <figure class="card figure span-all md-span-4 lg-span-6" data-chart-card="bars">
+        <h3 class="figure__title">Ranking województw</h3>
+        <p class="figure__subtitle">Odsetek ludności na wsi, %, rok <span class="num" data-bars-year>2024</span></p>
+        <div class="chart" data-chart="bars"></div>
+        <footer class="chart-source"><span class="chart-source__label">Źródło:</span><a href="sample/sample-data.json">dane przykładowe (nie GUS)</a></footer>
+      </figure>
+
+      <figure class="card figure span-all md-span-4 lg-span-6" data-chart-card="diverging">
+        <h3 class="figure__title">Gdzie wieś rośnie, a gdzie maleje</h3>
+        <p class="figure__subtitle">Zmiana liczby mieszkańców wsi, %, 2014-2024</p>
+        <div class="chart" data-chart="diverging"></div>
+        <footer class="chart-source"><span class="chart-source__label">Źródło:</span><a href="sample/sample-data.json">dane przykładowe (nie GUS)</a></footer>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== STATES ===================== -->
+  <section class="sg-section" id="states" aria-labelledby="h-states">
+    <h2 id="h-states">States and accessibility</h2>
+    <p class="sg-intro">Every data view has three extra states. Messages say what happened and what to do, in plain Polish.</p>
+    <div class="grid">
+      <div class="span-all lg-span-4">
+        <h3 class="small" style="font-family:var(--font-text);letter-spacing:0">Loading</h3>
+        <div class="skeleton" role="status" aria-label="Wczytywanie danych"><div class="skeleton__bar" style="width:40%"></div><div class="skeleton__bar" style="width:85%"></div><div class="skeleton__bar" style="width:65%"></div><div class="skeleton__bar" style="width:95%"></div><div class="skeleton__bar" style="width:55%"></div></div>
+      </div>
+      <div class="span-all lg-span-4">
+        <h3 class="small" style="font-family:var(--font-text);letter-spacing:0">Empty</h3>
+        <div class="state" role="status">
+          <svg class="state__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M8 11h6"/></svg>
+          <p class="state__title">Brak danych dla tych filtrów</p>
+          <p class="state__text">Dla wsi w województwie opolskim dane zaczynają się w 2006 roku.</p>
+          <button class="btn btn--secondary" type="button">Resetuj filtry</button>
+        </div>
+      </div>
+      <div class="span-all lg-span-4">
+        <h3 class="small" style="font-family:var(--font-text);letter-spacing:0">Error</h3>
+        <div class="state state--error" role="alert">
+          <svg class="state__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 2 20h20L12 3zM12 10v4M12 17v.5"/></svg>
+          <p class="state__title">Nie udało się wczytać danych</p>
+          <p class="state__text">Sprawdź połączenie i spróbuj ponownie.</p>
+          <button class="btn btn--secondary" type="button">Spróbuj ponownie</button>
+        </div>
+      </div>
+    </div>
+    <div class="sg-sub">
+      <h3>Accessibility rules</h3>
+      <ul class="rules">
+        <li class="focus-demo"><b>Focus ring:</b> 2 px focus-ring colour, 2 px offset, on <code>:focus-visible</code> only. Never removed. <button class="btn btn--secondary" type="button" tabindex="-1">Przykład</button></li>
+        <li><b>Touch size:</b> 44 × 44 px minimum for anything tappable, including chart hit areas (bigger than the mark). <span class="touch-demo" aria-hidden="true">44</span></li>
+        <li><b>Keyboard:</b> <kbd>Tab</kbd> through controls in reading order; <kbd>←</kbd> <kbd>→</kbd> in tabs, sliders and focused charts; <kbd>Space</kbd> toggles place types and play; <kbd>Esc</kbd> closes the menu and tooltips. A skip link is the first focusable element.</li>
+        <li><b>Never colour alone:</b> legends and direct labels name every series; status has icon plus words; selected toggles get a filled swatch and a check.</li>
+        <li><b>Contrast:</b> text 4.5:1, large text and UI 3:1, data marks 3:1 or labelled (exceptions listed in tokens.json).</li>
+        <li><b>Motion:</b> reduced-motion users get no transitions, no shimmer, no smooth scrolling.</li>
+        <li><b>Charts:</b> SVG with <code>role="img"</code> and a text summary in <code>aria-label</code>; table view for every chart.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="container grid">
+    <section class="span-all md-span-4 lg-span-4" aria-labelledby="ft-sources">
+      <h2 id="ft-sources">Źródła danych</h2>
+      <ul>
+        <li>Wykresy na tej stronie: dane przykładowe, wymyślone do pokazania stylu.</li>
+        <li>W serwisie: każda liczba ma źródło (GUS, Eurostat, ONZ) z linkiem i datą dostępu, pod wykresem i na stronie „O danych”.</li>
+      </ul>
+    </section>
+    <section class="span-all md-span-4 lg-span-4" aria-labelledby="ft-licence">
+      <h2 id="ft-licence">Licencje</h2>
+      <ul>
+        <li>Fonty: Public Sans, Schibsted Grotesk, IBM Plex Sans, Atkinson Hyperlegible Next, SIL Open Font License 1.1 (<a href="fonts/OFL-public-sans.txt">tekst licencji</a>).</li>
+        <li>Dane GUS: zasady ponownego wykorzystania podane przy każdym źródle.</li>
+      </ul>
+    </section>
+    <section class="span-all lg-span-4" aria-labelledby="ft-about">
+      <h2 id="ft-about">O projekcie</h2>
+      <ul>
+        <li><a href="README.md">Zasady systemu (README)</a></li>
+        <li><a href="sources.md">Źródła fontów i narzędzi</a></li>
+      </ul>
+    </section>
+    <p class="span-all site-footer__legal">Polska w danych · system wizualny v1.0 · strona statyczna, bez śledzenia.</p>
+  </div>
+</footer>
+
+<script src="components.js"></script>
+<script src="style-guide.js"></script>
+</body>
+</html>

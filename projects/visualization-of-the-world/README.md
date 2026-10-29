@@ -7,6 +7,7 @@ Data research for a later visualization of the world (how people live: where, in
 ## Layout
 - `research/<topic>/` - one folder per research topic, each with its own README, `sources.csv`, `data/`, `scripts/`, `reports/`.
 - `research/poland-demography-housing/` - Poland: population by place class, housing, etc. (first topic).
+- `design/` - design system for the later site: tokens (colour, type, space, motion), components and a style guide (`design/style-guide.html`, rules in `design/README.md`).
 
 ## Principles
 - Every number has a source (see `CLAUDE.md`).
