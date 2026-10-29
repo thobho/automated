@@ -11,6 +11,7 @@ Research for lens 1 of [BRIEF.md](../../BRIEF.md); scoring anchors in [method/cr
 | [dach-niche-software.md](dach-niche-software.md) | F04 Vimcar, F05 campai, F06 Smoobu |
 | [compliance-and-vertical-saas.md](compliance-and-vertical-saas.md) | F07 iubenda, F08 HoneyBook, F09 Shepherd, F10 Buildium, F11 Secfix (NIS2), F12 whistleblower, F13 Base/BaseLinker, F14 Survicate |
 | [trades-creators-and-workforce.md](trades-creators-and-workforce.md) | F15 OpenSolar, F16 plancraft, F17 Topmate, F18 Planday |
+| [more-markets.md](more-markets.md) | F19 Rentman (NL), F20 AssoConnect (FR), F21 L-Step (JP), F22 Mergado (CZ), F23 Twigsee (CZ), F24 Spond (NO), F25 TuriTop (ES), F26 Z-API (BR) — added in T11 gap pass |
 
 ## Gap status at a glance
 | Status | Findings |
@@ -54,3 +55,6 @@ Unverified or missing, with where to look next.
 6. **Vet software (F09) and holiday-rental compliance (F06):** Polish competitors found but not assessed. Next: pricing pages of Klinika XP and others; Smoobu UI language check.
 7. **NIS2 scope and dates (F11)** come from news sites; confirm in Dziennik Ustaw / https://isap.sejm.gov.pl/.
 8. **Reverse-direction ideas (PL to EU)** only have two proof points (Base, Survicate); a systematic list of Polish SaaS with foreign revenue was not built.
+
+### T11 gap pass (2026-10-29)
+Gap 4 (countries) partly closed: 8 findings (F19–F26) from 7 new countries (NL, FR, JP, CZ, NO, ES, BR). No PL equivalent found in a 1–2 search check for F19 Rentman (AV/event rental ops), F21 L-Step (messaging-app marketing automation; pattern only), F25 TuriTop (tour/activity booking), F26 Z-API (WhatsApp API for SMB software; ToS risk); F22 Mergado partial; PL equivalents exist for F20, F23, F24. Still open: Korea, Sweden, systematic discovery via Product Hunt/G2. The TuriTop pricing page contained text aimed at AI tools; ignored. Coverage is at the end of [more-markets.md](more-markets.md).

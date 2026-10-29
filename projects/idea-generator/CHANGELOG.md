@@ -3,4 +3,9 @@
 One line per change to already-merged findings or scores, newest first:
 `YYYY-MM-DD · file · what changed · why (source URL if any)`
 
+2026-10-29 · research/05-why-now/tech-shifts-and-uncovered-rules.md + README.md · T11 gap pass: new topic file with 10 findings L5-F25..F34 (voice/OCR/structured-output tech shifts; Data Act, GPSR, e-Doręczenia, sygnaliści act, PKE, ETS2); README topic table + gap-pass note · closes part of lens 5 gaps 5–6
+2026-10-29 · research/03-monetization/poland-vertical-and-compliance-pricing.md + README.md · T11 gap pass: new topic file with 10 findings L3-F32..F41 (Polish vet, practice EDM, wspólnoty, driving-school, law-firm, language-school, whistleblower, IOD, WCAG prices); README note. Seed 2 ("no Polish whistleblower prices found") is now superseded: PL vendors charge ~150–880 PLN/month (L3-F38, L3-F39) · closes part of lens 3 gaps 1 and 3
+2026-10-29 · research/03-monetization (L3 seeds 5, 7, 9) · context: Versum stopped selling on 31 Jan 2022 and moment.pl redirects to Booksy (L3-F32 file Coverage, https://versum.pl/cennik) · salon competitor set is smaller than earlier seeds assumed
+2026-10-29 · research/01-proven-abroad/more-markets.md + README.md · T11 gap pass: new topic file with 8 findings L1-F19..F26 from NL, FR, JP, CZ, NO, ES, BR; README topic table + gap-pass note · closes part of lens 1 gap 4
+
 2026-10-29 · research/01-proven-abroad/dach-niche-software.md (L1-F04) · added counter-evidence: Polish software-only mileage apps exist, gap is weaker · found in lens 02 (L2-F17, Google Play search)

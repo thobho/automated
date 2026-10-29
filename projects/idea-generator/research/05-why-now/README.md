@@ -15,6 +15,7 @@ Research for lens 5 of [BRIEF.md](../../BRIEF.md); scoring anchors in [method/cr
 | [poland-and-eu-invoicing-tax.md](poland-and-eu-invoicing-tax.md) | F01 KSeF dates, F02 KSeF penalties, F03 KSeF audience size, F04 Germany E-Rechnung, F05 France e-invoicing, F06 ViDA 2030, F07 DAC8/DAC7, F08 e-Doręczenia |
 | [digital-cyber-ai-privacy.md](digital-cyber-ai-privacy.md) | F09 AI Act omnibus, F10 Polish AI act/KRiBSI, F11 NIS2 (KSC), F12 CRA, F13 GDPR/UODO fines, F14 PSD3/PSR, F15 EAA Poland |
 | [sustainability-products-hr.md](sustainability-products-hr.md) | F16 CSRD omnibus, F17 CBAM, F18 EUDR, F19 PPWR, F20 system kaucyjny, F21 pay transparency |
+| [tech-shifts-and-uncovered-rules.md](tech-shifts-and-uncovered-rules.md) | F25 realtime speech APIs, F26 voice-agent per-minute prices, F27 LLM document OCR, F28 schema-guaranteed JSON + cheap models, F29 Data Act, F30 GPSR, F31 e-Doręczenia, F32 ustawa o ochronie sygnalistów, F33 Prawo komunikacji elektronicznej, F34 ETS2 — added in T11 gap pass |
 | [energy-and-agent-tech.md](energy-and-agent-tech.md) | F22 Czyste Powietrze, F23 MCP spec 2026-07-28, F24 MCP adoption |
 
 ## Strength at a glance
@@ -62,3 +63,6 @@ Counted from this session (2026-10-29), ±3.
 7. **Other countries** (CZ, NL, BE, ES, IT, Nordics e-invoicing and ESG mandates): only DE and FR read. Next: Belgium 2026, Poland-adjacent Czech e-invoice plans.
 8. **Whether the ENISA CRA platform and the EU EUDR information system offer public APIs** (decides feasibility of seeds 4 and 6): not checked.
 9. **KSeF second-order effects** (how many micro firms really act in Jan 2027; accountant behaviour): needs lens 6 (pain) evidence.
+
+### T11 gap pass (2026-10-29)
+Gaps 5 and 6 partly closed: 10 findings (F25–F34). Tech: speech-to-speech and SIP phone access with a cheap mini tier, voice agents at about USD 0.05–0.16/min, LLM OCR at about 1,000 pages per USD 1, schema-guaranteed JSON on models from USD 0.05 per 1M input tokens. Rules: Data Act cloud-switching charges end Jan 2027, GPSR seller info duties since Dec 2024, e-Doręczenia for CEIDG traders (1 Oct 2026, group per secondary sources), whistleblower channel for 50+ employers, PKE cookie/consent rules since 10 Nov 2024, ETS2 from 2028. EUR-Lex and ISAP texts were behind bot checks (not read; several points rest on secondary sources). Still open: DAC7 (no primary page), ZUS/PIT 2027. Coverage is at the end of [tech-shifts-and-uncovered-rules.md](tech-shifts-and-uncovered-rules.md).

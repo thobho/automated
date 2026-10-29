@@ -16,6 +16,7 @@ No finding is a complete L3 = 5 case on its own (the criteria need a named payer
 | [dach-and-eu-pricing.md](dach-and-eu-pricing.md) | F09 Lexware, F10 sevDesk, F11 Moneybird, F12 German trades comparison, F13 Craftboxx, F14 whistleblowing DE, F15 Cookiebot, F16 Papershift |
 | [us-and-global-niche-saas.md](us-and-global-niche-saas.md) | F17 Jobber, F18 Housecall Pro, F19 Shepherd (vet), F20 Time To Pet, F21 Buildium, F22 Tidio, F23 Brand24, F24 iubenda |
 | [willingness-to-pay-and-market-size.md](willingness-to-pay-and-market-size.md) | F25 Polish bookkeeping fees, F26 KSeF bundled free, F27 PL firm count, F28 DE craft firm count, F29 IOD outsourcing, F30 EAA costs, F31 SMB benchmarks |
+| [poland-vertical-and-compliance-pricing.md](poland-vertical-and-compliance-pricing.md) | F32 Weter.pl (vet), F33 Medfile (physio/psych), F34 Moja Wspólnota, F35 Portal OSK, F36 Mecenas.iT (law firms), F37 LangLion (language schools), F38 anonimowysygnalista.pl, F39 e-nform, F40 Lejdis Prawo (IOD), F41 codetech.dev (WCAG) — added in T11 gap pass |
 
 ## Strength at a glance
 | Verdict | Findings |
@@ -61,3 +62,6 @@ Counted from this session (2026-10-29).
 7. **Market sizes are firm counts, not payer counts.** F27 uses a media article citing GUS (primary release not read); F28 uses ZDH but assumes 100% penetration for an upper bound only. Next: GUS "Zmiany strukturalne grup podmiotów" and BDL tables by PKD.
 8. **Currency conversions are estimates** (4.3 PLN/EUR, 4.0 PLN/USD assumed; no FX source fetched). Recompute with NBP tables before use in write-ups.
 9. **Annual versus monthly billing and net/gross are inconsistent across pages;** comparisons across vendors are approximate (F10, F11, F12, F16).
+
+### T11 gap pass (2026-10-29)
+Gaps 1 and 3 partly closed: 10 findings (F32–F41) read on Polish vendor pricing pages. Polish vertical tools sit at about 75–600 PLN/month (vet 899 PLN/year for 3 users; practice EDM 109–274 PLN gross; driving schools 95–599 PLN; law firms 89–149 PLN/user; wspólnoty managers 99–1,049 PLN + per-unit), i.e. at or below the foreign corridor. Polish whistleblower channels cost about 150–880 PLN/month (vs 79–299 EUR in DE), outsourced IOD from 200 PLN/month, WCAG audits from 1,500 PLN one-off. Still open: salon competitors other than Booksy (Versum stopped selling in 2022, moment.pl redirects to Booksy), NIS2/KSC consultancy prices, renovation quoting (ath.pl 403). Coverage is at the end of [poland-vertical-and-compliance-pricing.md](poland-vertical-and-compliance-pricing.md).
