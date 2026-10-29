@@ -185,9 +185,9 @@ A starting list, not a limit. Prefer primary sources (the product's own pricing 
 - Caution: hagel-it.de contained text addressed to AI assistants (ignored); treat as low-reliability. See L3-F14.
 
 ### L4 (added by T05, accessed 2026-10-29)
-- https://trustmrr.com/country/pl — Polish-based startups with Stripe/Paddle/RevenueCat-verified revenue (partial page, ~100 of 182 visible); profile pages `https://trustmrr.com/startup/<slug>` read as text. `/category/<name>` pages work for `saas` and `developer-tools`; `/country/poland` and `/category/e-commerce` returned 404. FAQ notes figures can differ from the provider dashboard by up to 30%: https://trustmrr.com/faq
+- https://trustmrr.com/country/pl — Polish-based startups with Stripe/Paddle/RevenueCat-verified revenue (partial page, ~100 of 182 visible); profile pages (pattern trustmrr.com/startup/ plus the slug, e.g. https://trustmrr.com/startup/calendesk) read as text. `/category/<name>` pages work for `saas` and `developer-tools`; `/country/poland` and `/category/e-commerce` returned 404. FAQ notes figures can differ from the provider dashboard by up to 30%: https://trustmrr.com/faq
 - https://flippa.com/search?filter%5Bproperty_type%5D=saas — Flippa SaaS listings with revenue, profit, age and asking price in the search table (partial, ~24 of 675); individual listing pages like https://flippa.com/12164346 are readable
-- https://app.acquire.com/public/<listing-slug> — public Acquire.com listing pages are readable (the acquire.com/startups/ index returned 404)
+- https://app.acquire.com/public/vvc1ctl45x-profitable-wordpress-ratings-plugin-9k-ttm-profit-250-customers — public Acquire.com listing pages (pattern app.acquire.com/public/ plus the listing slug) are readable (the acquire.com/startups/ index returned 404)
 - https://dashboard.simpleanalytics.com/open — example of a founder-published live revenue page
 - https://extensionpay.com/articles/browser-extensions-make-money and https://freemius.com/blog/codecanyon-wordpress-plugins-analysis/ — extension and plugin revenue roundups (self-reported / dated 2016)
 - https://revenuehunt.com/state-of-the-shopify-app-economy/ — Shopify App Store revenue concentration (estimated)
