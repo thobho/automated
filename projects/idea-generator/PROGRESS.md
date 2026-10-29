@@ -35,7 +35,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links: g2.com/compare/float-vs-pulse-cash-flow-management (403), gramwzielone.pl/?p=101914 (timeout, varies)
 - [x] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
   Unverifiable links: yadda.icm.edu.pl (403), wykop.pl, elektroda.pl (timeout, varies)
-- [ ] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
+- [~] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
+  Resume: starting
 - [ ] T17 · Phase 1 summary and validation plans · opus · needs: T16 · [tasks/17-phase-1-summary-and-validation-plans.md](tasks/17-phase-1-summary-and-validation-plans.md)
 
 ## Blocked / questions for the owner
