@@ -30,7 +30,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
   Unverifiable links: none (only relative links added)
 - [~] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
-  Resume: 001-007 written (I062 rejected, I070 swapped in as 002); next 008 I050 WooCommerce-KSeF bridge. Unverifiable so far: g2.com gatherup pricing (403)
+  Resume: 001-008 written (I062 rejected, I070 swapped in as 002); next 009 I061 Polish company-data API. Unverifiable so far: g2.com gatherup pricing, trustpilot fakturownia (403)
 - [ ] T14 · write-ups batch B · sonnet · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
 - [ ] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
 - [ ] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
