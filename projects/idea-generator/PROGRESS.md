@@ -27,7 +27,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links: developers.facebook.com WhatsApp pricing (400); criteria.md ones as in T01/T03/T04/T05
 - [x] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
   Unverifiable links: open.store Ceneo feed app page, apps.appfollow.io ProtrainUp (timeouts, more-markets.md); criteria.md ones as in T01
-- [ ] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
+- [~] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
+  Resume: starting
 - [ ] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
 - [ ] T14 · write-ups batch B · sonnet · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
 - [ ] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
