@@ -111,3 +111,23 @@ Report: `reports/04-housing.md`. Rebuild: `python3 scripts/fetch_bdl_housing.py 
 - Permits (P4216) are dated by the year the permit/registration was issued and count dwellings of the project; they are not completions. BDL has the table nationally from 2009 but at gmina level only from 2018, so classes exist for 2018-2025 only (class sums equal the national value); 2009-2017 is given nationally (`class` = `poland`). The older powiat-level permits table (P1743/P2956) was not summed by class.
 - **Methodology breaks** (details in the report): 2005 (BDL's P3824 table starts to separate private dwellings for sale or rent from own use), 2018 (GUS definitions changed; BDL tables "valid to 2017" / "from 2018"; GUS note not found, only secondary S49), stock series recalculated around the 2002 and 2021 censuses (visible jumps in 2002, 2020, 2021).
 - Average area of dwellings completed in 2000-2008 is available only for all dwellings (the building-type split starts in 2009).
+## Task 05 - Housing vs Population (comparison of tasks 01-04)
+Report: `reports/05-housing-vs-population.md`. Rebuild: `python3 scripts/process_housing_population.py && python3 scripts/check_sources.py`
+
+| file | content | columns | source_ids |
+|---|---|---|---|
+| `data/processed/housing_completions_by_class.csv` | Housing completions by class with direct and proxy data (2000-2025) | year, class, type, basis, dwellings, share_of_total_pct, per_1000_residents, value_type, formula | S41-S43 |
+| `data/processed/housing_vs_population.csv` | Core comparison metrics: dwellings per 1000 inhabitants, 5-year construction trends, housing type shares, indexed dynamics | year, class, measure, value, source_id, notes | S1, S41-S43, derived |
+
+Key metrics:
+- **New dwellings per 1,000 inhabitants**: flats and houses separately, using direct data (S43) for 2009-2025 and proxy columns for 2000-2008
+- **New dwellings per additional resident**: 5-year windows showing construction responsiveness to population change
+- **Share of houses vs flats**: direct period only (2009-2025) to ensure comparability
+- **Indexed dynamics**: (2000 = 100) of population (S1), houses and flats per class with proper source attribution
+
+Decisions and conventions:
+- **Chart-ready format**: All files are in tidy format (one row per year/class/measure) for direct visualization
+- **Place classes**: Same as defined in Task 01 (big cities, small cities, villages)
+- **Proxy data usage**: 2000-2004 use individual proxy (S42 for houses, S41;S42 for flats); 2005-2008 use own-use proxy (S41 for houses, S41 for flats); 2009-2025 use direct data (S43)
+- **Source tracking**: Every value links to specific source_id with notes column indicating proxy usage where applicable
+
