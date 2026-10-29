@@ -5,7 +5,8 @@ A task can start when every task in its `needs` is `[x]`. Runs take the first `[
 Under each `[~]` task keep one indented **Resume:** line saying exactly where to continue.
 
 ## Tasks
-- [ ] T01 · setup and method · opus · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
+- [~] T01 · setup and method · opus · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
+  Resume: starting
 - [ ] T02 · research lens 01 — Proven abroad, missing in Poland · sonnet · needs: T01 · [tasks/02-research-lens-01-proven-abroad-missing-i.md](tasks/02-research-lens-01-proven-abroad-missing-i.md)
 - [ ] T03 · research lens 02 — Weak or no competition · sonnet · needs: T01 · [tasks/03-research-lens-02-weak-or-no-competition.md](tasks/03-research-lens-02-weak-or-no-competition.md)
 - [ ] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
