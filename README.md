@@ -4,7 +4,6 @@ Projects built continuously by a Claude Code worker, fed from this repo's GitHub
 
 ## Add a task
 - **Phone:** GitHub app → this repo → Issues → New → **Agent task**. The template adds `agent:todo` for you.
-- **Claude Code session in this folder:** `/new-task build a CLI that ...`
 - **Terminal:** `scripts/new-task.sh -p my-project -t "Do the thing" -b "Details" [-m haiku|sonnet|opus] [--high]`
 
 **Order and dependencies:** write `Depends on: #12, #14` in the issue body and the agent won't start it until those issues are closed (PR merged). Among ready tasks: `priority:high` first, `priority:low` last, otherwise oldest first. `scripts/queue.sh` shows the order and what each task waits on.
@@ -17,7 +16,6 @@ Projects built continuously by a Claude Code worker, fed from this repo's GitHub
 - **Plan checklist** in each task's comments shows step-by-step progress.
 - **Each PR** has a **Verification** section (real API calls, headless-browser screenshots), **Decisions I made** and **Action for you**. Failures are posted as `❌` comments on the issue; a push notification goes out when a PR opens, a task blocks or something fails.
 - **API keys** for tasks go in `~/.config/automated/secrets.env` (never committed).
-- **Claude Code session:** `/agent-status`.
 
 ## How the worker spends your limits
 A desktop-app scheduled task runs `agent/worker-prompt.md` every hour. Before each task it runs `agent/budget.py`:
