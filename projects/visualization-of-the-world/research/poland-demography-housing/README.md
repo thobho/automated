@@ -131,3 +131,18 @@ Decisions and conventions:
 - **Proxy data usage**: 2000-2004 use individual proxy (S42 for houses, S41;S42 for flats); 2005-2008 use own-use proxy (S41 for houses, S41 for flats); 2009-2025 use direct data (S43)
 - **Source tracking**: Every value links to specific source_id with notes column indicating proxy usage where applicable
 
+## Task 11 - Final report, bibliography, citation sheet
+Report: `reports/final-report.md` (executive summary on top; sections: classes and latest years, urbanization, structure, belts, Europe, housing, housing against population, contradictions between sources, methods and limitations). Rebuild the two generated files: `python3 scripts/build_reference_docs.py` (`--check` fails when they are stale).
+
+| file | content |
+|---|---|
+| `reports/final-report.md` | merged report; every number has `[S..]`, every derived value a `D..` key with formula (table in section 9) |
+| `reports/bibliography.md` | every row of `sources.csv` as a full reference with URL and access date, grouped primary / secondary, with where it is used |
+| `reports/citation-sheet.md` | ready-to-paste `Source:` / `Źródło:` caption for every file in `data/processed/` and `data/raw/` |
+
+Decisions and conventions:
+- `scripts/check_sources.py` now also checks the final report (every line with a number has a key, unknown keys, undefined `D..` keys) and fails on **unused sources**. "Used" = cited as `[S..]` in a report under `reports/` (the two generated files do not count) or present in a data file `source_id` column. S5 was unused and is now cited in the final report.
+- `tests/test_final_report.py` recomputes about 100 headline numbers from `data/processed/` and asserts they appear in the report text. Where task 05 disagreed with its CSV, the final report follows the CSV (contradiction C14); `05-housing-vs-population.md` carries an erratum banner and was otherwise left as is.
+- Raw extracts without a `source_id` column get their provenance from `RAW_PROVENANCE` in `build_reference_docs.py`.
+- Known defect, not fixed here: `housing_vs_population.csv` repeats its `total` index rows three times per year and splices proxy with direct data; the final report does not use it.
+
