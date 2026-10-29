@@ -1,3 +1,5 @@
+> **Rejected in T16 review (2026-10-29):** no pain found in two searches (L6 = 1, a knock-out), and the Polish-language cleaning software Anolla (free plan, 4.8 from 1,708 ratings) plus ZenMaid, Jobber and free generic tools cover the job; the write-up flagged it for rejection. See Devil's advocate and [rejected.md](../../rejected.md). File kept for the record.
+
 # 022 — Field-service OS for cleaning firms
 **One-liner:** One tool for Polish cleaning companies covering quote, job schedule per crew, a mobile checklist app for cleaners, client SMS and KSeF-ready invoicing, a Jobber/ZenMaid equivalent. Research found a Polish-language cleaning-software competitor with a free plan and a rating of 4.8 from 1,708 ratings, and no pain evidence, so the idea scores low.
 **Field:** b2b-saas-pl-smes | **Type:** SaaS (web plus mobile web)
@@ -13,10 +15,12 @@
 **First 10 customers:** Facebook groups for cleaning-firm owners (unverified, not readable), outbound to firms with PKD 81.21.Z from CEIDG (consent limits, L8-F13 to F15), Google Maps cleaning firms with 5+ staff, cleaning-trade fairs (unverified).
 **Build complexity:** medium. Risks: wide scope, mobile polish for cleaners (web app only), SMS cost, invoicing via third-party APIs.
 **Pros / Cons / Risks:** Pros: B2B recurring SaaS, understood model, clear price anchors, listable market. Cons: Polish competitor with a free plan and good ratings, no pain evidence, wide scope. Risks: free tier undercut, high churn among micro-firms, seasonal turnover of staff.
-**Scores (1–5):** L1 2, L2 2, L3 3, L4 3, L5 2, L6 1, L7 3, L8 2, L9 3 | **Weighted:** 2.3 / 5 | **Chance band:** <5% (shortlist 2.8; L1 falls 3 to 2 and L2 falls 3 to 2 after finding Anolla; L3 falls 4 to 3 because Anolla's basic plan is free; L6 falls 2 to 1, no complaint found)
+**Scores (1–5):** L1 2, L2 1, L3 3, L4 3, L5 2, L6 1, L7 3, L8 2, L9 3 | **Weighted:** 2.2 / 5 (computed 2.18) | **Chance band:** <5% (T16 review: L2 2→1, see Review changes; L6 = 1 knock-out; write-up value was 2.3 (computed 2.30), <5%; shortlist 2.3)
 **Cheapest validation test (≤1 week, ≤200 PLN):** Call 15 cleaning firms (found on Google Maps) and ask how they schedule and quote and whether they know Anolla; offer a free setup of a crew calendar. Success: 5 firms use Excel/WhatsApp and 3 agree to a pilot at 99 PLN/month.
 **Kill criteria:** Most firms already use Anolla or similar; or fewer than 3 of 15 say scheduling or quoting is a pain; or no one pays above 50 PLN/month.
 **Confidence:** low
+**Devil's advocate:** This is the widest MVP in the batch (quotes, crew calendar, mobile checklists, SMS, invoice export) for the market with the least evidence. Two searches in Polish (2026-10-29) found no cleaning-firm owner complaining about scheduling or quoting; the second one returned Anolla's two Polish pages for cleaning firms (calendar, job cards per site, staff schedules, pay-per-use, free plan, 4.8 from 1,708 ratings), ClickUp's free plan and ZenMaid in a Polish roundup, a gig platform (Stepapp) for cleaners, and freelancers building cleaning-order apps on AppSheet, i.e. owners who need something are either using a free tool or commissioning a cheap custom one. Most of the 48,726 registered cleaning firms are sole traders without crews; the 3–50-cleaner segment is uncounted. Micro-firms with high staff turnover churn, the free plan sets the price expectation at zero, and the only Polish-specific hook (KSeF invoicing) is already solved by the invoicing tools the MVP would export to. A newcomer would need field sales to cleaning-firm owners, which does not fit ~10 h/week.
+**Review changes:** L2 2→1 (a well-rated Polish-language cleaning tool with a free plan, plus free generic schedulers; no reason to switch), weighted 2.3→2.2, band stays <5%. Rejected as the write-up recommended: no pain evidence (L6 = 1 knock-out), wide scope, free incumbent; logged in rejected.md.
 **Sources:** (accessed 2026-10-29)
 - Jobber pricing (own page): https://www.getjobber.com/pricing/
 - ZenMaid pricing (own page, redirects to get.zenmaid.com): https://get.zenmaid.com/pricing
@@ -27,3 +31,4 @@
 - Cleaning-firm counts (BNF/IBISWorld via trade article): https://www.superauto.pl/artykuly/jak-zalozyc-firme-sprzatajaca-poradnik-jakie-auto-wybrac
 - Ordio on Excel schedules (vendor-sponsored): https://www.ordio.com/pl/szablony/grafik-pracy-excel
 - inEwi schedule software roundup (vendor): https://inewi.pl/blog/6-najlepszych-programow-do-ukladania-grafiku-pracy-w-2025-r
+- Anolla, cleaning management software (second Polish page): https://anolla.com/pl/oprogramowanie-do-zarzadzania-sprzataniem (T16)
