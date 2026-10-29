@@ -22,7 +22,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T08 · research lens 07 — Founder fit and feasibility · sonnet · needs: T01 · [tasks/08-research-lens-07-founder-fit-and-feasibi.md](tasks/08-research-lens-07-founder-fit-and-feasibi.md)
   Unverifiable links: none new in lens 07 folder; criteria.md ones as in T01/T03/T04/T05
 - [~] T09 · research lens 08 — Cheap distribution · sonnet · needs: T01 · [tasks/09-research-lens-08-cheap-distribution.md](tasks/09-research-lens-08-cheap-distribution.md)
-  Resume: marketplaces-and-directories.md done (F01-F07); next: outbound-and-legal.md (partner programmes, CEIDG, PKE art.398, UWG 7), then communities-and-search.md, ads-and-stories.md, README, criteria.md
+  Resume: marketplaces-and-directories.md (F01-F07) and partners-lists-and-law.md (F08-F15) done; next: communities-and-search.md (Wykop #ksef, Google autocomplete queries, Polish forum evidence), ads-and-stories.md (CPC, LinkedIn, solo-founder stories), README, criteria.md, link check
 - [ ] T10 · research lens 09 — Unit economics and defensibility · sonnet · needs: T01 · [tasks/10-research-lens-09-unit-economics-and-defe.md](tasks/10-research-lens-09-unit-economics-and-defe.md)
 - [ ] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
 - [ ] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
