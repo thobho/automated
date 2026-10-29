@@ -29,8 +29,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links: open.store Ceneo feed app page, apps.appfollow.io ProtrainUp (timeouts, more-markets.md); criteria.md ones as in T01
 - [x] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
   Unverifiable links: none (only relative links added)
-- [~] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
-  Resume: 001-009 all written (I062 rejected -> I070 as 002; I061 rejected -> I059 as 009). Ready for final check; T13 not marked [x] by this run. Unverifiable: g2.com gatherup pricing, trustpilot fakturownia (403)
+- [x] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
+  Unverifiable links: g2.com/products/gatherup/pricing, trustpilot.com/review/fakturownia.pl (403)
 - [ ] T14 · write-ups batch B · sonnet · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
 - [ ] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
 - [ ] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
@@ -41,6 +41,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · model · what was done · next step -->
+2026-10-29 18:05 · T13 · sonnet · write-ups 001–009 (≥8 sources each); I062 and I061 rejected (free renderers / CompanyData+Apify cover them), swapped for I070 (002) and I059 (009); most scores fell 0.2–0.6, 008 WooCommerce KSeF bridge rose to 3.3, 003 3.2; 009 at 2.2 flagged for T16 rejection, 007 suggested to merge into 001; Trends data unreadable; link check 93 links 0 dead · next T14
 2026-10-29 17:20 · T12 · opus · 16 merges + 3 drops + 81 below cut (rounded weighted <2.4) → rejected.md; ideas/shortlist.csv 108 ideas scored L1..L9 with reasons citing findings; top 25 (max 3 per field, 13 fields) numbered 001–025, batches A 9 / B 8 / C 8; best I010 KSeF inbox for bookkeeping offices 3.4, none in 15–30% band; coverage 208/208 checked; ideas/README.md explains columns · next T13–T15
 2026-10-29 16:58 · T11 · opus · gap pass on lenses 1, 3, 5: +28 findings (L1-F19..F26 NL/FR/JP/CZ/NO/ES/BR; L3-F32..F41 Polish vertical and compliance prices; L5-F25..F34 voice/OCR/structured output, Data Act, GPSR, e-Doręczenia, sygnaliści, PKE, ETS2), CHANGELOG updated; ideas/longlist.md 208 ideas in 22 fields (6–15 each, ~160 seeded), near-duplicate list for T12; 9 dropped ideas in rejected.md; link check 0 dead · next T12
 2026-10-29 16:29 · T10 · sonnet · lens 09: 27 findings (L9-F01..F27) in 6 topic files, 9 seeds, coverage, 11 gaps; gross margin ~78–96% at 49–299 PLN except SMS-heavy (0.14–0.17 PLN/SMS) and 15% store commissions; SMB churn 2.5–6%/month, annual plans cut it (Buffer 7%→2.4%); lock-in from accounting records and consumer marketplaces; platform risk concrete (Allegro API terms, Reddit/Apollo, Shopify checkout sunsets, model retirements, WhatsApp pricing); free MF KSeF tools cap compliance pricing; churn data US/global only, no German searches; link check 0 dead · next T11 (all lenses done)
