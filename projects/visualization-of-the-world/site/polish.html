@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Layout and polish · Polska w danych demo</title>
+<meta name="description" content="Choropleth of the 16 voivodeships with drill-down to powiats, and city bubbles. Real boundaries and city names, synthetic values.">
+<link rel="preload" href="vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vendor/design/tokens.css">
+<link rel="stylesheet" href="vendor/design/components.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<main id="main" class="site-main"><div class="container">
+  <div class="page-head"><h1>Layout and polish</h1><p class="lede">Responsive from 375 px to desktop, light and dark, and the three states every data view needs: loading, empty, error. The Source footer is a component used under every chart.</p></div>
+  <div class="grid" style="margin-bottom:var(--grid-gutter-base)">
+    <div class="card span-all lg-span-4"><h2 class="figure__title">Responsive</h2><p class="small secondary">Resize the window: columns go 4 to 8 to 12 at 600 and 960 px, the top bar becomes a menu below 960 px, charts re-flow (small multiples go from 4 to 3 columns, labels rotate).</p><p class="vp-readout num" id="vp">-</p><p class="small secondary" id="bp">-</p></div>
+    <div class="card span-all lg-span-4"><h2 class="figure__title">Light and dark</h2><p class="small secondary">The Theme switch in the top bar (Menu on phones) sets light, dark or follows the system. Charts read their colours from the same tokens, so they redraw with the page. Data colours stay the same in both themes except the map ramp, which flips.</p><div class="swatch-row" id="sw"></div></div>
+    <div class="card span-all lg-span-4"><h2 class="figure__title">Source footer component</h2><p class="small secondary">Created by <code>Votw.figure()</code>, which throws when a spec has no <code>source</code>. Markup: <code>footer.chart-source &gt; span.chart-source__label + a + span.chart-source__meta</code>. <code>scripts/verify_site.cjs</code> fails if any chart card on any page lacks it.</p></div>
+  </div>
+  <div class="section-head"><h2>States</h2><p>Each card below is forced into one state. The error card recovers on the first retry.</p></div>
+  <div class="grid" id="figures"></div>
+</div></main>
+<script src="js/shell.js"></script>
+<script src="vendor/lib/echarts-6.1.0.min.js"></script>
+<script src="vendor/lib/topojson-client-3.1.0.min.js"></script>
+<script src="vendor/design/components.js"></script>
+<script src="js/votw-core.js"></script>
+<script src="js/votw-charts.js"></script>
+<script src="js/specs-polish.js"></script>
+<script src="js/page-polish.js"></script>
+</body>
+</html>

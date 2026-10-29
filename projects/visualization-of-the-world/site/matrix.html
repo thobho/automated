@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capabilities matrix · Polska w danych demo</title>
+<meta name="description" content="Every capability of the chosen library as built in this demo: status, code location, docs link.">
+<link rel="preload" href="vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vendor/design/tokens.css">
+<link rel="stylesheet" href="vendor/design/components.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<main id="main" class="site-main"><div class="container">
+  <div class="page-head"><h1>Capabilities matrix</h1><p class="lede">What Apache ECharts 6.1.0 can do in this design system, based on what this demo actually builds. Status is "works", "works with limits" or "not possible"; limits are explained.</p></div>
+  <div class="card matrix-wrap">
+    <div class="filter-row" id="filters" role="group" aria-label="Filter by status"></div>
+    <p class="status-line" id="count" aria-live="polite"></p>
+    <div id="table"><noscript>This table needs JavaScript (it is rendered from data/capabilities.json).</noscript></div>
+    <footer class="chart-source"><span class="chart-source__label">Source:</span><a href="data/capabilities.json">data/capabilities.json</a><span class="chart-source__meta">Written from the demo code in this folder; docs links are listed in sources.md with access dates. DEMO DATA, NOT REAL applies to every number in the demo. Accessed 2026-10-29.</span></footer>
+  </div>
+</div></main>
+<script src="js/shell.js"></script>
+<script src="vendor/design/components.js"></script>
+<script src="js/page-matrix.js"></script>
+</body>
+</html>

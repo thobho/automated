@@ -1,0 +1,670 @@
+{
+ "failures": 0,
+ "results": [
+  {
+   "name": "index @375: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 375 vs 375"
+  },
+  {
+   "name": "index @375: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @375: 1 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @375: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @375: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 375 vs 375"
+  },
+  {
+   "name": "charts @375: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @375: 13 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @375: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @375: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 375 vs 375"
+  },
+  {
+   "name": "interaction @375: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @375: 6 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @375: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @375: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 375 vs 375"
+  },
+  {
+   "name": "maps @375: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @375: 2 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @375: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @375: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 375 vs 375"
+  },
+  {
+   "name": "formats @375: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @375: 4 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @375: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "polish @375: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "polish @375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 375 vs 375"
+  },
+  {
+   "name": "polish @375: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "polish @375: 3 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @375: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 375 vs 375"
+  },
+  {
+   "name": "matrix @375: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @375: 0 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @375: table has a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @768: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @768: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 768 vs 768"
+  },
+  {
+   "name": "index @768: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @768: 1 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @768: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @768: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @768: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 768 vs 768"
+  },
+  {
+   "name": "charts @768: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @768: 13 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @768: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @768: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @768: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 768 vs 768"
+  },
+  {
+   "name": "interaction @768: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @768: 6 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @768: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @768: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @768: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 768 vs 768"
+  },
+  {
+   "name": "maps @768: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @768: 2 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @768: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @768: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @768: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 768 vs 768"
+  },
+  {
+   "name": "formats @768: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @768: 4 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @768: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "polish @768: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "polish @768: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 768 vs 768"
+  },
+  {
+   "name": "polish @768: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "polish @768: 3 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @768: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @768: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 768 vs 768"
+  },
+  {
+   "name": "matrix @768: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @768: 0 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @768: table has a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @1280: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @1280: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 1280 vs 1280"
+  },
+  {
+   "name": "index @1280: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @1280: 1 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "index @1280: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @1280: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @1280: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 1280 vs 1280"
+  },
+  {
+   "name": "charts @1280: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @1280: 13 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "charts @1280: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @1280: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @1280: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 1280 vs 1280"
+  },
+  {
+   "name": "interaction @1280: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @1280: 6 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction @1280: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @1280: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @1280: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 1280 vs 1280"
+  },
+  {
+   "name": "maps @1280: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @1280: 2 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps @1280: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @1280: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @1280: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 1280 vs 1280"
+  },
+  {
+   "name": "formats @1280: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @1280: 4 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "formats @1280: every chart reached ready",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "polish @1280: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "polish @1280: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 1280 vs 1280"
+  },
+  {
+   "name": "polish @1280: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "polish @1280: 3 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @1280: no console errors / failed requests",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @1280: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth 1280 vs 1280"
+  },
+  {
+   "name": "matrix @1280: DEMO DATA banner and per-chart tag",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @1280: 0 chart cards all have a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "matrix @1280: table has a Source footer",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "theme switch: dark class applied",
+   "ok": true,
+   "detail": "rgb(13, 20, 24)"
+  },
+  {
+   "name": "theme switch: choice remembered after reload",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "theme switch: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "tooltip shows on hover (line chart)",
+   "ok": true,
+   "detail": " 2014\nBig cities\n25.3%\nSmall cities\n30.1%\nVillages\n44.6% 2014 Big cities\n25.3% S"
+  },
+  {
+   "name": "table view opens with rows",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "export CSV (has DEMO flag, 26 data rows)",
+   "ok": true,
+   "detail": "villages-gain-share-while-big-cities-lose-it.csv"
+  },
+  {
+   "name": "export SVG (valid, carries Source line)",
+   "ok": true,
+   "detail": "villages-gain-share-while-big-cities-lose-it.svg 10831 bytes"
+  },
+  {
+   "name": "export PNG (PNG signature)",
+   "ok": true,
+   "detail": "villages-gain-share-while-big-cities-lose-it.png 146464 bytes"
+  },
+  {
+   "name": "timeline play advances the year",
+   "ok": true,
+   "detail": "year 2003"
+  },
+  {
+   "name": "slider drives linked ranking, map and timeline",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "place-type filter updates the shared state",
+   "ok": true,
+   "detail": "small_cities"
+  },
+  {
+   "name": "filter changes the metric label in the ranking",
+   "ok": true,
+   "detail": "Small cities"
+  },
+  {
+   "name": "filter changes the brush scatter (one series left)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "clicking the map selects a region shared with the ranking and timeline",
+   "ok": true,
+   "detail": "14"
+  },
+  {
+   "name": "brush selects cities and the linked bars update",
+   "ok": true,
+   "detail": "139 cities brushed"
+  },
+  {
+   "name": "timeline zoom window changes (dataZoom)",
+   "ok": true,
+   "detail": "40-70"
+  },
+  {
+   "name": "morph: bars to pie renders",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interaction: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "choropleth hover tooltip names the region and value",
+   "ok": true,
+   "detail": "Mazowieckie Villages 2025 54.9% Click for powiats"
+  },
+  {
+   "name": "drill-down: click opens powiats of the voivodeship",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "drill-down: back to Poland",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "zoom to region (select)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "bubble map place-type filter (big cities only)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "maps: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "touch: tap on a voivodeship drills down",
+   "ok": true,
+   "detail": "{\"lvl\":\"14\",\"w\":375}"
+  },
+  {
+   "name": "touch: tap on a city bubble shows its tooltip",
+   "ok": true,
+   "detail": "Warszawa Big cities Size index 254.5"
+  },
+  {
+   "name": "touch: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "failure path: blocked data shows the error state with a message",
+   "ok": true,
+   "detail": "Could not load the data  The data could not be loaded (Failed to fetch). Check t"
+  },
+  {
+   "name": "failure path: footer still present in error state",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "failure path: Try again recovers",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "failure path: only the expected request error",
+   "ok": true,
+   "detail": "requestfailed: http://localhost:8751/data/demo.json|console.error: Failed to load resource: net::ERR_FAILED"
+  }
+ ]
+}

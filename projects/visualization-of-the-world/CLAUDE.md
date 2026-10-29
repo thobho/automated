@@ -1,6 +1,6 @@
 # visualization-of-the-world
 
-Phase 1: data research for a later visualization of the world. Independent project: do not import code from other projects. Research only - no web pages, dashboards or styled charts until a task says so (exception: the design system in `design/`, issue #14).
+Phase 1: data research for a later visualization of the world. Independent project: do not import code from other projects. Research only - no web pages, dashboards or styled charts until a task says so (exceptions: the design system in `design/`, issue #14, and the demo site in `site/`, issue #15; see `site/README.md`).
 
 ## Rules
 - **Every number needs a source.** Each topic has `sources.csv` (`id,title,publisher,url,indicator_or_table_code,accessed,type,notes`; type = primary or secondary). Every data file has a `source_id` column; report text cites with keys like `[S3]`.
@@ -17,3 +17,8 @@ Phase 1: data research for a later visualization of the world. Independent proje
 - Follow the colour, chart and "Źródło:" footer rules in `design/README.md`; every chart, map and table showing data cites its source.
 - Checks: `python3 design/scripts/check_contrast.py`, `python3 design/scripts/build_tokens.py --check`, `python3 -m unittest discover -s design/tests`, browser check `node design/scripts/verify_page.cjs` (see the CI workflow `visualization-of-the-world-design.yml`).
 - `design/sample/sample-data.json` is made up; never use it as data.
+
+## Demo site (`site/`)
+- Self-contained: served from `site/` with `python3 -m http.server`; copies of design files and geodata live in `site/vendor/` and `site/data/`. ECharts 6.1.0 is pinned and vendored.
+- All numbers on the site are synthetic and labelled "DEMO DATA, NOT REAL". Never put real statistics in `site/data/demo*`.
+- Every chart goes through `Votw.figure()` (Source footer mandatory). Checks: `node --test site/tests/core.test.js`, `python3 -m unittest discover -s site/tests`, `node site/scripts/check_footers.cjs <url>`, `node site/scripts/verify_site.cjs <url> <out>`.
