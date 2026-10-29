@@ -1,0 +1,165 @@
+year,class,type,dwellings,per_1000_residents,value_type,formula,source_id
+2018,big_cities,total,106150,10.33,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2018,big_cities,house,9876,0.96,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2018,big_cities,flat,94674,9.22,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2018,big_cities,other,1600,0.16,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2019,big_cities,total,104393,10.16,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2019,big_cities,house,9565,0.93,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2019,big_cities,flat,92937,9.04,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2019,big_cities,other,1891,0.18,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2020,big_cities,total,99712,9.68,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2020,big_cities,house,8569,0.83,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2020,big_cities,flat,89216,8.66,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2020,big_cities,other,1927,0.19,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2021,big_cities,total,112452,10.97,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2021,big_cities,house,10487,1.02,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2021,big_cities,flat,100237,9.78,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2021,big_cities,other,1728,0.17,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2022,big_cities,total,106500,10.45,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2022,big_cities,house,7995,0.78,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2022,big_cities,flat,96711,9.49,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2022,big_cities,other,1794,0.18,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2023,big_cities,total,90627,8.93,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2023,big_cities,house,6171,0.61,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2023,big_cities,flat,82709,8.15,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2023,big_cities,other,1747,0.17,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2024,big_cities,total,108334,10.71,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2024,big_cities,house,6388,0.63,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2024,big_cities,flat,100627,9.95,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2024,big_cities,other,1319,0.13,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2025,big_cities,total,90343,8.96,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2025,big_cities,house,6378,0.63,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2025,big_cities,flat,81604,8.09,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2025,big_cities,other,2361,0.23,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2018,small_cities,total,62775,4.91,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2018,small_cities,house,19508,1.52,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2018,small_cities,flat,41173,3.22,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2018,small_cities,other,2094,0.16,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2019,small_cities,total,68603,5.38,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2019,small_cities,house,20299,1.59,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2019,small_cities,flat,46297,3.63,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2019,small_cities,other,2007,0.16,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2020,small_cities,total,73477,5.89,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2020,small_cities,house,21029,1.69,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2020,small_cities,flat,50936,4.08,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2020,small_cities,other,1512,0.12,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2021,small_cities,total,93620,7.56,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2021,small_cities,house,24934,2.01,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2021,small_cities,flat,66763,5.39,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2021,small_cities,other,1923,0.16,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2022,small_cities,total,76550,6.23,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2022,small_cities,house,17484,1.42,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2022,small_cities,flat,57386,4.67,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2022,small_cities,other,1680,0.14,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2023,small_cities,total,64765,5.30,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2023,small_cities,house,13223,1.08,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2023,small_cities,flat,49561,4.05,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2023,small_cities,other,1981,0.16,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2024,small_cities,total,78830,6.48,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2024,small_cities,house,14649,1.20,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2024,small_cities,flat,62522,5.14,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2024,small_cities,other,1659,0.14,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2025,small_cities,total,67860,5.62,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2025,small_cities,house,15379,1.27,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2025,small_cities,flat,50904,4.22,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2025,small_cities,other,1577,0.13,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2018,villages,total,88643,5.78,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2018,villages,house,69253,4.51,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2018,villages,flat,16546,1.08,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2018,villages,other,2844,0.19,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2019,villages,total,95779,6.24,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2019,villages,house,75076,4.89,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2019,villages,flat,18236,1.19,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2019,villages,other,2467,0.16,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2020,villages,total,102960,6.72,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2020,villages,house,80916,5.28,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2020,villages,flat,20094,1.31,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2020,villages,other,1950,0.13,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2021,villages,total,135131,8.84,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2021,villages,house,103101,6.75,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2021,villages,flat,30055,1.97,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2021,villages,other,1975,0.13,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2022,villages,total,115322,7.55,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2022,villages,house,78280,5.12,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2022,villages,flat,35147,2.30,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2022,villages,other,1895,0.12,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2023,villages,total,86298,5.66,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2023,villages,house,61460,4.03,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2023,villages,flat,23022,1.51,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2023,villages,other,1816,0.12,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2024,villages,total,104563,6.87,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2024,villages,house,68586,4.51,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2024,villages,flat,34422,2.26,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2024,villages,other,1555,0.10,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2025,villages,total,108242,7.13,derived,"sum of var 1641096: dwellings in permits and registrations with a construction project, all works",S45
+2025,villages,house,76027,5.01,derived,sum of var 1641098: dwellings in new single-family (one-dwelling) buildings,S45
+2025,villages,flat,30623,2.02,derived,vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings,S45
+2025,villages,other,1592,0.10,derived,"total - house - flat: non-residential buildings, expansions, conversions",S45
+2009,poland,total,178789,,reported,"BDL national value, var 1641096",S45
+2009,poland,house,90472,,reported,"BDL national value, var 1641098",S45
+2009,poland,flat,77968,,derived,BDL national vars 1641099 + 1641100,S45
+2009,poland,other,10349,,derived,total - house - flat,S45
+2010,poland,total,175008,,reported,"BDL national value, var 1641096",S45
+2010,poland,house,88900,,reported,"BDL national value, var 1641098",S45
+2010,poland,flat,76216,,derived,BDL national vars 1641099 + 1641100,S45
+2010,poland,other,9892,,derived,total - house - flat,S45
+2011,poland,total,184146,,reported,"BDL national value, var 1641096",S45
+2011,poland,house,86137,,reported,"BDL national value, var 1641098",S45
+2011,poland,flat,88973,,derived,BDL national vars 1641099 + 1641100,S45
+2011,poland,other,9036,,derived,total - house - flat,S45
+2012,poland,total,165282,,reported,"BDL national value, var 1641096",S45
+2012,poland,house,75799,,reported,"BDL national value, var 1641098",S45
+2012,poland,flat,80653,,derived,BDL national vars 1641099 + 1641100,S45
+2012,poland,other,8830,,derived,total - house - flat,S45
+2013,poland,total,138837,,reported,"BDL national value, var 1641096",S45
+2013,poland,house,66952,,reported,"BDL national value, var 1641098",S45
+2013,poland,flat,64541,,derived,BDL national vars 1641099 + 1641100,S45
+2013,poland,other,7344,,derived,total - house - flat,S45
+2014,poland,total,156878,,reported,"BDL national value, var 1641096",S45
+2014,poland,house,65370,,reported,"BDL national value, var 1641098",S45
+2014,poland,flat,84405,,derived,BDL national vars 1641099 + 1641100,S45
+2014,poland,other,7103,,derived,total - house - flat,S45
+2015,poland,total,188798,,reported,"BDL national value, var 1641096",S45
+2015,poland,house,73198,,reported,"BDL national value, var 1641098",S45
+2015,poland,flat,108443,,derived,BDL national vars 1641099 + 1641100,S45
+2015,poland,other,7157,,derived,total - house - flat,S45
+2016,poland,total,211485,,reported,"BDL national value, var 1641096",S45
+2016,poland,house,82310,,reported,"BDL national value, var 1641098",S45
+2016,poland,flat,121566,,derived,BDL national vars 1641099 + 1641100,S45
+2016,poland,other,7609,,derived,total - house - flat,S45
+2017,poland,total,250906,,reported,"BDL national value, var 1641096",S45
+2017,poland,house,91632,,reported,"BDL national value, var 1641098",S45
+2017,poland,flat,151332,,derived,BDL national vars 1641099 + 1641100,S45
+2017,poland,other,7942,,derived,total - house - flat,S45
+2018,poland,total,257568,,reported,"BDL national value, var 1641096",S45
+2018,poland,house,98637,,reported,"BDL national value, var 1641098",S45
+2018,poland,flat,152393,,derived,BDL national vars 1641099 + 1641100,S45
+2018,poland,other,6538,,derived,total - house - flat,S45
+2019,poland,total,268775,,reported,"BDL national value, var 1641096",S45
+2019,poland,house,104940,,reported,"BDL national value, var 1641098",S45
+2019,poland,flat,157470,,derived,BDL national vars 1641099 + 1641100,S45
+2019,poland,other,6365,,derived,total - house - flat,S45
+2020,poland,total,276149,,reported,"BDL national value, var 1641096",S45
+2020,poland,house,110514,,reported,"BDL national value, var 1641098",S45
+2020,poland,flat,160246,,derived,BDL national vars 1641099 + 1641100,S45
+2020,poland,other,5389,,derived,total - house - flat,S45
+2021,poland,total,341203,,reported,"BDL national value, var 1641096",S45
+2021,poland,house,138522,,reported,"BDL national value, var 1641098",S45
+2021,poland,flat,197055,,derived,BDL national vars 1641099 + 1641100,S45
+2021,poland,other,5626,,derived,total - house - flat,S45
+2022,poland,total,298372,,reported,"BDL national value, var 1641096",S45
+2022,poland,house,103759,,reported,"BDL national value, var 1641098",S45
+2022,poland,flat,189244,,derived,BDL national vars 1641099 + 1641100,S45
+2022,poland,other,5369,,derived,total - house - flat,S45
+2023,poland,total,241690,,reported,"BDL national value, var 1641096",S45
+2023,poland,house,80854,,reported,"BDL national value, var 1641098",S45
+2023,poland,flat,155292,,derived,BDL national vars 1641099 + 1641100,S45
+2023,poland,other,5544,,derived,total - house - flat,S45
+2024,poland,total,291727,,reported,"BDL national value, var 1641096",S45
+2024,poland,house,89623,,reported,"BDL national value, var 1641098",S45
+2024,poland,flat,197571,,derived,BDL national vars 1641099 + 1641100,S45
+2024,poland,other,4533,,derived,total - house - flat,S45
+2025,poland,total,266445,,reported,"BDL national value, var 1641096",S45
+2025,poland,house,97784,,reported,"BDL national value, var 1641098",S45
+2025,poland,flat,163131,,derived,BDL national vars 1641099 + 1641100,S45
+2025,poland,other,5530,,derived,total - house - flat,S45

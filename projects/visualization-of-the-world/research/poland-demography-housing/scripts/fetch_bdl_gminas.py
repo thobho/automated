@@ -18,12 +18,18 @@ GMINA_VARS = {
 # at gmina level. Add them here to extend migration_by_place_class.csv (international) and households.csv (by class).
 
 
-def load_gmina_var(vid, years):
-    """{unit_id: (name, {year: value})} for all gmina-level units (types 1-5), cached."""
+# BDL attribute ids meaning "no number" (0 / x / a / X / - / n): the value field is a placeholder 0, not a real zero.
+NO_VALUE_ATTRS = {0, 4, 7, 14, 15, 17, 50, 91}
+
+
+def load_gmina_var(vid, years, skip_missing=False):
+    """{unit_id: (name, {year: value})} for all gmina-level units (types 1-5), cached.
+    skip_missing=True drops values whose BDL attribute says "no data" (attrId in NO_VALUE_ATTRS) instead of keeping the placeholder 0."""
     out = {}
     params = [("unit-level", 6)] + [("year", y) for y in years]
     for r in bdl.paged(f"/data/by-variable/{vid}", params):
-        out[r["id"]] = (r["name"], {int(v["year"]): v.get("val") for v in r["values"]})
+        out[r["id"]] = (r["name"], {int(v["year"]): v.get("val") for v in r["values"]
+                                    if not (skip_missing and v.get("attrId") in NO_VALUE_ATTRS)})
     return out
 
 

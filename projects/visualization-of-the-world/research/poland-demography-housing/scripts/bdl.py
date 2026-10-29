@@ -21,7 +21,7 @@ def _cache_path(url):
     return CACHE / (hashlib.sha1(url.encode()).hexdigest()[:16] + ".json")
 
 
-def get(path, params=None, retries=20):
+def get(path, params=None, retries=60):
     """GET BASE+path with params (list of pairs allowed for repeated keys). Cached."""
     pairs = list(params.items()) if isinstance(params, dict) else list(params or [])
     pairs += [("format", "json"), ("lang", "en")]
@@ -39,9 +39,13 @@ def get(path, params=None, retries=20):
             if e.code == 429 or "quota" in body.lower():
                 wait = int(str(e.headers.get("Retry-After", "90")).split()[0]) + 5
                 print(f"BDL quota hit, sleeping {wait} s ...", flush=True)
-                time.sleep(min(wait, 7200))
+                time.sleep(min(wait, 1800))
                 continue
             raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:   # network hiccup: retry
+            print(f"BDL network error ({e}), retrying in 20 s ...", flush=True)
+            time.sleep(20)
+            continue
         if isinstance(data, dict) and "errorResult" in data:
             if "quota" in str(data["errorResult"]).lower():
                 print("BDL quota hit, sleeping 90 s ...", flush=True)

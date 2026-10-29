@@ -84,7 +84,34 @@ Decisions and conventions:
 - UN WPP and OECD were not used: Eurostat covers all indicators and all eight areas, see the report.
 - "Net migration" is Eurostat's residual (net migration plus statistical adjustment), not registered moves; Poland 2020 (-762,735) is mostly an adjustment and flagged b.
 
-## Task 04 - Housing vs Population (BDL)
+## Task 04 - housing: new dwellings, houses vs flats, stock
+Report: `reports/04-housing.md`. Rebuild: `python3 scripts/fetch_bdl_housing.py && python3 scripts/process_housing.py && python3 scripts/check_sources.py` (needs `data/processed/big_city_list.csv`, `population_by_class.csv`). The gmina-level fetch is about 600 anonymous BDL requests (14 variables x 42 pages) and takes a few hours when the 1000 / 12 h limit is shared; it waits automatically and is cached (git-ignored). Committed extracts: `data/raw/bdl_housing_national.csv`, `bdl_housing_powiats_big.csv`, `bdl_housing_class_sums.csv`. Sources S41-S49. Place classes are exactly those of tasks 01/02 (same 34-city list, gmina-level units, urban and rural parts of urban-rural gminas summed into small cities / villages; helper `process_structure.class_sums`).
+
+| file | content | level |
+|---|---|---|
+| `housing_completions_by_class.csv` | dwellings completed 2000-2025: `total`, direct `house` / `flat` / `other` (2009-2025), proxies `house_proxy_*` / `flat_proxy_*` | big cities / small cities / villages |
+| `housing_floor_area_by_class.csv` | average useful floor area of completed dwellings: all, houses (direct), flats (direct) | by class |
+| `housing_stock_by_class.csv` | dwelling stock, floor area, average area, per 1000 residents, persons per dwelling, 2000-2025 | by class |
+| `housing_permits_by_class.csv` | dwellings in building permits / registrations by building type: classes 2018-2025, national (`poland`) 2009-2025 | by class |
+| `housing_starts_big_cities_vs_rest.csv` | construction starts 2005-2019: big cities vs rest of Poland | **powiat level only** |
+| `housing_completions_by_form_national.csv` | completions by form of construction (individual, sale/rent, cooperative, municipal, TBS, company), 2000-2025 | national |
+| `housing_national_crosscheck.csv` | sum of the three class values minus the BDL national value, every variable and year | check |
+
+### Houses vs flats: definitions and proxies
+- **`house` (direct)** = dwellings completed in *new single-family (one-dwelling) residential buildings*; **`flat` (direct)** = dwellings completed in *new multi-family residential buildings* (two or more dwellings; BDL gives no finer split in this table). Source: BDL P3821, variables 748247 and 748250 [S43]. Available **2009-2025 only**. `other` = total minus house minus flat: dwellings in non-residential buildings, additions to existing buildings and conversions (derived).
+- **No direct split exists for 2000-2008.** For the whole period 2000-2025 two clearly labelled proxies are given (type names start with `house_proxy_` / `flat_proxy_`, column `basis` = `proxy`). A proxy is never spliced with another series:
+  - `house_proxy_individual` = BDL "private" = individual construction (`indywidualne`), var 430, **2000-2017** [S42]. It includes the small number of private dwellings built for sale or rent. `flat_proxy_non_individual` = total - individual (developer, cooperative, municipal, social-rental TBS, company).
+  - `house_proxy_own_use` = private dwellings for the investor's own use, var 748604, **2005-2025** [S41] (before 2005 BDL has no value, attribute x). `flat_proxy_not_own_use` = total - own use (includes private dwellings for sale or rent, so it also holds some houses).
+  - Why proxies are imperfect: individual investors sometimes build multi-family houses and developers build terraced and detached houses. The direct series lets the proxies be checked for 2009-2025 (see report).
+- Forms of construction are also given nationally (`housing_completions_by_form_national.csv`); the class level only needs total and private.
+
+### Method and caveats (task 04)
+- Class values are sums over gmina-level BDL units (urban gminas, rural gminas, urban and rural parts of urban-rural gminas; whole urban-rural gminas only as control total). Warsaw / Wałbrzych unit joins as in task 01. Values with BDL attribute "no data" (x, a, X, -, n) are treated as missing, not zero. The three classes were checked against the BDL national value (`housing_national_crosscheck.csv`, tested for zero differences).
+- **Level of detail follows the source.** Construction starts and (in the older table) permits exist only at powiat level. The 34 big cities are powiats with city rights, so `housing_starts_big_cities_vs_rest.csv` gives big cities vs the rest of Poland; **small cities and villages cannot be separated** and are not estimated. Annual starts end in 2019; no later annual starts series was found (only monthly/quarterly tables, not used).
+- Permits (P4216) are dated by the year the permit/registration was issued and count dwellings of the project; they are not completions. BDL has the table nationally from 2009 but at gmina level only from 2018, so classes exist for 2018-2025 only (class sums equal the national value); 2009-2017 is given nationally (`class` = `poland`). The older powiat-level permits table (P1743/P2956) was not summed by class.
+- **Methodology breaks** (details in the report): 2005 (BDL's P3824 table starts to separate private dwellings for sale or rent from own use), 2018 (GUS definitions changed; BDL tables "valid to 2017" / "from 2018"; GUS note not found, only secondary S49), stock series recalculated around the 2002 and 2021 censuses (visible jumps in 2002, 2020, 2021).
+- Average area of dwellings completed in 2000-2008 is available only for all dwellings (the building-type split starts in 2009).
+## Task 05 - Housing vs Population (comparison of tasks 01-04)
 Report: `reports/05-housing-vs-population.md`. Rebuild: `python3 scripts/fetch_bdl_housing.py && python3 scripts/process_housing_population.py && python3 scripts/check_sources.py`
 
 | file | content | columns |
@@ -102,3 +129,4 @@ Decisions and conventions:
   - Indexed dynamics (2000 = 100) of population and housing
 - **Source tracking**: Every value links to source_id or is marked derived with formula
 - **Current limitation**: Placeholder data used due to unavailable BDL variable IDs; actual implementation requires verification of housing construction variable IDs in BDL API
+

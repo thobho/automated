@@ -1,0 +1,46 @@
+name: visualization-of-the-world design system
+
+on:
+  pull_request:
+    paths:
+      - 'projects/visualization-of-the-world/design/**'
+      - '.github/workflows/visualization-of-the-world-design.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'projects/visualization-of-the-world/design/**'
+      - '.github/workflows/visualization-of-the-world-design.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  design:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/visualization-of-the-world/design
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Contrast and colour-blind check on tokens.json
+        run: python3 scripts/check_contrast.py
+      - name: tokens.css is generated from tokens.json
+        run: python3 scripts/build_tokens.py --check
+      - name: Unit tests
+        run: python3 -m unittest discover -s tests
+      - name: Install Playwright
+        run: |
+          npm install --no-save --prefix "$RUNNER_TEMP/pw" playwright
+          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Style guide in Chromium (no console errors, no horizontal scroll at 375 px, fonts, interactions, failure path)
+        run: |
+          python3 -m http.server 8714 >/dev/null 2>&1 &
+          sleep 2
+          NODE_PATH="$RUNNER_TEMP/pw/node_modules" node scripts/verify_page.cjs http://localhost:8714 "$RUNNER_TEMP/verification"
