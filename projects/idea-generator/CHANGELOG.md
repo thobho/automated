@@ -10,3 +10,4 @@ One line per change to already-merged findings or scores, newest first:
 
 2026-10-29 · research/01-proven-abroad/dach-niche-software.md (L1-F04) · added counter-evidence: Polish software-only mileage apps exist, gap is weaker · found in lens 02 (L2-F17, Google Play search)
 2026-10-29 · ideas/shortlist.csv + rejected.md · T13: I062 (KSeF PDF API) rejected after research (free OSS renderers incl. REST/Docker); I070 promoted to write-up 002 (batch A)
+2026-10-29 · ideas/shortlist.csv + rejected.md · T13: I061 (Polish company-data API) rejected after research (CompanyData, Apify actors, free NIPRegon MCP); I059 promoted to write-up 009 (batch A)
