@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion and interaction · Polska w danych demo</title>
+<meta name="description" content="Choropleth of the 16 voivodeships with drill-down to powiats, and city bubbles. Real boundaries and city names, synthetic values.">
+<link rel="preload" href="vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vendor/design/tokens.css">
+<link rel="stylesheet" href="vendor/design/components.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<main id="main" class="site-main"><div class="container">
+  <div class="page-head"><h1>Motion and interaction</h1><p class="lede">Play the timeline, filter by place type, brush a scatter, click the map: the linked views below all react. Transitions are animated unless your system asks for reduced motion.</p></div>
+  <div class="card stack" style="margin-bottom:var(--grid-gutter-base)">
+    <div class="year-player" data-year-player id="year-player">
+      <button class="btn btn--primary btn--icon" type="button" data-play aria-pressed="false" aria-label="Play changes over time">
+        <svg data-icon-play viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+        <svg data-icon-pause viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+      </button>
+      <input type="range" id="year-range" min="2000" max="2025" step="1" value="2025" aria-label="Year">
+      <output class="year-player__year" for="year-range" aria-live="off">2025</output>
+      <div class="year-player__ticks" aria-hidden="true"><span>2000</span><span>2012</span><span>2025</span></div>
+    </div>
+    <fieldset class="place-toggle" data-place-toggle><legend>Place type (filters every view below)</legend><div class="place-toggle__options">
+      <button type="button" data-place="big-cities" aria-pressed="false" style="--swatch:var(--data-place-big-cities)"><span class="place-toggle__swatch" aria-hidden="true"></span>Big cities<svg class="place-toggle__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg></button><button type="button" data-place="small-cities" aria-pressed="false" style="--swatch:var(--data-place-small-cities)"><span class="place-toggle__swatch" aria-hidden="true"></span>Small cities<svg class="place-toggle__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg></button><button type="button" data-place="villages" aria-pressed="true" style="--swatch:var(--data-place-villages)"><span class="place-toggle__swatch" aria-hidden="true"></span>Villages<svg class="place-toggle__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg></button></div><p class="field__error" data-place-status aria-live="polite"></p></fieldset>
+    <p class="status-line">Year <strong id="year-live" class="num">2025</strong>. Selected region: click the map or a bar. <button class="btn btn--quiet btn--sm" type="button" id="reset-sel">Clear region</button></p>
+  </div>
+  <div class="grid" id="figures"></div>
+</div></main>
+<script src="js/shell.js"></script>
+<script src="vendor/lib/echarts-6.1.0.min.js"></script>
+<script src="vendor/lib/topojson-client-3.1.0.min.js"></script>
+<script src="vendor/design/components.js"></script>
+<script src="js/votw-core.js"></script>
+<script src="js/votw-charts.js"></script>
+<script src="js/specs-interaction.js"></script>
+<script src="js/page-interaction.js"></script>
+</body>
+</html>

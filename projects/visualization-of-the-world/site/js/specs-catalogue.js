@@ -69,16 +69,16 @@
           yAxis: V.valueAxis({ name: "Villages, %", scale: true }),
           series: [{ type: "scatter", name: "Voivodeships", data: pts, symbolSize: (v) => 10 + Math.sqrt(v[2]) * 8, itemStyle: { color: V.placeColor("big_cities"), opacity: 0.75, borderColor: V.cssVar("--color-chart-surface"), borderWidth: 1.5 }, emphasis: { itemStyle: { opacity: 1 } } }] });
       }, height: 360 },
-    { id: "heatmap", title: "Heatmap: every voivodeship, every year", subtitle: "Heatmap. Villages, % of population, 16 voivodeships x 26 years (synthetic)",
+    { id: "heatmap", title: "Heatmap: every voivodeship, every year", subtitle: "Heatmap. Villages, % of population (legend in %), 16 voivodeships x 26 years (synthetic)",
       source: S, load, csv: (d) => ({ header: ["voivodeship", ...yearsOf(d)], rows: d.regions.map((r) => [r.name, ...r.shares.villages]) }),
       build(d) {
         const cells = []; d.regions.forEach((r, ri) => r.shares.villages.forEach((v, yi) => cells.push([yi, ri, v])));
-        const ramp = V.mapRamp().slice().reverse();
+        const ramp = V.mapRamp(); const rc = [0, 2, 3, 4, 6].map((i) => ramp[i]);
         return V.base({ grid: V.grid({ top: 8, bottom: 70, left: 4, right: 8 }),
           tooltip: V.tooltip({ trigger: "item", formatter: (p) => V.tipRows(d.regions[p.value[1]].name + ", " + d.years[p.value[0]], [{ color: p.color, label: "Villages", value: V.fmt(p.value[2]) + "%" }]) }),
           xAxis: V.catAxis(yearsOf(d), { splitArea: { show: false }, axisLabel: Object.assign(V.textStyle(), { interval: window.innerWidth < 600 ? 7 : 4 }) }),
           yAxis: V.catAxis(d.regions.map((r) => r.name), { inverse: true, axisLabel: Object.assign(V.textStyle(), { fontSize: 11 }), axisLine: { show: false }, axisTick: { show: false } }),
-          visualMap: V.visualMapBase({ type: "piecewise", orient: "horizontal", left: 0, bottom: 0, splitNumber: 7, min: 20, max: 70, precision: 0, inRange: { color: ramp }, formatter: (a, b) => `${a}-${b}%`, itemGap: 6, textStyle: V.textStyle({ fontSize: 11 }) }),
+          visualMap: V.visualMapBase({ type: "piecewise", orient: "horizontal", left: 0, bottom: 0, pieces: [20, 30, 40, 50, 60].map((lo, i) => ({ gte: lo, lt: lo + 10, label: lo + "-" + (lo + 10), color: rc[i] })), itemGap: 6, itemWidth: 12, textGap: 4, textStyle: V.textStyle({ fontSize: 11 }) }),
           series: [{ type: "heatmap", data: cells, itemStyle: { borderColor: V.cssVar("--color-chart-surface"), borderWidth: 1 }, emphasis: { itemStyle: { borderColor: V.cssVar("--color-text-primary"), borderWidth: 2 } } }] });
       }, height: (w) => (w < 600 ? 520 : 480) },
     { id: "treemap", title: "Treemap: size = weight, colour = place type", subtitle: "Treemap. Synthetic population by voivodeship and place type, 2025 (weight index x share; synthetic)",

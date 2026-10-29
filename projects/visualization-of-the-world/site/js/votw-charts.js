@@ -218,7 +218,7 @@
       if (!ctl.chart) { ctl.chart = E.init(chartEl, null, { renderer: "canvas" }); ctl.chart.group = spec.group || ""; spec.onChart?.(ctl.chart, ctl); }
       ctl.chart.resize();
       ctl.option = option;
-      ctl.chart.setOption(option, spec.merge ? { notMerge: false } : { notMerge: true });
+      ctl.chart.setOption(option, spec.setOpt ? Object.assign({ notMerge: false }, spec.setOpt) : spec.merge ? { notMerge: false } : { notMerge: true });
       spec.afterRender?.(ctl);
       renderLegend(); renderTable();
     };
