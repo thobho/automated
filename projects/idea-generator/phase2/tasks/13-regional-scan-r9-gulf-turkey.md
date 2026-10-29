@@ -12,7 +12,7 @@ For **each country**:
 - local accelerator batches and "AI startup lists" for the country;
 - **local champions that solve a country-specific problem with LLMs**: law, tax, public services, health administration, real estate, HR and payroll, education, SMB admin. These matter most: their Polish counterpart needs local knowledge, which is exactly the edge.
 
-Record at least 5 products per country with traction evidence, or explain why fewer exist.
+Record at least 5 products per country with traction evidence, or explain why fewer exist. For each product, look for the brief's **Success signals** (retention, expansion, replaced spend, first channel) and hype warnings, and fill those catalogue columns; "unknown" is a valid answer, a guess is not.
 
 Output:
 - `research/regions/R9-gulf-turkey/<country>.md` with findings and sources, plus `README.md` with cross-country patterns and a Coverage table per country;

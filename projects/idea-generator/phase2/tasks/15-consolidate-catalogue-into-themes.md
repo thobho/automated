@@ -10,10 +10,10 @@ Write `themes/THEMES.md`. For each theme give:
 - a one-line description and the LLM role;
 - example products (links to catalogue rows);
 - the countries where it appears and the earliest/latest launch dates (diffusion signal);
-- the best traction evidence;
+- the best traction evidence, and a **durability verdict** (durable / mixed / hype) based on the members' durable signals and hype warnings;
 - B2B/B2C;
 - a first thought on the Polish angle.
 
-Rank the themes by spread across countries plus traction plus novelty, and explain the ranking rule at the top. Split the ranked list into three equal batches, **A / B / C** (A = highest ranked), for the Poland checks.
+Rank the themes by spread across countries, durable traction (not raw growth) and novelty, and explain the ranking rule at the top. Split the ranked list into three equal batches, **A / B / C** (A = highest ranked), for the Poland checks.
 
 **Done when:** every catalogue row has a theme, THEMES.md lists 40–80 ranked themes in batches A/B/C, and the link check passes.

@@ -10,6 +10,7 @@ Go through the global sources in `method/sources.md`: YC batches 2024–2026 (fi
 
 - Write findings to `research/global/` (one file per source family, plus a README with patterns).
 - Add every product to `catalogue/R0-global.csv` with the columns from `method/criteria.md` (country = HQ country). Aim for 100+ products.
+- For every product, look for the brief's **Success signals** (retention, expansion, replaced spend, first channel) and hype warnings, and fill those columns. "unknown" is a valid answer; a guess is not.
 - Coverage and Gaps sections.
 
 **Done when:** at least 100 catalogue rows with traction evidence, and the link check passes.

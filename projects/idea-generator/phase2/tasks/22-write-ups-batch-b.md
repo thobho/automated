@@ -12,6 +12,7 @@ For each idea:
 - gather evidence of Polish demand;
 - compute unit economics with real token prices;
 - check the AI Act category;
+- fill the **Success signals** section: the Western analogue's durable signals and hype warnings with sources, and which signals the Polish adaptation can reproduce (the budget line it replaces, its first channel, what keeps customers);
 - look for graveyard cases.
 
 Write **opportunities and risks as two separate lists, independently**, with likelihood and impact for each item, then choose the chance band. At least 6 distinct sources per idea.

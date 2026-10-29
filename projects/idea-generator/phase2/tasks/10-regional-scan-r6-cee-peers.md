@@ -12,7 +12,7 @@ For **each country**:
 - local accelerator batches and "AI startup lists" for the country;
 - **local champions that solve a country-specific problem with LLMs**: law, tax, public services, health administration, real estate, HR and payroll, education, SMB admin. These matter most: their Polish counterpart needs local knowledge, which is exactly the edge.
 
-Record at least 5 products per country with traction evidence, or explain why fewer exist.
+Record at least 5 products per country with traction evidence, or explain why fewer exist. For each product, look for the brief's **Success signals** (retention, expansion, replaced spend, first channel) and hype warnings, and fill those catalogue columns; "unknown" is a valid answer, a guess is not.
 
 For this region also record, for each product, whether it is a **local adaptation of a Western product** (and of which one). Note whether it has entered or announced Poland: that is both a warning and proof that adaptation pays.
 

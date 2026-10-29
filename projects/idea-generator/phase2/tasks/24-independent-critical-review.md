@@ -9,6 +9,7 @@ You did not write these ideas. Review them as a skeptical investor who knows the
 For each write-up in `ideas/<field>/` (commit and push after each one):
 - add a **Devil's advocate** section: the strongest case against the idea, especially "it already works in Polish", "ChatGPT will absorb it", "Polish customers won't pay this", "the Western leader will localize in 12 months";
 - search again for Polish and CEE competitors (new ones often turn up on a second search) and re-check the 2–3 claims the score depends on most;
+- challenge the **Success signals**: is the Western traction durable or hype? Cap L2 at 3 where only hype warnings exist;
 - check that the opportunity and risk lists are really independent and that the likelihoods are honest;
 - change scores and chance bands where the evidence doesn't hold up, and add a **Review changes** line saying what changed and why. Log it in CHANGELOG.md;
 - move ideas that collapse to `rejected.md`.

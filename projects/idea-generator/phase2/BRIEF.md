@@ -76,6 +76,29 @@ Check every idea against these. The write-up template asks about each one.
 11. **Who buys and how fast:** the sales cycle for Polish SMEs vs. corporations vs. the public sector (tenders excluded), and channels that work in Poland (associations, chambers, industry Facebook groups, local influencers, partners such as accounting offices).
 12. **Exit and expansion:** who could acquire a Polish adaptation, and whether it extends to CZ/SK/RO/HU/Baltics.
 
+## Success signals: durable vs. hype
+Fast growth in AI is often temporary. Many AI apps collected revenue from curious users ("AI tourists") who left after a month. Separate **durable** products from **hype** with these signals, gathered for every Western product where they can be found, and later for every Polish idea:
+
+**Durable signals** (the more, the better):
+1. **Replaces an existing spend:** a salary, hours of work, an agency, a freelancer, or a penalty for mistakes. Name the line in the customer's budget it comes from.
+2. **Frequent, painful problem with an owner:** daily or weekly, and someone is responsible for it.
+3. **Retention:** cohort retention that flattens, public churn or NRR figures, "still paying after N months", G2/Capterra reviews from long-term users, renewals, case studies older than a year.
+4. **Expansion:** customers pay more over time (seats, clients, volume); public net revenue retention above 100%.
+5. **Owned distribution:** how the first customers came. A marketplace, SEO on purchase-intent phrases, a niche community, partners or a built-in viral loop count. "Launched on Product Hunt" alone doesn't.
+6. **Time to value in minutes:** a self-serve signup that works without a sales call or week-long setup.
+7. **Value-based pricing from day one:** per client, per call, per document or per outcome, not per feature list; no endless free tier.
+8. **Hard to absorb:** integrations, data, regulation, trust or workflow that ChatGPT, Copilot or the platform owner can't add in one update.
+9. **Pull from customers:** feature requests about integrations and workflow, not "how does this work"; complaints when it breaks.
+10. **Timing window:** a regulation or new capability that opened the market recently, before incumbents react.
+
+**Hype warnings:** traffic spikes without retention, revenue mostly from one-off or lifetime deals, growth driven by paid ads or influencers only, a novelty use case (avatars, one-time generators), a product that is a thin wrapper around one model's API, rapid price cuts, or heavy layoffs or a pivot after a funding round.
+
+**How to use them:**
+- the catalogue records the signals found for each product (columns `first_channel`, `durable_signals`, `hype_warnings`);
+- theme ranking in T15 weighs durable signals, not only growth;
+- every write-up has a **Success signals** section: which durable signals the Western analogue shows, with sources, and which ones the Polish adaptation can realistically reproduce;
+- an idea whose Western analogue shows only hype warnings can't score above 3 on L2.
+
 ## Rules
 - **Never invent facts, numbers, companies, URLs or revenue figures.** Every factual claim needs a source URL plus the date you accessed it. Mark estimates as such. If you can't verify something, write "unverified".
 - **Link check before a task is reported done:** `python3 projects/idea-generator/tools/check_links.py <changed files>`. Fix or remove dead links. List "unverifiable" links (403/429 from sites that block bots) under the task in PROGRESS.md.
@@ -110,7 +133,7 @@ phase2/
 | # | Lens | Weight |
 |---|---|---|
 | L1 | Innovation / LLM-native | 12% |
-| L2 | Traction abroad (growth, revenue, funding, spread across countries) | 12% |
+| L2 | Durable traction abroad (retention, expansion, revenue and spread across countries, not just growth; see Success signals) | 12% |
 | L3 | Poland gap (no Polish equivalent; Western leader serves Poland poorly) | 12% |
 | L4 | Localization moat (how much local knowledge the adaptation needs) | 15% |
 | L5 | Polish demand, including demographic and social drivers | 15% |
@@ -138,6 +161,7 @@ phase2/
 **Regulation:** AI Act category, RODO, sector rules
 **Opportunities (szanse):** items, each with likelihood H/M/L, impact H/M/L, and what would make it true
 **Risks (ryzyka):** items, each with likelihood H/M/L, impact H/M/L, and the early warning sign
+**Success signals:** durable signals the Western analogue shows (with sources), hype warnings, and which signals the Polish adaptation can realistically reproduce (budget line it replaces, first channel, retention driver)
 **Graveyard:** similar products that failed, and why
 **Scores (1–5):** L1 … L9 | **Weighted:** x.x / 5 | **Chance band:** … with 2 sentences of reasoning
 **Cheapest validation test (≤1 week, ≤200 PLN):** …

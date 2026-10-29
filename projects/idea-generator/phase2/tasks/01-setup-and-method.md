@@ -12,7 +12,8 @@ Set up the Phase 2 folders (see Folder layout in the brief). BRIEF.md, PROGRESS.
    - the weights from the brief (change them only with a stated reason);
    - how the weighted score maps to chance bands;
    - how opportunities and risks are rated (likelihood × impact) and how they move the band;
-   - the **catalogue CSV columns**: id, name, country, region, url, launched, category, b2b_b2c, llm_role, traction (number + what), traction_source, country_specific (y/n + why), works_in_polish (unknown / no / partly / yes), pl_adaptation_angle, theme (filled in T15).
+   - the **catalogue CSV columns**: id, name, country, region, url, launched, category, b2b_b2c, llm_role, traction (number + what), traction_source, country_specific (y/n + why), works_in_polish (unknown / no / partly / yes), first_channel (how its first customers came, or unknown), durable_signals (which of the brief's Success signals have evidence, with source), hype_warnings, pl_adaptation_angle, theme (filled in T15);
+   - a rubric for **durable vs. hype** based on the brief's Success signals section, used by L2.
 3. `method/countries.md`: the 51 countries from the brief in a table with columns region, country, local-language search terms to use, app-store chart sources, local startup media, status (todo/done), products found.
 4. `method/sources.md`: global sources (YC directory, a16z Top 100 Gen AI consumer apps, Product Hunt, TrustMRR, Indie Hackers, Forbes AI 50, CB Insights AI 100, G2 fastest growing, Similarweb, Sensor Tower/Appfigures public charts, Dealroom, Sifted, TechCrunch, Hacker News Show HN) and at least two local sources per region (startup media, funding trackers, accelerators). Reuse Phase 1's `../method/` and `../research/` where useful.
 
