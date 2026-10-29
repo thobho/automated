@@ -1,3 +1,5 @@
+> **Rejected in T16 review (2026-10-29): merged into [001](001-ksef-inbox-bookkeeping-offices.md) as a feature.** Same payer, same certificate, same outreach; it has no standalone price. See Devil's advocate and [rejected.md](../../rejected.md). File kept for the record.
+
 # 007 — Delegated KSeF access and token/certificate manager for bookkeeping offices
 **One-liner:** A small dashboard for a biuro rachunkowe that shows, per client, which KSeF permissions the office and each employee actually hold, which certificates or tokens are about to expire, and which clients have not granted access yet, with reminders and a one-click checklist for the client. Overlaps strongly with idea 001 (same payer), and is probably best sold as a module of it.
 **Field:** accounting-invoicing-tax | **Type:** SaaS
@@ -17,6 +19,9 @@
 **Cheapest validation test (≤1 week, ≤200 PLN):** Do not build. Add three questions to the 001 interviews: how many clients are still not connected, how much time permission setup takes per client, and whether they would pay 4 PLN per client for a status board. Success: 5 of 10 offices report more than 15 minutes per client and name an unsolved failure case. Cost: nil.
 **Kill criteria:** Fewer than 3 of 10 offices report ongoing permission problems; or the ministry or the top two programs ship a cross-client permission overview; or interviews show offices only need the feature during onboarding (first half of 2027).
 **Confidence:** low
+**Devil's advocate:** A permission dashboard is a screen, not a business. Every tool that pulls client invoices must already query the same permissions to work, so it shows "connected / not connected" per client as a by-product: wFirma's status column and Fakturownia's accountant panel do this today, FakturaXL publishes a permissions guide for its own users ([fakturaxl.pl](https://www.fakturaxl.pl/jak-zarzadzac-uprawnieniami-z-ksef)), and the state's own Moduł Certyfikatów i Uprawnień (MCU) has been the central place to manage access since 1 Nov 2025 (Fillup guide via search summary, unverified). A second search found no standalone cross-client permission tool, but also no office asking for one; the strongest advice found is to keep a simple register of who has which access (a spreadsheet). The need peaks during onboarding (2026 waves, 1 Jan 2027 for the smallest, token-to-certificate switch) and then becomes occasional, which fits a one-off audit service or a feature, not a subscription. At 149 PLN per office it needs 67 offices that are not already on a bundling program, the same narrow niche as 001 (which this review lowered to <5%). Selling it separately would split the founder's 10 h/week across two products for one buyer.
+**Review changes:** Scores unchanged (2.6, <5%). Rejected as a standalone idea and merged into I010 (write-up 001) as its onboarding/permissions screen, as the write-up itself and T13 recommended; validation runs as three extra questions in the 001 interviews. Moved to rejected.md; shortlist row marked merged; I012 added to I010's merged_ids.
+
 **Sources:** (accessed 2026-10-29)
 - Permissions model: https://raw.githubusercontent.com/CIRFMF/ksef-docs/main/uprawnienia.md
 - Certificates: https://raw.githubusercontent.com/CIRFMF/ksef-docs/main/certyfikaty-KSeF.md
@@ -26,5 +31,6 @@
 - Advertorial on program permissions (sponsored): https://itwiz.pl/program-do-faktur-a-nadawanie-uprawnien-w-ksef-jak-to-dziala-w-praktyce/
 - Revoking permissions and ZAW-FA: https://poradnikprzedsiebiorcy.pl/-jak-odebrac-uprawnienia-w-ksef-instrukcja-krok-po-kroku
 - Autocomplete method: https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=ksef%20biuro%20rachunkowe (L6-F23)
+- FakturaXL permissions guide (T16 review): https://www.fakturaxl.pl/jak-zarzadzac-uprawnieniami-z-ksef
 - Rollout dates: https://ksef.podatki.gov.pl/etapy-wdrozenia-ksef/
 - Office counts (search summary): https://www.podatki.biz/artykuly/biuro-rachunkowe-przyszlosci-dane-algorytmy-i-ludzie_40_60545.htm , https://comparic.pl/przyszlosc-biur-ksiegowych-i-ich-rola-w-rozwoju-firm-msp/

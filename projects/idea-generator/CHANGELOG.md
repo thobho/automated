@@ -3,6 +3,7 @@
 One line per change to already-merged findings or scores, newest first:
 `YYYY-MM-DD · file · what changed · why (source URL if any)`
 
+2026-10-29 · ideas/accounting-invoicing-tax/007 + 001 + rejected.md + ideas/shortlist.csv · T16 review: I012 merged into I010 as its permissions screen (scores unchanged 2.6, <5%); I010 merged_ids now I024 I012 · incumbents show per-client KSeF status as a by-product, no standalone payer (https://www.fakturaxl.pl/jak-zarzadzac-uprawnieniami-z-ksef)
 2026-10-29 · ideas/b2b-saas-pl-smes/006 + ideas/shortlist.csv · T16 review: I004 L2 3→2, weighted 2.9→2.7, band 5–15%→<5%; row now carries write-up L1–L9 · Google tests native AI review replies in Business Profile (https://location3.com/blog/google-ai-powered-review-responses/); booking tools bundle review requests
 2026-10-29 · ideas/legal-compliance/005 + ideas/shortlist.csv · T16 review: I025 L2 2→1, L5 3→2, weighted 2.9→2.7, band 5–15%→<5%; row now carries write-up L1–L9 · more PL incumbents (Crido Sygnalizuj24h https://crido.pl/wp-content/uploads/2021/10/20240607_oferta_Sygnalizuj24h.pdf, Wolters Kluwer LEX Sygnalista, page 404, unverified); deadline was 1 Jan 2025
 2026-10-29 · ideas/accounting-invoicing-tax/004 + ideas/shortlist.csv · T16 review: I015 L8 3→2, weighted 2.9→2.7, band 5–15%→<5%; row now carries write-up L1–L9 · CERT Polska phishing warning on fake 'new KSeF invoice' emails (https://android.com.pl/tech/1038580-phishing-faktury-ksef-ostrzezenie-cert/); new rival firmly at $3.99/month (https://apps.apple.com/app/firmly/id6464039310)

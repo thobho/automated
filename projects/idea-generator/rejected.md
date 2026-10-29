@@ -125,3 +125,4 @@ Format: `- <id or name> · <task that dropped it> · <reason>`
 
 ### T16 review (write-ups dropped after the critical review; files kept with a "rejected" note)
 - I070 XRechnung/ZUGFeRD validator and generator API (write-up 002) · T16 · no wedge left: hosted validation with plain-language fix hints (Rechnungslotse), free-tier hosted generate/validate (normbill) and paid generation from 49 EUR/month (Factora) already exist next to free KoSIT/Mustang; German-only market, no Polish moat ([write-up](ideas/developer-tools-apis/002-xrechnung-zugferd-validator-api.md))
+- I012 Delegated KSeF access and token/certificate manager (write-up 007) · T16 · merged into I010 (write-up 001) as its permissions screen: same payer and certificate, incumbents show per-client KSeF status as a by-product, need peaks only during onboarding, no standalone price ([write-up](ideas/accounting-invoicing-tax/007-delegated-ksef-access-and-token-manager.md))
