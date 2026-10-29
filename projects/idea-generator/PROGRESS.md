@@ -26,7 +26,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T10 · research lens 09 — Unit economics and defensibility · sonnet · needs: T01 · [tasks/10-research-lens-09-unit-economics-and-defe.md](tasks/10-research-lens-09-unit-economics-and-defe.md)
   Unverifiable links: developers.facebook.com WhatsApp pricing (400); criteria.md ones as in T01/T03/T04/T05
 - [~] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
-  Resume: gap pass done (lenses 1, 3, 5: +28 findings, CHANGELOG updated). Longlist fields 1–8 written (I001–I089, ideas/longlist.md); next: fields 9–22 (real-estate-construction onward), then rejected.md entries, link check on longlist
+  Resume: gap pass done (lenses 1, 3, 5: +28 findings, CHANGELOG updated). Longlist fields 1–16 written (I001–I150, ideas/longlist.md); next: fields 17–22 (creators-media onward), then rejected.md entries, link check on longlist
 - [ ] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
 - [ ] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
 - [ ] T14 · write-ups batch B · sonnet · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
