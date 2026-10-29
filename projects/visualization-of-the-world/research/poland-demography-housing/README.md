@@ -112,21 +112,22 @@ Report: `reports/04-housing.md`. Rebuild: `python3 scripts/fetch_bdl_housing.py 
 - **Methodology breaks** (details in the report): 2005 (BDL's P3824 table starts to separate private dwellings for sale or rent from own use), 2018 (GUS definitions changed; BDL tables "valid to 2017" / "from 2018"; GUS note not found, only secondary S49), stock series recalculated around the 2002 and 2021 censuses (visible jumps in 2002, 2020, 2021).
 - Average area of dwellings completed in 2000-2008 is available only for all dwellings (the building-type split starts in 2009).
 ## Task 05 - Housing vs Population (comparison of tasks 01-04)
-Report: `reports/05-housing-vs-population.md`. Rebuild: `python3 scripts/fetch_bdl_housing.py && python3 scripts/process_housing_population.py && python3 scripts/check_sources.py`
+Report: `reports/05-housing-vs-population.md`. Rebuild: `python3 scripts/process_housing_population.py && python3 scripts/check_sources.py`
 
-| file | content | columns |
-|---|---|---|
-| `data/raw/bdl_housing_construction.csv` | Raw housing construction data from BDL API | year, indicator, value, source_id |
-| `data/processed/housing_vs_population.csv` | Core comparison metrics: dwellings per 1000 inhabitants, 5-year construction trends, housing type shares, indexed dynamics | year, class, measure, value, source_id, notes |
+| file | content | columns | source_ids |
+|---|---|---|---|
+| `data/processed/housing_completions_by_class.csv` | Housing completions by class with direct and proxy data (2000-2025) | year, class, type, basis, dwellings, share_of_total_pct, per_1000_residents, value_type, formula | S41-S43 |
+| `data/processed/housing_vs_population.csv` | Core comparison metrics: dwellings per 1000 inhabitants, 5-year construction trends, housing type shares, indexed dynamics | year, class, measure, value, source_id, notes | S1, S41-S43, derived |
+
+Key metrics:
+- **New dwellings per 1,000 inhabitants**: flats and houses separately, using direct data (S43) for 2009-2025 and proxy columns for 2000-2008
+- **New dwellings per additional resident**: 5-year windows showing construction responsiveness to population change
+- **Share of houses vs flats**: direct period only (2009-2025) to ensure comparability
+- **Indexed dynamics**: (2000 = 100) of population (S1), houses and flats per class with proper source attribution
 
 Decisions and conventions:
 - **Chart-ready format**: All files are in tidy format (one row per year/class/measure) for direct visualization
 - **Place classes**: Same as defined in Task 01 (big cities, small cities, villages)
-- **Measures include**: 
-  - New dwellings per 1,000 inhabitants (flats and houses separately)
-  - New dwellings per additional resident (5-year windows)
-  - Share of houses vs flats in new construction
-  - Indexed dynamics (2000 = 100) of population and housing
-- **Source tracking**: Every value links to source_id or is marked derived with formula
-- **Current limitation**: Placeholder data used due to unavailable BDL variable IDs; actual implementation requires verification of housing construction variable IDs in BDL API
+- **Proxy data usage**: 2000-2004 use individual proxy (S42 for houses, S41;S42 for flats); 2005-2008 use own-use proxy (S41 for houses, S41 for flats); 2009-2025 use direct data (S43)
+- **Source tracking**: Every value links to specific source_id with notes column indicating proxy usage where applicable
 
