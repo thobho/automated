@@ -173,3 +173,13 @@ A starting list, not a limit. Prefer primary sources (the product's own pricing 
 - https://wordpress.org/plugins/search/allegro/ — plugin ratings counts and active installs (fetchable)
 - https://spolecznosc.allegro.pl/t5/zaawansowani-sprzedawcy/alternatywa-dla-baselinker/m-p/987268 — Allegro Community seller board example: "alternatywa dla BaseLinker" type threads with quotes and prices
 - Not fetchable in this setup: Capterra and G2 (403), Reddit, trusted.de (403), Shopify App Store search (fails to load)
+
+### L3 (added by T04, accessed 2026-10-29)
+- Vendor pricing pages that the fetch tool reads as text: https://www.ifirma.pl/cennik, https://www.kadromierz.pl/cennik, https://www.sellasist.pl/cennik, https://www.shoper.pl/cennik/, https://www.smsapi.pl/cennik, https://landingi.com/pl/cennik, https://www.lexware.de/preise/, https://sevdesk.de/preise/, https://www.craftboxx.de/preise, https://www.papershift.com/de/preise, https://www.moneybird.nl/prijzen/, https://www.cookiebot.com/en/pricing/, https://www.iubenda.com/en/pricing, https://www.getjobber.com/pricing/, https://www.housecallpro.com/pricing/, https://www.shepherd.vet/pricing, https://www.timetopet.com/pricing, https://www.buildium.com/pricing/, https://www.tidio.com/pricing/, https://brand24.com/prices/
+- Pricing pages that do not extract (prices in images or scripts, redirects to home, 404): wFirma /cennik, inFakt /cennik/, Fakturownia paid tiers, Plancraft /de/preise, Fakturoid /cenik (ambiguous), Holded, Fortnox, Klippa. Use a browser or Wayback for these.
+- https://www.fuer-gruender.de/wissen/unternehmen-fuehren/buchhaltung/handwerker-software-vergleich/ — independent German trades-software comparison (13 vendors, prices conflict inside the article)
+- https://www.vatax.pl/blog/obsluga-ksef-porownanie-cen — Polish KSeF price comparison across invoicing tools and ERPs (published by a vendor of one compared product)
+- https://cenauslug.pl/ — Polish price-comparison guides, bookkeeping office fees (commercial)
+- https://www.zdh.de/daten-und-fakten/kennzahlen-des-handwerks/wirtschaftlicher-stellenwert-des-handwerks-2025/ — German craft business counts (primary)
+- https://xyz.pl/ — Polish business news citing GUS counts; read the GUS release for the primary figure
+- Caution: hagel-it.de contained text addressed to AI assistants (ignored); treat as low-reliability. See L3-F14.
