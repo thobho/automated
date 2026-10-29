@@ -6,7 +6,7 @@ Period: **2000 to 2025** (2025 = latest year published by GUS BDL on 2026-10-28;
 ## Layout
 - `sources.csv` - registry of every source (`S1`...). Every data file has a `source_id` column; reports cite `[S..]`.
 - `data/raw/` - small committed extracts of API responses (`bdl_national.csv`, `bdl_gminas.csv`, `bdl_gmina_sums.csv`, `worldbank_poland.csv`). The full API cache lives in `data/raw/cache/` (git-ignored, refetchable).
-- `data/processed/` - `population_by_class.csv`, `urbanization_and_big_cities.csv`, `big_city_list.csv` (task 01); `age_sex_pyramid.csv`, `age_structure_indicators.csv`, `vital_rates.csv`, `migration_national.csv`, `ukraine_inflow.csv`, `migration_by_place_class.csv`, `households.csv`, `suburban_belt_gminas.csv`, `suburban_belt_summary.csv`, `small_towns_change.csv` (task 02).
+- `data/processed/` - `population_by_class.csv`, `urbanization_and_big_cities.csv`, `big_city_list.csv` (task 01); `age_sex_pyramid.csv`, `age_structure_indicators.csv`, `vital_rates.csv`, `migration_national.csv`, `ukraine_inflow.csv`, `migration_by_place_class.csv`, `households.csv`, `suburban_belt_gminas.csv`, `suburban_belt_summary.csv`, `small_towns_change.csv` (task 02); `europe_annual.csv`, `europe_degurba.csv`, `europe_summary.csv` (task 03).
 - `scripts/` - `fetch_bdl.py`, `fetch_worldbank.py`, `process_population.py`, `check_sources.py`, `bdl.py` (cached throttled client). Python 3 stdlib only.
 - `reports/01-population.md`, `reports/02-structure.md` - short reports.
 - `tests/` - `python3 -m unittest discover -s tests`.
@@ -67,3 +67,19 @@ Decisions and conventions:
 - **Suburban belt:** gminas (types 1-3, not themselves among the 34 big cities) whose centroid lies within 25 km of one of the 8 largest cities by 2025 population, each assigned to the nearest of the 8. The centroid comes from the simplified polygons of the geography task (S26) and the 25 km radius is a judgement call. Series of a gmina that changed type (rural to urban-rural) are joined by the 6-digit TERYT because its territory did not change; gminas created or re-coded after 2000 have no 2000 value and are listed with no change (`note` column).
 - **Small towns** are urban gminas and the urban parts of urban-rural gminas with fewer than 100,000 inhabitants in 2025. Ranking of losses ignores towns below 2,000 inhabitants in 2000 and towns without a 2000 value (new town rights).
 - **Ukrainian inflow is not in the GUS permanent-residence series** (refugees mostly hold temporary protection), so it is shown only as the Eurostat stock in `ukraine_inflow.csv`. It does not feed any other file.
+
+## Task 03 - Poland in Europe (Eurostat)
+Report: `reports/03-europe.md`. Rebuild: `python3 scripts/fetch_eurostat_europe.py && python3 scripts/process_europe.py && python3 scripts/check_sources.py` (about 12 API calls, no key; raw extract `data/raw/eurostat_europe.csv`, 3.7k rows, the API cache is git-ignored).
+
+| file | content |
+|---|---|
+| `europe_annual.csv` | PL, CZ, SK, HU, DE, RO, LT and EU-27: population 1 Jan, total change, natural change, net migration plus adjustment (level and per 1000) [S29], TFR [S30], median age and old-age dependency 65+/15-64 [S31], life expectancy at birth (total/men/women) [S32], plus derived population index (1 Jan 2000 = 100). Column `eurostat_flag` keeps Eurostat's b/e/p flags |
+| `europe_degurba.csv` | cities / towns and suburbs / rural areas (Eurostat DEGURBA): EU-SILC share of persons [S33], EU-LFS population 15+ and derived shares [S34], 2021 census counts and derived shares [S35] |
+| `europe_summary.csv` | first and latest value per indicator and country, change, and Poland's rank among the 7 countries (derived) |
+
+Decisions and conventions:
+- Every row has `dataset_code` (Eurostat code) and `source_id`. Missing years stay missing (EU-27 starts 2001/2002 for some indicators).
+- **DEGURBA is not the GUS urban/rural split** and is never mixed with the place classes above; definitions are compared in the report (section 3).
+- The three DEGURBA sources (two surveys, one census) are kept as separate `measure` values and not combined.
+- UN WPP and OECD were not used: Eurostat covers all indicators and all eight areas, see the report.
+- "Net migration" is Eurostat's residual (net migration plus statistical adjustment), not registered moves; Poland 2020 (-762,735) is mostly an adjustment and flagged b.
