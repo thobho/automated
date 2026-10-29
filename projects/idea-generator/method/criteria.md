@@ -226,3 +226,14 @@ A starting list, not a limit. Prefer primary sources (the product's own pricing 
 - https://rpms.pl/ , https://www.goodwinlaw.com/en/insights/ — law-firm articles on KNF payment institutions and the AI Act (secondary; check statute)
 - https://gdpr-info.eu/ — readable GDPR text (unofficial mirror; confirm on EUR-Lex)
 - Not fetchable or not useful: docs.stripe.com platform-licensing pages (404), uodo.gov.pl guidance URL (wrong page), Apple programme fee page (fee not in text), Cal.com GitHub lookup (redirect), HN Algolia queries for solo-founder timelines (no hits). Caution: buildthisnow.com is promotional (sells a kit); treat as low reliability.
+
+### L8 (added by T09, accessed 2026-10-29)
+- https://www.allegro.com/partners/certified-integrators and https://developer.allegro.pl/news/ — Allegro certified integrator list and developer news (readable by fetch)
+- https://www.gesetze-im-internet.de/uwg_2004/__7.html — UWG § 7 (primary, readable); https://standardyprawa.pl/akt/532/art/63603 — PKE art. 398 text (check ISAP for the authoritative version)
+- https://api.stat.gov.pl/Home/RegonApi , https://dane.biznes.gov.pl/ — REGON BIR and CEIDG data warehouse (free; key by e-mail / Profil Zaufany login)
+- https://www.datev.de/web/de/ueber-datev/das-digitale-oekosystem-von-datev/partnering/datev-marktplatz/faq-zum-datev-marktplatz/ — DATEV-Marktplatz admission, fee model and visitor numbers
+- https://community.developer.atlassian.com/t/marketplace-revenue-share-updates-2026/91727 — Atlassian Marketplace revenue share
+- https://pomoc.wfirma.pl/ (programme regulations), https://www.ifirma.pl/program-partnerski — accounting-software partner programme terms
+- https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=QUERY — Google autocomplete as JSON (works with curl; shows that a phrase is searched, not volume)
+- https://wykop.pl/tag/ksef — Wykop tag page readable as text
+- Not fetchable or not useful: forum.gofin.pl (403), indiehackers.com (403), wolterskluwer.com articles (403), linkedin.com help (404), symfonia.pl/program-partnerski (404). Caution: vendor blogs (norman.finance, blog.storecensus.com, draper.chat, kluczesoft.pl, woodpecker.co) are interested sources.
