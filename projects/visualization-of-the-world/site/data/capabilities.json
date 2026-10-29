@@ -1,0 +1,389 @@
+{
+ "note": "Written by hand from what the demo builds; see README for how status is decided.",
+ "capabilities": [
+  {
+   "group": "Chart catalogue",
+   "capability": "Line chart",
+   "status": "works",
+   "notes": "Direct end labels, legend toggle, axis tooltip.",
+   "code": "js/specs-catalogue.js (id line)",
+   "docs": "https://echarts.apache.org/en/option.html#series-line"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Area chart (stacked)",
+   "status": "works",
+   "notes": "Line series with stack and areaStyle.",
+   "code": "js/specs-catalogue.js (id area)",
+   "docs": "https://echarts.apache.org/en/option.html#series-line.areaStyle"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Stacked bar",
+   "status": "works",
+   "notes": "Rounded value end only, as the design asks.",
+   "code": "js/specs-catalogue.js (id stacked-bar)",
+   "docs": "https://echarts.apache.org/en/option.html#series-bar.stack"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Grouped bar",
+   "status": "works",
+   "notes": "Several bar series side by side.",
+   "code": "js/specs-catalogue.js (id grouped-bar)",
+   "docs": "https://echarts.apache.org/en/option.html#series-bar"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Scatter plot",
+   "status": "works",
+   "notes": "Item tooltip with both coordinates.",
+   "code": "js/specs-catalogue.js (id scatter)",
+   "docs": "https://echarts.apache.org/en/option.html#series-scatter"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Bubble chart",
+   "status": "works",
+   "notes": "Scatter with symbolSize as a function of the third value. No built-in size legend: the subtitle explains it.",
+   "code": "js/specs-catalogue.js (id bubble)",
+   "docs": "https://echarts.apache.org/en/option.html#series-scatter.symbolSize"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Heatmap",
+   "status": "works",
+   "notes": "Category x category grid; piecewise legend with explicit bins.",
+   "code": "js/specs-catalogue.js (id heatmap)",
+   "docs": "https://echarts.apache.org/en/option.html#series-heatmap"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Treemap",
+   "status": "works",
+   "notes": "Drill by click, breadcrumb. The built-in legend does not list tree nodes, so an HTML legend (design .legend) is used.",
+   "code": "js/specs-catalogue.js (id treemap)",
+   "docs": "https://echarts.apache.org/en/option.html#series-treemap"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Sunburst",
+   "status": "works",
+   "notes": "Click a segment to zoom. Same HTML legend note as the treemap.",
+   "code": "js/specs-catalogue.js (id sunburst)",
+   "docs": "https://echarts.apache.org/en/option.html#series-sunburst"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Small multiples",
+   "status": "limits",
+   "notes": "No facet or trellis API: 16 grids, axes and series are positioned by hand and the panel layout is recomputed per width (4 columns, 3 on phones).",
+   "code": "js/specs-catalogue.js (id small-multiples)",
+   "docs": "https://echarts.apache.org/en/option.html#grid"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Slope chart",
+   "status": "limits",
+   "notes": "No dedicated type: a two-point line series per entity with end labels; labels collide, labelLayout.hideOverlap hides some of them.",
+   "code": "js/specs-catalogue.js (id slope)",
+   "docs": "https://echarts.apache.org/en/option.html#series-line.labelLayout"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Ranking / bump chart",
+   "status": "limits",
+   "notes": "Inverse category-like value axis over rank series; ranks are computed by our code (VotwCore.rankByColumn), the library does not rank.",
+   "code": "js/specs-catalogue.js (id bump), js/votw-core.js",
+   "docs": "https://echarts.apache.org/en/option.html#yAxis.inverse"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Indexed series (2000 = 100)",
+   "status": "limits",
+   "notes": "Indexing is our code (VotwCore.indexSeries); the library only draws the result. Dashed 100 line is a markLine.",
+   "code": "js/specs-catalogue.js (id indexed), js/votw-core.js",
+   "docs": "https://echarts.apache.org/en/option.html#series-line.markLine"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Tooltip on every chart",
+   "status": "works",
+   "notes": "Mouse hover and tap (triggerOn mousemove|click). Styled from tokens, content in the design's tooltip layout.",
+   "code": "js/votw-charts.js (Votw.tooltip, Votw.tipRows)",
+   "docs": "https://echarts.apache.org/en/option.html#tooltip"
+  },
+  {
+   "group": "Chart catalogue",
+   "capability": "Legend on every chart",
+   "status": "works",
+   "notes": "Built-in legend for series charts, piecewise visualMap for heatmaps and maps, HTML legend for treemap, sunburst, small multiples and slope.",
+   "code": "js/votw-charts.js (Votw.legend), htmlLegend in specs",
+   "docs": "https://echarts.apache.org/en/option.html#legend"
+  },
+  {
+   "group": "Motion and interaction",
+   "capability": "Animated transitions (data update)",
+   "status": "works",
+   "notes": "Bar ranking re-sorts live with realtimeSort while the year changes; values tween. Durations come from tokens; zero under reduced motion.",
+   "code": "js/specs-interaction.js (id rank)",
+   "docs": "https://echarts.apache.org/en/option.html#series-bar.realtimeSort"
+  },
+  {
+   "group": "Motion and interaction",
+   "capability": "Animated shape morph",
+   "status": "works",
+   "notes": "Bars to pie to treemap with universalTransition and the same data group id.",
+   "code": "js/specs-interaction.js (id morph)",
+   "docs": "https://echarts.apache.org/en/option.html#series-bar.universalTransition"
+  },
+  {
+   "group": "Motion and interaction",
+   "capability": "Timeline playback with year slider and play button",
+   "status": "limits",
+   "notes": "Uses the design system's year-player component (range + play) to call setOption; the ECharts timeline component was not used because it does not match the design controls.",
+   "code": "interaction.html, js/page-interaction.js, vendor/design/components.js",
+   "docs": "https://echarts.apache.org/en/option.html#timeline"
+  },
+  {
+   "group": "Motion and interaction",
+   "capability": "Filter by place type",
+   "status": "works",
+   "notes": "Design place-toggle component; the state re-renders all linked views. Villages have no city points, so the city scatter and bubble map only offer big and small cities.",
+   "code": "js/page-interaction.js, js/specs-maps.js",
+   "docs": "https://echarts.apache.org/handbook/en/how-to/data/dynamic-data/"
+  },
+  {
+   "group": "Motion and interaction",
+   "capability": "Brushing with linked views",
+   "status": "works",
+   "notes": "Rectangle brush on the scatter; brushSelected event feeds our own state and re-draws the linked bar chart. Several charts also react to map clicks.",
+   "code": "js/specs-interaction.js (ids brush, brushsum)",
+   "docs": "https://echarts.apache.org/en/option.html#brush"
+  },
+  {
+   "group": "Motion and interaction",
+   "capability": "Linked charts via echarts.connect",
+   "status": "limits",
+   "notes": "Not demonstrated: our linking goes through shared page state because the views show different data. connect (shared tooltip and zoom between charts) exists in the API but is not built here.",
+   "code": "js/votw-charts.js (group option only)",
+   "docs": "https://echarts.apache.org/en/api.html#echarts.connect"
+  },
+  {
+   "group": "Motion and interaction",
+   "capability": "Zoom and pan on a chart",
+   "status": "works",
+   "notes": "dataZoom inside (wheel, pinch, drag) plus slider on the timeline.",
+   "code": "js/specs-interaction.js (id timeline)",
+   "docs": "https://echarts.apache.org/en/option.html#dataZoom"
+  },
+  {
+   "group": "Maps",
+   "capability": "Choropleth of voivodeships",
+   "status": "works",
+   "notes": "Map series joined by TERYT code with nameProperty (names are not guaranteed unique at gmina level). Piecewise bins from design tokens.",
+   "code": "js/specs-maps.js (id choropleth)",
+   "docs": "https://echarts.apache.org/en/option.html#series-map"
+  },
+  {
+   "group": "Maps",
+   "capability": "No-data state on a map",
+   "status": "works",
+   "notes": "Hatched fill through itemStyle.decal, plus a legend entry. Never drawn as 0.",
+   "code": "js/specs-maps.js (noData)",
+   "docs": "https://echarts.apache.org/en/option.html#series-map.data.itemStyle.decal"
+  },
+  {
+   "group": "Maps",
+   "capability": "Drill-down voivodeship to powiat",
+   "status": "limits",
+   "notes": "No built-in drill-down: one map is registered per voivodeship (registerMap) and our click handler swaps the series; breadcrumb and back button are ours.",
+   "code": "js/votw-charts.js (ensureMaps), js/specs-maps.js",
+   "docs": "https://echarts.apache.org/en/api.html#echarts.registerMap"
+  },
+  {
+   "group": "Maps",
+   "capability": "City bubbles sized by value",
+   "status": "works",
+   "notes": "Scatter series on the geo component, symbolSize = sqrt(value); 1,020 points, per place-type colour.",
+   "code": "js/specs-maps.js (id bubbles)",
+   "docs": "https://echarts.apache.org/en/option.html#geo"
+  },
+  {
+   "group": "Maps",
+   "capability": "Map legend",
+   "status": "works",
+   "notes": "Piecewise visualMap with bins; no-data swatch as HTML.",
+   "code": "js/specs-maps.js",
+   "docs": "https://echarts.apache.org/en/option.html#visualMap-piecewise"
+  },
+  {
+   "group": "Maps",
+   "capability": "Hover and tap tooltips on maps",
+   "status": "works",
+   "notes": "Verified with mouse hover and with a tap under touch emulation at 375 px.",
+   "code": "scripts/verify_site.cjs",
+   "docs": "https://echarts.apache.org/en/option.html#tooltip"
+  },
+  {
+   "group": "Maps",
+   "capability": "Zoom to a region",
+   "status": "limits",
+   "notes": "The select computes centre and zoom from the region bounding box (VotwCore.zoomTo); the zoom factor is an approximation, not an exact fit. Scroll, drag and pinch are the built-in roam.",
+   "code": "js/votw-core.js (zoomTo), js/specs-maps.js",
+   "docs": "https://echarts.apache.org/en/option.html#series-map.zoom"
+  },
+  {
+   "group": "Maps",
+   "capability": "Works on touch",
+   "status": "limits",
+   "notes": "Tap (tooltip, drill-down) verified in Chromium touch emulation at 375 px. Two-finger pinch zoom was not tested on a real device.",
+   "code": "scripts/verify_site.cjs",
+   "docs": "https://echarts.apache.org/en/option.html#series-map.roam"
+  },
+  {
+   "group": "Maps",
+   "capability": "2,479 gminas on one map",
+   "status": "limits",
+   "notes": "Not in this demo to keep the download small (0.9 MB). Issue #12 measured it in ECharts; see research/viz-libraries.",
+   "code": "research/viz-libraries (not in site/)",
+   "docs": "https://echarts.apache.org/en/option.html#series-map"
+  },
+  {
+   "group": "Maps",
+   "capability": "Street or satellite basemap tiles",
+   "status": "no",
+   "notes": "ECharts draws only the shapes you give it. A basemap needs a second library (MapLibre GL JS, see the library report).",
+   "code": "-",
+   "docs": "https://echarts.apache.org/handbook/en/concepts/chart-types/"
+  },
+  {
+   "group": "Formats",
+   "capability": "Load CSV",
+   "status": "limits",
+   "notes": "The library does not read CSV: 25 lines of our own parser (quotes, CRLF, BOM) with unit tests.",
+   "code": "js/votw-core.js (parseCsv), tests/core.test.js",
+   "docs": "https://echarts.apache.org/handbook/en/concepts/dataset"
+  },
+  {
+   "group": "Formats",
+   "capability": "Load JSON",
+   "status": "works",
+   "notes": "Plain fetch and JSON.parse, any shape, then mapped into series.",
+   "code": "js/specs-formats.js",
+   "docs": "https://echarts.apache.org/handbook/en/concepts/dataset"
+  },
+  {
+   "group": "Formats",
+   "capability": "Load GeoJSON",
+   "status": "works",
+   "notes": "registerMap takes a FeatureCollection directly.",
+   "code": "js/specs-formats.js (fmt-geojson)",
+   "docs": "https://echarts.apache.org/en/api.html#echarts.registerMap"
+  },
+  {
+   "group": "Formats",
+   "capability": "Load TopoJSON",
+   "status": "limits",
+   "notes": "Not read natively: topojson-client 3.1.0 (vendored) converts it to GeoJSON first.",
+   "code": "js/votw-charts.js (topoFeatures)",
+   "docs": "https://github.com/topojson/topojson-client"
+  },
+  {
+   "group": "Formats",
+   "capability": "Export chart as PNG",
+   "status": "works",
+   "notes": "getDataURL, then our code adds title, subtitle, DEMO flag and source line on a canvas.",
+   "code": "js/votw-charts.js (exportPng)",
+   "docs": "https://echarts.apache.org/en/api.html#echartsInstance.getDataURL"
+  },
+  {
+   "group": "Formats",
+   "capability": "Export chart as SVG",
+   "status": "limits",
+   "notes": "Re-renders the same option in a detached SSR instance with the SVG renderer; wrapper adds title and source. Fonts are referenced by name, not embedded.",
+   "code": "js/votw-charts.js (exportSvg)",
+   "docs": "https://echarts.apache.org/handbook/en/how-to/cross-platform/server/"
+  },
+  {
+   "group": "Formats",
+   "capability": "Export data as CSV",
+   "status": "works",
+   "notes": "Our code; every chart defines csv(); rows end with a demo_flag column. Library has no data export without the toolbox dataView.",
+   "code": "js/votw-charts.js, js/votw-core.js (toCsv)",
+   "docs": "https://echarts.apache.org/en/option.html#toolbox.feature.dataView"
+  },
+  {
+   "group": "Formats",
+   "capability": "Export as PDF",
+   "status": "no",
+   "notes": "Not built and not a library feature; print the page or convert the SVG.",
+   "code": "-",
+   "docs": ""
+  },
+  {
+   "group": "Layout and polish",
+   "capability": "Responsive 375 px to desktop",
+   "status": "works",
+   "notes": "Container-width-driven heights and label density; verified with no horizontal scroll at 375, 768 and 1280.",
+   "code": "js/votw-charts.js (ResizeObserver), scripts/verify_site.cjs",
+   "docs": "https://echarts.apache.org/en/api.html#echartsInstance.resize"
+  },
+  {
+   "group": "Layout and polish",
+   "capability": "Light and dark switch",
+   "status": "limits",
+   "notes": "Colours are read from the CSS tokens and the chart option is rebuilt on a themechange event; the library has no live token binding, so the page triggers the redraw.",
+   "code": "js/shell.js, js/votw-charts.js (retheme)",
+   "docs": "https://echarts.apache.org/handbook/en/concepts/style/"
+  },
+  {
+   "group": "Layout and polish",
+   "capability": "Loading, empty and error states",
+   "status": "works",
+   "notes": "Skeleton, empty with reset, error with retry; the failure path is tested by blocking the data file.",
+   "code": "js/votw-charts.js (setState), js/specs-polish.js",
+   "docs": "https://echarts.apache.org/handbook/en/how-to/data/dynamic-data/"
+  },
+  {
+   "group": "Layout and polish",
+   "capability": "Source footer under every chart",
+   "status": "works",
+   "notes": "Created by Votw.figure; the figure throws without a source; the check script fails on any card without one.",
+   "code": "js/votw-charts.js, scripts/verify_site.cjs, scripts/check_footers.cjs",
+   "docs": ""
+  },
+  {
+   "group": "Layout and polish",
+   "capability": "Keyboard access to chart marks",
+   "status": "no",
+   "notes": "ECharts canvas marks cannot be focused or stepped through with the keyboard. Alternative: a table view for every chart, and aria description text.",
+   "code": "js/votw-charts.js (table view)",
+   "docs": "https://echarts.apache.org/handbook/en/best-practices/aria/"
+  },
+  {
+   "group": "Layout and polish",
+   "capability": "Screen reader summary",
+   "status": "limits",
+   "notes": "aria.enabled generates a description and the container has role img with the title; this is a summary, not per-mark navigation.",
+   "code": "js/votw-charts.js (Votw.base)",
+   "docs": "https://echarts.apache.org/handbook/en/best-practices/aria/"
+  },
+  {
+   "group": "Layout and polish",
+   "capability": "Reduced motion",
+   "status": "works",
+   "notes": "Animation durations are 0 when prefers-reduced-motion is set; the year player does not tween.",
+   "code": "js/votw-charts.js (Votw.base)",
+   "docs": "https://echarts.apache.org/en/option.html#animation"
+  },
+  {
+   "group": "Layout and polish",
+   "capability": "No build step, no CDN",
+   "status": "works",
+   "notes": "UMD file vendored (1,122 KB raw per the library report), plain script tags, opens from python3 -m http.server.",
+   "code": "vendor/lib/",
+   "docs": "https://echarts.apache.org/handbook/en/basics/import"
+  }
+ ]
+}

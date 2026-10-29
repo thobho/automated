@@ -101,7 +101,7 @@
   function download(name, blobOrUrl, type) {
     const a = document.createElement("a");
     let url = blobOrUrl;
-    if (typeof blobOrUrl === "string" && !blobOrUrl.startsWith("data:")) url = URL.createObjectURL(new Blob([blobOrUrl], { type }));
+    if (typeof blobOrUrl === "string" && !/^(data|blob):/.test(blobOrUrl)) url = URL.createObjectURL(new Blob([blobOrUrl], { type }));
     a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
     if (url.startsWith("blob:")) setTimeout(() => URL.revokeObjectURL(url), 2000);
   }
@@ -247,7 +247,7 @@
         if (d === null || (Array.isArray(d) && !d.length)) { ctl.setState("empty", spec.emptyMsg); return; }
         ctl.state = "loaded";
         const c = $(el, "[data-controls]");
-        if (spec.controls && !c.dataset.done) { c.dataset.done = "1"; c.hidden = false; spec.controls(c, ctl); }
+        if (spec.controls && !c.dataset.done) { c.dataset.done = "1"; c.hidden = false; spec.controls(c, ctl); window.VotwComponents?.init(c); }
         ctl.render();
         spec.onLoaded?.(ctl);
       } catch (e) {

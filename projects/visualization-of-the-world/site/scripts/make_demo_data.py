@@ -60,7 +60,7 @@ def main():
         for g in geoms:
             p = g["properties"]
             v = round(min(90, max(5, parent[p["voivodeship_teryt"]] + rng.gauss(0, 9))), 1)
-            if p["name"].startswith("powiat") is False:  # cities with powiat rights are urban: low village share
+            if int(p["teryt"][2:]) >= 61:  # TERYT: powiat numbers 61+ are cities with powiat rights, urban: low village share
                 v = round(rng.uniform(0, 6), 1)
             w.writerow([p["teryt"], p["name"], p["voivodeship_teryt"], v, "DEMO DATA, NOT REAL"])
     # cities: synthetic size index and growth; big_city flag is the only real attribute used

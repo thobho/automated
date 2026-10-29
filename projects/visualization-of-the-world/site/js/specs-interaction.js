@@ -4,7 +4,7 @@
   "use strict";
   const V = window.Votw, C = window.VotwCore;
   const S = V.DEMO_SOURCE;
-  const state = { year: 2025, active: ["villages"], region: null, brushed: null, kind: "bar" };
+  const state = { year: 2025, active: ["big_cities", "small_cities"], region: null, brushed: null, kind: "bar" };
   const figs = {};
   const rerender = (...ids) => ids.forEach((id) => figs[id]?.render());
   const metric = (r, yi) => Math.round(state.active.reduce((a, k) => a + r.shares[k][yi], 0) * 10) / 10;

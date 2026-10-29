@@ -22,7 +22,7 @@
 
   const specs = [
     { id: "line", title: "Villages gain share while big cities lose it", subtitle: "Line chart. Share of population by place type, %, 2000-2025 (synthetic national average)",
-      source: S, load, csv: regionCsv.bind(null), build(d) {
+      source: S, load, csv: (d) => regionCsv(d, P), build(d) {
         return V.base({ legend: V.legend(), grid: V.grid({ right: 96 }), tooltip: V.tooltip({ formatter: axisTip("%") }),
           xAxis: V.catAxis(yearsOf(d), { boundaryGap: false, axisLabel: Object.assign(V.textStyle(), { interval: window.innerWidth < 600 ? 7 : 4 }) }), yAxis: yAxisPct({ min: 20, max: 50 }),
           series: P.map((k) => lineSeries(L[k], avg(d, k), V.placeColor(k))) });

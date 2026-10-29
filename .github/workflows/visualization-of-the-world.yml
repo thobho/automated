@@ -30,3 +30,32 @@ jobs:
         run: python3 scripts/check_sources.py
       - name: Unit tests
         run: python3 -m unittest discover -s tests
+
+  site:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/visualization-of-the-world/site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Demo data generator tests
+        run: python3 -m unittest discover -s tests
+      - name: Core logic tests
+        run: node --test tests/core.test.js
+      - name: Install Playwright
+        run: |
+          npm install --no-save --prefix "$RUNNER_TEMP/pw" playwright
+          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Every chart has a Source footer; pages in Chromium (errors, 375 px overflow, interactions, failure path)
+        run: |
+          python3 -m http.server 8715 >/dev/null 2>&1 &
+          sleep 2
+          export NODE_PATH="$RUNNER_TEMP/pw/node_modules"
+          node scripts/check_footers.cjs http://localhost:8715
+          node scripts/verify_site.cjs http://localhost:8715 "$RUNNER_TEMP/verification"

@@ -60,9 +60,6 @@ body { min-width: 0; overflow-x: hidden; }
 /* matrix */
 .matrix-wrap .table-scroll { max-height: none; }
 .matrix td, .matrix th { vertical-align: top; }
-.matrix td:nth-child(1) { min-width: 12rem; }
-.matrix td:nth-child(3) { min-width: 14rem; }
-.matrix code { white-space: normal; word-break: break-all; }
 .filter-row { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-3); }
 .filter-row button { min-height: 36px; }
 
@@ -77,3 +74,7 @@ body { min-width: 0; overflow-x: hidden; }
 .topbar__inner > .theme-switch { display: none; }
 @media (min-width: 960px) { .topbar__inner > .theme-switch { display: flex; } .mobile-menu .theme-switch { display: none; } .topbar__menu-btn { display: none; } }
 [hidden] { display: none !important; }
+.matrix { table-layout: fixed; min-width: 60rem; }
+.matrix th:nth-child(1) { width: 17%; } .matrix th:nth-child(2) { width: 13%; } .matrix th:nth-child(3) { width: 38%; } .matrix th:nth-child(4) { width: 24%; } .matrix th:nth-child(5) { width: 8%; }
+.matrix code { white-space: normal; overflow-wrap: anywhere; font-size: var(--text-xs); }
+.matrix td, .matrix th { white-space: normal; overflow-wrap: anywhere; }

@@ -54,7 +54,7 @@
       }
       return V.base({
         tooltip: V.tooltip({ trigger: "item", formatter: (p) => V.tipRows(nameOf(p.name), [{ color: p.color, label: "Villages 2025", value: p.value === undefined || Number.isNaN(p.value) ? "no data" : V.fmt(p.value) + "%" }]) + (!lvl && p.value !== undefined && !Number.isNaN(p.value) ? '<div style="font-size:12px;opacity:.8;margin-top:4px">Click for powiats</div>' : "") }),
-        visualMap: V.visualMapBase({ type: "piecewise", orient: "horizontal", left: 0, bottom: 0, pieces: BINS.map((lo, i) => ({ gte: lo, lt: lo + 10, label: lo + "-" + (lo + 10), color: cols[i] })), itemGap: 6, itemWidth: 12, textGap: 4, textStyle: V.textStyle({ fontSize: 11 }) }),
+        visualMap: V.visualMapBase({ type: "piecewise", orient: "horizontal", left: 0, bottom: 0, pieces: [{ lt: 30, label: "<30", color: cols[0] }, { gte: 30, lt: 40, label: "30-40", color: cols[1] }, { gte: 40, lt: 50, label: "40-50", color: cols[2] }, { gte: 50, lt: 60, label: "50-60", color: cols[3] }, { gte: 60, label: "60+", color: cols[4] }], itemGap: 6, itemWidth: 12, textGap: 4, textStyle: V.textStyle({ fontSize: 11 }) }),
         series: [Object.assign({ type: "map", map: mapName, nameProperty: "teryt", roam: true, scaleLimit: { min: 1, max: 20 }, top: 8, bottom: 40, data,
           itemStyle: { borderColor: V.cssVar("--color-map-boundary"), borderWidth: lvl ? 0.8 : 1, areaColor: V.cssVar("--color-map-nodata") },
           emphasis: { label: { show: false }, itemStyle: { borderColor: V.cssVar("--color-text-primary"), borderWidth: 2 } }, select: { disabled: true }, label: { show: false }, animationDurationUpdate: V.ms("--dur-slow") }, view)],
