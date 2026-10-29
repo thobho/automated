@@ -13,7 +13,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links: Trustpilot profiles (ifirma, infakt, fakturownia, booksy, versum, inpost, vimcar.de, easyverein), api.github.com search URLs (403/422); criteria.md ones as in T01
 - [x] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
   Unverifiable links: cookiebot.com/en/pricing (403); criteria.md ones as in T01. Note: hagel-it.de (L3-F14) contains text aimed at AI assistants; ignored, finding marked low-reliability
-- [ ] T05 · research lens 04 — Copy what already makes money · sonnet · needs: T01 · [tasks/05-research-lens-04-copy-what-already-makes.md](tasks/05-research-lens-04-copy-what-already-makes.md)
+- [~] T05 · research lens 04 — Copy what already makes money · sonnet · needs: T01 · [tasks/05-research-lens-04-copy-what-already-makes.md](tasks/05-research-lens-04-copy-what-already-makes.md)
+  Resume: starting
 - [ ] T06 · research lens 05 — Why now: regulation and tech triggers · sonnet · needs: T01 · [tasks/06-research-lens-05-why-now-regulation-and.md](tasks/06-research-lens-05-why-now-regulation-and.md)
 - [ ] T07 · research lens 06 — Evidence of pain and demand · sonnet · needs: T01 · [tasks/07-research-lens-06-evidence-of-pain-and-de.md](tasks/07-research-lens-06-evidence-of-pain-and-de.md)
 - [ ] T08 · research lens 07 — Founder fit and feasibility · sonnet · needs: T01 · [tasks/08-research-lens-07-founder-fit-and-feasibi.md](tasks/08-research-lens-07-founder-fit-and-feasibi.md)
