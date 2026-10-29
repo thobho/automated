@@ -6,8 +6,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 Every task runs on **fable at medium effort** (see RUNNER.md).
 
 ## Tasks
-- [~] T01 · setup and method · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
-  - Resume: starting
+- [!] T01 · setup and method · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
+  - Resume: starting (nothing written yet; the subagent failed before doing any work)
 - [ ] T02 · Poland baseline: demography and social change · needs: T01 · [tasks/02-poland-baseline-demography-and-social-ch.md](tasks/02-poland-baseline-demography-and-social-ch.md)
 - [ ] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
 - [ ] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
@@ -34,7 +34,8 @@ Every task runs on **fable at medium effort** (see RUNNER.md).
 - [ ] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
 
 ## Blocked / questions for the owner
-(none)
+- **T01 (and every later task): the fable model needs usage credits.** 2026-10-30 00:46: the T01 subagent (model "fable", effort "medium") failed on its first call with HTTP 429 "Fable 5.1 requires usage credits". Extra usage is disabled on this Pro plan. Buying credits costs money, so the runner won't decide it. Options: (a) turn on usage credits for Fable, or (b) change the model choice in RUNNER.md and the scheduled task (for example to Opus or Sonnet). After choosing, set T01 back to `[ ]` and the next hourly run will continue.
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-10-30 00:46 · T01 · started; fable subagent failed with HTTP 429 (needs usage credits); nothing written; marked [!] · owner decides on credits or model (see Blocked)
