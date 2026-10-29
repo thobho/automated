@@ -156,3 +156,12 @@ A starting list, not a limit. Prefer primary sources (the product's own pricing 
 - LLM prices: https://openrouter.ai/models
 - Payment fees: https://stripe.com/pricing and https://www.przelewy24.pl/
 - Platform risk: the marketplace's developer terms (cite the specific page per idea)
+
+## 5. Sources added during research
+
+### L1 (added by T02, accessed 2026-10-29)
+- https://www.gramwzielone.pl/ — Polish renewable-energy trade news; lists Polish PV design tools
+- https://www.capterra.pl/ — Polish Capterra, category pages for PL-market software
+- https://itwiz.pl/ and https://www.infor.pl/ — Polish news on NIS2 (KSC amendment) and the whistleblower act; confirm in ISAP
+- https://useme.com/pl/blog/ — Polish freelancer-marketplace data (vendor's own figures)
+- https://base.com/ — BaseLinker (renamed Base), reverse-direction proof that Polish SaaS sells abroad
