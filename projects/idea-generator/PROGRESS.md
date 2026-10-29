@@ -38,7 +38,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
   Unverifiable links: g2.com gatherup + float-vs-pulse, trustpilot fakturownia, yadda.icm.edu.pl, wolterskluwer.com alerty (403); tuntievo.pl (expired SSL); elektroda.pl (timeout)
 - [~] T17 · Phase 1 summary and validation plans · opus · needs: T16 · [tasks/17-phase-1-summary-and-validation-plans.md](tasks/17-phase-1-summary-and-validation-plans.md)
-  Resume: reports/phase1-summary.md has bottom line, method, stats, top 20, top 5 plans (003, 001, 004, 006, 020); next: section 5 order of tests, patterns/wildcards/gaps/questions, README, link check
+  Resume: summary sections 1–9 and README done; next: run link check on reports/phase1-summary.md README.md PROGRESS.md, list unverifiable links here, then hand back for [x]
 
 ## Blocked / questions for the owner
 (none)
