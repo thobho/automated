@@ -142,7 +142,7 @@ Report: `reports/final-report.md` (executive summary on top; sections: classes a
 
 Decisions and conventions:
 - `scripts/check_sources.py` now also checks the final report (every line with a number has a key, unknown keys, undefined `D..` keys) and fails on **unused sources**. "Used" = cited as `[S..]` in a report under `reports/` (the two generated files do not count) or present in a data file `source_id` column. S5 was unused and is now cited in the final report.
-- `tests/test_final_report.py` recomputes about 100 headline numbers from `data/processed/` and asserts they appear in the report text. Where task 05 disagreed with its CSV, the final report follows the CSV (contradiction C14); `05-housing-vs-population.md` carries an erratum banner and was otherwise left as is.
+- `tests/test_final_report.py` recomputes dozens of headline numbers from `data/processed/` and asserts they appear in the report text. Where task 05 disagreed with its CSV, the final report follows the CSV (contradiction C14); `05-housing-vs-population.md` carries an erratum banner and was otherwise left as is.
 - Raw extracts without a `source_id` column get their provenance from `RAW_PROVENANCE` in `build_reference_docs.py`.
 - Known defect, not fixed here: `housing_vs_population.csv` repeats its `total` index rows three times per year and splices proxy with direct data; the final report does not use it.
 
