@@ -10,7 +10,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T02 · research lens 01 — Proven abroad, missing in Poland · sonnet · needs: T01 · [tasks/02-research-lens-01-proven-abroad-missing-i.md](tasks/02-research-lens-01-proven-abroad-missing-i.md)
   Unverifiable links: malt.com (403, lens files); criteria.md ones as in T01
 - [~] T03 · research lens 02 — Weak or no competition · sonnet · needs: T01 · [tasks/03-research-lens-02-weak-or-no-competition.md](tasks/03-research-lens-02-weak-or-no-competition.md)
-  Resume: F01..F19 written in 3 topic files (allegro-and-ecommerce-tools, dev-tools-and-polish-apis, reviews-and-app-stores). Next: 3-5 more PL-vertical/Reddit/Wykop-style findings (F20+), then README with Seeds/Coverage/Gaps, criteria.md sources, link check
+  Resume: F01..F21 written in 4 topic files. Next: README.md with Seeds/Coverage/Gaps, add sources to method/criteria.md, link check, final push
 - [ ] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
 - [ ] T05 · research lens 04 — Copy what already makes money · sonnet · needs: T01 · [tasks/05-research-lens-04-copy-what-already-makes.md](tasks/05-research-lens-04-copy-what-already-makes.md)
 - [ ] T06 · research lens 05 — Why now: regulation and tech triggers · sonnet · needs: T01 · [tasks/06-research-lens-05-why-now-regulation-and.md](tasks/06-research-lens-05-why-now-regulation-and.md)

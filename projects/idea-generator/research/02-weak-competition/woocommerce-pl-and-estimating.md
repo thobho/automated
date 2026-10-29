@@ -1,0 +1,14 @@
+# Polish WooCommerce plugin ecosystem and construction estimating
+
+Lens 2 findings. All pages accessed 2026-10-29. Install counts on WordPress.org are ranges ("10,000+"); ratings are counts of ratings, star averages were not shown on the search pages.
+
+## L2-F20 — Polish WooCommerce plugins: couriers and payments are covered, compliance and Ceneo are thin
+- **Couriers (covered, not a gap):** https://wordpress.org/plugins/search/paczkomat/ — "InPost PL" 10,000+ installs / 12 ratings, "Grainsoft – integracja z InPost Paczkomaty" 8,000+ / 33, Apaczka.pl Mapa Punktów 2,000+ / 3. Furgonetka.pl plugin 7,000+ installs / 14 ratings (https://wordpress.org/plugins/search/faktury+polska/).
+- **Payments (covered):** https://wordpress.org/plugins/search/blik/ — 58 results; Polish gateways have thousands of installs each (PayU GPO 10,000+, Pay by paynow.pl 7,000+, Autopay (Blue Media) 3,000+) but 2–7 ratings each. Low rating counts are the norm here, so do not read them as dissatisfaction.
+- **Thin spots:** "Polski for WooCommerce" (consumer-law and Polish shop requirements) has only 70+ installs and 10 ratings; a search for "ceneo" (https://wordpress.org/plugins/search/ceneo/) returns only generic feed plugins (CTX Feed 90,000+ installs, 838 ratings) and no Ceneo-named plugin in 4 results. Whether CTX Feed covers Ceneo's format was **not** checked.
+- **Assessment:** weak competition only in narrow compliance/marketplace-feed niches inside WooCommerce, and WooCommerce is not the main Polish shop platform (platform shares were not researched here). Treat as a hint, not a finding of pain.
+
+## L2-F21 — Construction estimating (kosztorysowanie): legacy desktop tools and training courses dominate
+- **Evidence:** search for Polish estimating software (2026-10-29) shows job ads requiring the program "Norma" and price bases Sekocenbud/Intercenbud (e.g. https://www.pracuj.pl/praca/specjalista-ds-kosztorysow-kosztorysant-warszawa,oferta,1004962916). PARP's training database lists Norma PRO courses at 1,800 PLN (32 h), 3,000 PLN (32 h remote) and 5,000 PLN (30 h) gross (e.g. https://uslugirozwojowe.parp.gov.pl/wyszukiwarka/uslugi/drukuj-pdf?id=3401298; the price-to-course mapping comes from a search summary, not read from each page — unverified).
+- **Small-contractor tools on Google Play** (https://play.google.com/store/search?q=wycena%20remontu%20kosztorys&c=apps&hl=pl): "Wycena Pro: Kosztorys i Cennik", "BudManager: Kosztorys i Wycena" and others, with **no ratings shown** on the listing page. No user review text was read.
+- **Assessment:** professional estimating (kosztorysy inwestorskie, tied to price bases) is a licensed-database market that is outside a solo dev's reach. The open question is the *quote* (oferta/wycena) for small renovation crews, where only unrated mobile apps surfaced. No pain quotes found; evidence is weak.
