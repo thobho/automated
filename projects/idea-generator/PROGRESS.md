@@ -37,7 +37,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links: yadda.icm.edu.pl (403), wykop.pl, elektroda.pl (timeout, varies)
 - [x] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
   Unverifiable links: g2.com gatherup + float-vs-pulse, trustpilot fakturownia, yadda.icm.edu.pl, wolterskluwer.com alerty (403); tuntievo.pl (expired SSL); elektroda.pl (timeout)
-- [ ] T17 · Phase 1 summary and validation plans · opus · needs: T16 · [tasks/17-phase-1-summary-and-validation-plans.md](tasks/17-phase-1-summary-and-validation-plans.md)
+- [~] T17 · Phase 1 summary and validation plans · opus · needs: T16 · [tasks/17-phase-1-summary-and-validation-plans.md](tasks/17-phase-1-summary-and-validation-plans.md)
+  Resume: starting
 
 ## Blocked / questions for the owner
 (none)
