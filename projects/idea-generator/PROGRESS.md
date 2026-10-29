@@ -34,7 +34,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T14 · write-ups batch B · sonnet · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
   Unverifiable links: g2.com/compare/float-vs-pulse-cash-flow-management (403), gramwzielone.pl/?p=101914 (timeout, varies)
 - [~] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
-  Resume: 019 done (2.5, <5%). Next: 020 feed manager for Polish comparison sites (Ceneo/Mergado), then 021-025.
+  Resume: 020 done (2.7, <5%). Next: 021 KRS/CEIDG change monitor, then 022-025.
 - [ ] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
 - [ ] T17 · Phase 1 summary and validation plans · opus · needs: T16 · [tasks/17-phase-1-summary-and-validation-plans.md](tasks/17-phase-1-summary-and-validation-plans.md)
 
