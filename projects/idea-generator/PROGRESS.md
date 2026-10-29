@@ -28,7 +28,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
   Unverifiable links: open.store Ceneo feed app page, apps.appfollow.io ProtrainUp (timeouts, more-markets.md); criteria.md ones as in T01
 - [~] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
-  Resume: ideas/shortlist.csv written (108 ideas, cut = rounded weighted ≥ 2.4) and 81 below-cut ideas logged in rejected.md; coverage 208/208; next: mark top 25 (write_up=y, wu_no 001–025, batches A/B/C) and add ideas/README.md
+  Resume: done pending owner check — shortlist.csv 108 ideas, top 25 marked (wu_no 001–025, batches A 9 / B 8 / C 8), ideas/README.md documents columns and rules; coverage script: all 208 longlist IDs in shortlist.csv or rejected.md; next: T13–T15 write-ups
 - [ ] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
 - [ ] T14 · write-ups batch B · sonnet · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
 - [ ] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
