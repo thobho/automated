@@ -8,7 +8,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T01 · setup and method · opus · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
   Unverifiable links (criteria.md): producthunt.com, g2.com, allegro.pl, trustpilot.com (403); bdl.stat.gov.pl, elektroda.pl (timeout)
 - [~] T02 · research lens 01 — Proven abroad, missing in Poland · sonnet · needs: T01 · [tasks/02-research-lens-01-proven-abroad-missing-i.md](tasks/02-research-lens-01-proven-abroad-missing-i.md)
-  Resume: lens 01 — 14 findings written (local-services.md F01-03, dach-niche-software.md F04-06, compliance-and-vertical-saas.md F07-14). Next: more findings F15+ (more countries: NL/Nordics/FR/ES/JP/KR/BR/IN, creators/e-com), then README (Seeds, Coverage, Gaps), criteria.md sources, link check.
+  Resume: lens 01 — 18 findings in 4 topic files + README (Seeds, Coverage, Gaps) written. Next: add sources to method/criteria.md, run link check on research/01-proven-abroad/*, fix dead links, final commit.
 - [ ] T03 · research lens 02 — Weak or no competition · sonnet · needs: T01 · [tasks/03-research-lens-02-weak-or-no-competition.md](tasks/03-research-lens-02-weak-or-no-competition.md)
 - [ ] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
 - [ ] T05 · research lens 04 — Copy what already makes money · sonnet · needs: T01 · [tasks/05-research-lens-04-copy-what-already-makes.md](tasks/05-research-lens-04-copy-what-already-makes.md)
