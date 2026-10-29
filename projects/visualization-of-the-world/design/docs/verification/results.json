@@ -1,0 +1,557 @@
+{
+ "url": "http://localhost:8714/style-guide.html",
+ "date": "2026-10-29T02:36:15.442Z",
+ "failures": 0,
+ "results": [
+  {
+   "name": "baltyk-light-375: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "baltyk-light-375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "baltyk-light-375: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "baltyk-light-375: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "baltyk-light-375: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "baltyk-light-375: classes applied",
+   "ok": true,
+   "detail": "theme-light bg rgb(255, 255, 255)"
+  },
+  {
+   "name": "baltyk-light-375: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 78.4,78.4 vs proportional 45.6,70.2"
+  },
+  {
+   "name": "baltyk-light-375: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "baltyk-light-wide: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "baltyk-light-wide: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "baltyk-light-wide: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "baltyk-light-wide: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "baltyk-light-wide: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "baltyk-light-wide: classes applied",
+   "ok": true,
+   "detail": "theme-light bg rgb(255, 255, 255)"
+  },
+  {
+   "name": "baltyk-light-wide: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 78.4,78.4 vs proportional 45.6,70.2"
+  },
+  {
+   "name": "baltyk-light-wide: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "baltyk-dark-375: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "baltyk-dark-375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "baltyk-dark-375: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "baltyk-dark-375: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "baltyk-dark-375: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "baltyk-dark-375: classes applied",
+   "ok": true,
+   "detail": "theme-dark bg rgb(13, 20, 24)"
+  },
+  {
+   "name": "baltyk-dark-375: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 78.4,78.4 vs proportional 45.6,70.2"
+  },
+  {
+   "name": "baltyk-dark-375: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "baltyk-dark-wide: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "baltyk-dark-wide: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "baltyk-dark-wide: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "baltyk-dark-wide: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "baltyk-dark-wide: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "baltyk-dark-wide: classes applied",
+   "ok": true,
+   "detail": "theme-dark bg rgb(13, 20, 24)"
+  },
+  {
+   "name": "baltyk-dark-wide: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 78.4,78.4 vs proportional 45.6,70.2"
+  },
+  {
+   "name": "baltyk-dark-wide: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "beton-light-375: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "beton-light-375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "beton-light-375: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "beton-light-375: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "beton-light-375: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "beton-light-375: classes applied",
+   "ok": true,
+   "detail": "dir-beton theme-light bg rgb(228, 232, 235)"
+  },
+  {
+   "name": "beton-light-375: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 67.2,67.2 vs proportional 67.2,67.2"
+  },
+  {
+   "name": "beton-light-375: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "beton-light-wide: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "beton-light-wide: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "beton-light-wide: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "beton-light-wide: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "beton-light-wide: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "beton-light-wide: classes applied",
+   "ok": true,
+   "detail": "dir-beton theme-light bg rgb(228, 232, 235)"
+  },
+  {
+   "name": "beton-light-wide: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 67.2,67.2 vs proportional 67.2,67.2"
+  },
+  {
+   "name": "beton-light-wide: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "beton-dark-375: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "beton-dark-375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "beton-dark-375: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "beton-dark-375: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "beton-dark-375: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "beton-dark-375: classes applied",
+   "ok": true,
+   "detail": "dir-beton theme-dark bg rgb(20, 22, 24)"
+  },
+  {
+   "name": "beton-dark-375: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 67.2,67.2 vs proportional 67.2,67.2"
+  },
+  {
+   "name": "beton-dark-375: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "beton-dark-wide: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "beton-dark-wide: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "beton-dark-wide: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "beton-dark-wide: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "beton-dark-wide: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "beton-dark-wide: classes applied",
+   "ok": true,
+   "detail": "dir-beton theme-dark bg rgb(20, 22, 24)"
+  },
+  {
+   "name": "beton-dark-wide: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 67.2,67.2 vs proportional 67.2,67.2"
+  },
+  {
+   "name": "beton-dark-wide: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "noc-light-375: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "noc-light-375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "noc-light-375: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "noc-light-375: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "noc-light-375: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "noc-light-375: classes applied",
+   "ok": true,
+   "detail": "dir-noc theme-light bg rgb(231, 237, 246)"
+  },
+  {
+   "name": "noc-light-375: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 70.8,70.8 vs proportional 45.6,70.5"
+  },
+  {
+   "name": "noc-light-375: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "noc-light-wide: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "noc-light-wide: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "noc-light-wide: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "noc-light-wide: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "noc-light-wide: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "noc-light-wide: classes applied",
+   "ok": true,
+   "detail": "dir-noc theme-light bg rgb(231, 237, 246)"
+  },
+  {
+   "name": "noc-light-wide: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 70.8,70.8 vs proportional 45.6,70.5"
+  },
+  {
+   "name": "noc-light-wide: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "noc-dark-375: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "noc-dark-375: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "noc-dark-375: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "noc-dark-375: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "noc-dark-375: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "noc-dark-375: classes applied",
+   "ok": true,
+   "detail": "dir-noc theme-dark bg rgb(10, 22, 40)"
+  },
+  {
+   "name": "noc-dark-375: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 70.8,70.8 vs proportional 45.6,70.5"
+  },
+  {
+   "name": "noc-dark-375: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "noc-dark-wide: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "noc-dark-wide: no horizontal scroll",
+   "ok": true,
+   "detail": "scrollWidth - innerWidth = 0"
+  },
+  {
+   "name": "noc-dark-wide: direction fonts loaded",
+   "ok": true,
+   "detail": "loaded: Public Sans Variable, Schibsted Grotesk Variable, IBM Plex Sans Variable, Atkinson Hyperlegible Next Variable"
+  },
+  {
+   "name": "noc-dark-wide: Polish glyphs available in all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",true],[\"Schibsted Grotesk Variable\",true],[\"IBM Plex Sans Variable\",true],[\"Atkinson Hyperlegible Next Variable\",true]]"
+  },
+  {
+   "name": "noc-dark-wide: latin + latin-ext woff2 loaded for all 4 families",
+   "ok": true,
+   "detail": "[[\"Public Sans Variable\",\"latin+latin-ext\"],[\"Schibsted Grotesk Variable\",\"latin+latin-ext\"],[\"IBM Plex Sans Variable\",\"latin+latin-ext\"],[\"Atkinson Hyperlegible Next Variable\",\"latin+latin-ext\"]]"
+  },
+  {
+   "name": "noc-dark-wide: classes applied",
+   "ok": true,
+   "detail": "dir-noc theme-dark bg rgb(10, 22, 40)"
+  },
+  {
+   "name": "noc-dark-wide: tabular numerals equal width",
+   "ok": true,
+   "detail": "tnum 70.8,70.8 vs proportional 45.6,70.5"
+  },
+  {
+   "name": "noc-dark-wide: 4 charts drawn, each with a source link",
+   "ok": true,
+   "detail": "svgs 7, source links 4"
+  },
+  {
+   "name": "keyboard: first Tab lands on the skip link",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "mobile menu opens",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "mobile menu closes with Esc",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "touch targets >= 44 px",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "name": "place toggle hides a series (color follows entity)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "place toggle keeps at least one on",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "play button advances the year and updates the map",
+   "ok": true,
+   "detail": "year 2003"
+  },
+  {
+   "name": "tabs: arrow key switches to the table",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "chart keyboard focus shows a tooltip",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "interactions: no console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "failure path: error state shown in every data view",
+   "ok": true,
+   "detail": "5 error states"
+  },
+  {
+   "name": "failure path: retry loads the data",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "failure path: no unexpected console errors",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "reduced motion: durations are 0ms and shimmer is off",
+   "ok": true,
+   "detail": "0ms,0ms,0ms / none"
+  }
+ ]
+}
