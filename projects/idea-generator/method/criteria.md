@@ -237,3 +237,13 @@ A starting list, not a limit. Prefer primary sources (the product's own pricing 
 - https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&q=QUERY — Google autocomplete as JSON (works with curl; shows that a phrase is searched, not volume)
 - https://wykop.pl/tag/ksef — Wykop tag page readable as text
 - Not fetchable or not useful: forum.gofin.pl (403), indiehackers.com (403), wolterskluwer.com articles (403), linkedin.com help (404), symfonia.pl/program-partnerski (404). Caution: vendor blogs (norman.finance, blog.storecensus.com, draper.chat, kluczesoft.pl, woodpecker.co) are interested sources.
+
+### L9 (added by T10, accessed 2026-10-29)
+- https://stripe.com/en-pl/pricing , https://poland.payu.com/en/pricing/ , https://www.przelewy24.pl/oferta — Polish payment fees (readable by fetch; przelewy24.pl/cennik is 404)
+- https://www.fresha.com/pricing — Fresha Poland prices (software, payments, SMS in PLN)
+- https://www.smsapi.pl/cennik — SMS price per message; https://aws.amazon.com/ses/pricing/ , https://aws.amazon.com/lambda/pricing/ , https://aws.amazon.com/api-gateway/pricing/ , https://www.hetzner.com/cloud/ — infra list prices
+- https://www.recurly.com/research/churn-rate-benchmarks , https://chartmogul.com/blog/good-customer-churn-rate/ , https://www.lennysnewsletter.com/p/monthly-churn-benchmarks , https://writing.pointnine.com/p/saas-metrics-benchmarking-your-churn , https://www.saas-capital.com/research/saas-retention-benchmarks-for-private-b2b-companies/ — churn and retention benchmarks (US/global; check unit annual vs monthly)
+- https://platform.claude.com/docs/en/about-claude/model-deprecations — LLM supplier retirement history; https://developers.facebook.com/docs/whatsapp/pricing — WhatsApp pricing rules
+- https://developer.allegro.pl/news , https://shopify.dev/tutorials/develop-theme-layouts-checkout — platform change logs; https://prighter.com/resources/laws/data-act/articles/article-29 — Data Act Art. 29 text (confirm on EUR-Lex)
+- https://pomoc.wfirma.pl/-import-z-innych-programow — what accounting-tool imports cover
+- Not fetchable or not useful: developer.apple.com programme page gives 15% but not the standard rate, support.bookedin.com (403), sap.com partner page (403), SaaS Capital PDFs (binary), shopify.dev deprecation pages other than the tutorials URL (404). Caution: vendor churn blogs often repeat unsourced numbers (e.g. the "ProfitWell 941 businesses" claim is not on the Baremetrics page it was attributed to).

@@ -24,7 +24,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T09 · research lens 08 — Cheap distribution · sonnet · needs: T01 · [tasks/09-research-lens-08-cheap-distribution.md](tasks/09-research-lens-08-cheap-distribution.md)
   Unverifiable links (timeouts, vary per run): woodpecker.co, landingi.com, codedesign.org, community.developer.atlassian.com, theygotacquired.com, api.sejm.gov.pl; criteria.md ones as in T01/T04/T05
 - [~] T10 · research lens 09 — Unit economics and defensibility · sonnet · needs: T01 · [tasks/10-research-lens-09-unit-economics-and-defe.md](tasks/10-research-lens-09-unit-economics-and-defe.md)
-  Resume: T10 in progress — wrote costs-and-fees (F01–F08), churn (F09–F12), switching-and-lockin (F13–F16), platform-risk (F17–F23), poland-cost-basics (F24–F25). Next: 2-4 more findings (DE/other country lock-in; infra for dev-tool/API; moat evidence), then README (Seeds/Coverage/Gaps), criteria.md sources, link check
+  Resume: T10 complete pending review: folder 09-unit-economics done (27 findings F01–F27, 6 topic files, README with Seeds/Coverage/Gaps), criteria.md L9 sources added, link check 0 dead (10 unverifiable). Nothing left except optional extra German-language sources.
 - [ ] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
 - [ ] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
 - [ ] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
