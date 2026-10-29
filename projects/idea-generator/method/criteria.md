@@ -139,6 +139,14 @@ A starting list, not a limit. Prefer primary sources (the product's own pricing 
 - https://github.com/ issues for developer tools
 - https://news.ycombinator.com/
 - https://trends.google.com/ — search interest in PL and abroad
+- https://forum.gofin.pl/dzialy-forum/ksef — GOFIN accountants' forum, KSeF section (open, parseable; ~2 new threads a week in autumn 2026)
+- https://wykop.pl/tag/ksef — Wykop tags (readable without login, e.g. /tag/ksef, /tag/jdg, /tag/ksiegowosc)
+- App Store review feed, no login: `https://itunes.apple.com/<cc>/rss/customerreviews/id=<APPID>/sortby=mostrecent/json` (50 per page, up to 10 pages); search and ratings via `https://itunes.apple.com/search?term=...&country=pl&entity=software`
+- https://api.github.com/search/issues and /search/repositories — complaint counts for developer tools (e.g. CIRFMF/ksef-api, allegro/allegro-api); 10 unauthenticated requests per minute
+- https://hn.algolia.com/api/v1/search — Hacker News search and `/items/<id>` for comment trees
+- https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/de.wikipedia/all-access/user/ZUGFeRD/monthly/20250101/20261001 — monthly attention curves (free proxy when Google Trends returns 429)
+- https://suggestqueries.google.com/complete/search?client=firefox&hl=pl&gl=pl&q=... — Google autocomplete as a qualitative demand and price-expectation signal
+- Not reachable by the research tools (2026-10-29): all of reddit.com, Trustpilot, Capterra, Indie Hackers, allegro.pl and its community, gutefrage.net; use a logged-in browser session.
 
 ### L7 — Founder fit and feasibility
 - Founder profile in [BRIEF.md](../BRIEF.md)

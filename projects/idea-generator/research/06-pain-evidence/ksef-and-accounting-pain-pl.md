@@ -8,7 +8,7 @@ Lens 6 findings from the official app's store reviews, the GOFIN accountants' fo
 - **Quotes:** "Dlaczego twórca aplikacji nie pomyślał o powiadomieniach o otrzymaniu faktury zakupowej?" (2★, 2026-04-09); "Dodajcie możliwość włączenia powiadomień o nowych fakturach" (1★, 2026-04-04); "Faktury nie można wystawiać w innej walucie jak PL !" (1★, 2026-03-31); "aplikacja pokazuje domyślnie tylko faktury wystawione w PLN" (2★, 2026-03-10).
 - **Repeated or one-off:** repeated. Notifications, foreign-currency invoices, missing invoices in the list and login failures recur across months and users.
 - **Counter-evidence:** a part of the 1★ reviews are pure venting ("Dziadostwo"), and the ministry may add push features; the app is free, so the pain does not prove willingness to pay.
-- **Product category:** companion to KSeF (alerts, mailbox, foreign-currency view). Overlaps [L2-F12](../02-weak-competition/reviews-and-app-stores.md#l2-f12--official-ksef-mobile-app-ministry-of-finance-29-on-go).
+- **Product category:** companion to KSeF (alerts, mailbox, foreign-currency view). Overlaps [L2-F12](../02-weak-competition/reviews-and-app-stores.md#l2-f12--official-ksef-mobile-app-ministry-of-finance-29-on-google-play-20-on-the-app-store).
 - **Confidence:** medium (small sample, vendor-neutral source).
 
 ### L6-F02 — GOFIN KSeF forum: 22 new threads in 11 weeks on page 1, mostly "how do I handle this case" questions
@@ -50,3 +50,8 @@ Lens 6 findings from the official app's store reviews, the GOFIN accountants' fo
 - **Evidence:** Wikimedia pageviews API (user agent, all access) for pl.wikipedia article Krajowy_System_e-Faktur: Feb 553, Mar 1,278, Apr 643, May 356, Jun 216, Jul 166, Aug 199, Sep 200 (Oct partial). https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/pl.wikipedia/all-access/user/Krajowy_System_e-Faktur/monthly/20240101/20261001 (accessed 2026-10-29). Wikipedia is a weak proxy for commercial search interest. Google Trends returned HTTP 429 to scripted access, so no Trends numbers (README Gaps).
 - **Takeaway (counter-evidence):** the panic peak around the 1 Feb / 1 Apr 2026 waves has passed. The next wave on 1 Jan 2027 (see [L5-F01](../05-why-now/poland-and-eu-invoicing-tax.md#l5-f01--ksef-is-mandatory-in-three-waves-1-feb-2026-1-apr-2026-1-jan-2027)) may lift it again, but pain tools sold now compete with free bundles and a calmer audience.
 - **Confidence:** medium (data is exact, interpretation is a proxy).
+
+### L6-F26 — Counter-evidence: free single-purpose KSeF notification apps already exist, with almost no users
+- **Evidence:** App Store lookups (iTunes API, 2026-10-29): "KSeF Mobile – powiadomienia" (released 2026-10-01, 5.0 from 2 ratings, free) https://apps.apple.com/pl/app/ksef-mobile-powiadomienia/id6817448137 ; "Monitor KSeF" (released 2026-03-13, 5.0 from 3 ratings, free) https://apps.apple.com/pl/app/monitor-ksef/id6759834557 . Accounting apps already push the alert: Wykop user "przy wykonanej prawidłowo integracji z reguły te powiadomienia są" (inFakt user, see F05); inFakt 4.81/5 from 9,348 and Fakturownia 4.63/5 from 2,818 ratings.
+- **Reading:** the loudest single complaint in F01 (no push for new purchase invoices) is being solved by free hobby apps and by the commercial invoicing apps. A paid "notification" product has no room; the pain pays only as part of an accounting-office workflow.
+- **Confidence:** medium.
