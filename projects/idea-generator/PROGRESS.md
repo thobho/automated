@@ -28,7 +28,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
   Unverifiable links: open.store Ceneo feed app page, apps.appfollow.io ProtrainUp (timeouts, more-markets.md); criteria.md ones as in T01
 - [~] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
-  Resume: merges (16) and drops (3) logged in rejected.md; next: score the remaining 189 ideas into ideas/shortlist.csv, cut at ~100, log below-cut ideas in rejected.md, mark top 25
+  Resume: ideas/shortlist.csv written (108 ideas, cut = rounded weighted ≥ 2.4) and 81 below-cut ideas logged in rejected.md; coverage 208/208; next: mark top 25 (write_up=y, wu_no 001–025, batches A/B/C) and add ideas/README.md
 - [ ] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
 - [ ] T14 · write-ups batch B · sonnet · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
 - [ ] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
