@@ -35,8 +35,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links: g2.com/compare/float-vs-pulse-cash-flow-management (403), gramwzielone.pl/?p=101914 (timeout, varies)
 - [x] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
   Unverifiable links: yadda.icm.edu.pl (403), wykop.pl, elektroda.pl (timeout, varies)
-- [~] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
-  Resume: reviewed 001–025, shortlist re-ranked, link check done (293 links, 0 dead, 7 unverifiable); T16 complete pending sign-off
+- [x] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
+  Unverifiable links: g2.com gatherup + float-vs-pulse, trustpilot fakturownia, yadda.icm.edu.pl, wolterskluwer.com alerty (403); tuntievo.pl (expired SSL); elektroda.pl (timeout)
 - [ ] T17 · Phase 1 summary and validation plans · opus · needs: T16 · [tasks/17-phase-1-summary-and-validation-plans.md](tasks/17-phase-1-summary-and-validation-plans.md)
 
 ## Blocked / questions for the owner
@@ -44,6 +44,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · model · what was done · next step -->
+2026-10-29 20:35 · T16 · opus · reviewed 010–025, done: 15/25 write-ups now rejected or merged (002, 007, 008, 009, 010, 012, 013, 016, 018, 019, 021, 022, 023, 024, 025); kept 001, 003, 004, 005, 006, 011, 014, 015, 017, 020; only 003 self-hosted KSeF gateway (3.1) still 5–15%, all others <5% (015 fell to 2.6); 014 L6 set to 1 (knock-out); shortlist re-ranked and verified against write-ups; link check 293 links 0 dead 7 unverifiable · next T17
 2026-10-29 20:00 · T16 · opus · reviewed 001–009: 002, 007 (merged into 001), 008, 009 rejected; 001 2.9→2.6, 004 2.9→2.7, 005 2.9→2.7, 006 2.9→2.7 all now <5%; 003 3.2→3.1 is the only one still 5–15%; shortlist.csv L columns updated for reviewed rows (rank not yet re-sorted); link check 114 links 0 dead, 2 unverifiable (g2 gatherup, trustpilot fakturownia) · next T16 review 010
 2026-10-29 19:05 · T15 · sonnet · write-ups 018–025 (9–10 sources each), no swaps; every score fell 0.1–0.5, all now <5% (018 2.7, 019 2.5, 020 2.7, 021 2.6, 022 2.3, 023 2.5, 024 2.5, 025 2.5); new rivals found: Estetify/Fresha (018), Preply Lesson Insights (019), free KRS newsletter + Prześwietl (021), Anolla (022/023), PodpiszWycenę.pl (024); 019 and 022 flagged for T16 rejection; Trends unreadable, many figures from search summaries (marked); link check 72 links 0 dead · next T16
 2026-10-29 18:25 · T14 · sonnet · write-ups 010–017 (≥8 sources each), no swaps; all scores fell 0.0–0.3, only 015 NIS2 supplier-questionnaire kit stays ≥2.8 (2.9, 5–15%), rest <5%; Polish pain evidence missing for 010/011/013/014/016/017 (stated, not invented); 014 legal requirement unverified; 015 entity count conflicts (10k vs 40k); link check 74 links 0 dead · next T15
