@@ -1,0 +1,19 @@
+# DACH / Czech niche software with no obvious Polish twin
+
+Lens 1 findings. All pages accessed 2026-10-29.
+
+## L1-F04 — Vimcar (Germany): automatic digital Fahrtenbuch and fleet logbook
+- **Product:** Vimcar, https://www.vimcar.de/ — OBD plug-in device with SIM that records trips into a tax-compliant logbook; fleet logbook and GPS tracking.
+- **Traction / pricing (own page):** Fahrtenbuch from 21,90 EUR/month; fleet logbook from 16,90 EUR/vehicle/month; fleet GEO from 9,90 EUR/vehicle/month (excl. VAT). Claims "60.000+" self-employed and businesses and "12.000+" tax advisors recommending it (self-reported).
+- **PL check:** searched `elektroniczna ewidencja przebiegu pojazdu aplikacja ... GPS OBD`. Found only partial matches: BURY GPS loggers (hardware, no price: https://www.bury.com/wp-content/uploads/2025/02/50-01-0502-1_210225_CL1020Time_Flyer-100x210-6pages_PL-1.pdf), Gannet Guard EuroFleet (fleet GPS app, https://apps.apple.com/cm/app/eurofleet/id6464317231), and a KIS interpretation that electronic mileage records are acceptable (https://www.gazetaprawna.pl/podatki/artykuly/10757910,czy-elektroniczna-ewidencja-przebiegu-pojazdu-spelnia-wymogi-ustawy-o.html). **No Polish self-serve, SMB-priced ewidencja przebiegu product with a tax-compliance angle was found in this search**; hardware dependency is a feasibility problem (L7).
+- **Why it works in DE:** the German 1% vs. logbook rule creates a tax saving (Vimcar claims 2.758 EUR/vehicle/year, self-reported). The Polish equivalent (100% VAT deduction needs a mileage log) is described at https://fakturownia.pl/firma-w-praktyce/ewidencja-przebiegu-pojazdu-czym-jest-i-jak-ja-prowadzic — a software-only app (no hardware) is the cheaper variant.
+
+## L1-F05 — campai / chapster (Germany): club and association management
+- **Product:** campai, https://www.campai.com/de/preise — member management, dues billing, donation receipts, accounting, events, club app, API.
+- **Pricing (own page):** 30 EUR/month up to 100 members, then 8 EUR per further 50; chapster for small clubs 99 EUR/year; month-to-month contracts. No customer count on the page.
+- **PL check:** searched `program do zarządzania stowarzyszeniem klubem sportowym składki członkowskie ... cennik`. Surfaced only generic/foreign tools (Clubs, Klubaro on Capterra/GetApp: https://www.getapp.co.uk/software/2080018/klubaro, 4.8 from 5 reviews). **No Polish association-management product with PLN dues billing found in this search.** The German "Verein" culture is far larger than the Polish one: unverified whether the Polish market (stowarzyszenia, KGW, OSP, kluby sportowe) is big enough to pay — needs a count from https://stat.gov.pl/.
+
+## L1-F06 — Smoobu (Germany): channel manager / PMS for vacation rentals
+- **Product:** Smoobu, https://www.smoobu.com/en/pricing/ — channel manager and PMS for private hosts of holiday rentals (Airbnb, Booking.com, direct booking).
+- **Pricing (own page):** Professional Flex 29 EUR/mo + 0.9% booking fee; Professional Prepaid 35 EUR/mo; Teams Pro+ 55 EUR/mo; per-unit pricing from 28 EUR for first unit and 9,60 EUR per extra unit. The site has a Polish language version (https://www.smoobu.com/pl/), so **this is NOT a clean gap: a German product already localizes to Polish** (whether the software UI is Polish is unverified).
+- **PL check:** searched `channel manager dla apartamentów krótkoterminowych ...` and `polski system PMS channel manager dla wynajmu krótkoterminowego ...`. Only Smoobu content and a hotel-oriented Polish PMS (Mini Hotel PMS on Capterra PL, 4.8 from 24 reviews: https://www.capterra.pl/software/198407/mini-hotel-pms) surfaced. **No Polish-built holiday-rental PMS found in these searches**, but the gap is closed by Smoobu itself; value-add would be Polish-specific (ewidencja obiektów, GUS reporting, meldunek, faktury/KSeF) — unverified demand.
