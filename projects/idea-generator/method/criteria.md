@@ -212,3 +212,17 @@ A starting list, not a limit. Prefer primary sources (the product's own pricing 
 - https://www.arthurcox.com/insights/ , https://www.jonesday.com/de/insights/ , https://www.orrick.com/en/Insights/ — law-firm briefings readable by the fetch tool (secondary; check the Official Journal)
 - https://itwiz.pl/ , https://kadry.infor.pl/ , https://ksiegowosc.infor.pl/ , https://globenergia.pl/ — Polish trade news for NIS2, pay transparency, KSeF, subsidies (secondary; Infor KSeF columns are opinion)
 - Not fetchable in this setup: EUR-Lex ELI page for Directive 2026/470 (empty), Clifford Chance and Grant Thornton PDFs (binary). Use a browser or ISAP/EUR-Lex PDF links.
+
+### L7 (added by T08, accessed 2026-10-29)
+- https://raw.githubusercontent.com/CIRFMF/ksef-docs/main/limity/limity-api.md , `.../srodowiska.md` , `.../tokeny-ksef.md` — Ministry of Finance KSeF 2.0 integrator docs as raw text (base: https://github.com/CIRFMF/ksef-docs); primary for limits, environments, authentication
+- https://developer.allegro.pl/rules/ — Allegro REST API terms (readable by fetch; the documentation page is 200k characters, read in parts)
+- https://peppol.org/join/fees/ — OpenPeppol Service Provider fee table
+- https://shopify.dev/docs/apps/launch/app-requirements-checklist , https://shopify.dev/docs/apps/launch/distribution/revenue-share , https://community.shopify.dev/ — app rules, fee, and developers' reports of review times
+- https://support.google.com/googleplay/android-developer/answer/14151465 , https://developer.chrome.com/docs/webstore/review-process , https://developer.wordpress.org/plugins/wordpress-org/plugin-developer-faq/ , https://developer.apple.com/app-store/review/guidelines/ — store review rules
+- https://docs.stripe.com/connect/overview , https://www.paddle.com/pricing — payments platform and merchant-of-record facts
+- https://api.baselinker.com/ — BaseLinker API (token, rate limit)
+- https://metr.org/blog/2026-02-24-uplift-update/ — best controlled evidence on AI-assisted developer speed
+- https://openrouter.ai/api/v1/models — machine-readable LLM prices (no key needed); GitHub REST API (`api.github.com/repos/...`, `/search/repositories`) for stars, licence, last push
+- https://rpms.pl/ , https://www.goodwinlaw.com/en/insights/ — law-firm articles on KNF payment institutions and the AI Act (secondary; check statute)
+- https://gdpr-info.eu/ — readable GDPR text (unofficial mirror; confirm on EUR-Lex)
+- Not fetchable or not useful: docs.stripe.com platform-licensing pages (404), uodo.gov.pl guidance URL (wrong page), Apple programme fee page (fee not in text), Cal.com GitHub lookup (redirect), HN Algolia queries for solo-founder timelines (no hits). Caution: buildthisnow.com is promotional (sells a kit); treat as low reliability.

@@ -20,7 +20,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T07 · research lens 06 — Evidence of pain and demand · sonnet · needs: T01 · [tasks/07-research-lens-06-evidence-of-pain-and-de.md](tasks/07-research-lens-06-evidence-of-pain-and-de.md)
   Unverifiable links: news.ycombinator.com items (503, read via Algolia API), elektroda.pl topics 2508455/4133476 (timeout), api.github.com issues + Wikimedia pageviews API URLs; criteria.md ones as in T01/T03/T04/T05
 - [~] T08 · research lens 07 — Founder fit and feasibility · sonnet · needs: T01 · [tasks/08-research-lens-07-founder-fit-and-feasibi.md](tasks/08-research-lens-07-founder-fit-and-feasibi.md)
-  Resume: F01–F27 all topic files pushed (api-access, licensing-and-regulation, build-speed-and-libraries, costs-and-ops); next: 1–2 more findings if time (support-load evidence, GDPR processor), README (Seeds/Coverage/Gaps), criteria.md sources, link check
+  Resume: All files written and pushed (28 findings, README, criteria.md updated, link check 0 dead). Remaining: nothing required; T08 awaits review/[x] by caller
 - [ ] T09 · research lens 08 — Cheap distribution · sonnet · needs: T01 · [tasks/09-research-lens-08-cheap-distribution.md](tasks/09-research-lens-08-cheap-distribution.md)
 - [ ] T10 · research lens 09 — Unit economics and defensibility · sonnet · needs: T01 · [tasks/10-research-lens-09-unit-economics-and-defe.md](tasks/10-research-lens-09-unit-economics-and-defe.md)
 - [ ] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
