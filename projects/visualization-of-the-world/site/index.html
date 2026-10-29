@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview · Polska w danych demo</title>
+<meta name="description" content="Choropleth of the 16 voivodeships with drill-down to powiats, and city bubbles. Real boundaries and city names, synthetic values.">
+<link rel="preload" href="vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vendor/design/tokens.css">
+<link rel="stylesheet" href="vendor/design/components.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<main id="main" class="site-main"><div class="container">
+  <div class="page-head"><h1>What the library can do</h1><p class="lede">A proof-of-concept for the Polska w danych visualisations: Apache ECharts 6.1.0 in the project design system, on real Polish boundaries, with clearly labelled synthetic numbers. It is the reference for how every later chart should look and behave.</p></div>
+<div class="grid" style="margin-bottom:var(--grid-gutter-base)"><a class="card link-card span-all md-span-4 lg-span-4" href="charts.html"><h2 class="figure__title">Chart catalogue</h2><p>Line, area, stacked and grouped bars, scatter, bubble, heatmap, treemap, sunburst, small multiples, slope, bump and indexed series.</p></a><a class="card link-card span-all md-span-4 lg-span-4" href="interaction.html"><h2 class="figure__title">Motion and interaction</h2><p>Timeline playback, place-type filter, brushing with linked views, zoom and pan, animated shape changes.</p></a><a class="card link-card span-all md-span-4 lg-span-4" href="maps.html"><h2 class="figure__title">Maps</h2><p>Voivodeship choropleth, drill-down to powiats, city bubbles, zoom to a region, touch.</p></a><a class="card link-card span-all md-span-4 lg-span-4" href="formats.html"><h2 class="figure__title">Formats</h2><p>CSV, JSON, GeoJSON and TopoJSON in; PNG, SVG and CSV out.</p></a><a class="card link-card span-all md-span-4 lg-span-4" href="polish.html"><h2 class="figure__title">Layout and polish</h2><p>375 px to desktop, light and dark, loading, empty and error states, the Source footer.</p></a><a class="card link-card span-all md-span-4 lg-span-4" href="matrix.html"><h2 class="figure__title">Capabilities matrix</h2><p>Every capability with status, code location and docs link, including what is not possible.</p></a></div>
+  <div class="grid" id="figures"></div>
+</div></main>
+<script src="js/shell.js"></script>
+<script src="vendor/lib/echarts-6.1.0.min.js"></script>
+<script src="vendor/lib/topojson-client-3.1.0.min.js"></script>
+<script src="vendor/design/components.js"></script>
+<script src="js/votw-core.js"></script>
+<script src="js/votw-charts.js"></script>
+<script src="js/specs-catalogue.js"></script>
+<script src="js/page-index.js"></script>
+</body>
+</html>

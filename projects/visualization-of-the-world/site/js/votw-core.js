@@ -98,13 +98,14 @@
 
   // Parse the rows of demo-regions.csv into {teryt: {name, big_cities:[], ...}} ordered by year.
   function regionsFromCsv(rows) {
-    const out = {}, years = [];
+    const out = new Map(), years = [];
     rows.forEach((r) => {
-      const o = out[r.teryt] || (out[r.teryt] = { teryt: r.teryt, name: r.name, shares: { big_cities: [], small_cities: [], villages: [] } });
+      // Map, not a plain object: integer-like keys such as "10" would be re-ordered before "02"
+      const o = out.get(r.teryt) || (out.set(r.teryt, { teryt: r.teryt, name: r.name, shares: { big_cities: [], small_cities: [], villages: [] } }), out.get(r.teryt));
       PLACE_TYPES.forEach((k) => o.shares[k].push(r[k] === "" ? null : Number(r[k])));
       if (!years.includes(+r.year)) years.push(+r.year);
     });
-    return { years, regions: Object.values(out) };
+    return { years, regions: Array.from(out.values()) };
   }
 
   // Sum of the three shares must be 100 +- tolerance (rounding of one decimal each).

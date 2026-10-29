@@ -52,6 +52,10 @@ test("demo data: CSV and JSON carry the same numbers", () => {
     assert.ok(C.sharesConsistent(r), "shares sum to 100 for " + r.name);
   });
 });
+test("regionsFromCsv keeps file order (integer-like TERYT keys must not reorder)", () => {
+  const rows = C.parseCsv("teryt,name,year,big_cities,small_cities,villages\n02,a,2000,1,1,98\n10,b,2000,1,1,98\n04,c,2000,1,1,98\n");
+  assert.deepStrictEqual(C.regionsFromCsv(rows).regions.map((r) => r.teryt), ["02", "10", "04"]);
+});
 test("demo data is labelled as not real everywhere", () => {
   assert.match(JSON.parse(data("demo.json")).meta.note, /DEMO DATA, NOT REAL/);
   ["demo-regions.csv", "demo-powiats.csv", "demo-cities.csv"].forEach((f) =>
