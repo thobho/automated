@@ -10,7 +10,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T02 · research lens 01 — Proven abroad, missing in Poland · sonnet · needs: T01 · [tasks/02-research-lens-01-proven-abroad-missing-i.md](tasks/02-research-lens-01-proven-abroad-missing-i.md)
   Unverifiable links: malt.com (403, lens files); criteria.md ones as in T01
 - [~] T03 · research lens 02 — Weak or no competition · sonnet · needs: T01 · [tasks/03-research-lens-02-weak-or-no-competition.md](tasks/03-research-lens-02-weak-or-no-competition.md)
-  Resume: F01..F21 written in 4 topic files. Next: README.md with Seeds/Coverage/Gaps, add sources to method/criteria.md, link check, final push
+  Resume: all work done (22 findings, 4 topic files, README, criteria sources); link check 0 dead, unverifiable: Trustpilot/G2/ProductHunt/allegro.pl 403, GitHub API 403/422 for bare endpoints, elektroda timeout. Waiting for T03 to be marked [x] by the runner
 - [ ] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
 - [ ] T05 · research lens 04 — Copy what already makes money · sonnet · needs: T01 · [tasks/05-research-lens-04-copy-what-already-makes.md](tasks/05-research-lens-04-copy-what-already-makes.md)
 - [ ] T06 · research lens 05 — Why now: regulation and tech triggers · sonnet · needs: T01 · [tasks/06-research-lens-05-why-now-regulation-and.md](tasks/06-research-lens-05-why-now-regulation-and.md)

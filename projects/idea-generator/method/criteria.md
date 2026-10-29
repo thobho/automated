@@ -165,3 +165,11 @@ A starting list, not a limit. Prefer primary sources (the product's own pricing 
 - https://itwiz.pl/ and https://www.infor.pl/ — Polish news on NIS2 (KSC amendment) and the whistleblower act; confirm in ISAP
 - https://useme.com/pl/blog/ — Polish freelancer-marketplace data (vendor's own figures)
 - https://base.com/ — BaseLinker (renamed Base), reverse-direction proof that Polish SaaS sells abroad
+
+### L2 (added by T03, accessed 2026-10-29)
+- https://api.github.com/search/repositories?q=ksef&sort=stars — GitHub search API; works with the fetch tool (stars, last push, language) and is good for gauging maintained SDKs and open-source competitors
+- https://www.trustpilot.com/review/ifirma.pl (pattern: /review/<domain>) — readable by the fetch tool (score, review counts, recent complaints); small and skewed samples, unclaimed profiles are unrepresentative
+- https://play.google.com/store/search?q=KSeF&c=apps&hl=pl — Polish Play Store results with ratings (fetchable; truncated list); app-detail pages by package id can be resolved the same way
+- https://wordpress.org/plugins/search/allegro/ — plugin ratings counts and active installs (fetchable)
+- https://spolecznosc.allegro.pl/t5/zaawansowani-sprzedawcy/alternatywa-dla-baselinker/m-p/987268 — Allegro Community seller board example: "alternatywa dla BaseLinker" type threads with quotes and prices
+- Not fetchable in this setup: Capterra and G2 (403), Reddit, trusted.de (403), Shopify App Store search (fails to load)

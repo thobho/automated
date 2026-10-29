@@ -17,7 +17,7 @@ Lens 2 findings. All pages accessed 2026-10-29. Review portals do not verify rev
 
 ## L2-F15 — Booksy: 2.9 on Trustpilot (16,585 reviews), billing and cancellation complaints
 - **Evidence:** https://www.trustpilot.com/review/booksy.com — 2.9, 16,585 reviews (262 in the last 12 months). Quotes: "Booksy charged me anyway." (2026-10-14); "They want piece of everything even tips." (2026-10-06); "awful customer service but quick to take your monthly fee" (2026-10-12). Reviews are mostly English-language, so mixed markets; Polish salons are not separable from this page.
-- **Pricing context:** see L2-F05 in [allegro-and-ecommerce-tools.md](allegro-and-ecommerce-tools.md#l2-f05--booksy-145-zlmonth-plus-45-first-visit-commission-a-recurring-salon-pain).
+- **Pricing context:** see L2-F05 in [allegro-and-ecommerce-tools.md](allegro-and-ecommerce-tools.md#l2-f05--booksy-145-złmonth-plus-45-first-visit-commission-a-recurring-salon-pain).
 - **Assessment:** real, recurring complaints about fees and cancelling, from a funded incumbent. Challengers such as Versum have 0 Trustpilot reviews (https://www.trustpilot.com/review/versum.com), so no independent rating signal for them was found.
 
 ## L2-F16 — InPost: 4.2 overall, but business shippers complain about claims and support
