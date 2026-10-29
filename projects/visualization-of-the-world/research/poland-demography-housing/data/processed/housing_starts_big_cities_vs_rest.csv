@@ -1,0 +1,91 @@
+year,area,type,dwellings,value_type,formula,source_id
+2005,big_cities,total,39951,derived,"sum of the 34 big-city powiats, var 217340",S46
+2005,rest_of_poland,total,65885,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2005,poland,total,105836,reported,"BDL national value, var 217340",S46
+2006,big_cities,total,58475,derived,"sum of the 34 big-city powiats, var 217340",S46
+2006,rest_of_poland,total,79487,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2006,poland,total,137962,reported,"BDL national value, var 217340",S46
+2007,big_cities,total,69746,derived,"sum of the 34 big-city powiats, var 217340",S46
+2007,rest_of_poland,total,115371,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2007,poland,total,185117,reported,"BDL national value, var 217340",S46
+2008,big_cities,total,63510,derived,"sum of the 34 big-city powiats, var 217340",S46
+2008,rest_of_poland,total,111176,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2008,poland,total,174686,reported,"BDL national value, var 217340",S46
+2009,big_cities,total,44567,derived,"sum of the 34 big-city powiats, var 217340",S46
+2009,rest_of_poland,total,98334,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2009,poland,total,142901,reported,"BDL national value, var 217340",S46
+2010,big_cities,total,58436,derived,"sum of the 34 big-city powiats, var 217340",S46
+2010,rest_of_poland,total,99628,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2010,poland,total,158064,reported,"BDL national value, var 217340",S46
+2011,big_cities,total,59856,derived,"sum of the 34 big-city powiats, var 217340",S46
+2011,rest_of_poland,total,102344,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2011,poland,total,162200,reported,"BDL national value, var 217340",S46
+2012,big_cities,total,52381,derived,"sum of the 34 big-city powiats, var 217340",S46
+2012,rest_of_poland,total,89417,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2012,poland,total,141798,reported,"BDL national value, var 217340",S46
+2013,big_cities,total,48613,derived,"sum of the 34 big-city powiats, var 217340",S46
+2013,rest_of_poland,total,78779,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2013,poland,total,127392,reported,"BDL national value, var 217340",S46
+2014,big_cities,total,63973,derived,"sum of the 34 big-city powiats, var 217340",S46
+2014,rest_of_poland,total,84149,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2014,poland,total,148122,reported,"BDL national value, var 217340",S46
+2015,big_cities,total,78544,derived,"sum of the 34 big-city powiats, var 217340",S46
+2015,rest_of_poland,total,89859,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2015,poland,total,168403,reported,"BDL national value, var 217340",S46
+2016,big_cities,total,75381,derived,"sum of the 34 big-city powiats, var 217340",S46
+2016,rest_of_poland,total,98551,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2016,poland,total,173932,reported,"BDL national value, var 217340",S46
+2017,big_cities,total,92214,derived,"sum of the 34 big-city powiats, var 217340",S46
+2017,rest_of_poland,total,113776,derived,Poland (var 217340) - big_cities; small cities and villages together,S46
+2017,poland,total,205990,reported,"BDL national value, var 217340",S46
+2018,big_cities,total,97092,derived,"sum of the 34 big-city powiats, var 567218",S46
+2018,rest_of_poland,total,124815,derived,Poland (var 567218) - big_cities; small cities and villages together,S46
+2018,poland,total,221907,reported,"BDL national value, var 567218",S46
+2019,big_cities,total,95341,derived,"sum of the 34 big-city powiats, var 567218",S46
+2019,rest_of_poland,total,141940,derived,Poland (var 567218) - big_cities; small cities and villages together,S46
+2019,poland,total,237281,reported,"BDL national value, var 567218",S46
+2005,big_cities,private,5757,derived,"sum of the 34 big-city powiats, var 217389",S46
+2005,rest_of_poland,private,53131,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2005,poland,private,58888,reported,"BDL national value, var 217389",S46
+2006,big_cities,private,7132,derived,"sum of the 34 big-city powiats, var 217389",S46
+2006,rest_of_poland,private,62233,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2006,poland,private,69365,reported,"BDL national value, var 217389",S46
+2007,big_cities,private,8662,derived,"sum of the 34 big-city powiats, var 217389",S46
+2007,rest_of_poland,private,82987,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2007,poland,private,91649,reported,"BDL national value, var 217389",S46
+2008,big_cities,private,8611,derived,"sum of the 34 big-city powiats, var 217389",S46
+2008,rest_of_poland,private,87735,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2008,poland,private,96346,reported,"BDL national value, var 217389",S46
+2009,big_cities,private,8176,derived,"sum of the 34 big-city powiats, var 217389",S46
+2009,rest_of_poland,private,81607,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2009,poland,private,89783,reported,"BDL national value, var 217389",S46
+2010,big_cities,private,7488,derived,"sum of the 34 big-city powiats, var 217389",S46
+2010,rest_of_poland,private,78989,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2010,poland,private,86477,reported,"BDL national value, var 217389",S46
+2011,big_cities,private,7715,derived,"sum of the 34 big-city powiats, var 217389",S46
+2011,rest_of_poland,private,82785,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2011,poland,private,90500,reported,"BDL national value, var 217389",S46
+2012,big_cities,private,7205,derived,"sum of the 34 big-city powiats, var 217389",S46
+2012,rest_of_poland,private,72482,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2012,poland,private,79687,reported,"BDL national value, var 217389",S46
+2013,big_cities,private,6881,derived,"sum of the 34 big-city powiats, var 217389",S46
+2013,rest_of_poland,private,65813,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2013,poland,private,72694,reported,"BDL national value, var 217389",S46
+2014,big_cities,private,8255,derived,"sum of the 34 big-city powiats, var 217389",S46
+2014,rest_of_poland,private,66113,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2014,poland,private,74368,reported,"BDL national value, var 217389",S46
+2015,big_cities,private,9442,derived,"sum of the 34 big-city powiats, var 217389",S46
+2015,rest_of_poland,private,69413,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2015,poland,private,78855,reported,"BDL national value, var 217389",S46
+2016,big_cities,private,9385,derived,"sum of the 34 big-city powiats, var 217389",S46
+2016,rest_of_poland,private,74195,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2016,poland,private,83580,reported,"BDL national value, var 217389",S46
+2017,big_cities,private,11096,derived,"sum of the 34 big-city powiats, var 217389",S46
+2017,rest_of_poland,private,83387,derived,Poland (var 217389) - big_cities; small cities and villages together,S46
+2017,poland,private,94483,reported,"BDL national value, var 217389",S46
+2018,big_cities,private,6346,derived,"sum of the 34 big-city powiats, var 567219",S46
+2018,rest_of_poland,private,78958,derived,Poland (var 567219) - big_cities; small cities and villages together,S46
+2018,poland,private,85304,reported,"BDL national value, var 567219",S46
+2019,big_cities,private,6926,derived,"sum of the 34 big-city powiats, var 567219",S46
+2019,rest_of_poland,private,83388,derived,Poland (var 567219) - big_cities; small cities and villages together,S46
+2019,poland,private,90314,reported,"BDL national value, var 567219",S46

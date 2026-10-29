@@ -42,6 +42,10 @@ def get(path, params=None, retries=60):
                 time.sleep(min(wait, 1800))
                 continue
             raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:   # network hiccup: retry
+            print(f"BDL network error ({e}), retrying in 20 s ...", flush=True)
+            time.sleep(20)
+            continue
         if isinstance(data, dict) and "errorResult" in data:
             if "quota" in str(data["errorResult"]).lower():
                 print("BDL quota hit, sleeping 90 s ...", flush=True)

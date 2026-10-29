@@ -170,7 +170,8 @@ def stock_rows(cs, pop):
     return rows
 
 
-def permits_rows(cs, pop):
+def permits_rows(cs, pop, nat=None):
+    """Gmina-level class values exist from 2018; the national total (class 'poland', reported) is added for 2009-2025 when `nat` is given."""
     rows = []
     for cls in CLASSES:
         for y in YEARS:
@@ -189,6 +190,16 @@ def permits_rows(cs, pop):
             add("house", sf, "sum of var 1641098: dwellings in new single-family (one-dwelling) buildings")
             add("flat", two + three, "vars 1641099 + 1641100: dwellings in new two-dwelling and three-or-more-dwelling buildings")
             add("other", tot - sf - two - three, "total - house - flat: non-residential buildings, expansions, conversions")
+    for y in YEARS if nat else []:
+        v = [nat.get(k, {}).get(y) for k in (V_PERMIT_TOTAL, V_PERMIT_SF, V_PERMIT_2, V_PERMIT_3)]
+        if None in v:
+            continue
+        for typ, n, formula in (("total", v[0], f"BDL national value, var {V_PERMIT_TOTAL}"), ("house", v[1], f"BDL national value, var {V_PERMIT_SF}"),
+                                ("flat", v[2] + v[3], f"BDL national vars {V_PERMIT_2} + {V_PERMIT_3}"),
+                                ("other", v[0] - v[1] - v[2] - v[3], "total - house - flat")):
+            rows.append({"year": y, "class": "poland", "type": typ, "dwellings": n, "per_1000_residents": "",
+                         "value_type": "reported" if typ in ("total", "house") else "derived", "formula": formula,
+                         "source_id": SRC["permits"]})
     return rows
 
 
@@ -259,7 +270,7 @@ def main():
     write(OUT / "housing_completions_by_class.csv", completions_rows(cs, pop))
     write(OUT / "housing_floor_area_by_class.csv", avg_area_rows(cs))
     write(OUT / "housing_stock_by_class.csv", stock_rows(cs, pop))
-    write(OUT / "housing_permits_by_class.csv", permits_rows(cs, pop))
+    write(OUT / "housing_permits_by_class.csv", permits_rows(cs, pop, nat))
     write(OUT / "housing_starts_big_cities_vs_rest.csv", starts_rows(nat, big_sums))
     write(OUT / "housing_completions_by_form_national.csv", forms_rows(nat))
     write(OUT / "housing_national_crosscheck.csv", crosscheck_rows(cs, nat))

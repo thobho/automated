@@ -73,6 +73,11 @@ class Others(unittest.TestCase):
         rows = {r["type"]: r["dwellings"] for r in ph.permits_rows(cs, {})}
         self.assertEqual(rows, {"total": 100, "house": 10, "flat": 75, "other": 15})
 
+    def test_permits_national_rows_for_years_without_class_data(self):
+        nat = {ph.V_PERMIT_TOTAL: {2010: 100}, ph.V_PERMIT_SF: {2010: 30}, ph.V_PERMIT_2: {2010: 10}, ph.V_PERMIT_3: {2010: 50}}
+        rows = {r["type"]: r["dwellings"] for r in ph.permits_rows({}, {}, nat) if r["class"] == "poland"}
+        self.assertEqual(rows, {"total": 100, "house": 30, "flat": 60, "other": 10})
+
     def test_starts_split_and_table_switch(self):
         nat = {217340: {2017: 1000}, 567218: {2017: 999, 2018: 800}}
         big = {217340: {2017: 300}, 567218: {2018: 250}}
