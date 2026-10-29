@@ -4,7 +4,6 @@ Projects built continuously by a Claude Code worker, fed from this repo's GitHub
 
 ## Add a task
 - **Phone:** GitHub app → this repo → Issues → New → **Agent task**. The template adds `agent:todo` for you.
-- **Terminal:** `scripts/new-task.sh -p my-project -t "Do the thing" -b "Details" [-m haiku|sonnet|opus] [--high]`
 
 **Order and dependencies:** write `Depends on: #12, #14` in the issue body and the agent won't start it until those issues are closed (PR merged). Among ready tasks: `priority:high` first, `priority:low` last, otherwise oldest first. `scripts/queue.sh` shows the order and what each task waits on.
 
