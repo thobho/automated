@@ -83,3 +83,22 @@ Decisions and conventions:
 - The three DEGURBA sources (two surveys, one census) are kept as separate `measure` values and not combined.
 - UN WPP and OECD were not used: Eurostat covers all indicators and all eight areas, see the report.
 - "Net migration" is Eurostat's residual (net migration plus statistical adjustment), not registered moves; Poland 2020 (-762,735) is mostly an adjustment and flagged b.
+
+## Task 04 - Housing vs Population (BDL)
+Report: `reports/05-housing-vs-population.md`. Rebuild: `python3 scripts/fetch_bdl_housing.py && python3 scripts/process_housing_population.py && python3 scripts/check_sources.py`
+
+| file | content | columns |
+|---|---|---|
+| `data/raw/bdl_housing_construction.csv` | Raw housing construction data from BDL API | year, indicator, value, source_id |
+| `data/processed/housing_vs_population.csv` | Core comparison metrics: dwellings per 1000 inhabitants, 5-year construction trends, housing type shares, indexed dynamics | year, class, measure, value, source_id, notes |
+
+Decisions and conventions:
+- **Chart-ready format**: All files are in tidy format (one row per year/class/measure) for direct visualization
+- **Place classes**: Same as defined in Task 01 (big cities, small cities, villages)
+- **Measures include**: 
+  - New dwellings per 1,000 inhabitants (flats and houses separately)
+  - New dwellings per additional resident (5-year windows)
+  - Share of houses vs flats in new construction
+  - Indexed dynamics (2000 = 100) of population and housing
+- **Source tracking**: Every value links to source_id or is marked derived with formula
+- **Current limitation**: Placeholder data used due to unavailable BDL variable IDs; actual implementation requires verification of housing construction variable IDs in BDL API
