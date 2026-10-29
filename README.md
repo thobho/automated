@@ -17,11 +17,11 @@ Projects built continuously by a Claude Code worker, fed from this repo's GitHub
 - **API keys** for tasks go in `~/.config/automated/secrets.env` (never committed).
 
 ## How the worker spends your limits
-A desktop-app scheduled task runs `agent/worker-prompt.md` every hour. Before each task it runs `agent/budget.py`:
-- 5-hour window must be under **80%**.
-- Weekly usage must stay under a line rising evenly to **80%** across the week (+5% buffer), so it never burns the week in a day.
+A desktop-app scheduled task (`automated-worker-2`, prompt in `agent/scheduled-task.md`) checks in every hour and runs `agent/worker-prompt.md`. Before each task it runs `agent/budget.py`, which spreads usage evenly:
+- **5-hour window:** usage must stay under a line rising evenly from **20%** at the window start to **80%** at its reset, so a window isn't burned in its first hour.
+- **Weekly:** usage must stay under a line rising evenly to **80%** across the week (+5% buffer), so it never burns the week in a day.
 
-That leaves at least 20% for your own work. Tune with `AGENT_FIVE_HOUR_CAP`, `AGENT_WEEKLY_CAP`, `AGENT_PACE_BUFFER`.
+Checking hourly is what makes the pacing work: a run that finds usage ahead of the line stops after the cheap gate. That leaves at least 20% for your own work. Tune with `AGENT_FIVE_HOUR_CAP`, `AGENT_FIVE_HOUR_BUFFER`, `AGENT_WEEKLY_CAP`, `AGENT_PACE_BUFFER`.
 
 ## Parallel runs
 Up to two worker runs build at the same time, each on its own task.
@@ -30,8 +30,9 @@ Up to two worker runs build at the same time, each on its own task.
 - **Shared resources:** add a `Uses: gus-bdl` line (comma-separated names) to issues that hit the same API, data or tool. The picker won't start one while another issue using the same thing is running.
 - **Own folder per task:** `scripts/task-worktree.sh <issue> <slug>` gives each task a git worktree in `../automated-work/issue-<n>`. The shared checkout stays on `main`.
 - **Usage:** a second run starts only while the 5-hour window is below 60% (`AGENT_PARALLEL_CAP`). The 80% caps apply to both.
+- **Other scheduled runners** can share the slots and the budget gate without using issues. `idea-generator` (branch `research/idea-generator`, prompt in `agent/scheduled-task.md`) takes a slot and claims `idea-generator`, and tracks its work in files instead of issues.
 
-Tests: `scripts/test-worker-lock.sh` and `python3 agent/test_pick_task.py`.
+Tests: `scripts/test-worker-lock.sh`, `python3 agent/test_pick_task.py` and `python3 agent/test_budget.py`.
 
 ## Layout
 `projects/<name>/` holds independent projects, each with its own README, CLAUDE.md and dependencies. `agent/` and `scripts/` hold the worker tooling.
