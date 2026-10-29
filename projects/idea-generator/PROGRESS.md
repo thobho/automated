@@ -25,7 +25,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links (timeouts, vary per run): woodpecker.co, landingi.com, codedesign.org, community.developer.atlassian.com, theygotacquired.com, api.sejm.gov.pl; criteria.md ones as in T01/T04/T05
 - [x] T10 · research lens 09 — Unit economics and defensibility · sonnet · needs: T01 · [tasks/10-research-lens-09-unit-economics-and-defe.md](tasks/10-research-lens-09-unit-economics-and-defe.md)
   Unverifiable links: developers.facebook.com WhatsApp pricing (400); criteria.md ones as in T01/T03/T04/T05
-- [ ] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
+- [~] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
+  Resume: starting
 - [ ] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
 - [ ] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
 - [ ] T14 · write-ups batch B · sonnet · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
