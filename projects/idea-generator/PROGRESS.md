@@ -5,8 +5,8 @@ A task can start when every task in its `needs` is `[x]`. Runs take the first `[
 Under each `[~]` task keep one indented **Resume:** line saying exactly where to continue.
 
 ## Tasks
-- [~] T01 · setup and method · opus · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
-  Resume: all T01 deliverables done (README, CLAUDE, CHANGELOG, rejected, method/criteria.md, tools/check_links.py + test, 13 tests pass); link check on criteria.md/README: 0 dead; unverifiable: producthunt.com, g2.com, allegro.pl, trustpilot.com (403), bdl.stat.gov.pl, elektroda.pl (timeout); next: runner reviews and marks T01 done
+- [x] T01 · setup and method · opus · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
+  Unverifiable links (criteria.md): producthunt.com, g2.com, allegro.pl, trustpilot.com (403); bdl.stat.gov.pl, elektroda.pl (timeout)
 - [ ] T02 · research lens 01 — Proven abroad, missing in Poland · sonnet · needs: T01 · [tasks/02-research-lens-01-proven-abroad-missing-i.md](tasks/02-research-lens-01-proven-abroad-missing-i.md)
 - [ ] T03 · research lens 02 — Weak or no competition · sonnet · needs: T01 · [tasks/03-research-lens-02-weak-or-no-competition.md](tasks/03-research-lens-02-weak-or-no-competition.md)
 - [ ] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
@@ -29,3 +29,4 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · model · what was done · next step -->
+2026-10-29 11:49 · T01 · opus · README, CHANGELOG, rejected, method/criteria.md (rubric, weights, bands, sources), tools/check_links.py + 13 tests passing; link check 42 ok/0 dead/6 unverifiable · next T02
