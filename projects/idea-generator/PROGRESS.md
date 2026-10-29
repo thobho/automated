@@ -12,7 +12,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T03 · research lens 02 — Weak or no competition · sonnet · needs: T01 · [tasks/03-research-lens-02-weak-or-no-competition.md](tasks/03-research-lens-02-weak-or-no-competition.md)
   Unverifiable links: Trustpilot profiles (ifirma, infakt, fakturownia, booksy, versum, inpost, vimcar.de, easyverein), api.github.com search URLs (403/422); criteria.md ones as in T01
 - [~] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
-  Resume: starting
+  Resume: poland-smb-pricing.md (F01-F08) and dach-and-eu-pricing.md (F09-F16) written; next us-and-global-niche-saas.md (Jobber, Housecall, Shepherd, Buildium, Tidio, Brand24 already fetched), then willingness-to-pay.md, README, criteria.md sources, link check
 - [ ] T05 · research lens 04 — Copy what already makes money · sonnet · needs: T01 · [tasks/05-research-lens-04-copy-what-already-makes.md](tasks/05-research-lens-04-copy-what-already-makes.md)
 - [ ] T06 · research lens 05 — Why now: regulation and tech triggers · sonnet · needs: T01 · [tasks/06-research-lens-05-why-now-regulation-and.md](tasks/06-research-lens-05-why-now-regulation-and.md)
 - [ ] T07 · research lens 06 — Evidence of pain and demand · sonnet · needs: T01 · [tasks/07-research-lens-06-evidence-of-pain-and-de.md](tasks/07-research-lens-06-evidence-of-pain-and-de.md)
