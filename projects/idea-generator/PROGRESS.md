@@ -27,8 +27,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links: developers.facebook.com WhatsApp pricing (400); criteria.md ones as in T01/T03/T04/T05
 - [x] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
   Unverifiable links: open.store Ceneo feed app page, apps.appfollow.io ProtrainUp (timeouts, more-markets.md); criteria.md ones as in T01
-- [~] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
-  Resume: done pending owner check — shortlist.csv 108 ideas, top 25 marked (wu_no 001–025, batches A 9 / B 8 / C 8), ideas/README.md documents columns and rules; coverage script: all 208 longlist IDs in shortlist.csv or rejected.md; next: T13–T15 write-ups
+- [x] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
+  Unverifiable links: none (only relative links added)
 - [ ] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
 - [ ] T14 · write-ups batch B · sonnet · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
 - [ ] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
@@ -40,6 +40,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · model · what was done · next step -->
+2026-10-29 17:20 · T12 · opus · 16 merges + 3 drops + 81 below cut (rounded weighted <2.4) → rejected.md; ideas/shortlist.csv 108 ideas scored L1..L9 with reasons citing findings; top 25 (max 3 per field, 13 fields) numbered 001–025, batches A 9 / B 8 / C 8; best I010 KSeF inbox for bookkeeping offices 3.4, none in 15–30% band; coverage 208/208 checked; ideas/README.md explains columns · next T13–T15
 2026-10-29 16:58 · T11 · opus · gap pass on lenses 1, 3, 5: +28 findings (L1-F19..F26 NL/FR/JP/CZ/NO/ES/BR; L3-F32..F41 Polish vertical and compliance prices; L5-F25..F34 voice/OCR/structured output, Data Act, GPSR, e-Doręczenia, sygnaliści, PKE, ETS2), CHANGELOG updated; ideas/longlist.md 208 ideas in 22 fields (6–15 each, ~160 seeded), near-duplicate list for T12; 9 dropped ideas in rejected.md; link check 0 dead · next T12
 2026-10-29 16:29 · T10 · sonnet · lens 09: 27 findings (L9-F01..F27) in 6 topic files, 9 seeds, coverage, 11 gaps; gross margin ~78–96% at 49–299 PLN except SMS-heavy (0.14–0.17 PLN/SMS) and 15% store commissions; SMB churn 2.5–6%/month, annual plans cut it (Buffer 7%→2.4%); lock-in from accounting records and consumer marketplaces; platform risk concrete (Allegro API terms, Reddit/Apollo, Shopify checkout sunsets, model retirements, WhatsApp pricing); free MF KSeF tools cap compliance pricing; churn data US/global only, no German searches; link check 0 dead · next T11 (all lenses done)
 2026-10-29 16:15 · T09 · sonnet · lens 08: 25 findings (L8-F01..F25) in 3 topic files, 9 seeds, coverage, 10 gaps; no platform hands out customers (Allegro showcase = 12 certified incumbents, DATEV-Marktplatz gated, Shopify ranks by installs/reviews, Atlassian Forge 0% to USD 1M); accounting-office referral commissions exist (ifirma PLN 10–100, wFirma 30%); cold e-mail needs prior consent in PL (PKE art. 398) and DE (UWG §7), registries CEIDG/REGON/KIDP free; SEO gap for Polish 'free/no login' KSeF phrases; ads only for message tests; founder stories self-reported, GOFIN/Indie Hackers 403; link check 0 dead · next T10
