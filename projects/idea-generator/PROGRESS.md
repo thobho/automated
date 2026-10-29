@@ -24,7 +24,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T09 · research lens 08 — Cheap distribution · sonnet · needs: T01 · [tasks/09-research-lens-08-cheap-distribution.md](tasks/09-research-lens-08-cheap-distribution.md)
   Unverifiable links (timeouts, vary per run): woodpecker.co, landingi.com, codedesign.org, community.developer.atlassian.com, theygotacquired.com, api.sejm.gov.pl; criteria.md ones as in T01/T04/T05
 - [~] T10 · research lens 09 — Unit economics and defensibility · sonnet · needs: T01 · [tasks/10-research-lens-09-unit-economics-and-defe.md](tasks/10-research-lens-09-unit-economics-and-defe.md)
-  Resume: T10 in progress — wrote costs-and-fees.md (L9-F01–F08); next: churn.md (Recurly, Lenny, Pointnine already read), switching-and-lockin.md, platform-risk.md, moats; then README, criteria.md, link check
+  Resume: T10 in progress — wrote costs-and-fees.md (F01–F08), churn.md (F09–F12), switching-and-lockin.md (F13–F16). Next: platform-risk.md (Allegro terms 23 Sep 2025 thread+L6-F10, Reddit/Apollo, Shopify checkout.liquid, Anthropic deprecations, free MF tools L8-F17/L2-F12), Polish tax basics (ryczałt 12% secondary), then README (Seeds/Coverage/Gaps), criteria.md, link check
 - [ ] T11 · gap pass and longlist · opus · needs: T02, T03, T04, T05, T06, T07, T08, T09, T10 · [tasks/11-gap-pass-and-longlist.md](tasks/11-gap-pass-and-longlist.md)
 - [ ] T12 · filter and shortlist · opus · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
 - [ ] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
