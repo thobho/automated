@@ -37,14 +37,16 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
   Unverifiable links: yadda.icm.edu.pl (403), wykop.pl, elektroda.pl (timeout, varies)
 - [x] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
   Unverifiable links: g2.com gatherup + float-vs-pulse, trustpilot fakturownia, yadda.icm.edu.pl, wolterskluwer.com alerty (403); tuntievo.pl (expired SSL); elektroda.pl (timeout)
-- [~] T17 · Phase 1 summary and validation plans · opus · needs: T16 · [tasks/17-phase-1-summary-and-validation-plans.md](tasks/17-phase-1-summary-and-validation-plans.md)
-  Resume: done-when met — reports/phase1-summary.md (sections 1–9, top 5 = 003, 001, 004, 006, 020) and README status written; link check 6 ok / 0 dead / 0 unverifiable, 110 relative links resolve; ready to mark [x]
+- [x] T17 · Phase 1 summary and validation plans · opus · needs: T16 · [tasks/17-phase-1-summary-and-validation-plans.md](tasks/17-phase-1-summary-and-validation-plans.md)
+  Unverifiable links: none (6 external ok; 122 relative links resolve)
 
 ## Blocked / questions for the owner
 (none)
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · model · what was done · next step -->
+2026-10-29 21:35 · all · — · every task T01–T17 is [x]; Phase 1 complete · next: owner reads reports/phase1-summary.md and runs validation tests
+2026-10-29 21:30 · T17 · opus · reports/phase1-summary.md (9 sections): funnel 208 longlist → 108 shortlist → 25 write-ups → 10 survive review, 257 findings, 18 countries; top 20 excludes rejected rows; top 5 for validation = 003 self-hosted KSeF gateway, 001 KSeF inbox for offices, 004 Podgląd KSeF, 006 review assistant, 020 Ceneo feed audit (reserves 005, 015, 017), ~30–35 h and 400–480 PLN in total over weeks 2–4, no cold e-mail (PKE art. 398); README status updated; link check 6 ok 0 dead, relative links resolve · next: owner review
 2026-10-29 20:35 · T16 · opus · reviewed 010–025, done: 15/25 write-ups now rejected or merged (002, 007, 008, 009, 010, 012, 013, 016, 018, 019, 021, 022, 023, 024, 025); kept 001, 003, 004, 005, 006, 011, 014, 015, 017, 020; only 003 self-hosted KSeF gateway (3.1) still 5–15%, all others <5% (015 fell to 2.6); 014 L6 set to 1 (knock-out); shortlist re-ranked and verified against write-ups; link check 293 links 0 dead 7 unverifiable · next T17
 2026-10-29 20:00 · T16 · opus · reviewed 001–009: 002, 007 (merged into 001), 008, 009 rejected; 001 2.9→2.6, 004 2.9→2.7, 005 2.9→2.7, 006 2.9→2.7 all now <5%; 003 3.2→3.1 is the only one still 5–15%; shortlist.csv L columns updated for reviewed rows (rank not yet re-sorted); link check 114 links 0 dead, 2 unverifiable (g2 gatherup, trustpilot fakturownia) · next T16 review 010
 2026-10-29 19:05 · T15 · sonnet · write-ups 018–025 (9–10 sources each), no swaps; every score fell 0.1–0.5, all now <5% (018 2.7, 019 2.5, 020 2.7, 021 2.6, 022 2.3, 023 2.5, 024 2.5, 025 2.5); new rivals found: Estetify/Fresha (018), Preply Lesson Insights (019), free KRS newsletter + Prześwietl (021), Anolla (022/023), PodpiszWycenę.pl (024); 019 and 022 flagged for T16 rejection; Trends unreadable, many figures from search summaries (marked); link check 72 links 0 dead · next T16
