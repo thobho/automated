@@ -7,8 +7,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 ## Tasks
 - [x] T01 · setup and method · opus · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
   Unverifiable links (criteria.md): producthunt.com, g2.com, allegro.pl, trustpilot.com (403); bdl.stat.gov.pl, elektroda.pl (timeout)
-- [~] T02 · research lens 01 — Proven abroad, missing in Poland · sonnet · needs: T01 · [tasks/02-research-lens-01-proven-abroad-missing-i.md](tasks/02-research-lens-01-proven-abroad-missing-i.md)
-  Resume: lens 01 complete (18 findings, 4 topic files, README with Seeds/Coverage/Gaps, criteria.md sources added); link check 0 dead, unverifiable: malt.com 403 plus criteria.md 403s. Awaiting human to mark [x].
+- [x] T02 · research lens 01 — Proven abroad, missing in Poland · sonnet · needs: T01 · [tasks/02-research-lens-01-proven-abroad-missing-i.md](tasks/02-research-lens-01-proven-abroad-missing-i.md)
+  Unverifiable links: malt.com (403, lens files); criteria.md ones as in T01
 - [ ] T03 · research lens 02 — Weak or no competition · sonnet · needs: T01 · [tasks/03-research-lens-02-weak-or-no-competition.md](tasks/03-research-lens-02-weak-or-no-competition.md)
 - [ ] T04 · research lens 03 — Clear monetization · sonnet · needs: T01 · [tasks/04-research-lens-03-clear-monetization.md](tasks/04-research-lens-03-clear-monetization.md)
 - [ ] T05 · research lens 04 — Copy what already makes money · sonnet · needs: T01 · [tasks/05-research-lens-04-copy-what-already-makes.md](tasks/05-research-lens-04-copy-what-already-makes.md)
@@ -30,4 +30,5 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · model · what was done · next step -->
+2026-10-29 11:57 · T02 · sonnet · lens 01: 18 findings (L1-F01..F18) in 4 topic files, 9 countries, 11 seeds, coverage, 8 gaps; link check 0 dead · next T03
 2026-10-29 11:49 · T01 · opus · README, CHANGELOG, rejected, method/criteria.md (rubric, weights, bands, sources), tools/check_links.py + 13 tests passing; link check 42 ok/0 dead/6 unverifiable · next T02
