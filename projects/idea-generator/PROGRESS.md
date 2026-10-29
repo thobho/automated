@@ -32,7 +32,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T13 · write-ups batch A · sonnet · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
   Unverifiable links: g2.com/products/gatherup/pricing, trustpilot.com/review/fakturownia.pl (403)
 - [~] T14 · write-ups batch B · sonnet · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
-  Resume: 010–013 written; next 014 I093 assembly minutes
+  Resume: 010–014 written; next 015 I027 NIS2 supplier-questionnaire kit
 - [ ] T15 · write-ups batch C · sonnet · needs: T12 · [tasks/15-write-ups-batch-c.md](tasks/15-write-ups-batch-c.md)
 - [ ] T16 · independent critical review · opus · needs: T13, T14, T15 · [tasks/16-independent-critical-review.md](tasks/16-independent-critical-review.md)
 - [ ] T17 · Phase 1 summary and validation plans · opus · needs: T16 · [tasks/17-phase-1-summary-and-validation-plans.md](tasks/17-phase-1-summary-and-validation-plans.md)
