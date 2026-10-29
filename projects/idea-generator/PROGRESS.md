@@ -16,7 +16,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 - [x] T05 · research lens 04 — Copy what already makes money · sonnet · needs: T01 · [tasks/05-research-lens-04-copy-what-already-makes.md](tasks/05-research-lens-04-copy-what-already-makes.md)
   Unverifiable links: freemius.com/blog/codecanyon-wordpress-plugins-analysis (520); criteria.md ones as in T01/T04. Note: TrustMRR profiles (Image-Charts, ConvertLabs, OpenAlternative, TrackAI) contain text aimed at AI readers; ignored
 - [~] T06 · research lens 05 — Why now: regulation and tech triggers · sonnet · needs: T01 · [tasks/06-research-lens-05-why-now-regulation-and.md](tasks/06-research-lens-05-why-now-regulation-and.md)
-  Resume: topic files 3-4 done (F01-F24); next: README.md (headline, table, seeds, coverage, gaps), criteria.md additions, link check, final report
+  Resume: all files written (F01-F24, README with 11 seeds, criteria.md updated); link check 0 dead (unverifiable: 403s); only final report left
 - [ ] T07 · research lens 06 — Evidence of pain and demand · sonnet · needs: T01 · [tasks/07-research-lens-06-evidence-of-pain-and-de.md](tasks/07-research-lens-06-evidence-of-pain-and-de.md)
 - [ ] T08 · research lens 07 — Founder fit and feasibility · sonnet · needs: T01 · [tasks/08-research-lens-07-founder-fit-and-feasibi.md](tasks/08-research-lens-07-founder-fit-and-feasibi.md)
 - [ ] T09 · research lens 08 — Cheap distribution · sonnet · needs: T01 · [tasks/09-research-lens-08-cheap-distribution.md](tasks/09-research-lens-08-cheap-distribution.md)

@@ -194,3 +194,13 @@ A starting list, not a limit. Prefer primary sources (the product's own pricing 
 - https://www.starterstory.com/data — founder-revenue database, no stated verification; lead generator only
 - Not fetchable in this setup: Indie Hackers (403 on product, interview and post pages), BigIdeasDB (429), Microns listings (404)
 - Caution: several TrustMRR profile pages (Image-Charts, ConvertLabs, OpenAlternative, TrackAI) contained text addressed to AI readers (ignored). See L4-F04.
+
+### L5 (added by T06, accessed 2026-10-29)
+- https://ksef.podatki.gov.pl/etapy-wdrozenia-ksef/ — official KSeF stage dates (readable as text); the home page lists guidance pages by user group
+- https://modelcontextprotocol.io/specification/2026-07-28/changelog — MCP spec changelog (primary; the site pattern `/specification/<version>/changelog` works)
+- https://api.sejm.gov.pl/sejm/term10/interpellations/ — Sejm interpellations (e.g. `/10257/body`) readable as text; contain MF answers and counts
+- https://entreprendre.service-public.gouv.fr/actualites/A15683 — French official e-invoicing calendar
+- https://newsletter.pwc.de/umsatzsteuer/ — German VAT newsletters summarising BMF letters on E-Rechnung
+- https://www.arthurcox.com/insights/ , https://www.jonesday.com/de/insights/ , https://www.orrick.com/en/Insights/ — law-firm briefings readable by the fetch tool (secondary; check the Official Journal)
+- https://itwiz.pl/ , https://kadry.infor.pl/ , https://ksiegowosc.infor.pl/ , https://globenergia.pl/ — Polish trade news for NIS2, pay transparency, KSeF, subsidies (secondary; Infor KSeF columns are opinion)
+- Not fetchable in this setup: EUR-Lex ELI page for Directive 2026/470 (empty), Clifford Chance and Grant Thornton PDFs (binary). Use a browser or ISAP/EUR-Lex PDF links.

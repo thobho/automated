@@ -1,0 +1,64 @@
+# Lens 5 — Why now: regulation and tech triggers
+
+Research for lens 5 of [BRIEF.md](../../BRIEF.md); scoring anchors in [method/criteria.md](../../method/criteria.md). All sources accessed 2026-10-29 (today). IDs `L5-Fnn` are stable anchors. This lens asks: **is there a dated, binding trigger inside ~18 months (by about April 2028) that makes the target customer act?** Whistleblowing prices and the German HinSchG case are in [L3-F14](../03-monetization/dach-and-eu-pricing.md#l3-f14--german-whistleblowing-channel-hinschg-79299-eurmonth-for-smes-35006000-euryear-for-enterprise-tools); Polish KSeF bundling and EAA remediation prices are in L3-F26 and L3-F30. Not repeated here.
+
+**Headline:** 24 findings (F01–F24) in four topic files, across Poland, Germany, France and EU-level rules. Patterns:
+1. **The strongest triggers are still invoicing.** KSeF reaches the last wave on **1 Jan 2027** (F01); Germany issues from **1 Jan 2027** (large) and **1 Jan 2028** (all) (F04); France from **1 Sep 2026/2027** (F05). Polish penalties are deferred, with sources disagreeing between end-2026, 2027 and 2028 (F02), and invoicing tools bundle KSeF free (L3-F26), so the trigger is strong but monetisation is weak at the micro end.
+2. **Several 2026 headline deadlines were softened.** CSRD now covers only firms above 1,000 employees and 450 mln EUR (F16); AI Act high-risk duties moved to **Dec 2027/Aug 2028** (F09); EUDR dates keep shifting (F18); Polish NIS2 fines wait until about April 2028 (F11). Any idea built on "SMEs must report ESG / high-risk AI by 2026" is built on a trigger that no longer exists.
+3. **Live and dated triggers inside the window:** NIS2 compliance by **3 Apr 2027** for 10,000+ Polish entities (F11), CRA reporting since **11 Sep 2026** with fines to 15 mln EUR (F12), CBAM certificate sales **1 Feb 2027** (F17), Art. 50 AI transparency since **2 Aug 2026** with labelling grace to **2 Dec 2026** (F09), MCP stateless spec migration over 12 months (F23), Czyste Powietrze heat-pump-only rule from **2027** (F22).
+4. **Poland-specific rule-making is slow:** pay transparency law expected only in **2027** (F21), AI act enforcement started **28 Oct 2026** (F10), DAC8 enacted late (F07). Waiting-for-law ideas need a fallback.
+5. **Only one deadline was a pure miss as product:** e-Doręczenia for sole traders (1 Oct 2026, F08) creates no paid need.
+
+## Topic files
+| File | Findings |
+|---|---|
+| [poland-and-eu-invoicing-tax.md](poland-and-eu-invoicing-tax.md) | F01 KSeF dates, F02 KSeF penalties, F03 KSeF audience size, F04 Germany E-Rechnung, F05 France e-invoicing, F06 ViDA 2030, F07 DAC8/DAC7, F08 e-Doręczenia |
+| [digital-cyber-ai-privacy.md](digital-cyber-ai-privacy.md) | F09 AI Act omnibus, F10 Polish AI act/KRiBSI, F11 NIS2 (KSC), F12 CRA, F13 GDPR/UODO fines, F14 PSD3/PSR, F15 EAA Poland |
+| [sustainability-products-hr.md](sustainability-products-hr.md) | F16 CSRD omnibus, F17 CBAM, F18 EUDR, F19 PPWR, F20 system kaucyjny, F21 pay transparency |
+| [energy-and-agent-tech.md](energy-and-agent-tech.md) | F22 Czyste Powietrze, F23 MCP spec 2026-07-28, F24 MCP adoption |
+
+## Strength at a glance
+| Verdict | Findings |
+|---|---|
+| Dated, binding, ≤18 months, primary or two agreeing sources | F01 (official page), F04, F05 (official page), F11, F12, F17 |
+| Binding but deadline soft or moved (penalties deferred, delays, Polish law pending) | F02, F09, F10, F16, F18, F21 |
+| Past deadline or low willingness to pay (counter-evidence) | F08, F13, F15, F16 (scope shrank) |
+| Beyond the 18-month window (supports a trend only) | F06 (2030) |
+| Technology trigger with primary source | F23 (spec changelog) |
+| Weak: search snippets only, status unclear | F07, F14, F19, F20, F24 |
+Counts of affected firms with an official source: F03 (1.75 mln VAT payers, interpellation). F11's 10,000+ is a ministry draft-stage estimate; most other triggers have **no counted audience** (see Gaps).
+
+## Seeds
+Idea sketches for the longlist (T11). Not validated; each links to its finding. L5 is only one of nine lenses: price evidence and competition need the other lenses.
+1. **KSeF numer-in-transfer and reconciliation add-on for bookkeeping offices**, active from 1 Jan 2027 (KSeF number required in transfers between VAT payers). Per-client pricing as in lens 3 seed 1. [L5-F01](poland-and-eu-invoicing-tax.md#l5-f01--ksef-is-mandatory-in-three-waves-1-feb-2026-1-apr-2026-1-jan-2027), [L5-F03](poland-and-eu-invoicing-tax.md#l5-f03--ksef-audience-about-175-million-active-vat-payers-voluntary-ksef-reached-only-5230-firms). Risk: penalties deferred (F02), free bundles (L3-F26).
+2. **German E-Rechnung validator and ZUGFeRD/XRechnung generator API for small ERP/Excel users**, sold in DE ahead of 1 Jan 2028 (smaller firms) with Polish dev cost base. [L5-F04](poland-and-eu-invoicing-tax.md#l5-f04--germany-e-rechnung-receiving-since-1-jan-2025-issuing-from-1-jan-2027-large-and-1-jan-2028-all). Risk: German competition (Lexware/sevDesk build it in), German-language support.
+3. **NIS2 readiness kit in Polish for the 10,000+ covered mid-size firms**: policies, risk register, supplier questionnaire, audit evidence tracker, aimed at the 3 Apr 2027 deadline. [L5-F11](digital-cyber-ai-privacy.md#l5-f11--nis2-in-poland-ksc-amendment-in-force-3-apr-2026-register-by-3-oct-2026-comply-by-3-apr-2027-first-audit-by-3-apr-2028). Needs competitor/price check (none seen). Fines only after Apr 2028 (low urgency).
+4. **CRA vulnerability-reporting and SBOM tracker for small software/IoT vendors** (24 h/72 h clocks, ENISA report drafts). [L5-F12](digital-cyber-ai-privacy.md#l5-f12--cyber-resilience-act-vulnerability-and-incident-reporting-live-since-11-sep-2026-fines-up-to-15-mln-eur-or-25-turnover-main-duties-from-11-dec-2027). Natural developer audience; the reporting API of the ENISA platform was not checked (Gaps).
+5. **Supplier-facing CBAM data collection and declaration builder for small importers**, deadline 30 Sep 2027 with quarterly cost estimates. [L5-F17](sustainability-products-hr.md#l5-f17--cbam-definitive-period-since-1-jan-2026-50-tonne-threshold-authorised-declarant-status-certificates-sold-from-1-feb-2027-first-declaration-30-sep-2027). Narrow audience, probably customs agents.
+6. **EUDR due-diligence statement helper for Polish wood/furniture/food importers**, 30 Dec 2026 (large/medium) and 30 Jun 2027 (small). [L5-F18](sustainability-products-hr.md#l5-f18--eudr-applies-30-dec-2026-large-and-medium-operators-30-jun-2027-micro-and-small-primary-operators-commission-review-did-not-reopen-the-text). Date has moved before; check the information-system API first.
+7. **Pay-gap report and pay-range checker from payroll exports** for Polish employers with 100+ employees. [L5-F21](sustainability-products-hr.md#l5-f21--pay-transparency-directive-transposition-deadline-7-jun-2026-missed-by-poland-law-expected-in-2027-draft-thresholds-at-100-employees). Timing depends on a 2027 Polish act; could start with other EU markets.
+8. **Art. 50 AI-transparency/labelling toolkit for chatbot and content users**: disclosure snippets, logs, audit pack. [L5-F09](digital-cyber-ai-privacy.md#l5-f09--eu-ai-act-digital-omnibus-annex-iii-high-risk-delayed-to-2-dec-2027-transparency-duties-art-50-start-2-aug-2026-watermarking-grace-to-2-dec-2026). Overlaps lens 3 compliance-tool ideas; fines unverified.
+9. **MCP 2026-07-28 migration and conformance tester** (stateless servers, `server/discover` checks), open core plus hosted checks. [L5-F23](energy-and-agent-tech.md#l5-f23--mcp-spec-revision-2026-07-28-is-stateless-and-breaks-older-servers-12-month-deprecation-window-for-old-features). Developer audience is reachable, but willingness to pay is untested.
+10. **Heat-pump installer toolkit for Czyste Powietrze** (eligibility check, ZUM list, application bundle) for the 2027 heat-pump-only switch. [L5-F22](energy-and-agent-tech.md#l5-f22--czyste-powietrze-from-2027-only-heat-pumps-among-electric-heating-changes-of-20-jul-2026-10-bn-pln-budget-70000-applications-since-mar-2025). Rule churn and NFOŚiGW portal dependency.
+11. **Polish MCP servers for public registers (KRS, CEIDG, KSeF API docs)** as a paid or lead-gen asset. [L5-F24](energy-and-agent-tech.md#l5-f24--mcp-adoption-governance-moved-to-the-linux-foundation-dec-2025-counts-of-servers-range-from-about-9600-to-about-16000-depending-on-the-source). Free official data limits price; low-evidence seed.
+
+## Coverage
+Counted from this session (2026-10-29), ±3.
+- **Searches run:** 23 web searches (PL 8, EN 12, DE 1, FR 1, mixed 1). Topics: KSeF dates, KSeF counts, AI Act omnibus, Polish AI act, NIS2 Poland, CSRD omnibus, ViDA, pay transparency Poland, deposit system, EUDR, CBAM, CRA, German E-Rechnung, French e-invoicing, Data Act, Czyste Powietrze, MCP, UODO fines, DAC8, PSD3/PSR, e-Doręczenia, PPWR, EAA Poland.
+- **Pages fetched with usable content:** 17: KSeF official site (2 pages), Fakturownia calendar, KPMG tax alert, Sejm interpellation 10257, Infor (2 articles), itwiz, Bankier, Orrick, Gibson Dunn, Arthur Cox, Jones Day, PwC newsletter DE, service-public.gouv.fr, MDDP, Globenergia, MCP changelog.
+- **Fetched but unusable:** Clifford Chance NIS2 PDF and Grant Thornton RODO PDF (binary, unreadable); EUR-Lex Directive 2026/470 page (empty); OpenRouter models API (10 entries, no modality data).
+- **Countries covered:** Poland (14 findings), Germany (F04), France (F05), EU level (F06, F09, F12, F14, F16–F19, F21 background), global tech (F23, F24). Not covered: Czechia, Nordics, Spain, Italy, Netherlands, Belgium (e-invoicing mandates), Brazil, India, Japan, Korea.
+- **Sectors:** accounting/tax (F01–F08), AI (F09, F10), cybersecurity (F11, F12), privacy/payments/accessibility (F13–F15), ESG/products (F16–F20), HR (F21), energy (F22), developer tooling (F23, F24).
+- **Searches that found nothing or gave only weak results:** official Polish KSeF taxpayer or invoice counts (none found beyond the 2025 interpellation); KSeF penalty amounts; Data Act (only Polish implementation status, no application dates or cloud-switching rules read; Polish authority reportedly UKE, undated source); official NIS2 final entity count; deposit-system store counts and fines; Polish packaging law/BDO (not searched); voice/vision/agent capability shifts (not researched).
+- **Data-quality flags:** most numbers come from law-firm and trade pages, not the Official Journal or ISAP; several dates conflict by a day (NIS2 2/3 Apr, Omnibus I 18/19 Mar). No page in this run contained text addressed to AI assistants beyond the standard `llms.txt` pointer in the MCP docs header (not followed).
+
+## Gaps
+1. **Official counts of affected entities** (KSeF non-VAT/exempt payers, NIS2, CRA manufacturers, CBAM importers, pay-gap reporters with 100+ employees). Next: GUS/BDL by size class, KAS and Ministry of Finance answers, ENISA/Commission impact assessments.
+2. **Penalty amounts** for KSeF, Polish AI act, pay transparency, EAA, e-Doręczenia and the DAC8 law. Next: ISAP text of each act (isap.sejm.gov.pl) and Dz.U. numbers.
+3. **Existing solutions and prices** for NIS2, CRA, CBAM, EUDR, pay-gap tooling were not looked at. Next: vendor pricing pages (reuse the lens 3 method), Capterra via browser, Polish consultancies' offers.
+4. **Primary-text verification**: EUR-Lex for Directive 2026/470, Regulation 2025/2083, 2025/40, 2024/2847, 2023/970 and the AI omnibus; ISAP for the KSC amendment and the AI act. Next: fetch the ELI/EUR-Lex PDFs with a browser session.
+5. **Technology shifts beyond MCP** (voice agents, vision, cheaper LLMs, structured output) are not covered with sources. Next: OpenRouter model pages, vendor release notes, price histories; target "feature that became possible/cheap in the last 12 months".
+6. **Data Act, GPSR, ePrivacy/Prawo komunikacji elektronicznej, DAC7 platform duties, ETS2, Ciepłe Mieszkanie, whistleblower act enforcement in Poland, ZUS/PIT changes for 2027** were not researched in this run. Next: one search each, then isap/podatki.gov.pl.
+7. **Other countries** (CZ, NL, BE, ES, IT, Nordics e-invoicing and ESG mandates): only DE and FR read. Next: Belgium 2026, Poland-adjacent Czech e-invoice plans.
+8. **Whether the ENISA CRA platform and the EU EUDR information system offer public APIs** (decides feasibility of seeds 4 and 6): not checked.
+9. **KSeF second-order effects** (how many micro firms really act in Jan 2027; accountant behaviour): needs lens 6 (pain) evidence.
