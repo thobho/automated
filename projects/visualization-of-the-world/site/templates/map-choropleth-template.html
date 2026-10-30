@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Map Choropleth Template</title>
+  <meta name="description" content="Template for creating choropleth maps">
+  
+  <!-- Preload fonts for performance -->
+  <link rel="preload" href="../vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Design system styles -->
+  <link rel="stylesheet" href="../vendor/design/tokens.css">
+  <link rel="stylesheet" href="../vendor/design/components.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <!-- Top bar included from shell.js -->
+  
+  <main id="main" class="site-main">
+    <div class="container">
+      <!-- Page header -->
+      <div class="page-head">
+        <h1>Map Choropleth Template</h1>
+        <p class="lede">Example of a choropleth map showing regional variations</p>
+      </div>
+      
+      <!-- Chart container -->
+      <div class="grid" id="figures"></div>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="../js/shell.js"></script>
+  <script src="../vendor/lib/echarts-6.1.0.min.js"></script>
+  <script src="../vendor/lib/topojson-client-3.1.0.min.js"></script>
+  <script src="../vendor/design/components.js"></script>
+  <script src="../js/votw-core.js"></script>
+  <script src="../js/votw-charts.js"></script>
+  
+  <!-- Map choropleth specification -->
+  <script>
+    // Map choropleth specification
+    const mapChoroplethSpec = {
+      id: "map-choropleth-example", 
+      title: "Regional Distribution", 
+      subtitle: "Choropleth map. Showing metric distribution across regions (synthetic data)",
+      source: { 
+        label: "GUGiK PRG boundaries (simplified) + synthetic demo values", 
+        url: "https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-granic-prg/", 
+        meta: "values: synthetic demo data" 
+      }, 
+      
+      // Data loading function
+      async load() { 
+        const [maps, regs] = await Promise.all([Votw.ensureMaps(), Votw.data.regions()]);
+        return { maps, regs };
+      },
+      
+      // CSV export function
+      csv(d) {
+        // Example data transformation for CSV export
+        return { 
+          header: ["region", "teryt", "value"], 
+          rows: d.regs.regions.map(r => [r.name, r.teryt, Math.random() * 100])
+        };
+      },
+      
+      // Chart rendering function
+      build(d) {
+        // Prepare map data
+        const mapData = d.regs.regions.map(r => ({
+          name: r.teryt,
+          value: Math.random() * 100
+        }));
+        
+        // Color ramp for choropleth
+        const ramp = Votw.mapRamp();
+        const colors = [0, 2, 3, 4, 6].map(i => ramp[i]);
+        
+        return Votw.base({
+          tooltip: Votw.tooltip({ 
+            trigger: "item", 
+            formatter: (params) => {
+              // Find region name
+              const region = d.regs.regions.find(r => r.teryt == params.name);
+              const regionName = region ? region.name : params.name;
+              
+              return Votw.tipRows(regionName, [{
+                color: params.color, 
+                label: "Value", 
+                value: params.value !== undefined ? Votw.fmt(params.value, 1) : "no data"
+              }]);
+            }
+          }),
+          visualMap: Votw.visualMapBase({ 
+            type: "piecewise", 
+            orient: "horizontal", 
+            left: 0, 
+            bottom: 0, 
+            pieces: [
+              { lt: 20, label: "<20", color: colors[0] },
+              { gte: 20, lt: 40, label: "20-40", color: colors[1] },
+              { gte: 40, lt: 60, label: "40-60", color: colors[2] },
+              { gte: 60, lt: 80, label: "60-80", color: colors[3] },
+              { gte: 80, label: "80+", color: colors[4] }
+            ],
+            itemGap: 6,
+            itemWidth: 12,
+            textGap: 4,
+            textStyle: Votw.textStyle({ fontSize: 11 })
+          }),
+          series: [{
+            type: "map",
+            map: "pl",
+            nameProperty: "teryt",
+            roam: true,
+            scaleLimit: { min: 1, max: 20 },
+            top: 8,
+            bottom: 40,
+            data: mapData,
+            itemStyle: { 
+              borderColor: Votw.cssVar("--color-map-boundary"), 
+              borderWidth: 1, 
+              areaColor: Votw.cssVar("--color-map-nodata") 
+            },
+            emphasis: { 
+              label: { show: false }, 
+              itemStyle: { 
+                borderColor: Votw.cssVar("--color-text-primary"), 
+                borderWidth: 2 
+              } 
+            },
+            select: { disabled: true },
+            label: { show: false },
+            animationDurationUpdate: Votw.ms("--dur-slow")
+          }]
+        });
+      },
+      
+      // Height function
+      height: (w) => (w < 600 ? 420 : 560)
+    };
+    
+    // Mount the chart when page loads
+    (function () {
+      document.addEventListener('DOMContentLoaded', function() {
+        Votw.figure(document.getElementById("figures"), mapChoroplethSpec);
+      });
+    })();
+  </script>
+</body>
+</html>

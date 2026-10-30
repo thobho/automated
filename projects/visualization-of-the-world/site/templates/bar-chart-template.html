@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bar Chart Template</title>
+  <meta name="description" content="Template for creating bar charts">
+  
+  <!-- Preload fonts for performance -->
+  <link rel="preload" href="../vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Design system styles -->
+  <link rel="stylesheet" href="../vendor/design/tokens.css">
+  <link rel="stylesheet" href="../vendor/design/components.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <!-- Top bar included from shell.js -->
+  
+  <main id="main" class="site-main">
+    <div class="container">
+      <!-- Page header -->
+      <div class="page-head">
+        <h1>Bar Chart Template</h1>
+        <p class="lede">Example of a bar chart comparing categories</p>
+      </div>
+      
+      <!-- Chart container -->
+      <div class="grid" id="figures"></div>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="../js/shell.js"></script>
+  <script src="../vendor/lib/echarts-6.1.0.min.js"></script>
+  <script src="../vendor/lib/topojson-client-3.1.0.min.js"></script>
+  <script src="../vendor/design/components.js"></script>
+  <script src="../js/votw-core.js"></script>
+  <script src="../js/votw-charts.js"></script>
+  
+  <!-- Bar chart specification -->
+  <script>
+    // Bar chart specification
+    const barChartSpec = {
+      id: "bar-example", 
+      title: "Category Comparison", 
+      subtitle: "Bar chart. Comparing values across different categories (synthetic data)",
+      source: window.Votw.DEMO_SOURCE, 
+      
+      // Data loading function
+      async load() { 
+        return await Votw.data.regions();
+      },
+      
+      // CSV export function
+      csv(d) {
+        // Example data transformation for CSV export
+        const categories = ["Category A", "Category B", "Category C", "Category D"];
+        return { 
+          header: ["category", "value"], 
+          rows: categories.map(cat => [cat, Math.random() * 100])
+        };
+      },
+      
+      // Chart rendering function
+      build(d) {
+        // Sample categories and data
+        const categories = ["Category A", "Category B", "Category C", "Category D"];
+        const values = categories.map(() => Math.random() * 100);
+        
+        return Votw.base({
+          legend: Votw.legend({ show: false }),
+          grid: Votw.grid(),
+          tooltip: Votw.tooltip({ 
+            formatter: (params) => {
+              return Votw.tipRows(params.name, [{
+                color: params.color, 
+                label: "Value", 
+                value: Votw.fmt(params.value, 1)
+              }]);
+            },
+            axisPointer: { type: "shadow" }
+          }),
+          xAxis: Votw.catAxis(categories, {
+            axisLabel: Object.assign(Votw.textStyle(), { 
+              interval: 0,
+              rotate: window.innerWidth < 600 ? 45 : 0
+            })
+          }),
+          yAxis: Votw.valueAxis(),
+          series: [{
+            name: "Categories",
+            type: "bar",
+            barMaxWidth: 56,
+            data: values,
+            itemStyle: { 
+              color: Votw.cssVar("--data-cat-1"),
+              borderRadius: [4, 4, 0, 0]
+            },
+            emphasis: { focus: "series" }
+          }]
+        });
+      },
+      
+      // Height function
+      height: (w) => (w < 600 ? 360 : 340)
+    };
+    
+    // Mount the chart when page loads
+    (function () {
+      document.addEventListener('DOMContentLoaded', function() {
+        Votw.figure(document.getElementById("figures"), barChartSpec);
+      });
+    })();
+  </script>
+</body>
+</html>

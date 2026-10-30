@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Place Toggle Template</title>
+  <meta name="description" content="Template for creating charts with place type filters">
+  
+  <!-- Preload fonts for performance -->
+  <link rel="preload" href="../vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Design system styles -->
+  <link rel="stylesheet" href="../vendor/design/tokens.css">
+  <link rel="stylesheet" href="../vendor/design/components.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <!-- Top bar included from shell.js -->
+  
+  <main id="main" class="site-main">
+    <div class="container">
+      <!-- Page header -->
+      <div class="page-head">
+        <h1>Place Toggle Template</h1>
+        <p class="lede">Example of a chart with place type filtering controls</p>
+      </div>
+      
+      <!-- Chart container -->
+      <div class="grid" id="figures"></div>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="../js/shell.js"></script>
+  <script src="../vendor/lib/echarts-6.1.0.min.js"></script>
+  <script src="../vendor/lib/topojson-client-3.1.0.min.js"></script>
+  <script src="../vendor/design/components.js"></script>
+  <script src="../js/votw-core.js"></script>
+  <script src="../js/votw-charts.js"></script>
+  
+  <!-- Place toggle specification -->
+  <script>
+    // Place toggle specification
+    const placeToggleSpec = {
+      id: "place-toggle-example", 
+      title: "Filtered Data by Place Type", 
+      subtitle: "Chart with place type filtering controls (synthetic data)",
+      source: window.Votw.DEMO_SOURCE, 
+      
+      // Data loading function
+      async load() { 
+        return await Votw.data.regions();
+      },
+      
+      // CSV export function
+      csv(d, ctl) {
+        // Export data filtered by active place types
+        const activeTypes = ctl.extra && ctl.extra.active ? ctl.extra.active : ["big_cities", "small_cities", "villages"];
+        
+        return { 
+          header: ["year", ...activeTypes], 
+          rows: d.years.map((year, i) => {
+            // Calculate averages for active types
+            const averages = activeTypes.map(type => {
+              const sum = d.regions.reduce((acc, r) => acc + (r.shares[type] ? r.shares[type][i] : 0), 0);
+              return Math.round(sum / d.regions.length * 10) / 10;
+            });
+            return [year, ...averages];
+          })
+        };
+      },
+      
+      // Custom controls function
+      controls(container, ctl) {
+        // Initialize extra data for the controller
+        ctl.extra = ctl.extra || { active: ["big_cities", "small_cities", "villages"] };
+        
+        // Create controls HTML
+        const CHECK = '<svg class="place-toggle__check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg>';
+        
+        container.innerHTML = `
+          <fieldset class="place-toggle" data-place-toggle>
+            <legend>Filter by place type</legend>
+            <div class="place-toggle__options">
+              <button type="button" data-place="big-cities" aria-pressed="true" style="--swatch:var(--data-place-big-cities)">
+                <span class="place-toggle__swatch" aria-hidden="true"></span>
+                Big cities
+                ${CHECK}
+              </button>
+              <button type="button" data-place="small-cities" aria-pressed="true" style="--swatch:var(--data-place-small-cities)">
+                <span class="place-toggle__swatch" aria-hidden="true"></span>
+                Small cities
+                ${CHECK}
+              </button>
+              <button type="button" data-place="villages" aria-pressed="true" style="--swatch:var(--data-place-villages)">
+                <span class="place-toggle__swatch" aria-hidden="true"></span>
+                Villages
+                ${CHECK}
+              </button>
+            </div>
+            <p class="field__error" data-place-status aria-live="polite"></p>
+          </fieldset>
+        `;
+        
+        // Add event listener for place toggle
+        const toggleGroup = container.querySelector('[data-place-toggle]');
+        toggleGroup.addEventListener('placechange', (e) => {
+          ctl.extra.active = e.detail.active.map(k => k.replace(/-/g, '_'));
+          ctl.render();
+        });
+      },
+      
+      // Chart rendering function
+      build(d, ctl) {
+        // Use active place types or default to all
+        const activeTypes = ctl.extra && ctl.extra.active ? ctl.extra.active : ["big_cities", "small_cities", "villages"];
+        
+        // Labels for place types
+        const labels = {
+          "big_cities": "Big cities",
+          "small_cities": "Small cities",
+          "villages": "Villages"
+        };
+        
+        // Calculate data series for active types
+        const seriesData = activeTypes.map(type => {
+          return d.years.map((year, i) => {
+            // Calculate average for this type across all regions
+            const sum = d.regions.reduce((acc, r) => acc + (r.shares[type] ? r.shares[type][i] : 0), 0);
+            return Math.round(sum / d.regions.length * 10) / 10;
+          });
+        });
+        
+        // Years for x-axis
+        const years = d.years.map(String);
+        
+        return Votw.base({
+          legend: Votw.legend(),
+          grid: Votw.grid({ right: 96 }),
+          tooltip: Votw.tooltip({ 
+            formatter: (params) => {
+              return Votw.tipRows(params[0].axisValueLabel || params[0].name, 
+                params.map(p => ({
+                  color: p.color, 
+                  label: p.seriesName, 
+                  value: Votw.fmt(p.value, 1)
+                }))
+              );
+            }
+          }),
+          xAxis: Votw.catAxis(years, { 
+            boundaryGap: false,
+            axisLabel: Object.assign(Votw.textStyle(), { 
+              interval: window.innerWidth < 600 ? 7 : 4 
+            }) 
+          }),
+          yAxis: Votw.valueAxis(),
+          series: activeTypes.map((type, index) => ({
+            name: labels[type],
+            type: "line",
+            data: seriesData[index],
+            symbol: "none",
+            showSymbol: false,
+            lineStyle: { width: 2 },
+            itemStyle: { color: Votw.placeColor(type) },
+            emphasis: { focus: "series" },
+            endLabel: { 
+              show: true, 
+              formatter: "{a}", 
+              color: Votw.cssVar("--color-text-primary"), 
+              fontWeight: 600, 
+              fontSize: 12 
+            }
+          }))
+        });
+      },
+      
+      // Height function
+      height: (w) => (w < 600 ? 320 : 360)
+    };
+    
+    // Mount the chart when page loads
+    (function () {
+      document.addEventListener('DOMContentLoaded', function() {
+        Votw.figure(document.getElementById("figures"), placeToggleSpec);
+      });
+    })();
+  </script>
+</body>
+</html>
