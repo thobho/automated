@@ -1,6 +1,6 @@
 # T24 — independent critical review
 
-**Model:** fable (medium effort) · **Needs:** T21, T22, T23
+**Model:** opus (medium effort) · **Needs:** T21, T22, T23
 
 Read `projects/idea-generator/phase2/BRIEF.md` first and follow its Rules. Commit and push after every small unit and keep your Resume line in `phase2/PROGRESS.md` current. Run the link check on changed files before reporting DONE.
 

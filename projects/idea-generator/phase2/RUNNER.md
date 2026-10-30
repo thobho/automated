@@ -22,7 +22,7 @@ Read `projects/idea-generator/phase2/PROGRESS.md`. Take the first `[~]` task. Ot
 Mark it `[~]`, add an indented `Resume: starting` line under it, commit `idea-generator: phase2 start T<NN>`, push.
 
 ## 4. Do the work
-Start **one subagent** (Agent tool) with `model: "fable"` and `effort: "medium"` for every task (the owner chose this; don't change it). Give it:
+Start **one subagent** (Agent tool) with `model: "opus"` and `effort: "medium"` for every task (the owner chose this on 2026-10-30; don't change it). Give it:
 - the working copy path, and the instruction never to touch `/Users/user/Projects/automated`;
 - the full text of `phase2/BRIEF.md` and of the task file;
 - the task's current **Resume** line and the relevant files already on the branch;

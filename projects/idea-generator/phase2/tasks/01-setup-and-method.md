@@ -1,6 +1,6 @@
 # T01 — setup and method
 
-**Model:** fable (medium effort) · **Needs:** —
+**Model:** opus (medium effort) · **Needs:** —
 
 Read `projects/idea-generator/phase2/BRIEF.md` first and follow its Rules. Commit and push after every small unit and keep your Resume line in `phase2/PROGRESS.md` current. Run the link check on changed files before reporting DONE.
 

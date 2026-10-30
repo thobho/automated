@@ -1,6 +1,6 @@
 # T06 — regional scan R2 UK & Ireland
 
-**Model:** fable (medium effort) · **Needs:** T01
+**Model:** opus (medium effort) · **Needs:** T01
 
 Read `projects/idea-generator/phase2/BRIEF.md` first and follow its Rules. Commit and push after every small unit and keep your Resume line in `phase2/PROGRESS.md` current. Run the link check on changed files before reporting DONE.
 

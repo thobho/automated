@@ -1,6 +1,6 @@
 # T15 — consolidate catalogue into themes
 
-**Model:** fable (medium effort) · **Needs:** T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14
+**Model:** opus (medium effort) · **Needs:** T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14
 
 Read `projects/idea-generator/phase2/BRIEF.md` first and follow its Rules. Commit and push after every small unit and keep your Resume line in `phase2/PROGRESS.md` current. Run the link check on changed files before reporting DONE.
 
