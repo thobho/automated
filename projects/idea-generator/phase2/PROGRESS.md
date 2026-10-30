@@ -7,7 +7,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Tasks
 - [~] T01 · setup and method · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
-  Resume: CHANGELOG, rejected.md, method/criteria.md done; next write method/countries.md, then sources.md, then link check
+  Resume: CHANGELOG, rejected.md, criteria.md, countries.md done; next write method/sources.md (global + 2 local per region), then link check on all four
 - [ ] T02 · Poland baseline: demography and social change · needs: T01 · [tasks/02-poland-baseline-demography-and-social-ch.md](tasks/02-poland-baseline-demography-and-social-ch.md)
 - [ ] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
 - [ ] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)

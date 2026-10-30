@@ -127,13 +127,13 @@ One row per product in `catalogue/RN-<name>.csv`, UTF-8, comma-separated, header
 | `name` | Product name as on its site | `Abridge` |
 | `country` | Country where the company is based or the product first grew (English name from the brief) | `United States` |
 | `region` | `R1`–`R10` | `R1` |
-| `url` | Product home page (checked) | `https://…` |
+| `url` | Product home page (checked) | `https://www.abridge.com/` |
 | `launched` | Year (or year-month) of launch or breakout, with "launch"/"breakout"; `unknown` | `2023 launch` |
 | `category` | Short field label, reused across rows (e.g. healthcare-admin, legal, hr, accounting, sales, real-estate, education, consumer-health) | `healthcare-admin` |
 | `b2b_b2c` | `B2B`, `B2C` or `B2B2C` | `B2B` |
 | `llm_role` | What the LLM does, a few words (agent, voice, vision, document understanding, generation, classification) | `voice: transcribes visits, drafts notes` |
 | `traction` | Number + what it measures + date | `"ARR 100M USD, 2025-06"` |
-| `traction_source` | URL of the source for `traction` (+ access date in `YYYY-MM-DD`) | `https://… 2026-11-02` |
+| `traction_source` | URL of the source for `traction` (+ access date in `YYYY-MM-DD`) | `<source URL> 2026-11-02` |
 | `country_specific` | `y`/`n` + why (does it depend on that country's laws, systems or habits?) | `"y: built on US Medicare billing codes"` |
 | `works_in_polish` | `unknown` / `no` / `partly` / `yes`, from trying it or its docs | `partly` |
 | `first_channel` | How its first customers came (marketplace, SEO, community, partners, viral loop, outbound, paid ads), or `unknown` | `"partners: health-system pilots"` |
