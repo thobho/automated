@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Line Chart Template</title>
+  <meta name="description" content="Template for creating line charts">
+  
+  <!-- Preload fonts for performance -->
+  <link rel="preload" href="../vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Design system styles -->
+  <link rel="stylesheet" href="../vendor/design/tokens.css">
+  <link rel="stylesheet" href="../vendor/design/components.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <!-- Top bar included from shell.js -->
+  
+  <main id="main" class="site-main">
+    <div class="container">
+      <!-- Page header -->
+      <div class="page-head">
+        <h1>Line Chart Template</h1>
+        <p class="lede">Example of a line chart showing trends over time</p>
+      </div>
+      
+      <!-- Chart container -->
+      <div class="grid" id="figures"></div>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="../js/shell.js"></script>
+  <script src="../vendor/lib/echarts-6.1.0.min.js"></script>
+  <script src="../vendor/lib/topojson-client-3.1.0.min.js"></script>
+  <script src="../vendor/design/components.js"></script>
+  <script src="../js/votw-core.js"></script>
+  <script src="../js/votw-charts.js"></script>
+  
+  <!-- Line chart specification -->
+  <script>
+    // Line chart specification
+    const lineChartSpec = {
+      id: "line-example", 
+      title: "Trend Over Time", 
+      subtitle: "Line chart. Showing how a metric changes over time (synthetic data)",
+      source: window.Votw.DEMO_SOURCE, 
+      
+      // Data loading function
+      async load() { 
+        return await Votw.data.regions();
+      },
+      
+      // CSV export function
+      csv(d) {
+        // Example data transformation for CSV export
+        return { 
+          header: ["year", "metric"], 
+          rows: d.years.map((year, i) => [year, Math.random() * 100])
+        };
+      },
+      
+      // Chart rendering function
+      build(d) {
+        // Years for x-axis
+        const years = d.years.map(String);
+        
+        // Sample data series
+        const seriesData = d.years.map(() => Math.random() * 100);
+        
+        return Votw.base({
+          legend: Votw.legend(),
+          grid: Votw.grid({ right: 96 }),
+          tooltip: Votw.tooltip({ 
+            formatter: (params) => {
+              return Votw.tipRows(params[0].axisValueLabel || params[0].name, [{
+                color: params[0].color, 
+                label: params[0].seriesName, 
+                value: Votw.fmt(params[0].value, 1)
+              }]);
+            } 
+          }),
+          xAxis: Votw.catAxis(years, { 
+            boundaryGap: false,
+            axisLabel: Object.assign(Votw.textStyle(), { 
+              interval: window.innerWidth < 600 ? 7 : 4 
+            }) 
+          }),
+          yAxis: Votw.valueAxis(),
+          series: [{
+            name: "Metric",
+            type: "line",
+            data: seriesData,
+            symbol: "none",
+            showSymbol: false,
+            lineStyle: { width: 2 },
+            itemStyle: { color: Votw.cssVar("--data-cat-1") },
+            emphasis: { focus: "series" },
+            endLabel: { 
+              show: true, 
+              formatter: "{a}", 
+              color: Votw.cssVar("--color-text-primary"), 
+              fontWeight: 600, 
+              fontSize: 12 
+            }
+          }]
+        });
+      },
+      
+      // Height function
+      height: (w) => (w < 600 ? 320 : 360)
+    };
+    
+    // Mount the chart when page loads
+    (function () {
+      document.addEventListener('DOMContentLoaded', function() {
+        Votw.figure(document.getElementById("figures"), lineChartSpec);
+      });
+    })();
+  </script>
+</body>
+</html>

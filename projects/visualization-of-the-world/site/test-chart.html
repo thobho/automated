@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Chart - Visualization Playbook</title>
+  <meta name="description" content="Test chart created using the visualization playbook">
+  
+  <!-- Preload fonts for performance -->
+  <link rel="preload" href="vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Design system styles -->
+  <link rel="stylesheet" href="vendor/design/tokens.css">
+  <link rel="stylesheet" href="vendor/design/components.css">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <!-- Top bar included from shell.js -->
+  
+  <main id="main" class="site-main">
+    <div class="container">
+      <!-- Page header -->
+      <div class="page-head">
+        <h1>Test Chart</h1>
+        <p class="lede">Verification that the playbook works correctly</p>
+      </div>
+      
+      <!-- Chart container -->
+      <div class="grid" id="figures"></div>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="js/shell.js"></script>
+  <script src="vendor/lib/echarts-6.1.0.min.js"></script>
+  <script src="vendor/lib/topojson-client-3.1.0.min.js"></script>
+  <script src="vendor/design/components.js"></script>
+  <script src="js/votw-core.js"></script>
+  <script src="js/votw-charts.js"></script>
+  
+  <!-- Test chart specification -->
+  <script>
+    // Test chart specification following the playbook rules
+    const testChartSpec = {
+      id: "test-chart", 
+      title: "Playbook Verification Chart", 
+      subtitle: "Line chart testing the visualization playbook implementation (synthetic data)",
+      source: window.Votw.DEMO_SOURCE, 
+      
+      // Data loading function
+      async load() { 
+        return await Votw.data.regions();
+      },
+      
+      // CSV export function
+      csv(d) {
+        // Simple CSV export with synthetic data
+        return { 
+          header: ["year", "value"], 
+          rows: d.years.map((year, i) => [year, 50 + Math.sin(i/2) * 30 + Math.random() * 10])
+        };
+      },
+      
+      // Chart rendering function using design system tokens
+      build(d) {
+        // Generate synthetic trend data
+        const values = d.years.map((_, i) => 50 + Math.sin(i/2) * 30 + Math.random() * 10);
+        const years = d.years.map(String);
+        
+        return Votw.base({
+          legend: Votw.legend({ show: false }),
+          grid: Votw.grid({ right: 96 }),
+          tooltip: Votw.tooltip({ 
+            formatter: (params) => {
+              return Votw.tipRows(params[0].axisValueLabel || params[0].name, [{
+                color: params[0].color, 
+                label: "Value", 
+                value: Votw.fmt(params[0].value, 1)
+              }]);
+            } 
+          }),
+          xAxis: Votw.catAxis(years, { 
+            boundaryGap: false,
+            axisLabel: Object.assign(Votw.textStyle(), { 
+              interval: window.innerWidth < 600 ? 7 : 4 
+            }) 
+          }),
+          yAxis: Votw.valueAxis({ min: 0, max: 100 }),
+          series: [{
+            name: "Test Metric",
+            type: "line",
+            data: values,
+            symbol: "none",
+            showSymbol: false,
+            lineStyle: { width: 2, color: Votw.cssVar("--data-cat-1") },
+            itemStyle: { color: Votw.cssVar("--data-cat-1") },
+            emphasis: { focus: "series" },
+            endLabel: { 
+              show: true, 
+              formatter: "{a}", 
+              color: Votw.cssVar("--color-text-primary"), 
+              fontWeight: 600, 
+              fontSize: 12 
+            }
+          }]
+        });
+      },
+      
+      // Responsive height function
+      height: (w) => (w < 600 ? 320 : 360)
+    };
+    
+    // Mount the chart when page loads
+    (function () {
+      document.addEventListener('DOMContentLoaded', function() {
+        Votw.figure(document.getElementById("figures"), testChartSpec);
+      });
+    })();
+  </script>
+</body>
+</html>

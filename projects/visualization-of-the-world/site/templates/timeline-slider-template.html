@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Timeline Slider Template</title>
+  <meta name="description" content="Template for creating charts with timeline sliders">
+  
+  <!-- Preload fonts for performance -->
+  <link rel="preload" href="../vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Design system styles -->
+  <link rel="stylesheet" href="../vendor/design/tokens.css">
+  <link rel="stylesheet" href="../vendor/design/components.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <!-- Top bar included from shell.js -->
+  
+  <main id="main" class="site-main">
+    <div class="container">
+      <!-- Page header -->
+      <div class="page-head">
+        <h1>Timeline Slider Template</h1>
+        <p class="lede">Example of a chart with interactive timeline controls</p>
+      </div>
+      
+      <!-- Chart container -->
+      <div class="grid" id="figures"></div>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="../js/shell.js"></script>
+  <script src="../vendor/lib/echarts-6.1.0.min.js"></script>
+  <script src="../vendor/lib/topojson-client-3.1.0.min.js"></script>
+  <script src="../vendor/design/components.js"></script>
+  <script src="../js/votw-core.js"></script>
+  <script src="../js/votw-charts.js"></script>
+  
+  <!-- Timeline slider specification -->
+  <script>
+    // Timeline slider specification
+    const timelineSliderSpec = {
+      id: "timeline-example", 
+      title: "Time Series with Controls", 
+      subtitle: "Interactive chart with timeline slider and play controls (synthetic data)",
+      source: window.Votw.DEMO_SOURCE, 
+      
+      // Data loading function
+      async load() { 
+        return await Votw.data.regions();
+      },
+      
+      // CSV export function
+      csv(d, ctl) {
+        // Export data for current year if specified, otherwise all years
+        const yearIndex = ctl.extra ? ctl.extra.yearIndex : null;
+        if (yearIndex !== null) {
+          return { 
+            header: ["region", "value"], 
+            rows: d.regions.map(r => [r.name, r.shares.villages[yearIndex]])
+          };
+        } else {
+          return { 
+            header: ["year", ...d.regions.map(r => r.name)], 
+            rows: d.years.map((year, i) => [year, ...d.regions.map(r => r.shares.villages[i])])
+          };
+        }
+      },
+      
+      // Custom controls function
+      controls(container, ctl) {
+        // Initialize extra data for the controller
+        ctl.extra = ctl.extra || { yearIndex: 0 };
+        
+        // Create controls HTML
+        container.innerHTML = `
+          <div class="year-player" data-year-player>
+            <button class="btn btn--icon" type="button" data-play aria-pressed="false" aria-label="Odtwórz zmiany w czasie">
+              <svg class="player-icon-play" data-icon-play viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="player-icon-pause" data-icon-pause viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" hidden><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+            </button>
+            <output class="year-player__year">2000</output>
+            <input type="range" min="0" max="25" value="0" step="1" id="year-range">
+            <div class="year-player__ticks"><span>2000</span><span>2025</span></div>
+          </div>
+        `;
+        
+        // Get references to control elements
+        const range = container.querySelector('input[type="range"]');
+        const output = container.querySelector('output');
+        
+        // Update output when range changes
+        range.addEventListener('input', () => {
+          output.textContent = 2000 + parseInt(range.value);
+          ctl.extra.yearIndex = parseInt(range.value);
+          ctl.render();
+        });
+        
+        // Handle play/pause button
+        const playButton = container.querySelector('[data-play]');
+        playButton.addEventListener('click', () => {
+          const isPlaying = playButton.getAttribute('aria-pressed') === 'true';
+          playButton.setAttribute('aria-pressed', String(!isPlaying));
+          
+          if (!isPlaying) {
+            // Start playing
+            playButton.setAttribute('aria-label', 'Zatrzymaj odtwarzanie');
+            playButton.querySelector('[data-icon-play]').hidden = true;
+            playButton.querySelector('[data-icon-pause]').hidden = false;
+            
+            // Auto advance
+            const advance = () => {
+              if (parseInt(range.value) >= parseInt(range.max)) {
+                // Reset to beginning
+                range.value = '0';
+                output.textContent = '2000';
+                ctl.extra.yearIndex = 0;
+                ctl.render();
+              } else {
+                // Advance by one
+                range.value = String(parseInt(range.value) + 1);
+                output.textContent = String(2000 + parseInt(range.value));
+                ctl.extra.yearIndex = parseInt(range.value);
+                ctl.render();
+              }
+              
+              // Continue playing if still pressed
+              if (playButton.getAttribute('aria-pressed') === 'true') {
+                setTimeout(advance, 1000);
+              }
+            };
+            
+            setTimeout(advance, 1000);
+          } else {
+            // Stop playing
+            playButton.setAttribute('aria-label', 'Odtwórz zmiany w czasie');
+            playButton.querySelector('[data-icon-play]').hidden = false;
+            playButton.querySelector('[data-icon-pause]').hidden = true;
+          }
+        });
+      },
+      
+      // Chart rendering function
+      build(d, ctl) {
+        // Use current year index or default to 0
+        const yearIndex = ctl.extra ? ctl.extra.yearIndex : 0;
+        const currentYear = 2000 + yearIndex;
+        
+        // Sample data for current year
+        const data = d.regions.map(r => ({
+          name: r.name,
+          value: r.shares.villages[yearIndex] || 0
+        }));
+        
+        return Votw.base({
+          legend: Votw.legend({ show: false }),
+          grid: Votw.grid(),
+          tooltip: Votw.tooltip({ 
+            formatter: (params) => {
+              return Votw.tipRows(params.name, [{
+                color: params.color, 
+                label: `Value (${currentYear})`, 
+                value: Votw.fmt(params.value, 1)
+              }]);
+            },
+            axisPointer: { type: "shadow" }
+          }),
+          xAxis: Votw.catAxis(
+            d.regions.map(r => r.name.length > 10 ? r.name.substring(0, 10) + '...' : r.name), 
+            {
+              axisLabel: Object.assign(Votw.textStyle(), { 
+                interval: 0,
+                rotate: window.innerWidth < 600 ? 45 : 0
+              })
+            }
+          ),
+          yAxis: Votw.valueAxis(),
+          series: [{
+            name: `Year ${currentYear}`,
+            type: "bar",
+            barMaxWidth: 56,
+            data: data.map(item => item.value),
+            itemStyle: { 
+              color: Votw.cssVar("--data-cat-1"),
+              borderRadius: [4, 4, 0, 0]
+            },
+            emphasis: { focus: "series" }
+          }]
+        });
+      },
+      
+      // Height function
+      height: (w) => (w < 600 ? 400 : 380)
+    };
+    
+    // Mount the chart when page loads
+    (function () {
+      document.addEventListener('DOMContentLoaded', function() {
+        Votw.figure(document.getElementById("figures"), timelineSliderSpec);
+      });
+    })();
+  </script>
+</body>
+</html>

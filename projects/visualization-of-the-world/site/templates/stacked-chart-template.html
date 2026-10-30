@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stacked Chart Template</title>
+  <meta name="description" content="Template for creating stacked charts">
+  
+  <!-- Preload fonts for performance -->
+  <link rel="preload" href="../vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Design system styles -->
+  <link rel="stylesheet" href="../vendor/design/tokens.css">
+  <link rel="stylesheet" href="../vendor/design/components.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <!-- Top bar included from shell.js -->
+  
+  <main id="main" class="site-main">
+    <div class="container">
+      <!-- Page header -->
+      <div class="page-head">
+        <h1>Stacked Chart Template</h1>
+        <p class="lede">Example of a stacked chart showing composition over time</p>
+      </div>
+      
+      <!-- Chart container -->
+      <div class="grid" id="figures"></div>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="../js/shell.js"></script>
+  <script src="../vendor/lib/echarts-6.1.0.min.js"></script>
+  <script src="../vendor/lib/topojson-client-3.1.0.min.js"></script>
+  <script src="../vendor/design/components.js"></script>
+  <script src="../js/votw-core.js"></script>
+  <script src="../js/votw-charts.js"></script>
+  
+  <!-- Stacked chart specification -->
+  <script>
+    // Stacked chart specification
+    const stackedChartSpec = {
+      id: "stacked-example", 
+      title: "Composition Over Time", 
+      subtitle: "Stacked area chart. Showing how components contribute to a whole over time (synthetic data)",
+      source: window.Votw.DEMO_SOURCE, 
+      
+      // Data loading function
+      async load() { 
+        return await Votw.data.regions();
+      },
+      
+      // CSV export function
+      csv(d) {
+        // Example data transformation for CSV export
+        const components = ["Component A", "Component B", "Component C"];
+        return { 
+          header: ["year", ...components], 
+          rows: d.years.map((year, i) => {
+            const total = 100;
+            const a = Math.random() * total;
+            const b = Math.random() * (total - a);
+            const c = total - a - b;
+            return [year, a, b, c];
+          })
+        };
+      },
+      
+      // Chart rendering function
+      build(d) {
+        // Years for x-axis
+        const years = d.years.map(String);
+        
+        // Sample data series for components
+        const componentA = d.years.map(() => Math.random() * 40);
+        const componentB = d.years.map(() => Math.random() * 30);
+        const componentC = d.years.map(() => Math.random() * 30);
+        
+        return Votw.base({
+          legend: Votw.legend(),
+          grid: Votw.grid(),
+          tooltip: Votw.tooltip({ 
+            formatter: (params) => {
+              const parts = params.map(p => ({
+                color: p.color,
+                label: p.seriesName,
+                value: Votw.fmt(p.value, 1)
+              }));
+              return Votw.tipRows(params[0].axisValueLabel || params[0].name, parts);
+            }
+          }),
+          xAxis: Votw.catAxis(years, { 
+            boundaryGap: false,
+            axisLabel: Object.assign(Votw.textStyle(), { 
+              interval: window.innerWidth < 600 ? 7 : 4 
+            }) 
+          }),
+          yAxis: Votw.valueAxis({ max: 100 }),
+          series: [
+            {
+              name: "Component A",
+              type: "line",
+              stack: "total",
+              areaStyle: { opacity: 0.85 },
+              symbol: "none",
+              lineStyle: { width: 1, color: Votw.cssVar("--color-chart-surface") },
+              itemStyle: { color: Votw.cssVar("--data-cat-1") },
+              color: Votw.cssVar("--data-cat-1"),
+              emphasis: { focus: "series" },
+              data: componentA
+            },
+            {
+              name: "Component B",
+              type: "line",
+              stack: "total",
+              areaStyle: { opacity: 0.85 },
+              symbol: "none",
+              lineStyle: { width: 1, color: Votw.cssVar("--color-chart-surface") },
+              itemStyle: { color: Votw.cssVar("--data-cat-2") },
+              color: Votw.cssVar("--data-cat-2"),
+              emphasis: { focus: "series" },
+              data: componentB
+            },
+            {
+              name: "Component C",
+              type: "line",
+              stack: "total",
+              areaStyle: { opacity: 0.85 },
+              symbol: "none",
+              lineStyle: { width: 1, color: Votw.cssVar("--color-chart-surface") },
+              itemStyle: { color: Votw.cssVar("--data-cat-3") },
+              color: Votw.cssVar("--data-cat-3"),
+              emphasis: { focus: "series" },
+              data: componentC
+            }
+          ]
+        });
+      },
+      
+      // Height function
+      height: (w) => (w < 600 ? 320 : 360)
+    };
+    
+    // Mount the chart when page loads
+    (function () {
+      document.addEventListener('DOMContentLoaded', function() {
+        Votw.figure(document.getElementById("figures"), stackedChartSpec);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -49,6 +49,16 @@ site/
 
 For real data later replace `Votw.DEMO_SOURCE` with the real source (publisher, table code, access date) and remove the DEMO tag in `votw-charts.js`.
 
+## Templates
+
+Reusable chart templates are available in `templates/`:
+- Basic structure templates for different chart types
+- Pre-built components for common interactions (timeline, filters)
+- Proper source footer implementations
+- Accessible color schemes and layouts
+
+Always start with a template rather than building from scratch.
+
 ## Checks
 ```
 python3 -m unittest discover -s tests                 # generator determinism, flags, matrix completeness

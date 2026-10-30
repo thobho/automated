@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Map Bubbles Template</title>
+  <meta name="description" content="Template for creating bubble maps">
+  
+  <!-- Preload fonts for performance -->
+  <link rel="preload" href="../vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Design system styles -->
+  <link rel="stylesheet" href="../vendor/design/tokens.css">
+  <link rel="stylesheet" href="../vendor/design/components.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <!-- Top bar included from shell.js -->
+  
+  <main id="main" class="site-main">
+    <div class="container">
+      <!-- Page header -->
+      <div class="page-head">
+        <h1>Map Bubbles Template</h1>
+        <p class="lede">Example of a bubble map showing point data</p>
+      </div>
+      
+      <!-- Chart container -->
+      <div class="grid" id="figures"></div>
+    </div>
+  </main>
+  
+  <!-- Scripts -->
+  <script src="../js/shell.js"></script>
+  <script src="../vendor/lib/echarts-6.1.0.min.js"></script>
+  <script src="../vendor/lib/topojson-client-3.1.0.min.js"></script>
+  <script src="../vendor/design/components.js"></script>
+  <script src="../js/votw-core.js"></script>
+  <script src="../js/votw-charts.js"></script>
+  
+  <!-- Map bubbles specification -->
+  <script>
+    // Map bubbles specification
+    const mapBubblesSpec = {
+      id: "map-bubbles-example", 
+      title: "Point Data Distribution", 
+      subtitle: "Bubble map. Showing point data with bubble sizes representing values (synthetic data)",
+      source: { 
+        label: "GUGiK PRG boundaries (simplified) + synthetic demo values", 
+        url: "https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-granic-prg/", 
+        meta: "values: synthetic demo data" 
+      }, 
+      
+      // Data loading function
+      async load() { 
+        const [maps, cities] = await Promise.all([Votw.ensureMaps(), Votw.data.cities()]);
+        const geo = await Votw.data.citiesGeo();
+        const by = Object.fromEntries(cities.map(r => [r.teryt, r]));
+        return { maps, cities: geo.features.map(f => ({ f, r: by[f.properties.teryt] })).filter(x => x.r) };
+      },
+      
+      // CSV export function
+      csv(d) {
+        // Example data transformation for CSV export
+        return { 
+          header: ["city", "teryt", "value", "size"], 
+          rows: d.cities.map(x => [x.r.name, x.r.teryt, Math.random() * 100, Math.random() * 50])
+        };
+      },
+      
+      // Chart rendering function
+      build(d) {
+        // Prepare bubble data
+        const bubbleData = d.cities.map(x => ({
+          name: x.r.name,
+          value: [...x.f.geometry.coordinates, Math.random() * 50, "category"]
+        }));
+        
+        return Votw.base({
+          tooltip: Votw.tooltip({ 
+            trigger: "item", 
+            formatter: (params) => {
+              return Votw.tipRows(params.name, [
+                { color: params.color, label: "Category", value: "" },
+                { color: params.color, label: "Value", value: Votw.fmt(params.value[2], 1) }
+              ]);
+            }
+          }),
+          geo: {
+            map: "pl",
+            nameProperty: "teryt",
+            roam: true,
+            scaleLimit: { min: 1, max: 20 },
+            silent: false,
+            itemStyle: { 
+              areaColor: Votw.cssVar("--color-bg-sunken"), 
+              borderColor: Votw.cssVar("--color-border-strong"), 
+              borderWidth: 0.8 
+            },
+            emphasis: { disabled: true },
+            select: { disabled: true },
+            label: { show: false },
+            zoom: 1
+          },
+          series: [{
+            name: "Cities",
+            type: "scatter",
+            coordinateSystem: "geo",
+            color: Votw.cssVar("--data-cat-1"),
+            data: bubbleData,
+            symbolSize: (v) => Math.sqrt(v[2]) * 1.1 + 3,
+            itemStyle: { 
+              color: Votw.cssVar("--data-cat-1"), 
+              opacity: 0.75, 
+              borderColor: Votw.cssVar("--color-bg-surface"), 
+              borderWidth: 0.8 
+            },
+            emphasis: { 
+              itemStyle: { 
+                opacity: 1, 
+                borderColor: Votw.cssVar("--color-text-primary"), 
+                borderWidth: 2 
+              } 
+            }
+          }]
+        });
+      },
+      
+      // Height function
+      height: (w) => (w < 600 ? 420 : 560)
+    };
+    
+    // Mount the chart when page loads
+    (function () {
+      document.addEventListener('DOMContentLoaded', function() {
+        Votw.figure(document.getElementById("figures"), mapBubblesSpec);
+      });
+    })();
+  </script>
+</body>
+</html>
