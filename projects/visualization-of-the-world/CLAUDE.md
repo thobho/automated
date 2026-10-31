@@ -91,3 +91,10 @@ Templates are available in `site/templates/`:
 - `timeline-slider-template.html` - Charts with time playback controls
 - `place-toggle-template.html` - Charts with place type filters
 - `source-footer-template.html` - Proper source footer implementation
+
+### Playbook Validation
+
+See `PLAYBOOK-TEST-RESULTS.md` for test results demonstrating that:
+- The playbook works correctly for creating valid charts
+- The verification script detects both valid and invalid implementations
+- All templates follow project standards and pass checks

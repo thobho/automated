@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Broken Chart - Should Fail Verification</title>
+  <meta name="description" content="Intentionally broken chart for testing verification">
+  
+  <!-- Missing preload directives -->
+  
+  <!-- Missing design system styles -->
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <!-- Missing top bar -->
+  
+  <main id="main" class="site-main">
+    <div class="container">
+      <!-- Page header -->
+      <div class="page-head">
+        <h1>Broken Chart</h1>
+        <p class="lede">This chart intentionally has issues to test verification</p>
+      </div>
+      
+      <!-- Chart container -->
+      <div class="grid" id="figures"></div>
+    </div>
+  </main>
+  
+  <!-- Missing shell.js -->
+  <script src="vendor/lib/echarts-6.1.0.min.js"></script>
+  <!-- Missing topojson-client -->
+  <!-- Missing components.js -->
+  <script src="js/votw-core.js"></script>
+  <script src="js/votw-charts.js"></script>
+  
+  <!-- Broken chart specification -->
+  <script>
+    // BROKEN: Missing source attribution
+    const brokenChartSpec = {
+      id: "broken-chart", 
+      title: "Broken Chart", 
+      subtitle: "This chart has intentional issues for testing",
+      // MISSING SOURCE OBJECT - This should cause verification to fail
+      
+      // Data loading function with potential error
+      async load() { 
+        // This might fail if data isn't available
+        return await Votw.data.regions();
+      },
+      
+      // Chart rendering function
+      build(d) {
+        // BROKEN: Using hardcoded color instead of tokens
+        return {
+          // Missing Votw.base() wrapper
+          series: [{
+            name: "Broken Series",
+            type: "line",
+            data: [10, 20, 30, 40, 50],
+            // HARDCODED COLOR - violates design system rules
+            itemStyle: { color: "#ff0000" },
+            // Missing accessibility attributes
+          }]
+        };
+      },
+      
+      // Missing height function
+    };
+    
+    // Mount the chart when page loads
+    (function () {
+      document.addEventListener('DOMContentLoaded', function() {
+        // This might fail due to missing dependencies
+        try {
+          Votw.figure(document.getElementById("figures"), brokenChartSpec);
+        } catch (e) {
+          console.error("Chart failed to render:", e);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
