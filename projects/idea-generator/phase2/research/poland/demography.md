@@ -89,4 +89,37 @@ How Polish society is changing and what new demand that creates for 2026–2035.
 | D38 | Ministry of Family *Barometr zawodów 2026*: **17 shortage occupations** (6 fewer than 2025, no surplus occupations, 90% balanced). Shortages concentrate in **care and health** (psychologists and therapists, doctors, nurses and midwives, carers of older or disabled people), **transport** (warehouse workers, bus and truck drivers), **education** (vocational, special-needs and general-subject teachers), construction installers, welders, electricians, uniformed services and **independent accountants**. Bus drivers short in 232 of ~380 powiats. | MRPiPS, *Barometr zawodów 2026 – raport ogólnopolski*: [PDF](https://barometrzawodow.pl//forecast-card-zip/2026/report_pl/raport_ogolnopolski_2026.pdf), p. 20–23 |
 | D39 | PIE/BGK business survey, July 2026: **labour costs are the top barrier (66% of firms)**; about half cite **unavailability of workers**; construction firms report worker shortages most often, TSL (transport-logistics) firms the most barriers overall. | PIE, *MIK w lipcu 2026* press release: [PDF](https://pie.net.pl/wp-content/uploads/2026/07/2026_07_07_MIK-w-lipcu_Nastroje-poprawiaja-sie-drugi-miesiac-z-rzedu-wbrew-uciazliwym-barierom.pdf) |
 
-<!-- next sections: I regions and suburbs; J education; K incomes and spending; L housing -->
+### I. Regions and the urban–suburban shift
+
+| ID | Finding | Source |
+|---|---|---|
+| D40 | Only **five voivodeships gain people through internal migration** (mazowieckie, pomorskie, małopolskie, dolnośląskie, wielkopolskie); the largest losers are lubelskie, podkarpackie, świętokrzyskie, warmińsko-mazurskie and śląskie. **Rural areas gained 36.1 thousand** net internal migrants in 2025 (42.4 thousand in 2024): the suburban ring around cities, as most moves (76%) stay within a voivodeship. | GUS, *Sytuacja demograficzna… do 2025 r.* ([PDF](https://stat.gov.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5468/40/6/1/sytuacja_demograficzna_polski_do_2025_2.pdf)), ch. 2.5 |
+| D41 | Suburban municipalities grew **23.8% in 2001–2021** (10.5% in 2011–2021) while large, medium and small cities lost ~6% in 2011–2021; all 30 fastest-growing gminas since 2002 (>84%) border large cities, led by the Poznań, Warsaw and Wrocław rings. | PIE analysis of census data via [Dziennik Warto Wiedzieć, 2022-09-30](https://wartowiedziec.pl/serwis-glowny/aktualnosci/65945-narodowy-spis-powszechny-czyli-gdzie-polacy-chca-mieszkac) |
+| D42 | Births are concentrated in growing metro regions (małopolskie, mazowieckie, pomorskie: 7.1–7.5‰) vs. 5.3‰ in świętokrzyskie; healthy life expectancy ranges from 63.5 years (men, wielkopolskie) to 60.1 (men, lubelskie). | GUS, *Sytuacja demograficzna… do 2025 r.* ([PDF](https://stat.gov.pl/download/gfx/portalinformacyjny/pl/defaultaktualnosci/5468/40/6/1/sytuacja_demograficzna_polski_do_2025_2.pdf)), ch. 2.1–2.2 |
+
+### J. Education
+
+| ID | Finding | Source |
+|---|---|---|
+| D43 | **Reforma26 "Kompas Jutra"**: new core curriculum from **1 Sept 2026 in preschools and grades I and IV**, secondary schools from 1 Sept 2027; old and new curricula run side by side until 2031/32; first exams (*egzamin ósmoklasisty*, *matura*) on the new curriculum in **2030/31**. Every year a new cohort of teachers and parents meets new content. | Draft amendment to *Prawo oświatowe* via [Portal Oświatowy, 2025-07-03](https://www.portaloswiatowy.pl/projekty-aktow-prawnych-dla-oswiaty/reforma-edukacji-2026-sprawdz-jakie-zmiany-planuje-men-26568.html); start date confirmed in 2026 reporting by [Eska](https://www.eska.pl/news/polska/potezne-zmiany-w-szkolach-od-1-wrzesnia-2026-men-wprowadza-nowa-podstawe-programowa-aa-kogD-Bcga-9WSv.html) |
+| D44 | Preschool enrolment reached **997 per 1,000 children aged 3–6** in 2024/25 (698 in 2015/16); 54.7% of people aged 19–24 are in education. Shrinking birth cohorts (D02) mean fewer pupils every year from now on. | GUS, *Polska w liczbach 2026* ([PDF](https://plwliczbach.stat.gov.pl/pl/assets/pdf/polska-w-liczbach-2026.pdf)), p. 4 |
+| D45 | Teachers are a shortage occupation: vocational, practical-training, special-needs and general-subject teachers are all on the 2026 shortage list (D38). | MRPiPS, *Barometr zawodów 2026*: [PDF](https://barometrzawodow.pl//forecast-card-zip/2026/report_pl/raport_ogolnopolski_2026.pdf), p. 22 |
+
+### K. Incomes and spending
+
+| ID | Finding | Source |
+|---|---|---|
+| D46 | Average **disposable income per person in households: 3,500.21 PLN/month in 2025** (1,386.16 in 2015, i.e. ×2.5 nominal); 30.2% comes from social benefits. Real wages grew 9.3% in 2024 and 5.5% in 2025. | GUS, *Polska w liczbach 2026* ([PDF](https://plwliczbach.stat.gov.pl/pl/assets/pdf/polska-w-liczbach-2026.pdf)), p. 8 and 10 |
+| D47 | **GDP per capita in PPS reached 81% of the EU average in 2025**, the highest ever (44% in 1995), Eurostat preliminary estimate. | Eurostat via [Notes from Poland, 2026-03-26](https://notesfrompoland.com/2026/03/26/polands-wealth-gap-to-eu-average-narrows-to-record-low-level/) |
+| D48 | Services inflation outpaces goods (2025: services +6.0%, goods +2.7%); prices of cold water +144.5% and bread +53.3% between 2015 and 2025: households feel the cost of services and housing more than of goods. | GUS, *Polska w liczbach 2026* ([PDF](https://plwliczbach.stat.gov.pl/pl/assets/pdf/polska-w-liczbach-2026.pdf)), p. 9 |
+
+### L. Housing
+
+| ID | Finding | Source |
+|---|---|---|
+| D49 | **208.3 thousand dwellings completed in 2025** (147.7 thousand in 2015), 5.6 per 1,000 residents; average new dwelling 87.0 m² (99.8 m² in 2015). | GUS, *Polska w liczbach 2026* ([PDF](https://plwliczbach.stat.gov.pl/pl/assets/pdf/polska-w-liczbach-2026.pdf)), p. 11 |
+| D50 | About **434 dwellings per 1,000 residents** at end-2025 (estimate from GUS data), vs. an EU average of ~514 (OECD, 2022); stock ~16.2 million, of which over a million lack modern standards. Shortage estimates range from ~1 to 2 million dwellings depending on method. | [Bank.pl (B. Turek), 2026-02-01](https://bank.pl/?p=538932); shortage range per [XYZ.pl analysis](https://xyz.pl/czy-w-polsce-naprawde-brakuje-dwoch-milionow-mieszkan/) (not read in full) |
+| D51 | NBP Q2 2026: prices **stable in nominal terms, falling relative to wages** (Warsaw primary −2.8% y/y real); new zloty mortgage lending **29.5 bn PLN in Q2 2026, +26.8% y/y**; mortgage stock 530.1 bn PLN. | NBP housing report via [Bank.pl, 2026-10-01](https://bank.pl/?p=560926) |
+| D52 | UN WPP 2024 (medium variant): Poland **32.8 million in 2050, with 31.8% aged 65+**. | UN World Population Prospects 2024 via [PopulationPyramid.net](https://www.populationpyramid.net/poland/2050/) |
+
+
