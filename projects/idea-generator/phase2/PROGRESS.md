@@ -9,7 +9,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T01 · setup and method · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
   Unverifiable links (bot-blocked, sites exist): g2.com/best-software-companies/fastest-growing, netokracija.com, qstp.org.qa, cuti.org.uy, brutkasten.com, datanews.be, timesofmalta.com
 - [~] T02 · Poland baseline: demography and social change · needs: T01 · [tasks/02-poland-baseline-demography-and-social-ch.md](tasks/02-poland-baseline-demography-and-social-ch.md)
-  Resume: demography.md has all findings A–L (D01–D52); next: write Demand drivers, Coverage and Gaps sections, then run link check and fix dead links
+  Resume: demography.md complete (D01–D50, Demand drivers DD1–DD12, Coverage, Gaps); next: run link check, fix dead links, report
 - [ ] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
 - [ ] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
 - [ ] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
