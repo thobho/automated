@@ -36,3 +36,6 @@ Tests: `scripts/test-worker-lock.sh`, `python3 agent/test_pick_task.py` and `pyt
 
 ## Layout
 `projects/<name>/` holds independent projects, each with its own README, CLAUDE.md and dependencies. `agent/` and `scripts/` hold the worker tooling.
+
+## Live site
+`projects/visualization-of-the-world/site/` (real GUS/Eurostat showcase plus the synthetic demo pages) is deployed to GitHub Pages by `.github/workflows/deploy-pages.yml` on pushes to `main`. Data sources, the proxy/direct distinction and the deploy steps are in [projects/visualization-of-the-world/site/README.md](projects/visualization-of-the-world/site/README.md).

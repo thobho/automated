@@ -1,6 +1,8 @@
 // Chart framework on top of ECharts 6.1.0 and the design tokens.
-// Votw.figure(host, spec) builds a card with title, DEMO tag, states, chart, legend, tools and the mandatory
-// "Source:" footer (a spec without `source` throws: no source, no chart).
+// Votw.figure(host, spec) builds a card with title, provenance tag, states, chart, legend, tools and the
+// mandatory "Source:" footer (a spec without `source` throws: no source, no chart).
+// `real: true` marks a spec fed by the processed GUS/Eurostat CSVs: the tag becomes REAL DATA, the footer
+// and exports name the source ids instead of the DEMO warning, and CSV exports carry a source_id column.
 (function () {
   "use strict";
   const C = window.VotwCore;
@@ -10,6 +12,8 @@
   const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const DEMO = "DEMO DATA, NOT REAL";
+  const REAL = "REAL DATA";
+  const REAL_ARN = "Real data: Statistics Poland (GUS) and Eurostat; exact sources in the footer.";
   const $ = (r, s) => r.querySelector(s);
 
   // ---------- data loading (cached promises) ----------
@@ -32,6 +36,16 @@
     citiesGeo: () => once("citiesGeo", () => fetchJson("data/geo/cities.geojson")),
     // The canonical regions dataset: JSON (single fetch) as { years, regions:[{teryt,name,shares}] }
     regions: () => once("regions", async () => { const j = await fetchJson("data/demo.json"); return { years: j.years, regions: j.regions, meta: j.meta }; }),
+    // Real data: verbatim copies of research/poland-demography-housing/data/processed/*.csv in data/real/.
+    // Rows keep every column, including source_id, so footers and CSV exports can name the source.
+    realPopulation: () => once("realPopulation", async () => C.parseCsv(await fetchText("data/real/population_by_class.csv"))),
+    realCompletions: () => once("realCompletions", async () => C.parseCsv(await fetchText("data/real/housing_completions_by_class.csv"))),
+    realHousingVsPop: () => once("realHousingVsPop", async () => C.parseCsv(await fetchText("data/real/housing_vs_population.csv"))),
+    realStock: () => once("realStock", async () => C.parseCsv(await fetchText("data/real/housing_stock_by_class.csv"))),
+    realMigration: () => once("realMigration", async () => C.parseCsv(await fetchText("data/real/migration_by_place_class.csv"))),
+    realEurope: () => once("realEurope", async () => C.parseCsv(await fetchText("data/real/europe_annual.csv"))),
+    realEuropeSummary: () => once("realEuropeSummary", async () => C.parseCsv(await fetchText("data/real/europe_summary.csv"))),
+    realBigCities: () => once("realBigCities", async () => C.parseCsv(await fetchText("data/real/big_city_list.csv"))),
   };
   const topoFeatures = (topo, obj) => ({ type: "FeatureCollection", features: window.topojson.feature(topo, topo.objects[obj]).features });
   // Register the map names once. 'pl' = voivodeships (from TopoJSON), 'pl-<teryt>' = powiats of one voivodeship.
@@ -112,7 +126,7 @@
     if (line) lines.push(line); return lines;
   }
 
-  // PNG: chart bitmap with title, subtitle, DEMO tag and source line composed around it
+  // PNG: chart bitmap with title, subtitle, provenance tag and source line composed around it
   function exportPng(chart, meta) {
     const src = chart.getDataURL({ type: "png", pixelRatio: 2, backgroundColor: cssVar("--color-chart-surface") });
     const img = new Image();
@@ -122,7 +136,7 @@
       const fam = cssVar("--font-text");
       probe.font = `${14 * k}px ${fam}`;
       const subLines = wrapText(probe, meta.subtitle, W - 2 * pad);
-      const srcLines = wrapText(probe, `${DEMO}. Source: ${meta.sourceText}`, W - 2 * pad);
+      const srcLines = wrapText(probe, `${meta.real ? REAL + ". " : DEMO + ". "}Source: ${meta.sourceText}`, W - 2 * pad);
       const head = pad + 22 * k + subLines.length * 18 * k + 8 * k, foot = srcLines.length * 18 * k + pad;
       const cv = document.createElement("canvas"); cv.width = W; cv.height = img.height + head + foot;
       const g = cv.getContext("2d");
@@ -149,7 +163,7 @@
     const H = h + 64 + 40;
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${H}" viewBox="0 0 ${w} ${H}"><rect width="100%" height="100%" fill="${cssVar("--color-chart-surface")}"/>` +
       t(16, 24, meta.title, 18, cssVar("--color-text-primary"), 600) + t(16, 46, meta.subtitle.slice(0, 140), 13, cssVar("--color-text-secondary")) + inner +
-      t(16, h + 64 + 18, `${DEMO}. Source: ${meta.sourceText}`.slice(0, 160), 12, cssVar("--color-text-secondary")) + "</svg>";
+      t(16, h + 64 + 18, `${meta.real ? REAL + ". " : DEMO + ". "}Source: ${meta.sourceText}`.slice(0, 160), 12, cssVar("--color-text-secondary")) + "</svg>";
     download(slug(meta.title) + ".svg", svg, "image/svg+xml");
   }
 
@@ -166,12 +180,18 @@
     el.className = "card figure " + (spec.className || "span-all");
     el.dataset.chartCard = spec.id;
     const src = spec.source;
+    const real = !!spec.real;
     const sourceText = src.label + (src.meta ? " (" + src.meta + ")" : "");
+    const tag = real
+      ? `<span class="badge badge--good real-tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 8.5 3 3 7-7"/></svg>${REAL}</span>`
+      : `<span class="badge badge--warning demo-tag">${DEMO}</span>`;
+    const aria = spec.title + ". " + spec.subtitle + (real ? " " + REAL_ARN : " " + DEMO + ".");
+    el.dataset.provenance = real ? "real" : "demo";
     el.innerHTML = `
-      <div class="figure__head"><h3 class="figure__title">${esc(spec.title)}</h3><span class="badge badge--warning demo-tag">${DEMO}</span></div>
+      <div class="figure__head"><h3 class="figure__title">${esc(spec.title)}</h3>${tag}</div>
       <p class="figure__subtitle">${esc(spec.subtitle)}</p>
       <div class="figure__controls" data-controls hidden></div>
-      <div class="chart-wrap"><div class="state-slot"></div><div class="chart" data-chart="${esc(spec.id)}" role="img" aria-label="${esc(spec.title + ". " + spec.subtitle + " " + DEMO + ".")}" hidden></div></div>
+      <div class="chart-wrap"><div class="state-slot"></div><div class="chart" data-chart="${esc(spec.id)}" role="img" aria-label="${esc(aria)}" hidden></div></div>
       <ul class="legend legend-html" data-legend hidden></ul>
       <p class="status-line" data-status aria-live="polite" hidden></p>
       <div class="figure__tools" data-tools>
@@ -181,12 +201,18 @@
         <button class="btn btn--secondary" type="button" data-act="csv">CSV</button>
       </div>
       <div class="table-view" data-table hidden></div>
-      <footer class="chart-source"><span class="chart-source__label">Source:</span>${src.url ? `<a href="${esc(src.url)}">${esc(src.label)}</a>` : `<span>${esc(src.label)}</span>`}${src.meta ? `<span class="chart-source__meta">${esc(src.meta)}</span>` : ""}<span class="chart-source__meta">${DEMO}. Accessed ${esc(src.accessed || "2026-10-29")}.</span></footer>`;
+      <footer class="chart-source"><span class="chart-source__label">Source:</span>${src.url ? `<a href="${esc(src.url)}">${esc(src.label)}</a>` : `<span>${esc(src.label)}</span>`}${src.meta ? `<span class="chart-source__meta">${esc(src.meta)}</span>` : ""}<span class="chart-source__meta">${real ? REAL + ". Accessed" : DEMO + ". Accessed"} ${esc(src.accessed || "2026-10-29")}.</span></footer>`;
     host.appendChild(el);
 
     const chartEl = $(el, "[data-chart]"), slot = $(el, ".state-slot");
     const ctl = { el, spec, data: null, chart: null, state: "init", option: null, extra: {} };
-    const csvOf = () => (spec.csv && ctl.data !== null ? spec.csv(ctl.data, ctl) : null);
+    const csvOf = () => {
+      if (!spec.csv || ctl.data === null) return null;
+      const t = spec.csv(ctl.data, ctl);
+      if (!t || !real) return t;
+      // Real charts export the source ids of every row, never a made-up "real" flag.
+      return C.csvWithSourceIds(t, src.ids || src.id || null);
+    };
 
     ctl.setState = (s, msg) => {
       ctl.state = s;
@@ -213,6 +239,8 @@
       let option;
       try { option = spec.build(ctl.data, Object.assign(ctl, { width: w })); } catch (e) { console.error(e); ctl.setState("error", { text: e.message }); return; }
       if (option === null || option === "empty") { ctl.setState("empty", ctl.emptyMsg); return; }
+      // ECharts writes its own aria-label on the canvas host; real charts keep the provenance wording there too.
+      if (real && option.aria) option.aria = Object.assign({}, option.aria, { label: Object.assign({}, option.aria.label, { description: aria }) });
       if (ctl.state !== "ready") ctl.setState("ready");
       chartEl.style.height = heightFor(chartEl.clientWidth || w) + "px";
       if (!ctl.chart) { ctl.chart = E.init(chartEl, null, { renderer: "canvas" }); ctl.chart.group = spec.group || ""; spec.onChart?.(ctl.chart, ctl); }
@@ -263,13 +291,14 @@
       const b = e.target.closest("[data-act]");
       if (!b || b.disabled) return;
       const act = b.dataset.act;
-      const meta = { title: spec.title, subtitle: spec.subtitle, sourceText };
+      const meta = { title: spec.title, subtitle: spec.subtitle, sourceText, real };
       if (act === "table") { b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true")); renderTable(); }
       if (act === "png" && ctl.chart) exportPng(ctl.chart, meta);
       if (act === "svg" && ctl.option) exportSvg(ctl.option, chartEl.clientWidth, chartEl.clientHeight, meta);
       if (act === "csv") {
         const t = csvOf(); if (!t) return;
-        download(slug(spec.title) + ".csv", C.toCsv([...t.header, "demo_flag"], t.rows.map((r) => [...r, DEMO])), "text/csv;charset=utf-8");
+        const table = real ? t : { header: [...t.header, "demo_flag"], rows: t.rows.map((r) => [...r, DEMO]) };
+        download(slug(spec.title) + ".csv", C.toCsv(table.header, table.rows), "text/csv;charset=utf-8");
       }
     });
     if ("ResizeObserver" in window) {
@@ -282,5 +311,5 @@
   }
   const retheme = () => registry.forEach((c) => { c.chart && c.render(); });
   document.addEventListener("themechange", () => requestAnimationFrame(retheme));
-  window.Votw = { figure, data, ensureMaps, topoFeatures, cssVar, ms, reduced, esc, fmt, placeColor, catColors, mapRamp, divRamp, base, tooltip, legend, valueAxis, catAxis, grid, textStyle, visualMapBase, tipRows, registry, download, DEMO, DEMO_SOURCE: { label: "Synthetic demo data (made up, not GUS)", url: "data/demo.json", meta: "generated by scripts/make_demo_data.py" }, GEO_NOTE: "boundaries: GUGiK PRG, simplified" };
+  window.Votw = { figure, data, ensureMaps, topoFeatures, cssVar, ms, reduced, esc, fmt, placeColor, catColors, mapRamp, divRamp, base, tooltip, legend, valueAxis, catAxis, grid, textStyle, visualMapBase, tipRows, registry, download, DEMO, REAL, DEMO_SOURCE: { label: "Synthetic demo data (made up, not GUS)", url: "data/demo.json", meta: "generated by scripts/make_demo_data.py" }, GEO_NOTE: "boundaries: GUGiK PRG, simplified" };
 })();

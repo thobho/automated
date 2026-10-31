@@ -2,7 +2,7 @@
 // Usage: node scripts/check_footers.cjs <base-url>   (site/ served over http; needs playwright, CHROMIUM_PATH optional)
 const { chromium } = require("playwright");
 const base = (process.argv[2] || "http://localhost:8000").replace(/\/$/, "");
-const PAGES = ["index", "charts", "interaction", "maps", "formats", "polish"];
+const PAGES = ["index", "charts", "interaction", "maps", "formats", "polish", "real"];
 (async () => {
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
   let bad = 0, total = 0;
