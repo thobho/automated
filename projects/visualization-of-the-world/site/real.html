@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real data · Polska w danych</title>
+<meta name="description" content="Poland's population and housing, 2000-2025: real Statistics Poland (GUS) and Eurostat data with source ids in every footer. Proxy 2000-2008 housing splits are labelled and never mixed with the direct 2009-2025 series.">
+<link rel="preload" href="vendor/design/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/design/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vendor/design/tokens.css">
+<link rel="stylesheet" href="vendor/design/components.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body data-provenance="real">
+<main id="main" class="site-main"><div class="container">
+  <div class="page-head"><h1>Real data: Poland's people and homes, 2000-2025</h1><p class="lede">The same components as the demo pages, now fed by the processed Statistics Poland (GUS) and Eurostat series from <code>research/poland-demography-housing</code>. Every number carries its source id (S1, S15, S29-S32, S41-S44) in the footer, table view and CSV export. Housing splits for 2000-2008 are proxies and are marked as such; they are never mixed with the direct 2009-2025 series.</p></div>
+
+  <div class="section-head"><h2>At a glance</h2><p>Three headline numbers, each with a manual Source footer. Values are computed from <code>data/real/*.csv</code> (verbatim copies of the processed research files).</p></div>
+  <div class="grid" style="margin-bottom:var(--grid-gutter-base)">
+    <article class="card kpi span-all md-span-4 lg-span-4" data-kpi="population">
+      <p class="kpi__label">Population change, 2000 → 2025</p>
+      <p class="kpi__value">−2.4%</p>
+      <p class="kpi__detail">38,253,955 → 37,332,510 residents (31 December)</p>
+      <ul class="kpi__list">
+        <li><span class="legend__swatch" style="--swatch:var(--data-place-big-cities)"></span>Big cities<span class="kpi__num">−5.0%</span></li>
+        <li><span class="legend__swatch" style="--swatch:var(--data-place-small-cities)"></span>Small cities<span class="kpi__num">−7.5%</span></li>
+        <li><span class="legend__swatch" style="--swatch:var(--data-place-villages)"></span>Villages<span class="kpi__num">+4.0%</span></li>
+      </ul>
+      <footer class="chart-source"><span class="chart-source__label">Source:</span><a href="https://bdl.stat.gov.pl/api/v1/data/by-variable/60641?unit-level=0&amp;year=2025&amp;format=json">GUS BDL var 60641 (S1)</a><span class="chart-source__meta">population by place of residence, 31 Dec; class split from gmina-level units</span><span class="chart-source__meta">REAL DATA. Accessed 2026-10-29.</span></footer>
+    </article>
+    <article class="card kpi span-all md-span-4 lg-span-4" data-kpi="completions">
+      <p class="kpi__label">Dwellings completed, 2000 → 2025</p>
+      <p class="kpi__value">4.16 million</p>
+      <p class="kpi__detail">Sum of the three place classes over 26 years</p>
+      <ul class="kpi__list">
+        <li><span class="legend__swatch" style="--swatch:var(--data-place-big-cities)"></span>Big cities<span class="kpi__num">1,649,831</span></li>
+        <li><span class="legend__swatch" style="--swatch:var(--data-place-small-cities)"></span>Small cities<span class="kpi__num">1,085,544</span></li>
+        <li><span class="legend__swatch" style="--swatch:var(--data-place-villages)"></span>Villages<span class="kpi__num">1,428,611</span></li>
+      </ul>
+      <footer class="chart-source"><span class="chart-source__label">Source:</span><a href="https://bdl.stat.gov.pl/api/v1/data/by-variable/748601?unit-level=6&amp;year=2025">GUS BDL var 748601 (S41)</a><span class="chart-source__meta">dwellings completed, direct reported total, all forms of construction</span><span class="chart-source__meta">REAL DATA. Accessed 2026-10-29.</span></footer>
+    </article>
+    <article class="card kpi span-all md-span-4 lg-span-4" data-kpi="split">
+      <p class="kpi__label">Houses vs flats, direct basis 2009 → 2025</p>
+      <p class="kpi__value">13.4% houses in big cities</p>
+      <p class="kpi__detail">Share of completed dwellings by building type; the rest is flats and other completed dwellings</p>
+      <ul class="kpi__list">
+        <li><span class="legend__swatch" style="--swatch:var(--data-place-big-cities)"></span>Big cities, houses / flats<span class="kpi__num">13.4% / 85.0%</span></li>
+        <li><span class="legend__swatch" style="--swatch:var(--data-place-small-cities)"></span>Small cities, houses / flats<span class="kpi__num">41.9% / 54.8%</span></li>
+        <li><span class="legend__swatch" style="--swatch:var(--data-place-villages)"></span>Villages, houses / flats<span class="kpi__num">89.9% / 8.0%</span></li>
+      </ul>
+      <footer class="chart-source"><span class="chart-source__label">Source:</span><a href="https://bdl.stat.gov.pl/api/v1/data/by-variable/748247?unit-level=6&amp;year=2025">GUS BDL var 748247 and var 748601 (S41;S43)</a><span class="chart-source__meta">direct single-/multi-family series only, 2009-2025; proxy years 2000-2008 excluded</span><span class="chart-source__meta">REAL DATA. Accessed 2026-10-29.</span></footer>
+    </article>
+  </div>
+
+  <div class="section-head"><h2>Charts</h2><p>Population and housing by place class, houses vs flats, Poland against its neighbours, and the 34 big cities on real boundaries. Proxy and direct bases are visually separated; CSV exports repeat the <code>source_id</code> of every row.</p></div>
+  <div class="grid" id="figures"></div>
+
+  <div class="section-head"><h2>How to read the housing numbers</h2><p>GUS publishes two different splits of completed dwellings. The direct series (var 748247, houses = single-family, flats = multi-family) starts in 2009. Before 2009 only a proxy exists: individual construction (var 430, mostly houses, but also private dwellings for sale or rent) against the direct total (var 748601). This page shows the proxy years in a hatched band and the direct years on their own; a chart that needs one consistent basis uses 2009-2025 only.</p></div>
+</div></main>
+<script src="js/shell.js"></script>
+<script src="vendor/lib/echarts-6.1.0.min.js"></script>
+<script src="vendor/lib/topojson-client-3.1.0.min.js"></script>
+<script src="vendor/design/components.js"></script>
+<script src="js/votw-core.js"></script>
+<script src="js/votw-charts.js"></script>
+<script src="js/specs-real.js"></script>
+<script src="js/page-real.js"></script>
+</body>
+</html>

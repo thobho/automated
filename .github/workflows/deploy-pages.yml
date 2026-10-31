@@ -1,0 +1,42 @@
+name: Deploy visualization-of-the-world site to Pages
+
+# Publishes projects/visualization-of-the-world/site/ as a GitHub Pages site.
+# Repository settings: Settings -> Pages -> Source: "GitHub Actions".
+# The site lands under https://<owner>.github.io/<repo>/ (the /automated/ subpath here); every asset path
+# in the pages is relative, so no base-path rewrite is needed.
+# Note: GitHub Pages serves one site per repository, so only one Pages deployment workflow can be live at a
+# time. smolec-weather-pages.yml deploys a different folder; if both are enabled the last run wins.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'projects/visualization-of-the-world/site/**'
+      - '.github/workflows/deploy-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload the site folder (no build step)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: projects/visualization-of-the-world/site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

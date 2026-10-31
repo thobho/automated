@@ -3,7 +3,8 @@
 // Needs `playwright` resolvable (NODE_PATH=.../node_modules). CHROMIUM_PATH optionally points to a browser.
 // Checks: no console errors, no horizontal scroll at 375/768/1280, every chart card has a Source footer,
 // every figure reaches a final state, interactions (tooltip, play, filter, brush, drill-down, zoom, touch tap,
-// theme switch, exports) and the forced failure path. Exit 1 on any failed check.
+// theme switch, exports) and the forced failure path. real.html must show the REAL DATA provenance instead of
+// the demo banner and export source_id columns. Exit 1 on any failed check.
 const { chromium } = require("playwright");
 const fs = require("fs");
 const path = require("path");
@@ -11,7 +12,7 @@ const [base, outDir] = process.argv.slice(2);
 if (!base || !outDir) { console.error("usage: node verify_site.cjs <base-url> <out-dir>"); process.exit(2); }
 fs.mkdirSync(outDir, { recursive: true });
 const B = base.replace(/\/$/, "");
-const PAGES = ["index", "charts", "interaction", "maps", "formats", "polish", "matrix"];
+const PAGES = ["index", "charts", "interaction", "maps", "formats", "polish", "matrix", "real"];
 const results = []; let failures = 0;
 const check = (name, ok, detail = "") => { results.push({ name, ok, detail }); if (!ok) failures++; console.log(`${ok ? "PASS" : "FAIL"} ${name}${detail ? " - " + detail : ""}`); };
 const shot = (page, name, opts = {}) => page.screenshot({ path: path.join(outDir, name), type: "jpeg", quality: 55, fullPage: true, ...opts });
@@ -39,16 +40,23 @@ const pt = async (page, sel, fn, args) => page.evaluate(([s, f, a]) => { const e
     for (const p of PAGES) {
       const { ctx, page, errors } = await open(browser, `${B}/${p}.html`, w);
       if (p !== "matrix") await settled(page); else { await page.waitForSelector("table.matrix"); await page.waitForTimeout(300); }
+      const isReal = p === "real";
       const info = await page.evaluate(() => ({
         sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth,
-        cards: Array.from(document.querySelectorAll("[data-chart-card]")).map((c) => ({ id: c.dataset.chartCard, src: !!c.querySelector("footer.chart-source .chart-source__label") && /Source:/.test(c.querySelector("footer.chart-source").textContent) && !!c.querySelector("footer.chart-source a, footer.chart-source span:not(.chart-source__label):not(.chart-source__meta)"), state: c.dataset.state })),
-        banner: /DEMO DATA, NOT REAL/.test(document.body.innerText), tags: Array.from(document.querySelectorAll("[data-chart-card]")).every((c) => /DEMO DATA, NOT REAL/.test(c.innerText)),
+        cards: Array.from(document.querySelectorAll("[data-chart-card]")).map((c) => ({ id: c.dataset.chartCard, src: !!c.querySelector("footer.chart-source .chart-source__label") && /Source:/.test(c.querySelector("footer.chart-source").textContent) && !!c.querySelector("footer.chart-source a, footer.chart-source span:not(.chart-source__label):not(.chart-source__meta)"), state: c.dataset.state, text: c.innerText })),
+        banner: document.querySelector(".provenance-banner")?.innerText || "", body: document.body.innerText,
+        tags: Array.from(document.querySelectorAll("[data-chart-card]")).every((c) => /DEMO DATA, NOT REAL/.test(c.innerText)),
+        realTags: Array.from(document.querySelectorAll("[data-chart-card]")).every((c) => /REAL DATA/.test(c.innerText)),
+        kpi: Array.from(document.querySelectorAll("[data-kpi]")).map((c) => ({ id: c.dataset.kpi, src: !!c.querySelector("footer.chart-source .chart-source__label") && /^Source:/.test((c.querySelector("footer.chart-source")?.innerText || "").trim()) && !!c.querySelector("footer.chart-source a[href]") })),
         tables: document.querySelectorAll("table.matrix").length, srcAll: Array.from(document.querySelectorAll("table.matrix")).every((t) => t.closest(".card")?.querySelector("footer.chart-source")),
       }));
+      const demoText = /DEMO DATA, NOT REAL/.test(info.body);
       check(`${p} @${w}: no console errors / failed requests`, errors.length === 0, errors.join(" | "));
       check(`${p} @${w}: no horizontal scroll`, info.sw <= info.cw, `scrollWidth ${info.sw} vs ${info.cw}`);
-      check(`${p} @${w}: DEMO DATA banner and per-chart tag`, info.banner && info.tags);
+      if (isReal) check(`${p} @${w}: REAL DATA banner, REAL DATA tags, no DEMO wording`, /^REAL DATA —/.test(info.banner) && info.realTags && !demoText && info.cards.every((c) => !/DEMO DATA, NOT REAL/.test(c.text)), info.banner.slice(0, 60));
+      else check(`${p} @${w}: DEMO DATA banner and per-chart tag`, /DEMO DATA, NOT REAL/.test(info.banner) && info.tags);
       check(`${p} @${w}: ${info.cards.length} chart cards all have a Source footer`, info.cards.every((c) => c.src), info.cards.filter((c) => !c.src).map((c) => c.id).join(","));
+      if (isReal) check(`${p} @${w}: KPI cards carry a manual Source footer and no DEMO flag`, info.kpi.length === 3 && info.kpi.every((c) => c.src), info.kpi.map((c) => c.id + ":" + c.src).join(","));
       if (p !== "polish" && p !== "matrix") check(`${p} @${w}: every chart reached ready`, info.cards.every((c) => c.state === "ready"), info.cards.filter((c) => c.state !== "ready").map((c) => c.id + ":" + c.state).join(","));
       if (p === "matrix") check(`matrix @${w}: table has a Source footer`, info.tables > 0 && info.srcAll);
       if (w === 375 || w === 1280) await shot(page, `${p}-${w}${w === 375 ? "" : "-desktop"}.jpg`.replace("-1280-desktop", "-desktop"));
@@ -89,6 +97,23 @@ const pt = async (page, sel, fn, args) => page.evaluate(([s, f, a]) => { const e
     check("export PNG (PNG signature)", png.text[0] === 0x89 && png.text[1] === 0x50 && png.text.length > 5000, png.name + " " + png.text.length + " bytes");
     fs.unlinkSync(csv.file); fs.unlinkSync(svg.file); // keep only the PNG sample, small
     fs.renameSync(png.file, path.join(outDir, "export-sample.png"));
+    await ctx.close();
+  }
+
+  // 3b. real page: provenance, exports carry source ids
+  {
+    const { ctx, page, errors } = await open(browser, `${B}/real.html`, 1280); await settled(page);
+    const dl = async (id, act) => { const [d] = await Promise.all([page.waitForEvent("download"), page.click(`[data-chart-card="${id}"] [data-act="${act}"]`)]); const f = path.join(outDir, `export-${id}.${act}`); await d.saveAs(f); return { file: f, text: fs.readFileSync(f, act === "png" ? undefined : "utf-8") }; };
+    const csv = await dl("real-housing-vs-pop", "csv");
+    const head = csv.text.replace(/^\uFEFF/, "").split(/\r?\n/)[0];
+    check("real export CSV: source_id column with per-row ids, proxy/direct basis, no DEMO flag",
+      /source_id/.test(head) && /S41;S42/.test(csv.text) && /S43/.test(csv.text) && /proxy/.test(csv.text) && /direct/.test(csv.text) && !/DEMO DATA, NOT REAL/.test(csv.text), head);
+    fs.unlinkSync(csv.file);
+    const png = await dl("real-cities-map", "png");
+    check("real export PNG: rendered map bubble chart", png.text[0] === 0x89 && png.text[1] === 0x50 && png.text.length > 5000, png.text.length + " bytes");
+    const tips = await page.evaluate(() => Array.from(document.querySelectorAll("[data-chart-card] [role=img]")).map((c) => c.getAttribute("aria-label")));
+    check("real page: aria-labels name the real sources, not a demo warning", tips.length > 0 && tips.every((t) => /Real data/.test(t) && !/DEMO DATA, NOT REAL/.test(t)), tips[0].slice(0, 80));
+    check("real page: no console errors", errors.length === 0, errors.join("|"));
     await ctx.close();
   }
 

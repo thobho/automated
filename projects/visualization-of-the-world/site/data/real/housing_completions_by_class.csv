@@ -1,0 +1,466 @@
+year,class,type,basis,dwellings,share_of_total_pct,per_1000_residents,value_type,formula,source_id
+2000,big_cities,total,total,40696,100.00,3.83,derived,"sum over gmina-level units of the class, var 748601",S41
+2000,big_cities,house_proxy_individual,proxy,6498,15.97,0.61,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2000,big_cities,flat_proxy_non_individual,proxy,34198,84.03,3.22,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2001,big_cities,total,total,53128,100.00,5.02,derived,"sum over gmina-level units of the class, var 748601",S41
+2001,big_cities,house_proxy_individual,proxy,7776,14.64,0.73,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2001,big_cities,flat_proxy_non_individual,proxy,45352,85.36,4.28,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2002,big_cities,total,total,42407,100.00,4.01,derived,"sum over gmina-level units of the class, var 748601",S41
+2002,big_cities,house_proxy_individual,proxy,8211,19.36,0.78,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2002,big_cities,flat_proxy_non_individual,proxy,34196,80.64,3.23,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2003,big_cities,total,total,47849,100.00,4.54,derived,"sum over gmina-level units of the class, var 748601",S41
+2003,big_cities,house_proxy_individual,proxy,15007,31.36,1.42,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2003,big_cities,flat_proxy_non_individual,proxy,32842,68.64,3.12,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2004,big_cities,total,total,39283,100.00,3.74,derived,"sum over gmina-level units of the class, var 748601",S41
+2004,big_cities,house_proxy_individual,proxy,9995,25.44,0.95,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2004,big_cities,flat_proxy_non_individual,proxy,29288,74.56,2.79,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2005,big_cities,total,total,43600,100.00,4.16,derived,"sum over gmina-level units of the class, var 748601",S41
+2005,big_cities,house_proxy_individual,proxy,9102,20.88,0.87,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2005,big_cities,flat_proxy_non_individual,proxy,34498,79.12,3.29,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2005,big_cities,house_proxy_own_use,proxy,7648,17.54,0.73,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2005,big_cities,flat_proxy_not_own_use,proxy,35952,82.46,3.43,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2006,big_cities,total,total,47175,100.00,4.51,derived,"sum over gmina-level units of the class, var 748601",S41
+2006,big_cities,house_proxy_individual,proxy,7998,16.95,0.76,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2006,big_cities,flat_proxy_non_individual,proxy,39177,83.05,3.75,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2006,big_cities,house_proxy_own_use,proxy,6589,13.97,0.63,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2006,big_cities,flat_proxy_not_own_use,proxy,40586,86.03,3.88,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2007,big_cities,total,total,51452,100.00,4.94,derived,"sum over gmina-level units of the class, var 748601",S41
+2007,big_cities,house_proxy_individual,proxy,8559,16.63,0.82,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2007,big_cities,flat_proxy_non_individual,proxy,42893,83.37,4.11,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2007,big_cities,house_proxy_own_use,proxy,7133,13.86,0.68,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2007,big_cities,flat_proxy_not_own_use,proxy,44319,86.14,4.25,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2008,big_cities,total,total,64656,100.00,6.22,derived,"sum over gmina-level units of the class, var 748601",S41
+2008,big_cities,house_proxy_individual,proxy,9940,15.37,0.96,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2008,big_cities,flat_proxy_non_individual,proxy,54716,84.63,5.26,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2008,big_cities,house_proxy_own_use,proxy,7731,11.96,0.74,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2008,big_cities,flat_proxy_not_own_use,proxy,56925,88.04,5.47,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2009,big_cities,total,total,64410,100.00,6.20,derived,"sum over gmina-level units of the class, var 748601",S41
+2009,big_cities,house,direct,8368,12.99,0.81,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2009,big_cities,flat,direct,53984,83.81,5.20,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2009,big_cities,other,direct,2058,3.20,0.20,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2009,big_cities,house_proxy_individual,proxy,8295,12.88,0.80,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2009,big_cities,flat_proxy_non_individual,proxy,56115,87.12,5.40,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2009,big_cities,house_proxy_own_use,proxy,6656,10.33,0.64,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2009,big_cities,flat_proxy_not_own_use,proxy,57754,89.67,5.56,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2010,big_cities,total,total,49368,100.00,4.77,derived,"sum over gmina-level units of the class, var 748601",S41
+2010,big_cities,house,direct,8003,16.21,0.77,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2010,big_cities,flat,direct,40083,81.19,3.87,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2010,big_cities,other,direct,1282,2.60,0.12,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2010,big_cities,house_proxy_individual,proxy,8155,16.52,0.79,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2010,big_cities,flat_proxy_non_individual,proxy,41213,83.48,3.98,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2010,big_cities,house_proxy_own_use,proxy,6495,13.16,0.63,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2010,big_cities,flat_proxy_not_own_use,proxy,42873,86.84,4.14,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2011,big_cities,total,total,45134,100.00,4.37,derived,"sum over gmina-level units of the class, var 748601",S41
+2011,big_cities,house,direct,7575,16.78,0.73,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2011,big_cities,flat,direct,36166,80.13,3.50,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2011,big_cities,other,direct,1393,3.09,0.13,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2011,big_cities,house_proxy_individual,proxy,8703,19.28,0.84,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2011,big_cities,flat_proxy_non_individual,proxy,36431,80.72,3.52,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2011,big_cities,house_proxy_own_use,proxy,6265,13.88,0.61,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2011,big_cities,flat_proxy_not_own_use,proxy,38869,86.12,3.76,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2012,big_cities,total,total,57829,100.00,5.60,derived,"sum over gmina-level units of the class, var 748601",S41
+2012,big_cities,house,direct,8185,14.15,0.79,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2012,big_cities,flat,direct,48376,83.65,4.69,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2012,big_cities,other,direct,1268,2.19,0.12,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2012,big_cities,house_proxy_individual,proxy,9982,17.26,0.97,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2012,big_cities,flat_proxy_non_individual,proxy,47847,82.74,4.64,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2012,big_cities,house_proxy_own_use,proxy,6214,10.75,0.60,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2012,big_cities,flat_proxy_not_own_use,proxy,51615,89.25,5.00,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2013,big_cities,total,total,54278,100.00,5.27,derived,"sum over gmina-level units of the class, var 748601",S41
+2013,big_cities,house,direct,7575,13.96,0.74,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2013,big_cities,flat,direct,45810,84.40,4.45,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2013,big_cities,other,direct,893,1.65,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2013,big_cities,house_proxy_individual,proxy,9341,17.21,0.91,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2013,big_cities,flat_proxy_non_individual,proxy,44937,82.79,4.37,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2013,big_cities,house_proxy_own_use,proxy,6149,11.33,0.60,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2013,big_cities,flat_proxy_not_own_use,proxy,48129,88.67,4.68,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2014,big_cities,total,total,56615,100.00,5.51,derived,"sum over gmina-level units of the class, var 748601",S41
+2014,big_cities,house,direct,7372,13.02,0.72,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2014,big_cities,flat,direct,48266,85.25,4.69,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2014,big_cities,other,direct,977,1.73,0.10,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2014,big_cities,house_proxy_individual,proxy,9484,16.75,0.92,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2014,big_cities,flat_proxy_non_individual,proxy,47131,83.25,4.58,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2014,big_cities,house_proxy_own_use,proxy,5584,9.86,0.54,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2014,big_cities,flat_proxy_not_own_use,proxy,51031,90.14,4.96,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2015,big_cities,total,total,56291,100.00,5.48,derived,"sum over gmina-level units of the class, var 748601",S41
+2015,big_cities,house,direct,7980,14.18,0.78,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2015,big_cities,flat,direct,47249,83.94,4.60,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2015,big_cities,other,direct,1062,1.89,0.10,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2015,big_cities,house_proxy_individual,proxy,9790,17.39,0.95,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2015,big_cities,flat_proxy_non_individual,proxy,46501,82.61,4.52,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2015,big_cities,house_proxy_own_use,proxy,5729,10.18,0.56,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2015,big_cities,flat_proxy_not_own_use,proxy,50562,89.82,4.92,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2016,big_cities,total,total,70953,100.00,6.90,derived,"sum over gmina-level units of the class, var 748601",S41
+2016,big_cities,house,direct,8370,11.80,0.81,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2016,big_cities,flat,direct,61346,86.46,5.97,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2016,big_cities,other,direct,1237,1.74,0.12,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2016,big_cities,house_proxy_individual,proxy,9681,13.64,0.94,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2016,big_cities,flat_proxy_non_individual,proxy,61272,86.36,5.96,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2016,big_cities,house_proxy_own_use,proxy,5887,8.30,0.57,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2016,big_cities,flat_proxy_not_own_use,proxy,65066,91.70,6.33,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2017,big_cities,total,total,78165,100.00,7.60,derived,"sum over gmina-level units of the class, var 748601",S41
+2017,big_cities,house,direct,8813,11.27,0.86,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2017,big_cities,flat,direct,68106,87.13,6.63,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2017,big_cities,other,direct,1246,1.59,0.12,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2017,big_cities,house_proxy_individual,proxy,10252,13.12,1.00,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2017,big_cities,flat_proxy_non_individual,proxy,67913,86.88,6.61,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2017,big_cities,house_proxy_own_use,proxy,5625,7.20,0.55,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2017,big_cities,flat_proxy_not_own_use,proxy,72540,92.80,7.06,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2018,big_cities,total,total,80282,100.00,7.82,derived,"sum over gmina-level units of the class, var 748601",S41
+2018,big_cities,house,direct,9411,11.72,0.92,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2018,big_cities,flat,direct,70105,87.32,6.82,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2018,big_cities,other,direct,766,0.95,0.07,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2018,big_cities,house_proxy_own_use,proxy,5534,6.89,0.54,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2018,big_cities,flat_proxy_not_own_use,proxy,74748,93.11,7.28,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2019,big_cities,total,total,91345,100.00,8.89,derived,"sum over gmina-level units of the class, var 748601",S41
+2019,big_cities,house,direct,10167,11.13,0.99,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2019,big_cities,flat,direct,79849,87.41,7.77,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2019,big_cities,other,direct,1329,1.45,0.13,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2019,big_cities,house_proxy_own_use,proxy,5943,6.51,0.58,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2019,big_cities,flat_proxy_not_own_use,proxy,85402,93.49,8.31,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2020,big_cities,total,total,97659,100.00,9.48,derived,"sum over gmina-level units of the class, var 748601",S41
+2020,big_cities,house,direct,11388,11.66,1.11,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2020,big_cities,flat,direct,85325,87.37,8.28,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2020,big_cities,other,direct,946,0.97,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2020,big_cities,house_proxy_own_use,proxy,5913,6.05,0.57,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2020,big_cities,flat_proxy_not_own_use,proxy,91746,93.95,8.91,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2021,big_cities,total,total,90604,100.00,8.84,derived,"sum over gmina-level units of the class, var 748601",S41
+2021,big_cities,house,direct,13701,15.12,1.34,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2021,big_cities,flat,direct,75704,83.55,7.39,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2021,big_cities,other,direct,1199,1.32,0.12,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2021,big_cities,house_proxy_own_use,proxy,7067,7.80,0.69,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2021,big_cities,flat_proxy_not_own_use,proxy,83537,92.20,8.15,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2022,big_cities,total,total,85584,100.00,8.40,derived,"sum over gmina-level units of the class, var 748601",S41
+2022,big_cities,house,direct,12914,15.09,1.27,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2022,big_cities,flat,direct,71392,83.42,7.00,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2022,big_cities,other,direct,1278,1.49,0.13,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2022,big_cities,house_proxy_own_use,proxy,6746,7.88,0.66,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2022,big_cities,flat_proxy_not_own_use,proxy,78838,92.12,7.73,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2023,big_cities,total,total,82903,100.00,8.16,derived,"sum over gmina-level units of the class, var 748601",S41
+2023,big_cities,house,direct,11324,13.66,1.12,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2023,big_cities,flat,direct,70762,85.36,6.97,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2023,big_cities,other,direct,817,0.99,0.08,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2023,big_cities,house_proxy_own_use,proxy,5674,6.84,0.56,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2023,big_cities,flat_proxy_not_own_use,proxy,77229,93.16,7.61,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2024,big_cities,total,total,76833,100.00,7.59,derived,"sum over gmina-level units of the class, var 748601",S41
+2024,big_cities,house,direct,10609,13.81,1.05,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2024,big_cities,flat,direct,65391,85.11,6.46,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2024,big_cities,other,direct,833,1.08,0.08,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2024,big_cities,house_proxy_own_use,proxy,5406,7.04,0.53,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2024,big_cities,flat_proxy_not_own_use,proxy,71427,92.96,7.06,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2025,big_cities,total,total,81332,100.00,8.07,derived,"sum over gmina-level units of the class, var 748601",S41
+2025,big_cities,house,direct,11093,13.64,1.10,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2025,big_cities,flat,direct,69017,84.86,6.84,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2025,big_cities,other,direct,1222,1.50,0.12,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2025,big_cities,house_proxy_own_use,proxy,4824,5.93,0.48,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2025,big_cities,flat_proxy_not_own_use,proxy,76508,94.07,7.59,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2000,small_cities,total,total,29416,100.00,2.25,derived,"sum over gmina-level units of the class, var 748601",S41
+2000,small_cities,house_proxy_individual,proxy,13415,45.60,1.03,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2000,small_cities,flat_proxy_non_individual,proxy,16001,54.40,1.23,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2001,small_cities,total,total,32916,100.00,2.52,derived,"sum over gmina-level units of the class, var 748601",S41
+2001,small_cities,house_proxy_individual,proxy,15041,45.70,1.15,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2001,small_cities,flat_proxy_non_individual,proxy,17875,54.30,1.37,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2002,small_cities,total,total,28669,100.00,2.21,derived,"sum over gmina-level units of the class, var 748601",S41
+2002,small_cities,house_proxy_individual,proxy,18978,66.20,1.46,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2002,small_cities,flat_proxy_non_individual,proxy,9691,33.80,0.75,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2003,small_cities,total,total,45686,100.00,3.52,derived,"sum over gmina-level units of the class, var 748601",S41
+2003,small_cities,house_proxy_individual,proxy,35357,77.39,2.73,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2003,small_cities,flat_proxy_non_individual,proxy,10329,22.61,0.80,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2004,small_cities,total,total,33240,100.00,2.57,derived,"sum over gmina-level units of the class, var 748601",S41
+2004,small_cities,house_proxy_individual,proxy,21124,63.55,1.63,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2004,small_cities,flat_proxy_non_individual,proxy,12116,36.45,0.93,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2005,small_cities,total,total,34111,100.00,2.64,derived,"sum over gmina-level units of the class, var 748601",S41
+2005,small_cities,house_proxy_individual,proxy,20582,60.34,1.59,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2005,small_cities,flat_proxy_non_individual,proxy,13529,39.66,1.05,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2005,small_cities,house_proxy_own_use,proxy,17877,52.41,1.38,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2005,small_cities,flat_proxy_not_own_use,proxy,16234,47.59,1.25,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2006,small_cities,total,total,33035,100.00,2.56,derived,"sum over gmina-level units of the class, var 748601",S41
+2006,small_cities,house_proxy_individual,proxy,17648,53.42,1.37,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2006,small_cities,flat_proxy_non_individual,proxy,15387,46.58,1.19,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2006,small_cities,house_proxy_own_use,proxy,15332,46.41,1.19,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2006,small_cities,flat_proxy_not_own_use,proxy,17703,53.59,1.37,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2007,small_cities,total,total,36838,100.00,2.86,derived,"sum over gmina-level units of the class, var 748601",S41
+2007,small_cities,house_proxy_individual,proxy,21189,57.52,1.64,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2007,small_cities,flat_proxy_non_individual,proxy,15649,42.48,1.21,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2007,small_cities,house_proxy_own_use,proxy,17891,48.57,1.39,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2007,small_cities,flat_proxy_not_own_use,proxy,18947,51.43,1.47,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2008,small_cities,total,total,44874,100.00,3.48,derived,"sum over gmina-level units of the class, var 748601",S41
+2008,small_cities,house_proxy_individual,proxy,23629,52.66,1.83,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2008,small_cities,flat_proxy_non_individual,proxy,21245,47.34,1.65,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2008,small_cities,house_proxy_own_use,proxy,19348,43.12,1.50,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2008,small_cities,flat_proxy_not_own_use,proxy,25526,56.88,1.98,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2009,small_cities,total,total,46905,100.00,3.64,derived,"sum over gmina-level units of the class, var 748601",S41
+2009,small_cities,house,direct,16643,35.48,1.29,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2009,small_cities,flat,direct,27666,58.98,2.15,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2009,small_cities,other,direct,2596,5.53,0.20,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2009,small_cities,house_proxy_individual,proxy,20530,43.77,1.59,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2009,small_cities,flat_proxy_non_individual,proxy,26375,56.23,2.05,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2009,small_cities,house_proxy_own_use,proxy,16073,34.27,1.25,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2009,small_cities,flat_proxy_not_own_use,proxy,30832,65.73,2.39,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2010,small_cities,total,total,36750,100.00,2.81,derived,"sum over gmina-level units of the class, var 748601",S41
+2010,small_cities,house,direct,16085,43.77,1.23,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2010,small_cities,flat,direct,18102,49.26,1.39,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2010,small_cities,other,direct,2563,6.97,0.20,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2010,small_cities,house_proxy_individual,proxy,18523,50.40,1.42,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2010,small_cities,flat_proxy_non_individual,proxy,18227,49.60,1.40,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2010,small_cities,house_proxy_own_use,proxy,15547,42.30,1.19,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2010,small_cities,flat_proxy_not_own_use,proxy,21203,57.70,1.62,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2011,small_cities,total,total,34814,100.00,2.67,derived,"sum over gmina-level units of the class, var 748601",S41
+2011,small_cities,house,direct,15825,45.46,1.21,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2011,small_cities,flat,direct,16883,48.49,1.29,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2011,small_cities,other,direct,2106,6.05,0.16,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2011,small_cities,house_proxy_individual,proxy,19382,55.67,1.49,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2011,small_cities,flat_proxy_non_individual,proxy,15432,44.33,1.18,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2011,small_cities,house_proxy_own_use,proxy,15305,43.96,1.17,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2011,small_cities,flat_proxy_not_own_use,proxy,19509,56.04,1.50,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2012,small_cities,total,total,38803,100.00,2.98,derived,"sum over gmina-level units of the class, var 748601",S41
+2012,small_cities,house,direct,16986,43.77,1.30,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2012,small_cities,flat,direct,19850,51.16,1.53,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2012,small_cities,other,direct,1967,5.07,0.15,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2012,small_cities,house_proxy_individual,proxy,21191,54.61,1.63,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2012,small_cities,flat_proxy_non_individual,proxy,17612,45.39,1.35,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2012,small_cities,house_proxy_own_use,proxy,15901,40.98,1.22,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2012,small_cities,flat_proxy_not_own_use,proxy,22902,59.02,1.76,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2013,small_cities,total,total,34191,100.00,2.64,derived,"sum over gmina-level units of the class, var 748601",S41
+2013,small_cities,house,direct,16489,48.23,1.27,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2013,small_cities,flat,direct,15912,46.54,1.23,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2013,small_cities,other,direct,1790,5.24,0.14,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2013,small_cities,house_proxy_individual,proxy,20191,59.05,1.56,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2013,small_cities,flat_proxy_non_individual,proxy,14000,40.95,1.08,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2013,small_cities,house_proxy_own_use,proxy,15739,46.03,1.21,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2013,small_cities,flat_proxy_not_own_use,proxy,18452,53.97,1.42,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2014,small_cities,total,total,33395,100.00,2.58,derived,"sum over gmina-level units of the class, var 748601",S41
+2014,small_cities,house,direct,15468,46.32,1.20,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2014,small_cities,flat,direct,16452,49.26,1.27,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2014,small_cities,other,direct,1475,4.42,0.11,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2014,small_cities,house_proxy_individual,proxy,18732,56.09,1.45,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2014,small_cities,flat_proxy_non_individual,proxy,14663,43.91,1.13,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2014,small_cities,house_proxy_own_use,proxy,14260,42.70,1.10,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2014,small_cities,flat_proxy_not_own_use,proxy,19135,57.30,1.48,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2015,small_cities,total,total,34750,100.00,2.70,derived,"sum over gmina-level units of the class, var 748601",S41
+2015,small_cities,house,direct,16489,47.45,1.28,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2015,small_cities,flat,direct,16780,48.29,1.30,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2015,small_cities,other,direct,1481,4.26,0.11,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2015,small_cities,house_proxy_individual,proxy,20088,57.81,1.56,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2015,small_cities,flat_proxy_non_individual,proxy,14662,42.19,1.14,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2015,small_cities,house_proxy_own_use,proxy,14198,40.86,1.10,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2015,small_cities,flat_proxy_not_own_use,proxy,20552,59.14,1.59,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2016,small_cities,total,total,36143,100.00,2.81,derived,"sum over gmina-level units of the class, var 748601",S41
+2016,small_cities,house,direct,16326,45.17,1.27,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2016,small_cities,flat,direct,18614,51.50,1.45,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2016,small_cities,other,direct,1203,3.33,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2016,small_cities,house_proxy_individual,proxy,19772,54.70,1.54,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2016,small_cities,flat_proxy_non_individual,proxy,16371,45.30,1.27,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2016,small_cities,house_proxy_own_use,proxy,13782,38.13,1.07,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2016,small_cities,flat_proxy_not_own_use,proxy,22361,61.87,1.74,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2017,small_cities,total,total,40038,100.00,3.12,derived,"sum over gmina-level units of the class, var 748601",S41
+2017,small_cities,house,direct,17768,44.38,1.38,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2017,small_cities,flat,direct,20683,51.66,1.61,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2017,small_cities,other,direct,1587,3.96,0.12,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2017,small_cities,house_proxy_individual,proxy,20753,51.83,1.62,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2017,small_cities,flat_proxy_non_individual,proxy,19285,48.17,1.50,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2017,small_cities,house_proxy_own_use,proxy,13944,34.83,1.09,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2017,small_cities,flat_proxy_not_own_use,proxy,26094,65.17,2.03,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2018,small_cities,total,total,43822,100.00,3.43,derived,"sum over gmina-level units of the class, var 748601",S41
+2018,small_cities,house,direct,17994,41.06,1.41,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2018,small_cities,flat,direct,24400,55.68,1.91,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2018,small_cities,other,direct,1428,3.26,0.11,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2018,small_cities,house_proxy_own_use,proxy,13701,31.27,1.07,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2018,small_cities,flat_proxy_not_own_use,proxy,30121,68.73,2.35,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2019,small_cities,total,total,50175,100.00,3.93,derived,"sum over gmina-level units of the class, var 748601",S41
+2019,small_cities,house,direct,20124,40.11,1.58,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2019,small_cities,flat,direct,28627,57.05,2.24,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2019,small_cities,other,direct,1424,2.84,0.11,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2019,small_cities,house_proxy_own_use,proxy,14191,28.28,1.11,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2019,small_cities,flat_proxy_not_own_use,proxy,35984,71.72,2.82,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2020,small_cities,total,total,51779,100.00,4.15,derived,"sum over gmina-level units of the class, var 748601",S41
+2020,small_cities,house,direct,21843,42.19,1.75,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2020,small_cities,flat,direct,28763,55.55,2.31,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2020,small_cities,other,direct,1173,2.27,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2020,small_cities,house_proxy_own_use,proxy,15374,29.69,1.23,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2020,small_cities,flat_proxy_not_own_use,proxy,36405,70.31,2.92,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2021,small_cities,total,total,59544,100.00,4.81,derived,"sum over gmina-level units of the class, var 748601",S41
+2021,small_cities,house,direct,25434,42.71,2.05,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2021,small_cities,flat,direct,33016,55.45,2.67,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2021,small_cities,other,direct,1094,1.84,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2021,small_cities,house_proxy_own_use,proxy,17528,29.44,1.42,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2021,small_cities,flat_proxy_not_own_use,proxy,42016,70.56,3.39,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2022,small_cities,total,total,62475,100.00,5.08,derived,"sum over gmina-level units of the class, var 748601",S41
+2022,small_cities,house,direct,24775,39.66,2.01,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2022,small_cities,flat,direct,36923,59.10,3.00,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2022,small_cities,other,direct,777,1.24,0.06,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2022,small_cities,house_proxy_own_use,proxy,17161,27.47,1.40,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2022,small_cities,flat_proxy_not_own_use,proxy,45314,72.53,3.69,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2023,small_cities,total,total,58546,100.00,4.79,derived,"sum over gmina-level units of the class, var 748601",S41
+2023,small_cities,house,direct,22322,38.13,1.83,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2023,small_cities,flat,direct,35050,59.87,2.87,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2023,small_cities,other,direct,1174,2.01,0.10,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2023,small_cities,house_proxy_own_use,proxy,14673,25.06,1.20,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2023,small_cities,flat_proxy_not_own_use,proxy,43873,74.94,3.59,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2024,small_cities,total,total,52030,100.00,4.28,derived,"sum over gmina-level units of the class, var 748601",S41
+2024,small_cities,house,direct,20187,38.80,1.66,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2024,small_cities,flat,direct,31070,59.72,2.56,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2024,small_cities,other,direct,773,1.49,0.06,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2024,small_cities,house_proxy_own_use,proxy,12585,24.19,1.04,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2024,small_cities,flat_proxy_not_own_use,proxy,39445,75.81,3.24,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2025,small_cities,total,total,52599,100.00,4.36,derived,"sum over gmina-level units of the class, var 748601",S41
+2025,small_cities,house,direct,20359,38.71,1.69,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2025,small_cities,flat,direct,31637,60.15,2.62,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2025,small_cities,other,direct,603,1.15,0.05,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2025,small_cities,house_proxy_own_use,proxy,12073,22.95,1.00,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2025,small_cities,flat_proxy_not_own_use,proxy,40526,77.05,3.36,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2000,villages,total,total,17677,100.00,1.21,derived,"sum over gmina-level units of the class, var 748601",S41
+2000,villages,house_proxy_individual,proxy,15629,88.41,1.07,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2000,villages,flat_proxy_non_individual,proxy,2048,11.59,0.14,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2001,villages,total,total,19923,100.00,1.36,derived,"sum over gmina-level units of the class, var 748601",S41
+2001,villages,house_proxy_individual,proxy,17825,89.47,1.22,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2001,villages,flat_proxy_non_individual,proxy,2098,10.53,0.14,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2002,villages,total,total,26519,100.00,1.81,derived,"sum over gmina-level units of the class, var 748601",S41
+2002,villages,house_proxy_individual,proxy,25244,95.19,1.72,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2002,villages,flat_proxy_non_individual,proxy,1275,4.81,0.09,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2003,villages,total,total,69151,100.00,4.71,derived,"sum over gmina-level units of the class, var 748601",S41
+2003,villages,house_proxy_individual,proxy,67670,97.86,4.61,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2003,villages,flat_proxy_non_individual,proxy,1481,2.14,0.10,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2004,villages,total,total,35594,100.00,2.42,derived,"sum over gmina-level units of the class, var 748601",S41
+2004,villages,house_proxy_individual,proxy,33739,94.79,2.29,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2004,villages,flat_proxy_non_individual,proxy,1855,5.21,0.13,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2005,villages,total,total,36355,100.00,2.47,derived,"sum over gmina-level units of the class, var 748601",S41
+2005,villages,house_proxy_individual,proxy,33595,92.41,2.28,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2005,villages,flat_proxy_non_individual,proxy,2760,7.59,0.19,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2005,villages,house_proxy_own_use,proxy,33160,91.21,2.25,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2005,villages,flat_proxy_not_own_use,proxy,3195,8.79,0.22,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2006,villages,total,total,35143,100.00,2.38,derived,"sum over gmina-level units of the class, var 748601",S41
+2006,villages,house_proxy_individual,proxy,31948,90.91,2.16,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2006,villages,flat_proxy_non_individual,proxy,3195,9.09,0.22,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2006,villages,house_proxy_own_use,proxy,31604,89.93,2.14,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2006,villages,flat_proxy_not_own_use,proxy,3539,10.07,0.24,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2007,villages,total,total,45408,100.00,3.07,derived,"sum over gmina-level units of the class, var 748601",S41
+2007,villages,house_proxy_individual,proxy,41895,92.26,2.83,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2007,villages,flat_proxy_non_individual,proxy,3513,7.74,0.24,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2007,villages,house_proxy_own_use,proxy,41195,90.72,2.78,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2007,villages,flat_proxy_not_own_use,proxy,4213,9.28,0.28,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2008,villages,total,total,55659,100.00,3.75,derived,"sum over gmina-level units of the class, var 748601",S41
+2008,villages,house_proxy_individual,proxy,49769,89.42,3.35,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2008,villages,flat_proxy_non_individual,proxy,5890,10.58,0.40,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2008,villages,house_proxy_own_use,proxy,48450,87.05,3.26,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2008,villages,flat_proxy_not_own_use,proxy,7209,12.95,0.49,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2009,villages,total,total,48687,100.00,3.27,derived,"sum over gmina-level units of the class, var 748601",S41
+2009,villages,house,direct,43181,88.69,2.90,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2009,villages,flat,direct,3983,8.18,0.27,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2009,villages,other,direct,1523,3.13,0.10,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2009,villages,house_proxy_individual,proxy,43146,88.62,2.90,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2009,villages,flat_proxy_non_individual,proxy,5541,11.38,0.37,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2009,villages,house_proxy_own_use,proxy,41978,86.22,2.82,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2009,villages,flat_proxy_not_own_use,proxy,6709,13.78,0.45,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2010,villages,total,total,49717,100.00,3.29,derived,"sum over gmina-level units of the class, var 748601",S41
+2010,villages,house,direct,44520,89.55,2.95,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2010,villages,flat,direct,3701,7.44,0.24,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2010,villages,other,direct,1496,3.01,0.10,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2010,villages,house_proxy_individual,proxy,43763,88.02,2.90,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2010,villages,flat_proxy_non_individual,proxy,5954,11.98,0.39,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2010,villages,house_proxy_own_use,proxy,42580,85.64,2.82,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2010,villages,flat_proxy_not_own_use,proxy,7137,14.36,0.47,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2011,villages,total,total,51006,100.00,3.37,derived,"sum over gmina-level units of the class, var 748601",S41
+2011,villages,house,direct,45470,89.15,3.00,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2011,villages,flat,direct,4228,8.29,0.28,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2011,villages,other,direct,1308,2.56,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2011,villages,house_proxy_individual,proxy,45468,89.14,3.00,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2011,villages,flat_proxy_non_individual,proxy,5538,10.86,0.37,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2011,villages,house_proxy_own_use,proxy,43872,86.01,2.90,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2011,villages,flat_proxy_not_own_use,proxy,7134,13.99,0.47,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2012,villages,total,total,56272,100.00,3.70,derived,"sum over gmina-level units of the class, var 748601",S41
+2012,villages,house,direct,50275,89.34,3.31,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2012,villages,flat,direct,4580,8.14,0.30,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2012,villages,other,direct,1417,2.52,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2012,villages,house_proxy_individual,proxy,49877,88.64,3.28,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2012,villages,flat_proxy_non_individual,proxy,6395,11.36,0.42,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2012,villages,house_proxy_own_use,proxy,48154,85.57,3.17,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2012,villages,flat_proxy_not_own_use,proxy,8118,14.43,0.53,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2013,villages,total,total,56667,100.00,3.72,derived,"sum over gmina-level units of the class, var 748601",S41
+2013,villages,house,direct,51769,91.36,3.40,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2013,villages,flat,direct,3370,5.95,0.22,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2013,villages,other,direct,1528,2.70,0.10,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2013,villages,house_proxy_individual,proxy,51696,91.23,3.39,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2013,villages,flat_proxy_non_individual,proxy,4971,8.77,0.33,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2013,villages,house_proxy_own_use,proxy,50064,88.35,3.29,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2013,villages,flat_proxy_not_own_use,proxy,6603,11.65,0.43,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2014,villages,total,total,53156,100.00,3.48,derived,"sum over gmina-level units of the class, var 748601",S41
+2014,villages,house,direct,48684,91.59,3.19,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2014,villages,flat,direct,3070,5.78,0.20,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2014,villages,other,direct,1402,2.64,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2014,villages,house_proxy_individual,proxy,47913,90.14,3.14,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2014,villages,flat_proxy_non_individual,proxy,5243,9.86,0.34,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2014,villages,house_proxy_own_use,proxy,46422,87.33,3.04,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2014,villages,flat_proxy_not_own_use,proxy,6734,12.67,0.44,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2015,villages,total,total,56670,100.00,3.71,derived,"sum over gmina-level units of the class, var 748601",S41
+2015,villages,house,direct,51347,90.61,3.36,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2015,villages,flat,direct,4011,7.08,0.26,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2015,villages,other,direct,1312,2.32,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2015,villages,house_proxy_individual,proxy,49880,88.02,3.27,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2015,villages,flat_proxy_non_individual,proxy,6790,11.98,0.44,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2015,villages,house_proxy_own_use,proxy,47826,84.39,3.13,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2015,villages,flat_proxy_not_own_use,proxy,8844,15.61,0.58,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2016,villages,total,total,56229,100.00,3.67,derived,"sum over gmina-level units of the class, var 748601",S41
+2016,villages,house,direct,50774,90.30,3.32,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2016,villages,flat,direct,4033,7.17,0.26,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2016,villages,other,direct,1422,2.53,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2016,villages,house_proxy_individual,proxy,48609,86.45,3.18,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2016,villages,flat_proxy_non_individual,proxy,7620,13.55,0.50,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2016,villages,house_proxy_own_use,proxy,46037,81.87,3.01,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2016,villages,flat_proxy_not_own_use,proxy,10192,18.13,0.67,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2017,villages,total,total,60139,100.00,3.92,derived,"sum over gmina-level units of the class, var 748601",S41
+2017,villages,house,direct,53794,89.45,3.51,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2017,villages,flat,direct,4786,7.96,0.31,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2017,villages,other,direct,1559,2.59,0.10,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2017,villages,house_proxy_individual,proxy,51403,85.47,3.35,derived,"sum of var 430: individual (private) construction, includes private dwellings for sale or rent",S42
+2017,villages,flat_proxy_non_individual,proxy,8736,14.53,0.57,derived,"total - var 430 (developer, cooperative, municipal, TBS, company)",S41;S42
+2017,villages,house_proxy_own_use,proxy,48088,79.96,3.14,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2017,villages,flat_proxy_not_own_use,proxy,12051,20.04,0.79,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2018,villages,total,total,60959,100.00,3.97,derived,"sum over gmina-level units of the class, var 748601",S41
+2018,villages,house,direct,54226,88.95,3.53,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2018,villages,flat,direct,5476,8.98,0.36,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2018,villages,other,direct,1257,2.06,0.08,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2018,villages,house_proxy_own_use,proxy,46985,77.08,3.06,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2018,villages,flat_proxy_not_own_use,proxy,13974,22.92,0.91,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2019,villages,total,total,65905,100.00,4.29,derived,"sum over gmina-level units of the class, var 748601",S41
+2019,villages,house,direct,58830,89.26,3.83,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2019,villages,flat,direct,5624,8.53,0.37,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2019,villages,other,direct,1451,2.20,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2019,villages,house_proxy_own_use,proxy,49092,74.49,3.20,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2019,villages,flat_proxy_not_own_use,proxy,16813,25.51,1.10,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2020,villages,total,total,71393,100.00,4.66,derived,"sum over gmina-level units of the class, var 748601",S41
+2020,villages,house,direct,63996,89.64,4.18,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2020,villages,flat,direct,6014,8.42,0.39,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2020,villages,other,direct,1383,1.94,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2020,villages,house_proxy_own_use,proxy,52704,73.82,3.44,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2020,villages,flat_proxy_not_own_use,proxy,18689,26.18,1.22,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2021,villages,total,total,84532,100.00,5.53,derived,"sum over gmina-level units of the class, var 748601",S41
+2021,villages,house,direct,76266,90.22,4.99,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2021,villages,flat,direct,6936,8.21,0.45,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2021,villages,other,direct,1330,1.57,0.09,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2021,villages,house_proxy_own_use,proxy,63535,75.16,4.16,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2021,villages,flat_proxy_not_own_use,proxy,20997,24.84,1.37,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2022,villages,total,total,90431,100.00,5.92,derived,"sum over gmina-level units of the class, var 748601",S41
+2022,villages,house,direct,81852,90.51,5.36,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2022,villages,flat,direct,7020,7.76,0.46,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2022,villages,other,direct,1559,1.72,0.10,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2022,villages,house_proxy_own_use,proxy,66827,73.90,4.37,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2022,villages,flat_proxy_not_own_use,proxy,23604,26.10,1.55,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2023,villages,total,total,79810,100.00,5.23,derived,"sum over gmina-level units of the class, var 748601",S41
+2023,villages,house,direct,72042,90.27,4.72,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2023,villages,flat,direct,6674,8.36,0.44,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2023,villages,other,direct,1094,1.37,0.07,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2023,villages,house_proxy_own_use,proxy,59018,73.95,3.87,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2023,villages,flat_proxy_not_own_use,proxy,20792,26.05,1.36,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2024,villages,total,total,71243,100.00,4.68,derived,"sum over gmina-level units of the class, var 748601",S41
+2024,villages,house,direct,64159,90.06,4.22,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2024,villages,flat,direct,6269,8.80,0.41,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2024,villages,other,direct,815,1.14,0.05,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2024,villages,house_proxy_own_use,proxy,51592,72.42,3.39,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2024,villages,flat_proxy_not_own_use,proxy,19651,27.58,1.29,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41
+2025,villages,total,total,74366,100.00,4.90,derived,"sum over gmina-level units of the class, var 748601",S41
+2025,villages,house,direct,66420,89.32,4.38,derived,sum of var 748247: dwellings in new single-family (one-dwelling) residential buildings,S43
+2025,villages,flat,direct,7132,9.59,0.47,derived,sum of var 748250: dwellings in new multi-family residential buildings,S43
+2025,villages,other,direct,814,1.09,0.05,derived,"total - house - flat: dwellings in non-residential buildings, expansions and conversions",S41;S43
+2025,villages,house_proxy_own_use,proxy,50344,67.70,3.32,derived,sum of var 748604: private dwellings for the own use of the investor (from 2005),S41
+2025,villages,flat_proxy_not_own_use,proxy,24022,32.30,1.58,derived,"total - var 748604 (sale or rent incl. private, cooperative, municipal, TBS, company)",S41

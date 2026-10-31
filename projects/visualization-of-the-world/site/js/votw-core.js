@@ -120,5 +120,105 @@
 
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
-  return { PLACE_TYPES, PLACE_LABEL, parseCsv, toCsv, csvCell, indexSeries, rankByColumn, filterPlaces, makeBins, bbox, zoomTo, regionsFromCsv, sharesConsistent, cap };
+  // ---------- real data (research/poland-demography-housing processed CSVs) ----------
+  // Empty string and missing values are "no data", never 0: a gap must stay visible.
+  function numOrNull(v) {
+    if (v === null || v === undefined || v === "") return null;
+    const n = Number(v);
+    return Number.isNaN(n) ? null : n;
+  }
+
+  // Keep rows where every field in `where` matches (string comparison, like the CSV).
+  function filterRows(rows, where) {
+    const ks = Object.keys(where || {});
+    return rows.filter((r) => ks.every((k) => r[k] === where[k]));
+  }
+
+  // Long rows (year, key, value) -> wide, year-aligned arrays. Keys keep file order, years ascend.
+  // opts: { yearField, keyField, keyFn, valueField, meta: ["basis", "source_id"] }
+  // result: { years:[2000,...], keys:[...], values:{key:[..]}, meta:{key:{basis:[..]}}, raw:{...} }
+  function pivotSeries(rows, opts) {
+    const o = Object.assign({ yearField: "year", keyField: "class", valueField: "value", meta: [] }, opts || {});
+    const keyOf = o.keyFn || ((r) => r[o.keyField]);
+    const years = [], keys = [], lookup = new Map();
+    rows.forEach((r) => {
+      const y = numOrNull(r[o.yearField]), k = keyOf(r);
+      if (y === null || k === null || k === undefined) return;
+      if (!years.includes(y)) years.push(y);
+      if (!lookup.has(k)) { lookup.set(k, true); keys.push(k); }
+    });
+    years.sort((a, b) => a - b);
+    const yi = new Map(years.map((y, i) => [y, i]));
+    const values = {}, meta = {}, raw = {};
+    keys.forEach((k) => {
+      values[k] = years.map(() => null);
+      meta[k] = {};
+      o.meta.forEach((m) => (meta[k][m] = years.map(() => null)));
+      raw[k] = years.map(() => null);
+    });
+    rows.forEach((r) => {
+      const y = numOrNull(r[o.yearField]), k = keyOf(r);
+      if (y === null || k === null || k === undefined) return;
+      const i = yi.get(y);
+      values[k][i] = numOrNull(r[o.valueField]);
+      raw[k][i] = r;
+      o.meta.forEach((m) => (meta[k][m][i] = r[m] === undefined ? null : r[m]));
+    });
+    return { years, keys, values, meta, raw };
+  }
+
+  // Element-wise sum of aligned arrays; null only when every input is null at that position.
+  function sumSeries(arrays) {
+    const n = Math.max(...arrays.map((a) => a.length));
+    return Array.from({ length: n }, (_, i) => {
+      const vs = arrays.map((a) => (i < a.length ? a[i] : null)).filter((v) => v !== null && v !== undefined);
+      return vs.length ? vs.reduce((x, y) => x + y, 0) : null;
+    });
+  }
+
+  // Element-wise value / total * 100, rounded to `digits`. A missing or zero total gives null.
+  function percentShare(values, totals, digits) {
+    const d = digits === undefined ? 1 : digits;
+    const k = Math.pow(10, d);
+    return values.map((v, i) => (v === null || v === undefined || !totals[i] ? null : Math.round((v / totals[i]) * 100 * k) / k));
+  }
+
+  // Contiguous runs of one basis, e.g. [{ basis: "proxy", years: [2000..2008] }].
+  function basisRanges(years, basis) {
+    const out = [];
+    years.forEach((y, i) => {
+      const b = basis[i];
+      const cur = out[out.length - 1];
+      if (cur && cur.basis === b && cur.end === years[i - 1]) cur.end = y;
+      else out.push({ basis: b, start: y, end: y });
+    });
+    return out;
+  }
+
+  // CSV export/table helper: append a source_id column. Per-row ids (function or array) win;
+  // otherwise every row gets the fallback (spec source ids). Never an invented id: unknown -> "".
+  function csvWithSourceIds(table, fallback) {
+    const n = table.rows.length;
+    let ids;
+    if (typeof table.sourceId === "function") ids = table.rows.map((r, i) => table.sourceId(r, i));
+    else if (Array.isArray(table.sourceId)) ids = table.sourceId;
+    else if (table.sourceId) ids = table.rows.map(() => table.sourceId);
+    else if (fallback) ids = table.rows.map(() => (Array.isArray(fallback) ? fallback.join(";") : fallback));
+    else ids = table.rows.map(() => "");
+    return { header: [...table.header, "source_id"], rows: table.rows.map((r, i) => [...r, ids[i] === null || ids[i] === undefined ? "" : String(ids[i])]) };
+  }
+
+  // -- the eight shipped real files --
+  const populationByClass = (rows) => pivotSeries(rows, { valueField: "population", meta: ["source_id"] });
+  // Housing completions keyed "<class>|<type>"; basis and source_id travel with every value so proxy
+  // and direct years can be told apart and never plotted as one unlabelled line.
+  const completionsByClass = (rows) => pivotSeries(rows, { keyFn: (r) => r.class + "|" + r.type, valueField: "dwellings", meta: ["basis", "source_id"] });
+  const housingVsPopulation = (rows, measure) => pivotSeries(measure ? filterRows(rows, { measure }) : rows, { keyFn: (r) => r.class + "|" + r.measure, valueField: "value", meta: ["source_id"] });
+  const europeByGeo = (rows, indicator, sex) => pivotSeries(filterRows(rows, { indicator, sex: sex || "total" }), { keyField: "geo", valueField: "value", meta: ["geo_name", "source_id"] });
+  const bigCities = (rows) => rows.map((r) => ({ unit_id: r.unit_id, city: r.city, population: numOrNull(r.population_latest_year), year: numOrNull(r.latest_year), source_id: r.source_id }))
+    .filter((c) => c.population !== null).sort((a, b) => b.population - a.population || (a.city < b.city ? -1 : 1));
+
+  return { PLACE_TYPES, PLACE_LABEL, parseCsv, toCsv, csvCell, indexSeries, rankByColumn, filterPlaces, makeBins, bbox, zoomTo, regionsFromCsv, sharesConsistent, cap,
+    numOrNull, filterRows, pivotSeries, sumSeries, percentShare, basisRanges, csvWithSourceIds,
+    populationByClass, completionsByClass, housingVsPopulation, europeByGeo, bigCities };
 });

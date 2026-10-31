@@ -17,4 +17,6 @@ Accessed 2026-10-29. HTTP status of each page was checked with `curl -L` (200). 
 | Design system (tokens, components, fonts: SIL OFL) | `../design/` ; copies in `vendor/design/` |
 | TERYT convention used by the generator: powiat codes 61 and above are cities with powiat rights | Not verified against a primary source in this task; it only decides which synthetic powiats get a low village share and has no effect on any real number |
 
-**All numbers shown on the site are synthetic** (`scripts/make_demo_data.py`, seed 15). None is a statistic.
+**The demo pages (`index.html`, `charts.html`, `interaction.html`, `maps.html`, `formats.html`, `polish.html`, `matrix.html`) show synthetic numbers** (`scripts/make_demo_data.py`, seed 15). None of those is a statistic.
+
+**`real.html` shows real numbers only.** Its data is `data/real/*.csv`, copied verbatim from `../research/poland-demography-housing/data/processed/`; each chart footer names the source ids (S1, S15, S29-S32, S41-S44) registered in [`../research/poland-demography-housing/sources.csv`](../research/poland-demography-housing/sources.csv) (GUS BDL and Eurostat, accessed 2026-10-29). Housing splits for 2000-2008 are proxies and are labelled as such.
