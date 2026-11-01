@@ -16,8 +16,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (bot-blocked, sites exist): g2.com/best-software-companies/fastest-growing, verdict.co.uk (Synthflow round), openevidence.com
 - [x] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
   Unverifiable links (bot-blocked 401/403, sites exist): thelogic.co (Asepha), axios.com (Outmarket, Anterior), theinsurer.com, insurancenewsnet.com, mobihealthnews.com, seedtable.com
-- [~] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
-  Resume: all outputs written (README, united-kingdom, uk-legal-property, uk-tax-health, ireland; catalogue/R2-uk-ireland.csv 40 rows GB 29 + IE 11; countries.md + CHANGELOG updated). Link check 106 links, 0 dead, 4 unverifiable: irishtechnews.ie/audrey-ai… (403), inspeq.ai (403), arabfounders.net record-os and valla pages (connection closed). Done-when met; awaiting orchestrator to mark [x]
+- [x] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
+  Unverifiable links (bot-blocked/timeout, sites exist): irishtechnews.ie (Audrey AI), inspeq.ai, arabfounders.net (Record OS, Valla), itbrief.co.uk (Gizmo, timeout)
 - [ ] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
 - [ ] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
 - [ ] T09 · regional scan R5 France & Southern Europe · needs: T01 · [tasks/09-regional-scan-r5-france-southern-europe.md](tasks/09-regional-scan-r5-france-southern-europe.md)
@@ -43,6 +43,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-01 03:25 · T06 · done: research/regions/R2-uk-ireland/ (README, UK index + 2 vertical files, ireland.md) + catalogue/R2-uk-ireland.csv (40 rows: GB 29 + 15 already in R0, IE 11); 106 links, 0 dead, 5 unverifiable; gaps: Google Play charts, EF/Seedcamp/NDRC portfolios not screened, 10 rows partly from search excerpts · next T07
 2026-11-01 03:05 · T05 · done: research/regions/R1-north-america/ (README, US index + 5 vertical files, canada.md) + catalogue/R1-north-america.csv (65 rows: US 55 new + 35 already in R0 = 90 researched, CA 10); 141 links, 0 dead, 7 unverifiable; gaps: ~25 rows partly from search excerpts (re-read before T15), no Google Play/Similarweb or non-YC accelerators, works_in_polish unknown everywhere · next T06
 2026-11-01 01:00 · T04 · done: catalogue/R0-global.csv (104 rows, all with sourced traction; durable signals known for 15) + research/global/ (5 source-family files + README); 193 links, 0 dead, 3 unverifiable; gaps: retention data, 47 CB Insights companies without traction · next T05
 2026-11-01 00:35 · T03 · done: research/poland/ai-landscape.md (29 findings, 52 startups) and local-moats.md (53 items); 172 links, 0 dead, 5 unverifiable; gaps: gateway/InPost/EKW fees, partner APIs of Symfonia/Booksy/ZnanyLekarz unverified · next T04
