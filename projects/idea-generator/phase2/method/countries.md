@@ -32,7 +32,7 @@ Media and chart links were checked on 2026-10-30 (home pages load and are the na
 | R4 | Denmark | Danish: "AI-startup", "AI-agent", "AI-assistent til", "rejser millioner", "kapitalrunde" | [App Store top-grossing Business](https://itunes.apple.com/dk/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/denmark/business/) | [Børsen](https://www.borsen.dk/), [Computerworld DK](https://www.computerworld.dk/), [The Hub](https://www.thehub.io/) | done | 5 (+2 Denmark-based in R0) |
 | R4 | Finland | Finnish: "tekoälystartup", "tekoälyagentti", "tekoälyavustaja", "rahoituskierros", "keräsi miljoonaa" | [App Store top-grossing Business](https://itunes.apple.com/fi/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/finland/business/) | [ArcticStartup](https://arcticstartup.com/), [Kauppalehti](https://www.kauppalehti.fi/), [Tivi](https://www.tivi.fi/) | done | 5 |
 | R4 | Iceland | Icelandic: "gervigreind sprotafyrirtæki", "gervigreindar", "fjármögnun" | [App Store top-grossing Business](https://itunes.apple.com/is/rss/topgrossingapplications/limit=100/genre=6000/json) | [Northstack](https://www.northstack.is/), [ArcticStartup](https://arcticstartup.com/) | thin | 2 |
-| R4 | Estonia | Estonian: "tehisintellekti idufirma", "TI-agent", "kaasas raha", "rahastusvoor" | [App Store top-grossing Business](https://itunes.apple.com/ee/rss/topgrossingapplications/limit=100/genre=6000/json) | [Startup Estonia](https://www.startupestonia.ee/), [ArcticStartup](https://arcticstartup.com/) | done | 5 |
+| R4 | Estonia | Estonian: "tehisintellekti idufirma", "TI-agent", "kaasas raha", "rahastusvoor" | [App Store top-grossing Business](https://itunes.apple.com/ee/rss/topgrossingapplications/limit=100/genre=6000/json) | [Startup Estonia](https://www.startupestonia.ee/), [ArcticStartup](https://arcticstartup.com/) | done | 6 |
 | R4 | Latvia | Latvian: "mākslīgā intelekta jaunuzņēmums", "MI asistents", "piesaista investīcijas" | [App Store top-grossing Business](https://itunes.apple.com/lv/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/latvia/business/) | [Startin.LV](https://startin.lv/), [Labs of Latvia](https://www.labsoflatvia.com/) | done | 5 |
 | R4 | Lithuania | Lithuanian: "dirbtinio intelekto startuolis", "DI asistentas", "pritraukė investicijų" | [App Store top-grossing Business](https://itunes.apple.com/lt/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/lithuania/business/) | [Startup Lithuania](https://www.startuplithuania.com/), [Verslo žinios](https://www.vz.lt/) | done | 5 |
 | R5 | France | French: "start-up IA", "agent IA", "assistant IA pour", "lève millions", "levée de fonds" | [App Store top-grossing Business](https://itunes.apple.com/fr/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/france/business/) | [Maddyness](https://www.maddyness.com/), [FrenchWeb](https://www.frenchweb.fr/), [La French Tech](https://www.lafrenchtech.gouv.fr/en/) | todo | 0 |
@@ -76,11 +76,11 @@ Media and chart links were checked on 2026-10-30 (home pages load and are the na
 | R1 North America | 2 | 2 | 65 |
 | R2 UK & Ireland | 2 | 2 | 40 |
 | R3 DACH & Benelux | 6 | 6 | 41 |
-| R4 Nordics & Baltics | 8 | 0 | 0 |
+| R4 Nordics & Baltics | 8 | 8 | 40 |
 | R5 France & Southern Europe | 7 | 0 | 0 |
 | R6 CEE peers | 7 | 0 | 0 |
 | R7 East Asia | 5 | 0 | 0 |
 | R8 Oceania & Israel | 3 | 0 | 0 |
 | R9 Gulf & Turkey | 6 | 0 | 0 |
 | R10 Latin America (OECD) | 5 | 0 | 0 |
-| **Total** | **51** | **10** | **146** |
+| **Total** | **51** | **18** | **186** |
