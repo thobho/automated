@@ -1,0 +1,39 @@
+# Czechia (T10)
+
+All sources accessed **2026-11-01**. "Read" = page opened; "excerpt" = search summary only (unverified). Catalogue rows R6-CZ-001…009 in [../../../catalogue/R6-cee-peers.csv](../../../catalogue/R6-cee-peers.csv). Searches in Czech ("česká AI startup získal investici 2026 účetní právníci", "CzechCrunch AI asistent investiční kolo", "AI pro advokáty český startup judikatura", "Digitoo vytěžování faktur", "Born Digital voicebot", "Legito AI smlouvy Polsko", "Myriad AI byrokracie") and English.
+
+Context: Czech lawyers adopt AI fast but mostly through general tools. In a March 2026 survey of 170 advocates, ~70% used AI several times a week, 80% of them ChatGPT, and only 35% used a legal-specific tool ([Advokátní deník](https://advokatnidenik.cz/2026/03/06/ai-uz-pouziva-7-z-10-advokatu-nastroje-specializovane-na-pravo-zatim-mensina/), read; the survey comes from DirectCase, a vendor). A Czech chamber survey says AI spreads slowest into HR and legal services ([BusinessInfo](https://www.businessinfo.cz/clanky/pruzkum-caui-a-hk-cr-ceske-firmy-berou-ai-vazne-celkem-9-z-10-s-ni-uz-v-roce-2026-pocita/), excerpt).
+
+## Findings
+
+Columns "Adapts" and "Poland" are the T10 extra fields (also in the CSV, in `pl_adaptation_angle`).
+
+| # | Product | What it does | Traction (date) | Source | Adapts | Poland |
+|---|---|---|---|---|---|---|
+| CZ-001 | **Everbot** | One login and payment for 80+ AI models for freelancers and SMEs; agents on business data planned | 60,000+ registered, several thousand paying, +200–500 paying/month, 2026-09-30 (read) | [Newstream](https://www.newstream.cz/zpravy-z-firem/cesky-prukopnik-v-ai-everbot-miri-do-polska-do-expanze-investuje-miliony-a-chysta-pobocku-v-katovicich) | Poe/TypingMind-style aggregator | **Entered 2026-09**: Polish version, local sales team, Polish support planned, Katowice branch planned; PL is its first big export market, SK next |
+| CZ-002 | **Myriad** | Regulatory-change agent mapping new rules to company controls | Seed 7.8M USD (~160M CZK), 2025-09-16 (read) | [Lupa](https://www.lupa.cz/aktuality/cesky-startup-byvaleho-inzenyra-v-nvidii-a-googlu-ziskal-160-milionu-na-ai-pro-zvladani-byrokracie/) | Norm Ai-style compliance agent | no (US go-to-market) |
+| CZ-003 | **Duvo** | Agents that run retail back-office tasks across SAP, portals, email, spreadsheets | Seed 15M USD (Index Ventures), 2025-12-02; six-figure contracts (read); >1bn CZK raised in total ([CzechCrunch](https://cc.cz/duvo-uz-ma-od-investoru-pres-miliardu-korun-ai-startup-tomase-cupra-miri-automatizovat-podniky-do-usa/), excerpt) | [Tech.eu](https://tech.eu/2025/12/02/duvo-raises-15m-to-give-retailers-ai-staff-that-cuts-manual-work-by-40/) | agentic RPA (no single leader) | unknown; next market is the US |
+| CZ-004 | **Born Digital** | Voice AI agents for banks, insurers, utilities, telcos | EUR 2M, 2023-12 (read); CEZ Distribuce 650K+ customers served ([site](https://borndigital.ai/), read) | [CzechTrade](https://www.czechtradeoffices.com/en/us/news/czech-ai-startup-born-digital-secures-%E2%82%AC2m-for-global-expansion) | PolyAI/Parloa-style | **Entered**: Netia (Polish telco) case study ([case studies](https://borndigital.ai/category/case-study/), read) |
+| CZ-005 | **Digitoo** | Invoice/receipt extraction and coding for accounting firms | 150,000 invoices/month, 2022-11 (read); seed EUR 2.3M, 2023-12 ([AIN](https://en.ain.ua/2023/12/14/digitoo-raises-2-3m-seed-reflex-capital), excerpt) | [CzechCrunch](https://cc.cz/vytvari-umelou-ucetni-a-hlasi-novou-investici-uz-jsme-mysleli-ze-to-nedame-rika-zakladatelka/) | Dext/Hubdoc | unknown (foreign test clients, country not named) |
+| CZ-006 | **DirectCase** | Cited legal research over 1.21M Czech/EU judgments and regulator decisions; MCP-style connectors for Claude/ChatGPT/Copilot | Customers Air Bank, Frank Bold, Software602; 1,599–7,999 CZK/month (read) | [DirectCase](https://www.directcase.ai/cz/cs/home) | Harvey/vLex Vincent | **Announced?** site has a Polish locale; Polish data coverage not stated |
+| CZ-007 | **Lawrence** | Legal agent with sub-agents for statutes (e-Sbírka), case law and drafting | Agentic version 2025-04-02; no user numbers (read) | [epravo](https://www.epravo.cz/top/aktualne/lawrence-predstavuje-prulomoveho-ai-asistenta-pro-pravni-profesionaly-119408.html) | Harvey | no |
+| CZ-008 | **Kuba** | AI English tutor that clones a popular Czech YouTube teacher | CZ Education top-grossing #14; 5,608 ratings, 2026-11-01 (read) | [App Store](https://apps.apple.com/cz/app/kuba-your-ai-english-buddy/id6504236543) | Praktika/Speak + local creator | no |
+| CZ-009 | **Linca** | AI receptionist answering missed calls and sending summaries | CZ Business top-grossing #48; 28 ratings, 2026-11-01 (read) | [App Store](https://apps.apple.com/cz/app/linca-ai-phone-receptionist/id6749208610) | Rosie/Goodcall | unknown |
+
+Seen, not catalogued: **Rossum** (AI document processing, 100M USD in 2021, pre-LLM origin, no recent traction figure read; [Radio Prague](https://english.radio.cz/node/8731759)), **Lorela** (second CZ AI call-answering app, released 2026-08, Business #37, 5 ratings), **Vocalls** (Prague voice bot, no figures), **Legito** (Brno contract automation; founder expected Poland to overtake Czechia as a market, undated, [MU alumni](https://www.fi.muni.cz/alumni/gallery/ondrej-materna.html), excerpt; AI role unclear), **Codexis AI** (incumbent legal database's AI, tested on 170 labour-law cases, [Právní prostor](https://pravniprostor.cz/clanky/pravo-it/codexis-ai-rozsahly-test-na-170-realnych-pripadech-z-oblasti-pracovniho-prava), excerpt), **E2B** and **Apify** (developer infrastructure for agents, not adaptation targets), **Filuta AI**, **BottleCap AI**, **UptimAI** (no product-market evidence read).
+
+## App Store charts (top-grossing CZ, 2026-11-01)
+Business: iDoklad and Billdu (invoicing), Profi Účtenka (receipts), scanners, call recorders, Smartsupp, two AI phone receptionists (Lorela, Linca). Education: Duolingo, Learna, **Astra AI (SI)**, Loora, Quizlet, Mooveez (CZ language app), **Kuba (CZ)**, Talkpal, Praktika, Knowunity (R3), DuoCards (CZ). Productivity: ChatGPT, Plaud, Grok, Perplexity, Lovable, Wispr Flow. Finance: Wallet (BudgetBakers, CZ), Spendee (Cleevio, CZ), BitFaktura, "Vyhledávání Exekucí" (search of the Czech enforcement register).
+
+## Patterns (Czechia)
+1. **Czech AI products already go to Poland first**: Everbot (2026-09, Katowice), Born Digital (Netia), DirectCase (Polish locale). Poland is treated as the natural first export market, which is both a warning and evidence that CEE players think local adaptation pays.
+2. **Two legal-AI entrants on top of incumbents** (DirectCase, Lawrence vs Codexis/ASPI/Beck), while most lawyers use ChatGPT. Same pattern as Poland (LEX/Legalis vs Lexu).
+3. **AI receptionists spread through the app store** (Linca, Lorela): a cheap, self-serve wedge for SMEs that answer phones (Czech "zvyk volat", as Born Digital's CEO put it in [CzechCrunch](https://cc.cz/cesi-jsou-zvykli-vsude-volat-vyuziti-chatbotu-se-zatim-hleda-tezko-rika-sef-startupu-born-digital-tomas-malovec/), 2020).
+4. **Creator-cloned tutors**: Kuba turns a local YouTube teacher into an AI tutor and charts above global apps.
+5. **Enterprise agents funded with global ambitions** (Duvo, Myriad) skip the local market and target the US.
+
+## Coverage (Czechia)
+- Products: 9 catalogued (meets ≥5). None in R0–R5. Seen, not catalogued: 10. Products researched: 19.
+- Sources read: 9 pages + 4 App Store feeds + iTunes Search API lookups.
+- Searches: 9.
+- Found nothing: Czech LLM startups with traction for payroll (mzdy), tax advisors, health administration (scribes, booking voice agents), real estate (katastr), public-services assistants; any retention or NRR figure.
