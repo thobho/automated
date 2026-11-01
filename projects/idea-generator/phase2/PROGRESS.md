@@ -10,8 +10,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (bot-blocked, sites exist): g2.com/best-software-companies/fastest-growing, netokracija.com, qstp.org.qa, cuti.org.uy, brutkasten.com, datanews.be, timesofmalta.com
 - [x] T02 · Poland baseline: demography and social change · needs: T01 · [tasks/02-poland-baseline-demography-and-social-ch.md](tasks/02-poland-baseline-demography-and-social-ch.md)
   Unverifiable links (bot-blocked, site exists): populationpyramid.net/poland/2050
-- [~] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
-  Resume: T03 Done-when met (ai-landscape A01–A29 + 52 startups; local-moats M01–M53; link check 172 links, 0 dead, 5 unverifiable: codesota.com, whitecase.com, seedtable.com, businesswire.com, ceelegalmatters.com); awaiting runner to mark done
+- [x] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
+  Unverifiable links (bot-blocked or 5xx, sites exist): codesota.com/polish-llm, whitecase.com (Digital Omnibus alert), seedtable.com, businesswire.com, ceelegalmatters.com
 - [ ] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
 - [ ] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
 - [ ] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
@@ -40,6 +40,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-01 00:35 · T03 · done: research/poland/ai-landscape.md (29 findings, 52 startups) and local-moats.md (53 items); 172 links, 0 dead, 5 unverifiable; gaps: gateway/InPost/EKW fees, partner APIs of Symfonia/Booksy/ZnanyLekarz unverified · next T04
 2026-11-01 00:05 · T02 · done: research/poland/demography.md (50 findings D01–D50, 12 demand drivers, Coverage, Gaps; 36 sources); link check 36 links, 0 dead, 1 unverifiable; open checks: bon senioralny age, carer count survey-based, NFZ mental-health data 2023 · next T03
 2026-10-30 11:00 · T01 · done: rejected.md, method/criteria.md, countries.md (51 countries), sources.md; link check 315 links, 0 dead, 7 unverifiable · next T02
 2026-10-30 · T01 · owner switched the worker model from fable to opus (medium effort); T01 unblocked · next run starts T01
