@@ -25,7 +25,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T09 · regional scan R5 France & Southern Europe · needs: T01 · [tasks/09-regional-scan-r5-france-southern-europe.md](tasks/09-regional-scan-r5-france-southern-europe.md)
   Unverifiable links (timeout/reset/403, sites exist): startupitalia.eu, marketing4ecommerce.net, seedtable.com, magnific.com, mindigital.gr, omilia.com
 - [~] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
-  Resume: 7 countries + README + countries.md done = 40 rows (CZ 11, SK 5, HU 5, SI 4 thin, HR 4 thin, RO 6, BG 5); next link check, then report
+  Resume: content complete, link check passed (326 links, 0 dead, 10 unverifiable: R6 ceelegalmatters.com, seedtable.com, businesswire.com 403; 7 older media links in countries.md); 40 rows (CZ 11, SK 5, HU 5, SI 4 thin, HR 4 thin, RO 6, BG 5); next: mark done
 - [ ] T11 · regional scan R7 East Asia · needs: T01 · [tasks/11-regional-scan-r7-east-asia.md](tasks/11-regional-scan-r7-east-asia.md)
 - [ ] T12 · regional scan R8 Oceania & Israel · needs: T01 · [tasks/12-regional-scan-r8-oceania-israel.md](tasks/12-regional-scan-r8-oceania-israel.md)
 - [ ] T13 · regional scan R9 Gulf & Turkey · needs: T01 · [tasks/13-regional-scan-r9-gulf-turkey.md](tasks/13-regional-scan-r9-gulf-turkey.md)
