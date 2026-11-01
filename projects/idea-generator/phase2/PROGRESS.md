@@ -18,8 +18,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (bot-blocked 401/403, sites exist): thelogic.co (Asepha), axios.com (Outmarket, Anterior), theinsurer.com, insurancenewsnet.com, mobihealthnews.com, seedtable.com
 - [x] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
   Unverifiable links (bot-blocked/timeout, sites exist): irishtechnews.ie (Audrey AI), inspeq.ai, arabfounders.net (Record OS, Valla), itbrief.co.uk (Gizmo, timeout)
-- [~] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
-  Resume: DONE pending review: all 6 countries (DE 17, NL 5, CH 6, AT 5, BE 6, LU 2 thin) = 41 rows, README final, link check passed (R3 files: 104 links, 0 dead, 3 unverifiable: manda.be x2 [520], organisator.ch [403])
+- [x] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
+  Unverifiable links (bot-blocked 403/520, sites exist): manda.be (Cavell, Lowi), finder.techleap.nl (Legal Mind), organisator.ch (TreuhandGPT)
 - [ ] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
 - [ ] T09 · regional scan R5 France & Southern Europe · needs: T01 · [tasks/09-regional-scan-r5-france-southern-europe.md](tasks/09-regional-scan-r5-france-southern-europe.md)
 - [ ] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
@@ -44,6 +44,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-01 03:55 · T07 · done: research/regions/R3-dach-benelux/ (README + 6 country files) + catalogue/R3-dach-benelux.csv (41 rows: DE 17 (+10 in R0), NL 5, CH 6, AT 5, BE 6, LU 2 = thin, reason stated); 102 links, 0 dead, 4 unverifiable; note: Libra (Wolters Kluwer) already live in PL on LEX, so general legal AI counts as taken; gaps: Google Play charts, accelerator batches, 5 rows partly from excerpts · next T08
 2026-11-01 03:25 · T06 · done: research/regions/R2-uk-ireland/ (README, UK index + 2 vertical files, ireland.md) + catalogue/R2-uk-ireland.csv (40 rows: GB 29 + 15 already in R0, IE 11); 106 links, 0 dead, 5 unverifiable; gaps: Google Play charts, EF/Seedcamp/NDRC portfolios not screened, 10 rows partly from search excerpts · next T07
 2026-11-01 03:05 · T05 · done: research/regions/R1-north-america/ (README, US index + 5 vertical files, canada.md) + catalogue/R1-north-america.csv (65 rows: US 55 new + 35 already in R0 = 90 researched, CA 10); 141 links, 0 dead, 7 unverifiable; gaps: ~25 rows partly from search excerpts (re-read before T15), no Google Play/Similarweb or non-YC accelerators, works_in_polish unknown everywhere · next T06
 2026-11-01 01:00 · T04 · done: catalogue/R0-global.csv (104 rows, all with sourced traction; durable signals known for 15) + research/global/ (5 source-family files + README); 193 links, 0 dead, 3 unverifiable; gaps: retention data, 47 CB Insights companies without traction · next T05
