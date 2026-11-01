@@ -21,7 +21,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
   Unverifiable links (bot-blocked 403/520, sites exist): manda.be (Cavell, Lowi), finder.techleap.nl (Legal Mind), organisator.ch (TreuhandGPT)
 - [~] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
-  Resume: SE, NO, DK, FI, IS(thin), EE done (catalogue 29 rows, link check passed for these); next LV, then LT, README (patterns, R0 overlaps Lovable/Legora/Brickanta/Light/Complir, Coverage table), countries.md totals row, final link check
+  Resume: SE, NO, DK, FI, IS(thin), EE, LV done (catalogue 34 rows, link check passed for these); next LT, then README (patterns, R0 overlaps Lovable/Legora/Brickanta/Light/Complir, Coverage table), countries.md totals row, final link check
 - [ ] T09 · regional scan R5 France & Southern Europe · needs: T01 · [tasks/09-regional-scan-r5-france-southern-europe.md](tasks/09-regional-scan-r5-france-southern-europe.md)
 - [ ] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
 - [ ] T11 · regional scan R7 East Asia · needs: T01 · [tasks/11-regional-scan-r7-east-asia.md](tasks/11-regional-scan-r7-east-asia.md)
