@@ -5,3 +5,4 @@
 2026-11-01 · method/countries.md · R2 rows (United Kingdom done 29 +15 UK-based in R0; Ireland done 11) and Totals row (4 done, 105 products) updated · T06 regional scan finished
 2026-11-01 · method/countries.md · R3 Germany row done (16 rows +10 in R0), Totals updated · T07 regional scan in progress
 2026-11-01 · method/countries.md · R3 Netherlands row done (5), Totals updated · T07
+2026-11-01 · method/countries.md · R3 Switzerland row done (6), Totals updated · T07
