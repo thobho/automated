@@ -20,8 +20,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (bot-blocked/timeout, sites exist): irishtechnews.ie (Audrey AI), inspeq.ai, arabfounders.net (Record OS, Valla), itbrief.co.uk (Gizmo, timeout)
 - [x] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
   Unverifiable links (bot-blocked 403/520, sites exist): manda.be (Cavell, Lowi), finder.techleap.nl (Legal Mind), organisator.ch (TreuhandGPT)
-- [~] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
-  Resume: complete pending runner sign-off: 8 country files + README, catalogue 40 rows (SE 7, NO 5, DK 5, FI 5, IS 2, EE 6, LV 5, LT 5), countries.md R4 rows + totals updated, final link check 115 links, 0 dead, 6 unverifiable (di.ku.dk, sodas.ku.dk, tech.slator.com, lsm.lv, regjeringen.no, techsavvy.media); nothing left to do
+- [x] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
+  Unverifiable links (timeout/403/454, sites exist): di.ku.dk, sodas.ku.dk, tech.slator.com, lsm.lv, regjeringen.no, techsavvy.media
 - [ ] T09 · regional scan R5 France & Southern Europe · needs: T01 · [tasks/09-regional-scan-r5-france-southern-europe.md](tasks/09-regional-scan-r5-france-southern-europe.md)
 - [ ] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
 - [ ] T11 · regional scan R7 East Asia · needs: T01 · [tasks/11-regional-scan-r7-east-asia.md](tasks/11-regional-scan-r7-east-asia.md)
@@ -45,6 +45,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-01 05:55 · T08 · done: research/regions/R4-nordics-baltics/ (README + 8 country files) + catalogue/R4-nordics-baltics.csv (40 rows: SE 7 (+3 in R0), NO 5, DK 5 (+2 in R0), FI 5, IS 2 thin, EE 6, LV 5, LT 5); 115 links, 0 dead, 6 unverifiable; caveats: 40 = floor, 7 rows non-LLM/unclear AI, charts and accelerators not screened, Baltic local media thin; PL entry warnings: Sigvi (LT) operating in PL since 06/2026, Paysera AI bookkeeping incl. PL · next T09
 2026-11-01 05:05 · T08 · progress: SE 7 (+3 in R0), NO 5, DK 5 (+2 in R0), FI 5, IS 2 (thin, reason stated) = 24 catalogue rows + 5 country files; 70 links, 1 dead fixed, 5 unverifiable (di.ku.dk, sodas.ku.dk, ks.no, regjeringen.no, techsavvy.media); Bluebook site down (hype warning); Google Play charts and accelerators not yet screened · next EE, LV, LT, README, countries.md totals
 2026-11-01 03:55 · T07 · done: research/regions/R3-dach-benelux/ (README + 6 country files) + catalogue/R3-dach-benelux.csv (41 rows: DE 17 (+10 in R0), NL 5, CH 6, AT 5, BE 6, LU 2 = thin, reason stated); 102 links, 0 dead, 4 unverifiable; note: Libra (Wolters Kluwer) already live in PL on LEX, so general legal AI counts as taken; gaps: Google Play charts, accelerator batches, 5 rows partly from excerpts · next T08
 2026-11-01 03:25 · T06 · done: research/regions/R2-uk-ireland/ (README, UK index + 2 vertical files, ireland.md) + catalogue/R2-uk-ireland.csv (40 rows: GB 29 + 15 already in R0, IE 11); 106 links, 0 dead, 5 unverifiable; gaps: Google Play charts, EF/Seedcamp/NDRC portfolios not screened, 10 rows partly from search excerpts · next T07
