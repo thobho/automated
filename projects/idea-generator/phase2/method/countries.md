@@ -21,7 +21,7 @@ Media and chart links were checked on 2026-10-30 (home pages load and are the na
 | R1 | Canada | English as US; French (Québec): "jeune pousse IA", "agent IA", "levée de fonds" | [App Store top-grossing Business](https://itunes.apple.com/ca/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/canada/business/) | [BetaKit](https://betakit.com/) | done | 10 |
 | R2 | United Kingdom | English: "AI agent for", "AI startup raises", "seed round" + vertical | [App Store top-grossing Business](https://itunes.apple.com/gb/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/united-kingdom/business/) | [UKTN](https://uktech.news/), [Sifted](https://sifted.eu/) | done | 29 (+15 UK-based in R0) |
 | R2 | Ireland | English as UK | [App Store top-grossing Business](https://itunes.apple.com/ie/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/ireland/business/) | [Silicon Republic](https://www.siliconrepublic.com/), [ThinkBusiness](https://www.thinkbusiness.ie/), [Business Post](https://www.businesspost.ie/) | done | 11 |
-| R3 | Germany | German: "KI-Startup", "KI-Agent", "KI-Assistent für", "Finanzierungsrunde", "Seed-Runde" | [App Store top-grossing Business](https://itunes.apple.com/de/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/germany/business/) | [Gründerszene](https://www.gruenderszene.de/), [deutsche-startups.de](https://www.deutsche-startups.de/), [Handelsblatt](https://www.handelsblatt.com/) | todo | 0 |
+| R3 | Germany | German: "KI-Startup", "KI-Agent", "KI-Assistent für", "Finanzierungsrunde", "Seed-Runde" | [App Store top-grossing Business](https://itunes.apple.com/de/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/germany/business/) | [Gründerszene](https://www.gruenderszene.de/), [deutsche-startups.de](https://www.deutsche-startups.de/), [Handelsblatt](https://www.handelsblatt.com/) | done | 16 (+10 Germany-based in R0) |
 | R3 | Austria | German as DE; "österreichisches KI-Startup" | [App Store top-grossing Business](https://itunes.apple.com/at/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/austria/business/) | [Trending Topics](https://www.trendingtopics.eu/), [brutkasten](https://www.brutkasten.com/) (403 to bots) | todo | 0 |
 | R3 | Switzerland | German as DE; French as FR; Italian as IT; "Schweizer KI-Startup" | [App Store top-grossing Business](https://itunes.apple.com/ch/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/switzerland/business/) | [startupticker.ch](https://www.startupticker.ch/en) | todo | 0 |
 | R3 | Netherlands | Dutch: "AI-startup", "AI-agent", "AI-assistent voor", "investeringsronde", "haalt miljoen op" | [App Store top-grossing Business](https://itunes.apple.com/nl/rss/topgrossingapplications/limit=100/genre=6000/json); [Similarweb Google Play Business](https://www.similarweb.com/top-apps/google/netherlands/business/) | [Silicon Canals](https://www.siliconcanals.com/), [Emerce](https://www.emerce.nl/), [Techleap](https://www.techleap.nl/) | todo | 0 |
@@ -75,7 +75,7 @@ Media and chart links were checked on 2026-10-30 (home pages load and are the na
 |---|---|---|---|
 | R1 North America | 2 | 2 | 65 |
 | R2 UK & Ireland | 2 | 2 | 40 |
-| R3 DACH & Benelux | 6 | 0 | 0 |
+| R3 DACH & Benelux | 6 | 1 | 16 |
 | R4 Nordics & Baltics | 8 | 0 | 0 |
 | R5 France & Southern Europe | 7 | 0 | 0 |
 | R6 CEE peers | 7 | 0 | 0 |
@@ -83,4 +83,4 @@ Media and chart links were checked on 2026-10-30 (home pages load and are the na
 | R8 Oceania & Israel | 3 | 0 | 0 |
 | R9 Gulf & Turkey | 6 | 0 | 0 |
 | R10 Latin America (OECD) | 5 | 0 | 0 |
-| **Total** | **51** | **4** | **105** |
+| **Total** | **51** | **5** | **121** |
