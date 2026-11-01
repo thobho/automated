@@ -18,7 +18,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (bot-blocked 401/403, sites exist): thelogic.co (Asepha), axios.com (Outmarket, Anterior), theinsurer.com, insurancenewsnet.com, mobihealthnews.com, seedtable.com
 - [x] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
   Unverifiable links (bot-blocked/timeout, sites exist): irishtechnews.ie (Audrey AI), inspeq.ai, arabfounders.net (Record OS, Valla), itbrief.co.uk (Gizmo, timeout)
-- [ ] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
+- [~] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
+  Resume: starting
 - [ ] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
 - [ ] T09 · regional scan R5 France & Southern Europe · needs: T01 · [tasks/09-regional-scan-r5-france-southern-europe.md](tasks/09-regional-scan-r5-france-southern-europe.md)
 - [ ] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
