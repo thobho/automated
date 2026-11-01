@@ -12,8 +12,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (bot-blocked, site exists): populationpyramid.net/poland/2050
 - [x] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
   Unverifiable links (bot-blocked or 5xx, sites exist): codesota.com/polish-llm, whitecase.com (Digital Omnibus alert), seedtable.com, businesswire.com, ceelegalmatters.com
-- [~] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
-  Resume: T04 Done-when met (104 rows with traction, link check 193 links 0 dead); research/global/README.md + 5 family files written; unverifiable (403): g2.com/best-software-companies/fastest-growing, verdict.co.uk (Synthflow), openevidence.com; awaiting owner/runner to mark [x]
+- [x] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
+  Unverifiable links (bot-blocked, sites exist): g2.com/best-software-companies/fastest-growing, verdict.co.uk (Synthflow round), openevidence.com
 - [ ] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
 - [ ] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
 - [ ] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
@@ -41,6 +41,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-01 01:00 · T04 · done: catalogue/R0-global.csv (104 rows, all with sourced traction; durable signals known for 15) + research/global/ (5 source-family files + README); 193 links, 0 dead, 3 unverifiable; gaps: retention data, 47 CB Insights companies without traction · next T05
 2026-11-01 00:35 · T03 · done: research/poland/ai-landscape.md (29 findings, 52 startups) and local-moats.md (53 items); 172 links, 0 dead, 5 unverifiable; gaps: gateway/InPost/EKW fees, partner APIs of Symfonia/Booksy/ZnanyLekarz unverified · next T04
 2026-11-01 00:05 · T02 · done: research/poland/demography.md (50 findings D01–D50, 12 demand drivers, Coverage, Gaps; 36 sources); link check 36 links, 0 dead, 1 unverifiable; open checks: bon senioralny age, carer count survey-based, NFZ mental-health data 2023 · next T03
 2026-10-30 11:00 · T01 · done: rejected.md, method/criteria.md, countries.md (51 countries), sources.md; link check 315 links, 0 dead, 7 unverifiable · next T02
