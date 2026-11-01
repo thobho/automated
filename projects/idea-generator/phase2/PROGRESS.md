@@ -14,8 +14,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (bot-blocked or 5xx, sites exist): codesota.com/polish-llm, whitecase.com (Digital Omnibus alert), seedtable.com, businesswire.com, ceelegalmatters.com
 - [x] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
   Unverifiable links (bot-blocked, sites exist): g2.com/best-software-companies/fastest-growing, verdict.co.uk (Synthflow round), openevidence.com
-- [~] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
-  Resume: all outputs written: research/regions/R1-north-america/ (README, united-states.md, 5 us-*.md, canada.md), catalogue/R1-north-america.csv 65 rows (US 55, CA 10; US researched 90 incl. 35 R0), countries.md R1 done; link check 141 links, 0 dead, 7 unverifiable (thelogic.co, theinsurer.com, insurancenewsnet.com, mobihealthnews.com, seedtable.com, finder.techleap.nl, clio.com). Done-when met; awaiting runner to mark [x]. Optional follow-up: re-read ~25 excerpt-based rows, Google Play charts
+- [x] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
+  Unverifiable links (bot-blocked 401/403, sites exist): thelogic.co (Asepha), axios.com (Outmarket, Anterior), theinsurer.com, insurancenewsnet.com, mobihealthnews.com, seedtable.com
 - [ ] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
 - [ ] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
 - [ ] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
@@ -42,6 +42,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-01 03:05 · T05 · done: research/regions/R1-north-america/ (README, US index + 5 vertical files, canada.md) + catalogue/R1-north-america.csv (65 rows: US 55 new + 35 already in R0 = 90 researched, CA 10); 141 links, 0 dead, 7 unverifiable; gaps: ~25 rows partly from search excerpts (re-read before T15), no Google Play/Similarweb or non-YC accelerators, works_in_polish unknown everywhere · next T06
 2026-11-01 01:00 · T04 · done: catalogue/R0-global.csv (104 rows, all with sourced traction; durable signals known for 15) + research/global/ (5 source-family files + README); 193 links, 0 dead, 3 unverifiable; gaps: retention data, 47 CB Insights companies without traction · next T05
 2026-11-01 00:35 · T03 · done: research/poland/ai-landscape.md (29 findings, 52 startups) and local-moats.md (53 items); 172 links, 0 dead, 5 unverifiable; gaps: gateway/InPost/EKW fees, partner APIs of Symfonia/Booksy/ZnanyLekarz unverified · next T04
 2026-11-01 00:05 · T02 · done: research/poland/demography.md (50 findings D01–D50, 12 demand drivers, Coverage, Gaps; 36 sources); link check 36 links, 0 dead, 1 unverifiable; open checks: bon senioralny age, carer count survey-based, NFZ mental-health data 2023 · next T03
