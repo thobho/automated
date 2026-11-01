@@ -73,7 +73,7 @@ Media and chart links were checked on 2026-10-30 (home pages load and are the na
 
 | Region | Countries | Done | Products found |
 |---|---|---|---|
-| R1 North America | 2 | 0 | 0 |
+| R1 North America | 2 | 2 | 65 |
 | R2 UK & Ireland | 2 | 0 | 0 |
 | R3 DACH & Benelux | 6 | 0 | 0 |
 | R4 Nordics & Baltics | 8 | 0 | 0 |
@@ -83,4 +83,4 @@ Media and chart links were checked on 2026-10-30 (home pages load and are the na
 | R8 Oceania & Israel | 3 | 0 | 0 |
 | R9 Gulf & Turkey | 6 | 0 | 0 |
 | R10 Latin America (OECD) | 5 | 0 | 0 |
-| **Total** | **51** | **0** | **0** |
+| **Total** | **51** | **2** | **65** |

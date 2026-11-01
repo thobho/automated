@@ -15,7 +15,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
   Unverifiable links (bot-blocked, sites exist): g2.com/best-software-companies/fastest-growing, verdict.co.uk (Synthflow round), openevidence.com
 - [~] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
-  Resume: US + Canada done: R1 folder has united-states.md, 5 us-*.md, canada.md; CSV 65 rows (R1-US-001..055, R1-CA-056..065); countries.md R1 rows done. Next: README.md (patterns, coverage, R0 overlaps), CHANGELOG line, link check
+  Resume: all outputs written: research/regions/R1-north-america/ (README, united-states.md, 5 us-*.md, canada.md), catalogue/R1-north-america.csv 65 rows (US 55, CA 10; US researched 90 incl. 35 R0), countries.md R1 done; link check 141 links, 0 dead, 7 unverifiable (thelogic.co, theinsurer.com, insurancenewsnet.com, mobihealthnews.com, seedtable.com, finder.techleap.nl, clio.com). Done-when met; awaiting runner to mark [x]. Optional follow-up: re-read ~25 excerpt-based rows, Google Play charts
 - [ ] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
 - [ ] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
 - [ ] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
