@@ -26,7 +26,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (timeout/reset/403, sites exist): startupitalia.eu, marketing4ecommerce.net, seedtable.com, magnific.com, mindigital.gr, omilia.com
 - [x] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
   Unverifiable links (bot-blocked 403, sites exist): ceelegalmatters.com, seedtable.com, businesswire.com
-- [ ] T11 · regional scan R7 East Asia · needs: T01 · [tasks/11-regional-scan-r7-east-asia.md](tasks/11-regional-scan-r7-east-asia.md)
+- [~] T11 · regional scan R7 East Asia · needs: T01 · [tasks/11-regional-scan-r7-east-asia.md](tasks/11-regional-scan-r7-east-asia.md)
+  Resume: starting
 - [ ] T12 · regional scan R8 Oceania & Israel · needs: T01 · [tasks/12-regional-scan-r8-oceania-israel.md](tasks/12-regional-scan-r8-oceania-israel.md)
 - [ ] T13 · regional scan R9 Gulf & Turkey · needs: T01 · [tasks/13-regional-scan-r9-gulf-turkey.md](tasks/13-regional-scan-r9-gulf-turkey.md)
 - [ ] T14 · regional scan R10 Latin America (OECD) · needs: T01 · [tasks/14-regional-scan-r10-latin-america-oecd.md](tasks/14-regional-scan-r10-latin-america-oecd.md)
