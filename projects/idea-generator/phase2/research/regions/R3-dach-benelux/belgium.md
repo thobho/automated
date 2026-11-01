@@ -1,0 +1,33 @@
+# Belgium (T07)
+
+All sources accessed **2026-11-01**. "Read" = page opened; "excerpt" = search summary only (unverified). Catalogue rows R3-BE-001…006 in [../../../catalogue/R3-dach-benelux.csv](../../../catalogue/R3-dach-benelux.csv). Searches in Dutch ("Belgische AI-startup haalt miljoen op") and French ("start-up belge IA lève millions") plus English. Data News blocks bots (per [countries.md](../../../method/countries.md)); Forbes België, manda.be and Belga were used instead.
+
+Context: Belgium counts 700+ AI startups ([Belga](https://www.belganewsagency.eu/more-than-700-ai-start-ups-now-active-in-belgium), excerpt); 67.6% of the latest Start it @KBC cohort build AI products and 252M EUR was raised in 2026 by the time of writing vs 190M EUR in all of 2025 ([Forbes FR](https://www.forbes.be/fr/start-it-kbc-lia-simpose-dans-les-start-up-belges-les-capitaux-se-concentrent/), excerpt).
+
+## Findings
+
+| # | Product | What it does | Traction (date) | Source | Polish angle |
+|---|---|---|---|---|---|
+| BE-001 | **Accountable** (Brussels/Berlin) | Tax and bookkeeping app for the self-employed with an "AI accountant": 24/7 tax answers trained on Belgian tax law and thousands of freelancer questions, expense categorisation, pre-submission checks, receipt OCR; tax guarantee; states it is not subject to accountant/tax-adviser regulation | Launched 2024-03-12; 50,000+ Belgian self-employed users (read); **#1 top-grossing BE Finance and #3 DE Finance**, 2026-11-01 ([BE feed](https://itunes.apple.com/be/rss/topgrossingapplications/limit=100/genre=6015/json)); Series A extension to 10M EUR, 16M EUR total ([PYMNTS](https://www.pymnts.com/?p=1298213), excerpt, undated) | [Accountable press](https://www.accountable.eu/fr-be/press/accountable-lance-le-premier-comptable-ia/) | **Strong analogue:** AI tax assistant for JDG built on Polish rules (ryczałt vs liniowy vs skala, ZUS reliefs, KSeF, JPK_V7). Shows the same product rebuilt per country (BE then DE) tops two national charts. Regulatory question in PL: where an AI answer becomes doradztwo podatkowe |
+| BE-002 | **LEGALFLY** (Ghent) | Legal AI for law firms and in-house teams (finance, insurance); anonymises sensitive data on-premise before calling LLMs; chooses the model per task | 15M EUR (Notion Capital lead; redalpine, Fortino), 2024-07-15; partnerships with Slaughter and May and Allianz (read) | [Forbes België](https://www.forbes.be/nl/legalfly-haalt-15-miljoen-euro-op-voor-ai-gedreven-juridische-diensten/) | Horizontal. Anonymisation-first fits Polish banks/insurers (tajemnica bankowa, RODO) |
+| BE-003 | **Ravical** (Ghent) | AI "virtual employees" for tax, accounting, legal and insurance firms, combining domain expertise, firm know-how and client context | Pre-seed 7.3M EUR (Lakestar), 2025-05-21; 10 pilots; claims up to 80% of firm work automatable; founder sold Silverfin for 320M EUR (2023) (read) | [tech.eu](https://tech.eu/2025/05/21/ravical-raises-eur73m-for-ai-virtual-employees-to-automate-80-of-professional-services-work/) | Same thesis as Germany's Limetax/Skalar but sold as software to firms rather than as a roll-up: the version a solo founder could copy for biura rachunkowe |
+| BE-004 | **Cavell** (Ghent) | Listens during consultations, surgeries and ward rounds; writes **coded** medical reports into the patient record | Pre-seed 1.5M EUR, 2025-05-06; early supporter AZ Sint-Lucas; GP users (read) | [M&A Belgium](https://manda.be/articles/gent-based-health-tech-startup-cavell-raises-1-5-million-euros-to-streamline-healthcare-documentation/) | National-language scribe with coding, as in NL (Juvoly) and CH (Saipient, 44ai) |
+| BE-005 | **Henchman** (Ghent; now part of LexisNexis) | Indexes a firm's own contracts at clause level on its DMS; multi-LLM drafting suggestions | 170+ legal and corporate customers; founded 2020; acquisition by LexisNexis announced 2024-06-03 (read). Home page henchman.io no longer resolves (url `unknown`) | [LawSites](https://www.lawnext.com/2024/06/breaking-news-lexisnexis-to-acquire-contract-drafting-company-henchman.html) | Publisher exit pattern (as Libra → Wolters Kluwer); for PL the buyers would be Wolters Kluwer Polska or C.H. Beck |
+| BE-006 | **Warren** (Ghent) | Workplace pension platform (ETF-based) with AI financial coaching for employees | Seed 10M EUR, "one of the largest AI seed rounds in Belgium" (article 2026-07-09, read; investors not named there); Motive Ventures lead and ~100 employer clients per aggregators (excerpt) | [Forbes België](https://www.forbes.be/nl/het-forbes-startupnieuws-in-vlaanderen-10/) | PPK/PPE context in PL, but a pension product needs a licence (L7); only an employer-side coaching layer would fit |
+
+Not catalogued: **Lowi** (Hasselt, 2.7M EUR, 2026-06, SME process automation that prioritises "practicality over generative AI"; [M&A Belgium](https://manda.be/articles/hasselt-based-ai-firm-lowi-secures-2-7-million-euros-for-benelux-expansion/), read); **Dytto** (Ghent, AI assistant for accounting firms, 1.5M EUR per a funding database, excerpt); **Booqee** (AI for accountants, 300k EUR, excerpt). Spott (Antwerp, recruiting) is in R0.
+
+## App Store charts (top-grossing BE, 2026-11-01)
+Local or country-specific: Accountable (#1 Finance), Bilance (budget), Zonebourse / Investir (French-language investing), Feu Vert 2026 and Belgium Driving Test (driving theory, Education), Start 2 Run, Trenara (running coach), iRISCO (Lifestyle). Productivity: global LLM apps plus "Vincen – Your Super AI Agent".
+
+## Patterns (Belgium)
+1. **Ghent is an accounting-AI cluster** (Ravical, Dytto, Booqee, earlier Silverfin, and Henchman in legal). The Silverfin exit funds and staffs the next wave. Poland has the same structure (many biura, staff shortages), and Polish accounting software incumbents are the integration points.
+2. **The freelancer tax assistant is a two-country chart leader** (Accountable #1 BE, #3 DE): durable consumer-side tax AI exists where it is rebuilt per national law.
+3. **Publishers buy legal AI** (Henchman → LexisNexis, Libra → Wolters Kluwer).
+
+## Coverage (Belgium)
+- Products: 6 catalogued; Spott (R0) is Belgian. Seen, not catalogued: Lowi, Dytto, Booqee, Bilance (4). Products researched: 11.
+- Sources read: 7 pages + 6 App Store feeds.
+- Searches: 6 (Dutch 2, French 1, English 3).
+- Found nothing: Belgian LLM products for public services (MyMinfin, Itsme-based flows), HR/payroll (social secretariats such as SD Worx or Partena add AI in-house; no startup found), real estate; French-language Belgian legal or health startups with funding figures.
+- Failed fetch: belganewsagency.eu Ravical article (404; tech.eu used).
