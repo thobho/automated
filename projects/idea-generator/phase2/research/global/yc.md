@@ -26,7 +26,7 @@ Source family: YC company directory, batches Winter 2024 to Fall 2026. All sourc
 
 ## Coverage
 - Sources: yc-oss mirror of the YC directory (2,025 companies in 2024–2026 batches screened by team size and location), 42 YC company pages cited, G2 awards page (Retell). 42 catalogue rows.
-- Countries: United States 21, United Kingdom 8, Germany 7, France 3, Sweden 1, Belgium 1, Denmark 1, Hong Kong 1, Turkey 1, Colombia 1 (some counts include rows of the same country; see CSV).
+- Countries: United States 19, United Kingdom 7, Germany 7, France 3, Sweden 1, Belgium 1, Denmark 1, Hong Kong 1, Turkey 1, Colombia 1.
 - Searches run: 0 web searches (directory data read directly).
 - Not found: revenue for any YC 2024–26 company in this set (YC does not publish it).
 

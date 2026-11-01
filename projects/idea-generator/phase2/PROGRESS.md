@@ -13,7 +13,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
   Unverifiable links (bot-blocked or 5xx, sites exist): codesota.com/polish-llm, whitecase.com (Digital Omnibus alert), seedtable.com, businesswire.com, ceelegalmatters.com
 - [~] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
-  Resume: all 5 source-family files done (a16z-consumer, revenue-leaders, funding-and-rankings, yc, g2-producthunt-rounds); 104 rows (R0-*-001..104); next: research/global/README.md (patterns, Coverage, Gaps), then link check on research/global/*.md + catalogue/R0-global.csv
+  Resume: T04 Done-when met (104 rows with traction, link check 193 links 0 dead); research/global/README.md + 5 family files written; unverifiable (403): g2.com/best-software-companies/fastest-growing, verdict.co.uk (Synthflow), openevidence.com; awaiting owner/runner to mark [x]
 - [ ] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
 - [ ] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
 - [ ] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
