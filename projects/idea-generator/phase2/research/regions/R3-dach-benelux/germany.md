@@ -68,7 +68,7 @@ Not catalogued: **simpleclub** (vocational-training platform, 300+ corporate par
 
 ## 8. App Store charts (top-grossing, 2026-11-01)
 
-Read from the Apple RSS feeds (`https://itunes.apple.com/de/rss/topgrossingapplications/limit=25/genre=<id>/json`, genres 6000/6007/6015/6013/6017/6012). Local, LLM-era or country-specific apps in the top 25:
+Read from the Apple RSS top-grossing feeds for country code `de`, limit 25, genres 6000/6007/6015/6013/6017/6012 (URL pattern in [countries.md](../../../method/countries.md)), e.g. [Finance](https://itunes.apple.com/de/rss/topgrossingapplications/limit=100/genre=6015/json). Local, LLM-era or country-specific apps in the top 25:
 - **Finance:** Finanzguru (#1, contract and account manager, launched pre-LLM), Accountable (#3, freelancer tax, Belgian, see [belgium.md](belgium.md)), Elterngeld Buddy (#21), Blockpit (crypto tax), Finanzfluss Copilot, Driversnote (Fahrtenbuch).
 - **Education:** Knowunity (#5), Jurafuchs (#21), Astra AI (exam prep), Retain Cards (AI flashcards), Praktika and Loora (AI speaking tutors).
 - **Productivity:** ChatGPT, Claude, Grok, Perplexity, Plaud, Manus, German-named chatbot wrappers (ChatOn, "KI Chatbot Deutsch") — the same as the UK/US.

@@ -2,7 +2,7 @@
 
 All sources accessed **2026-11-01**. "Read" = page opened; "excerpt" = search summary only (unverified). Catalogue rows R3-BE-001…006 in [../../../catalogue/R3-dach-benelux.csv](../../../catalogue/R3-dach-benelux.csv). Searches in Dutch ("Belgische AI-startup haalt miljoen op") and French ("start-up belge IA lève millions") plus English. Data News blocks bots (per [countries.md](../../../method/countries.md)); Forbes België, manda.be and Belga were used instead.
 
-Context: Belgium counts 700+ AI startups ([Belga](https://www.belganewsagency.eu/more-than-700-ai-start-ups-now-active-in-belgium), excerpt); 67.6% of the latest Start it @KBC cohort build AI products and 252M EUR was raised in 2026 by the time of writing vs 190M EUR in all of 2025 ([Forbes FR](https://www.forbes.be/fr/start-it-kbc-lia-simpose-dans-les-start-up-belges-les-capitaux-se-concentrent/), excerpt).
+Context: Belgium counts 700+ AI startups (Belga News Agency headline seen in search; the page now returns 404, unverified); 67.6% of the latest Start it @KBC cohort build AI products and 252M EUR was raised in 2026 by the time of writing vs 190M EUR in all of 2025 ([Forbes FR](https://www.forbes.be/fr/start-it-kbc-lia-simpose-dans-les-start-up-belges-les-capitaux-se-concentrent/), excerpt).
 
 ## Findings
 
@@ -30,4 +30,4 @@ Local or country-specific: Accountable (#1 Finance), Bilance (budget), Zonebours
 - Sources read: 7 pages + 6 App Store feeds.
 - Searches: 6 (Dutch 2, French 1, English 3).
 - Found nothing: Belgian LLM products for public services (MyMinfin, Itsme-based flows), HR/payroll (social secretariats such as SD Worx or Partena add AI in-house; no startup found), real estate; French-language Belgian legal or health startups with funding figures.
-- Failed fetch: belganewsagency.eu Ravical article (404; tech.eu used).
+- Failed fetch: belganewsagency.eu Ravical and "700 AI start-ups" articles (404; tech.eu used for Ravical). manda.be returned 520 to the link checker but was read with the fetch tool.
