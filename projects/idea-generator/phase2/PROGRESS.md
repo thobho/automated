@@ -15,7 +15,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
   Unverifiable links (bot-blocked, sites exist): g2.com/best-software-companies/fastest-growing, verdict.co.uk (Synthflow round), openevidence.com
 - [~] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
-  Resume: US done: united-states.md (index, charts) + 5 us-*.md vertical files; catalogue/R1-north-america.csv 55 rows (R1-US-001..055; 35 R0 overlaps listed). Next: canada.md + CA rows (Blue J, Spellbook, Alexi, Paraito, Tali, Asepha, Clio, Infoway scribe vendors), README, countries.md rows, link check
+  Resume: US + Canada done: R1 folder has united-states.md, 5 us-*.md, canada.md; CSV 65 rows (R1-US-001..055, R1-CA-056..065); countries.md R1 rows done. Next: README.md (patterns, coverage, R0 overlaps), CHANGELOG line, link check
 - [ ] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
 - [ ] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
 - [ ] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
