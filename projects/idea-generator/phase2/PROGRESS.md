@@ -11,7 +11,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T02 · Poland baseline: demography and social change · needs: T01 · [tasks/02-poland-baseline-demography-and-social-ch.md](tasks/02-poland-baseline-demography-and-social-ch.md)
   Unverifiable links (bot-blocked, site exists): populationpyramid.net/poland/2050
 - [~] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
-  Resume: ai-landscape.md A–E done; local-moats.md written (M01–M53); next: ai-landscape Coverage+Gaps, link check both files, fix dead links
+  Resume: T03 Done-when met (ai-landscape A01–A29 + 52 startups; local-moats M01–M53; link check 172 links, 0 dead, 5 unverifiable: codesota.com, whitecase.com, seedtable.com, businesswire.com, ceelegalmatters.com); awaiting runner to mark done
 - [ ] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
 - [ ] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
 - [ ] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
