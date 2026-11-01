@@ -13,7 +13,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
   Unverifiable links (bot-blocked or 5xx, sites exist): codesota.com/polish-llm, whitecase.com (Digital Omnibus alert), seedtable.com, businesswire.com, ceelegalmatters.com
 - [~] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
-  Resume: done a16z (research/global/a16z-consumer.md, rows R0-*-001..016); next: revenue leaders (ARR Club Velocity 20 + TrustMRR AI), then funding rounds (TechCrunch $100M+ 2025/2026, Forbes AI 50, CB Insights AI 100), YC 2024-26, G2, Product Hunt; then README + link check
+  Resume: done a16z (a16z-consumer.md) and revenue boards (revenue-leaders.md); 30 rows (R0-*-001..030); next: funding rounds (TechCrunch $100M+ 2025/2026, Forbes AI 50, CB Insights AI 100) -> research/global/funding-and-rankings.md, then YC 2024-26, G2, Product Hunt; then README + link check
 - [ ] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
 - [ ] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
 - [ ] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
