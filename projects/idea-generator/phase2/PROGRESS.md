@@ -8,8 +8,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 ## Tasks
 - [x] T01 · setup and method · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
   Unverifiable links (bot-blocked, sites exist): g2.com/best-software-companies/fastest-growing, netokracija.com, qstp.org.qa, cuti.org.uy, brutkasten.com, datanews.be, timesofmalta.com
-- [~] T02 · Poland baseline: demography and social change · needs: T01 · [tasks/02-poland-baseline-demography-and-social-ch.md](tasks/02-poland-baseline-demography-and-social-ch.md)
-  Resume: done pending review: demography.md complete (D01–D50, DD1–DD12, Coverage, Gaps); link check 36 links, 0 dead, 1 unverifiable (https://www.populationpyramid.net/poland/2050/ 403)
+- [x] T02 · Poland baseline: demography and social change · needs: T01 · [tasks/02-poland-baseline-demography-and-social-ch.md](tasks/02-poland-baseline-demography-and-social-ch.md)
+  Unverifiable links (bot-blocked, site exists): populationpyramid.net/poland/2050
 - [ ] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
 - [ ] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
 - [ ] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
@@ -39,6 +39,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-01 00:05 · T02 · done: research/poland/demography.md (50 findings D01–D50, 12 demand drivers, Coverage, Gaps; 36 sources); link check 36 links, 0 dead, 1 unverifiable; open checks: bon senioralny age, carer count survey-based, NFZ mental-health data 2023 · next T03
 2026-10-30 11:00 · T01 · done: rejected.md, method/criteria.md, countries.md (51 countries), sources.md; link check 315 links, 0 dead, 7 unverifiable · next T02
 2026-10-30 · T01 · owner switched the worker model from fable to opus (medium effort); T01 unblocked · next run starts T01
 2026-10-30 00:46 · T01 · started; fable subagent failed with HTTP 429 (needs usage credits); nothing written; marked [!] · owner decides on credits or model (see Blocked)
