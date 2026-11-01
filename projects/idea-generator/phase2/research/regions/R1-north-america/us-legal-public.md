@@ -1,0 +1,31 @@
+# United States: legal and public services (T05)
+
+Part of the US scan; index and charts in [united-states.md](united-states.md). All sources accessed **2026-11-01**. "Read" = page opened and read; "excerpt" = fact taken from the search-engine summary of the cited article because the page was not opened or blocked the fetch tool (treat as unverified until read). Catalogue rows: [../../../catalogue/R1-north-america.csv](../../../catalogue/R1-north-america.csv).
+
+## Findings
+
+| # | Product | What it does | Traction (date) | Source | Polish angle |
+|---|---|---|---|---|---|
+| US-L01 | **Eve** | AI platform for plaintiff (personal injury) law firms | Series A 47M USD led by a16z, 2025-01 (read); reported 1B USD valuation 2025-09 (excerpt) | [Legal Tech Monitor](https://www.legaltechmonitor.com/2025/01/gen-ai-legal-tech-startup-eve-raises-47-million-series-a-investment/), [Bloomberg Gov](https://news.bgov.com/employment/startup-delivering-ai-to-lawyers-nabs-1-billion-valuation) | kancelarie odszkodowawcze (motor and medical claims, OC/AC); same theme as EvenUp (R0) |
+| US-L02 | **Supio** | AI agent across personal-injury and mass-tort cases: intake, medical chronologies, demand letters, litigation drafting | Series A 25M USD, 2024-10 (read); Series B 60M USD in H1 2025 per Law360 (excerpt) | [Supio press](https://supio.com/press/supio-an-ai-platform-for-personal-injury-law-raises-25m), [Law360](https://www.law360.com/pulse/articles/2363506) | medical chronologies from Polish records (IKP, discharge letters) for odszkodowania |
+| US-L03 | **Manifest (Manifest Law)** | Runs its own AI-native law firms with fixed-fee and outcome pricing, starting with business immigration; first firm under Arizona's alternative business structure (ABS) | Series A 60M USD at 750M USD valuation, 2026-04 (read) | [Legal IT Insider](https://legaltechnology.com/manifest-os-raises-60m-series-a-to-build-ai-native-law-firm-model/) | AI-native firm model needs Polish lawyers (no ABS in PL); immigration angle → karta pobytu / zezwolenie na pracę for employers of foreigners |
+| US-L04 | **Alma** | Self-described AI-native immigration law firm (employment visas, international hiring), founded 2024 | Series A 17M USD led by Bling Capital, 2026-09 (read; HQ not stated in article) | [Dealroom](https://dealroom.co/news/151371-ai-native-law-firm-alma-raises-17m-to-automate-immigration-cases/) | Polish residence/work permits for ~1.5–2M migrants; urzędy wojewódzkie backlog |
+| US-L05 | **Visalaw.ai** | AI for immigration lawyers: research, case assessment, drafting, visa applications; exclusive AILA publications | Seed 1.6M USD, 2025-02; "hundreds of immigration law firms" (read) | [Hypepotamus](https://www.hypepotamus.com/visalawai-lands-seed-1-6-million-seed-investment/) | content partnership model (AILA) → Polish publisher or bar-association content |
+| US-L06 | **CaseBlink** | AI immigration case-preparation tool (Miami) | Pre-seed 2M USD led by Tower Research Ventures with immigration law firms (excerpt) | [Techleap feed](https://finder.techleap.nl/news/feed/caseblink-secures-2m-in-pre-seed-funding) | same as US-L04 |
+| US-P01 | **GovWell** | "AI operating system" for local government: permitting and licensing, AI AutoCheck of applications against local code, multilingual assistant | Series A 25M USD (Insight), 2026-05; 130+ municipalities and counties in 34 states (read) | [Pulse 2.0](https://pulse2.com/govwell-25-million-series-a-raised-for-ai-government-operating-system/) | pozwolenie na budowę / zgłoszenie checks vs MPZP and WZ; public tenders excluded by brief, so sell to applicants (architects) instead |
+| US-P02 | **Govstream.ai** | AI permitting assistant for local agencies trained on local codes, GIS and zoning; flags zoning issues, drafts code-citing emails | Seed 3.6M USD, 2025-12; Bellevue, WA early client (read) | [GovTech](https://www.govtech.com/biz/ai-permitting-firm-govstream-ai-raises-3-6m-seed-round) | Geoportal + MPZP + Prawo budowlane checks for architects and investors |
+| US-P03 | **Madison AI** | Chatbot and AI services for cities, counties and agencies trained on each government's knowledge | 3.5M USD round late 2025 (excerpt, aggregator; unverified) | [NeuronFeed](https://neuronfeed.com/startups/madison-ai) | gmina resident assistant (BIP, uchwały) — public buyer, weak fit |
+| US-P04 | **EffiGov** | AI call operators for 311 and department phone lines (permits, animal control) | YC seed 500K USD (excerpt, unverified) | [NeuronFeed](https://neuronfeed.com/startups/effigov) | gmina hotline; public buyer |
+
+**Also in R0 (US legal), counted toward US coverage, not re-catalogued:** Harvey (R0-US-031), EvenUp (R0-US-044), Eudia (R0-US-045), PointOne (R0-US-069), Comp AI (R0-US-019).
+
+## Patterns
+1. **Plaintiff-side legal is the hottest US legal niche**: Eve, Supio, EvenUp (R0) all sell to contingency-fee personal-injury firms, where AI-written demand packages map straight to fee revenue (durable signal 1, unverified per product). Poland's analogue is the large market of kancelarie odszkodowawcze and claims firms.
+2. **"AI-native law firm" is a 2025–26 format** (Manifest, Alma; Crosby and others not catalogued), enabled in the US by Arizona's ABS rules. In Poland non-lawyer ownership of a law firm is restricted, so the format would need a partner kancelaria. Founder L7 risk: it is a service with licensed staff.
+3. **Immigration is a recurring LLM vertical** (Manifest, Alma, Visalaw.ai, CaseBlink). Poland has the demand driver (migrant workers, urzędy wojewódzkie queues; see demography D-files) and the moat (Polish forms, MOS portal, voivodeship practice).
+4. **Local-government permitting** (GovWell, Govstream) is growing but sells to municipalities; the brief excludes tenders, so a Polish version would target applicants (architects, developers) rather than the gmina.
+
+## Coverage
+- Products: 10 new (6 legal, 4 public) + 5 R0 overlaps. Sources read: 6 pages; 5 facts from search excerpts (marked).
+- Searches run: 5 (AI legal Series A immigration/PI; legal tech funding 2025; GovTech AI permits; Paraito/Clio for comparison; legal deals roundup).
+- Found nothing: retention/NRR figures for any US plaintiff-side tool; Polimorphic and Crosby funding pages not opened (not catalogued); the Eudia 2025 legal deals roundup URL returned 404.
