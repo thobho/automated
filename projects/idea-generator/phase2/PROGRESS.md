@@ -23,7 +23,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
   Unverifiable links (timeout/403/454, sites exist): di.ku.dk, sodas.ku.dk, tech.slator.com, lsm.lv, regjeringen.no, techsavvy.media
 - [~] T09 · regional scan R5 France & Southern Europe · needs: T01 · [tasks/09-regional-scan-r5-france-southern-europe.md](tasks/09-regional-scan-r5-france-southern-europe.md)
-  Resume: FR (001…012), ES (001…006), IT (001…006), PT (001…005) done in catalogue/R5-france-southern-europe.csv (29 rows); next Greece, then MT, CY, README, countries.md, link check
+  Resume: FR 12, ES 6, IT 6, PT 5, GR 4 (thin) done in catalogue/R5-france-southern-europe.csv (33 rows); next Malta, Cyprus, then top up to ≥40 (FR seen-list candidates), README, countries.md, link check
 - [ ] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
 - [ ] T11 · regional scan R7 East Asia · needs: T01 · [tasks/11-regional-scan-r7-east-asia.md](tasks/11-regional-scan-r7-east-asia.md)
 - [ ] T12 · regional scan R8 Oceania & Israel · needs: T01 · [tasks/12-regional-scan-r8-oceania-israel.md](tasks/12-regional-scan-r8-oceania-israel.md)
