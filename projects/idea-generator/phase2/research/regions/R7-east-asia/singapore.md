@@ -1,0 +1,34 @@
+# Singapore (T11)
+
+All sources accessed **2026-11-01**. "Read" = page opened; "excerpt" = search summary only (unverified). Catalogue rows R7-SG-001…007 in [../../../catalogue/R7-east-asia.csv](../../../catalogue/R7-east-asia.csv). Searches in English (Singapore's business language): "Osome AI accounting Singapore 2025 funding revenue", "Sleek Singapore corporate secretary accounting AI revenue", "Singapore Academy of Law GPT-Legal LawNet AI", "VocalBeats Owll AI translator revenue", "WIZ.AI voice agents Southeast Asia 2025", "GovTech Pair AI assistant public officers", "Inspired AI TalkMe revenue users". Chinese-language searches were not needed: the products found all market in English.
+
+Context: Singapore is a **regional HQ market**: many "Singaporean" AI companies sell mostly elsewhere (Manus, already R0-SG-011; Vocalbeats; WIZ.AI in SEA; TalkMe globally). The country-specific products are **compliance-as-a-service for SMEs** (incorporation, corporate secretary under ACRA rules, bookkeeping, GST) and **state-built LLM tools** (Pair for civil servants, GPT-Legal inside LawNet).
+
+## Findings
+
+| # | Product | What it does | Traction (date) | Source | Adapts | Poland |
+|---|---|---|---|---|---|---|
+| SG-001 | **Osome** | Online accounting, corporate secretary, incorporation and payroll for SMEs with AI chat and automation; MCP connector to Claude/ChatGPT/Gemini | FY2025 revenue S$26.6M, CY2025 S$29M; EBITDA loss halved to -S$11.8M; FY2026 growth 20-30% guided (read); 13,000+ SME customers in SG/HK/UK (2024, excerpt) | [Osome blog](https://osome.com/sg/blog/osome-fy2025-results-ebitda-loss-cut-ai/) | Pilot/Bench | no (UK, NL, SG, HK, MY, PH) |
+| SG-002 | **Sleek** | Incorporation, corporate secretary, accounting (own ledger SleekBooks) with AI tools; claims 5x efficiency vs traditional firms | ~15,000 customers in SG/HK/AU/UK (job ads, excerpt); 2023 revenue ~10.6M USD (+163%) per Latka (estimate, excerpt) | [Latka](https://getlatka.com/companies/sleek) | Pilot/Bench + corporate services | no |
+| SG-003 | **WIZ.AI** | Voice agents ("Talkbots") for banks, telcos, insurers tuned for SEA languages and accents; multi-agent inbound platform | Series B "tens of millions USD" led by SMBC Asia Rising Fund, 2025-11-05; revenue +100% in 2024-25 (read); 300+ enterprise clients in 17 countries (excerpt) | [TechNode Global](https://technode.global/2025/11/05/singapores-wiz-ai-raises-tens-of-millions-in-series-b-to-scale-enterprise-agi-solution-globally/) | PolyAI/Parloa | no |
+| SG-004 | **Owll / Owll Translator (Vocalbeats.AI)** | Voice translation with voice cloning, voice notes turned into two-way conversations | #1 top-grossing Business in 22 markets (single-day peak), top 10 in 125 markets, 2026-08 (excerpt); SG Business #80, TW #10, KR #32, JP #20 (as オルル), 2026-11-01 (read) | [Macau Business (press release)](https://macaubusiness.com/vocalbeats-ai-applications-gain-strong-momentum-in-2026-reaching-top-grossing-charts-worldwide/) | Google Translate / iTranslate + voice clone | unknown (global app) |
+| SG-005 | **TalkMe (Inspired AI)** | AI speaking tutor for English, Japanese, Korean | ">1000% YoY growth in users and ARR", 1M+ learners (company release 2025-09, excerpt); KR Education #60, TW #17, HK #23, 2026-11-01 (read) | [App Store](https://apps.apple.com/sg/app/id6449895215) | Speak/Praktika | unknown |
+| SG-006 | **Pair (GovTech / Open Government Products)** | Secure ChatGPT-based assistant for civil servants on all government devices: drafting, summaries, data analysis, minutes | 148 agencies, 55,000 public-officer users, 50% active (GovTech CTO, excerpt); more than half of 150,000 officers regular users (2026 report, excerpt) | [GovInsider](https://govinsider.asia/intl-en/article/governments-role-important-to-ensure-use-of-ai-for-public-good-says-govtech-cto) | Copilot for government | no (state product) |
+| SG-007 | **LawNet AI / GPT-Legal (Singapore Academy of Law + IMDA)** | LawNet 4.0 (2025-09-11): natural-language legal search on Singapore case law and legislation (contract law first), AI summaries of 15,000+ unreported judgments | LawNet used by ~75% of Singapore lawyers (AWS case study, excerpt; refers to LawNet, not GPT-Legal) | [AWS case study](https://aws.amazon.com/solutions/case-studies/imda-case-study/) | Lexis+ AI, run by a statutory body | no |
+
+Seen, not catalogued: **Manus** (Butterfly Effect; R0-SG-011), **Barebone** (AI stock research, SG Finance top-grossing #1; also HK #52; seller "Barebone Group Holdings", figures not read), **flick** (AI note taker, SG Business #32), **Sprout** (AI job search, #91), **GoAI** (ADDX investment assistant), **Hypotenuse AI** (e-commerce copy, not searched), **AIBots** (16,000 active government users across 97 agencies, excerpt). Singapore's state also trials agentic AI for corporate compliance ([GovInsider](https://govinsider.asia/intl-en/article/singapore-trials-agentic-ai-for-corporate-compliance-launches-genai-search-engine-for-lawyers), excerpt).
+
+## App Store charts (top-grossing SG, 2026-11-01)
+Business: LinkedIn-type global apps, CamCard, Manychat, flick (#32), Owll (#80). Productivity: ChatGPT #1, Grok, Plaud, Perplexity, Pocket, Otter, Manus, Wispr Flow, Kimi. Education: BoldVoice, Blinkist, Praktika #9, Loora #14. Finance: **AI stock-signal apps dominate the top 10** (Barebone #1, Stocks to Buy Now AI, Trend IQ, Finny). Medical: generic AI doctor apps.
+
+## Patterns (Singapore)
+1. **AI-native corporate services for SMEs** (Osome, Sleek) are the closest SG analogue to Polish JDG/sp. z o.o. bookkeeping + KRS/CEIDG compliance. Osome's numbers show the economics: S$29M revenue, still loss-making, AI used to cut cost per client. Both sell in UK and HK too, so the model travels when the local compliance layer is rebuilt.
+2. **The state builds the LLM tools for professions** (GPT-Legal in LawNet, Pair for civil servants). Polish parallel: PLLuM and mObywatel assistant plans; a private vendor would compete with or sell to the state.
+3. **Voice agents tuned for local accents and languages** (WIZ.AI) sell to banks and telcos; same pattern as Born Digital (R6) and PolyAI (R2).
+4. **Retail AI investing signals** top the finance charts (also HK, KR), a hype-prone and licence-heavy category (out of founder scope).
+
+## Coverage (Singapore)
+- Products: 7 catalogued (meets ≥5), of which 2 are state products (SG-006, SG-007). Overlaps with R0–R6: Manus (R0-SG-011), Praktika (R2), Plaud (R1), Loora in SG charts. Seen, not catalogued: 7. Products researched: 14.
+- Sources read: 3 pages + 5 App Store feeds + iTunes lookups; sal.org.sg returned 403.
+- Searches: 8.
+- Found nothing: SG LLM startups with public traction in health administration, HR/payroll (beyond Osome/Sleek bundles) or real estate (not searched in depth); Startup SG and e27 lists not screened (time budget).
