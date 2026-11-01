@@ -31,7 +31,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T12 · regional scan R8 Oceania & Israel · needs: T01 · [tasks/12-regional-scan-r8-oceania-israel.md](tasks/12-regional-scan-r8-oceania-israel.md)
   Unverifiable links (bot-blocked 403/timeout, sites exist): businesswire.com (Heidi, Checkbox), businessnewsaustralia.com (Minikai), globenewswire.com (Symphony by Wix), idealog.co.nz (countries.md, timeout)
 - [~] T13 · regional scan R9 Gulf & Turkey · needs: T01 · [tasks/13-regional-scan-r9-gulf-turkey.md](tasks/13-regional-scan-r9-gulf-turkey.md)
-  Resume: all 6 countries + README written, 40 rows (TR 11, AE 9, SA 16, QA 2, KW 1, BH 1); next: run link check on R9 files + CSV + countries.md, fix dead links, list unverifiable under T13
+  Resume: Done-when met: 6 country files + README, 40 rows (TR 11, AE 9, SA 16, QA 2, KW 1, BH 1), countries.md updated; link check 293 links, 0 dead; unverifiable (bot-blocked/errors, sites exist): meatechwatch.com (ShipBee, Coraly), menabytes.com (Lucidya), mitsloanme.com (Qai); ready for the runner to mark [x]
 - [ ] T14 · regional scan R10 Latin America (OECD) · needs: T01 · [tasks/14-regional-scan-r10-latin-america-oecd.md](tasks/14-regional-scan-r10-latin-america-oecd.md)
 - [ ] T15 · consolidate catalogue into themes · needs: T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14 · [tasks/15-consolidate-catalogue-into-themes.md](tasks/15-consolidate-catalogue-into-themes.md)
 - [ ] T16 · Poland check batch A · needs: T02, T03, T15 · [tasks/16-poland-check-batch-a.md](tasks/16-poland-check-batch-a.md)
