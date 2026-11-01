@@ -24,8 +24,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (timeout/403/454, sites exist): di.ku.dk, sodas.ku.dk, tech.slator.com, lsm.lv, regjeringen.no, techsavvy.media
 - [x] T09 · regional scan R5 France & Southern Europe · needs: T01 · [tasks/09-regional-scan-r5-france-southern-europe.md](tasks/09-regional-scan-r5-france-southern-europe.md)
   Unverifiable links (timeout/reset/403, sites exist): startupitalia.eu, marketing4ecommerce.net, seedtable.com, magnific.com, mindigital.gr, omilia.com
-- [~] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
-  Resume: content complete, link check passed (326 links, 0 dead, 10 unverifiable: R6 ceelegalmatters.com, seedtable.com, businesswire.com 403; 7 older media links in countries.md); 40 rows (CZ 11, SK 5, HU 5, SI 4 thin, HR 4 thin, RO 6, BG 5); next: mark done
+- [x] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
+  Unverifiable links (bot-blocked 403, sites exist): ceelegalmatters.com, seedtable.com, businesswire.com
 - [ ] T11 · regional scan R7 East Asia · needs: T01 · [tasks/11-regional-scan-r7-east-asia.md](tasks/11-regional-scan-r7-east-asia.md)
 - [ ] T12 · regional scan R8 Oceania & Israel · needs: T01 · [tasks/12-regional-scan-r8-oceania-israel.md](tasks/12-regional-scan-r8-oceania-israel.md)
 - [ ] T13 · regional scan R9 Gulf & Turkey · needs: T01 · [tasks/13-regional-scan-r9-gulf-turkey.md](tasks/13-regional-scan-r9-gulf-turkey.md)
@@ -47,6 +47,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-01 08:10 · T10 · done: research/regions/R6-cee-peers/ (README + 7 country files) + catalogue/R6-cee-peers.csv (40 rows: CZ 11, SK 5, HU 5, SI 4 thin, HR 4 thin, RO 6, BG 5, reasons stated); 326 links, 0 dead, 3 R6 unverifiable; caveats: 40 = floor, 7 rows non-LLM/unclear, 8 weak-traction rows, Google Play and accelerators not screened; PL signal: 9 CEE products already in PL (Everbot, Nexana, Born Digital, Payhawk, Infobip, Mediately, Astra AI, Kuba, Xeropan) + 3 announced; repeated pattern: accounting firm wired into national e-invoicing (Declaro, Bookkeepie, FiskAI, Digitoo) · next T11
 2026-11-01 06:25 · T09 · done: research/regions/R5-france-southern-europe/ (README + 7 country files) + catalogue/R5-france-southern-europe.csv (40 rows: FR 14, ES 7, IT 6, PT 5, GR 4 thin, MT 1 thin, CY 3 thin, reasons stated); 112 links, 0 dead, 6 unverifiable; caveats: 40 = floor, 3 weak-traction filler rows, 5 rows excerpt-only figures, charts and accelerators not screened; PL signal: national legal AI (Lexroom IT, Doctrine FR) expanding across civil-law Europe · next T10
 2026-11-01 05:55 · T08 · done: research/regions/R4-nordics-baltics/ (README + 8 country files) + catalogue/R4-nordics-baltics.csv (40 rows: SE 7 (+3 in R0), NO 5, DK 5 (+2 in R0), FI 5, IS 2 thin, EE 6, LV 5, LT 5); 115 links, 0 dead, 6 unverifiable; caveats: 40 = floor, 7 rows non-LLM/unclear AI, charts and accelerators not screened, Baltic local media thin; PL entry warnings: Sigvi (LT) operating in PL since 06/2026, Paysera AI bookkeeping incl. PL · next T09
 2026-11-01 05:05 · T08 · progress: SE 7 (+3 in R0), NO 5, DK 5 (+2 in R0), FI 5, IS 2 (thin, reason stated) = 24 catalogue rows + 5 country files; 70 links, 1 dead fixed, 5 unverifiable (di.ku.dk, sodas.ku.dk, ks.no, regjeringen.no, techsavvy.media); Bluebook site down (hype warning); Google Play charts and accelerators not yet screened · next EE, LV, LT, README, countries.md totals
