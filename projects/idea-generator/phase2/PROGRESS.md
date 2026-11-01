@@ -23,7 +23,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T08 · regional scan R4 Nordics & Baltics · needs: T01 · [tasks/08-regional-scan-r4-nordics-baltics.md](tasks/08-regional-scan-r4-nordics-baltics.md)
   Unverifiable links (timeout/403/454, sites exist): di.ku.dk, sodas.ku.dk, tech.slator.com, lsm.lv, regjeringen.no, techsavvy.media
 - [~] T09 · regional scan R5 France & Southern Europe · needs: T01 · [tasks/09-regional-scan-r5-france-southern-europe.md](tasks/09-regional-scan-r5-france-southern-europe.md)
-  Resume: README.md and countries.md (R5 rows + totals) done; 40 catalogue rows; next run link check on R5 files + CSV, fix dead links, record unverifiable domains here, then report DONE
+  Resume: complete pending runner sign-off: 7 country files + README, 40 catalogue rows (FR 14, ES 7, IT 6, PT 5, GR 4 thin, MT 1 thin, CY 3 thin), countries.md R5 rows + totals updated; link check 2026-11-01 passed (112 links, 0 dead, 6 unverifiable)
+  Unverifiable links (403/timeout/connection reset, sites exist): startupitalia.eu (Fiscozen), marketing4ecommerce.net (Maisa, read with fetch tool), seedtable.com (Tucuvi), magnific.com, mindigital.gr (mAigov), omilia.com
 - [ ] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
 - [ ] T11 · regional scan R7 East Asia · needs: T01 · [tasks/11-regional-scan-r7-east-asia.md](tasks/11-regional-scan-r7-east-asia.md)
 - [ ] T12 · regional scan R8 Oceania & Israel · needs: T01 · [tasks/12-regional-scan-r8-oceania-israel.md](tasks/12-regional-scan-r8-oceania-israel.md)
