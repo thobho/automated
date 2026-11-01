@@ -8,9 +8,10 @@ Draft: updated after each country.
 
 | File | Content |
 |---|---|
-| [germany.md](germany.md) | law, tax/DATEV, health admin, property, trades, benefits, education, horizontal; charts (DE-001…016) |
+| [germany.md](germany.md) | law, tax/DATEV, health admin, property, trades, benefits, education, horizontal; charts (DE-001…017) |
 | [netherlands.md](netherlands.md) | GP scribe, audit, tenders, legal, accounting (NL-001…005) |
 | [switzerland.md](switzerland.md) | legal search, fiduciary AI via association, hospital documentation and coding, study app, invoicing (CH-001…006) |
+| [austria.md](austria.md) | voice agents, payroll, symptom check, plot potential (AT-001…005) |
 
 ## Choices recorded
 - IDs `R3-<ISO>-NNN`, numbered per country (DE-001…). Products already in R0/R1/R2 are not re-added (listed below).
@@ -21,6 +22,7 @@ Draft: updated after each country.
 
 | Country | Status | New rows | R0–R2 overlaps | Products researched | Sources read | Searches | Notes |
 |---|---|---|---|---|---|---|---|
-| Germany | done | 16 | 10 (R0) | 37 | 20 pages + 6 feeds | 21 | |
+| Germany | done | 17 | 10 (R0) | 38 | 20 pages + 6 feeds | 21 | |
 | Netherlands | done | 5 | 0 | 11 | 7 pages + 6 feeds | 9 | thin applied-AI pipeline |
 | Switzerland | done | 6 | 0 | 12 | 6 pages + 6 feeds | 6 | 1 row on excerpt (TreuhandGPT) |
+| Austria | done | 5 | 0 | 9 | 5 pages + 6 feeds | 4 | |

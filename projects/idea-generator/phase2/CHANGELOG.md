@@ -6,3 +6,4 @@
 2026-11-01 · method/countries.md · R3 Germany row done (16 rows +10 in R0), Totals updated · T07 regional scan in progress
 2026-11-01 · method/countries.md · R3 Netherlands row done (5), Totals updated · T07
 2026-11-01 · method/countries.md · R3 Switzerland row done (6), Totals updated · T07
+2026-11-01 · method/countries.md · R3 Austria row done (5); Germany 16→17 (Skalar added); Totals updated · T07
