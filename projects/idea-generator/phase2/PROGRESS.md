@@ -27,7 +27,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T10 · regional scan R6 CEE peers · needs: T01 · [tasks/10-regional-scan-r6-cee-peers.md](tasks/10-regional-scan-r6-cee-peers.md)
   Unverifiable links (bot-blocked 403, sites exist): ceelegalmatters.com, seedtable.com, businesswire.com
 - [~] T11 · regional scan R7 East Asia · needs: T01 · [tasks/11-regional-scan-r7-east-asia.md](tasks/11-regional-scan-r7-east-asia.md)
-  Resume: Japan (9) and South Korea (9) done; next Taiwan, then Singapore, Hong Kong, README; App Store charts for all 5 already pulled (top-grossing 6000/6007/6017/6015/6020)
+  Resume: Japan (9), South Korea (9), Taiwan (8) done; next Singapore, then Hong Kong (Omnichat planned as HK row), README; App Store charts for all 5 already pulled
 - [ ] T12 · regional scan R8 Oceania & Israel · needs: T01 · [tasks/12-regional-scan-r8-oceania-israel.md](tasks/12-regional-scan-r8-oceania-israel.md)
 - [ ] T13 · regional scan R9 Gulf & Turkey · needs: T01 · [tasks/13-regional-scan-r9-gulf-turkey.md](tasks/13-regional-scan-r9-gulf-turkey.md)
 - [ ] T14 · regional scan R10 Latin America (OECD) · needs: T01 · [tasks/14-regional-scan-r10-latin-america-oecd.md](tasks/14-regional-scan-r10-latin-america-oecd.md)
