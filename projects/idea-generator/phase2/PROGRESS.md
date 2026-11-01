@@ -13,7 +13,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T03 · Poland baseline: AI landscape and local moats · needs: T01 · [tasks/03-poland-baseline-ai-landscape-and-local-m.md](tasks/03-poland-baseline-ai-landscape-and-local-m.md)
   Unverifiable links (bot-blocked or 5xx, sites exist): codesota.com/polish-llm, whitecase.com (Digital Omnibus alert), seedtable.com, businesswire.com, ceelegalmatters.com
 - [~] T04 · global trend lists · needs: T01 · [tasks/04-global-trend-lists.md](tasks/04-global-trend-lists.md)
-  Resume: done a16z-consumer.md, revenue-leaders.md, funding-and-rankings.md; 54 rows (R0-*-001..054); next: YC 2024-26 (research/global/yc.md), G2 + Product Hunt + Series A/B Europe, then README + link check
+  Resume: done a16z-consumer.md, revenue-leaders.md, funding-and-rankings.md, yc.md; 96 rows (R0-*-001..096); next: G2 + Product Hunt + Series A/B Europe (research/global/g2-producthunt-rounds.md, rows from 097), then README + link check
 - [ ] T05 · regional scan R1 North America · needs: T01 · [tasks/05-regional-scan-r1-north-america.md](tasks/05-regional-scan-r1-north-america.md)
 - [ ] T06 · regional scan R2 UK & Ireland · needs: T01 · [tasks/06-regional-scan-r2-uk-ireland.md](tasks/06-regional-scan-r2-uk-ireland.md)
 - [ ] T07 · regional scan R3 DACH & Benelux · needs: T01 · [tasks/07-regional-scan-r3-dach-benelux.md](tasks/07-regional-scan-r3-dach-benelux.md)
