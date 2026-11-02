@@ -35,7 +35,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T14 · regional scan R10 Latin America (OECD) · needs: T01 · [tasks/14-regional-scan-r10-latin-america-oecd.md](tasks/14-regional-scan-r10-latin-america-oecd.md)
   Unverifiable links (bot-blocked 403/conn closed, sites exist): ex-ante.cl, valoraanalitik.com (Telepatia), leracom.ai
 - [~] T15 · consolidate catalogue into themes · needs: T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14 · [tasks/15-consolidate-catalogue-into-themes.md](tasks/15-consolidate-catalogue-into-themes.md)
-  Resume: starting
+  Resume: taxonomy done (themes/taxonomy.py, 69 themes TH01-TH69) and all 11 catalogue CSVs tagged (531 rows) via themes/build_themes.py --write; next: ranking + generate themes/THEMES.md (render script), then link check
 - [ ] T16 · Poland check batch A · needs: T02, T03, T15 · [tasks/16-poland-check-batch-a.md](tasks/16-poland-check-batch-a.md)
 - [ ] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
 - [ ] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
