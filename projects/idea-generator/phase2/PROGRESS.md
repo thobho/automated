@@ -33,7 +33,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T13 · regional scan R9 Gulf & Turkey · needs: T01 · [tasks/13-regional-scan-r9-gulf-turkey.md](tasks/13-regional-scan-r9-gulf-turkey.md)
   Unverifiable links (403/reset/500, sites exist): meatechwatch.com, menabytes.com, mitsloanme.com
 - [~] T14 · regional scan R10 Latin America (OECD) · needs: T01 · [tasks/14-regional-scan-r10-latin-america-oecd.md](tasks/14-regional-scan-r10-latin-america-oecd.md)
-  Resume: Chile, Mexico, Colombia, Uruguay done (CL 10, MX 13, CO 8, UY 6 rows = 37). Next: costa-rica.md thin (Huli, Avify, Indax, Dataizen; reason for <5), README with Coverage table, countries.md R10 rows + totals, link check
+  Resume: all 5 country files done (CL 10, MX 13, CO 8, UY 6, CR 4 thin = 41 rows). Next: README with patterns + Coverage table, countries.md R10 rows + totals, link check
 - [ ] T15 · consolidate catalogue into themes · needs: T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14 · [tasks/15-consolidate-catalogue-into-themes.md](tasks/15-consolidate-catalogue-into-themes.md)
 - [ ] T16 · Poland check batch A · needs: T02, T03, T15 · [tasks/16-poland-check-batch-a.md](tasks/16-poland-check-batch-a.md)
 - [ ] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
