@@ -6,7 +6,7 @@ Theme: [THEMES.md#th37](../../themes/THEMES.md#th37) · rank 16, batch A · sour
 | Product | What | Price | Customers | Source |
 |---|---|---|---|---|
 | Odrabiamy | Homework solutions app for Polish textbooks (long-established) | subscription (not re-checked) | Polish pupils | [App Store PL](https://apps.apple.com/pl/app/odrabiamy-pomoc-w-nauce/id1146781202?l=pl) |
-| maturai | AI tutor, 1,700+ maths tasks aligned to CKE requirements | app store (not checked) | matura candidates | [App Store PL](https://apps.apple.com/pl/app/maturai/id6495065099) |
+| maturai | AI tutor, 1,700+ maths tasks aligned to CKE requirements | not checked | matura candidates | App Store listing seen in search, but returned 404 on 2026-11-03 (app likely withdrawn; unverified) |
 | egzamin.ai | Builds study apps from user-supplied material | not checked | mixed Trustpilot reviews (~4.1/5, a dozen or so reviews) | [Trustpilot](https://ch.trustpilot.com/review/egzamin.ai) |
 | Stimy AI (PL/US) | AI maths tutor in Polish; 337k USD pre-seed | not checked | not stated | [instalki.pl](https://www.instalki.pl/news/software/sztuczna-inteligencja-jako-korepetytor-polsko-amerykanska-platforma-stimy-ai-pomaga-w-nauce-matematyki/) |
 | Smartschool | AI-guided K-12 learning system, raised 1.5M (per Vestbee) | not checked | not stated | [Vestbee](https://www.vestbee.com/blog/articles/polish-smartschool-secures-1-5-m) |

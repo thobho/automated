@@ -1,6 +1,6 @@
 # Poland check, batch A (T16)
 
-Gap verdicts for the 23 batch-A themes of [THEMES.md](../../themes/THEMES.md). All sources accessed **2026-11-03**. Summary table at the end (filled as themes are written).
+Gap verdicts for the 23 batch-A themes of [THEMES.md](../../themes/THEMES.md). All sources accessed **2026-11-03**. Summary table at the end.
 
 ## Method
 - **Leaders tried** without creating accounts: public site, pricing page, language switcher, help centre, docs and signup page read via web fetch and search (English and Polish). Nothing was signed up for, paid, or submitted. What could not be checked is listed in each file.
@@ -33,5 +33,6 @@ Gap verdicts for the 23 batch-A themes of [THEMES.md](../../themes/THEMES.md). A
 | [TH06](TH06-consumer-health-coaching-triage.md) | Consumer health coaching and triage | partial | Infermedica (PL) leads triage; Fitatu ships photo calories at 49.99 PLN; lab-result understanding via IKP searched but on MDR line and in ChatGPT Health's path | (risky) Non-diagnostic Polish lab-result explainer with NFZ wait times |
 | [TH10](TH10-law-practice-operations-ai-secretariat.md) | Law-practice operations and AI secretariat | partial | 30+ practice-management programs incl. WK LEX; JUPUS (DE, 97 EUR/user) not in PL; no AI secretariat reading PISP deliveries and computing deadlines | PISP/e-Doręczenia inbox agent with deadline calendar for small firms |
 | [TH13](TH13-consumer-legal-help-ai-law-firms.md) | Consumer legal help and AI-enabled law firms | partial | Free state help (1,490 legal-aid points, mObywatel PLLuM assistant) and ChatGPT cover questions; no Polish product turns a dispute into a fileable letter despite strong 'wzór' searches | Per-procedure letter engine starting with transit and parking fines |
+| [TH40](TH40-ai-speaking-language-tutors.md) | AI speaking and language tutors | partial | English practice taken (Speak, Praktika, Duolingo, ChatGPT voice); Polish-for-foreigners has 21,781 state-exam candidates (2024) and only small apps | AI coach for the state B1/B2 Polish exam in UA/EN/RU |
 
-**Not yet written (T16 continues):** TH40.
+**Totals (23 themes):** 3 open gap (TH56, TH61, TH04), 12 partial, 8 taken. Link check over all files in this folder on 2026-11-03: 130 links, 0 dead, 1 unverifiable (ch.trustpilot.com, 403); earlier runs also saw apps.apple.com (429) and wolterskluwer.com (403) as unverifiable, both resolving on the final run.
