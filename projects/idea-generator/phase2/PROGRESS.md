@@ -37,7 +37,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T15 · consolidate catalogue into themes · needs: T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14 · [tasks/15-consolidate-catalogue-into-themes.md](tasks/15-consolidate-catalogue-into-themes.md)
   Unverifiable links (bot-blocked 403, sites exist): businesswire.com (Heidi), businessnewsaustralia.com (Minikai), ceelegalmatters.com (QuickLegal), meatechwatch.com (ShipBee); catalogue CSVs: 35 known bot-blocks from T04–T14
 - [~] T16 · Poland check batch A · needs: T02, T03, T15 · [tasks/16-poland-check-batch-a.md](tasks/16-poland-check-batch-a.md)
-  Resume: TH16, TH07, TH09, TH01 written (poland-check/A/); next TH19 ledger agents, then TH34, TH02… in THEMES.md batch-A order; README summary table rows still to add
+  Resume: TH16, TH07, TH09, TH01, TH19 written (poland-check/A/); next TH34 HR/payroll, then TH02, TH56… in THEMES.md batch-A order; README summary table rows still to add
 - [ ] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
 - [ ] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
 - [ ] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
