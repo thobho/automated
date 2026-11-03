@@ -26,5 +26,6 @@ Gap verdicts for the 23 batch-A themes of [THEMES.md](../../themes/THEMES.md). A
 | [TH17](TH17-agents-accounting-tax-firms.md) | Agents for accounting and tax firms | partial | In-ledger posting taken (Comarch, Symfonia, Saldeo 3,000 offices); client-chasing outside the ledger open | Office–client assistant chasing missing documents and explanations |
 | [TH26](TH26-ai-receptionist-smes.md) | AI receptionist for SMEs | taken | 30+ vendors at 169–499 PLN/month incl. ElevenLabs, fonio | (residue) Booksy-native salon receptionist |
 | [TH24](TH24-local-language-voice-cs-agents.md) | Local-language voice and CS agents | taken | PKO/Alior in-house voicebots, Lekta, Voicetel, SentiOne; Wonderful (IL) and Born Digital (CZ, via Netia) already in PL | (residue) Polish voicebot QA/test harness for vendors |
+| [TH37](TH37-study-material-generators.md) | Study material generators | taken | Knowunity and StudyFi (CZ) have Polish sites, StudyFi claims 374k students; free NotebookLM/Quizlet; many Polish matura apps | (weak) CKE-rubric grader for written matura answers |
 
-**Not yet written (T16 continues):** TH37, TH21, TH04, TH29, TH06, TH10, TH13, TH40.
+**Not yet written (T16 continues):** TH21, TH04, TH29, TH06, TH10, TH13, TH40.
