@@ -31,5 +31,6 @@ Gap verdicts for the 23 batch-A themes of [THEMES.md](../../themes/THEMES.md). A
 | [TH04](TH04-care-provider-documentation-operations.md) | Care-provider documentation and operations | open gap | No Polish AI care-records product, no foreign leader in PL; bon senioralny (1 bn PLN 2026–28) creates new small providers settling hours with gminas; WTP unproven | Carer voice-note app filling gmina task cards and monthly settlements |
 | [TH29](TH29-conversational-commerce-messaging.md) | Conversational commerce on messaging apps | taken | WhatsApp-first buying absent in PL; Tidio (WhatsApp/Messenger/Instagram + Lyro) and ManyChat serve Polish shops; Allegro chat platform-owned | (weak) AI reply agent for Allegro seller messages |
 | [TH06](TH06-consumer-health-coaching-triage.md) | Consumer health coaching and triage | partial | Infermedica (PL) leads triage; Fitatu ships photo calories at 49.99 PLN; lab-result understanding via IKP searched but on MDR line and in ChatGPT Health's path | (risky) Non-diagnostic Polish lab-result explainer with NFZ wait times |
+| [TH10](TH10-law-practice-operations-ai-secretariat.md) | Law-practice operations and AI secretariat | partial | 30+ practice-management programs incl. WK LEX; JUPUS (DE, 97 EUR/user) not in PL; no AI secretariat reading PISP deliveries and computing deadlines | PISP/e-Doręczenia inbox agent with deadline calendar for small firms |
 
-**Not yet written (T16 continues):** TH10, TH13, TH40.
+**Not yet written (T16 continues):** TH13, TH40.
