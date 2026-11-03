@@ -12,7 +12,7 @@ Theme: [THEMES.md#th23](../../themes/THEMES.md#th23) · rank 11, batch A · sour
 | Thulium, InteliWISE, Hellobot and others | Contact-centre and voicebot vendors | e.g. Thulium 1,395 PLN/month net for 5 licences; InteliWISE from 899 PLN/month | not stated | [AInora comparison](https://ainora.lt/pl/blog/najlepsi-asystenci-telefoniczni-ai-dla-firm-2026) |
 
 ## 2. Does the Western leader already serve Poland?
-- **Intercom Fin**: supports 45 languages **including Polish**, with resolution reporting per language ([Intercom blog](https://www.intercom.com/blog/fin-ai-chatbot-45-languages/); [changelog](https://intercom.com/changes/en/33711-support-customers-with-fin-in-45-languages-join-the-open-beta)). **Serves Polish.**
+- **Intercom Fin**: supports 45 languages **including Polish**, with resolution reporting per language ([Intercom blog](https://www.intercom.com/blog/fin-ai-chatbot-45-languages/); Polish in the language list per the Intercom changelog seen in search, page now 404). **Serves Polish.**
 - **Infobip AgentOS** (HR) sells in Poland; **Born Digital** (CZ) has a Netia case study; **Omilia** (CY) serves US/Canadian banks (no PL found).
 - Could not check: Polish enterprise case studies for Fin.
 
