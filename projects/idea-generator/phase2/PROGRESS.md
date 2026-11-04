@@ -39,7 +39,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T16 · Poland check batch A · needs: T02, T03, T15 · [tasks/16-poland-check-batch-a.md](tasks/16-poland-check-batch-a.md)
   Unverifiable links (bot-blocked 403, site exists): ch.trustpilot.com
 - [~] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
-  Resume: 11 of 23 batch-B themes in poland-check/B/ (TH15, TH59, TH14, TH27, TH32, TH05, TH46, TH20, TH35, TH38, TH60) + README (method, table, interim totals); next TH22, then TH18, TH52, TH03, TH55, TH68, TH30, TH39, TH57, TH67, TH11, TH64; when all done replace interim totals with final totals and rerun link check
+  Resume: 13 of 23 batch-B themes in poland-check/B/ (TH15, TH59, TH14, TH27, TH32, TH05, TH46, TH20, TH35, TH38, TH60, TH22, TH18) + README (method, table, interim totals); next TH52, then TH03, TH55, TH68, TH30, TH39, TH57, TH67, TH11, TH64; when all done replace interim totals with final totals and rerun link check
   Unverifiable links (timeout, site exists): elektroda.pl
 - [ ] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
 - [ ] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
