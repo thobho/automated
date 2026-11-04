@@ -40,7 +40,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (bot-blocked 403, site exists): ch.trustpilot.com
 - [~] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
   Resume: 17 of 23 batch-B themes in poland-check/B/ (TH15, TH59, TH14, TH27, TH32, TH05, TH46, TH20, TH35, TH38, TH60, TH22, TH18, TH52, TH03, TH55, TH68) + README (method, table, interim totals); next TH30, then TH39, TH57, TH67, TH11, TH64; when all done replace interim totals with final totals and rerun link check
-  Unverifiable links (timeout, site exists): elektroda.pl
+  Unverifiable links (timeout/403 bot-block, sites exist): elektroda.pl, wolterskluwer.com (TH20, TH35), app.dealroom.co (TH27)
 - [ ] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
 - [ ] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [ ] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
