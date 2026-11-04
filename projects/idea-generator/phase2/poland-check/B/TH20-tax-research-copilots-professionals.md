@@ -9,7 +9,7 @@ Theme: [THEMES.md#th20](../../themes/THEMES.md#th20) · rank 31, batch B · sour
 | LEX Kompas Interpretacje Podatkowe | AI tool for working through interpretacje podatkowe held in LEX (launched 2025-01) | add-on (not checked) | tax specialists | [Wolters Kluwer PL 2025-01-23](https://www.wolterskluwer.com/pl-pl/news/wolters-kluwer-polska-dostarcza-nowe-narzedzia-specjalistom-pracujacym-z-interpretacjami-podatkowymi) |
 | Beck-Noxtua (Legalis), INFOR, Gaius-Lex | Legal-research AI on Polish law found in batch A ([TH07](../A/TH07-legal-research-national-law.md)); tax is part of the same corpora | subscriptions | law and tax firms | batch A TH07 |
 | State: EUREKA (KIS) | Free official search of individual interpretations | free | everyone | autocomplete below |
-| Training market | Courses on using ChatGPT/Copilot for tax work, warning of invented KIS interpretations and court rulings and the adviser's liability | per course | accountants, advisers | [podatki.biz course 2026-08-06](https://www.podatki.biz/artykuly/[06-08-2026]-szkolenie-on-line-jak-wykorzystac-ai-chatgpt-copilot-w-rozliczaniu-podatkow-zalety-ryzyka-i-kontrola-poprawnosci_38_61774.htm) |
+| Training market | Courses on using ChatGPT/Copilot for tax work, warning of invented KIS interpretations and court rulings and the adviser's liability | per course | accountants, advisers | [podatki.biz course 2026-08-06](https://www.podatki.biz/artykuly/%5B06-08-2026%5D-szkolenie-on-line-jak-wykorzystac-ai-chatgpt-copilot-w-rozliczaniu-podatkow-zalety-ryzyka-i-kontrola-poprawnosci_38_61774.htm) |
 
 ## 2. Does the Western leader already serve Poland?
 - **Blue J** (CA): US, Canadian and UK tax content; no Polish law (theme row, not re-checked). **Not in PL.**
