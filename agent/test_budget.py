@@ -50,13 +50,24 @@ class FiveHourPace(unittest.TestCase):
         self.assertIn("cap 80", r["reason"])
 
 
-class WeeklyPace(unittest.TestCase):
+class WeeklyReserve(unittest.TestCase):
     def test_halfway_through_week(self):
-        # 3.5 days in: allowed 80 * 0.5 + 5 = 45
-        self.assertEqual(budget.decide(plan(0, timedelta(hours=5), 44), NOW)["decision"], "RUN")
-        r = budget.decide(plan(0, timedelta(hours=5), 46), NOW)
+        # 3.5 days in: reserve 50 * 0.5 = 25, allowed 98 - 25 = 73
+        self.assertEqual(budget.decide(plan(0, timedelta(hours=5), 72), NOW)["decision"], "RUN")
+        r = budget.decide(plan(0, timedelta(hours=5), 74), NOW)
         self.assertEqual(r["decision"], "WAIT")
-        self.assertEqual(r["weekly_allowed_now"], 45)
+        self.assertEqual(r["weekly_allowed_now"], 73)
+        self.assertIn("reserve", r["reason"])
+
+    def test_week_start_keeps_full_reserve(self):
+        r = budget.decide(plan(0, timedelta(hours=5), 47, timedelta(days=7)), NOW)
+        self.assertEqual(r["weekly_allowed_now"], 48)
+        self.assertEqual(r["decision"], "RUN")
+
+    def test_end_of_week_burns_up_to_cap(self):
+        r = budget.decide(plan(0, timedelta(hours=5), 97, timedelta(minutes=1)), NOW)
+        self.assertEqual(r["decision"], "RUN")
+        self.assertEqual(budget.decide(plan(0, timedelta(hours=5), 98, timedelta(minutes=1)), NOW)["decision"], "WAIT")
 
 
 if __name__ == "__main__":

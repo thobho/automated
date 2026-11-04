@@ -5,9 +5,11 @@ Two gates, both must pass:
   1. 5-hour pace: used% must stay below a line that rises evenly across the
      window to FIVE_HOUR_CAP (default 80) at its reset, plus FIVE_HOUR_BUFFER
      (default 20) so a fresh window can start work at once.
-  2. Weekly pace: used% must stay below a line that rises evenly from the
-     start of the week to WEEKLY_CAP (default 80) at the reset, plus a small
-     PACE_BUFFER so the first hours of a week aren't blocked.
+  2. Weekly use-it-or-lose-it: the owner keeps a reserve of USER_RESERVE
+     (default 50) points of the week that shrinks evenly to 0 at the reset;
+     the worker may use everything above it, up to WEEKLY_CAP (default 98).
+     Allowed = WEEKLY_CAP - USER_RESERVE x share of the week still left, so
+     a week the owner leaves idle is burned almost completely by the reset.
   3. Parallel runs: a run in worker slot 2 or higher (AGENT_SLOT) starts only
      while the 5-hour window is below PARALLEL_CAP (default 60).
 
@@ -24,8 +26,8 @@ import sys
 from datetime import datetime, timedelta, timezone
 
 FIVE_HOUR_CAP = float(os.environ.get("AGENT_FIVE_HOUR_CAP", 80))
-WEEKLY_CAP = float(os.environ.get("AGENT_WEEKLY_CAP", 80))
-PACE_BUFFER = float(os.environ.get("AGENT_PACE_BUFFER", 5))
+WEEKLY_CAP = float(os.environ.get("AGENT_WEEKLY_CAP", 98))
+USER_RESERVE = float(os.environ.get("AGENT_USER_RESERVE", 50))
 FIVE_HOUR_BUFFER = float(os.environ.get("AGENT_FIVE_HOUR_BUFFER", 20))
 PARALLEL_CAP = float(os.environ.get("AGENT_PARALLEL_CAP", 60))
 SLOT = int(os.environ.get("AGENT_SLOT", 1))
@@ -52,6 +54,15 @@ def paced_allowance(cap, buffer, resets_at, length, now):
     return min(cap * elapsed + buffer, cap), elapsed
 
 
+def weekly_allowance(resets_at, now):
+    """Allowed used% now: WEEKLY_CAP minus the owner's reserve, which shrinks evenly to 0 at the reset."""
+    elapsed = 0.0
+    if resets_at:
+        week = timedelta(days=7)
+        elapsed = min(max((now - (parse_time(resets_at) - week)) / week, 0.0), 1.0)
+    return max(WEEKLY_CAP - USER_RESERVE * (1 - elapsed), 0.0), elapsed
+
+
 def decide(plan, now):
     if plan.get("status") not in (None, "ok"):
         return {"decision": "WAIT", "reason": f"plan limits unavailable ({plan.get('status')})"}
@@ -66,8 +77,7 @@ def decide(plan, now):
     weekly_used = float(weekly["percentUsed"])
     five_allowed, five_elapsed = paced_allowance(
         FIVE_HOUR_CAP, FIVE_HOUR_BUFFER, five.get("resetsAt"), timedelta(hours=5), now)
-    weekly_allowed, elapsed = paced_allowance(
-        WEEKLY_CAP, PACE_BUFFER, weekly.get("resetsAt"), timedelta(days=7), now)
+    weekly_allowed, elapsed = weekly_allowance(weekly.get("resetsAt"), now)
 
     result = {
         "five_hour_used": five_used,
@@ -78,6 +88,7 @@ def decide(plan, now):
         "weekly_used": weekly_used,
         "weekly_allowed_now": round(weekly_allowed, 1),
         "weekly_cap": WEEKLY_CAP,
+        "weekly_user_reserve_now": round(USER_RESERVE * (1 - elapsed), 1),
         "weekly_resets_at": weekly.get("resetsAt"),
         "week_elapsed_pct": round(elapsed * 100, 1),
     }
@@ -88,9 +99,9 @@ def decide(plan, now):
     elif SLOT > 1 and five_used >= PARALLEL_CAP:
         result.update(decision="WAIT", reason=f"slot {SLOT}: 5-hour window at {five_used:.0f}% (parallel cap {PARALLEL_CAP:.0f}%)")
     elif weekly_used >= weekly_allowed:
-        result.update(decision="WAIT", reason=f"weekly at {weekly_used:.0f}%, ahead of pace ({weekly_allowed:.0f}% allowed so far)")
+        result.update(decision="WAIT", reason=f"weekly at {weekly_used:.0f}%, inside the owner's reserve ({weekly_allowed:.0f}% allowed now)")
     else:
-        result.update(decision="RUN", reason="within 5-hour pace and weekly pace")
+        result.update(decision="RUN", reason="within 5-hour pace and above the owner's weekly reserve")
     return result
 
 
