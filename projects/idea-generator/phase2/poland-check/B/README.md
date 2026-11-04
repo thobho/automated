@@ -13,3 +13,4 @@ Same as [batch A](../A/README.md#method):
 | Id | Theme | Verdict | Key reason | Seed idea |
 |---|---|---|---|---|
 | [TH15](TH15-property-transaction-title-diligence.md) | Property transaction and title diligence | open gap | Spatial plot reports automated (OnGeo, e-mapa 20 PLN); nobody reads KW działy I–IV with AI; Orbital/Moverly UK/US only | KW odpis risk reader for buyers and agents, 49–99 PLN per property |
+| [TH59](TH59-citizen-sme-public-service-navigators.md) | Citizen and SME public-service navigators | partial | General navigation taken by mObywatel PLLuM assistant (free); MOS 2.0-only filing since 2026-04-27 and ~800k CUKR applications leave foreigners with NGO bot or ~4.5k PLN agencies | UA/RU/EN MOS application preparer, 99–199 PLN, via employers |
