@@ -39,7 +39,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T16 · Poland check batch A · needs: T02, T03, T15 · [tasks/16-poland-check-batch-a.md](tasks/16-poland-check-batch-a.md)
   Unverifiable links (bot-blocked 403, site exists): ch.trustpilot.com
 - [~] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
-  Resume: 6 of 23 batch-B themes in poland-check/B/ (TH15, TH59, TH14, TH27, TH32, TH05) + README (method, table); next TH46, then TH20, TH35, TH38, TH60, TH22, TH18, TH52, TH03, TH55, TH68, TH30, TH39, TH57, TH67, TH11, TH64
+  Resume: 7 of 23 batch-B themes in poland-check/B/ (TH15, TH59, TH14, TH27, TH32, TH05, TH46) + README (method, table); next TH20, then TH35, TH38, TH60, TH22, TH18, TH52, TH03, TH55, TH68, TH30, TH39, TH57, TH67, TH11, TH64
 - [ ] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
 - [ ] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [ ] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
