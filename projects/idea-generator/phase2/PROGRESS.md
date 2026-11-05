@@ -49,7 +49,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T22 · write-ups batch B · needs: T20 · [tasks/22-write-ups-batch-b.md](tasks/22-write-ups-batch-b.md)
   Unverifiable links: FTC DoNotPay press release in 009 (404 to scripts, reads fine in browser; backup cited)
 - [~] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
-  Resume: 017 (3.1, <5%), 018 (3.1, <5%), 019 (2.9, <5%) done; next 020 clinic phone agent, then 021–024
+  Resume: 017 (3.1, <5%), 018 (3.1, <5%), 019 (2.9, <5%), 020 (2.7, <5%) done; next 021 school pedagogue licence, then 022–024
 - [ ] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
 - [ ] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
 
