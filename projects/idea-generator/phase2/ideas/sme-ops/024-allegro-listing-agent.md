@@ -81,6 +81,15 @@ Changes vs. quick score: L3 3 → 2 (Senvio, Allegro assistant, Apilo found), L9
 
 **Confidence:** medium (competition and platform moves sourced; seller-size split and API terms not checked).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *The small-seller niche is not empty.* A second search ("narzędzie AI Allegro Ads automatyzacja kampanii mały sprzedawca abonament", 2026-11-06) found **Sellpander "Panel Pro dla Allegro Ads"**, a Chrome extension that automates Allegro Ads optimisation and names individual sellers as a target ([Chrome Web Store](https://chrome.google.com/webstore/detail/sellpander/detail/panel-pro-dla-allegro-ads/bgkpehhnbobnalcmakjmllahilkcfelp), search result, not fetched); BaseLinker already lets sellers push offers into Ads campaigns in bulk and pick bestsellers by sales history ([base.com blog](https://base.com/pl-PL/blog/?p=15843), excerpt); Senvio runs rule-based auto-updating campaigns and target-ROAS optimisation ([Senvio](https://senvio.ai/?p=26319), excerpt). The "below Senvio" segment the write-up keeps is served by a cheaper extension and by the multichannel tool most sellers already use.
+- *The platform owner absorbs it.* Allegro's free seller assistant (2026-04) has offer optimisation on its roadmap, and Allegro announced **Brand Ads Manager** with a built-in AI assistant for brands and agencies ([PAP MediaRoom](https://www.pap.pl/mediaroom/allegro-zapowiada-allegro-brand-ads-manager-nowe-narzedzie-dla-marek-do-budowania), excerpt). Allegro's API also controls what a third party can do (one excerpt says the API allowed one Ads campaign per account; may be out of date, unverified).
+- *Polish customers won't pay this.* Small sellers with tiny ad budgets are exactly the high-churn segment; the +1% of ad spend fee is negligible at their budgets.
+- *Not innovative.* The ads part is a 2018-era Amazon pattern (rules/ML); the LLM part (titles, descriptions, parameters) is the part ChatGPT, Base and Apilo already do.
+- *Success signals.* Teikametrics/Perpetua are pre-LLM and consolidating; L2 2 is fair.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 3 · L2 2 · L3 2 · L4 4 · L5 3 · L6 3 · L7 3 · L8 3 · L9 1; weighted **2.8**; <5% after §4, O 14, R 31). **Rejected** and moved to [rejected.md](../../rejected.md): every slice of the job is already sold in Polish (Senvio, Sellpander, Base, Apilo) and Allegro is shipping its own AI tools for sellers and brands.
+
 **Sources** (accessed 2026-11-06 unless noted):
 1. https://techcrunch.com/2020/02/19/teikametrics-funding
 2. https://senvio.ai/
@@ -94,6 +103,10 @@ Changes vs. quick score: L3 3 → 2 (Senvio, Allegro assistant, Apilo found), L9
 10. https://www.pracuj.pl/praca/senior-allegro-ads-specialist-kielce,oferta,1004950628
 11. https://openrouter.ai/google/gemini-2.5-flash (accessed 2026-11-05)
 12. https://artificialintelligenceact.eu/annex/3/
-13. Internal: [TH52 check](../../poland-check/B/TH52-marketing-seo-ad-agents.md)
+13. https://chrome.google.com/webstore/detail/sellpander/detail/panel-pro-dla-allegro-ads/bgkpehhnbobnalcmakjmllahilkcfelp (T24, search result)
+14. https://base.com/pl-PL/blog/?p=15843 (T24, excerpt)
+15. https://senvio.ai/?p=26319 (T24, excerpt)
+16. https://www.pap.pl/mediaroom/allegro-zapowiada-allegro-brand-ads-manager-nowe-narzedzie-dla-marek-do-budowania (T24, excerpt)
+17. Internal: [TH52 check](../../poland-check/B/TH52-marketing-seo-ad-agents.md)
 
 Coverage: 5 web searches and 2 fetches for this write-up (Allegro seller AI, Allegro Ads tools, Senvio, seller count, Amazon ads analogues). Not found: number of small Allegro sellers, Senvio and Apilo prices, Allegro API terms for AI agents, any Allegro-tool graveyard case.
