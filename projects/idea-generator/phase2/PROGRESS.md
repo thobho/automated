@@ -45,8 +45,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [x] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
 - [~] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
-  Resume: 001–005 done (property/001, employment-migration/002, health-care/003, legal-compliance/004, property/005; TH56 note + CHANGELOG line); next 006 (L092 czy tu zbuduję, TH58)
-  Unverifiable links (403/520/SSL, sites exist): thenegotiator.co.uk, mos.cudzoziemcy.gov.pl, digitalhealth.net, htworld.co.uk, businesswire.com
+  Resume: 001–006 done (property/001, employment-migration/002, health-care/003, legal-compliance/004, property/005, property/006 at 2.9 with 'fold into 001' recommendation; TH56 and TH58 notes + CHANGELOG lines); next 007 (L014 PIT assistant for foreign employees, TH21)
+  Unverifiable links (403/520/SSL, sites exist): thenegotiator.co.uk, mos.cudzoziemcy.gov.pl, digitalhealth.net, htworld.co.uk, businesswire.com, businessnewsaustralia.com
 - [ ] T22 · write-ups batch B · needs: T20 · [tasks/22-write-ups-batch-b.md](tasks/22-write-ups-batch-b.md)
 - [ ] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
 - [ ] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
