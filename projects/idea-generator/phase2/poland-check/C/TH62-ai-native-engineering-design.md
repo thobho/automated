@@ -9,7 +9,9 @@ Theme: [THEMES.md#th62](../../themes/THEMES.md#th62) · rank 48, batch C · sour
 | Blue Boson (PL) | AI control of heating installations (operation, not design) | not found | not found | [itkey.media](https://itkey.media/?p=24780) |
 | Biura projektowe instalacji | Human design offices; autocomplete lists many local offices (electrical, sanitary, gas) | per project | investors, contractors | §3 |
 
-No Polish company selling AI-produced building-services design as an outcome (the Solvera/Endra model) was found in one web search in Polish and the R6 catalogue.
+| archi.sulerr.com (beta) | AI-drafted residential project documentation for Poland, from a free concept to a permit dossier, with "WT pre-check with article references"; output is an unsigned draft reviewed by an engineer; operator and location not disclosed | free concept; paid tiers on quote | none named | [archi.sulerr.com: Poland](https://archi.sulerr.com/en/jurisdictions/pl) |
+
+No Polish company selling AI-produced building-services design as an outcome (the Solvera/Endra model) was found in two web searches in Polish and the R6 catalogue; the nearest is the anonymous archi.sulerr.com beta for residential architecture (found while checking TH58).
 
 ## 2. Does the Western leader already serve Poland?
 - **Solvera** (NO): acts as the responsible designer (*ansvarlig prosjekterende*) for ventilation, piping and electrical; customers pay for the result; 10M+ NOK contracted in its first three months from July 2026; customer Betonmast; next office London, no other markets named ([Shifter, 2026-10](https://www.shifter.no/nyheter/henter-inn-60-millioner-kroner-etter-noen-maneder-i-drift/303542)). Not in Poland.

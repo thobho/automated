@@ -41,7 +41,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
   Unverifiable links (timeout/403/SSL, sites exist): elektroda.pl, wolterskluwer.com (TH20, TH35), app.dealroom.co (TH27), appvizer.com (TH30), geoportal.gov.pl (TH57), wamda.com (TH67)
 - [~] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
-  Resume: 4 of 23 done in poland-check/C/ (TH08 taken, TH62 open gap, TH28 taken, TH31 taken) + README table; next TH45, TH58, TH12, TH41, then ranks 55–69 in THEMES.md order
+  Resume: 6 of 23 done in poland-check/C/ (TH08 taken, TH62 open gap, TH28 taken, TH31 taken, TH45 partial, TH58 partial) + README table; next TH12, TH41, TH42, TH53, TH63, TH36, then ranks 59–69 in THEMES.md order
 - [ ] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [ ] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
 - [ ] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
