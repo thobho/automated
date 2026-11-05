@@ -89,6 +89,17 @@ Quick scores confirmed; L5 4 now rests on the KRAZ count, the CUKR driver and jo
 
 **Confidence:** medium (rules, fines and target-group size sourced; willingness to pay and agency attitude untested).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *The state is building the field sheet.* The MOS draft law (UD163, adopted by the Council of Ministers 2025-08-05) says MOS itself shows which mandatory attachments an application needs and passes data into the register without manual retyping ([gov.pl UD163](https://www.gov.pl/web/premier/projekt-ustawy-o-zmianie-ustawy-o-cudzoziemcach-oraz-niektorych-innych-ustaw14), fetched 2026-11-06). So the "attachment checklist" half of the MVP partly duplicates the official form. What remains is office-specific practice, the employer annex and deadlines. R4 is not "M": it has partly happened.
+- *Agencies won't pay to commoditise themselves.* Agencies charge ~4.5k PLN per case for know-how; a 399 PLN tool that makes that know-how cheap helps their competitors and their clients more than them. The staffing firms (KRAZ) are the better buyer, but they already pay for HRappka-type suites and would want the feature there.
+- *ChatGPT absorption.* Low for the deadline board and office-practice data; high for "draft my ponaglenie" or "explain this MOS field", which is the text-generation part.
+- *Volume is not yet visible.* An early-launch report counted ~5,600 MOS applications and listed concrete failure points: the employer-signed Załącznik nr 1, no edits after submission, no drafts, a single work address, and a fixed job-position list ([Interia](https://wydarzenia.interia.pl/kraj/news-nowy-system-dopiero-zaczal-dzialac-juz-sa-problemy-mnoza-sie,nId,23475520), fetched 2026-11-06; article undated, 2026 implied). This is real pain and supports demand (a point **for** the idea). The 900k CUKR wave is still a projection, not filed volume.
+- *Second competitor search (2026-11-06):* "program do legalizacji cudzoziemców AI MOS 2.0 agencja pracy" found HRappka (MOS 2.0 guide plus a legalisation module), EY's immigration-law portal (human advisory) and a "Work in Europe" site calling itself an AI immigration platform (pages.dev site, no company or traction details found: unverified, treated as noise). No Polish AI case-file drafting tool found.
+- *Success signals.* US analogues are pre-seed/seed with no retention data, so L2 2 holds (the cap applies).
+- *Opportunity/risk lists.* O1 is marked H on no evidence (its "what would make it true" is a future test), so it is M by §4's own definition. Mostly independent otherwise. §4 not applied in T21.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 4 · L2 2 · L3 4 · L4 5 · L5 4 · L6 3 · L7 3 · L8 3 · L9 3; weighted 0.48+0.24+0.48+0.75+0.60+0.30+0.24+0.24+0.24 = 3.57 → **3.6**). O1 likelihood H → M (no evidence yet), R4 likelihood M → H (UD163 makes MOS list mandatory attachments). §4: O 6+6+4+3+4 = 23, R 9+6+6+6+3+4 = 34, R − O = 11 ≥ 6, and R1 is H×H with only partial MVP mitigation (versioned rules, 3 offices) → down one band: 5–15% → **<5%**. Still the strongest moat in the set; MVP should pivot from the "field sheet" toward the employer annex, corrections workflow and the deadline board, which the state does not cover.
+
 **Sources** (accessed 2026-11-05):
 1. https://dealroom.co/news/151371-ai-native-law-firm-alma-raises-17m-to-automate-immigration-cases/
 2. https://tower-research.com/caseblink-raises-2m-in-pre-seed-funding-to-transform-immigration-case-preparation-with-ai/
@@ -105,6 +116,8 @@ Quick scores confirmed; L5 4 now rests on the KRAZ count, the CUKR driver and jo
 13. https://dlajurysty.pl/orzeczenia/pokaz/489740/II-SAB-Wr-287-26 (T20 notes)
 14. https://artificialintelligenceact.eu/annex/3/
 15. https://openrouter.ai/google/gemini-2.5-flash
-16. Internal: [TH12 check](../../poland-check/C/TH12-immigration-casework.md), [TH59 check](../../poland-check/B/TH59-citizen-sme-public-service-navigators.md), [local-moats](../../research/poland/local-moats.md), [demography DD6/DD7](../../research/poland/demography.md)
+16. https://www.gov.pl/web/premier/projekt-ustawy-o-zmianie-ustawy-o-cudzoziemcach-oraz-niektorych-innych-ustaw14 (2026-11-06, T24)
+17. https://wydarzenia.interia.pl/kraj/news-nowy-system-dopiero-zaczal-dzialac-juz-sa-problemy-mnoza-sie,nId,23475520 (2026-11-06, T24)
+18. Internal: [TH12 check](../../poland-check/C/TH12-immigration-casework.md), [TH59 check](../../poland-check/B/TH59-citizen-sme-public-service-navigators.md), [local-moats](../../research/poland/local-moats.md), [demography DD6/DD7](../../research/poland/demography.md)
 
 Coverage: 4 web searches run for this write-up (US analogues' funding, CUKR application statistics, employer fines, KRAZ agency count). Not found: any count of CUKR applications filed so far, any failed AI immigration product, prices for HRappka.
