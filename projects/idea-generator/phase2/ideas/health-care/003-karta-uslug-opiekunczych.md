@@ -85,6 +85,17 @@ Quick scores confirmed. L5 stays 4 on sourced size + driver, though direct provi
 
 **Confidence:** low–medium (law and budget sourced; settlement formats, provider counts and willingness to pay not).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *"No competitor" was wrong.* A second search ("aplikacja dla opiekunek usługi opiekuńcze rozliczanie godzin MOPS program bon senioralny", 2026-11-06) found **SeniorApp** (Fundacja SeniorApp / SeniorApp Sp. z o.o.), presented as an application "already ready" for running the bon senioralny programme: used by gminas and by field staff delivering services, with real-time data on the number, type and duration of services, service-quality monitoring, an SOS button, and gmina-level reports ([infor.pl, 2026-06-23](https://www.infor.pl/twoje-pieniadze/swiadczenia/7607097,aplikacja-na-bon-senioralny-2026-czy-senior-musi-ja-miec-dla-kogo-jest-przeznaczona-aplikacja-do-obslugi-bonu-senioralnego-dla-65-plus-z-dochodem-do-3410-zl-kto-dostanie-jakie-swiadczenia.html), fetched 2026-11-06; vendor's own claims, price and settlement not stated). That is the time-and-task log at the heart of this MVP, sold from the **gmina** side.
+- *The gmina, not the provider, picks the tool.* If a gmina adopts SeniorApp (or its social-assistance vendor's module) for its bon senioralny contracts, providers must log visits there, and a provider-side app becomes double entry. The buyer the write-up targets (thin-margin NGOs and micro-firms) is the one with the least power over the format.
+- *Polish customers won't pay this.* 25 PLN per carer from providers paid ~40 PLN per hour by gminas (Korsze MOPS full fee 42 PLN/h on Sundays, search excerpt) is plausible only if it removes settlement corrections; no provider has said settlement hurts (the write-up itself calls demand "the weakest part").
+- *ChatGPT absorption.* Low: the value is catalogue mapping and settlement format, not text. Not the main threat.
+- *Western leader localizing.* Birdie shows no CEE move; not a threat.
+- *Success signals.* Birdie: two rounds, no funding found after 2022, customer count unverified; the durable proof is thin (2–3 signals), so L2 3 is the ceiling.
+- *Opportunity/risk lists.* R5 ("a social-assistance vendor adds a provider module", L×M) has effectively happened from the gmina side; it is now M×H. §4 was not applied in T21.
+
+**Review changes (T24, 2026-11-06):** L3 4 → 3 (SeniorApp covers service logging for bon senioralny); L5 4 → 3 (no provider-side demand evidence, as T21 itself noted for a strict reading); L9 3 → 2 (gmina-chosen tools can make a provider app redundant). R5 L×M → M×H. **Reviewed scores:** L1 4 · L2 3 · L3 3 · L4 4 · L5 3 · L6 2 · L7 3 · L8 3 · L9 2 | **Weighted:** 0.48+0.36+0.36+0.60+0.45+0.20+0.24+0.24+0.16 = **3.1** | table band 5–15%; §4: O 6+6+3+4+4 = 23, R 9+6+4+6+6+2 = 33, R − O = 10 and R1 H×H → down one band → **<5%**. Not rejected: voice notes in Ukrainian and per-gmina settlement could still be a module sold **to** SeniorApp-type platforms or to large agencies; the validation calls should now also ask which tool the gmina prescribes.
+
 **Sources** (accessed 2026-11-05 unless noted):
 1. https://prnewswire.co.uk/news-releases/birdie-raises-30m-series-b-to-transform-elderly-care-at-home-864971599.html
 2. https://app.welcometothejungle.com/companies/Birdie
@@ -99,6 +110,7 @@ Quick scores confirmed. L5 stays 4 on sourced size + driver, though direct provi
 11. https://openrouter.ai/google/gemini-2.5-flash
 12. https://artificialintelligenceact.eu/annex/3/
 13. https://ideaproof.io/failure/homehero
-14. Internal: [TH04 check](../../poland-check/A/TH04-care-provider-documentation-operations.md), [demography DD1/DD2/DD6](../../research/poland/demography.md)
+14. https://www.infor.pl/twoje-pieniadze/swiadczenia/7607097,aplikacja-na-bon-senioralny-2026-czy-senior-musi-ja-miec-dla-kogo-jest-przeznaczona-aplikacja-do-obslugi-bonu-senioralnego-dla-65-plus-z-dochodem-do-3410-zl-kto-dostanie-jakie-swiadczenia.html (2026-11-06, T24)
+15. Internal: [TH04 check](../../poland-check/A/TH04-care-provider-documentation-operations.md), [demography DD1/DD2/DD6](../../research/poland/demography.md)
 
 Coverage: 5 web searches/fetches for this write-up (bon senioralny law status, Cera, Birdie, home-care graveyard, transcription prices). Not found: the gmina–provider settlement format, number of bon senioralny providers, any Polish provider forum discussing documentation.
