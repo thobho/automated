@@ -50,7 +50,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links: FTC DoNotPay press release in 009 (404 to scripts, reads fine in browser; backup cited)
 - [x] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
   Unverifiable links: mos.cudzoziemcy.gov.pl/jak-zaczac, migrant.poznan.uw.gov.pl, businesswire.com (Parspec), allegro.gcs-web.com (2023 report PDF)
-- [ ] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
+- [~] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
+  Resume: starting
 - [ ] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
 
 ## Blocked / questions for the owner
