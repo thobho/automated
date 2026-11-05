@@ -51,7 +51,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
   Unverifiable links: mos.cudzoziemcy.gov.pl/jak-zaczac, migrant.poznan.uw.gov.pl, businesswire.com (Parspec), allegro.gcs-web.com (2023 report PDF)
 - [~] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
-  Resume: batch A 001–006 plus 019, 020, 024 reviewed (001 3.4, 002 3.6, 003 3.1, 004 3.4, 005 3.2 all <5%; 006 merged into 001; 019, 020, 024 rejected); next 007, then 008–018, 021–023 (shortlist rows for those still carry quick scores)
+  Resume: PARTIAL, stopped at a clean point after 9 of 24: 001–006, 019, 020, 024 reviewed (001 3.4, 002 3.6, 003 3.1, 004 3.4, 005 3.2, all <5% after §4; 006 merged into 001; 019, 020, 024 rejected); link check on reviewed files 124 links, 0 dead, 7 unverifiable (all pre-existing: thenegotiator, mos.cudzoziemcy, digitalhealth, htworld, businesswire, businessnewsaustralia, allegro.gcs-web); next 007, then 008–018, 021–023 (their shortlist.csv rows still carry quick scores; T22/T23 write-ups already applied §4)
 - [ ] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
 
 ## Blocked / questions for the owner
