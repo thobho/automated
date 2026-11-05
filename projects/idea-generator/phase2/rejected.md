@@ -112,3 +112,7 @@
 - 2026-11-05 · L154 Monthly management report from Optima/Rewizor sent by offices · T20 · merged into L005
 - 2026-11-05 · L155 NL Q&A layer for enova365 and WAPRO · T20 · merged into L153
 - 2026-11-05 · L160 AI-moderated studies among migrant customers · T20 · merged into L159
+
+## T24 independent critical review (2026-11-06)
+
+- 2026-11-06 · L072 AML-in-a-box for small obliged entities (write-up [019](ideas/legal-compliance/019-aml-in-a-box.md)) · T24 · not innovative under the brief (rule-shaped duty, pre-LLM analogue); taken for biura by Comarch Apfino; estate-agent niche served by RPMS procedures and TTMS automation; weighted 2.9, <5%

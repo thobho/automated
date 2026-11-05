@@ -83,6 +83,16 @@ Changes vs. quick score: L1 3 → 2 (rule-shaped duty; the LLM drafts text only)
 
 **Confidence:** medium (duties and the incumbent sourced; enforcement, prices and estate-agent counts not found).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *Not innovative by the brief's own test.* The brief requires at least two of four conditions. This idea is not LLM-native (the score and the KYC pull are rules; the LLM writes a justification paragraph), its only analogue with traction (Thirdfort, Series A 2022) is pre-LLM, and it replaces no person's job step that a template does not already replace. Only "new demand" (AMLR 2027) holds. It is a Phase 1-style compliance tool, which is what Phase 2 set out to avoid.
+- *It already works in Polish.* Comarch Apfino automates KYC, client scoring and the office risk assessment for biura rachunkowe; accounting-software vendors will ship AMLR 2027 updates to their own base for free or as an upsell.
+- *Polish customers won't pay this monthly.* Offices buy AML as a one-off procedure pack or training (LTCA, RPMS), and podatki.biz stresses that the office risk assessment must be individual and approved by the AML officer, so a generated document is a starting draft, not the deliverable ([podatki.biz](https://www.podatki.biz/artykuly/ocena-ryzyka-wedlug-ustawy-aml-co-powinno-sie-w-niej-znalezc_34_48140.htm), search excerpt, 2026-11-06). Enforcement against small offices is unmeasured.
+- *The estate-agent niche is not empty either.* A second search ("AML dla pośredników nieruchomości program … ocena ryzyka klienta", 2026-11-06) found RPMS selling AML procedures to estate agents and TTMS marketing automated client risk scoring, sanctions and PEP screening to the real-estate sector ([RPMS](https://rpms.pl/procedura-przeciwdzialania-praniu-brudnych-pieniedzy-aml-w-praktyce-posrednikow-nieruchomosci/); [TTMS](https://ttms.com/pl/ryzyka-aml-w-branzy-nieruchomosci-jak-automatyzacja-zmniejsza-podatnosc-na-naduzycia/), excerpts). The only "unserved" segment found in T23 is served by services and an enterprise vendor.
+- *Success signals.* Thirdfort is durable but not an LLM product; L2 3 stays only because the rubric scores the analogue's traction.
+- *Opportunity/risk lists.* Independent and honest; R1 H×H is evidenced (Apfino).
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 2 · L2 3 · L3 2 · L4 4 · L5 3 · L6 3 · L7 4 · L8 3 · L9 2; weighted **2.9**; band <5% after §4: O 20, R 29). **Rejected** and moved to [rejected.md](../../rejected.md): fails the brief's "at least two innovative conditions" test, the core job is taken for biura (Comarch Apfino) and the estate-agent niche has service and vendor offers. If AMLR 2027 is worth anything to the founder, it is as a free lead magnet for idea 016, not a product.
+
 **Sources** (accessed 2026-11-06 unless noted):
 1. https://www.biometricupdate.com/202203/thirdfort-secures-20m-in-series-a-funding-as-aml-business-scales
 2. https://binderr.com/ (accessed 2026-11-01)
@@ -98,6 +108,9 @@ Changes vs. quick score: L1 3 → 2 (rule-shaped duty; the LLM drafts text only)
 12. https://www.infor.pl/biura-rachunkowe/aml/
 13. https://openrouter.ai/google/gemini-2.5-flash (accessed 2026-11-05)
 14. https://artificialintelligenceact.eu/annex/3/
-15. Internal: [TH54 check](../../poland-check/A/TH54-compliance-regtech-agents.md), [016](../accounting-tax/016-asystent-klienta-biura.md), R5/R6 catalogue rows
+15. https://www.podatki.biz/artykuly/ocena-ryzyka-wedlug-ustawy-aml-co-powinno-sie-w-niej-znalezc_34_48140.htm (T24)
+16. https://rpms.pl/procedura-przeciwdzialania-praniu-brudnych-pieniedzy-aml-w-praktyce-posrednikow-nieruchomosci/ (T24)
+17. https://ttms.com/pl/ryzyka-aml-w-branzy-nieruchomosci-jak-automatyzacja-zmniejsza-podatnosc-na-naduzycia/ (T24)
+18. Internal: [TH54 check](../../poland-check/A/TH54-compliance-regtech-agents.md), [016](../accounting-tax/016-asystent-klienta-biura.md), R5/R6 catalogue rows
 
 Coverage: 6 web searches and 2 fetches for this write-up (Polish AML software for offices, GIIF controls, AMLR timeline, Thirdfort traction). Not found: prices of Apfino or procedure packs, number of estate agencies, GIIF control statistics after 2021, CRBR API terms.
