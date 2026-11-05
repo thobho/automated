@@ -43,7 +43,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
   Unverifiable links (SSL/timeout/403, sites exist): mos.cudzoziemcy.gov.pl, bip.brpo.gov.pl (x2), village.ai
 - [~] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
-  Resume: ideas/longlist.md sections 1–4 written (finance, employment/migration, legal/compliance, property/construction), L001–L102; next section 5 health/care (TH02, TH03, TH04, TH06 + TH01/TH05 residues), 6 education (TH35, TH36, TH37), 7 SME ops (TH61, TH60, TH52, TH55, TH67, TH45, TH68, TH64, TH65 + residues), then coverage table and counts
+  Resume: ideas/longlist.md sections 1–7 written, L001–L167; next: coverage table (every open/partial theme → ids), counts and B2B share, relative-link check, link check, then report
 - [ ] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
 - [ ] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
 - [ ] T22 · write-ups batch B · needs: T20 · [tasks/22-write-ups-batch-b.md](tasks/22-write-ups-batch-b.md)
