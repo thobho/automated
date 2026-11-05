@@ -45,8 +45,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [x] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
 - [~] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
-  Resume: 001, 002, 003 done (property/001, employment-migration/002, health-care/003); next 004 (L069 claim-file assistant, TH11)
-  Unverifiable links (403/520/SSL, sites exist): thenegotiator.co.uk, mos.cudzoziemcy.gov.pl, digitalhealth.net, htworld.co.uk
+  Resume: 001–004 done (property/001, employment-migration/002, health-care/003, legal-compliance/004); next 005 (L083 AI biuro zarządcy, TH56)
+  Unverifiable links (403/520/SSL, sites exist): thenegotiator.co.uk, mos.cudzoziemcy.gov.pl, digitalhealth.net, htworld.co.uk, businesswire.com
 - [ ] T22 · write-ups batch B · needs: T20 · [tasks/22-write-ups-batch-b.md](tasks/22-write-ups-batch-b.md)
 - [ ] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
 - [ ] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
