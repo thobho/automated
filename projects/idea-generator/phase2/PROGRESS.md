@@ -47,7 +47,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
   Unverifiable links (403/520/SSL/reset, sites exist): thenegotiator.co.uk, mos.cudzoziemcy.gov.pl, digitalhealth.net, htworld.co.uk, businesswire.com, businessnewsaustralia.com, asiae.co.kr
 - [~] T22 · write-ups batch B · needs: T20 · [tasks/22-write-ups-batch-b.md](tasks/22-write-ups-batch-b.md)
-  Resume: starting
+  Resume: 009 done (3.1, <5%); next 010 teczka sprzedażowa, then 011–016
 - [ ] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
 - [ ] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
 - [ ] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
