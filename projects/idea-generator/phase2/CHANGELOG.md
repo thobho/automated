@@ -28,3 +28,4 @@
 2026-11-06 · ideas/health-care/003-karta-uslug-opiekunczych.md, ideas/shortlist.csv (L115) · T24 review: SeniorApp found (gmina-side bon senioralny app with service logging); L3 4→3, L5 4→3, L9 3→2, weighted 3.4→3.1; §4 applied (O 23, R 33) → 5–15%→<5% · T24
 2026-11-06 · ideas/legal-compliance/004-claim-file-assistant.md, ideas/shortlist.csv (L069) · T24 review: scores unchanged (3.4); §4 applied (O 19, R 30) → 5–15%→<5%; firm count unsourced so §3 sanity check fails too · T24
 2026-11-06 · ideas/property/005-ai-biuro-zarzadcy.md, ideas/shortlist.csv (L083) · T24 review: scores unchanged (3.2, shortlist quick 3.4 replaced); fonio Polish AI phone assistant for zarządcy found; §4 applied (O 19, R 27) → 5–15%→<5% · T24
+2026-11-06 · ideas/property/006-czy-tu-zbuduje.md, ideas/shortlist.csv (L092), rejected.md · T24 review: shortlist quick 3.3 replaced by reviewed 2.9; §4 applied (O 14, R 31) → <5%; rejected as standalone, merged into L079 (001) · T24

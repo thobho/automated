@@ -83,6 +83,16 @@ Changes vs. quick score: L1 4 → 3 (plan-ogólny part is GIS, not LLM), L3 4 �
 
 **Confidence:** medium (reform status and competition sourced; demand and willingness to pay not).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *It already works in Polish.* Plan ogólny zones and obszary uzupełnienia zabudowy are free GML, shown per gmina by e-mapa.net; OnGeo sells an automated plot diagnosis covering MPZP designation "in under 5 minutes" ([OnGeo blog](https://blog.ongeo.pl/sprawdzenie-dzialki), search excerpt, 2026-11-06). What is left is MPZP parameter extraction from the resolution text.
+- *Polish customers won't pay this.* The anchor price is e-mapa's ~20 PLN report; the one paid-demand signal found on a second search is B2B: a Useme job asking for an "analiza chłonności działki" ([Useme](https://useme.com/pl/jobs/analiza-chonnosci-dziaki,98912/), search result, not fetched), i.e. small developers pay for capacity studies, which need an architect's judgement, not only extracted parameters. A plot guide stresses that MPZP indicators must be read together, not one by one ([Pewny Lokal](https://pewnylokal.pl/parametry-zabudowy), excerpt), which raises the error risk (R2) of automatic extraction.
+- *Second competitor search (2026-11-06):* "AI analiza MPZP działki parametry zabudowy raport sztuczna inteligencja" found no AI MPZP reader, only OnGeo, guides and a plot-analytics publisher (gruntguru.pl, not checked: unverified whether it sells per-plot reports).
+- *ChatGPT absorption.* High: uploading one MPZP PDF and asking for the parameters of zone 3MN is a single prompt.
+- *Success signals.* PermitFlow and Archistar show durable traction in permits and government review, not in consumer feasibility; L2 2 is right.
+- *Opportunity/risk lists.* O2 (bundle with 001) is an internal choice, not market evidence. §4 not applied in T21.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 3 · L2 2 · L3 3 · L4 4 · L5 3 · L6 2 · L7 3 · L8 3 · L9 2; weighted **2.9**). §4: O 4+6+2+2 = 14, R 9+6+6+6+4 = 31, R − O = 17 and R1 is H×H → down one band: 5–15% → **<5%**. **Rejected as a standalone idea** and recorded in [rejected.md](../../rejected.md) as merged into L079 (write-up [001](001-kw-plot-risk-report.md)): the MPZP-extraction module survives only as a plot add-on to 001, as T21 recommended.
+
 **Sources** (accessed 2026-11-05):
 1. https://builtin.com/articles/ai-construction-platform-permitflow-secures-54m-series-b-20251203
 2. https://www.businessnewsaustralia.com/articles/property-and-planning-design-intelligence-venture-archistar-raises--6m-for-global-ambitions.html
@@ -96,6 +106,9 @@ Changes vs. quick score: L1 4 → 3 (plan-ogólny part is GIS, not LLM), L3 4 �
 10. https://stat.gov.pl/obszary-tematyczne/infrastruktura-komunalna-nieruchomosci/nieruchomosci-budynki-infrastruktura-komunalna/obrot-nieruchomosciami-w-2024-r-,4,22.html
 11. https://openrouter.ai/google/gemini-2.5-flash
 12. https://artificialintelligenceact.eu/annex/3/
-13. Internal: [TH58 check](../../poland-check/C/TH58-government-back-office-ai.md), [TH15 check](../../poland-check/B/TH15-property-transaction-title-diligence.md), [write-up 001](001-kw-plot-risk-report.md)
+13. https://blog.ongeo.pl/sprawdzenie-dzialki (2026-11-06, T24, excerpt)
+14. https://useme.com/pl/jobs/analiza-chonnosci-dziaki,98912/ (2026-11-06, T24, search result)
+15. https://pewnylokal.pl/parametry-zabudowy (2026-11-06, T24, excerpt)
+16. Internal: [TH58 check](../../poland-check/C/TH58-government-back-office-ai.md), [TH15 check](../../poland-check/B/TH15-property-transaction-title-diligence.md), [write-up 001](001-kw-plot-risk-report.md)
 
 Coverage: 5 web searches/fetches for this write-up (PermitFlow/Archistar, plan ogólny adoption count, Polish plot-check tools, e-mapa plan ogólny page, Sejm committee article). Not found: share of plot transactions in GUS data, counts of architects, any graveyard case.
