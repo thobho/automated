@@ -39,7 +39,6 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T16 · Poland check batch A · needs: T02, T03, T15 · [tasks/16-poland-check-batch-a.md](tasks/16-poland-check-batch-a.md)
   Unverifiable links (bot-blocked 403, site exists): ch.trustpilot.com
 - [x] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
-  Resume: all 23 batch-B themes done in poland-check/B/ + README with final totals (open gap 2, partial 12, taken 9); link check 2026-11-05: 184 links, 0 dead, 5 unverifiable (elektroda.pl, geoportal.gov.pl, dbc.wroc.pl, wamda.com timeouts; appvizer.com expired SSL); ready to mark done
   Unverifiable links (timeout/403/SSL, sites exist): elektroda.pl, wolterskluwer.com (TH20, TH35), app.dealroom.co (TH27), appvizer.com (TH30), geoportal.gov.pl (TH57), wamda.com (TH67)
 - [ ] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
 - [ ] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
