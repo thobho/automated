@@ -86,6 +86,17 @@ Quick scores confirmed; L2 kept at 3 (strong durable signals but only 2 countrie
 
 **Confidence:** medium (Western traction and Polish moat well sourced; Polish firm count and demand not).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *EvenUp's economics do not cross the border.* EvenUp sells into a US market where one PI demand letter can unlock six-figure settlements and contingency fees pay for software. Polish zadośćuczynienie awards are far smaller and the firm's success fee is a share of that (level still unverified), so a 499 PLN/month tool is a much larger share of a Polish firm's revenue per case than EvenUp is of a US firm's.
+- *It already works in Polish (partly).* A medical chronology from a 100-page PDF is exactly what Claude/Gemini do well in Polish today; R1 is the core risk, not a side risk. The only piece a general assistant lacks is the SAOS amount corpus, and SAOS covers only published judgments, while most claims settle with the OC insurer, which uses its own internal tables. The "range" may not match what firms actually negotiate.
+- *Polish customers won't pay this.* Firm-side demand is still inferred ("ai pismo procesowe" returns nothing). The firm count is still an estimate; the criteria §3 sanity check (20 firms × 20 = 400 reachable firms, with a source) cannot be passed, so the band is capped at 5–15% before §4 anyway.
+- *Western leader localizing.* Unlikely within 12 months (US-centric damages model). Local threat: Gaius-Lex or LEX adding a document-chronology feature, which is generic.
+- *Second competitor search (2026-11-06):* "sztuczna inteligencja kancelaria odszkodowawcza program analiza dokumentacji medycznej zadośćuczynienie kalkulator orzeczeń" found no Polish product; it found more foreign analogues on the **insurer/defence** side (Wisedocs, CA, for insurers and defence counsel; CLARA Claims DocIntel; expert.ai at Plexus Law, UK, 2022) ([Wisedocs](https://www.ai.engineer/orgs/wisedocs); [CLARA](https://claraanalytics.com/products/claims-document-intelligence-pro/); [expert.ai Plexus PDF](https://www.expert.ai/wp-content/uploads/2022/10/Plexus-case-study.pdf), search excerpts). Spread widens to CA and UK, and it suggests a second Polish buyer: insurers' claims departments (who would build in-house).
+- *Success signals.* EvenUp and Supio show expansion (ARR doubling, 4× ARR) and strategic investors; these are company-reported but sourced. Durable, not hype. L2 3 is conservative; spread now US, TR, CA, UK would allow 4, but the PI-firm pattern itself is still US-only, so 3 stays.
+- *Opportunity/risk lists.* Independent; R1 should be H×M as written. §4 not applied in T21.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 4 · L2 3 · L3 4 · L4 4 · L5 3 · L6 3 · L7 3 · L8 3 · L9 3; weighted **3.4**). §4: O 6+4+4+3+2 = 19, R 6+6+6+4+4+4 = 30, R − O = 11 ≥ 6 → down one band: 5–15% → **<5%** (the §3 customer-count sanity check would also cap it at 5–15%). Not rejected: the concierge test with 50 firms is cheap and decisive.
+
 **Sources** (accessed 2026-11-05):
 1. https://www.businesswire.com/news/home/20251007138957/en/EvenUp-Raises-150M-Series-E-at-2B-Valuation-to-Redefine-Personal-Injury-Law-and-Level-the-Playing-Field-for-Injury-Victims
 2. https://news.bloomberglaw.com/legal-ops-and-tech/ai-legal-tech-evenup-raises-150-million-at-2-billion-valuation
@@ -101,6 +112,9 @@ Quick scores confirmed; L2 kept at 3 (strong durable signals but only 2 countrie
 12. https://openrouter.ai/google/gemini-2.5-flash
 13. https://artificialintelligenceact.eu/annex/3/
 14. https://getcoai.com/news/ftc-bans-donotpays-ai-lawyer-claims-and-orders-refunds
-15. Internal: [TH11 check](../../poland-check/B/TH11-plaintiff-litigation-casework.md), [shortlist notes († rules)](../shortlist-notes.md), [local-moats M29/M30](../../research/poland/local-moats.md)
+15. https://www.ai.engineer/orgs/wisedocs (2026-11-06, T24, excerpt)
+16. https://claraanalytics.com/products/claims-document-intelligence-pro/ (2026-11-06, T24, excerpt)
+17. https://www.expert.ai/wp-content/uploads/2022/10/Plexus-case-study.pdf (2026-11-06, T24, excerpt)
+18. Internal: [TH11 check](../../poland-check/B/TH11-plaintiff-litigation-casework.md), [shortlist notes († rules)](../shortlist-notes.md), [local-moats M29/M30](../../research/poland/local-moats.md)
 
 Coverage: 5 web searches for this write-up (EvenUp, Supio, road-accident and OC payout data, Polish AI for claims firms, DoNotPay). Not found: number of claims firms in Poland, OC zadośćuczynienie payout totals (KNF), any Polish product for injury files.
