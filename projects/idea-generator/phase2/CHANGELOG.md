@@ -10,3 +10,4 @@
 2026-11-01 · method/countries.md · R3 Belgium row done (6 +1 in R0), Totals updated · T07
 2026-11-01 · method/countries.md · R3 Luxembourg row thin (2), R3 totals 6 countries / 41 products · T07 regional scan finished
 2026-11-01 · method/countries.md · R4 rows (Sweden 7 +3 in R0, Norway 5, Denmark 5 +2 in R0, Finland 5, Iceland thin 2, Estonia 6, Latvia 5, Lithuania 5) and Totals row (18 done, 186 products) updated · T08 regional scan finished
+2026-11-05 · catalogue/R6-cee-peers.csv · not changed, flagged only: row R6-RO-005 (Bible Chat) URL biblechat.ai now redirects to crosstalk.ai (Manifest Automation, Inc., EN/ES/PT), apparently a different product from BookVitals' Romanian Bible Chat; correct URL not found · found in T18 (poland-check/C/TH65)
