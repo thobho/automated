@@ -116,3 +116,4 @@
 ## T24 independent critical review (2026-11-06)
 
 - 2026-11-06 · L072 AML-in-a-box for small obliged entities (write-up [019](ideas/legal-compliance/019-aml-in-a-box.md)) · T24 · not innovative under the brief (rule-shaped duty, pre-LLM analogue); taken for biura by Comarch Apfino; estate-agent niche served by RPMS procedures and TTMS automation; weighted 2.9, <5%
+- 2026-11-06 · L103 Phone agent for private clinics (merges L104; write-up [020](ideas/health-care/020-clinic-phone-agent.md)) · T24 · voice layer sold in Polish (ElevenLabs, fonio, AInora incl. dental, 30+ vendors); Docplanner Noa Booking and the state CeZ voicebot ship booking; ~30% gross margin at 599 PLN; live calls break the no-on-call rule; weighted 2.7, <5%

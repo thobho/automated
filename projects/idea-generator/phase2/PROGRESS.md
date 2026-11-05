@@ -51,7 +51,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
   Unverifiable links: mos.cudzoziemcy.gov.pl/jak-zaczac, migrant.poznan.uw.gov.pl, businesswire.com (Parspec), allegro.gcs-web.com (2023 report PDF)
 - [~] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
-  Resume: 001, 002, 019 reviewed (001 3.4 <5%, 002 3.6 <5%, 019 rejected); next 020 and 024 (near collapse), then 003–018, 021–023
+  Resume: 001, 002, 019, 020 reviewed (001 3.4 <5%, 002 3.6 <5%, 019 and 020 rejected); next 024 (near collapse), then 003–018, 021–023
 - [ ] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
 
 ## Blocked / questions for the owner

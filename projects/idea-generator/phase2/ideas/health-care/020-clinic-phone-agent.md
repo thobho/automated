@@ -80,6 +80,16 @@ Changes vs. quick score: L3 3 → 2 (ElevenLabs/fonio in Polish), L4 4 → 3 (in
 
 **Confidence:** medium (competition and Western traction sourced; Polish rollout of Noa Booking, API access and clinic counts for private-only practices not confirmed).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *It already works in Polish.* The voice layer is sold in Polish today by ElevenLabs, fonio (399–479 PLN/month, cheaper than this idea's 599 PLN), AInora and 30+ local voicebot vendors; a second search ("ZnanyLekarz Noa asystent głosowy rejestracja telefoniczna AI Polska", 2026-11-06) also returned AInora's 2026 guide aimed at dental practices specifically, i.e. the one niche the write-up keeps ([AInora](https://ainora.lt/pl/blog/asystent-glosowy-ai-dla-gabinetow-stomatologicznych-2026), search result, not fetched), and a 2022 "Assi" voice booking assistant presentation hosted by the Koszalin medical chamber (PDF not readable here: unverified what it is).
+- *The platform owner will ship it.* Docplanner (ZnanyLekarz) has Noa Booking and reports doubled bookings per doctor; the state's Centralna e-Rejestracja voicebot (ElevenLabs) covers NFZ specialists for free. The remaining "edge", direct writes into mMedica/Medfile/KS-SOMED, has no public API.
+- *Polish customers won't pay at a margin that works.* At ~0.40 PLN per minute of voice cost, 599 PLN with 1,000 minutes is ~30% gross margin, and the cheapest competitor already prices below that.
+- *Founder fit.* Live phone calls with elderly patients are the "heavy on-call operations" the founder profile rules out; failures land on the founder in real time.
+- *Success signals.* Assort's valuation vs. ~US$3M ARR is a hype warning; no retention data in the theme. L2 3 is generous.
+- *Opportunity/risk lists.* Honest; R1 and R2 are evidenced, not speculative.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 4 · L2 3 · L3 2 · L4 3 · L5 3 · L6 2 · L7 2 · L8 3 · L9 1; weighted **2.7**; <5%, O 18, R 31). **Rejected** and moved to [rejected.md](../../rejected.md): the voice layer is commodity in Polish, Docplanner and the state already ship booking voice agents, unit economics fail at PLN prices, and live calls break the no-on-call rule. The dental niche outside ZnanyLekarz is already targeted by AInora and fonio.
+
 **Sources** (accessed 2026-11-06 unless noted):
 1. https://www.fiercehealthcare.com/ai-and-machine-learning/assort-health-brings-total-funding-102m-four-months
 2. https://techcrunch.com/2025/08/26/assort-health-nabs-50m-to-automate-patient-phone-calls-sources-say
@@ -92,6 +102,8 @@ Changes vs. quick score: L3 3 → 2 (ElevenLabs/fonio in Polish), L4 4 → 3 (in
 9. https://ainora.lt/pl/blog/najlepsi-asystenci-telefoniczni-ai-dla-firm-2026 (accessed 2026-11-03)
 10. https://www.fonio.ai/pl/ki-telefonassistenten-archived/przychodnie (accessed 2026-11-03)
 11. https://elevenlabs.io/pl/agents/healthcare-answering-service (accessed 2026-11-03)
-12. Internal: [TH02 check](../../poland-check/A/TH02-patient-call-scheduling-agents.md), [demography.md](../../research/poland/demography.md)
+12. https://ainora.lt/pl/blog/asystent-glosowy-ai-dla-gabinetow-stomatologicznych-2026 (T24, search result)
+13. https://www.oil.koszalin.pl/images/dokumenty/ogolne_2022/Assi_glosowy_asystent_rezerwacji.pdf (T24, PDF text not extracted, unverified)
+14. Internal: [TH02 check](../../poland-check/A/TH02-patient-call-scheduling-agents.md), [demography.md](../../research/poland/demography.md)
 
 Coverage: 5 web searches and 1 fetch for this write-up (Docplanner voice agent, Assort traction, clinic counts, clinic-software APIs, voice pricing). Not found: Noa Booking status in Poland, public calendar APIs of mMedica/Medfile/KS-SOMED, number of private-only practices, Polish clinic demand evidence.

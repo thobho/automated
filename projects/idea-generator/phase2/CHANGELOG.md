@@ -23,3 +23,4 @@
 2026-11-06 · ideas/property/001-kw-plot-risk-report.md, ideas/shortlist.csv (L079) · T24 review: L3 4→3, L4 5→4, weighted 3.6→3.4, band 5–15%→<5% (criteria §4 applied: O 20, R 31, R1 H×H); shortlist row now carries reviewed scores · T24
 2026-11-06 · ideas/employment-migration/002-teczka-legalizacyjna.md, ideas/shortlist.csv (L036) · T24 review: scores unchanged (3.6); O1 H→M, R4 M→H (UD163: MOS itself lists mandatory attachments); §4 applied (O 23, R 34) → band 5–15%→<5% · T24
 2026-11-06 · ideas/legal-compliance/019-aml-in-a-box.md, ideas/shortlist.csv (L072), rejected.md · T24 review: scores unchanged (2.9, <5%); rejected (not innovative under the brief, Comarch Apfino, estate-agent niche served by RPMS/TTMS) · T24
+2026-11-06 · ideas/health-care/020-clinic-phone-agent.md, ideas/shortlist.csv (L103), rejected.md · T24 review: scores unchanged (2.7, <5%); rejected (commodity Polish voice layer, Docplanner/CeZ voice booking, margin, on-call) · T24
