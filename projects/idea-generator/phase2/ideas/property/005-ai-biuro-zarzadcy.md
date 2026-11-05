@@ -86,6 +86,16 @@ Changes vs. quick score: L3 4 → 3 (resident portals with e-voting found; gap p
 
 **Confidence:** low–medium (law and Polish incumbents sourced; demand and export access untested).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *The wrong analogue carries the score.* EliseAI's billions come from US rental leasing (rent, tours, renewals), a revenue line for landlords. Polish wspólnoty are owner-occupied; the manager is paid a flat fee per lokal and an AI inbox is a cost saving on a low-margin service, not revenue. The condominium form has only Buena (DE) as an unverified analogue; Condo Control (CA) markets an AI assistant for condo/HOA managers ([Condo Control](https://condocontrol.com/communication/ai-property-manager-assistant), search result, not fetched), which widens spread but adds no traction figure.
+- *It already works in Polish (the phone part).* A second search ("asystent AI dla zarządcy wspólnoty mieszkaniowej … 2026", 2026-11-06) found **fonio** selling a Polish AI phone assistant for zarządcy nieruchomości that it says fits wspólnoty, prioritising urgent faults ([fonio](https://www.fonio.ai/pl/ki-telefonassistenten-archived/ai-asystent-zarzadcy-nieruchomosci), search excerpt). The "later phone" module is therefore commodity; the inbox/vote/protokół core is not covered by a product found.
+- *Incumbents own the data.* e-kartoteka and LokaleNet already hold balances, faults and e-voting; adding an LLM answer layer on their own data is a quarter's work for them, while this product depends on CSV exports that managers may not send twice (R2).
+- *Polish customers won't pay this.* Small management firms are price-squeezed per lokal; no willingness-to-pay evidence beyond AI courses.
+- *ChatGPT absorption.* High for drafting uchwały and protokoły (template text); low for udział-weighted vote tallies, which are simple arithmetic any portal already does.
+- *Opportunity/risk lists.* Independent; likelihoods plausible. §4 not applied in T21.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 4 · L2 3 · L3 3 · L4 4 · L5 3 · L6 3 · L7 3 · L8 3 · L9 2; weighted **3.2**). §4: O 6+4+2+4+3 = 19, R 6+6+4+2+6+3 = 27, R − O = 8 ≥ 6 → down one band: 5–15% → **<5%**. Drop the phone module (fonio). Not rejected, but weak: the best route is a partnership pitch to Mieszczanin or MMSoft rather than a standalone product.
+
 **Sources** (accessed 2026-11-05 unless noted):
 1. https://siliconangle.com/2025/08/20/property-management-startup-eliseai-nabs-250m-2-2b-valuation/
 2. https://dealroom.co/news/157636-eliseai-raises-350m-at-4b-valuation-to-push-ai-deeper-into-housing/
@@ -97,6 +107,8 @@ Changes vs. quick score: L3 4 → 3 (resident portals with e-voting found; gap p
 8. https://openrouter.ai/google/gemini-2.5-flash
 9. https://developers.openai.com/api/docs/pricing
 10. https://artificialintelligenceact.eu/annex/3/
-11. Internal: [TH56 check](../../poland-check/A/TH56-leasing-property-management-agents.md), [local-moats](../../research/poland/local-moats.md), [demography DD9/DD10](../../research/poland/demography.md)
+11. https://www.fonio.ai/pl/ki-telefonassistenten-archived/ai-asystent-zarzadcy-nieruchomosci (2026-11-06, T24, excerpt)
+12. https://condocontrol.com/communication/ai-property-manager-assistant (2026-11-06, T24, search result)
+13. Internal: [TH56 check](../../poland-check/A/TH56-leasing-property-management-agents.md), [local-moats](../../research/poland/local-moats.md), [demography DD9/DD10](../../research/poland/demography.md)
 
 Coverage: 4 web searches/fetches for this write-up (Polish manager/resident apps, EliseAI/Buena funding, number of wspólnoty, e-kartoteka App Store page). Not found: number of management firms, number of wspólnoty (only flats in wspólnoty, 2018), Buena funding, prices of e-kartoteka/LokaleNet for managers, any graveyard case.

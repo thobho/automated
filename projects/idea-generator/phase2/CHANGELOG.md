@@ -27,3 +27,4 @@
 2026-11-06 · ideas/sme-ops/024-allegro-listing-agent.md, ideas/shortlist.csv (L142), rejected.md · T24 review: scores unchanged (2.8, <5%); rejected (Senvio, Sellpander, Base/Apilo, Allegro's own AI tools) · T24
 2026-11-06 · ideas/health-care/003-karta-uslug-opiekunczych.md, ideas/shortlist.csv (L115) · T24 review: SeniorApp found (gmina-side bon senioralny app with service logging); L3 4→3, L5 4→3, L9 3→2, weighted 3.4→3.1; §4 applied (O 23, R 33) → 5–15%→<5% · T24
 2026-11-06 · ideas/legal-compliance/004-claim-file-assistant.md, ideas/shortlist.csv (L069) · T24 review: scores unchanged (3.4); §4 applied (O 19, R 30) → 5–15%→<5%; firm count unsourced so §3 sanity check fails too · T24
+2026-11-06 · ideas/property/005-ai-biuro-zarzadcy.md, ideas/shortlist.csv (L083) · T24 review: scores unchanged (3.2, shortlist quick 3.4 replaced); fonio Polish AI phone assistant for zarządcy found; §4 applied (O 19, R 27) → 5–15%→<5% · T24
