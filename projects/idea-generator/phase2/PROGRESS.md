@@ -48,8 +48,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (403/520/SSL/reset, sites exist): thenegotiator.co.uk, mos.cudzoziemcy.gov.pl, digitalhealth.net, htworld.co.uk, businesswire.com, businessnewsaustralia.com, asiae.co.kr
 - [x] T22 · write-ups batch B · needs: T20 · [tasks/22-write-ups-batch-b.md](tasks/22-write-ups-batch-b.md)
   Unverifiable links: FTC DoNotPay press release in 009 (404 to scripts, reads fine in browser; backup cited)
-- [~] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
-  Resume: all 8 write-ups done: 017 (3.1, <5%), 018 (3.1, <5%), 019 (2.9, <5%), 020 (2.7, <5%), 021 (3.1, <5%), 022 (3.1, <5%), 023 (3.1, <5%), 024 (2.8, <5%); link check 90 links, 0 dead (2 fixed in 024); unverifiable: mos.cudzoziemcy.gov.pl/jak-zaczac/ and migrant.poznan.uw.gov.pl/pl/node/5099 (SSL chain), businesswire Parspec seed (403), allegro.gcs-web.com annual report (timeout); next: T23 review/close by the runner
+- [x] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
+  Unverifiable links: mos.cudzoziemcy.gov.pl/jak-zaczac, migrant.poznan.uw.gov.pl, businesswire.com (Parspec), allegro.gcs-web.com (2023 report PDF)
 - [ ] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
 - [ ] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
 
@@ -58,6 +58,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-06 · T23 · done: write-ups 017–024 (017 3.1, 018 3.1, 019 2.9, 020 2.7, 021 3.1, 022 3.1, 023 3.1, 024 2.8; all <5% after §4); link check 89 links, 0 dead, 4 unverifiable; open for T24: 019, 020, 024 near collapse (Comarch Apfino, Docplanner Noa Booking, Allegro assistant/Senvio) — consider rejecting; many facts from excerpts, no hands-on of competitors · next T24
 2026-11-06 · T22 · done: write-ups 009–016 complete (009 3.1, 010 3.1, 011 3.2, 012 3.3, 013 3.2, 014 3.2, 015 2.9, 016 3.3; only 011 and 013 stay 5–15%, rest <5% after §4); link check 0 dead; open for T24: many facts from excerpts, no hands-on of Western leaders, 016 office count from undated source · next T23
 2026-11-06 · T22 · progress: write-ups 014 Sekretariat PISP 3.2 <5% (O 19/R 29; WK LegalDesk already pulls PISP deliveries), 015 Opinia i sprawozdanie 2.9 <5% (O 20/R 25, H×H free ChatGPT; awans plans abolished 2022, module dropped), 016 Asystent klienta biura 3.3 <5% (O 21/R 27, H×H Comarch agents); link check 35 links, 0 dead; caveats: many facts from search excerpts, no hands-on of Western leaders, office count from an undated source · next: T22 review/close
 2026-11-05 · T22 · progress: write-ups 009–013 (009 letter engine 3.1 <5%, 010 teczka sprzedażowa 3.1 <5%, 011 broker OWU 3.2 5–15%, 012 NFZ settlement 3.3 <5%, 013 sworn-translation drafts 3.2 5–15%); §4 O/R rule applied; link check 44 links, 0 truly dead (FTC DoNotPay 404 to scripts only), caveats: no hands-on of Western leaders, several market sizes not found · next 014, 015, 016
