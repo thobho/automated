@@ -40,8 +40,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (bot-blocked 403, site exists): ch.trustpilot.com
 - [x] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
   Unverifiable links (timeout/403/SSL, sites exist): elektroda.pl, wolterskluwer.com (TH20, TH35), app.dealroom.co (TH27), appvizer.com (TH30), geoportal.gov.pl (TH57), wamda.com (TH67)
-- [~] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
-  Resume: 23 of 23 themes in poland-check/C/ + README table and totals (open 2: TH62, TH12; partial 6; taken 15); link check 102 links, 0 dead after fix, 4 unverifiable (mos.cudzoziemcy.gov.pl SSL, bip.brpo.gov.pl timeout x2, village.ai 403); CHANGELOG flag on R6-RO-005 URL; ready for review, not marked [x]
+- [x] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
+  Unverifiable links (SSL/timeout/403, sites exist): mos.cudzoziemcy.gov.pl, bip.brpo.gov.pl (x2), village.ai
 - [ ] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [ ] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
 - [ ] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
@@ -55,6 +55,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-05 · T18 · done: poland-check/C/ 23 theme files + README; verdicts open 2 (TH12 immigration casework, TH62 engineering design, poor founder fit), partial 6, taken 15; link check 101 links, 0 dead, 4 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, 12 global/hype themes got short checks; strongest seed TH12 legalisation case-file agent; data flag R6-RO-005 URL in CHANGELOG · next T19
 2026-11-05 · T17 · done: poland-check/B/ 23 theme files + README; final totals open 2 (TH15, TH27), partial 12, taken 9; link check 184 links, 0 dead, 4 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, some prices unverified · next T18
 2026-11-04 17:00 · T17 · progress: 17 of 23 batch-B themes (added TH22 taken, TH18 taken, TH52 partial, TH03 partial, TH55 partial, TH68 partial); interim totals open 2, partial 7, taken 8; folder link check 109 links, 0 dead, 5 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, some prices unverified · next TH30, TH39, TH57, TH67, TH11, TH64
 2026-11-04 10:50 · T17 · progress: 11 of 23 batch-B themes in poland-check/B/ + README (open 2: TH15 property title diligence, TH27 trades front office; partial 3: TH59, TH35, TH60; taken 6); link check 69 links, 0 dead, 1 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, a few prices unverified · next TH22, TH18, TH52, TH03, TH55, TH68, TH30, TH39, TH57, TH67, TH11, TH64
