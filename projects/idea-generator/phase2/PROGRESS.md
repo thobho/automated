@@ -44,7 +44,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (SSL/timeout/403, sites exist): mos.cudzoziemcy.gov.pl, bip.brpo.gov.pl (x2), village.ai
 - [x] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [~] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
-  Resume: shortlist.csv (59) + rejected.md (61 rejected, 47 merged) done, all L001-L167 covered; next: write ideas/shortlist-notes.md († sourcing, merges, field balance), link check, final report
+  Resume: work complete, awaiting owner/runner review before marking [x]: ideas/shortlist.csv (59 rows, 24 write_up=y 001-024), rejected.md T20 section (61 rejected + 47 merged), ideas/shortlist-notes.md; all L001-L167 covered; link check 7 links, 0 dead, 0 unverifiable
 - [ ] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
 - [ ] T22 · write-ups batch B · needs: T20 · [tasks/22-write-ups-batch-b.md](tasks/22-write-ups-batch-b.md)
 - [ ] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
@@ -56,6 +56,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-05 · T20 · shortlist.csv 59 quick-scored ideas (41 at 5–15%, 18 at <5%, none higher), 24 marked for write-up across 7 fields (7 B2C), 61 rejected + 47 merged in rejected.md, 7 † rules sourced (shortlist-notes.md); link check 7 links, 0 dead; caveats: quick scores from check files only, B2B demand unproven, several top ideas one-off revenue, L142 included for field balance over L088 · next T21
 2026-11-05 · T19 · done: ideas/longlist.md, 167 ideas (125 B2B = 75%), all 37 open/partial themes covered, 184 relative links resolve; caveats: synthesis only, no new web research; ~40 rows marked † name a Polish rule not yet sourced (T20 must source or drop); overlapping clusters to merge in T20 (foreign-worker legalisation, parcel/title checks, accounting-office agents, installers); regulatory flags: AI Act hiring L033/L034, MDR L110/L111, tax-advice wording L003/L007/L014 · next T20
 2026-11-05 · T18 · done: poland-check/C/ 23 theme files + README; verdicts open 2 (TH12 immigration casework, TH62 engineering design, poor founder fit), partial 6, taken 15; link check 101 links, 0 dead, 4 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, 12 global/hype themes got short checks; strongest seed TH12 legalisation case-file agent; data flag R6-RO-005 URL in CHANGELOG · next T19
 2026-11-05 · T17 · done: poland-check/B/ 23 theme files + README; final totals open 2 (TH15, TH27), partial 12, taken 9; link check 184 links, 0 dead, 4 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, some prices unverified · next T18
