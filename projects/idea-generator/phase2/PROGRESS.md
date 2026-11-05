@@ -44,7 +44,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (SSL/timeout/403, sites exist): mos.cudzoziemcy.gov.pl, bip.brpo.gov.pl (x2), village.ai
 - [x] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [x] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
-- [ ] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
+- [~] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
+  Resume: starting
 - [ ] T22 · write-ups batch B · needs: T20 · [tasks/22-write-ups-batch-b.md](tasks/22-write-ups-batch-b.md)
 - [ ] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
 - [ ] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
