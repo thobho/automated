@@ -42,8 +42,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (timeout/403/SSL, sites exist): elektroda.pl, wolterskluwer.com (TH20, TH35), app.dealroom.co (TH27), appvizer.com (TH30), geoportal.gov.pl (TH57), wamda.com (TH67)
 - [x] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
   Unverifiable links (SSL/timeout/403, sites exist): mos.cudzoziemcy.gov.pl, bip.brpo.gov.pl (x2), village.ai
-- [~] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
-  Resume: ideas/longlist.md complete for review: 167 ideas L001–L167 (125 B2B, 74.9%), all 37 open/partial themes covered, coverage table and T20 notes written; link check 0 external links, 184 relative links resolve; remaining: owner/runner review and marking T19 [x]
+- [x] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [ ] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
 - [ ] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
 - [ ] T22 · write-ups batch B · needs: T20 · [tasks/22-write-ups-batch-b.md](tasks/22-write-ups-batch-b.md)
@@ -56,6 +55,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-05 · T19 · done: ideas/longlist.md, 167 ideas (125 B2B = 75%), all 37 open/partial themes covered, 184 relative links resolve; caveats: synthesis only, no new web research; ~40 rows marked † name a Polish rule not yet sourced (T20 must source or drop); overlapping clusters to merge in T20 (foreign-worker legalisation, parcel/title checks, accounting-office agents, installers); regulatory flags: AI Act hiring L033/L034, MDR L110/L111, tax-advice wording L003/L007/L014 · next T20
 2026-11-05 · T18 · done: poland-check/C/ 23 theme files + README; verdicts open 2 (TH12 immigration casework, TH62 engineering design, poor founder fit), partial 6, taken 15; link check 101 links, 0 dead, 4 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, 12 global/hype themes got short checks; strongest seed TH12 legalisation case-file agent; data flag R6-RO-005 URL in CHANGELOG · next T19
 2026-11-05 · T17 · done: poland-check/B/ 23 theme files + README; final totals open 2 (TH15, TH27), partial 12, taken 9; link check 184 links, 0 dead, 4 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, some prices unverified · next T18
 2026-11-04 17:00 · T17 · progress: 17 of 23 batch-B themes (added TH22 taken, TH18 taken, TH52 partial, TH03 partial, TH55 partial, TH68 partial); interim totals open 2, partial 7, taken 8; folder link check 109 links, 0 dead, 5 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, some prices unverified · next TH30, TH39, TH57, TH67, TH11, TH64
