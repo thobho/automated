@@ -7,6 +7,8 @@ Theme: [THEMES.md#th56](../../themes/THEMES.md#th56) · rank 8, batch A · sourc
 |---|---|---|---|---|
 | "Lokale", "S.Bit" (desktop software for wspólnoty/media settlements) | Accounting, premises register and utility settlements for housing communities; named as required skills in Polish job ads and taught at a university course | not found | property managers and their accountants | [pracuj.pl ad (S.Bit)](https://www.pracuj.pl/praca/specjalista-specjalistka-ds-rozliczen-mediow-warszawa-begonii-9,oferta,1002572495); [Białystok Univ. of Technology syllabus (Lokale)](https://usosweb.pb.edu.pl/zasady_zaliczenia_pdf/1343-37111584635241.pdf) |
 | Training market | PARP-listed courses on "AI in property administration" (ChatGPT for reports), one at 10,000 PLN gross for Łódź managers | 1,690–10,000 PLN per course | property managers | [PARP BUR course](https://uslugirozwojowe.parp.gov.pl/wyszukiwarka/uslugi/drukuj-pdf?id=3561507) |
+*Added in T21 (2026-11-05):* resident portals without AI do exist: Mieszczanin's e-kartoteka (balances, settlements, messages, uchwały, surveys; [App Store](https://apps.apple.com/app/id1440618758)) and MMSoft's LokaleNet (in-app voting on uchwały; [App Store](https://apps.apple.com/app/id1670413194)); see [write-up 005](../../ideas/property/005-ai-biuro-zarzadcy.md), which treats the gap as partial.
+
 No Polish AI agent for tenant/owner communication or property-manager back office was found in two Polish searches; managers are being **taught** to use ChatGPT rather than sold a product.
 
 ## 2. Does the Western leader already serve Poland?
