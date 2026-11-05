@@ -86,6 +86,17 @@ Changes vs. quick score: L5 4 → 3 (search shows access intent, not interpretat
 
 **Confidence:** medium (moat and competition well sourced; demand and B2B willingness to pay not).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *It already works in Polish.* The write-up admits nobody pasted a real odpis into ChatGPT or Gemini. A text odpis from EKW is a clean, structured document; a free assistant will list hipoteki, służebności, wzmianki and owners in Polish. The real extras (building and land KW, ULDK area) cover a minority of purchases and need the buyer to fetch two more odpisy. Until that test is run, the gap is an assumption, so the gap fits the L3 = 3 anchor ("only a generic tool used today").
+- *Polish customers won't pay this.* The search evidence is about **access** ("sprawdzenie KW za darmo, po numerze"), which is free on EKW. The people who search for interpretation are at the stage where a notary and the mortgage bank will check the KW anyway at no extra charge. A 69 PLN once-a-decade purchase has no retention, and agencies have a reason **not** to give buyers a list of risks about their own listing (it can kill the sale). So the B2B tier, which carries the MRR, cuts against the agent's own interest.
+- *Moat thinner than scored.* The KW structure (działy I–IV) is public and documented, and the upload design removes EKW access, the hardest local piece. A competent foreign or local team learns it in weeks, not months, so L4 5 is too high.
+- *Western leader localizing.* Not a real threat: Orbital sells to UK and US law firms and shows no CEE interest. The threat is local: Pewny Lokal or OnGeo adding an AI tier.
+- *Second competitor search (2026-11-06):* two searches in Polish ("AI analiza księgi wieczystej raport ryzyk", "księga wieczysta sztuczna inteligencja … pośredników 2026") found no Polish AI KW reader. They found one more analogue abroad: Gyeonggi Province (KR) runs a public AI service that reads registry documents and market prices to flag lease and transaction risks, with licensed agents checking the results ([Digital Today](https://www.digitaltoday.co.kr/en/view/103603/ai-to-flag-lease-contract-risks-gyeonggi-launches-grt-service), search excerpt, not fetched). This is a B2C use of the idea, but it is **free and run by the state**, which supports the "free beats 69 PLN" risk.
+- *Success signals.* Orbital's traction (Series B, 250k transactions/year) is durable, but it is B2B law-firm workflow. The B2C report form has no durable analogue, so L2 3 is generous but within the rubric because of spread (UK, US, DE, CA, now KR).
+- *Opportunity/risk lists.* Mostly independent. R5 (one purchase per decade) is a structural fact, not a 12-month risk, so H fits. O2 (merge with 006) is an internal build choice, not market evidence, so it should not lift the band. §4 was not applied in T21: O = 6+6+2+2+4 = 20, R = 9+6+3+3+6+4 = 31.
+
+**Review changes (T24, 2026-11-06):** L3 4 → 3 (ChatGPT/Gemini on a real odpis never tried; the generic-tool-only gap is the L3 3 anchor); L4 5 → 4 (upload design removes EKW access; KW structure is public, so weeks to learn, not months). **Reviewed scores:** L1 4 · L2 3 · L3 3 · L4 4 · L5 3 · L6 3 · L7 4 · L8 3 · L9 3 | **Weighted:** 0.48+0.36+0.36+0.60+0.45+0.30+0.32+0.24+0.24 = 3.35 → **3.4** | table band 5–15%; §4: O 20, R 31, R − O = 11 ≥ 6 and R1 is H×H with no MVP mitigation → down one band → **<5%**. Not rejected: the first validation step (20 real odpisy, MVP against free ChatGPT) is cheap and decides it. Fold 006 into this idea's plot tier as T21 suggested.
+
 **Sources** (accessed 2026-11-05 unless noted):
 1. https://www.orbital.tech/ (2026-11-04, TH15)
 2. https://cfotech.co.uk/story/orbital-raises-usd-60m-to-scale-ai-for-real-estate-law
@@ -103,6 +114,7 @@ Changes vs. quick score: L5 4 → 3 (search shows access intent, not interpretat
 14. https://openrouter.ai/google/gemini-2.5-flash
 15. https://nationalmortgagenews.com/news/doma-to-sell-to-title-resources-group-for-85-million
 16. https://alta.org/news-and-publications/news/20241001-TRG-Completes-Deal-for-Doma
-17. Internal: [TH15 check](../../poland-check/B/TH15-property-transaction-title-diligence.md), [local-moats M27/M28](../../research/poland/local-moats.md), [demography DD9/DD10](../../research/poland/demography.md)
+18. https://www.digitaltoday.co.kr/en/view/103603/ai-to-flag-lease-contract-risks-gyeonggi-launches-grt-service (2026-11-06, T24, search excerpt)
+19. Internal: [TH15 check](../../poland-check/B/TH15-property-transaction-title-diligence.md), [local-moats M27/M28](../../research/poland/local-moats.md), [demography DD9/DD10](../../research/poland/demography.md)
 
 Coverage: 5 web searches/fetches run for this write-up (Orbital funding, Polish KW-analysis services, Pewny Lokal price page, GUS transactions, Doma graveyard); Pewny Lokal price page gave no price; no AI KW reader found in Polish search.
