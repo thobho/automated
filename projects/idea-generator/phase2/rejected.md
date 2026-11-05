@@ -1,3 +1,114 @@
 # Phase 2 rejected ideas
 
 <!-- one line per rejected idea or theme: date · id/name · task · reason (e.g. knock-out lens, taken in Poland, licence needed) -->
+
+## T20 filter and shortlist (2026-11-05)
+
+- 2026-11-05 · L009 Non-KSeF cost-document inbox · T20 · taken (TH18: OCR bundled in Fakturownia/Comarch/Saldeo, autoMEE); weak in the check file
+- 2026-11-05 · L012 Citation checker for AI tax answers · T20 · taken (TH20: LEX Kompas Interpretacje, LEX Expert AI, free EUREKA)
+- 2026-11-05 · L017 PIT-38 from foreign broker statements · T20 · taken by free tools (kloPIT, PIT Inwestora, TH21); L6 ≈1
+- 2026-11-05 · L019 Ulgi finder for households · T20 · Twój e-PIT and free programs (PITax 12M users) cover ulgi wizards; † ulgi details unsourced; no payer
+- 2026-11-05 · L020 BIK report and debt-pile explainer · T20 · taken theme (TH22); credit advice sits on a licence line; weak
+- 2026-11-05 · L021 ZUS pension-statement explainer · T20 · licence line (financial advice) and taken theme (TH22); no payer for education only
+- 2026-11-05 · L022 Benefits-communication agent for HR (PPK, ZUS) · T20 · low innovation, payroll suites and PPK providers own the data; weak demand evidence
+- 2026-11-05 · L024 Zarząd sukcesyjny kit for JDG owners · T20 · not innovative (checklist and forms, no LLM job step); one-off
+- 2026-11-05 · L030 Termination-paperwork agent (świadectwo pracy, ZWUA) · T20 · Comarch ships this agent inside Optima (TH34); other suites will follow
+- 2026-11-05 · L031 Client Q&A agent for biura kadrowo-płacowe · T20 · absorbed by LEX Expert AI for HR staff and ChatGPT (TH20/TH34)
+- 2026-11-05 · L032 Civil-contract compliance checker · T20 · mostly rule-based (not LLM-native); † minimum hourly rate rule unsourced
+- 2026-11-05 · L035 Onboarding and BHP-induction pack · T20 · † BHP training rules unsourced; LMS products exist; low innovation
+- 2026-11-05 · L042 ZUS benefits navigator for seniors · T20 · mObywatel PLLuM assistant is free (TH59); no payer
+- 2026-11-05 · L044 PFRON SODiR paperwork agent · T20 · † SODiR rules unsourced; narrow monthly form-filling, low innovation
+- 2026-11-05 · L047 Aplikacja entrance-exam drill tutor · T20 · small, seasonal market; existing paid test banks; weak analogue (one-off revenue warning, TH39)
+- 2026-11-05 · L050 B2 Polish preparation licensed to universities · T20 · university buying via tenders (excluded); overlaps L048
+- 2026-11-05 · L051 Ukrainian explainer of Polish textbook tasks · T20 · taken (TH38: Odrabiamy, Astra AI, Brainly)
+- 2026-11-05 · L053 Diploma-recognition paperwork assistant · T20 · † NAWA/nostryfikacja procedures unsourced; rare, one-off; free NAWA guidance
+- 2026-11-05 · L056 Developer-contract checker for flat buyers · T20 · † developer act and DFG rules unsourced; one-off B2C, lawyers' fixed-fee checks; below cut
+- 2026-11-05 · L058 Sales-terms clause check after KSeF · T20 · † payment-gridlock act unsourced; template-shaped, ChatGPT absorbs
+- 2026-11-05 · L062 KIO-ruling monitor · T20 · taken (TH07: LEX/Legalis, SAOS free); weak
+- 2026-11-05 · L075 BDO/EPR reporting assistant · T20 · not LLM-native (rule-based annual reporting); † BDO details unsourced
+- 2026-11-05 · L077 AI Act deployer kit for SMEs · T20 · crowded with law-firm services and Quantifier.ai (TH54); template product, low innovation
+- 2026-11-05 · L078 Whistleblower channel and case handling · T20 · not innovative (case-management software, LLM is a bolt-on); † act details unsourced
+- 2026-11-05 · L089 Lead follow-up agent for small estate agencies · T20 · AI receptionists crowded (TH26 taken); Otodom owns the lead channel
+- 2026-11-05 · L093 WZ application drafter with dobre sąsiedztwo analysis · T20 · † rule unsourced; needs urbanist judgement, poor testability; overlaps L092
+- 2026-11-05 · L094 Plan ogólny and MPZP change monitor · T20 · † consultation steps unsourced; BIP fragmentation makes MVP far beyond 6 weeks
+- 2026-11-05 · L095 "Sprawdzacz WT" for design offices · T20 · poor founder fit (TH62): licensed designers, regulation in flux since 2026-09-20
+- 2026-11-05 · L096 Energy-certificate draft generator for auditors · T20 · poor founder fit (TH62); † central register details unsourced
+- 2026-11-05 · L101 "Is this quote fair?" for homeowners · T20 · one-off B2C, KNR/Sekocenbud price data is paid; low search volume (TH27)
+- 2026-11-05 · L102 Maintenance calendar for new suburban houses · T20 · not innovative (calendar/reminders); † inspection duties unsourced
+- 2026-11-05 · L107 Admin assistant for private psychologists · T20 · MDR/clinical-note line and taken scribe theme (TH01); RODO art. 9
+- 2026-11-05 · L109 NFZ konkurs ofert preparation · T20 · † SZOI contracting forms unsourced; rare event per clinic
+- 2026-11-05 · L110 Refund-list and ChPL lookup for pharmacists · T20 · taken (TH05: Mediately, PZWL/PWN MEDICO); MDR line
+- 2026-11-05 · L111 "Wyniki bez stresu" lab-result explainer · T20 · MDR line: interpreting results is likely a medical device; ChatGPT Health path (TH06)
+- 2026-11-05 · L112 NFZ queue finder · T20 · not LLM-native (API search); NFZ Terminy leczenia is free; L6 = 1
+- 2026-11-05 · L114 Employer mental-health navigation benefit · T20 · weak local moat; competes with benefit platforms; therapy line
+- 2026-11-05 · L118 Family pack for agencies placing carers in Germany · T20 · niche, few large agencies; † A1 rules unsourced
+- 2026-11-05 · L121 Entitlement checker for families · T20 · free state help and mObywatel assistant; no payer; D17 age rules unverified
+- 2026-11-05 · L125 Parent explainer of the new curriculum · T20 · free publisher and ministry material; ChatGPT absorbs; low WTP
+- 2026-11-05 · L129 Preschool documentation for private przedszkola · T20 · † school-readiness information rule unsourced; small private segment
+- 2026-11-05 · L130 CKE-rubric matura grader · T20 · taken (TH37 hype theme); AI Act education scoring line
+- 2026-11-05 · L134 Purchase-quote file for EU-funded SMEs · T20 · † zasada konkurencyjności / Baza Konkurencyjności unsourced; weak analogue (Pactum is negotiation)
+- 2026-11-05 · L135 Voice-note visit report for field reps · T20 · taken (TH31: CloudTalk, meeting recorders)
+- 2026-11-05 · L138 Posting-declaration (IMI) assistant for carriers · T20 · not LLM-native (form-filling); † IMI rules unsourced
+- 2026-11-05 · L139 Driver document checker for carriers · T20 · not LLM-native (expiry tracking); † driver-document rules unsourced
+- 2026-11-05 · L140 Cross-border claim pack for carriers · T20 · taken (TH14: Vindicat, TSL collectors)
+- 2026-11-05 · L143 Review agent for local firms · T20 · not innovative (review-request SMS is pre-LLM); crowded
+- 2026-11-05 · L144 AI reply agent for Allegro seller messages · T20 · taken (TH29: Tidio, Allegro platform-owned chat)
+- 2026-11-05 · L149 HACCP and Sanepid records assistant · T20 · low innovation (logging app); voice is a bolt-on
+- 2026-11-05 · L150 Member-retention agent for gyms · T20 · platform risk (Benefit Systems, eFitness own data); no search demand
+- 2026-11-05 · L151 Booksy-native salon receptionist · T20 · taken (TH26 receptionists); Booksy platform risk
+- 2026-11-05 · L152 Otomoto/OLX lead follow-up for komisy · T20 · taken (TH28: 10+ Polish AI assistants for workshops/dealers)
+- 2026-11-05 · L157 Payee-change fraud check for SME finance · T20 · not innovative: biała lista/KRS/KSeF checks are rules, no LLM job step
+- 2026-11-05 · L158 Family scam shield for seniors · T20 · operators block smishing under the 2023 act, free filters (TH68); weak
+- 2026-11-05 · L161 Catholic prayer companion · T20 · hype theme (TH65, L2 ≤2), needs Church approval and content rights
+- 2026-11-05 · L162 Parish-office assistant · T20 · weak, † parish practice unsourced; low WTP
+- 2026-11-05 · L164 Consent-first prospecting assistant · T20 · taken (TH30: Woodpecker, DMSales); PKE art. 398 exposure
+- 2026-11-05 · L165 Below-threshold vertical bid writer · T20 · taken (TH32: Minerva, Mimira)
+- 2026-11-05 · L166 Polish integrations pack for prompt-to-app builders · T20 · taken (TH49); templates, no moat
+- 2026-11-05 · L167 Household-admin assistant for people living alone · T20 · taken (TH42: ChatGPT/Gemini in Polish, Everbot); low WTP
+- 2026-11-05 · L002 First-month JDG onboarding for foreign IT contractors · T20 · merged into L001
+- 2026-11-05 · L004 JDG accounting for foreign drivers and couriers · T20 · merged into L001
+- 2026-11-05 · L006 Per-client workload and repricing report for biura · T20 · merged into L005
+- 2026-11-05 · L007 Month-end VAT/ZUS explanation letter per client · T20 · merged into L005
+- 2026-11-05 · L008 Vendor-neutral KSeF anomaly and missing-invoice chaser · T20 · merged into L005
+- 2026-11-05 · L011 JPK_V7 pre-submission checker · T20 · merged into L005
+- 2026-11-05 · L013 Fixed-price agent setup service for biura (go-to-market for L005) · T20 · merged into L005
+- 2026-11-05 · L015 PIT season package for employers of foreigners (B2B channel) · T20 · merged into L014
+- 2026-11-05 · L026 KRS comparables report per PKD · T20 · merged into L023
+- 2026-11-05 · L027 "Legalny pracownik" permit and deadline tracker · T20 · merged into L036
+- 2026-11-05 · L034 Shift re-engagement agent for temp agencies (same buyer, same AI Act line) · T20 · merged into L033
+- 2026-11-05 · L037 Voivodeship-office practice tracker · T20 · merged into L036
+- 2026-11-05 · L038 Employer-side MOS assistant for HR · T20 · merged into L036
+- 2026-11-05 · L039 Ponaglenie and skarga generator for stalled residence cases (rule sourced: art. 37 KPA ponaglenie precedes skarga na bezczynność, e.g. https://dlajurysty.pl/orzeczenia/pokaz/489740/II-SAB-Wr-287-26 accessed 2026-11-05) · T20 · merged into L036
+- 2026-11-05 · L041 CUKR bulk package for employers · T20 · merged into L036
+- 2026-11-05 · L045 Official-letter explainer for foreigners · T20 · merged into L040
+- 2026-11-05 · L060 Intake agent for small kancelarie · T20 · merged into L059
+- 2026-11-05 · L061 e-Protokół hearing summariser († access rule unsourced; kept only as a later module) · T20 · merged into L059
+- 2026-11-05 · L064 Sprzeciw od nakazu zapłaty assistant (rule sourced: 14-day sprzeciw, limitation rules https://poradnikprzedsiebiorcy.pl/-termin-przedawnienia-roszczen-konsumentow-jak-liczyc accessed 2026-11-05) · T20 · merged into L063
+- 2026-11-05 · L065 ZUS decision appeal drafter (rule sourced: one month, lodged through ZUS, no court fee https://poradnikprzedsiebiorcy.pl/-odwolanie-od-decyzji-zus-wszystko-co-nalezy-wiedziec accessed 2026-11-05) · T20 · merged into L063
+- 2026-11-05 · L066 Consumer complaint engine for online purchases († consumer-rights rules unsourced; later procedure) · T20 · merged into L063
+- 2026-11-05 · L067 Employment-dispute letter pack for workers in PL/UA · T20 · merged into L063
+- 2026-11-05 · L070 Work-accident file builder († protokół powypadkowy rules unsourced; later case type) · T20 · merged into L069
+- 2026-11-05 · L071 Medical-incident compensation file (fund sourced: FKZM applications since 2023-09-06, 1,574 in 2024, https://api.sejm.gov.pl/sejm/term10/interpellations/attachment/ATTDGMHRA/i08909-o1.pdf accessed 2026-11-05; the longlist's '2024' start date was wrong) · T20 · merged into L069
+- 2026-11-05 · L080 KW risk report B2B tier for agents and brokers · T20 · merged into L079
+- 2026-11-05 · L081 Pre-deed check for notary offices · T20 · merged into L079
+- 2026-11-05 · L082 Check pack for spółdzielcze własnościowe prawo do lokalu († unsourced; kept as an unverified module) · T20 · merged into L079
+- 2026-11-05 · L084 Wspólnota meeting recorder to protokół · T20 · merged into L083
+- 2026-11-05 · L085 Media-settlement explainer for residents · T20 · merged into L083
+- 2026-11-05 · L086 Defect handling agent for new estates († developer-act rules unsourced; later module) · T20 · merged into L083
+- 2026-11-05 · L087 Assistant for private landlords with 1-5 flats · T20 · merged into L018
+- 2026-11-05 · L090 Plot-potential report for small developers · T20 · merged into L092
+- 2026-11-05 · L091 AML client file for estate agents · T20 · merged into L072
+- 2026-11-05 · L098 Czyste Powietrze / Mój Prąd paperwork agent for installers · T20 · merged into L097
+- 2026-11-05 · L099 Voice-note-to-offer for general renovation crews · T20 · merged into L097
+- 2026-11-05 · L100 Missed-call and WhatsApp front desk for one-person trades · T20 · merged into L097
+- 2026-11-05 · L104 No-show recovery add-on for dental and physio practices · T20 · merged into L103
+- 2026-11-05 · L113 Family medical-record organiser · T20 · merged into L120
+- 2026-11-05 · L116 Bon senioralny provider-onboarding kit · T20 · merged into L115
+- 2026-11-05 · L119 Programme reporting for NGOs running care programmes · T20 · merged into L115
+- 2026-11-05 · L127 Awans zawodowy documentation helper · T20 · merged into L126
+- 2026-11-05 · L132 Order-entry agent for distributors into Subiekt/Optima · T20 · merged into L131
+- 2026-11-05 · L146 IDD needs-analysis (APK) documentation agent · T20 · merged into L145
+- 2026-11-05 · L147 Claim-notification assistant for SME policyholders · T20 · merged into L145
+- 2026-11-05 · L154 Monthly management report from Optima/Rewizor sent by offices · T20 · merged into L005
+- 2026-11-05 · L155 NL Q&A layer for enova365 and WAPRO · T20 · merged into L153
+- 2026-11-05 · L160 AI-moderated studies among migrant customers · T20 · merged into L159

@@ -44,7 +44,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (SSL/timeout/403, sites exist): mos.cudzoziemcy.gov.pl, bip.brpo.gov.pl (x2), village.ai
 - [x] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [~] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
-  Resume: shortlist.csv written (59 rows, 24 write_up=y, 001-024); next: append rejected/merged ids to rejected.md, write ideas/shortlist-notes.md († sourcing, merges), coverage check, link check
+  Resume: shortlist.csv (59) + rejected.md (61 rejected, 47 merged) done, all L001-L167 covered; next: write ideas/shortlist-notes.md († sourcing, merges, field balance), link check, final report
 - [ ] T21 · write-ups batch A · needs: T20 · [tasks/21-write-ups-batch-a.md](tasks/21-write-ups-batch-a.md)
 - [ ] T22 · write-ups batch B · needs: T20 · [tasks/22-write-ups-batch-b.md](tasks/22-write-ups-batch-b.md)
 - [ ] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
