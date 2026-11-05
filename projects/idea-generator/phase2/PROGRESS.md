@@ -38,9 +38,9 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links (bot-blocked 403, sites exist): businesswire.com (Heidi), businessnewsaustralia.com (Minikai), ceelegalmatters.com (QuickLegal), meatechwatch.com (ShipBee); catalogue CSVs: 35 known bot-blocks from T04–T14
 - [x] T16 · Poland check batch A · needs: T02, T03, T15 · [tasks/16-poland-check-batch-a.md](tasks/16-poland-check-batch-a.md)
   Unverifiable links (bot-blocked 403, site exists): ch.trustpilot.com
-- [~] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
+- [x] T17 · Poland check batch B · needs: T02, T03, T15 · [tasks/17-poland-check-batch-b.md](tasks/17-poland-check-batch-b.md)
   Resume: all 23 batch-B themes done in poland-check/B/ + README with final totals (open gap 2, partial 12, taken 9); link check 2026-11-05: 184 links, 0 dead, 5 unverifiable (elektroda.pl, geoportal.gov.pl, dbc.wroc.pl, wamda.com timeouts; appvizer.com expired SSL); ready to mark done
-  Unverifiable links (timeout/403 bot-block, sites exist): elektroda.pl, wolterskluwer.com (TH20, TH35), app.dealroom.co (TH27)
+  Unverifiable links (timeout/403/SSL, sites exist): elektroda.pl, wolterskluwer.com (TH20, TH35), app.dealroom.co (TH27), appvizer.com (TH30), geoportal.gov.pl (TH57), wamda.com (TH67)
 - [ ] T18 · Poland check batch C · needs: T02, T03, T15 · [tasks/18-poland-check-batch-c.md](tasks/18-poland-check-batch-c.md)
 - [ ] T19 · longlist of adaptation ideas · needs: T16, T17, T18 · [tasks/19-longlist-of-adaptation-ideas.md](tasks/19-longlist-of-adaptation-ideas.md)
 - [ ] T20 · filter and shortlist · needs: T19 · [tasks/20-filter-and-shortlist.md](tasks/20-filter-and-shortlist.md)
@@ -55,6 +55,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-05 · T17 · done: poland-check/B/ 23 theme files + README; final totals open 2 (TH15, TH27), partial 12, taken 9; link check 184 links, 0 dead, 4 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, some prices unverified · next T18
 2026-11-04 17:00 · T17 · progress: 17 of 23 batch-B themes (added TH22 taken, TH18 taken, TH52 partial, TH03 partial, TH55 partial, TH68 partial); interim totals open 2, partial 7, taken 8; folder link check 109 links, 0 dead, 5 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, some prices unverified · next TH30, TH39, TH57, TH67, TH11, TH64
 2026-11-04 10:50 · T17 · progress: 11 of 23 batch-B themes in poland-check/B/ + README (open 2: TH15 property title diligence, TH27 trades front office; partial 3: TH59, TH35, TH60; taken 6); link check 69 links, 0 dead, 1 unverifiable; caveats: demand from autocomplete + web search only, no accounts created, a few prices unverified · next TH22, TH18, TH52, TH03, TH55, TH68, TH30, TH39, TH57, TH67, TH11, TH64
 2026-11-03 13:01 · T16 · done: poland-check/A/ (23 theme files + README table): 3 open gap (TH56 property managers of wspólnoty, TH61 RFQ-to-quote for wholesalers, TH04 care-provider documentation for bon senioralny providers), 12 partial, 8 taken; link check 130 links, 0 dead, 1 unverifiable; entry risks: Wonderful (IL) has a PL office, Born Digital (CZ) serves Netia, StudyFi (CZ) has a PL site; caveats: demand from Google autocomplete + web search only (Trends, Wykop, Facebook groups not checked), no accounts created · next T17
