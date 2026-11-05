@@ -213,3 +213,61 @@ One line per idea: a Western (or global) pattern × a Polish moat × a demand dr
 | L165 | Below-threshold vertical bid writer for one sector (cleaning or catering) *(weak)* | AutogenAI (UK), Cato (IT) | B2B | Pzp below-threshold procedures, e-Zamówienia; Minerva and Mimira already generic (TH32 file) | — | [B/TH32](../poland-check/B/TH32-tender-bid-writing.md) (taken) |
 | L166 | Polish integrations template pack for prompt-to-app builders (Przelewy24, InPost, KSeF, Fakturownia) *(weak)* | Lovable (SE), Base44 (IL) | B2B | P24/InPost/KSeF/Fakturownia APIs (M01, M33, M37, M46) | — | [C/TH49](../poland-check/C/TH49-prompt-to-app-builders.md) (taken) |
 | L167 | Household-admin assistant for people living alone: bills, contracts, renewal and cancellation deadlines, official letters, one inbox | Zapia (UY), Fyxer (UK) | B2C | Polish contract notice rules, utility and telecom letters, ePUAP hand-off (M17); 27% one-person households (D28) | DD8 | [C/TH42](../poland-check/C/TH42-consumer-general-assistants.md) (taken); [demography DD8](../research/poland/demography.md#demand-drivers) |
+
+## Coverage and counts
+
+**Totals:** 167 ideas (L001–L167): **125 B2B (74.9%)**, 42 B2C. 38 carry the check files' *(seed)* flag, 23 build mainly on residues of taken themes, and the rest are new combinations of a Western pattern, a Polish moat and a demand driver. Ideas born mainly from a demography driver with no close Western product: L021 (DD5), L107 (DD4), L114 (DD4), L120–L122 (DD1/DD2), L167 (DD8).
+
+**Every open or partial theme (37) has at least one idea:**
+
+| Theme | Verdict | Ideas |
+|---|---|---|
+| TH12 Immigration casework | open | L036–L039 |
+| TH15 Property title diligence | open | L056, L079–L082 |
+| TH27 Trades front office | open | L097–L102 |
+| TH04 Care-provider documentation | open | L115–L122 |
+| TH56 Property-management agents | open | L083–L087 |
+| TH61 RFQ and order handling | open | L131–L134 |
+| TH62 Engineering design | open (poor fit) | L095, L096 |
+| TH16 AI accountant for JDG | partial | L001–L004 |
+| TH17 Agents for accounting firms | partial | L005–L007, L010, L011 |
+| TH21 Consumer tax filing | partial | L014–L019 |
+| TH63 Small-business sale / M&A | partial | L023–L026 |
+| TH34 HR and payroll agents | partial | L022, L027–L032 |
+| TH33 Recruiting and screening | partial | L033–L035 |
+| TH59 Public-service navigators | partial | L040–L045 |
+| TH39 Exam prep | partial | L046, L047 |
+| TH40 Language tutors | partial | L048–L050 |
+| TH69 Translation | partial | L052, L053 |
+| TH09 Contract review | partial | L054–L058 |
+| TH10 Law-practice secretariat | partial | L059–L061 |
+| TH13 Consumer legal help | partial | L063–L068 |
+| TH11 Plaintiff casework | partial | L069–L071 |
+| TH54 Compliance and regtech | partial | L072–L078 |
+| TH57 Real-estate agency tools | partial | L088–L091 |
+| TH58 Government back-office (private side) | partial | L090, L092–L094 |
+| TH02 Patient call agents | partial | L103, L104 |
+| TH03 Healthcare back office | partial | L108, L109 |
+| TH06 Consumer health navigation | partial | L111–L114 |
+| TH35 Teacher copilot | partial | L123–L125 |
+| TH36 Teacher paperwork | partial | L126–L129 |
+| TH60 Freight and logistics | partial | L136–L139 |
+| TH52 Marketing and AI visibility | partial | L141–L143 |
+| TH55 Insurance operations | partial | L145–L147 |
+| TH67 Agents in POS / gyms | partial | L148–L150 |
+| TH45 NL analytics on Polish ERPs | partial | L153–L155 |
+| TH68 Fraud and trust | partial | L156–L158 |
+| TH64 AI-moderated research | partial | L159, L160 |
+| TH65 AI companions | partial (weak) | L161, L162 |
+
+**Residues of taken themes used:** TH01 (L105–L107), TH05 (L110), TH07 (L062), TH14 (L140), TH18 (L009), TH19 (L008), TH20 (L012), TH22 (L020, L021), TH24 (L163), TH26 (L151), TH28 (L152), TH29 (L144), TH30 (L164), TH31 (L135), TH32 (L165), TH37 (L130), TH38 (L051), TH41 (L084), TH42 (L167), TH46 (L013), TH49 (L166), TH53 (L073). Taken themes with no residue idea: TH08, TH23, TH25, TH43, TH44, TH47, TH48, TH50, TH51, TH66 (global or language-agnostic, see [C/README](../poland-check/C/README.md)).
+
+## Notes for T20 (shortlist)
+
+- **Clusters to merge or pick one from**, because they share a customer and data: foreign-worker legalisation (L027, L036–L041, L045: the TH34, TH59 and TH12 seeds, as the TH59 file asks); parcel and title checks (L079–L082, L090, L092: TH15 + TH58, as the TH58 file asks); accounting-office agents (L005–L011, L154: one buyer, several wedges); installers (L097–L101).
+- **Regulatory lines to check before scoring:** AI Act hiring scope (L033, L034), MDR for anything that explains results (L111, L110), tax-advice wording (L003, L007, L014), automated access terms for ZUS PUE, PISP, EKW, Allegro and Otodom (L010, L059, L079, L142, L156).
+- **†-marked rules** (about 40 rows, e.g. the developer act, whistleblower act, IMI declarations, SODiR, school-readiness information, the patient compensation fund) come from general knowledge and are unsourced in Phase 2; T20 must source or drop them.
+- **Demand evidence is uneven:** most ideas inherit the check files' Google-autocomplete signals; B2B buyers (wholesalers, carriers, property managers, brokers) rarely search, so their demand is unproven until interviews or outreach tests.
+- **Founder-fit warnings:** L001 and L004 need a partner biuro rachunkowe; L095–L096 sell to licensed signatories; L159–L160 depend on a panel partner; L118 and L162 are niche. No idea needs the founder to hold a licence, hire staff or keep stock.
+
+**Coverage of this file:** 167 ideas from 69 Poland-check files (37 open/partial, 22 taken with residues), the 12 demography drivers and the 53-item moat inventory. No new web sources were read for T19: every factual statement points to an existing Phase 2 file, and statements without such a file are marked †. Searches run: 0 (synthesis task).
