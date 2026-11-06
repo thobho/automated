@@ -1,6 +1,6 @@
 # Phase 3 shortlist (T12, quick scores)
 
-Human-readable view of [shortlist.csv](shortlist.csv) (final scores from write-ups: [T13 batch A](#write-ups-t13-batch-a), [T14 batch B](#write-ups-t14-batch-b)) ([task](../tasks/12-filter-and-shortlist.md)). Scores are **quick** ([criteria](../method/criteria.md) §2): judged from the longlist evidence (T04–T11 files), not re-researched; weighted scores and bands are computed by [shortlist_score.py](shortlist_score.py). Rejected ideas and reasons: [rejected.md](../rejected.md). 2026-11-06.
+Human-readable view of [shortlist.csv](shortlist.csv) (final scores from write-ups: [T13 batch A](#write-ups-t13-batch-a), [T14 batch B](#write-ups-t14-batch-b), [T15 review](#review-t15-sceptical-pass)) ([task](../tasks/12-filter-and-shortlist.md)). Scores are **quick** ([criteria](../method/criteria.md) §2): judged from the longlist evidence (T04–T11 files), not re-researched; weighted scores and bands are computed by [shortlist_score.py](shortlist_score.py). Rejected ideas and reasons: [rejected.md](../rejected.md). 2026-11-06.
 
 ## How it was filtered
 
@@ -83,6 +83,17 @@ The next five by quick score after batch A (ranks 6–9), plus #53 (rank 14) in 
 | 53 | [010 Fishing subscription box](v3-hobby/010-fishing-subscription-box.md) | 3.1 → 2.4 | <5% | Catch Co. (Mystery Tackle Box) assets bought by Gordon Brothers in 2024 after USD 56 m raised; ~PLN 9 gross profit per box before CAC; needs a shop that packs from its own stock |
 
 All five end in `<5%`, like batch A. Finding that changes T10: Jaecoo 7 front pads (T10 V1 #1, N) are now sold by Inter Cars (PLN 229) and Iparts.pl (PLN 119) per Auto Świat, 8 June 2026 (noted in 008; affects #2, the T10 file is not edited).
+
+## Review (T15, sceptical pass)
+
+Each write-up gets **Devil's advocate** and **Review changes** sections (fresh findability queries, supplier terms, unit economics with sourced parcel prices, return rates and a Google Ads CPC-based CAC). Scores in [shortlist.csv](shortlist.csv) are updated for reviewed rows; the T13/T14 tables above keep their values. 2026-11-06.
+
+| # | Write-up | Before → after T15 | Band after T15 | Main reason |
+|---|---|---|---|---|
+| 81 | [001](v5-small-business/001-catering-equipment-parts.md) | 2.79 → 2.64 | <5% | F4 3→2: at CPC PLN 2.5 and 2% conversion (CAC ~PLN 125) the first order loses ~PLN 53; Gastroparts shows only retail prices; REPA (ex-GEV) confirmed as Unox distributor for DACH, no public reseller terms |
+| 17 | [002](v1-vehicle/002-body-damage-photo-quote.md) | 2.88 → 2.51 | **rejected** | Oferteo runs a multi-shop body-shop quote category; PZU and LINK4 already estimate damage from photos with AI; fee per request ~PLN 0 after CAC; moved to [rejected.md](../rejected.md#t15--independent-critical-review-2026-11-06) |
+| 8 | [005](v1-vehicle/005-camper-habitation-parts.md) | 3.00 → 2.63 | <5% | Reimo PL delivers "only to Germany" and routes Poles to dealers; DE→PL parcel ~PLN 91–108 (DHL EU tariff) wipes the margin; window seals are findable at Reimo PL |
+<!-- T15 rows end -->
 
 ## Caveats
 

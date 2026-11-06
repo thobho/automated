@@ -110,3 +110,9 @@ Owner areas: **car** rejections are mostly ideas where T10 found the part at onc
 Ideas that hit a knock-out (criteria §3) only after a full write-up. The write-up stays in `ideas/` for the review (T15).
 
 - **#1 Collision-part sourcing desk for Chinese brands** (V1 · owner area: car; final 2.7, [write-up 008](ideas/v1-vehicle/008-chinese-brand-collision-parts.md)) · F8 = 1: every case is ~35 minutes of supplier calls, above 40 h/month before ~70 cases a month; importers hold Omoda/Jaecoo/BYD body stock and have built Polish warehouses, so a desk cannot shorten the wait · 2026-11-06
+
+## T15 — independent critical review (2026-11-06)
+
+Ideas dropped after the sceptical review. The write-up stays in `ideas/` with its Devil's advocate section.
+
+- **#17 Photo-based body-damage quote to partner body shops** (V1; T15 2.51, was 2.88; [write-up 002](ideas/v1-vehicle/002-body-damage-photo-quote.md)) · Oferteo already runs a multi-shop body-shop quote category; PZU and LINK4 estimate damage from photos with AI; fee per request after a CPC-based CAC is about PLN 0; the direct analogue (Fixico) left consumers in 2016 · 2026-11-06
