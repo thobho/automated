@@ -87,6 +87,17 @@ Changes vs. quick score: L5 4 → 3 (no volume data found for fines or EPU nakaz
 
 **Confidence:** medium (procedures, competitor prices and the graveyard sourced; demand volume, conversion and the non-lawyer advice rule not).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *It already works in Polish: a Polish AI letter generator and a Polish-law consumer chat now exist.* **DocuGov.ai** (Warsaw, founded 2025, public launch 2026-05-13) generates appeals (speeding tickets, tax assessments, insurance denials), demand letters and consumer complaints from a plain-language description, in Polish among five languages; pricing and user numbers not published ([press release](https://xpr.media/?p=796473), fetched 2026-11-06, company-reported). **LEX AI** (LEX SECURE AI sp. z o.o., iOS since 2025-10) is a Polish-law chat that generates documents, with a 49 PLN/month Standard plan, 120 PLN Premium and a 29 PLN one-off lawyer-confirmed answer ([App Store](https://apps.apple.com/pl/app/lex-ai/id6748342467), fetched 2026-11-06; 5 ratings). Neither has the per-city fine tables, but the "AI writes my Polish letter" slot is no longer empty, and LEX AI already prices a lawyer-checked answer at the same 29 PLN.
+- *ChatGPT will absorb it.* A free general assistant already drafts a passable reklamacja; the only defensible part is the verified per-city deadline/addressee table, which is public data any copycat (or DocuGov) can add in a few weeks. Courts are also starting to punish hallucinated citations in AI-written pisma (NSA case reported by [wartowiedziec.pl](https://wartowiedziec.pl/serwis-glowny/aktualnosci/82040-z-wokandy-halucynacje-ai-w-pismie-procesowym-nsa-oddala-zazalenie-w-sprawie-podatkowej), search excerpt), which hurts trust in the category rather than helping a new entrant.
+- *Polish customers won't pay this.* Template sites anchor at ~20 PLN, free wzory rank first, and most transit fines are justified (R5). One-off revenue needs ~345 new buyers every month (R1), with SEO held by incumbents.
+- *Western leader localizing in 12 months.* Lawhive will not (regulated firm model, UK/US); DoNotPay is gone from this space. The entry risk is local and already realised (above).
+- *Second competitor search (2026-11-06):* "generator pism AI odwołanie od opłaty dodatkowej sprzeciw", "AI asystent prawny dla konsumentów Polska": found DocuGov.ai and LEX AI (above) and a Legal Hackathon 2026 consumer-letter prototype ([prawo.pl](https://www.prawo.pl/prawnicy-sady/ponad-200-osob-zmierzy-sie-w-8-edycji-legal-hackathon-2026,1540152.html), search excerpt). The T22 "Not found: any Polish AI letter generator for consumers" no longer holds.
+- *Success signals.* Lawhive's durable signals belong to a regulated lawyer-time model this idea does not copy. The pattern actually copied (self-service AI appeal letters) shows only hype warnings: DoNotPay's FTC order and LoFrayer's bar ultimatum, no retention data anywhere. Under the brief's rule L2 is capped at 3; on the evidence it is 2.
+- *Opportunity/risk lists.* Independent. O4 (bar cannot shut it down) is H likelihood but L impact, honestly rated. R2 and R3 are now closer to realised; R1 H×H is honest and unmitigated.
+
+**Review changes (T24, 2026-11-06):** L2 3 → 2 (copied pattern shows only hype warnings), L3 3 → 2 (DocuGov.ai and LEX AI serve Polish consumer letters); weighted 3.1 → **2.8** (L1 3 · L2 2 · L3 2 · L4 4 · L5 3 · L6 2 · L7 4 · L8 3 · L9 2; shortlist quick 3.3 replaced). §4 unchanged: O 20, R 29, R1 H×H → **<5%**. **Rejected** and recorded in [rejected.md](../../rejected.md): one-off revenue, Polish AI letter tools already live, free ChatGPT and ~20 PLN templates cap price. The EPU sprzeciw/przedawnienie module remains a possible component of a debt-related product, as T22 suggested.
+
 **Sources** (accessed 2026-11-05):
 1. https://fortune.com/2026/02/05/lawhive-ai-law-firm-startup-series-b-venture-funding/
 2. https://www.globallegalpost.com/news/uk-new-law-start-up-lawhive-secures-fresh-funding-for-us-expansion-1810357469
@@ -103,6 +114,10 @@ Changes vs. quick score: L5 4 → 3 (no volume data found for fines or EPU nakaz
 13. https://www.gazetaprawna.pl/twoje-prawo/artykuly/10848117,esad-prawie-700-tys-spraw-w-ciagu-roku.html
 14. https://openrouter.ai/google/gemini-2.5-flash
 15. https://artificialintelligenceact.eu/annex/3/
-16. Internal: [TH13 check](../../poland-check/A/TH13-consumer-legal-help-ai-law-firms.md), [shortlist notes](../shortlist-notes.md)
+16. https://xpr.media/?p=796473 (2026-11-06, T24)
+17. https://apps.apple.com/pl/app/lex-ai/id6748342467 (2026-11-06, T24)
+18. https://wartowiedziec.pl/serwis-glowny/aktualnosci/82040-z-wokandy-halucynacje-ai-w-pismie-procesowym-nsa-oddala-zazalenie-w-sprawie-podatkowej (2026-11-06, T24, excerpt)
+19. https://www.prawo.pl/prawnicy-sady/ponad-200-osob-zmierzy-sie-w-8-edycji-legal-hackathon-2026,1540152.html (2026-11-06, T24, excerpt)
+20. Internal: [TH13 check](../../poland-check/A/TH13-consumer-legal-help-ai-law-firms.md), [shortlist notes](../shortlist-notes.md)
 
 Coverage: 10 web searches/fetches for this write-up (DoNotPay FTC order, Lawhive funding and revenue, LoFrayer, ZTM complaint rules and fine amounts, Warsaw parking reklamacje, EPU statistics, Polish AI/template letter generators and prices). Not found: number of opłaty dodatkowe per year in any city, EPU nakazy count for 2024, any Polish AI letter generator for consumers, LoFrayer's status after the bar's ultimatum, the statutory basis for non-lawyer advice in Poland.
