@@ -82,6 +82,18 @@ Changes vs. quick score: L1 4 kept, L2 3 → 4 (Basis and Ravical rounds), L3 3 
 
 **Confidence:** medium on competition and KSeF facts, low on office count and willingness to pay.
 
+**Devil's advocate (T24, 2026-11-06):**
+- *Half of the MVP already ships in the ledger.* Step 2 (deterministic matching of bank lines to documents) is what Comarch's bank-statement agent does commercially since 2026-09-01 (1,000 lines in ~3 minutes in an XL pilot), and Comarch's payment-settlement and collections agent already writes to counterparties about overdue payments; it does not request documents from the office's own clients (ITwiz, re-fetched 2026-11-06, [ITwiz](https://itwiz.pl/comarch-wpuszcza-ai-do-biur-rachunkowych/)). Pointing an agent that already messages people at "client, send the receipt for this line" is a small step for Comarch; Symfonia already sends automatic missing-document notices. What remains open is the conversational reply parsing for Saldeo/Symfonia/wFirma offices.
+- *ChatGPT will absorb it.* The LLM part (classify a reply, write a polite chase) is the easy part; the hard part is getting statements and writing results back into the ledger, which is R2 and which incumbents get for free.
+- *Polish customers won't pay this.* Offices do not even budget their own clients' hours ("1 na 60", infor.pl, cited above), so a per-client fee that has to be passed on is a hard sell; offices already pay Saldeo or Symfonia for a client panel with reminders. No office owner was found asking for this.
+- *Western leader localizing in 12 months.* Basis, Ravical and Maxed AI show no CEE plans; the threat is domestic (Comarch, Symfonia, Saldeo), not Western.
+- *Second competitor search (2026-11-06):* "biuro rachunkowe AI agent ... brakujących dokumentach wyciąg bankowy KSeF", "SaldeoSMART AI agent 2026", "Księgoboty": no Polish product chasing office clients by unmatched bank lines found. Found: Księgoboty.pl (tax Q&A, KSeF guidance, document classification; built on AgentX, 2026-01-07 case study, no client chasing; [AgentX](https://www.agentx.so/mcp/blog/how-ksiegoboty-pl-automates-accounting-workflows-and-compliance-in-poland-a-success-story-built-with-agentx)); autoMEE flowMEE, an AI-first office platform that checks bank account numbers automatically (partner article 2026-05-28, [podatki.biz](https://www.podatki.biz/artykuly/ksef-ai-i-automatyzacja-ksiegowosci-jak-zmienia-sie-praca-biur-rachunkowych-w-2026-roku_40_62261.htm)). No new AI features found for SaldeoSMART.
+- *Claims re-checked.* Comarch agents and dates: confirmed. Office count (~35,000): still only the undated podatki.biz page; not improved. Documents outside KSeF "15–30%": still a sponsored claim (search excerpt), unverified.
+- *Success signals.* Basis's US$1.15bn valuation and Ravical's seed are funding, not retention or revenue; the analogue for the actual job (Maxed AI, client document requests) is a US$850k pre-seed. No hype warning, but the durable signals for client chasing specifically are 1, 2 and 7 by design, none evidenced by figures. L2 4 is too high for the job step being copied.
+- *Opportunity/risk lists.* O1 "KSeF makes chasing automatable for the first time" rated H without evidence of the effect (the KSeF schedule is sourced, the drop in open items is not), and KSeF helps the ledger vendors equally → M×M. Risks honest; R1 is better evidenced than when written.
+
+**Review changes (T24, 2026-11-06):** L2 4 → 3 (traction is in AI bookkeeping and tax prep; the client-chasing analogue is pre-seed). Reviewed scores: L1 4 · L2 3 · L3 3 · L4 4 · L5 3 · L6 3 · L7 3 · L8 3 · L9 2 | weighted 0.48+0.36+0.36+0.60+0.45+0.30+0.24+0.24+0.16 = 3.19 → **3.2** (shortlist quick 3.2; write-up 3.3 replaced). O1 H×M → M×M. §4: O 4+6+4+3+2 = 19, R 27, R − O = 8 and R1 H×H → down one → **<5%** (unchanged). Not rejected: the conversational chase for non-Comarch offices is still open, but the one-office pilot should first check whether the office's ledger already lists unmatched lines.
+
 **Sources** (accessed 2026-11-05/06):
 1. https://news.bloomberglaw.com/crypto/ai-for-accounting-startup-basis-hits-1-15-billion-valuation (search excerpt)
 2. https://www.axios.com/pro/fintech-deals/2026/01/06/basis-accel-series-b (search excerpt)
@@ -98,5 +110,8 @@ Changes vs. quick score: L1 4 kept, L2 3 → 4 (Basis and Ravical rounds), L3 3 
 13. https://openrouter.ai/google/gemini-2.5-flash
 14. https://artificialintelligenceact.eu/annex/3/
 15. Internal: [TH17 check](../../poland-check/A/TH17-agents-accounting-tax-firms.md)
+16. https://itwiz.pl/comarch-wpuszcza-ai-do-biur-rachunkowych/ (2026-11-06, T24, re-fetched)
+17. https://www.agentx.so/mcp/blog/how-ksiegoboty-pl-automates-accounting-workflows-and-compliance-in-poland-a-success-story-built-with-agentx (2026-11-06, T24)
+18. https://www.podatki.biz/artykuly/ksef-ai-i-automatyzacja-ksiegowosci-jak-zmienia-sie-praca-biur-rachunkowych-w-2026-roku_40_62261.htm (2026-11-06, T24, partner article)
 
 Coverage: 9 web searches/fetches (Saldeo client features, office counts, Western AI-for-accounting rounds, Polish client-portal reminders, Symfonia panel, KSeF schedule, Polish AI agents for offices, Comarch agents). Not found: a GUS/REGON count of offices for PKD 69.20, Comarch agent prices, Saldeo/Optima partner API terms, WhatsApp Business message prices for Poland, any office-owner quote on chasing time, graveyard cases.
