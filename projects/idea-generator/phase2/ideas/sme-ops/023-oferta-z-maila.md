@@ -83,6 +83,17 @@ Changes vs. quick score: L2 3 → 4 (Parspec Series A, 4× revenue, top US distr
 
 **Confidence:** medium-low (Western traction and job-step evidence sourced; market size and Polish willingness to pay not found).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *The Western leader is closer than "DACH focus" suggests.* Mercura's seed release (re-fetched 2026-11-06) says the round was led by TQ Ventures, SignalFire and Y Combinator, the company has been profitable from the start, targets double-digit million euro revenue for 2026, has customers in Europe and the US (Bauder, Reisser, Siteco, BME Group), works with existing ERP/CRM systems and will use the money to grow internationally ([Munich Startup, 2026-01-07](https://www.munich-startup.de/en/news/mercura-secures-e1-8-million)). Poland is not named, but a profitable, YC-backed team selling exactly this to electrical and building-technology wholesalers can add a Polish catalogue faster than a solo founder can build ERP connectors. "Localizes in 12 months" is plausible, not likely: no Polish page or job ad found.
+- *Generic e-mail-to-order agents already sell in Polish.* Virtual Workforce (Rotterdam) publishes Polish pages for AI agents that turn customer order e-mails into sales orders, for SAP, Dynamics/Business Central and QuickBooks, with a 14-day trial ([virtualworkforce.ai/pl](https://virtualworkforce.ai/pl/konwertuj-e-maile-zamowien-klientow-na-zamowienia-sprzedazy/), fetched 2026-11-06); parsers such as Parseur do rule-based extraction ([Parseur PL](https://parseur.com/pl/blog/zastosowania-parsera-e-mail), search result). They miss Subiekt/Optima and Polish technical vocabulary, which is the real moat (L4 3), but they cover the larger wholesalers on SAP or Dynamics.
+- *ChatGPT will absorb it.* Copilot in Outlook can extract a list into Excel; the hard part is matching "YDYp 3x2,5" to the wholesaler's own indeks and price group, which general assistants cannot do without the catalogue. This is the strongest defence in the batch.
+- *Polish customers won't pay this, or won't buy it quickly.* Demand is still unproven (no wholesaler quote, no searches), the number of target wholesalers is still unknown, and family firms with on-premise Subiekt buy through resellers and visits. The 499 PLN price is reasonable against a 6–12k PLN salesperson, but nobody has been asked.
+- *Second competitor search (2026-11-06):* "AI automatyczne wprowadzanie zamówień z e-maili hurtownia ... Subiekt Comarch agent", "InsERT nexo sztuczna inteligencja AI Subiekt 2026": no Polish product and no InsERT AI feature found; Comarch's 2026 agents (see 016) cover bank matching, collections and KSeF checks, not customer enquiries (ITwiz). Comarch e-Sklep order import is e-commerce, not e-mail.
+- *Success signals.* Parspec (Series A, 4× revenue, top US distributors) and Mercura (profitable, double-digit million target) are durable, value-priced and integration-heavy; no hype warning. L2 4 holds.
+- *Opportunity/risk lists.* O1 "5 of 20 wholesalers agree" rated H with no evidence of willingness → M×M. O5 (Western entrants absent) is honest at L. Risks independent and fair; R5 could add Mercura, but as M×M it does not change the sums.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 4 · L2 4 · L3 4 · L4 3 · L5 2 · L6 3 · L7 3 · L8 2 · L9 3; weighted **3.1**; shortlist quick 3.0 replaced). O1 H×M → M×M. §4: O 4+4+4+4+2 = 18, R 28, R − O = 10 → down one → **<5%** (unchanged). Not rejected: still the cleanest gap of the batch; the 20-call outreach test decides L5, and a Mercura Polish page or ad would be a kill signal.
+
 **Sources** (accessed 2026-11-06 unless noted):
 1. https://distributionstrategy.com/2025/07/parspec-raises-20-million-to-bring-ai-automation-to-construction-distributors/
 2. https://www.businesswire.com/news/home/20240227657482/en/Parspec-Announces-11.5M-Seed-Funding-led-by-Innovation-Endeavors-bringing-the-power-of-AI-to-construction-product-procurement
@@ -95,5 +106,9 @@ Changes vs. quick score: L2 3 → 4 (Parspec Series A, 4× revenue, top US distr
 9. https://openrouter.ai/google/gemini-2.5-flash (accessed 2026-11-05)
 10. https://artificialintelligenceact.eu/annex/3/
 11. Internal: [TH61 check](../../poland-check/A/TH61-procurement-rfq-order-handling.md), R6 catalogue rows (Duvo, Definic)
+12. https://www.munich-startup.de/en/news/mercura-secures-e1-8-million (2026-11-06, T24, re-fetched)
+13. https://virtualworkforce.ai/pl/konwertuj-e-maile-zamowien-klientow-na-zamowienia-sprzedazy/ (2026-11-06, T24)
+14. https://parseur.com/pl/blog/zastosowania-parsera-e-mail (2026-11-06, T24, search result)
+15. https://itwiz.pl/comarch-wpuszcza-ai-do-biur-rachunkowych/ (2026-11-06, T24)
 
 Coverage: 6 web searches for this write-up (Mercura, Parspec, Polish AI quoting with Subiekt, wholesaler associations, Subiekt user base, wholesale job ads). Not found: number of technical wholesalers in Poland, a Polish wholesaler association's membership, Subiekt nexo SDK confirmation, any Polish AI quoting product.
