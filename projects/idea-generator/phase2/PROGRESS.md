@@ -50,8 +50,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links: FTC DoNotPay press release in 009 (404 to scripts, reads fine in browser; backup cited)
 - [x] T23 · write-ups batch C · needs: T20 · [tasks/23-write-ups-batch-c.md](tasks/23-write-ups-batch-c.md)
   Unverifiable links: mos.cudzoziemcy.gov.pl/jak-zaczac, migrant.poznan.uw.gov.pl, businesswire.com (Parspec), allegro.gcs-web.com (2023 report PDF)
-- [~] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
-  Resume: all 24 write-ups reviewed, both sections present everywhere, shortlist.csv carries reviewed scores for all 24 (001 3.4, 002 3.6, 003 3.1, 004 3.4, 005 3.2, 008 3.0, 010 3.0, 012 3.3, 013 3.2, 014 3.1, 016 3.2, 021 3.1, 023 3.1 all <5%; 011 3.2 the only 5–15%; merged: 006→001, 007 and 017→002; rejected: 009, 015, 018, 019, 020, 022, 024); link check 001–013/019/020/024: 226 links, 0 dead, 11 unverifiable; 014–018, 021–023 + rejected.md + CHANGELOG.md: 116 links, 0 dead, 5 unverifiable (wolterskluwer legaldesk timeout, mos.cudzoziemcy.gov.pl and migrant.poznan.uw.gov.pl ×2 SSL, businesswire 403); ready to mark done
+- [x] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
+  Unverifiable links (timeout/403/SSL, sites exist): thenegotiator.co.uk, mos.cudzoziemcy.gov.pl, migrant.poznan.uw.gov.pl, digitalhealth.net, htworld.co.uk, businesswire.com, businessnewsaustralia.com, allegro.gcs-web.com, asiae.co.kr, prawo.pl, wolterskluwer.com, api.sejm.gov.pl
 - [ ] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
 
 ## Blocked / questions for the owner
@@ -59,6 +59,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-06 · T24 · done: all 24 write-ups reviewed (Devil's advocate + Review changes, shortlist.csv matches); only 011 (3.2) stays 5–15%, 001–005, 008, 010, 012–014, 016, 021, 023 <5%; merged 006→001, 007+017→002; rejected 009, 015, 018, 019, 020, 022, 024; link check 0 dead, 5 unverifiable in last batch; caveats: evidence mostly search excerpts/vendor pages, no hands-on of competitors, several market counts unsourced · next T25
 2026-11-06 · T24 · progress: 16 of 24 reviewed (added 007–013); 007 merged into 002, 009 rejected; 011 the only reviewed idea still at 5–15% (013 moved to <5%); link check 226 links, 0 truly dead; caveats: new evidence mostly search excerpts, translator and broker counts still unsourced, no hands-on of competitors · next 014, then 015–018, 021–023
 2026-11-06 · T24 · progress: 9 of 24 reviewed (001–006, 019, 020, 024); 019, 020, 024 rejected, 006 merged into 001; 001–005 all <5% after §4; link check 124 links, 0 dead; caveats: new evidence mostly from search excerpts, no hands-on of competitors · next 007, then 008–018, 021–023
 2026-11-06 · T23 · done: write-ups 017–024 (017 3.1, 018 3.1, 019 2.9, 020 2.7, 021 3.1, 022 3.1, 023 3.1, 024 2.8; all <5% after §4); link check 89 links, 0 dead, 4 unverifiable; open for T24: 019, 020, 024 near collapse (Comarch Apfino, Docplanner Noa Booking, Allegro assistant/Senvio) — consider rejecting; many facts from excerpts, no hands-on of competitors · next T24
