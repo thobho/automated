@@ -11,7 +11,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T02 · Poland commerce baseline · needs: T01 · [tasks/02-poland-commerce-baseline.md](tasks/02-poland-commerce-baseline.md)
 - [x] T03 · friction patterns: why Oponeo, Uber and Deliveroo won · needs: T01 · [tasks/03-friction-patterns.md](tasks/03-friction-patterns.md)
 - [~] T04 · scan V1 vehicle parts and car-related buying · needs: T01 · [tasks/04-scan-v1-vehicle-parts.md](tasks/04-scan-v1-vehicle-parts.md)
-  - Resume: catalogue has 12 US rows (V1-US-001..012); next add DE, NL, UK, FR, Nordics, JP/KR, NZ, PL, LT, CZ rows (researched, scratch notes not in repo), then research/verticals/V1-vehicle-parts.md
+  - Resume: catalogue has 32 rows (US, DE, NL, UK, FR); next add Nordics, JP/KR, NZ, PL, LT, CZ rows, link-check, then research/verticals/V1-vehicle-parts.md
 - [ ] T05 · scan V2 home, climate and appliance parts and consumables · needs: T01 · [tasks/05-scan-v2-home-climate-appliance.md](tasks/05-scan-v2-home-climate-appliance.md)
 - [ ] T06 · scan V3 hobby niches · needs: T01 · [tasks/06-scan-v3-hobby-niches.md](tasks/06-scan-v3-hobby-niches.md)
 - [ ] T07 · scan V4 services with a logistics step · needs: T01 · [tasks/07-scan-v4-services-with-logistics.md](tasks/07-scan-v4-services-with-logistics.md)
