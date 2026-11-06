@@ -4,8 +4,8 @@ Napisane 2026-11-06 (T25). Streszcza zadania T01–T24 fazy 2. Liczby są policz
 
 ## Najważniejsze
 - Faza 2 dała pomysły bardziej innowacyjne niż faza 1, ale nie mocniejsze.
-- Po krytycznym przeglądzie (T24) tylko **jeden** pomysł ma szansę `5–15%` na 10 000 PLN MRR w 12 miesięcy: [011 Agent porównujący OWU dla małych brokerów](../ideas/sme-ops/011-broker-owu-comparison.md) (wynik 3,2).
-- Wszystkie inne przejrzane pomysły mają `<5%`.
+- Po krytycznym przeglądzie (T24) i korekcie z 2026-11-06 **żaden** przejrzany pomysł nie ma szansy `5–15%` na 10 000 PLN MRR w 12 miesięcy. Wszystkie 14 opisów, które przetrwały, ma `<5%`.
+- Ostatni spadł [011 Agent porównujący OWU dla małych brokerów](../ideas/sme-ops/011-broker-owu-comparison.md) (wynik 3,2 → 2,7): nowe wyszukiwanie znalazło polskie narzędzia AI do porównywania OWU, które przegląd pominął.
 - Z 24 opisów 10 odrzucono lub połączono z innymi.
 - Przegląd wciąż trafiał na dwie przeszkody:
   - polski gracz już ma tę funkcję albo doda ją w jednym wydaniu (Comarch, Wolters Kluwer, Docplanner, Allegro);
@@ -18,7 +18,7 @@ Napisane 2026-11-06 (T25). Streszcza zadania T01–T24 fazy 2. Liczby są policz
 2. Listy trendów i skany 51 krajów w 10 regionach. Szukanie po angielsku, polsku i w językach lokalnych. Każdy produkt to wiersz katalogu z trakcją i sygnałami trwałości.
 3. 531 produktów → 69 tematów ([THEMES.md](../themes/THEMES.md)). Dla każdego tematu werdykt luki w Polsce: otwarta, częściowa, zajęta.
 4. 167 pomysłów ([longlist.md](../ideas/longlist.md)) → 59 z szybką oceną ([shortlist.csv](../ideas/shortlist.csv)) → 24 pełne opisy → niezależny przegląd „adwokata diabła”.
-5. Dziewięć soczewek z wagami ([criteria.md](../method/criteria.md)) daje wynik i przedział szans. Potem reguła §4: jeśli ryzyka przeważają szanse o 6+ albo jest ryzyko wysokie × wysokie bez łagodzenia, spadek o jeden przedział. Ta reguła zepchnęła 13 z 14 pozostałych pomysłów do `<5%`.
+5. Dziewięć soczewek z wagami ([criteria.md](../method/criteria.md)) daje wynik i przedział szans. Potem reguła §4: jeśli ryzyka przeważają szanse o 6+ albo jest ryzyko wysokie × wysokie bez łagodzenia, spadek o jeden przedział. Ta reguła zepchnęła 13 z 14 pozostałych pomysłów do `<5%`. Czternasty pomysł (011) spadł przez sam wynik w korekcie z 2026-11-06.
 
 ## 2. Liczby
 
@@ -50,10 +50,10 @@ Napisane 2026-11-06 (T25). Streszcza zadania T01–T24 fazy 2. Liczby są policz
 | Z shortlisty, nigdy niebadane głębiej | 35 |
 | Wszystkie odrzucenia i połączenia | 118 linii w [rejected.md](../rejected.md) |
 
-- Na shortliście 18 wierszy ma `5–15%`, 41 ma `<5%`.
-- Z tych 18 tylko jeden to przejrzany opis (011). Pozostałe 17 to szybkie oceny bez reguły §4.
-- Traktuj je jako raczej `<5%`: 23 z 24 opisów skończyły na `<5%`.
-- Faza 1 też skończyła się jednym pomysłem w `5–15%` ([phase1-summary.md](../../reports/phase1-summary.md)).
+- Na shortliście 17 wierszy ma `5–15%`, 42 ma `<5%`.
+- Żaden z tych 17 nie jest przejrzanym opisem. To szybkie oceny bez reguły §4.
+- Traktuj je jako raczej `<5%`: wszystkie 24 opisy skończyły na `<5%`.
+- Faza 1 skończyła się jednym pomysłem w `5–15%` ([phase1-summary.md](../../reports/phase1-summary.md)), a faza 2 nie ma teraz żadnego.
 - Pomysły z fazy 2 są bardziej „LLM-native” (L1 = 4 w 11 z 14 opisów). Ale popyt w Polsce (L5) i dystrybucja (L8) są równie słabe jak w fazie 1.
 
 ## 3. Top 20 po przeglądzie
@@ -65,22 +65,22 @@ Bez odrzuconych i połączonych. 14 opisów ma oceny po przeglądzie. 6 wierszy 
 | 2 | [001 Raport ryzyk KW i działki](../ideas/property/001-kw-plot-risk-report.md) | 3,4 | <5% | opis (+006) | nikt nie sprawdził darmowego ChatGPT na prawdziwym odpisie |
 | 3 | [004 Asystent akt dla kancelarii odszkodowawczych](../ideas/legal-compliance/004-claim-file-assistant.md) | 3,4 | <5% | opis | wzorzec EvenUp; liczba kancelarii nieznana |
 | 4 | [012 Kontrola rozliczeń NFZ](../ideas/health-care/012-kontrola-rozliczen-nfz.md) | 3,3 | <5% | opis | najgłębsza fosa; wymaga danych przychodni |
-| 5 | [011 Porównanie OWU dla brokerów](../ideas/sme-ops/011-broker-owu-comparison.md) | 3,2 | **5–15%** | opis | jedyny w 5–15% |
-| 6 | [005 AI biuro zarządcy](../ideas/property/005-ai-biuro-zarzadcy.md) | 3,2 | <5% | opis | dane mają dostawcy portali |
-| 7 | [013 Szkice tłumaczeń przysięgłych](../ideas/employment-migration/013-sworn-translation-drafts.md) | 3,2 | <5% | opis | tani test; liczba tłumaczy nieznana |
-| 8 | [016 Asystent klienta biura](../ideas/accounting-tax/016-asystent-klienta-biura.md) | 3,2 | <5% | opis | Comarch ma agentów dopasowania banku |
-| 9 | [003 Karta usług opiekuńczych](../ideas/health-care/003-karta-uslug-opiekunczych.md) | 3,1 | <5% | opis | SeniorApp po stronie gminy |
-| 10 | [014 Sekretariat PISP](../ideas/legal-compliance/014-sekretariat-pisp.md) | 3,1 | <5% | opis | Wolters Kluwer ma PISP i Libra AI |
-| 11 | [021 Licencja szkolna dla pedagogów](../ideas/education/021-school-pedagogue-licence.md) | 3,1 | <5% | opis | przewodnik ZPE zakazuje AI przy WOPFU |
-| 12 | [023 Oferta z maila (hurtownie)](../ideas/sme-ops/023-oferta-z-maila.md) | 3,1 | <5% | opis | najczystsza luka; popyt nieznany |
-| 13 | L088 Raport CMA z RCN dla pośredników ([B/TH57](../poland-check/B/TH57-real-estate-agency-investor-tools.md)) | 3,1 | 5–15% (szybka) | tylko szybka ocena | Otodom może to dodać |
-| 14 | [008 Wycena z notatki (instalatorzy)](../ideas/property/008-wycena-z-notatki.md) | 3,0 | <5% | opis | potrzebny partner: hurtownia lub producent |
-| 15 | [010 Teczka sprzedażowa](../ideas/accounting-tax/010-teczka-sprzedazowa.md) | 3,0 | <5% | opis | jednorazowy zakup |
-| 16 | L033 Wstępna selekcja kandydatów dla agencji ([A/TH33](../poland-check/A/TH33-ai-recruiting-interviews-screening.md)) | 3,0 | 5–15% (szybka) | tylko szybka ocena | AI Act: rekrutacja |
-| 17 | L106 Skryba dla fizjoterapeutów ([A/TH01](../poland-check/A/TH01-ambient-clinical-scribe.md)) | 3,0 | 5–15% (szybka) | tylko szybka ocena | Heidi i Noa działają po polsku |
-| 18 | L046 Wiedza o Polsce + B2 do obywatelstwa ([B/TH39](../poland-check/B/TH39-national-migration-exam-prep.md)) | 3,0 | 5–15% (szybka) | tylko szybka ocena | zależy od projektu ustawy |
-| 19 | L010 Urzędowa skrzynka biura ([A/TH17](../poland-check/A/TH17-agents-accounting-tax-firms.md)) | 3,0 | 5–15% (szybka) | tylko szybka ocena | automatyczny dostęp do ZUS PUE może łamać regulamin |
-| 20 | L163 Testy jakości polskich voicebotów ([A/TH24](../poland-check/A/TH24-local-language-voice-cs-agents.md)) | 2,9 | 5–15% (szybka) | tylko szybka ocena | za mały rynek |
+| 5 | [005 AI biuro zarządcy](../ideas/property/005-ai-biuro-zarzadcy.md) | 3,2 | <5% | opis | dane mają dostawcy portali |
+| 6 | [013 Szkice tłumaczeń przysięgłych](../ideas/employment-migration/013-sworn-translation-drafts.md) | 3,2 | <5% | opis | tani test; liczba tłumaczy nieznana |
+| 7 | [016 Asystent klienta biura](../ideas/accounting-tax/016-asystent-klienta-biura.md) | 3,2 | <5% | opis | Comarch ma agentów dopasowania banku |
+| 8 | [003 Karta usług opiekuńczych](../ideas/health-care/003-karta-uslug-opiekunczych.md) | 3,1 | <5% | opis | SeniorApp po stronie gminy |
+| 9 | [014 Sekretariat PISP](../ideas/legal-compliance/014-sekretariat-pisp.md) | 3,1 | <5% | opis | Wolters Kluwer ma PISP i Libra AI |
+| 10 | [021 Licencja szkolna dla pedagogów](../ideas/education/021-school-pedagogue-licence.md) | 3,1 | <5% | opis | przewodnik ZPE zakazuje AI przy WOPFU |
+| 11 | [023 Oferta z maila (hurtownie)](../ideas/sme-ops/023-oferta-z-maila.md) | 3,1 | <5% | opis | najczystsza luka; popyt nieznany |
+| 12 | L088 Raport CMA z RCN dla pośredników ([B/TH57](../poland-check/B/TH57-real-estate-agency-investor-tools.md)) | 3,1 | 5–15% (szybka) | tylko szybka ocena | Otodom może to dodać |
+| 13 | [008 Wycena z notatki (instalatorzy)](../ideas/property/008-wycena-z-notatki.md) | 3,0 | <5% | opis | potrzebny partner: hurtownia lub producent |
+| 14 | [010 Teczka sprzedażowa](../ideas/accounting-tax/010-teczka-sprzedazowa.md) | 3,0 | <5% | opis | jednorazowy zakup |
+| 15 | L033 Wstępna selekcja kandydatów dla agencji ([A/TH33](../poland-check/A/TH33-ai-recruiting-interviews-screening.md)) | 3,0 | 5–15% (szybka) | tylko szybka ocena | AI Act: rekrutacja |
+| 16 | L106 Skryba dla fizjoterapeutów ([A/TH01](../poland-check/A/TH01-ambient-clinical-scribe.md)) | 3,0 | 5–15% (szybka) | tylko szybka ocena | Heidi i Noa działają po polsku |
+| 17 | L046 Wiedza o Polsce + B2 do obywatelstwa ([B/TH39](../poland-check/B/TH39-national-migration-exam-prep.md)) | 3,0 | 5–15% (szybka) | tylko szybka ocena | zależy od projektu ustawy |
+| 18 | L010 Urzędowa skrzynka biura ([A/TH17](../poland-check/A/TH17-agents-accounting-tax-firms.md)) | 3,0 | 5–15% (szybka) | tylko szybka ocena | automatyczny dostęp do ZUS PUE może łamać regulamin |
+| 19 | L163 Testy jakości polskich voicebotów ([A/TH24](../poland-check/A/TH24-local-language-voice-cs-agents.md)) | 2,9 | 5–15% (szybka) | tylko szybka ocena | za mały rynek |
+| 20 | [011 Porównanie OWU dla brokerów](../ideas/sme-ops/011-broker-owu-comparison.md) | 2,7 | <5% | opis, korekta 2026-11-06 | OWU Pro, Syntexa i OWU24 już sprzedają porównywanie OWU; otwarta wygląda tylko pełna obsługa polis firmowych |
 
 ## 4. Top 5 do walidacji
 **Jak wybrane.** Tylko opisy, które przetrwały. Liczyły się: przedział i wynik, fosa nienaruszona w przeglądzie, test rozstrzygający w tydzień za ≤200 PLN.
@@ -91,13 +91,14 @@ Wszystkie pięć to B2B. Wszystkie wymagają telefonów. Każdy test to „conci
 
 Oznaczenia przy szansach i ryzykach: prawdopodobieństwo × wpływ, gdzie W = wysokie, Ś = średnie, N = niskie.
 
-### 4.1 [011 Agent porównujący OWU dla małych brokerów](../ideas/sme-ops/011-broker-owu-comparison.md) – 3,2, `5–15%`
-- **Dlaczego:** jedyny pomysł, który zachował `5–15%` (szanse 19, ryzyka 24, brak ryzyka W×W). Czysta luka: brak polskiego i zachodniego narzędzia dla brokera. Wystarczy ~25 biur po 399 PLN/mies.
+### 4.1 [011 Agent porównujący OWU dla małych brokerów](../ideas/sme-ops/011-broker-owu-comparison.md) – 2,7, `<5%` (korekta 2026-11-06)
+- **Dlaczego nadal na liście:** trafił tu jako jedyny pomysł w `5–15%`, a to już nieaktualne (szanse 15, ryzyka 37, jedno ryzyko W×W). Polskie narzędzia AI do porównywania OWU istnieją (OWU Pro, Syntexa, OWU24, Nawigator OWU, InsuranceChat), więc otwarta może być tylko pełna obsługa polis firmowych. Test idzie teraz na koniec. Zamiana na rezerwowy 013 to Twoja decyzja. Wystarczy ~25 biur po 399 PLN/mies., ale ta cena jest wyraźnie wyższa niż w tych narzędziach (19–221 PLN/mies.).
 - **Wzorzec z Zachodu:** FurtherAI (USA), 25 mln USD seria A od a16z (2025-10). Handle (USA/Meksyk), 6 mln USD seed (2026-03), 75+ brokerów. Segura (Brazylia), 8 mln USD seed. Dane od firm, brak danych o retencji.
 - **Polska przewaga:** OWU każdego ubezpieczyciela porównane klauzula po klauzuli. Analiza potrzeb klienta (APK) z ustawy o dystrybucji ubezpieczeń. Zapytania do underwriterów mailem. Słownictwo: OC przewoźnika (CMR / krajowe), franszyza integralna / redukcyjna. Publiczny rejestr KNF = pełna lista kontaktów.
-- **3 szanse:** mało klientów wystarcza do sprzedaży przez założyciela (Ś×Ś). Biblioteka klauzul OWU rośnie z każdym klientem (Ś×Ś). Odnowienia OC przewoźnika dają stałe użycie (Ś×Ś).
-- **3 ryzyka:** przeoczone wyłączenie = odpowiedzialność brokera, więc brak zaufania (Ś×W). Mali brokerzy robią za mało polis firmowych (Ś×W). Konserwatywni klienci i 40 h/mies. = wolna sprzedaż (W×Ś). Do obserwacji: Compensa i PZU automatyzują swoją stronę tych samych zapytań.
+- **3 szanse:** mało klientów wystarcza do sprzedaży przez założyciela (Ś×Ś). Odnowienia OC przewoźnika dają stałe użycie (Ś×Ś). Sieć licencjonuje narzędzie dla wszystkich członków (N×W).
+- **3 ryzyka:** polski dostawca AI do OWU rozszerzy się na polisy firmowe (W×W). Przeoczone wyłączenie = odpowiedzialność brokera, więc brak zaufania (Ś×W). Mali brokerzy robią za mało polis firmowych (Ś×W). Do tego: polskie narzędzia zaniżają oczekiwaną cenę (W×Ś), a Compensa i PZU automatyzują swoją stronę tych samych zapytań.
 - **Najbardziej ryzykowne założenie:** małe biuro brokerskie robi ≥5 polis firmowych miesięcznie przez maile i zaufa tabeli AI na tyle, by zapłacić.
+- **Najpierw (za darmo):** wypróbuj 30-dniowy okres próbny OWU Pro i demo Syntexy na prawdziwych OWU i ofertach OC przewoźnika. Zakończ test, jeśli któreś już dobrze obsługuje tę linię.
 - **Plan (5 dni, ≤100 PLN):**
   1. Dzień 1: pobierz aktualne OWU OC przewoźnika 6 ubezpieczycieli. Z LLM zrób tabelę porównawczą z cytatem (strona, paragraf) w każdej komórce. Sprawdź ręcznie każdą komórkę. Zapisz trafność.
   2. Dzień 1: przeczytaj raport KNF za 2024 i zapisz aktualną liczbę brokerów (opis ma tylko dane z 2017).
@@ -172,7 +173,7 @@ Oznaczenia przy szansach i ryzykach: prawdopodobieństwo × wpływ, gdzie W = wy
   - **Stop, gdy:** ChatGPT pokrywa się w ≥18 z 20, albo <2 przedsprzedaże z ~300 kliknięć i zero zainteresowanych biur. (Czy 150 PLN da ~300 kliknięć, niezweryfikowane; przy mniejszej liczbie oceniaj konwersję.)
 
 ### 4.6 Kolejność i reguła decyzji
-- **Kolejność:** tydzień 1 → 011. Tydzień 2 → 023 (zacznij telefony wcześnie). Tydzień 3 → 002. Tydzień 4 → 004. Test ChatGPT z 001 jest darmowy, zrób go w wolny wieczór. Reklamy dla 001 na końcu, w tygodniu 5.
+- **Kolejność (zmieniona 2026-11-06):** tydzień 1 → 023 (zacznij telefony wcześnie). Tydzień 2 → 002. Tydzień 3 → 004. Tydzień 4 → 011, tylko jeśli darmowe sprawdzenie konkurencji zostawi lukę. Test ChatGPT z 001 jest darmowy, zrób go w wolny wieczór. Reklamy dla 001 na końcu, w tygodniu 5.
 - **Koszt:** najwyżej ~600 PLN w 5 tygodni, pewnie mniej. To mniej więcej miesięczny budżet.
 - **Decyzja:**
   - pomysł spełnia wszystkie warunki „idziemy dalej” → nowa ocena z nowymi dowodami;
@@ -217,7 +218,7 @@ Które czynniki popytu ([demography.md](../research/poland/demography.md#demand-
 
 **Fosy:**
 - **Fosa w darmowym systemie państwowym** (MOS 2.0, EKW/mObywatel, Geoportal/e-mapa, Twój e-PIT, NFZ Terminy, wytyczne ZPE) wygląda głęboko. Ale państwo jest najsilniejszym konkurentem: daje funkcję za darmo albo zakazuje użycia. Zaszkodziło to pomysłom 002, 006, 007, 015, 017, 020, 021.
-- **Fosa w prywatnym obiegu dokumentów** (OWU ubezpieczycieli, katalog i ceny hurtowni, akta szkód plus SAOS) trzymała się lepiej. Obie najczystsze luki (011, 023) są tego typu.
+- **Fosa w prywatnym obiegu dokumentów** (OWU ubezpieczycieli, katalog i ceny hurtowni, akta szkód plus SAOS) trzymała się lepiej. Taka jest 023, najczystsza pozostała luka. 011 wyglądał podobnie do korekty z 2026-11-06, która znalazła polskie narzędzia do OWU.
 
 **Co zabijało pomysły w przeglądzie:**
 - polski gracz już to ma: Comarch (016, 019), Wolters Kluwer (014), Docplanner (020), Allegro/Senvio (024), Mova/PolskiTest (022), WoBorders (018), DocuGov/LEX AI (009);
@@ -234,6 +235,7 @@ Które czynniki popytu ([demography.md](../research/poland/demography.md#demand-
 ## 8. Co research pokrył słabo
 - **Nikt nie wypróbował zachodnich liderów.** Brief każe to zrobić, ale liderzy wymagali dema, a kont nie zakładano. „Działa po polsku?” jest nieznane dla 79% katalogu.
 - **Nikt nie sprawdził darmowych asystentów na prawdziwych polskich dokumentach.** To główne ryzyko wchłonięcia dla 001, 004, 011, 013. Opisaliśmy je, ale nie zmierzyliśmy.
+- **Wyszukiwanie konkurencji może pomijać polskie produkty.** Przegląd T24 nie znalazł polskiego narzędzia dla brokerów, a szersze polskie wyszukiwanie z 2026-11-06 znalazło kilka. Pozostałych twierdzeń „brak polskiego produktu”, także dla 023, nie sprawdzono ponownie.
 - **Dowody popytu są pośrednie:** podpowiedzi Google, ogłoszenia o pracę, prasa. Zero wywiadów i telefonów. Nie sprawdzono Google Trends, Keyword Planner, grup na Facebooku, Wykopu (wymagają logowania lub JavaScriptu).
 - **Brak wielkości rynku** dla większości pomysłów B2B: brokerzy (tylko 2017), kancelarie odszkodowawcze, hurtownie techniczne, tłumacze ukraińskiego. Dlatego 004, 013 i 023 nie przechodzą testu liczby klientów (§3).
 - **Prawie brak danych o retencji** w katalogu. „Trwały” w THEMES.md to ocena względna; L2 nigdy nie miał danych o NRR czy churnie.
@@ -243,7 +245,7 @@ Które czynniki popytu ([demography.md](../research/poland/demography.md#demand-
 ## 9. Pytania do Ciebie
 1. **Kontakty.** Znasz kogoś wśród brokerów, agencji zatrudnienia lub legalizacyjnych, kancelarii odszkodowawczych, hurtowni technicznych albo przychodni z kontraktem NFZ? Jedno polecenie zmienia L8 bardziej niż research. Tylko tak da się przetestować 012.
 2. **Telefony.** Każdy test to 20–100 telefonów lub maili w tydzień. Mieści się to w 40 h/mies.? Czy przerobić plany na same maile i strony (wolniej, słabsze sygnały)?
-3. **Poprzeczka.** Przy „10 000 PLN MRR w 12 miesięcy” tylko 011 przechodzi do `5–15%`. Czy mniejszy pierwszy cel (np. 3–5 tys. PLN MRR jako biznes poboczny) jest OK? Wtedy rosną tanie, małe pomysły jak 013 i 001.
+3. **Poprzeczka.** Przy „10 000 PLN MRR w 12 miesięcy” żaden przejrzany pomysł nie osiąga `5–15%`. Czy mniejszy pierwszy cel (np. 3–5 tys. PLN MRR jako biznes poboczny) jest OK? Wtedy rosną tanie, małe pomysły jak 013 i 001.
 4. **Partnerzy.** Czy budowałbyś z partnerem branżowym (specjalista od rozliczeń NFZ dla 012, broker dla 011) za udziały lub procent przychodu?
 5. **Dane medyczne.** 004 i 012 wymagają danych z art. 9 RODO: hosting w UE, umowy powierzenia, polityka usuwania. Chcesz to dźwigać sam?
 6. **Co dalej, jeśli wszystkie testy padną.** Rekomendacja: faza 3 z badaniami pierwotnymi. 30 krótkich wywiadów w 3–4 niszach, które ciągle wracały (brokerzy, agencje zatrudnienia, hurtownie, biura rachunkowe). Cel: znaleźć ból, za który już płacą. Nie kolejny skan zagranicznych produktów. Zgadzasz się?

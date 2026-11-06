@@ -2,14 +2,14 @@
 
 Written 2026-11-06 by T25. It summarises T01–T24 of Phase 2. Every number below is counted from the files on this branch, and the counting method is given next to it. Estimates are marked as estimates. A Polish version for phone reading is in [podsumowanie-pl.md](podsumowanie-pl.md).
 
-**Bottom line.** Phase 2 found more innovative ideas than Phase 1, but no stronger ones. After the skeptical review (T24) only one idea, [011 Submission and OWU comparison agent for small SME-lines brokers](../ideas/sme-ops/011-broker-owu-comparison.md) (weighted 3.2), stays in the `5–15%` band of reaching 10,000 PLN MRR within 12 months. Every other reviewed idea is `<5%`. Of the 24 write-ups, 10 were rejected or merged. The review kept finding the same two things: a Polish incumbent or platform owner already ships the feature or is one release away (Comarch, Wolters Kluwer, Docplanner, Allegro), or the state gives the same help for free (MOS 2.0, mObywatel, e-mapa, Twój e-PIT). No idea justifies building before a test. The next month should go on the five cheap validation tests in section 4, not on code. If all five fail, stop desk research and switch to customer interviews (section 9).
+**Bottom line.** Phase 2 found more innovative ideas than Phase 1, but no stronger ones. After the skeptical review (T24) and a later correction (2026-11-06), no reviewed idea stays in the `5–15%` band of reaching 10,000 PLN MRR within 12 months: all 14 standing write-ups are `<5%`. [011](../ideas/sme-ops/011-broker-owu-comparison.md) was the last to fall (3.2 → 2.7), because a new search found Polish AI products for OWU comparison that the review had missed. Of the 24 write-ups, 10 were rejected or merged. The review kept finding the same two things: a Polish incumbent or platform owner already ships the feature or is one release away (Comarch, Wolters Kluwer, Docplanner, Allegro), or the state gives the same help for free (MOS 2.0, mObywatel, e-mapa, Twój e-PIT). No idea justifies building before a test. The next month should go on the five cheap validation tests in section 4, not on code. If all five fail, stop desk research and switch to customer interviews (section 9).
 
 ## 1. Method in 5 lines
 1. Poland baseline: demography (50 findings, 12 demand drivers), the AI landscape and an inventory of 53 local moats ([research/poland/](../research/poland/demography.md)) (T02–T03).
 2. Global trend lists plus regional scans of 51 developed countries in 10 regions, searched in English, Polish and local languages. Each product went into a catalogue row with its traction, durable signals and hype warnings (T04–T14).
 3. 531 products were clustered into 69 themes, ranked by spread, durable traction and novelty ([THEMES.md](../themes/THEMES.md), T15). Each theme then got a Poland gap verdict: open, partial or taken (T16–T18).
 4. 167 adaptation ideas ([longlist.md](../ideas/longlist.md)) → 59 quick-scored ([shortlist.csv](../ideas/shortlist.csv)) → 24 full write-ups with separate opportunity and risk lists (T19–T23) → an independent devil's-advocate review that re-scored all 24 (T24).
-5. Nine lenses, weighted per [criteria.md](../method/criteria.md), give a score. The score maps to a chance band, and the band then moves down one step if risks outweigh opportunities by 6 or more, or if there is an unmitigated high × high risk (§4). That rule moved 13 of the 14 surviving ideas from `5–15%` to `<5%`.
+5. Nine lenses, weighted per [criteria.md](../method/criteria.md), give a score. The score maps to a chance band, and the band then moves down one step if risks outweigh opportunities by 6 or more, or if there is an unmitigated high × high risk (§4). That rule moved 13 of the 14 surviving ideas from `5–15%` to `<5%`; the 14th (011) fell on its score in the 2026-11-06 correction.
 
 ## 2. Stats
 
@@ -41,9 +41,9 @@ Written 2026-11-06 by T25. It summarises T01–T24 of Phase 2. Every number belo
 | Shortlisted, never researched beyond the quick score | 35 | 59 − 24 |
 | Every rejection or merge, all stages | 118 lines | 108 + 10 in rejected.md |
 
-**Bands in shortlist.csv after the review:** 18 rows `5–15%` and 41 rows `<5%` (counted with `collections.Counter` on `chance_band`; the 41 include 7 rejected and 3 merged). Of the 18 rows at `5–15%`, only one is a reviewed write-up (011). The other 17 are quick scores that never faced the §4 opportunity/risk rule. Read them as probably `<5%`: 23 of the 24 write-ups ended at `<5%`.
+**Bands in shortlist.csv after the review:** 17 rows `5–15%` and 42 rows `<5%` (counted with `collections.Counter` on `chance_band`; the 41 include 7 rejected and 3 merged). None of the 17 rows at `5–15%` is a reviewed write-up. They are quick scores that never faced the §4 opportunity/risk rule. Read them as probably `<5%`: all 24 write-ups ended at `<5%`.
 
-**Phase 1 vs Phase 2.** Phase 1 also ended with exactly one `5–15%` idea ([phase1-summary.md](../../reports/phase1-summary.md)). Phase 2 ideas are more LLM-native (L1 is 4 in 11 of the 14 standing write-ups). But they did not score better on Polish demand (L5) or distribution (L8), which is where both phases fail.
+**Phase 1 vs Phase 2.** Phase 1 ended with exactly one `5–15%` idea ([phase1-summary.md](../../reports/phase1-summary.md)); Phase 2 now has none. Phase 2 ideas are more LLM-native (L1 is 4 in 11 of the 14 standing write-ups). But they did not score better on Polish demand (L5) or distribution (L8), which is where both phases fail.
 
 ## 3. Top 20 after review
 
@@ -55,22 +55,22 @@ Written 2026-11-06 by T25. It summarises T01–T24 of Phase 2. Every number belo
 | 2 | [001 KW + plot risk report](../ideas/property/001-kw-plot-risk-report.md) | property | 3.4 | <5% | reviewed (006 merged in) | free ChatGPT on a real odpis never tried; B2C pays once a decade |
 | 3 | [004 Claim-file assistant for kancelarie odszkodowawcze](../ideas/legal-compliance/004-claim-file-assistant.md) | legal-compliance | 3.4 | <5% | reviewed | EvenUp pattern; firm count unknown, RODO art. 9 trust |
 | 4 | [012 Kontrola rozliczeń NFZ](../ideas/health-care/012-kontrola-rozliczen-nfz.md) | health-care | 3.3 | <5% | reviewed | deepest moat; needs a pilot clinic's data and NFZ domain help |
-| 5 | [011 Broker OWU comparison agent](../ideas/sme-ops/011-broker-owu-comparison.md) | sme-ops | 3.2 | **5–15%** | reviewed | only idea keeping 5–15% (O 19, R 24, no H×H risk) |
-| 6 | [005 AI biuro zarządcy](../ideas/property/005-ai-biuro-zarzadcy.md) | property | 3.2 | <5% | reviewed | portal vendors sit on the data; partnership route only |
-| 7 | [013 Sworn-translation drafts](../ideas/employment-migration/013-sworn-translation-drafts.md) | employment-migration | 3.2 | <5% | reviewed | cheap to test; translator count unsourced |
-| 8 | [016 Asystent klienta biura](../ideas/accounting-tax/016-asystent-klienta-biura.md) | accounting-tax | 3.2 | <5% | reviewed | Comarch ships bank-matching agents; one release from a feature |
-| 9 | [003 Karta usług opiekuńczych (bon senioralny)](../ideas/health-care/003-karta-uslug-opiekunczych.md) | health-care | 3.1 | <5% | reviewed | SeniorApp on the gmina side; thin-margin payers |
-| 10 | [014 Sekretariat PISP](../ideas/legal-compliance/014-sekretariat-pisp.md) | legal-compliance | 3.1 | <5% | reviewed | Wolters Kluwer holds PISP pickup and Libra AI |
-| 11 | [021 School licence for pedagodzy and psycholodzy](../ideas/education/021-school-pedagogue-licence.md) | education | 3.1 | <5% | reviewed | ZPE guide names WOPFU as off-limits for AI |
-| 12 | [023 Oferta z maila: RFQ-to-quote for wholesalers](../ideas/sme-ops/023-oferta-z-maila.md) | sme-ops | 3.1 | <5% | reviewed | cleanest gap and best analogue; demand and market size unknown |
-| 13 | L088 RCN-based CMA PDF for estate agents ([B/TH57](../poland-check/B/TH57-real-estate-agency-investor-tools.md)) | property | 3.1 | 5–15% (quick) | quick score only | Otodom can add it |
-| 14 | [008 Wycena z notatki for installers](../ideas/property/008-wycena-z-notatki.md) | property | 3.0 | <5% | reviewed | two H×H risks; needs a wholesaler or manufacturer partner |
-| 15 | [010 Teczka sprzedażowa](../ideas/accounting-tax/010-teczka-sprzedazowa.md) | accounting-tax | 3.0 | <5% | reviewed | one-off purchase; depends on a listing-site partner |
-| 16 | L033 Multilingual pre-screening for staffing agencies ([A/TH33](../poland-check/A/TH33-ai-recruiting-interviews-screening.md)) | employment-migration | 3.0 | 5–15% (quick) | quick score only | AI Act hiring line; counsel opinion needed |
-| 17 | L106 Physiotherapy scribe with NFZ rehab docs ([A/TH01](../poland-check/A/TH01-ambient-clinical-scribe.md)) | health-care | 3.0 | 5–15% (quick) | quick score only | Heidi and Noa already work in Polish |
-| 18 | L046 Citizenship civics + B2 prep ([B/TH39](../poland-check/B/TH39-national-migration-exam-prep.md)) | employment-migration | 3.0 | 5–15% (quick) | quick score only | depends on a draft law |
-| 19 | L010 Urzędowa skrzynka biura ([A/TH17](../poland-check/A/TH17-agents-accounting-tax-firms.md)) | accounting-tax | 3.0 | 5–15% (quick) | quick score only | automated ZUS PUE access may breach terms |
-| 20 | L163 Polish voicebot QA harness ([A/TH24](../poland-check/A/TH24-local-language-voice-cs-agents.md)) | sme-ops | 2.9 | 5–15% (quick) | quick score only | fails the customer-count sanity check |
+| 5 | [005 AI biuro zarządcy](../ideas/property/005-ai-biuro-zarzadcy.md) | property | 3.2 | <5% | reviewed | portal vendors sit on the data; partnership route only |
+| 6 | [013 Sworn-translation drafts](../ideas/employment-migration/013-sworn-translation-drafts.md) | employment-migration | 3.2 | <5% | reviewed | cheap to test; translator count unsourced |
+| 7 | [016 Asystent klienta biura](../ideas/accounting-tax/016-asystent-klienta-biura.md) | accounting-tax | 3.2 | <5% | reviewed | Comarch ships bank-matching agents; one release from a feature |
+| 8 | [003 Karta usług opiekuńczych (bon senioralny)](../ideas/health-care/003-karta-uslug-opiekunczych.md) | health-care | 3.1 | <5% | reviewed | SeniorApp on the gmina side; thin-margin payers |
+| 9 | [014 Sekretariat PISP](../ideas/legal-compliance/014-sekretariat-pisp.md) | legal-compliance | 3.1 | <5% | reviewed | Wolters Kluwer holds PISP pickup and Libra AI |
+| 10 | [021 School licence for pedagodzy and psycholodzy](../ideas/education/021-school-pedagogue-licence.md) | education | 3.1 | <5% | reviewed | ZPE guide names WOPFU as off-limits for AI |
+| 11 | [023 Oferta z maila: RFQ-to-quote for wholesalers](../ideas/sme-ops/023-oferta-z-maila.md) | sme-ops | 3.1 | <5% | reviewed | cleanest gap and best analogue; demand and market size unknown |
+| 12 | L088 RCN-based CMA PDF for estate agents ([B/TH57](../poland-check/B/TH57-real-estate-agency-investor-tools.md)) | property | 3.1 | 5–15% (quick) | quick score only | Otodom can add it |
+| 13 | [008 Wycena z notatki for installers](../ideas/property/008-wycena-z-notatki.md) | property | 3.0 | <5% | reviewed | two H×H risks; needs a wholesaler or manufacturer partner |
+| 14 | [010 Teczka sprzedażowa](../ideas/accounting-tax/010-teczka-sprzedazowa.md) | accounting-tax | 3.0 | <5% | reviewed | one-off purchase; depends on a listing-site partner |
+| 15 | L033 Multilingual pre-screening for staffing agencies ([A/TH33](../poland-check/A/TH33-ai-recruiting-interviews-screening.md)) | employment-migration | 3.0 | 5–15% (quick) | quick score only | AI Act hiring line; counsel opinion needed |
+| 16 | L106 Physiotherapy scribe with NFZ rehab docs ([A/TH01](../poland-check/A/TH01-ambient-clinical-scribe.md)) | health-care | 3.0 | 5–15% (quick) | quick score only | Heidi and Noa already work in Polish |
+| 17 | L046 Citizenship civics + B2 prep ([B/TH39](../poland-check/B/TH39-national-migration-exam-prep.md)) | employment-migration | 3.0 | 5–15% (quick) | quick score only | depends on a draft law |
+| 18 | L010 Urzędowa skrzynka biura ([A/TH17](../poland-check/A/TH17-agents-accounting-tax-firms.md)) | accounting-tax | 3.0 | 5–15% (quick) | quick score only | automated ZUS PUE access may breach terms |
+| 19 | L163 Polish voicebot QA harness ([A/TH24](../poland-check/A/TH24-local-language-voice-cs-agents.md)) | sme-ops | 2.9 | 5–15% (quick) | quick score only | fails the customer-count sanity check |
+| 20 | [011 Broker OWU comparison agent](../ideas/sme-ops/011-broker-owu-comparison.md) | sme-ops | 2.7 | <5% | reviewed, corrected 2026-11-06 | OWU Pro, Syntexa and OWU24 already sell OWU comparison in Poland; only end-to-end commercial placement looks open |
 
 ## 4. Top 5 for validation
 
@@ -78,13 +78,14 @@ Written 2026-11-06 by T25. It summarises T01–T24 of Phase 2. Every number belo
 
 All five are B2B and need phone outbound. All five plans are concierge tests: the "product" is done by hand plus an LLM, and nothing is built for production. Prices and go/no-go numbers come from each write-up's own test and kill criteria, adjusted for the T24 review.
 
-### 4.1 [011 Submission and OWU comparison agent for small SME-lines brokers](../ideas/sme-ops/011-broker-owu-comparison.md): weighted 3.2, `5–15%`
-- **Why it's here:** the only idea that keeps `5–15%` after review (O 19, R 24, no H×H risk). The gap is clean: no Polish or Western broker-side placement tool was found in two searches. Only ~25 offices at 399 PLN/month are needed.
+### 4.1 [011 Submission and OWU comparison agent for small SME-lines brokers](../ideas/sme-ops/011-broker-owu-comparison.md): weighted 2.7, `<5%` (corrected 2026-11-06)
+- **Why it's still listed:** it was picked as the only `5–15%` idea, and that no longer holds (O 15, R 37, one H×H risk). Polish AI tools for OWU comparison exist (OWU Pro, Syntexa, OWU24, Nawigator OWU, InsuranceChat), so only the end-to-end commercial placement workflow may be open. It now tests last. Replacing it with the runner-up 013 is the owner's call. Only ~25 offices at 399 PLN/month are needed, but that price is well above these tools (19–221 PLN/month).
 - **Western analogue and traction:** FurtherAI (US), US$25M Series A led by a16z (2025-10), named carrier and MGA customers; Handle (US/MX), US$6M seed from a16z (2026-03), 75+ active brokers in Mexico; Segura (BR), US$8M seed. All figures are company claims, and there is no retention data ("promising", L2 3).
 - **Polish edge:** OWU wording per insurer and per product, compared clause by clause; the IDD needs analysis (APK) under the ustawa o dystrybucji ubezpieczeń; commercial placement by e-mail RFQ to underwriters; line vocabulary (OC przewoźnika CMR vs domestic, franszyza integralna/redukcyjna). The public KNF register gives a complete outbound list.
-- **Top 3 opportunities:** a small number of offices is enough for founder-led sales (M×M); the OWU clause library compounds across customers (M×M); OC przewoźnika renewals keep usage steady (M×M).
-- **Top 3 risks:** a missed exclusion exposes the broker, so nobody trusts the table (M×H); small brokers place too few commercial policies to justify 399 PLN (M×H); conservative buyers plus 40 h/month make sales slow (H×M). A watch item from the review: insurers (Compensa, PZU) are automating their side of the same inquiry e-mail.
+- **Top 3 opportunities:** a small number of offices is enough for founder-led sales (M×M); OC przewoźnika renewals keep usage steady (M×M); a network licenses it for all members (L×H).
+- **Top 3 risks:** a Polish OWU AI vendor extends to commercial placement (H×H); a missed exclusion exposes the broker, so nobody trusts the table (M×H); small brokers place too few commercial policies to justify 399 PLN (M×H). Also: Polish tools anchor the price far lower (H×M), and insurers (Compensa, PZU) are automating their side of the same inquiry e-mail.
 - **Riskiest assumption:** a 1–10 person brokerage places at least 5 commercial policies a month by e-mail RFQ and would trust an AI comparison table enough to pay for it.
+- **Run first (free):** try OWU Pro's 30-day trial and a Syntexa demo on real OC przewoźnika OWU and offers. Stop if either already covers that line well enough.
 - **Validation plan (5 days, ≤100 PLN):**
   1. Day 1: download the current OC przewoźnika OWU of 6 insurers from their websites. With an LLM, build one side-by-side table (sum insured, sub-limits, territorial scope, exclusions, deductibles), every cell citing page and paragraph. Check every cell by hand and record field accuracy.
   2. Day 1: read the KNF 2024 broker report for today's broker count (the write-up still uses the 2017 figure of ~1.5k).
@@ -159,7 +160,7 @@ All five are B2B and need phone outbound. All five plans are concierge tests: th
   - **No-go:** ChatGPT matches in ≥18 of 20, or <2 pre-orders from ~300 ad clicks and no agency interested after 3 free reports each. (Whether 150 PLN buys ~300 clicks is unverified; judge on the conversion rate if clicks are fewer.)
 
 ### 4.6 Order and decision rule
-- **Order:** week 1 → 011 (the only `5–15%` idea; ≤100 PLN). Week 2 → 023 (needs samples and a script, so start the calls early). Week 3 → 002. Week 4 → 004. Day 1 of 001 (the ChatGPT comparison) costs nothing and can run in any spare evening; its ad test goes last, in week 5. Total spend at most ~600 PLN over five weeks (each plan's cap), probably less, so about one month's budget.
+- **Order (changed 2026-11-06):** week 1 → 023 (needs samples and a script, so start the calls early). Week 2 → 002. Week 3 → 004. Week 4 → 011, only if the free competitor check leaves a gap. Day 1 of 001 (the ChatGPT comparison) costs nothing and can run in any spare evening; its ad test goes last, in week 5. Total spend at most ~600 PLN over five weeks (each plan's cap), probably less, so about one month's budget.
 - **Decision rule:** an idea that passes every Go condition gets rescored with the new evidence. If L5 and L8 reach 4 with sources, it moves to `5–15%` or above, and it gets a 6-week MVP. If two pass, pick the one with more paying-intent answers, not the higher score. If none pass, do not open a new desk-research round. See section 9.
 
 ## 5. Demographic opportunity map
@@ -190,7 +191,7 @@ Which Polish demand drivers ([demography.md](../research/poland/demography.md#de
 
 **Moats.** Two kinds of moat behaved very differently:
 - **Moats inside a free state system** (MOS 2.0, EKW/mObywatel, Geoportal/e-mapa, Twój e-PIT, NFZ Terminy, the ZPE guidance) look deep, but the state is also the strongest competitor. It ships the feature for free, or forbids the use case. It hurt 002, 006, 007, 015, 017, 020 and 021 in review.
-- **Moats inside a private document flow** (insurers' OWU, a wholesaler's catalogue and price groups, claim files plus SAOS) held up better. The two cleanest gaps (011, 023) are both of this kind.
+- **Moats inside a private document flow** (insurers' OWU, a wholesaler's catalogue and price groups, claim files plus SAOS) held up better. 023, the cleanest remaining gap, is of this kind; 011 looked like one until the 2026-11-06 correction found Polish OWU tools.
 
 **What killed ideas in review** (from the reasons in rejected.md and the Review changes lines): a Polish incumbent or platform owner shipping the feature (Comarch: 016, 019; Wolters Kluwer: 014; Docplanner: 020; Allegro/Senvio: 024; Mova/PolskiTest: 022; WoBorders: 018; DocuGov/LEX AI: 009); free state help (006, 007, 015, 017); one-off revenue (007, 009, 010, 022).
 
@@ -204,6 +205,7 @@ Which Polish demand drivers ([demography.md](../research/poland/demography.md#de
 ## 8. What the research covered poorly
 - **No hands-on trial of a Western leader.** The brief's first check ("actually try the Western leader") was almost never done: leaders were demo-led and no accounts were created. `works_in_polish` is `unknown` for 79% of catalogue rows.
 - **No test of free general assistants on real Polish documents.** This is the main absorption risk for 001, 004, 011 and 013, and it was argued, not measured.
+- **Competitor searches can miss Polish products.** T24's search for 011 found no Polish broker tool, yet a broader Polish search on 2026-11-06 found several. Other "no Polish product" claims, including 023's, have not been rechecked.
 - **Demand evidence is indirect.** It comes from Google autocomplete, job ads and press. No interviews or calls were made, and Google Trends, Keyword Planner, Facebook groups and Wykop were not checked (they need a login or JavaScript).
 - **Market sizes are missing** for most standing B2B ideas: brokers (2017 figure only), claims firms (unknown), technical wholesalers (unknown), Ukrainian-language sworn translators (unknown). So the §3 customer-count sanity check could not be passed for 004, 013 or 023.
 - **Retention data is almost absent** from the catalogue, so "durable" in THEMES.md is a relative label, and L2 never had NRR or churn behind it.
@@ -213,7 +215,7 @@ Which Polish demand drivers ([demography.md](../research/poland/demography.md#de
 ## 9. Open questions for you
 1. **Network access.** Do you know anyone among insurance brokers, staffing or legalisation agencies, compensation-claims firms, technical wholesalers, or clinics with an NFZ contract? One warm introduction changes L8 more than any desk research, and it is the only way 012 becomes testable.
 2. **Phone outbound.** All five tests need 20–100 calls or e-mails in a week. Is that acceptable inside your 40 h/month, or should the plans be reshaped toward e-mail and landing pages only (slower and weaker signals)?
-3. **The success bar.** With "10,000 PLN MRR within 12 months" nothing clears `5–15%` except 011. Would a smaller first goal (for example 3–5k PLN MRR as a side business) be acceptable? It would favour cheap, small-market ideas such as 013 and 001.
+3. **The success bar.** With "10,000 PLN MRR within 12 months" no reviewed idea clears `5–15%`. Would a smaller first goal (for example 3–5k PLN MRR as a side business) be acceptable? It would favour cheap, small-market ideas such as 013 and 001.
 4. **Partners and revenue share.** Would you build with a domain partner (an NFZ settlement specialist for 012, a broker for 011) for equity or a revenue share?
 5. **Medical and personal data.** 004 and 012 need art. 9 health data handled with EU hosting, DPAs and deletion policies. Are you willing to carry that compliance work as a solo founder?
 6. **What next if all five tests fail.** The recommendation is a Phase 3 of primary research: 30 short interviews across the 3–4 professional niches that kept appearing (brokers, staffing agencies, wholesalers, accounting offices) to find a pain they already pay for, rather than another scan of foreign products. Do you agree?

@@ -34,4 +34,6 @@ Insly (EE, outside R6) sells policy admin in the region; no R6 insurance agent i
 ## 7. Verdict: **partial**
 Retail motor and home comparison is served by multiagency systems (WebCUK) and consumer comparison sites, and the claims side has a Polish AI player selling to insurers (Minte.ai). The broker back office for **commercial lines**, where submissions go by e-mail with spreadsheets and OWU must be compared clause by clause, has no LLM product found and no Western entrant.
 
+**Correction (2026-11-06):** this check missed Polish AI tools for OWU comparison sold to agents and brokers: OWU Pro, Syntexa, OWU24, Nawigator OWU and InsuranceChat (vendor pages, none tried; see [011](../../ideas/sme-ops/011-broker-owu-comparison.md)). The verdict stays partial, but only the end-to-end commercial placement workflow looks unserved.
+
 **Seed idea:** submission and OWU comparison agent for small Polish brokers in SME lines: reads the client's questionnaire and documents, drafts RFQs to 5–8 insurers, parses returned offers and OWU into a side-by-side table of limits, exclusions and franchises, and pre-fills the IDD needs analysis; 299–599 PLN/month per broker office. Start with one line (OC przewoźnika or SME property).
