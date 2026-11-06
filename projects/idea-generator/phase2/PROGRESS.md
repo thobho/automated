@@ -59,6 +59,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-06 · run · all tasks T01–T25 are [x]; nothing left to do · owner runs validation tests
 2026-11-06 · T25 · done: phase2/reports/phase2-summary.md + podsumowanie-pl.md, README Phase 2 status; only 011 at 5–15%, 13 standing ideas <5%; top 5 for validation 011, 023, 002, 004, 001 (≤1 week, ≤200 PLN each); link check 0 dead, 0 unverifiable (no external links in new files) · next: owner runs validation tests. All Phase 2 tasks are [x].
 2026-11-06 · T24 · done: all 24 write-ups reviewed (Devil's advocate + Review changes, shortlist.csv matches); only 011 (3.2) stays 5–15%, 001–005, 008, 010, 012–014, 016, 021, 023 <5%; merged 006→001, 007+017→002; rejected 009, 015, 018, 019, 020, 022, 024; link check 0 dead, 5 unverifiable in last batch; caveats: evidence mostly search excerpts/vendor pages, no hands-on of competitors, several market counts unsourced · next T25
 2026-11-06 · T24 · progress: 16 of 24 reviewed (added 007–013); 007 merged into 002, 009 rejected; 011 the only reviewed idea still at 5–15% (013 moved to <5%); link check 226 links, 0 truly dead; caveats: new evidence mostly search excerpts, translator and broker counts still unsourced, no hands-on of competitors · next 014, then 015–018, 021–023
