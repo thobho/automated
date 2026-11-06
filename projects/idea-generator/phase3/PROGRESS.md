@@ -32,7 +32,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable (403/timeout/SSL, real sites): ebay.de (store hvpa12, item 376242467625), elektroda.pl topic4130040 and poszukaj search (timeout), nwyachting.com (SSL), decathlon.pl Jaxon and Mikado pages (403).
 - [x] T15 · independent critical review · needs: T13, T14 · [tasks/15-independent-critical-review.md](tasks/15-independent-critical-review.md)
   - Unverifiable (403/timeout/SSL, real sites): counterman.com reeling-from-returns (new in T15), gev-online.com/pl, frankana.de/en/aboutus, mieleusa.com remote-assist, elektroda.pl topics 3633231 and 4130040 and poszukaj searches (ariston, indesit), ebay.de (hvpa12 store, item 376242467625), nwyachting.com (SSL), decathlon.pl Jaxon and Mikado pages; Allegro listing pages return 403 to the fetch tool, so Allegro findability was not rerun for any write-up.
-- [ ] T16 · summary and validation plans · needs: T15 · [tasks/16-summary-and-validation-plans.md](tasks/16-summary-and-validation-plans.md)
+- [~] T16 · summary and validation plans · needs: T15 · [tasks/16-summary-and-validation-plans.md](tasks/16-summary-and-validation-plans.md)
+  - Resume: starting
 
 ## Blocked / questions for the owner
 (none)
