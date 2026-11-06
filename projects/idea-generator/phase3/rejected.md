@@ -104,3 +104,9 @@ Owner areas: **car** rejections are mostly ideas where T10 found the part at onc
 - **#92 Builders'-merchant stock lookup with fast delivery to site** (V5; quick 2.4) · courier coordination per order; merchant stock data unverified; Schuttflix shows logistics burns capital · 2026-11-06
 - **#93 Procurement workflow for small contractors on TIM or Onninen** (V5; quick 2.7) · TIM already sells about 70% online; long sales cycle for a 40 h/month founder · 2026-11-06
 
+
+## T14 — write-ups batch B (2026-11-06)
+
+Ideas that hit a knock-out (criteria §3) only after a full write-up. The write-up stays in `ideas/` for the review (T15).
+
+- **#1 Collision-part sourcing desk for Chinese brands** (V1 · owner area: car; final 2.7, [write-up 008](ideas/v1-vehicle/008-chinese-brand-collision-parts.md)) · F8 = 1: every case is ~35 minutes of supplier calls, above 40 h/month before ~70 cases a month; importers hold Omoda/Jaecoo/BYD body stock and have built Polish warehouses, so a desk cannot shorten the wait · 2026-11-06

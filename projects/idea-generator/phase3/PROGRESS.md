@@ -29,7 +29,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T13 · write-ups batch A · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
   - Unverifiable (403/timeout, real sites): gev-online.com/pl, mieleusa.com remote-assist, elektroda.pl topic3633231 (timeout), frankana.de/en/aboutus.
 - [~] T14 · write-ups batch B · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
-  - Resume: 006 (#24), 007 (#33) done; next 008 (#1), 009 (#19), 010 (#53), then shortlist.csv/md update and link check.
+  - Resume: 006 (#24), 007 (#33), 008 (#1, F8 knock-out added to rejected.md) done; next 009 (#19), 010 (#53), then shortlist.csv/md update and link check.
 - [ ] T15 · independent critical review · needs: T13, T14 · [tasks/15-independent-critical-review.md](tasks/15-independent-critical-review.md)
 - [ ] T16 · summary and validation plans · needs: T15 · [tasks/16-summary-and-validation-plans.md](tasks/16-summary-and-validation-plans.md)
 
