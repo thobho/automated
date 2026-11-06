@@ -14,8 +14,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable (403/468/timeout, open in a browser): businesswire.com PartsTech, thebusinessdesk.com Tyres on the Drive, aftermarketnews.com RockAuto, repairpal.com, louis.de, oscaro.com, auto-infos.fr/opisto, autobutler.co.uk, skruvat.se, autoway.jp, mroauto.cz, ebay.de mroparts store
 - [x] T05 · scan V2 home, climate and appliance parts and consumables · needs: T01 · [tasks/05-scan-v2-home-climate-appliance.md](tasks/05-scan-v2-home-climate-appliance.md)
   - Unverifiable (403/timeout, open in a browser): partselect.com, repairclinic.com, appliancepartspros.com, supplyhouse.com, batteriesplus.com, thebusinessdesk.com BOXT, village.ai Fiyo, dutchitchannel.nl, mtsprout.nl, reservex.se, rakuten.co.jp (andonya, sagasikata), particuliers.engie.fr
-- [~] T06 · scan V3 hobby niches · needs: T01 · [tasks/06-scan-v3-hobby-niches.md](tasks/06-scan-v3-hobby-niches.md)
-  - Resume: Done-when met (research/verticals/V3-hobby-niches.md, catalogue 39 rows, 29-hobby table, top-10 PL check; link check 0 dead, 16 unverifiable). Awaiting review before marking [x].
+- [x] T06 · scan V3 hobby niches · needs: T01 · [tasks/06-scan-v3-hobby-niches.md](tasks/06-scan-v3-hobby-niches.md)
   - Unverifiable (403/429/timeout, open in a browser): catawiki.com (home + 2 press releases), kingscrowd.com Fishbrain, companydata.dk Hobbii, sec.gov Etsy 10-Q, seedtable.com buycycle, roadbikerider.com, voxelmatters.com, old.businessden.com, shapeways.com, zoominfo.com, cardmarket.com, wiggle.com, suruga-ya.jp, muziker.com
 - [ ] T07 · scan V4 services with a logistics step · needs: T01 · [tasks/07-scan-v4-services-with-logistics.md](tasks/07-scan-v4-services-with-logistics.md)
 - [ ] T08 · scan V5 small business and professional buying · needs: T01 · [tasks/08-scan-v5-small-business-buying.md](tasks/08-scan-v5-small-business-buying.md)
@@ -37,3 +36,4 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - 2026-11-06 · T03 done (friction-patterns.md: 22 cases, 10 patterns, AI section, graveyard; 0 dead links, 6 unverifiable). Next: T04.
 - 2026-11-06 · T04 done (V1 scan: 48 rows, 13 countries; link check 0 dead, 12 unverifiable). Allegro launched VIN search Feb 2026; margins thin; gaps: garage price/trust, car collection. Next: T05.
 - 2026-11-06 · T05 done (V2 scan: 42 rows, 11 countries; link check 0 dead, 13 unverifiable). Gap: diagnosis before part purchase (Spareka-type) not in Poland. Next: T06.
+- 2026-11-06 · T06 done (V3 scan: 39 rows, 15 countries, 29 hobbies table; link check 0 dead, 16 unverifiable). Gaps: print-bureau quote aggregator, hobby-shop price aggregator, Japan/China consolidated buying in Polish; ~15 hobby sizes unverified for T09. Next: T07.
