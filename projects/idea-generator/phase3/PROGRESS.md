@@ -19,7 +19,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T07 · scan V4 services with a logistics step · needs: T01 · [tasks/07-scan-v4-services-with-logistics.md](tasks/07-scan-v4-services-with-logistics.md)
   - Unverifiable links: mediaexpert.pl, angi.com, icracked.com, eu-startups.com (Sojo), pl.trustpilot.com, se.trustpilot.com, winfuture.de, soomgo.com
 - [~] T08 · scan V5 small business and professional buying · needs: T01 · [tasks/08-scan-v5-small-business-buying.md](tasks/08-scan-v5-small-business-buying.md)
-  - Resume: catalogue/V5-small-business-buying.csv has 22 rows (JP, US, DE, GB, KR, FR, NL, FI, SE, PL, CZ, UA). Next: ~12 more rows (salon/dental/workshop supplies, UK, Nordics, KR MRO, CEE, graveyard), then write research/verticals/V5-small-business-buying.md, then link check.
+  - Resume: catalogue has 35 rows (12 countries), link check on CSV 0 dead. Next: write research/verticals/V5-small-business-buying.md (sections as V4: what, friction, patterns, numbers, graveyard incl. Mapudo/Katerra/Buildzar/merXu, Poland, top 10, coverage), then link check both files.
 - [ ] T09 · Polish demand mining · needs: T02, T04, T05, T06, T07, T08 · [tasks/09-demand-mining.md](tasks/09-demand-mining.md)
 - [ ] T10 · findability test · needs: T09 · [tasks/10-findability-test.md](tasks/10-findability-test.md)
 - [ ] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
