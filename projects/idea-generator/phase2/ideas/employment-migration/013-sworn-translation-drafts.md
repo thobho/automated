@@ -83,6 +83,17 @@ Changes vs. quick score: L9 3 → 2 (SwornTrans exists and DeepL could add layou
 
 **Confidence:** low-medium (prices, law and Western tools sourced; translator count and willingness to pay not).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *It already works for Ukrainian layouts.* Generic AI document translators now advertise exactly the hard part: OCR of scanned Ukrainian Cyrillic including older Soviet-era records, correct handling of і/ї/є/ґ, layout-preserving output, and auto-deletion within 24 hours (Bluente; Otranslator; [Bluente guide](https://www.bluente.com/blog/translate-documents-to-ukrainian), [Otranslator](https://otranslator.com/en/intro/ua), vendor pages, search excerpts 2026-11-06). The US "AI translates, human certifies" model is the same workflow (Bluente's USCIS guide). What none shows is the Polish sworn convention (bracketed descriptions of seals, certification clause, repertory, 1,125-character page). That is a template layer a translator can approximate with a Word macro on top of a layout-preserving draft. R1 H×M is honest.
+- *ChatGPT will absorb it.* A photo of a birth certificate into ChatGPT with "translate in Polish sworn-translation format, describe stamps in brackets" gets a usable draft today; the remaining value is the verified template set and RODO-safe handling of third-party ID documents. L9 2 is right.
+- *Polish customers won't pay this.* The buyer pool is still unknown. The only figure found again is "39 on the MS list" in a 2022 prawo.pl article about diploma recognition, with unclear scope ([prawo.pl](https://www.prawo.pl/student/nostryfikacje-dyplomow-utrudnia-brak-tlumaczy-z-ukrainskiego,514262.html)); the MS register can be filtered by language but was not counted in this pass. If the national pool of active Ukrainian sworn translators is in the hundreds, ~100 subscribers at 99 PLN would need a very large share of it.
+- *Western leader localizing in 12 months.* SwornTrans (DE) or the US certified-translation platforms adding Polish conventions is possible but unlikely to be a priority; DeepL adding document layouts is the more likely threat.
+- *Second competitor search (2026-11-06):* "AI tłumaczenie przysięgłe narzędzie dla tłumaczy przysięgłych akt urodzenia ukraiński szablon OCR": no Polish product for sworn translators found; generic layout-preserving AI translators with Ukrainian OCR found (above).
+- *Success signals.* SwornTrans: per-page pricing, no users, no reviews; AcudocX/Translato: an acquisition with no figures. No durable signal and no hype either; the pattern is unproven. L2 2 stays.
+- *Opportunity/risk lists.* O4 "template library compounds and is hard to copy" was rated H likelihood without evidence; templates are copyable → M×L. Other items honest.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 4 · L2 2 · L3 3 · L4 4 · L5 3 · L6 3 · L7 4 · L8 3 · L9 2; weighted **3.2**; shortlist quick L9 3 replaced). O4 H×L → M×L. §4: O 4+4+4+2+2 = 16, R 6+6+4+4+2 = 22, R − O = 6 ≥ 6 → down one band: 5–15% → **<5%**. Not rejected: the first validation step (count Ukrainian entries in the MS register) costs nothing and decides R2.
+
 **Sources** (accessed 2026-11-05):
 1. https://www.stork.ai/en/sworntrans
 2. https://x-doc.ai/use-cases/en/online-birth-certificate-translation-localization
@@ -94,6 +105,8 @@ Changes vs. quick score: L9 3 → 2 (SwornTrans exists and DeepL could add layou
 8. https://www.prawo.pl/student/nostryfikacje-dyplomow-utrudnia-brak-tlumaczy-z-ukrainskiego,514262.html
 9. https://openrouter.ai/google/gemini-2.5-flash
 10. https://artificialintelligenceact.eu/annex/3/
-11. Internal: [TH69 check](../../poland-check/C/TH69-translation-localisation.md), [write-up 002](002-teczka-legalizacyjna.md)
+11. https://www.bluente.com/blog/translate-documents-to-ukrainian (2026-11-06, T24, excerpt)
+12. https://otranslator.com/en/intro/ua (2026-11-06, T24, excerpt)
+13. Internal: [TH69 check](../../poland-check/C/TH69-translation-localisation.md), [write-up 002](002-teczka-legalizacyjna.md)
 
 Coverage: 5 web searches/fetches for this write-up plus the TH69 check's sources (sworn-translator counts, AI certified-translation tools, Polish page rates, shortage reports, SwornTrans pricing). Not found: number of sworn translators of Ukrainian, SwornTrans language list, any graveyard case, translator demand for such a tool.
