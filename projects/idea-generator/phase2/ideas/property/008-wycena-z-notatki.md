@@ -86,6 +86,17 @@ Changes vs. quick score: L4 4 → 3 (VAT rule, ZUM and Fakturownia API are weeks
 
 **Confidence:** low-medium (Western traction and Polish rules sourced; Polish installer counts, willingness to pay and channel not).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *ChatGPT will absorb it, through the invoicing vendors.* inFakt says it was first in Poland to open an MCP server so a client's own Claude/ChatGPT/Gemini can read its products, clients and invoices and **draft an invoice from a command**, which the user confirms ([inFakt blog](https://www.infakt.pl/blog/?p=80793), search excerpt; MCP terms from Nov 2025 limit it to selected users, [regulamin](https://www.infakt.infaktcdn.pl/2025/11/regulamin_mcp.pdf)). Fakturownia's MCP is read-only for now ([Fakturownia](https://fakturownia.pl/asystent-ai-mcp), fetched 2026-11-06). In CZ, Fakturoid's MCP (April 2026) lets ChatGPT/Claude issue and edit invoices ([Fakturoid](https://www.fakturoid.cz/blog/2026/04/29/mcp-server), search excerpt). So "speak a job, get a priced document" is already one voice prompt away for an inFakt user with a product list; R2 is no longer M likelihood, it is happening. What stays specific is the offer document, the 8%/23% envelope rule and the ZUM check, which is thin.
+- *It already works in Polish.* For PV, OpenSolar and PV\*SOL already sell proposals in Polish (above). For heat pumps, manufacturers' configurators do sizing for free. The gap is only "photo + voice → offer from my own price list", i.e. a workflow layer.
+- *Polish customers won't pay this.* No search demand (autocomplete empty, one Elektroda idea thread). Crews in an overbooked market (DD7) do not lose jobs because of a slow offer; they lose them to price. 99 PLN/month for something the owner does on Sunday evening in Excel is a hard sell without a partner paying.
+- *Western leader localizing in 12 months.* plancraft raised for AT, NL, IT, not CEE; L likelihood is fair. The bigger entry risk is local: invoicing vendors (above) and wholesalers' own B2B portals.
+- *Second competitor search (2026-11-06):* "aplikacja AI wycena oferta dla instalatorów pomp ciepła fotowoltaiki", "Fakturownia/inFakt AI oferta": no Polish AI quoting tool for installers found; found the invoicing-vendor MCP servers above (absorption, not competition).
+- *Success signals.* plancraft and Handoff show funding and customer counts (company/investor reported), no retention or NRR, and plancraft's base predates its AI. Not hype, but "durable" is assumed rather than shown; L2 3 stays (not raised).
+- *Opportunity/risk lists.* Independent. O1 L likelihood is honest; R1 H×H is honest and unmitigated. R2 raised M → H (now evidenced).
+
+**Review changes (T24, 2026-11-06):** L3 4 → 3 (general assistants with inFakt's MCP already draft priced documents from a voice/text command; only the offer and VAT/ZUM layer is open); weighted 3.1 → **3.0** (L1 4 · L2 3 · L3 3 · L4 3 · L5 3 · L6 3 · L7 3 · L8 2 · L9 2; shortlist quick 3.3 replaced). R2 likelihood M → H, so R2 is H×H. §4: O 15, R 9+9+3+4+4 = 29, two risks of weight 9 → down two bands (rule §4.4), floor **<5%** (unchanged). Not rejected: the partner test (3 wholesalers, 2 manufacturers) is cheap and decides it; without a partner commitment it should be dropped.
+
 **Sources** (accessed 2026-11-05):
 1. https://tech.eu/2025/08/13/plancraft-raises-eur38m-series-b-to-drive-ai-transformation-in-european-construction/
 2. https://www.htgf.de/en/plancraft-series-b/
@@ -100,6 +111,10 @@ Changes vs. quick score: L4 4 → 3 (VAT rule, ZUM and Fakturownia API are weeks
 11. https://globenergia.pl/ecopartner-rewolucyjna-aplikacja-wkrotce-zarobia-na-niej-nie-tylko-sprzedawcy-fotowoltaiki/
 12. https://openrouter.ai/google/gemini-2.5-flash
 13. https://artificialintelligenceact.eu/annex/3/
-14. Internal: [TH27 check](../../poland-check/B/TH27-trades-home-services-front-office.md)
+14. https://www.infakt.pl/blog/?p=80793 (2026-11-06, T24, excerpt)
+15. https://www.infakt.infaktcdn.pl/2025/11/regulamin_mcp.pdf (2026-11-06, T24, excerpt)
+16. https://fakturownia.pl/asystent-ai-mcp (2026-11-06, T24)
+17. https://www.fakturoid.cz/blog/2026/04/29/mcp-server (2026-11-06, T24, excerpt)
+18. Internal: [TH27 check](../../poland-check/B/TH27-trades-home-services-front-office.md)
 
 Coverage: 12 web searches/fetches for this write-up (plancraft and Handoff rounds, Polish PV/heat-pump offer tools, OpenSolar in Polish, installer counts, heat-pump sales, VAT 8%/23% rule, Czyste Powietrze 2025 changes, Fakturownia API, trades-app graveyard). Not found: number of installation firms in Poland, prices of Polish quoting apps, any retention data for plancraft or Handoff, a shutdown case.
