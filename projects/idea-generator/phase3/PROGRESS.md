@@ -18,7 +18,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable (403/429/timeout, open in a browser): catawiki.com (home + 2 press releases), kingscrowd.com Fishbrain, companydata.dk Hobbii, sec.gov Etsy 10-Q, seedtable.com buycycle, roadbikerider.com, voxelmatters.com, old.businessden.com, shapeways.com, zoominfo.com, cardmarket.com, wiggle.com, suruga-ya.jp, muziker.com
 - [x] T07 · scan V4 services with a logistics step · needs: T01 · [tasks/07-scan-v4-services-with-logistics.md](tasks/07-scan-v4-services-with-logistics.md)
   - Unverifiable links: mediaexpert.pl, angi.com, icracked.com, eu-startups.com (Sojo), pl.trustpilot.com, se.trustpilot.com, winfuture.de, soomgo.com
-- [ ] T08 · scan V5 small business and professional buying · needs: T01 · [tasks/08-scan-v5-small-business-buying.md](tasks/08-scan-v5-small-business-buying.md)
+- [~] T08 · scan V5 small business and professional buying · needs: T01 · [tasks/08-scan-v5-small-business-buying.md](tasks/08-scan-v5-small-business-buying.md)
+  - Resume: starting
 - [ ] T09 · Polish demand mining · needs: T02, T04, T05, T06, T07, T08 · [tasks/09-demand-mining.md](tasks/09-demand-mining.md)
 - [ ] T10 · findability test · needs: T09 · [tasks/10-findability-test.md](tasks/10-findability-test.md)
 - [ ] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
