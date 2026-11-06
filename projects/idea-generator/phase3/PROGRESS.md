@@ -30,8 +30,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable (403/timeout, real sites): gev-online.com/pl, mieleusa.com remote-assist, elektroda.pl topic3633231 (timeout), frankana.de/en/aboutus.
 - [x] T14 · write-ups batch B · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
   - Unverifiable (403/timeout/SSL, real sites): ebay.de (store hvpa12, item 376242467625), elektroda.pl topic4130040 and poszukaj search (timeout), nwyachting.com (SSL), decathlon.pl Jaxon and Mikado pages (403).
-- [~] T15 · independent critical review · needs: T13, T14 · [tasks/15-independent-critical-review.md](tasks/15-independent-critical-review.md)
-  - Resume: all 10 write-ups reviewed (Devil's advocate + Review changes in each); shortlist.csv/md, rejected.md, CHANGELOG updated; link check on all changed files 0 dead. Dropped: #17, #52, #36, #33, #53 (#1 stays rejected from T14); remaining #19 2.86, #81 2.64, #8 2.63, #24 2.56, all <5%. Nothing left for T15 except marking it done.
+- [x] T15 · independent critical review · needs: T13, T14 · [tasks/15-independent-critical-review.md](tasks/15-independent-critical-review.md)
   - Unverifiable (403/timeout/SSL, real sites): counterman.com reeling-from-returns (new in T15), gev-online.com/pl, frankana.de/en/aboutus, mieleusa.com remote-assist, elektroda.pl topics 3633231 and 4130040 and poszukaj searches (ariston, indesit), ebay.de (hvpa12 store, item 376242467625), nwyachting.com (SSL), decathlon.pl Jaxon and Mikado pages; Allegro listing pages return 403 to the fetch tool, so Allegro findability was not rerun for any write-up.
 - [ ] T16 · summary and validation plans · needs: T15 · [tasks/16-summary-and-validation-plans.md](tasks/16-summary-and-validation-plans.md)
 
@@ -53,3 +52,4 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - 2026-11-06 · T12 done (shortlist 26 rows, 69 rejected with reasons; no idea above 5–15% band, top #81 catering parts 3.5; 7 recurring ideas; 0 external links). Supplier/channel from research only, 10 unverified. Next: T13/T14.
 - 2026-11-06 · T13 done (5 write-ups 001–005: catering parts, body-damage photo quote, 3D-print quote, diagnosis-then-part, camper parts; all end in <5% band after O/R rule; 0 dead links, 4 unverifiable). Polish catering-parts shop Gastroparts exists, so T10 gap for #81 overstated. Supplier terms unverified. Next: T14.
 - 2026-11-06 · T14 done (write-ups 006–010: heat-pump parts, used washer modules, Chinese-brand collision parts, fitment data, fishing box; all <5%; 0 dead links, 7 unverifiable). Contradicts T10: Jaecoo pads and Kaisai parts exist in PL. Next: T15.
+- 2026-11-06 · T15 done (10 write-ups reviewed; 5 dropped: #17,#52,#36,#33,#53; remaining #19 2.86, #81 2.64, #8 2.63, #24 2.56, all <5%; 131 links, 0 dead, 14 unverifiable; Allegro 403 so unverifiable). Next: T16.
