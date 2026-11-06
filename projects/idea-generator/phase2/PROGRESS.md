@@ -62,6 +62,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 2026-11-06 · run · all tasks T01–T25 are [x]; nothing left to do · owner runs validation tests
 2026-11-06 · run · all tasks T01–T25 are [x]; nothing left to do · owner runs validation tests
 2026-11-06 · run · all tasks T01–T25 are [x]; nothing left to do · owner runs validation tests
+2026-11-06 · run · all tasks T01–T25 are [x]; nothing left to do · owner runs validation tests
 2026-11-06 · correction · owner request: 011 rescored 3.2→2.7, 5–15%→<5% after Polish OWU tools were found; no reviewed idea stays at 5–15%; test order now 023, 002, 004, 011 with 001 alongside; other "no Polish product" claims not rechecked · owner runs validation tests
 2026-11-06 · run · all tasks T01–T25 are [x]; nothing left to do · owner runs validation tests
 2026-11-06 · T25 · done: phase2/reports/phase2-summary.md + podsumowanie-pl.md, README Phase 2 status; only 011 at 5–15%, 13 standing ideas <5%; top 5 for validation 011, 023, 002, 004, 001 (≤1 week, ≤200 PLN each); link check 0 dead, 0 unverifiable (no external links in new files) · next: owner runs validation tests. All Phase 2 tasks are [x].
