@@ -84,6 +84,17 @@ Changes vs. quick score: L7 4 → 3 (eKRS has no API and blocks datacenter IPs; 
 
 **Confidence:** medium-low (listing volumes and eKRS access sourced; seller willingness to pay, succession numbers and listing fees not).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *The trust piece is already taken.* BizShop is now listed as a Polish business marketplace with seller verification "Stripe, KSeF or manual" ([PeerPush](https://peerpush.com/p/bizshop), search excerpt 2026-11-06; third-party profile, not confirmed on BizShop's own site). The KSeF-verified revenue that this write-up treats as part of the edge belongs to the listing site, which also owns the seller flow. What is left for us is the valuation range and the teaser/IM text, the most ChatGPT-like part of the product.
+- *ChatGPT will absorb it.* A seller who pastes three years of figures into a general assistant gets a teaser and an SDE-multiple range in minutes. Our only non-generic input is the eKRS comparables set, which needs paid scraped data (no API) and covers sp. z o.o., not the JDG micro firms that make up most listings (a 7.9k PLN online shop has no comparable in eKRS).
+- *Polish customers won't pay this.* The sourced sellers are micro firms (salons, small shops at 10–100k PLN); 399–999 PLN is 1–10% of their price, for documents a buyer of a 16k PLN salon will not read. Each seller buys once.
+- *Western leader localizing in 12 months.* OffDeal is a US brokerage; no move to Europe found. The realistic entrant is the listing site itself (BizShop, sprzedambiznes, OLX) adding an AI teaser, i.e. R5.
+- *Second competitor search (2026-11-06):* "wycena firmy AI online sprzedaż firmy teaser memorandum Polska", "BizShop KSeF weryfikacja": no Polish AI sale-pack tool found; Polish M&A boutiques (Aventis Advisors) publish valuation content for larger deals; generic AI memo generators (corpdev.ai, energent.ai) exist in English. BizShop KSeF verification found (above).
+- *Success signals.* OffDeal: one follow-on round and "30 launched transactions" (company-reported), no closed-deal, revenue or retention data; one country. Not hype, but durable signals are absent; L2 2 is right.
+- *Opportunity/risk lists.* Independent. O3 (KSeF badge) should be read as a partner's feature, not ours; O5 H×L is honest. R1 H×H is honest; the 399 PLN tier does not really mitigate it.
+
+**Review changes (T24, 2026-11-06):** L3 4 → 3 (BizShop already verifies sellers via KSeF; gap narrows to valuation and IM text); weighted 3.1 → **3.0** (L1 4 · L2 2 · L3 3 · L4 4 · L5 3 · L6 2 · L7 3 · L8 2 · L9 3; shortlist quick 3.3 replaced). §4 unchanged: O 19, R 29, R1 H×H → **<5%**. Not rejected: the cheapest test is a pitch to BizShop and sprzedambiznes.pl, which also decides the channel; if neither takes a pilot, drop.
+
 **Sources** (accessed 2026-11-05):
 1. https://offdeal.io/news/offdeal-series-a-funding-radical-ventures-2025
 2. https://www.comparables.ai/
@@ -95,6 +106,7 @@ Changes vs. quick score: L7 4 → 3 (eKRS has no API and blocks datacenter IPs; 
 8. https://www.producthunt.com/products/bizshop
 9. https://openrouter.ai/google/gemini-2.5-pro
 10. https://artificialintelligenceact.eu/annex/3/
-11. Internal: [TH63 check](../../poland-check/C/TH63-finance-ma-research-agents.md)
+11. https://peerpush.com/p/bizshop (2026-11-06, T24, excerpt)
+12. Internal: [TH63 check](../../poland-check/C/TH63-finance-ma-research-agents.md)
 
 Coverage: 6 web searches/fetches for this write-up plus the TH63 check's sources (OffDeal funding and traction, Polish listing volumes, zarząd sukcesyjny counts, sprzedambiznes prices, eKRS bulk access). Not found: sprzedambiznes.pl listing fees, a current zarząd sukcesyjny count, Polish broker fee levels for small deals, any graveyard case, Comparables.ai's Polish coverage.
