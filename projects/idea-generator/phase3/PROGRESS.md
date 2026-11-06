@@ -20,7 +20,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable links: mediaexpert.pl, angi.com, icracked.com, eu-startups.com (Sojo), pl.trustpilot.com, se.trustpilot.com, winfuture.de, soomgo.com
 - [x] T08 · scan V5 small business and professional buying · needs: T01 · [tasks/08-scan-v5-small-business-buying.md](tasks/08-scan-v5-small-business-buying.md)
 - [~] T09 · Polish demand mining · needs: T02, T04, T05, T06, T07, T08 · [tasks/09-demand-mining.md](tasks/09-demand-mining.md)
-  - Resume: starting
+  - Resume: V1 done (demand/V1-vehicle-parts.md, 21 signals, 14 items, links ok). Next: V2 file (autocomplete batch already run: pralka, lodówka, kuchenka, Kaisai heat pump, rekuperator filters, Lidlomix, Zelmer, Parkside batteries, Kernau/Berdsen hoods); then V3, V4, V5.
 - [ ] T10 · findability test · needs: T09 · [tasks/10-findability-test.md](tasks/10-findability-test.md)
 - [ ] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
 - [ ] T12 · filter and shortlist · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
