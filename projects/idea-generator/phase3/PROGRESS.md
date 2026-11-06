@@ -15,7 +15,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T05 · scan V2 home, climate and appliance parts and consumables · needs: T01 · [tasks/05-scan-v2-home-climate-appliance.md](tasks/05-scan-v2-home-climate-appliance.md)
   - Unverifiable (403/timeout, open in a browser): partselect.com, repairclinic.com, appliancepartspros.com, supplyhouse.com, batteriesplus.com, thebusinessdesk.com BOXT, village.ai Fiyo, dutchitchannel.nl, mtsprout.nl, reservex.se, rakuten.co.jp (andonya, sagasikata), particuliers.engie.fr
 - [~] T06 · scan V3 hobby niches · needs: T01 · [tasks/06-scan-v3-hobby-niches.md](tasks/06-scan-v3-hobby-niches.md)
-  - Resume: catalogue/V3-hobby-niches.csv written (39 rows, 15 countries). Next: write research/verticals/V3-hobby-niches.md (hobbies table, patterns, graveyard, top-10 Polish check), then link check.
+  - Resume: research file and catalogue (39 rows) written. Next: run tools/check_links.py on both, fix dead links, list unverifiable ones here, then report.
 - [ ] T07 · scan V4 services with a logistics step · needs: T01 · [tasks/07-scan-v4-services-with-logistics.md](tasks/07-scan-v4-services-with-logistics.md)
 - [ ] T08 · scan V5 small business and professional buying · needs: T01 · [tasks/08-scan-v5-small-business-buying.md](tasks/08-scan-v5-small-business-buying.md)
 - [ ] T09 · Polish demand mining · needs: T02, T04, T05, T06, T07, T08 · [tasks/09-demand-mining.md](tasks/09-demand-mining.md)
