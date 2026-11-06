@@ -9,9 +9,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T01 · setup and method · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
   - Unverifiable (403/429/timeout/SSL, real sites, open in a browser): allegro.pl (home + kategoria/czesci-samochodowe-620), trends.google.com, lsa-conso.fr, apek.cz, heureka.cz, heureka.sk, leboncoin.fr, idealo.de, louis.de, oscaro.com, mediaexpert.pl, euro.com.pl, repairclinic.com, appliancepartspros.com, taskrabbit.com, leroymerlin.pl, monotaro.com
 - [x] T02 · Poland commerce baseline · needs: T01 · [tasks/02-poland-commerce-baseline.md](tasks/02-poland-commerce-baseline.md)
-- [~] T03 · friction patterns: why Oponeo, Uber and Deliveroo won · needs: T01 · [tasks/03-friction-patterns.md](tasks/03-friction-patterns.md)
-  - Resume: Done-when met (22 cases, typology P1–P10, cheap-AI section, graveyard of 6 + Reverb ceiling); link check 0 dead. Ready for review/mark done by the runner.
-  - Unverifiable (403/reset, open in a browser): aftermarketnews.com (RockAuto), dieseltechmag.com, PartSelect.com/Two-Million-Parts.htm, businesswire.com (Uber FY2025), sec.gov (DoorDash and Chewy 10-K)
+- [x] T03 · friction patterns: why Oponeo, Uber and Deliveroo won · needs: T01 · [tasks/03-friction-patterns.md](tasks/03-friction-patterns.md)
 - [ ] T04 · scan V1 vehicle parts and car-related buying · needs: T01 · [tasks/04-scan-v1-vehicle-parts.md](tasks/04-scan-v1-vehicle-parts.md)
 - [ ] T05 · scan V2 home, climate and appliance parts and consumables · needs: T01 · [tasks/05-scan-v2-home-climate-appliance.md](tasks/05-scan-v2-home-climate-appliance.md)
 - [ ] T06 · scan V3 hobby niches · needs: T01 · [tasks/06-scan-v3-hobby-niches.md](tasks/06-scan-v3-hobby-niches.md)
@@ -32,3 +30,4 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 ## Run log
 - 2026-11-06 · T01 done (method/criteria, verticals, sources; link check 0 dead, 18 unverifiable). Next: T02.
 - 2026-11-06 · T02 done (3 files in research/poland, ~47 findings, 47 links ok). Next: T03.
+- 2026-11-06 · T03 done (friction-patterns.md: 22 cases, 10 patterns, AI section, graveyard; 0 dead links, 6 unverifiable). Next: T04.
