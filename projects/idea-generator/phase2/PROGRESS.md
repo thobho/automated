@@ -52,14 +52,14 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   Unverifiable links: mos.cudzoziemcy.gov.pl/jak-zaczac, migrant.poznan.uw.gov.pl, businesswire.com (Parspec), allegro.gcs-web.com (2023 report PDF)
 - [x] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
   Unverifiable links (timeout/403/SSL, sites exist): thenegotiator.co.uk, mos.cudzoziemcy.gov.pl, migrant.poznan.uw.gov.pl, digitalhealth.net, htworld.co.uk, businesswire.com, businessnewsaustralia.com, allegro.gcs-web.com, asiae.co.kr, prawo.pl, wolterskluwer.com, api.sejm.gov.pl
-- [~] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
-  Resume: all T25 outputs written (phase2/reports/phase2-summary.md, podsumowanie-pl.md, README.md Phase 2 status); link check passed (0 external links, all relative links resolve); only marking T25 [x] and the run-log line remain
+- [x] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
 
 ## Blocked / questions for the owner
 (none)
 
 ## Run log
 <!-- newest first: YYYY-MM-DD HH:MM · task · what was done · next step -->
+2026-11-06 · T25 · done: phase2/reports/phase2-summary.md + podsumowanie-pl.md, README Phase 2 status; only 011 at 5–15%, 13 standing ideas <5%; top 5 for validation 011, 023, 002, 004, 001 (≤1 week, ≤200 PLN each); link check 0 dead, 0 unverifiable (no external links in new files) · next: owner runs validation tests. All Phase 2 tasks are [x].
 2026-11-06 · T24 · done: all 24 write-ups reviewed (Devil's advocate + Review changes, shortlist.csv matches); only 011 (3.2) stays 5–15%, 001–005, 008, 010, 012–014, 016, 021, 023 <5%; merged 006→001, 007+017→002; rejected 009, 015, 018, 019, 020, 022, 024; link check 0 dead, 5 unverifiable in last batch; caveats: evidence mostly search excerpts/vendor pages, no hands-on of competitors, several market counts unsourced · next T25
 2026-11-06 · T24 · progress: 16 of 24 reviewed (added 007–013); 007 merged into 002, 009 rejected; 011 the only reviewed idea still at 5–15% (013 moved to <5%); link check 226 links, 0 truly dead; caveats: new evidence mostly search excerpts, translator and broker counts still unsourced, no hands-on of competitors · next 014, then 015–018, 021–023
 2026-11-06 · T24 · progress: 9 of 24 reviewed (001–006, 019, 020, 024); 019, 020, 024 rejected, 006 merged into 001; 001–005 all <5% after §4; link check 124 links, 0 dead; caveats: new evidence mostly from search excerpts, no hands-on of competitors · next 007, then 008–018, 021–023
