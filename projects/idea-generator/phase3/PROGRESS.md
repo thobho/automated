@@ -26,8 +26,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
   - Unverifiable: longlist.md has no external URLs; the 58 unverifiable links are pre-existing ones in catalogue/*.csv (403/429/timeout), already listed under T04–T08.
 - [x] T12 · filter and shortlist · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
-- [~] T13 · write-ups batch A · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
-  - Resume: 5/5 done, Done-when met: 001 #81 (ideas/v5-small-business/001-catering-equipment-parts.md), 002 #17 (ideas/v1-vehicle/002-body-damage-photo-quote.md), 003 #52 (ideas/v3-hobby/003-3d-print-instant-quote.md), 004 #36 (ideas/v2-home-appliance/004-diagnosis-then-part.md), 005 #8 (ideas/v1-vehicle/005-camper-habitation-parts.md); shortlist.csv (writeup_path column, final scores) and shortlist.md updated, CHANGELOG noted. All five final 2.8–3.0, band <5% after O/R. Link check 0 dead. Nothing left; awaiting the runner to mark T13 [x].
+- [x] T13 · write-ups batch A · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
   - Unverifiable (403/timeout, real sites): gev-online.com/pl, mieleusa.com remote-assist, elektroda.pl topic3633231 (timeout), frankana.de/en/aboutus.
 - [ ] T14 · write-ups batch B · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
 - [ ] T15 · independent critical review · needs: T13, T14 · [tasks/15-independent-critical-review.md](tasks/15-independent-critical-review.md)
@@ -49,3 +48,4 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - 2026-11-06 · T10 done (5 findability files, 87 items; gap rate V1 59%, V2 39%, V3 31%, V4 79%, V5 65%; link check 0 dead, 2 unverifiable). Allegro 403 so untested, Google replaced by WebSearch: gaps likely overstated. Gaps: orphan/Chinese brands, discontinued-appliance parts, distributor-only brands, post-warranty electronics repair. Next: T11.
 - 2026-11-06 · T11 done (95 ideas, 20 themes, pattern column filled in 201 catalogue rows; link check 0 dead, 58 older unverifiable in CSVs). 39 ideas with N/W gap, 22 found easily, 34 untested. Supplier terms unverified. Next: T12.
 - 2026-11-06 · T12 done (shortlist 26 rows, 69 rejected with reasons; no idea above 5–15% band, top #81 catering parts 3.5; 7 recurring ideas; 0 external links). Supplier/channel from research only, 10 unverified. Next: T13/T14.
+- 2026-11-06 · T13 done (5 write-ups 001–005: catering parts, body-damage photo quote, 3D-print quote, diagnosis-then-part, camper parts; all end in <5% band after O/R rule; 0 dead links, 4 unverifiable). Polish catering-parts shop Gastroparts exists, so T10 gap for #81 overstated. Supplier terms unverified. Next: T14.
