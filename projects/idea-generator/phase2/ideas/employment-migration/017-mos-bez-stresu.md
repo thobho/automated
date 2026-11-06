@@ -91,6 +91,18 @@ Changes vs. quick score: none on the lenses (L5 4 now sourced with OKO.press app
 
 **Confidence:** medium-low (rules and market size sourced; willingness to pay, ChatGPT quality on MOS and post-MOS-2.0 complaints not tested).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *Free help already sits where users look.* Since MOS-only filing, voivodeship offices run free information points for people who need help creating an account or filling in the application (Wielkopolski UW, search excerpt of [migrant.poznan.uw.gov.pl](https://migrant.poznan.uw.gov.pl/pl/node/4754), 2026-11-06; page failed to load: certificate error), universities publish MOS Q&A packs for foreign students and staff (e.g. [UAM, updated 27.04](https://amu.edu.pl/__data/assets/pdf_file/0029/659252/nowy-MOS-pytania-i-odpowiedzi-PL-wersja-zaktualizowana-27.04.pdf), search result), and Zielona Linia, UdSC and Ukrainian news sites (thepage.ua, minfin.com.ua, visitukraine.today) explain CUKR step by step in Ukrainian. Commercial players stop at photos: Visafoto sells MOS-compliant residence-permit photos with a 99.7% acceptance claim and walks through MOS for free ([Visafoto MOS guide](https://visafoto.com/poland/residence-permit-application-mos-guide), fetched 2026-11-06). R1 H×H is better evidenced than when written.
+- *Nobody sells this in Poland, and that is a warning.* Two further searches (Polish and Ukrainian, "pomoc w wypełnieniu wniosku MOS online cena", "MOS ... CUKR заява онлайн допомога бот") found no paid online MOS helper at any price. Agencies sell full service at ~4.5k PLN; the space between free guides and full service is empty, which can mean a gap or no willingness to pay. The validation test must separate the two.
+- *ChatGPT will absorb it.* A Ukrainian user can already ask ChatGPT what CUKR costs (340 + 100 PLN) and which signature works; office-specific attachment lists are the only part it lacks, and those are published by each office in Ukrainian.
+- *The one structural point in its favour.* The same office excerpt says a pełnomocnik may take part only while the foreigner fills in the application in their presence, so agencies cannot fully file for the client; this supports guided self-filling, but it helps 002's agencies (sitting next to the client) as much as a B2C tool.
+- *Western leader localizing in 12 months.* Boundless is US-only and pre-LLM; no sign of interest in Poland. Not a threat.
+- *Claims re-checked.* CUKR window 2026-05-04 to 2027-03-04 and MOS-only filing: confirmed again (UdSC and Zielona Linia via search, 2026-11-06). Number of CUKR applications filed so far: still not published (searched again).
+- *Success signals.* Boundless: funding to 2021, no revenue or retention since; Visabot: no recent trace; LLM-era analogues are free state services. No durable signal and no hype either; L2 2 stays.
+- *Opportunity/risk lists.* O3 "communities spread a tool" rated H without evidence → M×M. O1 and R3 both come from the CUKR deadline but are different effects (a peak vs. the cliff after it), kept. R6 (state assistant) stays L: the free help that exists is human help points, already counted in R1.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 4 · L2 2 · L3 3 · L4 4 · L5 4 · L6 2 · L7 3 · L8 3 · L9 2; weighted **3.1**; shortlist quick 3.1 now reviewed). O3 H×M → M×M. §4: O 6+6+4+4+3 = 23, R 31, R − O = 8 and R1 H×H → down one → **<5%** (unchanged). **Rejected as a standalone idea** and recorded in [rejected.md](../../rejected.md) as merged into L036 (write-up [002](002-teczka-legalizacyjna.md)) as its B2C/employer front end, as the write-up itself recommended: free official help points, no paid B2C helper anywhere in Poland, and a demand peak that ends on 2027-03-04.
+
 **Sources** (accessed 2026-11-06 unless noted):
 1. https://builtin.com/articles/boundless-immigration-raises-25m-series-b-hiring
 2. https://www.smithsonianmag.com/innovation/could-chatbot-prevent-some-deportations-180962435/
@@ -109,5 +121,8 @@ Changes vs. quick score: none on the lenses (L5 4 now sourced with OKO.press app
 15. https://openrouter.ai/google/gemini-2.5-flash (accessed 2026-11-05)
 16. https://artificialintelligenceact.eu/annex/3/
 17. Internal: [TH59 check](../../poland-check/B/TH59-citizen-sme-public-service-navigators.md), [002](002-teczka-legalizacyjna.md), R3/R4/R5/R8 catalogue rows
+18. https://migrant.poznan.uw.gov.pl/pl/node/4754 (2026-11-06, T24, search excerpt; certificate error on fetch)
+19. https://amu.edu.pl/__data/assets/pdf_file/0029/659252/nowy-MOS-pytania-i-odpowiedzi-PL-wersja-zaktualizowana-27.04.pdf (2026-11-06, T24, search result)
+20. https://visafoto.com/poland/residence-permit-application-mos-guide (2026-11-06, T24)
 
 Coverage: 7 web searches and 3 page fetches for this write-up (CUKR application counts, MOS problems, Polish B2C helpers, Boundless and Visabot traction and fate). Not found: CUKR applications filed so far, post-MOS-2.0 complaint coverage, any paid Polish B2C MOS helper, Boundless current revenue.
