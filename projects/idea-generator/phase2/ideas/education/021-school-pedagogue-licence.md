@@ -82,6 +82,19 @@ Changes vs. quick score: none on the lenses (L5 4 now sourced with MEN FTE data)
 
 **Confidence:** medium-low (rules, user counts and the incumbent's prices sourced; specialists' willingness to switch from ChatGPT and school buying speed not tested).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *The ministry's teacher guide names this product's core documents.* The ZPE guide "Do czego AI nie służy. Przewodnik dla nauczycieli" tells teachers "pod żadnym pozorem" to use AI tools, language models included, for "wielospecjalistyczna ocena poziomu funkcjonowania ucznia (WOPFU)", for correspondence with the poradnia and for opinions about a child required by a court or poradnia, because that passes data to tools that should not have it ([ZPE, section 4.1](https://zpe.gov.pl/a/iv-do-czego-ai-nie-sluzy---szkolne-przyklady-dzialan-niepozadanych-41-przyklady-niewlasciwego-wykorzystywania-narzedzi-ai-przez-uczniow-nauczycieli-i-dyrektorow-szkol/DLLzz186W), fetched 2026-11-06; undated). Every MVP document type is on that list. Browser-side pseudonymisation answers the stated reason, but a school IOD or director only needs to point at a gov.pl page to say no. R4 likelihood M is too low.
+- *Counterpoint: schools already buy an LLM tool for the next document in the chain.* Smart IPET reads the orzeczenie and WOPFU and drafts the IPET with language models, advertises "inteligentne rekomendacje" and a no-training promise, and sells 30-user institutional packages at ~3,000 PLN/year ([smartipet.pl](https://smartipet.pl/ipet-w-kilka-minut/), re-fetched 2026-11-06). So the guidance has not stopped school purchases; it does mean that the publisher already holding WOPFU as an input is one feature away from generating it (R1).
+- *ChatGPT will absorb it.* Specialists already use free assistants (R3); Google AI Pro for Education gives schools a sanctioned general tool. The paid edge is the required-element checklist, which is also what ORKE and training centres teach for free or for 199 PLN.
+- *Polish customers won't pay this fast enough.* 121 schools within 12 months through director approvals and organ prowadzący budgets, with a dead summer, is the main problem (R2), unchanged by this review.
+- *Western leader localizing in 12 months.* MagicSchool is unlikely to learn WOPFU rules; not a real threat.
+- *Second competitor search (2026-11-06):* "WOPFU generator AI program online pedagog specjalny 2026": no AI WOPFU tool found; results were school guides, free webinars on WOPFU duties (e.g. a 2026-01-13 webinar, [ClickMeeting](https://nodncos.clickmeeting.com/wopfu-)) and research papers.
+- *Claims re-checked.* Smart IPET scope (IPET only, WOPFU as input) and prices: confirmed. Psychologist FTE growth (10,548 → 12,508): not re-checked (search excerpt of an MEN reply).
+- *Success signals.* Al-Muwajjih is a 2025 chart rank; MagicSchool's traction is broad co-piloting. No durable signal for specialist records; L2 2 stays.
+- *Opportunity/risk lists.* O1 (more specialists) and O5 (more orzeczenia) are distinct drivers (staff vs. caseload), kept. R1 likelihood M is honest: adjacency, no announcement. R4 M×H → H×H (ministry guide).
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 3 · L2 2 · L3 3 · L4 4 · L5 4 · L6 3 · L7 4 · L8 2 · L9 2; weighted **3.1**; shortlist quick 3.1 now reviewed). L5 stays 4 because schools pay for an LLM-based IPET tool, which is direct demand evidence that 015 lacked. R4 M×H → H×H: the ZPE guide names WOPFU and court/poradnia opinions; pseudonymisation and a DPA template are only a partial mitigation. §4: O 19, R 6+6+6+9+3 = 30, R − O = 11 → down one → **<5%** (unchanged; one H×H risk, so not two bands). Not rejected: unlike 015 the payer is the school and an AI precedent (Smart IPET) is bought, but validation must start with two school IODs reviewing the data design against the ZPE guide.
+
 **Sources** (accessed 2026-11-06 unless noted):
 1. https://www.magicschool.ai/blog-posts/series-b-fundraise-for-teacher-ai (accessed 2026-11-05)
 2. https://knowledge.workspace.google.com/admin/generative-ai/workspace-with-gemini/ai-pro-for-education?hl=pl
@@ -95,5 +108,8 @@ Changes vs. quick score: none on the lenses (L5 4 now sourced with MEN FTE data)
 10. https://openrouter.ai/google/gemini-2.5-flash (accessed 2026-11-05)
 11. https://artificialintelligenceact.eu/annex/3/
 12. Internal: [TH36 check](../../poland-check/C/TH36-teacher-school-paperwork.md), [015](015-opinia-i-sprawozdanie.md), R9 catalogue rows
+13. https://zpe.gov.pl/a/iv-do-czego-ai-nie-sluzy---szkolne-przyklady-dzialan-niepozadanych-41-przyklady-niewlasciwego-wykorzystywania-narzedzi-ai-przez-uczniow-nauczycieli-i-dyrektorow-szkol/DLLzz186W (2026-11-06, T24)
+14. https://smartipet.pl/ipet-w-kilka-minut/ (2026-11-06, T24, re-fetched)
+15. https://nodncos.clickmeeting.com/wopfu- (2026-11-06, T24, search result)
 
 Coverage: 5 web searches and 1 fetch for this write-up (specialist FTE counts, AI WOPFU tools and prices, school counts, IEP-AI startups, Smart IPET scope). Not found: any Polish AI WOPFU tool, a funded IEP/school-psychology report startup, the number of pedagogues (only psychologists' FTE).
