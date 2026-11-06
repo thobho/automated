@@ -6,7 +6,7 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Tasks
-- [~] T01 · setup and method · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
+- [x] T01 · setup and method · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
   - Resume: all four files done (criteria, verticals, sources; CHANGELOG/rejected kept); link check 2026-11-06: 168 links, 0 dead, 18 unverifiable; awaiting review to mark [x]
   - Unverifiable (403/429/timeout/SSL, real sites, open in a browser): allegro.pl (home + kategoria/czesci-samochodowe-620), trends.google.com, lsa-conso.fr, apek.cz, heureka.cz, heureka.sk, leboncoin.fr, idealo.de, louis.de, oscaro.com, mediaexpert.pl, euro.com.pl, repairclinic.com, appliancepartspros.com, taskrabbit.com, leroymerlin.pl, monotaro.com
 - [ ] T02 · Poland commerce baseline · needs: T01 · [tasks/02-poland-commerce-baseline.md](tasks/02-poland-commerce-baseline.md)
@@ -29,3 +29,4 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 (none)
 
 ## Run log
+- 2026-11-06 · T01 done (method/criteria, verticals, sources; link check 0 dead, 18 unverifiable). Next: T02.
