@@ -93,6 +93,8 @@ Each write-up gets **Devil's advocate** and **Review changes** sections (fresh f
 | 81 | [001](v5-small-business/001-catering-equipment-parts.md) | 2.79 → 2.64 | <5% | F4 3→2: at CPC PLN 2.5 and 2% conversion (CAC ~PLN 125) the first order loses ~PLN 53; Gastroparts shows only retail prices; REPA (ex-GEV) confirmed as Unox distributor for DACH, no public reseller terms |
 | 17 | [002](v1-vehicle/002-body-damage-photo-quote.md) | 2.88 → 2.51 | **rejected** | Oferteo runs a multi-shop body-shop quote category; PZU and LINK4 already estimate damage from photos with AI; fee per request ~PLN 0 after CAC; moved to [rejected.md](../rejected.md#t15--independent-critical-review-2026-11-06) |
 | 8 | [005](v1-vehicle/005-camper-habitation-parts.md) | 3.00 → 2.63 | <5% | Reimo PL delivers "only to Germany" and routes Poles to dealers; DE→PL parcel ~PLN 91–108 (DHL EU tariff) wipes the margin; window seals are findable at Reimo PL |
+| 52 | [003](v3-hobby/003-3d-print-instant-quote.md) | 2.79 → 2.52 | **rejected** | Filaquote (Shopify, Polish on the USD 15 plan) and WooCommerce plugins give any bureau an instant STL price; PLN 11 per order vs CAC PLN 75–125 |
+| 36 | [004](v2-home-appliance/004-diagnosis-then-part.md) | 2.78 → 2.53 | **rejected** | Bosch Home Connect and LG Smart Diagnosis do remote triage; one-off purchase, PLN ~16 per customer vs CAC PLN 50–83; no appliance-parts supplier with public dropship terms |
 <!-- T15 rows end -->
 
 ## Caveats
