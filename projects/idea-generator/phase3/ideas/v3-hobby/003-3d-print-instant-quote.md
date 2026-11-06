@@ -1,0 +1,71 @@
+# 003 — Instant multi-bureau 3D-print quote from an uploaded file
+**One-liner:** Upload an STL/STEP file, get instant prices and delivery dates from several Polish print bureaus in Polish, pay by BLIK with a VAT invoice, and the chosen bureau prints and ships by InPost.
+**Vertical:** V3 | **Model:** commission from the bureau (main); small buyer service fee (alternative) | **B2C and small B2B** (makers, engineers, small firms)
+**Friction removed:** price discovery (each Polish maker quotes each file by hand) and finding (which bureau has the material and a free machine this week). Today the buyer posts the file on Oferteo, Useme or Allegro Lokalnie and waits for messages, or orders from a Chinese instant-quote service.
+**Analogues:** Craftcloud by All3DP (Germany, price comparison since 2015): 150+ manufacturing partners, "95 different countries", "transparent pricing, no minimum order", no Polish UI ([Craftcloud](https://craftcloud3d.com/), accessed 2026-11-06; [catalogue V3-DE-005](../../catalogue/V3-hobby-niches.csv)). Treatstock (instant quote widget comparing vendors and technologies; lists at least one vendor in Kraków) ([Treatstock](https://de.treatstock.com/l/3d-printing-service-online-order), [Treatstock vendor page](https://www.treatstock.com/c/technology-applied-sp-z-oo), accessed 2026-11-06). Shapeways (own factories) filed for Chapter 7 in July 2024 (graveyard below). Traction, take rate and repeat rate of Craftcloud and Treatstock: not published (unverified).
+**Findability gap in Poland:** T10 tested only printer parts (Bambu A1 hotend: E) ([V3 #16](../../findability/V3-hobby-niches.md#16-hotend-bambu-lab-a1-3d-printer-v3-d05)); the service was not tested there. T13 query, 2026-11-06, `druk 3D na zamówienie wycena online wgraj plik STL natychmiastowa cena Polska`: no Polish instant-quote comparison; results were makers quoting by hand on Useme ([PrintMe on Useme](https://useme.com/pl/roles/contractor/printme,641278/)) and Allegro Lokalnie ("każdy model wyceniam indywidualnie") ([Allegro Lokalnie offer](https://allegrolokalnie.pl/oferta/usluga-druku-3d-na-zamowienie-i2z)), Oferteo lists (FDM PLN 30–60 per machine hour ([Oferteo Wschowa](https://www.oferteo.pl/druk-3d/wschowa))), all accessed 2026-11-06. Result: **W** — a buyer finds many printers at once but gets no instant comparable price in Polish; instant prices exist in English (Craftcloud, Treatstock, JLC3DP).
+**Supply side:** (1) **Zortrax** (Polish printer maker) launched on-demand printing in January 2020 for individuals and firms, all its technologies (LPD, LPD Plus, UV LCD) ([money.pl / ISBnews](https://www.money.pl/gielda/zortrax-uruchamia-uslugi-druku-3d-na-zadanie-6470129187162241a.html), accessed 2026-11-06); quotes via a form (not instant). (2) **Technology Applied sp. z o.o.**, a Polish vendor already on Treatstock (page above; location unverified). (3) Small makers on Useme and Oferteo (e.g. PrintMe, PandaPrint3D ([Useme](https://useme.com/pl/roles/contractor/pandaprint3d,388436/), accessed 2026-11-06)). Will they work with a newcomer? Small makers want orders and some already sit on Treatstock, so likely yes for leads; whether they accept automatic prices and a commission is unverified. None contacted.
+**Data:** the file comes from the buyer (their IP; terms must forbid printing copyrighted or weapon parts). Pricing per bureau = machine-hour rate + material per gram, computed with an open-source slicer (PrusaSlicer/Cura) on the server; Prusa publishes the cost logic ([Prusa blog, cost of a print](https://blog.prusa3d.com/pl/jak-obliczyc-koszt-druku_38650/), accessed 2026-11-06). No third-party catalogue licence needed.
+**Polish competition:** Oferteo, Useme, Fixly, Allegro Lokalnie (lead or freelance marketplaces, no instant price); Zortrax and larger bureaus (own form); Craftcloud and Treatstock (instant, English, foreign bureaus mostly); JLC3DP (China) advertises prints "from USD 0.30" with instant quotes including shipping ([JLC3DP](https://jlc3dp.com/events/professional-3d-printing), accessed 2026-11-06). The gap left is narrow: Polish language, BLIK, VAT invoice and 1–2 day domestic delivery.
+**Demand evidence:** autocomplete phrase `druk 3d na zamówienie cena` was the T09 seed for this idea ([V3 demand](../../demand/V3-hobby-niches.md), [V3 scan §7](../../research/verticals/V3-hobby-niches.md#7-ten-most-promising-analogues-for-poland-quick-polish-check)); Oferteo keeps city pages for 3D printing (above), which suggests steady requests. Group size (people and firms ordering prints in Poland): unverified.
+**How AI is used:** printability check and auto-orientation are rules-based slicer work; AI helps classify the request (functional part vs. figurine, material advice), fix broken meshes and answer "which material" questions. Cost per order under PLN 0.50 (estimate). This is mostly software, not AI.
+**Physical work:** none (bureaus print, pack and ship). By hand: quality disputes (photos, reprint decisions), bureau onboarding.
+
+| Orders / month | Physical work | Disputes and reprints | Bureau support | Total h / month |
+|---|---|---|---|---|
+| 10 | 0 h | 0.5 h | 3 h | 3.5 h |
+| 50 | 0 h | 2 h | 3 h | 5 h |
+| 200 | 0 h | 7 h | 4 h | 11 h (non-physical) |
+
+(estimates: 5% of orders disputed at ~40 min)
+
+**MVP (≤6 weeks):** web upload, slicer-based price for FDM in PLA/PETG/ASA only, 3–5 bureaus with their own rates entered as rules, BLIK via a gateway, order passed to the bureau by e-mail with the file, InPost label generated for the bureau; VAT invoice issued by the bureau (marketplace model) or by the platform (reseller model; decide with an accountant).
+**Monetisation:** 15% commission on the print price (estimate; Craftcloud's rate is not published). **Unit economics per order (fees, estimate):**
+
+| Item | PLN | Basis |
+|---|---|---|
+| Print price paid by buyer (excl. shipping) | 150 | estimate; a few machine hours at PLN 30–60/h (Oferteo) plus material |
+| Commission 15% | 22.5 | estimate |
+| Payment fee ~1.5% of 150 (platform collects) | −2.3 | secondary source BLIK 0.79–1.4% ([Freenance](https://freenance.io/przedsiebiorczosc/bramki-platnosci-2026-ranking-stripe-payu-przelewy24-tpay-bluemedia-porownanie/), accessed 2026-11-06) |
+| Shipping | 0 | buyer pays InPost (PLN 14.55–21.04 business locker rate, [logistics L2](../../research/poland/logistics-and-returns.md)) |
+| Reprint/dispute share (5% × PLN 22.5 refunded commission) | −1.1 | estimate; bureau pays reprint |
+| Support 8 min at PLN 60/h | −8 | estimate |
+| **Fees after costs, repeat order** | **11** | |
+| CAC: Google Ads CPC ~PLN 1.5, 4% conversion | −37 | estimate; CPC unverified |
+| **First order** | **−26** | |
+
+10,000 PLN monthly fees after costs needs ~900 repeat-level orders a month (10,000 / 11), i.e. ~PLN 135,000 of print turnover. Figures are **fees**, not turnover. No sourced size of the buying group, so the 20× check cannot be passed.
+**Distribution, first 100 buyers:** SEO pages per material and use (`druk 3d PETG cena`, `druk 3d części zamienne na zamówienie`), Polish maker groups and forums (names and sizes unverified), technical universities' student clubs, and engineers at small firms (direct e-mail).
+**Regulation:** marketplace or reseller: decide who is seller of record. Custom-made goods have no 14-day withdrawal right ([UOKiK exceptions, logistics L15](../../research/poland/logistics-and-returns.md)); rękojmia still applies to defects. Terms must ban weapon parts (gun parts are a criminal-law risk) and IP-infringing models; GPSR applies to the seller of consumer products. RODO standard.
+**Opportunities (szanse):**
+1. Small firms and engineers want a fast local print with a VAT invoice and pay for certainty of date. Likelihood M, impact M (4). True if: ≥30% of first orders ask for a VAT invoice.
+2. Polish makers with idle printers accept automatic orders at a commission rather than chase leads on Oferteo. M / M (4). True if: 5 of 10 makers contacted sign within 2 weeks.
+3. Foreign platforms keep ignoring Polish language, BLIK and InPost. L / M (2). True if: no Polish UI at Craftcloud/Treatstock after 6 months.
+4. Same flow extends to CZ/SK makers. L / L (1).
+**O = 11.**
+**Risks (ryzyka):**
+1. Low ticket and low commission: acquisition per order exceeds the fee and repeat rate is unknown. Likelihood H, impact H (9). Early sign: CAC above PLN 30 after the first PLN 250 of ads. Mitigation in the MVP: none beyond SEO pages, which take months.
+2. Chinese instant-quote services (JLC3DP and others) win on price for anything not urgent. H / M (6). Early sign: buyers quote JLC3DP prices back.
+3. Bureaus refuse automatic prices or a 15% commission. M / H (6). Early sign: fewer than 3 of 10 makers agree.
+4. Quality disputes on hobby prints (layer lines, tolerance) eat support time. M / L (2). Early sign: >10% of orders disputed.
+**R = 23.**
+**Success signals:** Craftcloud survives on the routing model where Shapeways' factory model failed, which supports the no-stock design (signal 8 weak, signal 5 unknown). No repeat or take rate published (durability unproven). Hype warning: Shapeways' SPAC listing and collapse ([catalogue V3-US-005](../../catalogue/V3-hobby-niches.csv)). A Polish version can reproduce signal 6 (price in minutes) and perhaps 2 for firms that reorder; signal 1 (replaces a spend) is weak.
+**Graveyard:** Shapeways (own print factories) filed for Chapter 7 on 2 July 2024 after defaulting on a USD 669,500 note; the brand was later bought and relaunched ([Hackaday](https://hackaday.com/2024/07/04/shapeways-files-for-bankruptcy), accessed 2026-11-06). Lesson: one-off hobby prints are price-competitive and thin.
+**Scores (1–5):** F1 2 (was 3: makers answer free quotes within hours and instant prices exist in English; the friction is waiting and language) · F2 3 (city-level Oferteo pages and autocomplete; size unsourced) · F3 4 (bureaus print and ship) · F4 2 (~PLN 11 per order after costs; ~900 orders a month needed; estimates) · F5 2 (pricing is slicer rules) · F6 3 (no Polish instant comparison; Treatstock, Craftcloud, JLC3DP nearby) · F7 4 (custom goods, ban on weapon/IP files) · F8 4 (pure software MVP; makers reachable online) · F9 2 (copyable; bureau network is the only moat) | **Weighted:** 2.8 / 5 (2.79) | **Chance band:** `<5%`. Score gives `5–15%`; O 11, R 23, R − O = 12 and one unmitigated H×H risk → down one band. The friction is small and the commission per order cannot pay for paid acquisition.
+**Cheapest validation test (≤2 weeks, ≤300 PLN):** message 10 makers on Oferteo/Useme: will they accept orders at fixed rules (PLN/h, PLN/g) and 15% commission (0 PLN). Build a one-page upload form that returns an automatic PLA/PETG price from one slicer profile; PLN 250 of Google Ads on 15 phrases; route paid orders by hand to the makers who agreed. Measure upload-to-pay conversion, VAT-invoice share, CAC.
+**Kill criteria:** fewer than 3 makers agree; upload-to-pay below 5%; or CAC above PLN 30 per paid order.
+**Confidence:** medium (competition and price structure are checked; demand size is not).
+**Sources:**
+- [Craftcloud](https://craftcloud3d.com/), accessed 2026-11-06
+- [Treatstock online 3D printing service](https://de.treatstock.com/l/3d-printing-service-online-order), accessed 2026-11-06 (via search summary)
+- [Treatstock vendor Technology Applied sp. z o.o.](https://www.treatstock.com/c/technology-applied-sp-z-oo), accessed 2026-11-06 (via search summary)
+- [Useme, PrintMe](https://useme.com/pl/roles/contractor/printme,641278/), accessed 2026-11-06 (via search summary)
+- [Useme, PandaPrint3D](https://useme.com/pl/roles/contractor/pandaprint3d,388436/), accessed 2026-11-06 (via search summary)
+- [Allegro Lokalnie, 3D print to order](https://allegrolokalnie.pl/oferta/usluga-druku-3d-na-zamowienie-i2z), accessed 2026-11-06 (via search summary)
+- [Oferteo, druk 3D Wschowa](https://www.oferteo.pl/druk-3d/wschowa), accessed 2026-11-06
+- [money.pl, Zortrax on-demand printing (Jan 2020)](https://www.money.pl/gielda/zortrax-uruchamia-uslugi-druku-3d-na-zadanie-6470129187162241a.html), accessed 2026-11-06
+- [JLC3DP professional 3D printing](https://jlc3dp.com/events/professional-3d-printing), accessed 2026-11-06 (via search summary)
+- [Prusa blog, how to compute print cost](https://blog.prusa3d.com/pl/jak-obliczyc-koszt-druku_38650/), accessed 2026-11-06 (via search summary)
+- [Hackaday, Shapeways files for bankruptcy](https://hackaday.com/2024/07/04/shapeways-files-for-bankruptcy), accessed 2026-11-06
+- [Freenance, payment gateways 2026](https://freenance.io/przedsiebiorczosc/bramki-platnosci-2026-ranking-stripe-payu-przelewy24-tpay-bluemedia-porownanie/), accessed 2026-11-06 (via search summary)
+- Internal: [V3 scan](../../research/verticals/V3-hobby-niches.md), [V3 findability](../../findability/V3-hobby-niches.md), [logistics](../../research/poland/logistics-and-returns.md), [longlist #52](../longlist.md#v3--hobby-niches-with-thin-coverage)
