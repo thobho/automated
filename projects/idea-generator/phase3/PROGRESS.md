@@ -14,7 +14,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable (403/468/timeout, open in a browser): businesswire.com PartsTech, thebusinessdesk.com Tyres on the Drive, aftermarketnews.com RockAuto, repairpal.com, louis.de, oscaro.com, auto-infos.fr/opisto, autobutler.co.uk, skruvat.se, autoway.jp, mroauto.cz, ebay.de mroparts store
 - [x] T05 · scan V2 home, climate and appliance parts and consumables · needs: T01 · [tasks/05-scan-v2-home-climate-appliance.md](tasks/05-scan-v2-home-climate-appliance.md)
   - Unverifiable (403/timeout, open in a browser): partselect.com, repairclinic.com, appliancepartspros.com, supplyhouse.com, batteriesplus.com, thebusinessdesk.com BOXT, village.ai Fiyo, dutchitchannel.nl, mtsprout.nl, reservex.se, rakuten.co.jp (andonya, sagasikata), particuliers.engie.fr
-- [ ] T06 · scan V3 hobby niches · needs: T01 · [tasks/06-scan-v3-hobby-niches.md](tasks/06-scan-v3-hobby-niches.md)
+- [~] T06 · scan V3 hobby niches · needs: T01 · [tasks/06-scan-v3-hobby-niches.md](tasks/06-scan-v3-hobby-niches.md)
+  - Resume: starting
 - [ ] T07 · scan V4 services with a logistics step · needs: T01 · [tasks/07-scan-v4-services-with-logistics.md](tasks/07-scan-v4-services-with-logistics.md)
 - [ ] T08 · scan V5 small business and professional buying · needs: T01 · [tasks/08-scan-v5-small-business-buying.md](tasks/08-scan-v5-small-business-buying.md)
 - [ ] T09 · Polish demand mining · needs: T02, T04, T05, T06, T07, T08 · [tasks/09-demand-mining.md](tasks/09-demand-mining.md)
