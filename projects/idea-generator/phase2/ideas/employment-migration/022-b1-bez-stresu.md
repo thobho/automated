@@ -81,6 +81,21 @@ Changes vs. quick score: none on the lenses (L3 2 confirmed by Mova's App Store 
 
 **Confidence:** medium (exam volumes and the competitor sourced; scoring quality and willingness to pay untested).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *It already works in Polish, several times over.* The second search found a crowded niche, not one early entrant:
+  - **PolskiTest.pl** (web): mock B1/B2/C1 exams, "most of the tests ... are real exams from previous years", AI feedback on writing with a corrected version, recorded oral exam, tutor directory, UI in EN/PL/BE/RU/UA; **30 PLN for 1 month, 40 PLN for 2, 50 PLN for 3**, speaking packages 20–50 PLN ([polskitest.pl](https://polskitest.pl/en/), fetched 2026-11-06).
+  - **PolskiPro: Polish B1 & B2 Exam Preparation** (developer Dzianis Hrynko): full exam simulator, essays, pronunciation beta, human-checked content, menu in PL/BE/UA/RU; **39.99 PLN/month, 109.99 PLN/3 months**, 4.3★ from 6 ratings ([App Store PL](https://apps.apple.com/pl/app/polskipro/id6749869442), fetched 2026-11-06).
+  - **Mova** (B1–C1, AI writing and speaking scoring, US$9.99–14.99/month; cited above), plus PolishGo ([App Store](https://apps.apple.com/mx/app/polishgo/id6752503183), search result) and a Belarusian-built B1 prep app covered by dev.by ([dev.by](https://devby.io/news/belarus-sdelal-prilozhenie-kotoroe-pomogaet-gotovitsya-k-ekzamenu-na-b1-po-polskomu), search result); none checked hands-on.
+  The job (official-format mocks + AI writing feedback + Ukrainian/Russian UI) is done; only examiner-calibrated speaking scores might still be open, and Mova claims those too.
+- *Polish customers won't pay this price.* The market price is set at 30–50 PLN for one to three months (PolskiTest.pl) or ~40 PLN/month (PolskiPro); the planned 49 PLN/month or 129 PLN per 3 months is above all of them, before 15–30% app-store fees.
+- *ChatGPT will absorb it.* Free past sheets plus ChatGPT voice already give most of the feedback (R3); the paid local apps are themselves thin layers on that.
+- *The trigger is still not law.* The citizenship B2 + civics test draft is planned for cabinet adoption in Q4 2026 and has not been adopted (search excerpts of PAP and Bezprawnik, 2026-11-06, [PAP](https://www.pap.pl/aktualnosci/mswia-szykuje-zmiany-dot-polskiego-obywatelstwa-padl-termin)); O2 stays L. 2025 candidate numbers: still not found.
+- *Western leader localizing in 12 months.* Speak or Praktika adding Polish for exam takers is unlikely and unnecessary: local developers already serve it.
+- *Success signals.* Speak and Praktika are durable in English tutoring, but the host-country exam pattern shows only small apps (Kielo, YKI trainers); L2 3 is fair for the theme, not for this niche.
+- *Opportunity/risk lists.* R1 should name the whole set of local apps, not only Mova; it is H×H with no answer in the MVP. O4 (app-store channel) is weaker with four exam apps already ranking for "B1" → L×M.
+
+**Review changes (T24, 2026-11-06):** L3 2 → 1 (taken: PolskiTest.pl, PolskiPro, Mova and others sell official-format mocks with AI writing feedback and UA/RU/BE UIs); L6 3 → 2 (market price 30–50 PLN per 1–3 months undercuts the 49 PLN/month plan). Reviewed scores: L1 4 · L2 3 · L3 1 · L4 3 · L5 4 · L6 2 · L7 3 · L8 3 · L9 2 | weighted 0.48+0.36+0.12+0.45+0.60+0.20+0.24+0.24+0.16 = 2.85 → **2.9** (shortlist quick 3.1 replaced). Knock-out L3 = 1 → **<5%** whatever the score. O4 M×M → L×M; §4: O 6+3+4+2 = 15, R 29. **Rejected** (recorded in rejected.md).
+
 **Sources** (accessed 2026-11-06 unless noted):
 1. https://techcrunch.com/2024/12/10/openai-backed-speak-raises-78m-at-1b-valuation-to-help-users-learn-languages-by-talking-out-loud (accessed 2026-11-01)
 2. https://techcrunch.com/2024/05/22/praktika-raises-35-5m-to-use-ai-avatars-to-make-learning-languages-feel-more-natural (accessed 2026-11-01)
@@ -95,5 +110,10 @@ Changes vs. quick score: none on the lenses (L3 2 confirmed by Mova's App Store 
 11. https://openrouter.ai/google/gemini-2.5-flash (accessed 2026-11-05)
 12. https://artificialintelligenceact.eu/annex/3/
 13. Internal: [TH40 check](../../poland-check/A/TH40-ai-speaking-language-tutors.md), R1/R2/R4/R7 catalogue rows
+14. https://polskitest.pl/en/ (2026-11-06, T24)
+15. https://apps.apple.com/pl/app/polskipro/id6749869442 (2026-11-06, T24)
+16. https://apps.apple.com/mx/app/polishgo/id6752503183 (2026-11-06, T24, search result)
+17. https://devby.io/news/belarus-sdelal-prilozhenie-kotoroe-pomogaet-gotovitsya-k-ekzamenu-na-b1-po-polskomu (2026-11-06, T24, search result)
+18. https://www.pap.pl/aktualnosci/mswia-szykuje-zmiany-dot-polskiego-obywatelstwa-padl-termin (2026-11-06, T24, search excerpt)
 
 Coverage: 4 web searches and 1 fetch for this write-up (Mova, Kielo/YKI apps, 2025 exam counts, citizenship B2 draft). Not found: 2025 candidate numbers, Mova's user numbers, audio-token price for the chosen model.
