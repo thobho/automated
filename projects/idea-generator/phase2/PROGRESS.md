@@ -53,7 +53,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T24 · independent critical review · needs: T21, T22, T23 · [tasks/24-independent-critical-review.md](tasks/24-independent-critical-review.md)
   Unverifiable links (timeout/403/SSL, sites exist): thenegotiator.co.uk, mos.cudzoziemcy.gov.pl, migrant.poznan.uw.gov.pl, digitalhealth.net, htworld.co.uk, businesswire.com, businessnewsaustralia.com, allegro.gcs-web.com, asiae.co.kr, prawo.pl, wolterskluwer.com, api.sejm.gov.pl
 - [~] T25 · Phase 2 summary and validation plans · needs: T24 · [tasks/25-phase-2-summary-and-validation-plans.md](tasks/25-phase-2-summary-and-validation-plans.md)
-  Resume: English summary done (phase2/reports/phase2-summary.md); next podsumowanie-pl.md, then README.md, then link check
+  Resume: both reports done (phase2/reports/phase2-summary.md, podsumowanie-pl.md); next README.md Phase 2 status, then link check
 
 ## Blocked / questions for the owner
 (none)
