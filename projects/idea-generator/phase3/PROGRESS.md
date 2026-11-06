@@ -24,7 +24,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T10 · findability test · needs: T09 · [tasks/10-findability-test.md](tasks/10-findability-test.md)
   - Unverifiable (timeout, open in a browser): elektroda.pl topic3633231, longines.com/pl/cennik-uslug
 - [~] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
-  - Resume: step 1 done (pattern column filled in all 5 catalogue CSVs). Next: step 2, write ideas/longlist.md, V1 ideas first (read findability/V1 + demand/V1).
+  - Resume: steps 1 done; ideas/longlist.md has V1 (#1-23) and V2 (#24-45). Next: add V3 (#46+), V4, V5 tables, then theme list and owner summary, then link check.
 - [ ] T12 · filter and shortlist · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
 - [ ] T13 · write-ups batch A · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
 - [ ] T14 · write-ups batch B · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
