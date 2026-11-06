@@ -1,6 +1,6 @@
 # Phase 3 shortlist (T12, quick scores)
 
-Human-readable view of [shortlist.csv](shortlist.csv) (T13 final scores for the first five: see [Write-ups](#write-ups-t13-batch-a)) ([task](../tasks/12-filter-and-shortlist.md)). Scores are **quick** ([criteria](../method/criteria.md) §2): judged from the longlist evidence (T04–T11 files), not re-researched; weighted scores and bands are computed by [shortlist_score.py](shortlist_score.py). Rejected ideas and reasons: [rejected.md](../rejected.md). 2026-11-06.
+Human-readable view of [shortlist.csv](shortlist.csv) (final scores from write-ups: [T13 batch A](#write-ups-t13-batch-a), [T14 batch B](#write-ups-t14-batch-b)) ([task](../tasks/12-filter-and-shortlist.md)). Scores are **quick** ([criteria](../method/criteria.md) §2): judged from the longlist evidence (T04–T11 files), not re-researched; weighted scores and bands are computed by [shortlist_score.py](shortlist_score.py). Rejected ideas and reasons: [rejected.md](../rejected.md). 2026-11-06.
 
 ## How it was filtered
 
@@ -22,15 +22,15 @@ Human-readable view of [shortlist.csv](shortlist.csv) (T13 final scores for the 
 | 3 | 52 | Instant multi-bureau 3D-print quote from an uploaded file | V3 | commission | 3.4 → **2.8** ([003](v3-hobby/003-3d-print-instant-quote.md)) | 5-15% → **<5%** | Polish print bureaus quoting on Oferteo (none contacted) | SEO on druk 3D na zamowienie cena (V3-D04) |
 | 4 | 36 | Video or photo diagnosis before the part, ending in a dropshipped part | V2 | service fee + margin | 3.4 → **2.8** ([004](v2-home-appliance/004-diagnosis-then-part.md)) | 5-15% → **<5%** | CzęściAGD.pl (also a wholesaler); BSH shop by E-Nr | SEO on co sie zepsulo w pralce type phrases (V2 scan 8) |
 | 5 | 8 | Camper habitation parts by body brand, dropshipped from DE | V1 | margin | 3.3 → **3.0** ([005](v1-vehicle/005-camper-habitation-parts.md)) | 5-15% → **<5%** | Reimo (seen in T10 item 7); Dometic windows via one OLX seller | SEO on the camper-parts autocomplete phrases (V1-D07, 10 suggestions) |
-| 6 | 24 | Spare parts for distributor-only heat-pump brands, for installers | V2 | margin | 3.3 | 5-15% | KLIMA-THERM (Kaisai distributor, T10) | heat-pump installers searching the V2-D04 phrases (9 suggestions) |
-| 7 | 33 | Fit-checked used modules for discontinued washers from donor machines | V2 | commission | 3.3 | 5-15% | independent repairers and OLX donor machines | elektroda.pl forum threads on washer modules (V2-D01) |
-| 8 | 1 | Collision-part sourcing desk for Chinese brands | V1 | service fee | 3.2 | 5-15% | brand importers and dealers (ASO); used parts on OLX | Omoda Polska Facebook group (>30,000 members, V1 demand S3) |
-| 9 | 19 | Fitment data for Allegro and Shoper parts sellers | V1 | subscription | 3.2 | 5-15% | TecDoc or OE data licence, or AI extraction from listings (rights unverified) | Allegro and Shoper parts sellers (none contacted) |
+| 6 | 24 | Spare parts for distributor-only heat-pump brands, for installers | V2 | margin | 3.3 → **2.7** ([006](v2-home-appliance/006-heat-pump-parts-for-installers.md)) | 5-15% → **<5%** | KLIMA-THERM (Kaisai distributor, T10) | heat-pump installers searching the V2-D04 phrases (9 suggestions) |
+| 7 | 33 | Fit-checked used modules for discontinued washers from donor machines | V2 | commission | 3.3 → **2.7** ([007](v2-home-appliance/007-used-washer-modules.md)) | 5-15% → **<5%** | independent repairers and OLX donor machines | elektroda.pl forum threads on washer modules (V2-D01) |
+| 8 | 1 | Collision-part sourcing desk for Chinese brands | V1 | service fee | 3.2 → **2.7** ([008](v1-vehicle/008-chinese-brand-collision-parts.md)) | 5-15% → **<5%** (F8 knock-out) | brand importers and dealers (ASO); used parts on OLX | Omoda Polska Facebook group (>30,000 members, V1 demand S3) |
+| 9 | 19 | Fitment data for Allegro and Shoper parts sellers | V1 | subscription | 3.2 → **3.0** ([009](v1-vehicle/009-fitment-data-for-parts-sellers.md)) | 5-15% → **<5%** | TecDoc or OE data licence, or AI extraction from listings (rights unverified) | Allegro and Shoper parts sellers (none contacted) |
 | 10 | 84 | Industrial sewing-machine parts for the Lodz textile cluster | V5 | margin | 3.2 | 5-15% | unverified (no Juki parts distributor named) | unverified (Lodz/Pabianice sewing workshops, not listed) |
 | 11 | 87 | Ordering app between restaurants and their wholesalers | V5 | subscription (supplier pays) | 3.2 | 5-15% | Polish food wholesalers (none named; unverified) | unverified (direct sales to wholesalers) |
 | 12 | 67 | Down-jacket repair and refill by post | V4 | service fee | 3.2 | 5-15% | unverified (no partner tailor named) | SEO on naprawa kurtki puchowej (V4-D03, 10 suggestions) |
 | 13 | 72 | Car premium-audio module repair by post | V4 | service fee | 3.2 | 5-15% | UK and US module repair services (no Polish repairer found) | SEO on naprawa wzmacniacza Bose phrases (V4-D09, 10 suggestions) |
-| 14 | 53 | Fishing subscription box for the PZW audience | V3 | subscription | 3.1 | 5-15% | unverified (no dropshipping lure wholesaler named) | PZW angler groups (about 500,000 members, V3 scan 6); channel unverified |
+| 14 | 53 | Fishing subscription box for the PZW audience | V3 | subscription | 3.1 → **2.4** ([010](v3-hobby/010-fishing-subscription-box.md)) | 5-15% → **<5%** | unverified (no dropshipping lure wholesaler named) | PZW angler groups (about 500,000 members, V3 scan 6); channel unverified |
 | 15 | 91 | Instant laser-cutting quote from a CAD file to local job shops | V5 | margin | 3.1 | 5-15% | unverified (5-10 laser-cutting shops, none named) | SEO on ciecie laserem na wymiar wycena online (V5 scan 9) |
 | 16 | 37 | Rating-plate photo to part number, widget for appliance-parts shops | V2 | subscription | 3.1 | 5-15% | CzęściAGD.pl as a possible customer (unverified) | direct sales to appliance-parts shops (none contacted) |
 | 17 | 85 | Hydraulic-seal matcher by profile and size | V5 | margin | 3.0 | 5-15% | RS PL distributor (shaft seals) | SEO on uszczelniacz hydrauliczny wymiar phrases (V5-D13, 10 suggestions) |
@@ -69,6 +69,20 @@ Final scores from full write-ups replace the quick scores for these rows in [sho
 | 8 | [005 Camper habitation parts](v1-vehicle/005-camper-habitation-parts.md) | 3.3 → 3.0 | <5% | hardest parts are dealer-only at retail price; small seasonal owner base |
 
 All five score in the `5–15%` range and drop one band on the opportunity/risk sums (criteria §4). None is killed outright; each has a ≤300 PLN validation test.
+
+## Write-ups (T14, batch B)
+
+The next five by quick score after batch A (ranks 6–9), plus #53 (rank 14) in place of ranks 10–13 so the batch has a hobby idea and a second subscription idea (task T14). Final scores replace the quick scores in [shortlist.csv](shortlist.csv), edited with the csv module as in T13. 2026-11-06.
+
+| # | Write-up | Quick → final weighted | Final band | Main reason for the change |
+|---|---|---|---|---|
+| 24 | [006 Heat-pump parts for installers](v2-home-appliance/006-heat-pump-parts-for-installers.md) | 3.3 → 2.7 | <5% | Klima-Therm (Kaisai) sells parts in and after warranty through its own service desk, and CNC Pompy Ciepła runs a 1,000-item parts warehouse for major brands: a middleman adds a call, not a route |
+| 33 | [007 Used washer modules](v2-home-appliance/007-used-washer-modules.md) | 3.3 → 2.7 | <5% | no listable supply of tested modules in Poland; ~PLN 10 commission per order; WEEE law limits dismantling to licensed plants. Spareka/ENVIE show the model works with a subsidised reuse network |
+| 1 | [008 Chinese-brand collision parts](v1-vehicle/008-chinese-brand-collision-parts.md) | 3.2 → 2.7 | <5% (F8 knock-out) | importers hold body stock and built Polish warehouses (Duchnice, 20% late-part rebate); phone work per case breaks 40 h/month; added to [rejected.md](../rejected.md#t14--write-ups-batch-b-2026-11-06) |
+| 19 | [009 Fitment data for parts sellers](v1-vehicle/009-fitment-data-for-parts-sellers.md) | 3.2 → 3.0 | <5% | Allegro's "Pasuje do" runs on TecDoc IDs and auto-fills from catalogue products; Ovoko syncs dismantlers to Allegro; best of the batch on score but Allegro can absorb it |
+| 53 | [010 Fishing subscription box](v3-hobby/010-fishing-subscription-box.md) | 3.1 → 2.4 | <5% | Catch Co. (Mystery Tackle Box) assets bought by Gordon Brothers in 2024 after USD 56 m raised; ~PLN 9 gross profit per box before CAC; needs a shop that packs from its own stock |
+
+All five end in `<5%`, like batch A. Finding that changes T10: Jaecoo 7 front pads (T10 V1 #1, N) are now sold by Inter Cars (PLN 229) and Iparts.pl (PLN 119) per Auto Świat, 8 June 2026 (noted in 008; affects #2, the T10 file is not edited).
 
 ## Caveats
 
