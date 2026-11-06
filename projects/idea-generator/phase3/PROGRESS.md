@@ -6,7 +6,8 @@ Under each `[~]` task keep one indented **Resume:** line saying exactly where to
 Every task runs on **opus at medium effort** (see RUNNER.md).
 
 ## Tasks
-- [ ] T01 · setup and method · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
+- [~] T01 · setup and method · needs: — · [tasks/01-setup-and-method.md](tasks/01-setup-and-method.md)
+  - Resume: starting
 - [ ] T02 · Poland commerce baseline · needs: T01 · [tasks/02-poland-commerce-baseline.md](tasks/02-poland-commerce-baseline.md)
 - [ ] T03 · friction patterns: why Oponeo, Uber and Deliveroo won · needs: T01 · [tasks/03-friction-patterns.md](tasks/03-friction-patterns.md)
 - [ ] T04 · scan V1 vehicle parts and car-related buying · needs: T01 · [tasks/04-scan-v1-vehicle-parts.md](tasks/04-scan-v1-vehicle-parts.md)
