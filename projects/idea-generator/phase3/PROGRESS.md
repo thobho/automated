@@ -10,7 +10,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable (403/429/timeout/SSL, real sites, open in a browser): allegro.pl (home + kategoria/czesci-samochodowe-620), trends.google.com, lsa-conso.fr, apek.cz, heureka.cz, heureka.sk, leboncoin.fr, idealo.de, louis.de, oscaro.com, mediaexpert.pl, euro.com.pl, repairclinic.com, appliancepartspros.com, taskrabbit.com, leroymerlin.pl, monotaro.com
 - [x] T02 · Poland commerce baseline · needs: T01 · [tasks/02-poland-commerce-baseline.md](tasks/02-poland-commerce-baseline.md)
 - [x] T03 · friction patterns: why Oponeo, Uber and Deliveroo won · needs: T01 · [tasks/03-friction-patterns.md](tasks/03-friction-patterns.md)
-- [ ] T04 · scan V1 vehicle parts and car-related buying · needs: T01 · [tasks/04-scan-v1-vehicle-parts.md](tasks/04-scan-v1-vehicle-parts.md)
+- [~] T04 · scan V1 vehicle parts and car-related buying · needs: T01 · [tasks/04-scan-v1-vehicle-parts.md](tasks/04-scan-v1-vehicle-parts.md)
+  - Resume: starting
 - [ ] T05 · scan V2 home, climate and appliance parts and consumables · needs: T01 · [tasks/05-scan-v2-home-climate-appliance.md](tasks/05-scan-v2-home-climate-appliance.md)
 - [ ] T06 · scan V3 hobby niches · needs: T01 · [tasks/06-scan-v3-hobby-niches.md](tasks/06-scan-v3-hobby-niches.md)
 - [ ] T07 · scan V4 services with a logistics step · needs: T01 · [tasks/07-scan-v4-services-with-logistics.md](tasks/07-scan-v4-services-with-logistics.md)
