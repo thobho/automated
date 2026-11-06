@@ -95,6 +95,8 @@ Each write-up gets **Devil's advocate** and **Review changes** sections (fresh f
 | 8 | [005](v1-vehicle/005-camper-habitation-parts.md) | 3.00 → 2.63 | <5% | Reimo PL delivers "only to Germany" and routes Poles to dealers; DE→PL parcel ~PLN 91–108 (DHL EU tariff) wipes the margin; window seals are findable at Reimo PL |
 | 52 | [003](v3-hobby/003-3d-print-instant-quote.md) | 2.79 → 2.52 | **rejected** | Filaquote (Shopify, Polish on the USD 15 plan) and WooCommerce plugins give any bureau an instant STL price; PLN 11 per order vs CAC PLN 75–125 |
 | 36 | [004](v2-home-appliance/004-diagnosis-then-part.md) | 2.78 → 2.53 | **rejected** | Bosch Home Connect and LG Smart Diagnosis do remote triage; one-off purchase, PLN ~16 per customer vs CAC PLN 50–83; no appliance-parts supplier with public dropship terms |
+| 24 | [006](v2-home-appliance/006-heat-pump-parts-for-installers.md) | 2.71 → 2.56 | <5% | each brand has one Polish distributor selling parts to its own installers (Klima-Therm, Refsystem for Haier, unverified); realistic margin 0–10%, ~PLN 45 per order |
+| 33 | [007](v2-home-appliance/007-used-washer-modules.md) | 2.67 → 2.45 | **rejected** | module repair by post (~PLN 110) beats a used module on price and fit; PLN 1–7 per order before CAC; no listable supply |
 <!-- T15 rows end -->
 
 ## Caveats

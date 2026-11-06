@@ -31,7 +31,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T14 · write-ups batch B · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
   - Unverifiable (403/timeout/SSL, real sites): ebay.de (store hvpa12, item 376242467625), elektroda.pl topic4130040 and poszukaj search (timeout), nwyachting.com (SSL), decathlon.pl Jaxon and Mikado pages (403).
 - [~] T15 · independent critical review · needs: T13, T14 · [tasks/15-independent-critical-review.md](tasks/15-independent-critical-review.md)
-  - Resume: done 001, 002 (dropped), 003 (dropped), 004 (dropped), 005 (both sections; shortlist.csv/md, rejected.md, CHANGELOG updated). Next: 006, then 007, 008, 009, 010. Shared CAC/return/DHL sources are in the T15 block at the end of each reviewed write-up's Sources.
+  - Resume: done 001, 002 (dropped), 003 (dropped), 004 (dropped), 005, 006, 007 (dropped) (both sections; shortlist.csv/md, rejected.md, CHANGELOG updated). Next: 008, then 009, 010. Shared CAC/return/DHL sources are in the T15 block at the end of each reviewed write-up's Sources.
 - [ ] T16 · summary and validation plans · needs: T15 · [tasks/16-summary-and-validation-plans.md](tasks/16-summary-and-validation-plans.md)
 
 ## Blocked / questions for the owner
