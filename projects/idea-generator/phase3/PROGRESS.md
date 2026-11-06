@@ -23,8 +23,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable (timeout/403, open in a browser): elektroda.pl topics 3633231, 3961802, 4153141, 4096321, 3854078; decathlon.pl learn page
 - [x] T10 · findability test · needs: T09 · [tasks/10-findability-test.md](tasks/10-findability-test.md)
   - Unverifiable (timeout, open in a browser): elektroda.pl topic3633231, longines.com/pl/cennik-uslug
-- [~] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
-  - Resume: all 3 steps done: pattern column filled (5 CSVs); ideas/longlist.md has 95 ideas (V1 23, V2 22, V3 19, V4 16, V5 15) with theme tags, owner marks and evidence links; check_links 0 dead; relative links and anchors all resolve. Next: reviewer marks T11 [x], then T12.
+- [x] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
   - Unverifiable: longlist.md has no external URLs; the 58 unverifiable links are pre-existing ones in catalogue/*.csv (403/429/timeout), already listed under T04–T08.
 - [ ] T12 · filter and shortlist · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
 - [ ] T13 · write-ups batch A · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
@@ -46,3 +45,4 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - 2026-11-06 · T08 done (V5 scan: 35 rows, 12 countries; link check 0 dead, 9 unverifiable; figures from search summaries, aggregator ones marked secondary). Poland has TIM and Allegro Biznes. Graveyard: Mapudo, merXu (unverified), CADDi pivot, Schüttflix. Best fit: free ordering app for small pro buyers paid by suppliers (Choco/REKKI pattern) with AI structuring messy orders; nothing like it found in PL for restaurants, dental, salons. Gaps: Baltic/SK/RO/HU, car-workshop consumables, Polish builders' merchants. Next: T09.
 - 2026-11-06 · T09 done (5 demand files: 114 signals, 84 candidate items; link check 0 dead, 6 unverifiable). Mostly Google autocomplete, volumes unverified; V5 no forum threads; FB sizes/Trends not collected. Themes: orphan brands (Chinese cars, Saab, old machinery), model-exact consumable filters, repair searched by city not by post. Next: T10.
 - 2026-11-06 · T10 done (5 findability files, 87 items; gap rate V1 59%, V2 39%, V3 31%, V4 79%, V5 65%; link check 0 dead, 2 unverifiable). Allegro 403 so untested, Google replaced by WebSearch: gaps likely overstated. Gaps: orphan/Chinese brands, discontinued-appliance parts, distributor-only brands, post-warranty electronics repair. Next: T11.
+- 2026-11-06 · T11 done (95 ideas, 20 themes, pattern column filled in 201 catalogue rows; link check 0 dead, 58 older unverifiable in CSVs). 39 ideas with N/W gap, 22 found easily, 34 untested. Supplier terms unverified. Next: T12.
