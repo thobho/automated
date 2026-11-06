@@ -64,7 +64,7 @@ General marketplaces and price comparison to check in every vertical (Poland fir
 **Sites to look at**
 - Poland: [Łysoń](https://www.lyson.com.pl/) (beekeeping equipment maker; blocks bots), [Botland](https://www.botland.com.pl/) (electronics hobby), [Zooplus PL](https://www.zooplus.pl/) (pet and aquarium), [Thomann PL](https://www.thomann.de/pl/) (music and audio, German shop with Polish site), Allegro, OLX and Facebook groups per hobby.
 - Germany and Czechia: [bike-components](https://www.bike-components.de/), [Bike-Discount](https://www.bike-discount.de/), [WiMo](https://www.wimo.com/) (ham radio; blocks bots), [SVB](https://www.svb.de/) (boat equipment; blocks bots), [Prusa Research](https://www.prusa3d.com/) (3D printers, Czechia).
-- Japan: [HLJ](https://www.hlj.com/) (hobby, ships abroad), [AmiAmi](https://www.amiami.com/), [1999.co.jp](https://www.1999.co.jp/) (blocks bots), [Mercari Japan](https://jp.mercari.com/).
+- Japan: [HLJ](https://www.hlj.com/) (hobby, ships abroad), [1999.co.jp](https://www.1999.co.jp/) (blocks bots), [Mercari Japan](https://jp.mercari.com/).
 - Global: [HobbyKing](https://www.hobbyking.com/) (RC), [KBDfans](https://kbdfans.com/) (keyboards), [BrickLink](https://www.bricklink.com/) (LEGO parts marketplace), [Reverb](https://www.reverb.com/) (music gear marketplace), [UltiMaker](https://www.ultimaker.com/) (3D printing).
 
 ## V4 — Services with a logistics step
