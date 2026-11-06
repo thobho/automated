@@ -19,9 +19,9 @@ Projects built continuously by a Claude Code worker, fed from this repo's GitHub
 ## How the worker spends your limits
 A desktop-app scheduled task (`automated-worker-2`, prompt in `agent/scheduled-task.md`) checks in every hour and runs `agent/worker-prompt.md`. Before each task it runs `agent/budget.py`, which spreads usage evenly:
 - **5-hour window:** usage must stay under a line rising evenly from **20%** at the window start to **80%** at its reset, so a window isn't burned in its first hour.
-- **Weekly:** usage must stay under a line rising evenly to **80%** across the week (+5% buffer), so it never burns the week in a day.
+- **Weekly (use it or lose it):** you keep a reserve of **50** points of the week, shrinking evenly to 0 at the reset. The worker may use everything above it, up to **98%**. A week you leave idle is therefore spent almost completely by the reset, and a busy week leaves your reserve alone.
 
-Checking hourly is what makes the pacing work: a run that finds usage ahead of the line stops after the cheap gate. That leaves at least 20% for your own work. Tune with `AGENT_FIVE_HOUR_CAP`, `AGENT_FIVE_HOUR_BUFFER`, `AGENT_WEEKLY_CAP`, `AGENT_PACE_BUFFER`.
+Checking hourly is what makes the pacing work: a run that finds usage ahead of the line stops after the cheap gate. Tune with `AGENT_FIVE_HOUR_CAP`, `AGENT_FIVE_HOUR_BUFFER`, `AGENT_WEEKLY_CAP`, `AGENT_USER_RESERVE`.
 
 ## Parallel runs
 Up to two worker runs build at the same time, each on its own task.
