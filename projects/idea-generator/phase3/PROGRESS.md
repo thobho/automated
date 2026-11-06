@@ -26,7 +26,7 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
   - Unverifiable: longlist.md has no external URLs; the 58 unverifiable links are pre-existing ones in catalogue/*.csv (403/429/timeout), already listed under T04–T08.
 - [~] T12 · filter and shortlist · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
-  - Resume: ideas/shortlist_score.py and shortlist.csv (26 rows) written; next write rejected.md (69 ideas, from the script output), optional ideas/shortlist.md, link check
+  - Resume: Done-when met (shortlist.csv 26 rows, shortlist.md, 69 ideas in rejected.md, link check 0 links/0 dead, relative links ok); only marking T12 [x] and the run-log line remain
 - [ ] T13 · write-ups batch A · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
 - [ ] T14 · write-ups batch B · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
 - [ ] T15 · independent critical review · needs: T13, T14 · [tasks/15-independent-critical-review.md](tasks/15-independent-critical-review.md)
