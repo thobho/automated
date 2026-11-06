@@ -81,6 +81,18 @@ Changes vs. quick score: L1 4 → 3 (most checks are rules, the LLM reads notes)
 
 **Confidence:** low-medium (NFZ money flows and Western traction sourced; clinic count, error rates and willingness to share data not).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *The driver landed, but in the wrong segment.* NFZ adopted the degression after consultation (published 2026-03-31; URL slug points to zarządzenie 34/2026/DSOZ, number not in the text): services above contract value are paid at **50% for CT/MRI and 60% for gastroscopy/colonoscopy** from 2026-04-01, paid **after year-end**, with children, the colorectal screening programme and DiLO patients excluded; ~625 M PLN expected savings ([NFZ](https://www.nfz.gov.pl/aktualnosci/aktualnosci-centrali/zarzadzenie-po-konsultacjach-spolecznych-nfz-uwzglednia-czesc-uwag-i-wprowadza-nowy-sposob-rozliczania-nadwykonan-w-diagnostyce,8916.html), fetched 2026-11-06). That makes limit tracking worth money for **imaging and endoscopy providers**, a smaller set of larger firms running RIS/PACS vendors' software, not the AOS/rehabilitation clinics this MVP starts with. O1 is now H likelihood but M impact for the planned wedge.
+- *It already works in Polish: NFZ publishes its own checks.* NFZ runs Centralne Warunki Walidacji and Centralne Reguły Weryfikacji, published for providers to unify checks across voivodeship branches ([NFZ](https://www.nfz.gov.pl/aktualnosci/aktualnosci-centrali/sprawdzenia-z-zakresu-centralnych-warunkow-walidacji-i-centralnych-regul-weryfikacji,8286.html), search excerpt). HIS vendors can implement those rules before submission, which supports R2: the rule-based half of the product is the HIS vendor's job; only the "documented but not reported" check needs an LLM.
+- *ChatGPT will absorb it.* Not directly: it has no access to the clinic's HIS data and art. 9 data blocks casual use. The real absorber is the HIS vendor (KAMSOFT, CGM, Asseco), who already owns the export. CGM launched an AI document-extraction tool in the US in January 2026 (CGM INDEX.AI, search excerpt); no Polish rollout found.
+- *Polish customers won't pay this.* Unknown: the AOS contractor count is still not found, and no clinic owner asking for this was found on a second search.
+- *Western leader localizing in 12 months.* Parallel's Series A funds international expansion, but a national-payer rulebook per country makes Poland unlikely soon. L.
+- *Second competitor search (2026-11-06):* "sztuczna inteligencja rozliczenia NFZ weryfikacja sprawozdawczość AI KAMSOFT CGM": no Polish AI settlement-check product found; one PTI 2025 conference paper notes that AI in Polish healthcare is used "mainly for financial purposes (like NFZ settlements)" without naming products ([PTI](https://pti.org.pl/wp-content/uploads/2025/07/4_Czy-SI-nas-uleczy-i-obroni.pdf), search excerpt), which hints that hospitals already do some of this in-house.
+- *Success signals.* Parallel (FR) and Arintra (US): large rounds, company-claimed customer counts, no retention or NRR. Promising, not proven; L2 3 is the cap.
+- *Opportunity/risk lists.* Independent. O1 re-rated M×H → H×M (adopted, but for diagnostics). R1 H×H is honest; R3 H×M is honest given the founder's profile.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 3 · L2 3 · L3 4 · L4 5 · L5 3 · L6 3 · L7 2 · L8 2 · L9 3; weighted **3.3**; shortlist quick L1 4/L2 2 replaced). O1 M×H → H×M (sum unchanged). §4: O 23, R 28, R1 H×H only partly mitigated → **<5%** unchanged. Not rejected, but if pursued the wedge should move to ASDK imaging/endoscopy limit tracking, where zarządzenie 34/2026/DSOZ now puts money at stake; the AOS completeness check needs the pilot clinic first.
+
 **Sources** (accessed 2026-11-05):
 1. https://www.indexventures.com/perspectives/parallel-raises-20m-to-tackle-hospital-inefficiencies-with-ai-agents/
 2. https://tech.eu/2026/03/19/parallel-raises-20m-to-scale-ai-solutions-for-hospital-administration/
@@ -90,6 +102,9 @@ Changes vs. quick score: L1 4 → 3 (most checks are rules, the LLM reads notes)
 6. https://www.dzp.pl/files/shares/Art/Rozliczanie_swiadczen_ponadlimitowych.pdf
 7. https://openrouter.ai/google/gemini-2.5-flash
 8. https://artificialintelligenceact.eu/annex/3/
-9. Internal: [TH03 check](../../poland-check/B/TH03-healthcare-back-office-automation.md)
+9. https://www.nfz.gov.pl/aktualnosci/aktualnosci-centrali/zarzadzenie-po-konsultacjach-spolecznych-nfz-uwzglednia-czesc-uwag-i-wprowadza-nowy-sposob-rozliczania-nadwykonan-w-diagnostyce,8916.html (2026-11-06, T24)
+10. https://www.nfz.gov.pl/aktualnosci/aktualnosci-centrali/sprawdzenia-z-zakresu-centralnych-warunkow-walidacji-i-centralnych-regul-weryfikacji,8286.html (2026-11-06, T24, excerpt)
+11. https://pti.org.pl/wp-content/uploads/2025/07/4_Czy-SI-nas-uleczy-i-obroni.pdf (2026-11-06, T24, excerpt)
+12. Internal: [TH03 check](../../poland-check/B/TH03-healthcare-back-office-automation.md)
 
 Coverage: 6 web searches/fetches for this write-up (Parallel and Arintra funding, NFZ over-contract figures and the 40% proposal, AOS and rehabilitation contractor counts). Not found: national count of AOS contractors, NFZ rejection rates for outpatient reports, prices of HIS settlement modules or settlement outsourcing, status of the 40% rule.
