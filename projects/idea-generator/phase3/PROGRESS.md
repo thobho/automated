@@ -21,7 +21,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
 - [x] T08 · scan V5 small business and professional buying · needs: T01 · [tasks/08-scan-v5-small-business-buying.md](tasks/08-scan-v5-small-business-buying.md)
 - [x] T09 · Polish demand mining · needs: T02, T04, T05, T06, T07, T08 · [tasks/09-demand-mining.md](tasks/09-demand-mining.md)
   - Unverifiable (timeout/403, open in a browser): elektroda.pl topics 3633231, 3961802, 4153141, 4096321, 3854078; decathlon.pl learn page
-- [ ] T10 · findability test · needs: T09 · [tasks/10-findability-test.md](tasks/10-findability-test.md)
+- [~] T10 · findability test · needs: T09 · [tasks/10-findability-test.md](tasks/10-findability-test.md)
+  - Resume: starting
 - [ ] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
 - [ ] T12 · filter and shortlist · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
 - [ ] T13 · write-ups batch A · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
