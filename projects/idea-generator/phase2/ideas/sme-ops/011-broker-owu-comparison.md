@@ -83,6 +83,17 @@ Changes vs. quick score: L2 2 → 3 (FurtherAI, Handle, Segura rounds in 2025–
 
 **Confidence:** medium-low (Western traction and the Polish workflow sourced; broker count is old, demand and placement volumes not sourced).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *The insurers are automating the other end of the same e-mail.* Compensa says it receives **80,000 broker inquiries a year**, each 30–40 pages with up to 100 clauses, and runs an AI assistant (built with its tech arm Beesafe) that reads them in seconds, aiming at 85% of inquiries by end-2025 ([bank.pl, 2025-02-05](https://bank.pl/?p=506228), fetched 2026-11-06). PZU was nominated for a 2026 Qorus award for "AI-orchestrated broker inquiry intake" ([Qorus](https://www.qorusglobal.com/index.php/innovations/30892-pzu-i360-an-ai-orchestrated-broker-inquiry-intake), search excerpt). This proves the volume exists and that the step is painful, but it also means insurers may push brokers onto their own structured portals, so the free-form e-mail RFQ we parse could shrink. An insurer cannot compare its rivals' OWU, though, so the comparison step stays with the broker.
+- *ChatGPT will absorb it.* Uploading six OWU PDFs to a Claude or ChatGPT project and asking for a comparison table already works in Polish. What it lacks is a maintained, versioned clause library with citations and the APK link, and a broker's confidence that nothing was missed (R1). That is a real but narrow moat; L9 3 is the ceiling.
+- *Polish customers won't pay this.* The 80k inquiries at one insurer most likely come largely from the big broker houses with their own back offices, not the 1–10 person firms targeted here; small brokers' placement counts are still unknown (R2), and the broker count is still the 2017 figure (~1.5k; the KNF 2024 report exists but its counts were not extracted in this pass).
+- *Western leader localizing in 12 months.* FurtherAI is US/UK; Foliume already has ES/DE/PT clients and is the most likely EU entrant, but Polish OWU wording is a real barrier. L is fair.
+- *Second competitor search (2026-11-06):* "AI dla brokerów ubezpieczeniowych porównanie OWU ofert asystent broker Polska": no Polish broker-side placement tool found; insurer-side tools found (Compensa, PZU i360, above) plus generic English "AI for brokers" pages. The gap still holds.
+- *Success signals.* FurtherAI, Handle and Segura are funded by a16z within 2025–2026 and claim time savings, but all figures are company claims and there is no retention or NRR data. Promising, not proven; L2 3 is the right cap.
+- *Opportunity/risk lists.* Mostly independent, but two opportunity likelihoods were too generous under criteria §4 (H needs evidence): O1 "5 demos from 50 e-mails" has no evidence → M; O2 "parser ≥95% accuracy on 8 insurers" is untested → M.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 4 · L2 3 · L3 4 · L4 4 · L5 2 · L6 3 · L7 3 · L8 3 · L9 3; weighted **3.2**; shortlist quick 3.3 replaced). O1 H → M, O2 H → M. §4: O 4+4+4+4+3 = 19, R 6+6+6+4+2 = 24, R − O = 5 < 6, no H×H risk → band **5–15%** unchanged (one of the few ideas that keeps it). New demand evidence: Compensa's 80k broker inquiries a year; new watch item: insurer-side intake portals.
+
 **Sources** (accessed 2026-11-05):
 1. https://www.insurancejournal.com/news/national/2025/10/09/843205.htm
 2. https://inforcapital.com/news/handle-raises-6m-seed-round-led-by-andreessen-horowitz/
@@ -92,6 +103,8 @@ Changes vs. quick score: L2 2 → 3 (FurtherAI, Handle, Segura rounds in 2025–
 6. https://www.pracuj.pl/praca/broker-brokerka-poznan,oferta,1004969534
 7. https://openrouter.ai/google/gemini-2.5-flash
 8. https://artificialintelligenceact.eu/annex/3/
-9. Internal: [TH55 check](../../poland-check/B/TH55-insurance-operations-agents.md)
+9. https://bank.pl/?p=506228 (2026-11-06, T24)
+10. https://www.qorusglobal.com/index.php/innovations/30892-pzu-i360-an-ai-orchestrated-broker-inquiry-intake (2026-11-06, T24, excerpt)
+11. Internal: [TH55 check](../../poland-check/B/TH55-insurance-operations-agents.md)
 
 Coverage: 8 web searches/fetches for this write-up (FurtherAI, Handle, Segura funding; KNF broker counts and commissions; Polish broker software and prices). Not found: the current number of brokers (KNF 2024 report not read), Polish broker-software prices, placements per broker office, any graveyard case.
