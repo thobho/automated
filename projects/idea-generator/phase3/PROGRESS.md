@@ -10,7 +10,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable (403/429/timeout/SSL, real sites, open in a browser): allegro.pl (home + kategoria/czesci-samochodowe-620), trends.google.com, lsa-conso.fr, apek.cz, heureka.cz, heureka.sk, leboncoin.fr, idealo.de, louis.de, oscaro.com, mediaexpert.pl, euro.com.pl, repairclinic.com, appliancepartspros.com, taskrabbit.com, leroymerlin.pl, monotaro.com
 - [x] T02 · Poland commerce baseline · needs: T01 · [tasks/02-poland-commerce-baseline.md](tasks/02-poland-commerce-baseline.md)
 - [~] T03 · friction patterns: why Oponeo, Uber and Deliveroo won · needs: T01 · [tasks/03-friction-patterns.md](tasks/03-friction-patterns.md)
-  - Resume: 22 cases written in research/global/friction-patterns.md; next: typology, cheap-AI section, graveyard, link check
+  - Resume: Done-when met (22 cases, typology P1–P10, cheap-AI section, graveyard of 6 + Reverb ceiling); link check 0 dead. Ready for review/mark done by the runner.
+  - Unverifiable (403/reset, open in a browser): aftermarketnews.com (RockAuto), dieseltechmag.com, PartSelect.com/Two-Million-Parts.htm, businesswire.com (Uber FY2025), sec.gov (DoorDash and Chewy 10-K)
 - [ ] T04 · scan V1 vehicle parts and car-related buying · needs: T01 · [tasks/04-scan-v1-vehicle-parts.md](tasks/04-scan-v1-vehicle-parts.md)
 - [ ] T05 · scan V2 home, climate and appliance parts and consumables · needs: T01 · [tasks/05-scan-v2-home-climate-appliance.md](tasks/05-scan-v2-home-climate-appliance.md)
 - [ ] T06 · scan V3 hobby niches · needs: T01 · [tasks/06-scan-v3-hobby-niches.md](tasks/06-scan-v3-hobby-niches.md)

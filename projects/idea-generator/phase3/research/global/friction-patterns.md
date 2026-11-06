@@ -61,7 +61,7 @@ Reading notes:
 - Earns: retail margin on parts.
 - History (from PartSelect's own pages, quoted by search; the History page blocks the fetch tool): 25 years in 2024 (so started about 1999); parent Eldis Group in the trade since 1945 (unverified).
 - Lesson: the model number on the rating plate is the key that turns "my dishwasher leaks" into one SKU. A Polish copy needs the same model-to-part data for brands sold in Poland.
-- Sources: [PartSelect model number FAQ](https://partselect.com/model-number-faq); [PartSelect help page](https://www.partselect.com/assets/html/help.html); [PartSelect "Two Million Parts"](https://PartSelect.com/Two-Million-Parts.htm); [PartSelect history](https://www.partselect.com/About/History/) (blocks bots).
+- Sources: [PartSelect model number FAQ](https://partselect.com/model-number-faq); [PartSelect help page](https://www.partselect.com/assets/html/help.html); [PartSelect "Two Million Parts"](https://PartSelect.com/Two-Million-Parts.htm); [PartSelect history](https://www.partselect.com/About/History/) (blocked the fetch tool; link check ok).
 
 **7. Partly (New Zealand, parts data for the automotive trade, B2B)**
 - Friction: Finding and Fit, but sold to the trade (parts sellers, repairers), not to drivers.
@@ -95,11 +95,11 @@ Reading notes:
 **10. Uber (USA, rides, later delivery)**
 - Friction: Coordination (finding a car now), Trust (rating, known price), Price discovery (fare shown up front).
 - Trick: summon a car with one button; GPS matching; payment stored in the app, so no cash and no haggling.
-- First customers: UberCab launched in San Francisco in mid-2010 as a black-car service costing about 1.5x a taxi; within two weeks of the App Store listing about 10 drivers were doing more than 10 rides per weekend night (per Business Insider / LoveMoney summaries).
+- First customers: UberCab launched in San Francisco in mid-2010 as a black-car service costing about 1.5x a taxi; within two weeks of the App Store listing about 10 drivers were doing more than 10 rides per weekend night (per LoveMoney and Business Insider summaries).
 - Earns: take rate on gross bookings (commission and fees).
 - Public numbers (FY2025): gross bookings USD 193.5 bn (+19%), 13.6 bn trips (+20%), 202 m monthly active platform consumers in Q4 2025.
 - Time: fifteen years; years of losses and subsidies, which the brief counts as a hype warning for any small copy.
-- Sources: [Uber Q4 and FY2025 results, Business Wire](https://www.businesswire.com/news/home/20260204947622/en/); [Business Insider, "Uber turns five"](https://www.businessinsider.in/tech/uber-turns-five-today-heres-how-it-took-over-the-world-in-just-a-few-years/slidelist/47507604.cms).
+- Sources: [Uber Q4 and FY2025 results, Business Wire](https://www.businesswire.com/news/home/20260204947622/en/); [LoveMoney, "The incredible rise of Uber"](https://www.lovemoney.com/gallerylist/51012/the-incredible-rise-of-uber).
 
 **11. Deliveroo (UK, restaurant delivery)**
 - Friction: Logistics (good restaurants that did not deliver), Coordination.
@@ -108,7 +108,7 @@ Reading notes:
 - Earns: commission from restaurants plus delivery and service fees from customers.
 - Outcome: bought by DoorDash; completed 2 October 2025 at 180p per share; DoorDash's 10-K states purchase consideration of USD 3,724 m.
 - Lesson: doing the physical step by hand at the start taught the operation; the business only worked at scale and after a long loss-making period.
-- Sources: [Yahoo Finance, "DoorDash finalises $3.8bn takeover of Deliveroo"](https://finance.yahoo.com/news/doordash-finalises-3-8bn-takeover-113850444.html); [DoorDash FY2025 10-K](https://www.sec.gov/Archives/edgar/data/1792789/000179278926000013/dash-20251231.htm); [Entrepreneur Middle East, interview with Will Shu](https://www.entrepreneur.com/article/307544).
+- Sources: [Yahoo Finance, "DoorDash finalises $3.8bn takeover of Deliveroo"](https://finance.yahoo.com/news/doordash-finalises-3-8bn-takeover-113850444.html); [DoorDash FY2025 10-K](https://www.sec.gov/Archives/edgar/data/1792789/000179278926000013/dash-20251231.htm); [Entrepreneur Middle East, interview with Will Shu](https://mena.entrepreneur.com/entrepreneurs/focused-on-impact-deliveroo-co-founder-and-ceo-will-shu/307544).
 
 **12. Wolt (Finland, delivery; active in Poland)**
 - Friction: Logistics, Coordination; also groceries and retail.
@@ -151,7 +151,7 @@ Reading notes:
 - Earns: retail margin; Autoship gives predictable volume.
 - Public numbers (FY2025 10-K): net sales USD 12.6 bn (+6.2%), Autoship customer sales USD 10.5 bn (+11.8%), reported as 83.3% of net sales. Chewy counts all sales from customers who had an Autoship order in the last 364 days, so the figure is broad.
 - Lesson: replenishment of a consumable that the buyer knows by name is where "subscription" works; it is a discount-plus-convenience, not a paid search subscription.
-- Sources: [Chewy 10-K FY2025](https://www.sec.gov/Archives/edgar/data/1766502/000176650226000034/chwy-20260201.htm); [Subscription Insider](https://www.subscriptioninsider.com/article-type/news/chewys-autoship-customer-sales-reached-83-3-of-net-sales-in-fiscal-2025).
+- Sources: [Chewy 10-K FY2025](https://www.sec.gov/Archives/edgar/data/1766502/000176650226000034/chwy-20260201.htm); [Market Chameleon, Autoship share FY2025](https://marketchameleon.com/articles/b/2026/3/25/chewy-autoship-sales-profit-margins-fy2025) (secondary, for the 83.3% share).
 
 **17. Dollar Shave Club (USA, razors by subscription)**
 - Friction: Price discovery (expensive branded blades), Coordination (reordering).
@@ -230,4 +230,70 @@ Reading notes:
 | 21 | Booksy | PL | Coordination | salon tool + marketplace | subscription + lead fee | no |
 | 22 | Ceneo | PL | Price discovery | comparison, CPC | CPC | no |
 
-(Typology, "What changes with cheap AI" and graveyard follow.)
+
+## 2. Typology of winning patterns
+
+Each pattern names the cases that show it, what it takes to start small (founder profile: 40 h/month, ~8 h physical, no inventory, 500 PLN/month), and the trap.
+
+| # | Pattern | Cases | Friction removed | What it needs to start small | Trap for a small founder |
+|---|---|---|---|---|---|
+| P1 | **Compatibility-by-model database** (car, appliance model number, device) | Autodoc, RockAuto, PartSelect, Partly, Oponeo (size) | Finding, Fit | one narrow product family (e.g. one appliance brand's spare parts, one car model's filters); model-to-part data from supplier catalogues, exploded diagrams or licensed data; a supplier who dropships | data rights (catalogues are owned: TecDoc-like licences, manufacturer diagrams); errors cause returns; big players already cover the mainstream |
+| P2 | **Product plus the physical step booked in one checkout** (fitting, installation, repair slot) | Oponeo, Blackcircles, Booksy (slot), Deliveroo (delivery) | Logistics, Coordination | 10–30 partner workshops or installers in one city; a booking calendar; goods shipped by the supplier to the partner | coordination is hand work; partner quality and no-shows; partners bypass the platform after the first job (see Homejoy) |
+| P3 | **One checkout across many suppliers / one catalogue for odd items** | MonotaRO, McMaster-Carr, RockAuto, Autodoc marketplace | Finding, Price discovery | supplier price lists and stock feeds; a professional buyer group that reorders; invoices with VAT | thin margins when items are standard; holding stock is how MonotaRO and McMaster win on speed, which the founder will not do |
+| P4 | **Price comparison or price guide for odd or used items** | Ceneo, Reverb (price guide), RockAuto (many brands side by side) | Price discovery | items Ceneo cannot match (used, technical, no EAN); affiliate or CPC income | Ceneo/Allegro own standard items; affiliate rates are low and fall for returning buyers ([monetisation.md](../poland/monetisation.md) M1, M4) |
+| P5 | **Trust layer on a marketplace** (escrow, grading, warranty, buyer fee) | Back Market, Vinted, Reverb, Uber (ratings) | Trust | a payment flow with escrow (Przelewy24/BLIK), clear grading rules, a returns policy | needs liquidity on both sides; low repeat (Back Market ~2 purchases per customer) makes CAC dominate |
+| P6 | **Fit answer sold to shops** (B2B widget or data) | Fit Analytics, Partly | Fit | a few shops willing to embed it; per-shop fee | B2B sales cycles; shops expect it free from their platform (Shoper, Allegro) |
+| P7 | **Replenishment / subscribe-and-save** | Chewy, Dollar Shave Club | Coordination, Price | a consumable bought on a cycle (filters, cartridges, coffee-machine descalers), the model already known from P1 | discounts eat margin; the buyer must know the item fits, else churn; Allegro Smart! anchors delivery at ~PLN 5/month ([monetisation.md](../poland/monetisation.md) M9) |
+| P8 | **Community plus catalogue for a hobby** | Reverb | Finding, Trust | an existing forum or group with members asking "where do I get X"; content plus a curated catalogue | ceiling is small (Reverb sold to a niche owner); hard to earn beyond affiliate |
+| P9 | **Software tool for the professional, marketplace on top** | Booksy | Coordination | a daily-use tool for one trade (installers, workshops), subscription PLN 100–200/month | support load; sales to tradespeople take time |
+| P10 | **Own the last mile at scale** | Uber, Deliveroo, Wolt, InPost | Logistics, Coordination | not feasible for this founder: capital and fleets. **Use** these networks (InPost lockers, Wolt/Stuart couriers) as partners | — |
+
+**What the winners share** (from the cases above):
+- They removed **one** friction completely before adding others (Blackcircles: fitting; PartSelect: model number; Vinted: buyer protection).
+- The physical step was done by hand at first (Deliveroo's founder as courier) or delegated to existing partners (Oponeo's and Blackcircles' independent garages).
+- Most large winners hold inventory (Oponeo, Autodoc, MonotaRO, McMaster, Chewy, Zalando) or a fleet (Uber, Deliveroo). The **no-inventory** winners are marketplaces with a trust layer (Back Market, Vinted, Reverb), software (Booksy, Fit Analytics, Partly) or comparison (Ceneo). This narrows the founder's options to P1/P2/P4/P6/P9 run without stock.
+- Time to work is long: Back Market about 12 years to group profit, Partly 6 years to Series B, Autofixer about 5 years to EBITDA-positive months. Nothing here was quick except in a narrow niche.
+
+## 3. What changes with cheap AI
+
+Steps that used to need staff or licensed data and are now cheap enough for a solo founder, with evidence where it exists. "Evidence" means a business uses it in production; where I only have a claim, it says so.
+
+| Step | Before | Now | Evidence | Business that becomes possible |
+|---|---|---|---|---|
+| Reading a part photo or a rating plate | buyer had to find and type the model number; staff answered photos by email | a vision model reads the label or recognises the item | eBay's "magical listing": a seller takes a photo and AI fills in title, description and pricing suggestions (launched Sep 2023; full rollout took over a year and a half, per Value Added Resource). Google Lens: Google said in Oct 2024 that Lens handles nearly 20 bn visual searches a month, about 20% shopping-related (secondary summaries; Google's post not opened, unverified) | "photo of your boiler plate → the right part": the step PartSelect needs the buyer to do by hand |
+| Matching a free-text request to a catalogue | keyword search; needed exact part number | LLM maps "my Bosch dryer shows E18 and doesn't drain" to candidate parts | Amazon reports that Rufus drove about USD 12 bn incremental annualised sales in 2025 and that users are 60% more likely to buy (company metric, 7-day attribution; not audited) | a conversational front end on a niche catalogue; but this is exactly what Allegro and Amazon can add (brief's absorption risk) |
+| Building fitment / compatibility data from messy supplier data | manual data entry teams, licensed databases | LLM + retrieval extracts specs and compatibility from part numbers and listings | Versable (YC W22) uses a fine-tuned LLM with retrieval to generate titles, specs and fitment data from part numbers for parts retailers; Partly built a specialised model on licensed manufacturer data (USD 50 m Series B, 2026); Intropy (London) raised USD 11 m for AI in spare parts (Jul 2026) | a small curated compatibility database for one niche that Allegro sellers lack |
+| Translating technical specs | translator or the buyer reads German/English data sheets | machine translation of data sheets and supplier catalogues is near free | widely available; no specific business evidence collected (unverified as a moat) | sourcing from German, Czech or Italian suppliers for Polish buyers; little defensibility |
+| Answering fit questions | phone or chat staff | LLM answers with the catalogue as context | Zalando: AI size and fit tools cut size-related returns by more than 8% (Ecotextile on the 2025 results) | pre-sale fit check that lowers returns; the value is in the data behind the answer, not the answer |
+| Reading supplier price lists and stock feeds | manual import, CSV mapping per supplier | LLM maps columns and product names across suppliers | no direct business evidence collected in this run (unverified) | "one checkout across many suppliers" (P3) for a trade, with dropshipping |
+
+Sources for this table: [TechCrunch, eBay photo-to-listing tool (7 Sep 2023)](https://techcrunch.com/2023/09/07/ebay-rolls-out-a-tool-that-generates-product-listings-from-photos); [Value Added Resource, "Magical Listing Revisited"](https://www.valueaddedresource.net/ebay-ai-magical-listing-revisited/); [eMarketer, Google and Amazon visual search](https://www.emarketer.com/content/google-amazon-visual-search-updates) (secondary for the Lens figure); [PPC Land, Rufus USD 12 bn in 2025](https://ppc.land/amazons-ai-shopping-assistant-drove-12-billion-in-sales-for-2025/); [Y Combinator, Versable](https://www.ycombinator.com/companies/versable); [SiliconANGLE, Partly Series B](https://siliconangle.com/2026/06/23/partly-raises-50m-500m-valuation-crack-us-auto-parts-market/); [tech.eu, Intropy USD 11 m](https://tech.eu/2026/07/30/ai-for-spare-parts-startup-intropy-raises-11m/); [Ecotextile, Zalando 2025](https://www.ecotextile.com/2026031262026/radar/zalando-reports-record-annual-results/).
+
+**What did not become cheap:** the physical step (fitting, collection, returns), supplier relationships, licensed catalogue data, and buyer trust. Partly's pitch is explicit that it trains on **licensed manufacturer data**, not on scraping: the AI step is cheap, the data rights are not.
+
+**Implication for Phase 3:** cheap AI lowers the cost of P1 (compatibility data) and P6 (fit answers) most. It also lowers it for Allegro, Amazon and ChatGPT, so an idea must hold value in something AI does not give: supplier links, a booked physical step (P2), a trusted niche community (P8), or data the incumbents do not have. Write-ups (T13–T14) should name which of these the idea owns.
+
+## 4. Graveyard: vertical marketplaces and on-demand services that failed
+
+| Business | Country, years | What it did | Why it failed (as reported) | Failure type | Source |
+|---|---|---|---|---|---|
+| Homejoy | US, 2012–2015 | home-cleaning marketplace | CEO blamed worker-classification lawsuits; post-mortems point to poor customer and cleaner retention, heavy discounting, costly international expansion; cleaners and clients made direct deals and left the platform (disintermediation) | liquidity / retention, disintermediation | [Backchannel, "Why Homejoy failed"](https://medium.com/backchannel/why-homejoy-failed-bb0ab39d901a); [Harvard Digital Initiative case](https://d3.harvard.edu/platform-digit/submission/homejoy-a-silicon-valley-darlings-path-to-the-grave/) |
+| Shyp | US, 2013–2018 | on-demand pickup and packing of parcels | founder blamed "growth at all costs", staying with consumer shipments and expanding too fast; had cut New York, Chicago and LA in 2017; raised about USD 62 m | margin (consumer shipping is low value), premature scaling | [TechCrunch, 27 Mar 2018](https://techcrunch.com/2018/03/27/on-demand-shipping-startup-shyp-is-shutting-down/) |
+| Washio | US, 2013–2016 | on-demand laundry pickup | no official reason; reports cite failed sale talks, a worker-classification suit, low margins and reliance on growth; raised about USD 16–17 m; assets later bought by Rinse | margin, funding | [TechCrunch, 30 Aug 2016](https://techcrunch.com/2016/08/30/washio-on-demand-laundry-service-shuts-down-operations) |
+| Munchery | US, 2010–2019 | prepared-meal delivery from its own kitchens | Chapter 11 filing cites competition, over-funding, aggressive expansion; raised about USD 125 m; left about USD 6 m owed to vendors and gift-card holders | margin (food waste, delivery cost), premature scaling | [TechCrunch, 21 Jan 2019](https://techcrunch.com/2019/01/21/munchery-shuts-down/) |
+| BikeExchange (Kitzuma) | AU/US/EU, listed company | bike marketplace; Kitzuma "ready-to-ride" door-to-door delivery | dropped capital-intensive door-to-door bike delivery in North America in 2023 ($5.3 m impairment, currency as reported), sold Colombian stores, later reported to exit Australia by June 2025 | logistics step too costly, capital | [The Latz Report, Kitzuma scrapped](https://thelatzreport.com.au/news/trade/bikeexchange-scraps-kitzuma-ready-to-ride-delivery-service/); [OI Compass, exit from Australia](https://www.oicompass.com/corporate-and-manda/bikeexchange-to-exit-australian-market-by-june-2025/114359.article) |
+| Wiggle Chain Reaction Cycles | UK, administration Oct 2023 | large online bike retailer (inventory, not a marketplace) | parent Signa Sports United withdrew about EUR 150 m of financing; post-pandemic overstock in the bike trade, Brexit; owed creditors over GBP 26 m | inventory and capital, not friction | [road.cc, administration](https://road.cc/content/news/wiggle-chain-reaction-enters-administration-304741) |
+| Reverb (not a failure, a ceiling) | US | music-gear marketplace | bought by Etsy for USD 275 m (2019), sold in 2025 for an undisclosed sum to a group including Fender's owner: a horizontal parent did not get enough from a single-hobby vertical | ceiling of a niche vertical | [Engadget](https://www.engadget.com/audio/etsy-is-selling-online-music-gear-marketplace-reverb-160002119.html) |
+
+**Reasons, grouped** (supply, liquidity, margin, Allegro/Amazon):
+- **Margin on a cheap service** (Shyp, Washio, Munchery): the physical step cost more than buyers would pay; venture money hid this until it ran out. For the brief: a service fee must cover hand work at 10 orders, not at 10,000.
+- **Liquidity and disintermediation** (Homejoy): once buyer and provider met, they left. Platforms that keep buyers do so with a tool the provider uses every day (Booksy, P9) or with payment protection (Vinted, P5).
+- **Owning the logistics step** (BikeExchange's Kitzuma, Munchery's kitchens): the companies that survived used partners (Oponeo's and Blackcircles' garages, InPost lockers).
+- **Inventory and capital** (Wiggle CRC): not a friction failure, but a warning that the "Oponeo pattern" with stock needs capital the founder does not have.
+- **Platform ceiling** (Reverb): a vertical that wins its niche may still be small. For Poland, the same ceiling comes from Allegro: no case found in this run where a Polish vertical marketplace was closed **because** of Allegro (searched for Fixly, OLX's services marketplace; no closure reported, unverified). The Allegro risk is better assessed per vertical in T04–T08.
+
+## 5. Takeaways for the longlist (T11)
+1. The strongest no-inventory patterns for this founder are **P1 narrow compatibility database + dropship supplier**, **P2 product plus booked installer**, and **P9 tool for a trade with a marketplace on top**.
+2. Cheap AI makes building P1 data and answering fit questions cheap, but also cheap for Allegro and ChatGPT; value must come from supplier ties, the booked physical step or a niche community.
+3. Every service idea needs the graveyard check: does the fee cover the hand work at 10 orders a month, and what stops the buyer and provider from going direct after the first job?
+4. Subscriptions work for replenishment (Chewy, Dollar Shave Club) and for professionals (Booksy), not for consumers who want to find a part once.
