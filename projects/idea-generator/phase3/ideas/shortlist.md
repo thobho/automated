@@ -97,7 +97,11 @@ Each write-up gets **Devil's advocate** and **Review changes** sections (fresh f
 | 36 | [004](v2-home-appliance/004-diagnosis-then-part.md) | 2.78 → 2.53 | **rejected** | Bosch Home Connect and LG Smart Diagnosis do remote triage; one-off purchase, PLN ~16 per customer vs CAC PLN 50–83; no appliance-parts supplier with public dropship terms |
 | 24 | [006](v2-home-appliance/006-heat-pump-parts-for-installers.md) | 2.71 → 2.56 | <5% | each brand has one Polish distributor selling parts to its own installers (Klima-Therm, Refsystem for Haier, unverified); realistic margin 0–10%, ~PLN 45 per order |
 | 33 | [007](v2-home-appliance/007-used-washer-modules.md) | 2.67 → 2.45 | **rejected** | module repair by post (~PLN 110) beats a used module on price and fit; PLN 1–7 per order before CAC; no listable supply |
-<!-- T15 rows end -->
+| 1 | [008](v1-vehicle/008-chinese-brand-collision-parts.md) | 2.67 → 2.57 | <5%, stays rejected (F8 knock-out, T14) | rear bumper for Omoda 5 still not sold new outside ASO; oversized parts leave the parcel network (non-standard shipment PLN 243.90 net at ORLEN) |
+| 19 | [009](v1-vehicle/009-fitment-data-for-parts-sellers.md) | 3.01 → 2.86 | <5% | gap still open (no third-party "Pasuje do" filler found; Allegro's 2026 AI assistant is buyer-side); B2B click CAC PLN 400–1,070 vs PLN 97/month; best remaining write-up |
+| 53 | [010](v3-hobby/010-fishing-subscription-box.md) | 2.40 → 2.28 | **rejected** | Westin sells a curated lure gift box in Polish via retailers; PLN 7–9 per box before CAC; no packing partner, no public dealer terms (Jaxon, Mikado, Konger) |
+
+**Outcome of T15:** of the 10 write-ups, 6 are now rejected (#17, #52, #36, #33, #53 in T15 and #1 from T14); 4 remain, all `<5%`: #19 (2.86), #81 (2.64), #8 (2.63), #24 (2.56). Main reasons across the batch: Google Ads CAC at sourced CPC ranges (PLN 50–125 for consumer parts, PLN 400+ for B2B software) is above the per-order profit of one-off purchases; cross-border parcels (DHL EU 5–10 kg EUR 16.49–25.49) remove most margins on German-sourced parts; no supplier anywhere published dropship or affiliate terms. Caveat: CPC figures come from one weak Polish source and US benchmarks; a Google Keyword Planner check per idea (needs a login, not done) would replace them.
 
 ## Caveats
 
