@@ -1,6 +1,6 @@
 # Phase 3 shortlist (T12, quick scores)
 
-Human-readable view of [shortlist.csv](shortlist.csv) ([task](../tasks/12-filter-and-shortlist.md)). Scores are **quick** ([criteria](../method/criteria.md) §2): judged from the longlist evidence (T04–T11 files), not re-researched; weighted scores and bands are computed by [shortlist_score.py](shortlist_score.py). Rejected ideas and reasons: [rejected.md](../rejected.md). 2026-11-06.
+Human-readable view of [shortlist.csv](shortlist.csv) (T13 final scores for the first five: see [Write-ups](#write-ups-t13-batch-a)) ([task](../tasks/12-filter-and-shortlist.md)). Scores are **quick** ([criteria](../method/criteria.md) §2): judged from the longlist evidence (T04–T11 files), not re-researched; weighted scores and bands are computed by [shortlist_score.py](shortlist_score.py). Rejected ideas and reasons: [rejected.md](../rejected.md). 2026-11-06.
 
 ## How it was filtered
 
@@ -17,11 +17,11 @@ Human-readable view of [shortlist.csv](shortlist.csv) ([task](../tasks/12-filter
 
 | Rank | # | Idea | V | Model | Weighted | Band | First supplier | First channel |
 |---|---|---|---|---|---|---|---|---|
-| 1 | 81 | Catering-equipment spare parts from EU distributors for restaurants | V5 | margin | 3.5 | 5-15% | Nisbets (IE) or Parts Town (US) seen in T10; EU distributor terms unverified | SEO on uszczelka Unox and Carpigiani czesci phrases (V5-D08, 2+3 suggestions) |
-| 2 | 17 | Photo-based body-damage quote to partner body shops | V1 | lead fee | 3.5 | 5-15% | local body shops (none named; kb.pl price lists show them) | unverified (cash-paying drivers after small damage; no channel named) |
-| 3 | 52 | Instant multi-bureau 3D-print quote from an uploaded file | V3 | commission | 3.4 | 5-15% | Polish print bureaus quoting on Oferteo (none contacted) | SEO on druk 3D na zamowienie cena (V3-D04) |
-| 4 | 36 | Video or photo diagnosis before the part, ending in a dropshipped part | V2 | service fee + margin | 3.4 | 5-15% | CzęściAGD.pl (also a wholesaler); BSH shop by E-Nr | SEO on co sie zepsulo w pralce type phrases (V2 scan 8) |
-| 5 | 8 | Camper habitation parts by body brand, dropshipped from DE | V1 | margin | 3.3 | 5-15% | Reimo (seen in T10 item 7); Dometic windows via one OLX seller | SEO on the camper-parts autocomplete phrases (V1-D07, 10 suggestions) |
+| 1 | 81 | Catering-equipment spare parts from EU distributors for restaurants | V5 | margin | 3.5 → **2.8** ([001](v5-small-business/001-catering-equipment-parts.md)) | 5-15% → **<5%** | Nisbets (IE) or Parts Town (US) seen in T10; EU distributor terms unverified | SEO on uszczelka Unox and Carpigiani czesci phrases (V5-D08, 2+3 suggestions) |
+| 2 | 17 | Photo-based body-damage quote to partner body shops | V1 | lead fee | 3.5 → **2.9** ([002](v1-vehicle/002-body-damage-photo-quote.md)) | 5-15% → **<5%** | local body shops (none named; kb.pl price lists show them) | unverified (cash-paying drivers after small damage; no channel named) |
+| 3 | 52 | Instant multi-bureau 3D-print quote from an uploaded file | V3 | commission | 3.4 → **2.8** ([003](v3-hobby/003-3d-print-instant-quote.md)) | 5-15% → **<5%** | Polish print bureaus quoting on Oferteo (none contacted) | SEO on druk 3D na zamowienie cena (V3-D04) |
+| 4 | 36 | Video or photo diagnosis before the part, ending in a dropshipped part | V2 | service fee + margin | 3.4 → **2.8** ([004](v2-home-appliance/004-diagnosis-then-part.md)) | 5-15% → **<5%** | CzęściAGD.pl (also a wholesaler); BSH shop by E-Nr | SEO on co sie zepsulo w pralce type phrases (V2 scan 8) |
+| 5 | 8 | Camper habitation parts by body brand, dropshipped from DE | V1 | margin | 3.3 → **3.0** ([005](v1-vehicle/005-camper-habitation-parts.md)) | 5-15% → **<5%** | Reimo (seen in T10 item 7); Dometic windows via one OLX seller | SEO on the camper-parts autocomplete phrases (V1-D07, 10 suggestions) |
 | 6 | 24 | Spare parts for distributor-only heat-pump brands, for installers | V2 | margin | 3.3 | 5-15% | KLIMA-THERM (Kaisai distributor, T10) | heat-pump installers searching the V2-D04 phrases (9 suggestions) |
 | 7 | 33 | Fit-checked used modules for discontinued washers from donor machines | V2 | commission | 3.3 | 5-15% | independent repairers and OLX donor machines | elektroda.pl forum threads on washer modules (V2-D01) |
 | 8 | 1 | Collision-part sourcing desk for Chinese brands | V1 | service fee | 3.2 | 5-15% | brand importers and dealers (ASO); used parts on OLX | Omoda Polska Facebook group (>30,000 members, V1 demand S3) |
@@ -55,6 +55,20 @@ Human-readable view of [shortlist.csv](shortlist.csv) ([task](../tasks/12-filter
 - **#30 MVHR (rekuperator) filter subscription by unit model** (subscription): MVHR filters must be changed 2-4 times a year and owners forget the exact set.
 
 Ideas marked "partly" in the CSV (#47, #52, #58, #67, #81, #84, #85, #91) have some repeat purchase but no subscription reason yet.
+
+## Write-ups (T13, batch A)
+
+Final scores from full write-ups replace the quick scores for these rows in [shortlist.csv](shortlist.csv) (new `writeup_path` column; `band_note` records the opportunity/risk rule). Ranks are kept from T12. 2026-11-06.
+
+| # | Write-up | Quick → final weighted | Final band | Main reason for the change |
+|---|---|---|---|---|
+| 81 | [001 Catering-equipment parts](v5-small-business/001-catering-equipment-parts.md) | 3.5 → 2.8 | <5% | Gastroparts (Toruń, 80,000 parts, 24 h shipping) and GEV sell online in Polish: the T10 "foreign only" gap did not hold |
+| 17 | [002 Body-damage photo quote](v1-vehicle/002-body-damage-photo-quote.md) | 3.5 → 2.9 | <5% | Fixico left the consumer model for fleets in 2016; ~PLN 12 fee per request after CAC |
+| 52 | [003 3D-print instant quote](v3-hobby/003-3d-print-instant-quote.md) | 3.4 → 2.8 | <5% | Treatstock, Craftcloud and JLC3DP quote instantly (in English); commission per order below CAC |
+| 36 | [004 Diagnosis then part](v2-home-appliance/004-diagnosis-then-part.md) | 3.4 → 2.8 | <5% | free help (elektroda.pl, AI assistants); Spareka relies on a French repair subsidy Poland lacks |
+| 8 | [005 Camper habitation parts](v1-vehicle/005-camper-habitation-parts.md) | 3.3 → 3.0 | <5% | hardest parts are dealer-only at retail price; small seasonal owner base |
+
+All five score in the `5–15%` range and drop one band on the opportunity/risk sums (criteria §4). None is killed outright; each has a ≤300 PLN validation test.
 
 ## Caveats
 

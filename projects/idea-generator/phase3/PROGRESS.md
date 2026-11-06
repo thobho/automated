@@ -27,7 +27,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable: longlist.md has no external URLs; the 58 unverifiable links are pre-existing ones in catalogue/*.csv (403/429/timeout), already listed under T04–T08.
 - [x] T12 · filter and shortlist · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
 - [~] T13 · write-ups batch A · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
-  - Resume: 4/5 done: 001 #81 (ideas/v5-small-business/), 002 #17 (ideas/v1-vehicle/), 003 #52 (ideas/v3-hobby/), 004 #36 (ideas/v2-home-appliance/004-diagnosis-then-part.md); csv rows updated. Next: 005 #8 camper parts (ideas/v1-vehicle/); then shortlist.md + CHANGELOG + link check.
+  - Resume: 5/5 done, Done-when met: 001 #81 (ideas/v5-small-business/001-catering-equipment-parts.md), 002 #17 (ideas/v1-vehicle/002-body-damage-photo-quote.md), 003 #52 (ideas/v3-hobby/003-3d-print-instant-quote.md), 004 #36 (ideas/v2-home-appliance/004-diagnosis-then-part.md), 005 #8 (ideas/v1-vehicle/005-camper-habitation-parts.md); shortlist.csv (writeup_path column, final scores) and shortlist.md updated, CHANGELOG noted. All five final 2.8–3.0, band <5% after O/R. Link check 0 dead. Nothing left; awaiting the runner to mark T13 [x].
+  - Unverifiable (403/timeout, real sites): gev-online.com/pl, mieleusa.com remote-assist, elektroda.pl topic3633231 (timeout), frankana.de/en/aboutus.
 - [ ] T14 · write-ups batch B · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
 - [ ] T15 · independent critical review · needs: T13, T14 · [tasks/15-independent-critical-review.md](tasks/15-independent-critical-review.md)
 - [ ] T16 · summary and validation plans · needs: T15 · [tasks/16-summary-and-validation-plans.md](tasks/16-summary-and-validation-plans.md)
