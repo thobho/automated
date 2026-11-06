@@ -23,7 +23,8 @@ Every task runs on **opus at medium effort** (see RUNNER.md).
   - Unverifiable (timeout/403, open in a browser): elektroda.pl topics 3633231, 3961802, 4153141, 4096321, 3854078; decathlon.pl learn page
 - [x] T10 · findability test · needs: T09 · [tasks/10-findability-test.md](tasks/10-findability-test.md)
   - Unverifiable (timeout, open in a browser): elektroda.pl topic3633231, longines.com/pl/cennik-uslug
-- [ ] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
+- [~] T11 · longlist of ideas · needs: T03, T09, T10 · [tasks/11-longlist.md](tasks/11-longlist.md)
+  - Resume: starting
 - [ ] T12 · filter and shortlist · needs: T11 · [tasks/12-filter-and-shortlist.md](tasks/12-filter-and-shortlist.md)
 - [ ] T13 · write-ups batch A · needs: T12 · [tasks/13-write-ups-batch-a.md](tasks/13-write-ups-batch-a.md)
 - [ ] T14 · write-ups batch B · needs: T12 · [tasks/14-write-ups-batch-b.md](tasks/14-write-ups-batch-b.md)
