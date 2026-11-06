@@ -87,6 +87,17 @@ Changes vs. quick score: L3 4 → 3 (Twój e-PIT and free programs handle the si
 
 **Confidence:** medium (counts and Twój e-PIT gaps sourced; refund frequency, willingness to pay and the child-abroad rule not).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *It already works in Polish, and the Polish tools already target Ukrainians.* e-pity runs a dedicated "PIT dla Ukraińca" section (PIT-11, which form, tax office, missing PESEL, a residency explainer PDF) and its program fills PIT-37 from the employer's PIT-11 automatically ([e-pity](https://www.e-pity.pl/pit-dla-ukrainca/rozliczenie-pit-w-polsce/), fetched 2026-11-06; the deadline on the page is still 2024, so it is not kept current). PITax and podatnik.info have Ukrainian-citizen guides too ([PITax](https://www.pitax.pl/wiedza/poradnik-rozliczenia/rozliczenie-podatku-dochodowego-obywateli-ukrainy/); [podatnik.info](https://www.podatnik.info/publikacje/pit-11-dla-ukrainca-rozliczenie,6158d0), search excerpts). The UI is Polish, but the free programs already own the SEO and the flow; adding a Ukrainian UI (R3) is a translation job for them, not a moat for us.
+- *ChatGPT will absorb it.* For the simple majority (one PIT-11, PIT-37, accept in Twój e-PIT) a Ukrainian-language chat answer is enough. The paid value sits only in residency doubt, Ukrainian income (PIT/ZG) and the unused child-relief refund, and the child-abroad rule for that refund is **still unconfirmed** after a second search (no KIS interpretation found). If children living in Ukraine do not qualify, the "we found you X PLN" hook shrinks to foreign parents whose children live in Poland.
+- *Polish customers won't pay this.* The B2C payer is a low-earning worker deciding between a free state pre-fill and 39 PLN; the B2B payer (agencies) has no budget line for "PIT help" today; at best it is a retention perk. Paid human help exists at the margin (Ukrainian-language legal/accounting services such as [consultant.net.pl](https://consultant.net.pl/en/consultant-article/filing-a-pit-declaration-for-ukrainians-in-poland-legal-support-0), search excerpt; prices not found), which caps price expectations rather than proving willingness to pay.
+- *Western leader localizing in 12 months.* No: Taxfix is still DE/IT/ES/UK, no TaxDown or Taxfix move into Poland or CEE found (second search 2026-11-06). The threat is local (e-pity, PITax, Pitbot, which partner content says can import from e-PIT; its Ukrainian-language claim could not be verified: comparic.pl returns 403).
+- *Second competitor search (2026-11-06):* "rozliczenie PIT dla Ukraińców aplikacja po ukraińsku", "Pitbot PIT po ukraińsku", "Taxfix/TaxDown Poland": no Ukrainian-language PIT product confirmed; free Polish programs with Ukrainian-targeted content (above) and money-transfer firms' guides (Profee) found. No CEE (CZ) analogue for foreigners found.
+- *Success signals.* Samjjeomsam and TaxDown are durable (repeat yearly use, refund-based pricing, profitability claimed by TaxDown, company-reported). But the durable signal is **national-population scale with an annual cycle**; the migrant-niche version has no Western analogue at all, and the seasonality that is harmless at 24 million users is fatal at a few thousand. L2 3 stays, not raised.
+- *Opportunity/risk lists.* Independent. O3 (shared customers with 002) is a portfolio choice, not market evidence. R1 H×H is honest; its mitigation (annual B2B tier) is unproven, so the §4 move stands. R2 H likelihood is plausible but unmeasured.
+
+**Review changes (T24, 2026-11-06):** scores unchanged (L1 3 · L2 3 · L3 3 · L4 4 · L5 4 · L6 2 · L7 4 · L8 3 · L9 2; weighted **3.2**; shortlist quick 3.3 with L3 4 replaced). §4 already applied in T21: O 20, R 28, R − O = 8 and R1 H×H with unproven mitigation → **<5%** confirmed. **Rejected as a standalone idea** and recorded in [rejected.md](../../rejected.md) as merged into L036 (write-up [002](../employment-migration/002-teczka-legalizacyjna.md)) as a seasonal add-on for the same agency customers, which is what T21 itself recommended. Open check carried over: ulga na dziecko for children living in Ukraine (art. 27f, KIS interpretations).
+
 **Sources** (accessed 2026-11-05):
 1. https://www.venturesquare.net/en/982378
 2. https://www.asiae.co.kr/en/article/2026031708331058189
@@ -107,6 +118,10 @@ Changes vs. quick score: L3 4 → 3 (Twój e-PIT and free programs handle the si
 17. https://www.kyivpost.com/uk/post/40179
 18. https://openrouter.ai/google/gemini-2.5-flash
 19. https://artificialintelligenceact.eu/annex/3/
-20. Internal: [TH21 check](../../poland-check/A/TH21-consumer-tax-filing.md), [write-up 002](../employment-migration/002-teczka-legalizacyjna.md)
+20. https://www.e-pity.pl/pit-dla-ukrainca/rozliczenie-pit-w-polsce/ (2026-11-06, T24)
+21. https://www.pitax.pl/wiedza/poradnik-rozliczenia/rozliczenie-podatku-dochodowego-obywateli-ukrainy/ (2026-11-06, T24, excerpt)
+22. https://www.podatnik.info/publikacje/pit-11-dla-ukrainca-rozliczenie,6158d0 (2026-11-06, T24, excerpt)
+23. https://consultant.net.pl/en/consultant-article/filing-a-pit-declaration-for-ukrainians-in-poland-legal-support-0 (2026-11-06, T24, excerpt)
+24. Internal: [TH21 check](../../poland-check/A/TH21-consumer-tax-filing.md), [write-up 002](../employment-migration/002-teczka-legalizacyjna.md)
 
 Coverage: 16 web searches/fetches for this write-up (Samjjeomsam traction and legal case, TaxDown, Taxfix, MF interpellation answer on foreigners' PIT, Twój e-PIT login and ulga rules, Ukrainian-language PIT services, accountant prices, ZUS foreigner counts, doradztwo podatkowe scope). Not found: a Ukrainian-language PIT product, prices of Ukrainian-speaking accountants, the ulga rule for children living abroad, the current text of art. 2–3 of the doradztwo podatkowe act, any shutdown in the theme.
