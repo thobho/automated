@@ -86,6 +86,19 @@ Changes vs. quick score: none on the lenses; L2 4 now sourced (Osome revenue, Hn
 
 **Confidence:** medium-low (Western traction, Polish prices and JDG counts sourced; competition from Ukrainian-run offices and support load not measured).
 
+**Devil's advocate (T24, 2026-11-06):**
+- *It already works in Ukrainian.* The wedge "no online office marketed in Ukrainian" does not hold. WoBorders, a Ukrainian business-services agency, sells bookkeeping for JDG and sp. z o.o. in Poland with Ukrainian-speaking accountants, documents sent electronically, chat over Telegram, Viber or WhatsApp, a team of 20+ Polish accountants and 1M PLN liability insurance, at **300 PLN gross/month with no invoices, 500 PLN up to 20, 800 PLN up to 40** ([WoBorders](https://woborders.agency/biznes-servisy/reyestracziya-biznesu-v-yevropi/buhgalterskyj-suprovid-v-polshhi/), fetched 2026-11-06; no AI mentioned). That is the proposed product without the AI, at a price the 299/399 PLN net plan does not undercut much. Ukrainian-run offices (UKDN, cited above) serve the same community by word of mouth.
+- *A cheaper substitute removes the JDG altogether.* Bizky (Warsaw) invoices on the contractor's behalf "without ZUS, bookkeeping or opening a JDG", with a Ukrainian-language guide and RU/EN/PL site ([bizky.ai](https://bizky.ai/?p=9366), fetched 2026-11-06; commission not stated). For low-volume freelancers this competes with the whole idea; Useme does the same in Polish (not re-checked).
+- *Polish customers won't pay this, at least not to a newcomer.* An IT contractor on ryczałt 12% with one foreign client already gets Norman in English at 29–39 PLN or inFakt with an accountant from ~60 PLN; the ones who need a Ukrainian-speaking human already have WoBorders-type agencies or a known accountant.
+- *ChatGPT will absorb it.* The explanation layer (tax form choice, "what you owe" in Ukrainian) is exactly what a general assistant does well; the paid part is filing and liability, which belongs to the partner office, not the software.
+- *The model collides with the founder profile.* The write-up itself scores L7 2: a service with a partner's margin share and multilingual support. Nothing found in this pass reduces that load; Osome, the best-documented analogue, is still loss-making (cited above).
+- *Second competitor search (2026-11-06):* Ukrainian ("бухгалтерія онлайн Польща JDG українською") and Polish ("księgowość online dla obcokrajowców JDG po ukraińsku angielsku"): found WoBorders and Bizky (above); Polish price guides put online offices at 50–300 PLN/month and traditional ones at 200–900 PLN (freenance.io, kb.pl, search excerpts; secondary).
+- *Claims re-checked.* Ukrainian JDG starts (~31k in 2025): unchanged, still a search excerpt of PIE. Norman PL pricing: not re-fetched.
+- *Success signals.* Osome (revenue S$29M) and Hnry (Series C, revenue ~3×) are durable, not hype; L2 4 holds for the theme. The gap is in Poland, not abroad.
+- *Opportunity/risk lists.* O1 rests on "no online office targets in Ukrainian", now false → M×M. R2 H×M confirmed by WoBorders. Lists otherwise independent.
+
+**Review changes (T24, 2026-11-06):** L3 3 → 2 (a Ukrainian-language online JDG bookkeeping service exists at 300–800 PLN gross; Norman covers English self-service; Bizky offers invoicing without a JDG). Reviewed scores: L1 3 · L2 4 · L3 2 · L4 4 · L5 3 · L6 3 · L7 2 · L8 3 · L9 2 | weighted 0.36+0.48+0.24+0.60+0.45+0.30+0.16+0.24+0.16 = 2.99 → **3.0** (shortlist quick 3.1 replaced). O1 H×M → M×M. §4: O 4+6+6+4+1 = 21, R 31, R − O = 10 and R1 H×H → down one → **<5%** (unchanged). **Rejected** (recorded in rejected.md): the language wedge is already served by human agencies, the low end by self-service and no-JDG invoicing, and the service model's support load conflicts with the 40 h/month limit (L7 2).
+
 **Sources** (accessed 2026-11-06 unless noted):
 1. https://osome.com/sg/blog/osome-fy2025-results-ebitda-loss-cut-ai/ (accessed 2026-11-01)
 2. https://hnry.co.nz/resources/news/hnry-raises-30-mil-to-accelerate-growth/
@@ -104,5 +117,9 @@ Changes vs. quick score: none on the lenses; L2 4 now sourced (Osome revenue, Hn
 15. https://openrouter.ai/google/gemini-2.5-flash (accessed 2026-11-05)
 16. https://artificialintelligenceact.eu/annex/3/
 17. Internal: [TH16 check](../../poland-check/A/TH16-ai-accountant-micro-businesses.md), R3/R6/R7/R8 catalogue rows
+18. https://woborders.agency/biznes-servisy/reyestracziya-biznesu-v-yevropi/buhgalterskyj-suprovid-v-polshhi/ (2026-11-06, T24)
+19. https://bizky.ai/?p=9366 (2026-11-06, T24)
+20. https://freenance.io/ile-kosztuje/ile-kosztuje-ksiegowa-jdg-2026-biuro-rachunkowe-vs-samoobsluga/ (2026-11-06, T24, search excerpt)
+21. https://kb.pl/ceny/uslugi-biznesowe/cennik-biur-rachunkowych-i-uslug-ksiegowych-w-calej-polsce/ (2026-11-06, T24, search excerpt)
 
 Coverage: 6 web searches and 3 fetches for this write-up (Hnry funding, Norman languages, Ukrainian JDG counts, Polish JDG accounting prices, Ukrainian-language offices, rules for usługowe prowadzenie ksiąg). Not found: number of active foreign-owned JDG, prices of Ukrainian-run offices, any online office marketed in Ukrainian; the PIE PDF could not be parsed.
