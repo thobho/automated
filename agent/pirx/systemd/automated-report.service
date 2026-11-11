@@ -1,0 +1,8 @@
+[Unit]
+Description=automated: build the daily report and post it on GitHub
+After=network-online.target
+
+[Service]
+Type=oneshot
+Environment=HOME=%h
+ExecStart=/usr/bin/python3 %h/Projects/automated-work/runner/agent/daily_report.py

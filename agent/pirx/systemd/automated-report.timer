@@ -1,0 +1,9 @@
+[Unit]
+Description=automated: daily report at 07:45 Warsaw time
+
+[Timer]
+OnCalendar=*-*-* 07:45:00 Europe/Warsaw
+Persistent=true
+
+[Install]
+WantedBy=timers.target

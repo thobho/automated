@@ -1,0 +1,10 @@
+[Unit]
+Description=automated: hourly OpenCode worker check
+
+[Timer]
+OnCalendar=*-*-* *:17:00
+RandomizedDelaySec=120
+Persistent=false
+
+[Install]
+WantedBy=timers.target

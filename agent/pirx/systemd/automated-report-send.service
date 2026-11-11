@@ -1,0 +1,8 @@
+[Unit]
+Description=automated: send the daily report to WhatsApp via Hermes (runs as the owner's user)
+After=network-online.target
+
+[Service]
+Type=oneshot
+Environment=HOME=%h
+ExecStart=/bin/bash %h/.local/bin/automated-report-send.sh
