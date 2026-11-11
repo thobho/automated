@@ -51,9 +51,10 @@
       "Bash(timeout *)",
       "Bash(sleep *)",
       "Bash(docker compose *)",
-      "Bash(podman compose *)",
-      "Bash(podman ps *)",
-      "Bash(podman logs *)"
+      "Bash(podman *)",
+      "Bash(podman-compose *)",
+      "Bash(make *)",
+      "Bash(just *)"
     ],
     "deny": [
       "Bash(sudo *)",
