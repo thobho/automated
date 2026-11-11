@@ -12,6 +12,7 @@ usage="$RUNTIME/state/claude-usage.json"
 budget="$RUNTIME/state/claude-budget.json"
 cat > "$usage"
 [[ -s "$usage" ]] || { echo "ERROR: no usage JSON on stdin"; exit 2; }
+beat dispatcher
 
 free_slots() { bash "$LOCK" status | grep -c ': free$' || true; }
 held_slots() { bash "$LOCK" status | grep -c ': held' || true; }

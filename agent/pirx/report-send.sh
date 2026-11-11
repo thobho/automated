@@ -25,5 +25,11 @@ if [[ "$created" != "$today" ]]; then
   exit 0
 fi
 short="$(jq -r '.body' <<<"$latest" | sed -n '/<!-- whatsapp:start -->/,/<!-- whatsapp:end -->/p' | sed '1d;$d')"
+# Watchdog: if the health page has not been refreshed for 2 hours, pirx's side is down.
+h_upd="$(gh api "repos/$REPO/issues?labels=agent:status&state=open&per_page=1" --jq '.[0].updated_at // empty')"
+if [[ -n "$h_upd" ]] && (( $(date +%s) - $(date -d "$h_upd" +%s) > 7200 )); then
+  short="⚠️ The health page has not updated since $h_upd: the automation on pirx may be down.
+$short"
+fi
 [[ -n "$short" ]] || short="📋 automated: report ready."
 printf '%s\nFull report: %s\n' "$short" "$url" | hermes send -t "$TARGET" -f - >/dev/null

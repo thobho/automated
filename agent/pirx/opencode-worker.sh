@@ -8,6 +8,7 @@ set -uo pipefail
 source "$(dirname "$0")/common.sh"
 
 export AUTOMATED_RUN_PID=$$
+beat opencode
 keyfile="${OPENROUTER_KEY_FILE:-$CONF_DIR/openrouter-opencode.key}"
 model="${OPENCODE_MODEL:-openrouter/deepseek/deepseek-v4.1-flash-1017}"
 keyinfo="$RUNTIME/state/openrouter-key.json"
