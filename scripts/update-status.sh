@@ -16,6 +16,13 @@ five_reset="$(field five_hour_resets_at)"; weekly_reset="$(field weekly_resets_a
 [[ "$five_reset" != "?" ]] && five_reset="$(local_time "$five_reset")"
 [[ "$weekly_reset" != "?" ]] && weekly_reset="$(local_time "$weekly_reset")"
 
+# Optional: the OpenCode worker passes its openrouter_budget.py output as a file.
+openrouter_row=""
+if [[ -n "${AGENT_OPENROUTER_JSON:-}" && -s "$AGENT_OPENROUTER_JSON" ]]; then
+  orf() { jq -r ".$1 // \"?\"" "$AGENT_OPENROUTER_JSON"; }
+  openrouter_row="| OpenCode (OpenRouter, month) | **\$$(orf usage_monthly_usd)** | \$$(orf allowed_now_usd) allowed now · \$$(orf monthly_budget_usd) max | 1st of the month (UTC) |"
+fi
+
 queue_line() {
   gh issue list --label "agent:$1" --state open --limit 50 --json number,title \
     --jq 'if length == 0 then "_none_" else map("#\(.number) \(.title)") | join("<br>") end'
@@ -28,7 +35,8 @@ _Updated $(TZ="$tz" date '+%a %d %b %H:%M') ($tz)_
 | Window | Used | Agent cap | Resets |
 |---|---|---|---|
 | 5-hour | **$(field five_hour_used)%** | $(field five_hour_cap)% | $five_reset |
-| Weekly | **$(field weekly_used)%** | $(field weekly_allowed_now)% allowed now · $(field weekly_cap)% max | $weekly_reset |
+| Weekly | **$(field weekly_used)%** | $(field weekly_allowed_now)% on the even line now ($(field weekly_headroom) pts headroom) · $(field weekly_cap)% max | $weekly_reset |
+$openrouter_row
 
 **Last decision:** $(field decision) — $(field reason)
 **Last run:** ${note:-_no note_}
