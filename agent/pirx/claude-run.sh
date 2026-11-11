@@ -3,9 +3,10 @@
 # Started detached by start-claude-run.sh (systemd-run --user).
 #   claude-run.sh <issue> <model> [spillover]
 # Isolation: the agent user has no sudo and no access to /home/user or the LAN; on top of that Claude Code
-# runs with its OS sandbox (bubblewrap): shell commands may write only inside the task's working copy and a
-# few cache folders, and reach only GitHub and PyPI (agent/pirx/claude-settings.json). File edits are
-# accepted inside the working copy; anything else that would need a prompt is refused (headless run).
+# runs in `dontAsk` mode with a command allowlist (agent/pirx/claude-settings.json): file edits only inside
+# the working copy, shell commands only from the list (git, gh issue/pr/run, uv, pytest, ruff, curl, ...),
+# everything else is refused. (Claude Code's OS sandbox cannot start on Ubuntu 26.04 without relaxing its
+# user-namespace restriction, which the owner chose not to do.)
 # This script holds the slot and the claim, records the outcome and escalates:
 # 3 failed sonnet/haiku runs -> model:opus; 3 failed opus runs -> agent:blocked.
 # Runs stopped by a usage limit do not count as failures.
