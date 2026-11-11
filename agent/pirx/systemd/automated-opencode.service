@@ -1,0 +1,10 @@
+[Unit]
+Description=automated: OpenCode worker run (one task, paced by the OpenRouter budget)
+After=network-online.target
+
+[Service]
+Type=oneshot
+Environment=HOME=%h
+ExecStart=/bin/bash %h/Projects/automated-work/runner/agent/pirx/opencode-worker.sh
+TimeoutStartSec=1h
+Nice=10
