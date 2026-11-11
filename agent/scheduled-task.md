@@ -1,21 +1,19 @@
-# Scheduled task: automated-worker-2
+# Scheduled task: automated-dispatcher
+
+The Claude work itself runs on pirx (see `agent/pirx/README.md`). Only the Mac's desktop app can read the plan limits, so this hourly Mac task reads them and hands them to pirx in one SSH call. It must stay tiny: it is the only Claude cost of a run that ends up waiting.
 
 Create it in the Claude desktop app (Code tab → Scheduled tasks), or ask Claude to create it.
 - **Schedule:** every hour, at minute 7 (cron `7 * * * *`, local time)
+- **Model:** the cheapest available (Haiku)
 - **Prompt:**
 
 ```
-You are the unattended worker for the GitHub repo thobho/automated, checked out at /Users/user/Projects/automated. Nobody is watching this run: never ask questions in chat; questions go into GitHub issue comments.
-
-Work from /Users/user/Projects/automated (use absolute paths). Read and follow these two files exactly, in this order:
-1. /Users/user/Projects/automated/agent/worker-prompt.md (the run procedure)
-2. /Users/user/Projects/automated/CLAUDE.md (repo rules)
-
-This task fires every hour so that usage is spread evenly: agent/budget.py paces both the 5-hour window and the week, and only lets work start while usage is below the rising pace line. The budget gate in worker-prompt.md step 1 comes first and must stay cheap: if agent/budget.py says WAIT, update the status issue and end the run right away without reading anything else. Re-check the gate before every next task.
-
-Issues often take more than one run. Commit and push small pieces of work often, so that a run stopped by the budget loses nothing; the next run resumes the interrupted `agent:doing` issue from its branch.
-
-Hard limits: never push to main, never merge PRs, never force-push, work only inside projects/<name>/ for the issue's project label, at most 3 tasks per run. Leave the shared checkout on the branch you found it on, and update the pinned "🤖 Agent status" issue at the end.
+You are the dispatcher for the agent runs of the repo thobho/automated. Nobody is watching: never ask questions. Do exactly this and nothing else:
+1. Call the get_usage tool (mcp__ccd_session_mgmt__get_usage; load it with ToolSearch if it is deferred).
+2. Write its JSON output, unchanged, to /tmp/automated-usage.json.
+3. Run: ssh -o BatchMode=yes -o ConnectTimeout=15 agent@192.168.68.62 'bash ~/Projects/automated-work/runner/agent/pirx/start-claude-run.sh' < /tmp/automated-usage.json
+4. Reply with the one line it printed (or the SSH error) and end the run.
+Do not read files, do not investigate errors, do not retry more than once.
 ```
 
 # Scheduled task: idea-generator

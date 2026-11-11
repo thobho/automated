@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "read": "allow",
+    "edit": "allow",
+    "external_directory": "deny",
+    "websearch": "deny",
+    "webfetch": "allow",
+    "bash": {
+      "*": "allow",
+      "sudo *": "deny",
+      "su *": "deny",
+      "git push*": "deny",
+      "git checkout main*": "deny",
+      "git reset --hard*": "deny",
+      "gh *": "deny",
+      "systemctl*": "deny",
+      "crontab*": "deny",
+      "ssh *": "deny",
+      "* ~/.config/*": "deny",
+      "*.key*": "deny"
+    }
+  }
+}
