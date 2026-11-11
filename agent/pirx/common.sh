@@ -6,7 +6,7 @@ _ref_override="${AUTOMATED_RUNNER_REF:-}"
 [[ -f "$CONF_DIR/pirx.env" ]] && source "$CONF_DIR/pirx.env"
 [[ -n "$_ref_override" ]] && AUTOMATED_RUNNER_REF="$_ref_override"
 
-export PATH="$HOME/.local/node/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.opencode/bin:$HOME/.local/node/bin:$PATH"   # systemd units get no login PATH
 REPO_ROOT="${AUTOMATED_REPO_ROOT:-$HOME/Projects/automated}"        # shared checkout: never switch its branch
 RUNNER_DIR="${AUTOMATED_RUNNER_DIR:-$HOME/Projects/automated-work/runner}"  # this tooling, pinned to RUNNER_REF
 RUNNER_REF="${AUTOMATED_RUNNER_REF:-origin/main}"
