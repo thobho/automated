@@ -21,9 +21,7 @@
       "Read(~/.config/automated/*.key)",
       "Read(~/.config/gh/**)",
       "Edit(~/.config/**)",
-      "Edit(~/.claude/**)",
-      "Write(~/.config/**)",
-      "Write(~/.claude/**)"
+      "Edit(~/.claude/**)"
     ]
   },
   "sandbox": {
