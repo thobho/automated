@@ -38,9 +38,12 @@ fail_count() {  # fail_count <issue> <executor-or-model>
   gh api "repos/$GH_REPO/issues/$1/comments?per_page=100" --jq "[.[] | select(.body | contains(\"<!-- automated:fail:$2 -->\"))] | length"
 }
 
-status_update() {  # status_update "<note>"  (uses the last Claude budget and OpenRouter JSON seen on pirx)
-  local budget="$RUNTIME/state/claude-budget.json"
-  [[ -s "$budget" ]] || echo '{}' > "$budget"
-  AGENT_OPENROUTER_JSON="$RUNTIME/state/openrouter-budget.json" AUTOMATED_LOCK_SCRIPT="$LOCK" \
-    bash "$RUNNER_DIR/scripts/update-status.sh" "$1" < "$budget" >/dev/null 2>&1 || log "status update failed"
+beat() {  # beat <component>: record that a component ran just now (read by agent/health.py)
+  date +%s > "$RUNTIME/state/beat-$1"
+}
+
+status_update() {  # status_update "<note>": record the event and refresh the health page (pinned GitHub issue)
+  echo "$(date -u +%FT%TZ)|$1" >> "$RUNTIME/state/events.log"
+  tail -500 "$RUNTIME/state/events.log" > "$RUNTIME/state/events.tmp" && mv "$RUNTIME/state/events.tmp" "$RUNTIME/state/events.log"
+  AUTOMATED_LOCK_SCRIPT="$LOCK" python3 "$RUNNER_DIR/agent/health.py" >/dev/null 2>>"$RUNTIME/logs/runner.log" || log "health page update failed"
 }

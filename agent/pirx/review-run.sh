@@ -65,6 +65,7 @@ log "review #$pr: starts ($model, ${sha:0:7}, protected $prot)"
 (cd "$work" && claude -p "$prompt" --model "$model" --output-format stream-json --verbose \
    --settings "$RUNNER_DIR/agent/pirx/claude-settings.json") > "$runlog" 2>&1
 
+beat review
 verdict_file="$work/.agent/REVIEW.json"
 if ! python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["verdict"] in ("approve","changes","blocked")' "$verdict_file" 2>/dev/null; then
   log "review #$pr: no valid verdict"; status_update "Review of PR #$pr ended without a verdict (log $runlog)"; exit 0

@@ -213,12 +213,19 @@ def llm_ideas(a):
     return [l for l in lines if l][:3] or None
 
 
-def render(a, ideas, now):
+def health_url():
+    found = gh_json("api", f"repos/{REPO}/issues?labels=agent:status&state=open&per_page=1")
+    return found[0]["html_url"] if found else ""
+
+
+def render(a, ideas, now, health=""):
     day = now.astimezone(TZ).strftime("%a %d %b")
     p = a["progress"]
     def bullets(items, empty="_none_"):
         return "\n".join(f"{i}. {x}" for i, x in enumerate(items, 1)) if items else empty
     full = f"""## {REPORT_TITLE}: {day}
+
+🩺 Is it alive, any errors? See the health page: {health or 'not created yet'}
 
 ### ✅ What you must do ({len(a['actions'])})
 {bullets(a['actions'], '_Nothing: agents are not waiting on you._')}
@@ -239,6 +246,8 @@ def render(a, ideas, now):
 """
     top = a["actions"][:5]
     short = [f"📋 automated, {day}"]
+    if health:
+        short.append(f"🩺 Health: {health}")
     short.append(f"Do today ({len(a['actions'])}):" if a["actions"] else "Nothing for you today.")
     short += [f"{i}. {first_lines(x, 180)}" for i, x in enumerate(top, 1)]
     if len(a["actions"]) > 5:
@@ -265,7 +274,12 @@ def main():
     now = datetime.now(timezone.utc)
     a = analyse(collect(now))
     ideas = llm_ideas(a) or rule_ideas(a)
-    text = render(a, ideas, now)
+    text = render(a, ideas, now, health_url())
+    try:
+        with open(os.path.join(RUNTIME, "state", "beat-report"), "w") as f:
+            f.write(str(int(now.timestamp())))
+    except OSError:
+        pass
     if "--print" in sys.argv:
         print(text)
         return

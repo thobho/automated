@@ -1,0 +1,8 @@
+[Unit]
+Description=automated: refresh the health page (pinned GitHub issue)
+After=network-online.target
+
+[Service]
+Type=oneshot
+Environment=HOME=%h
+ExecStart=/usr/bin/python3 %h/Projects/automated-work/runner/agent/health.py

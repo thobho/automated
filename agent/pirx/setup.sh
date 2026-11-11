@@ -52,11 +52,11 @@ echo "AUTOMATED_RUNNER_REF=$RUNNER_REF" >> "$CONF_DIR/pirx.env"
 
 units="$HOME/.config/systemd/user"
 mkdir -p "$units"
-for u in automated-opencode.service automated-opencode.timer automated-report.service automated-report.timer; do
+for u in automated-opencode.service automated-opencode.timer automated-report.service automated-report.timer automated-health.service automated-health.timer; do
   install -m 644 "$RUNNER_DIR/agent/pirx/systemd/$u" "$units/"
 done
 systemctl --user daemon-reload
-systemctl --user enable --now automated-opencode.timer automated-report.timer >/dev/null 2>&1
+systemctl --user enable --now automated-opencode.timer automated-report.timer automated-health.timer >/dev/null 2>&1
 
 echo "runner: $RUNNER_DIR at $(git -C "$RUNNER_DIR" rev-parse --short HEAD) ($RUNNER_REF)"
 echo "slots: $(cat "$CONF_DIR/state/slots.conf"); memory available: $(free_mb) MB (gate $PIRX_MIN_FREE_MB MB)"

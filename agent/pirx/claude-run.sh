@@ -62,6 +62,7 @@ else
   status_update "Claude ($model) failed on #$num ($fails failed $model runs so far)"
 fi
 
+beat claude-run
 # Remove working copies of issues that are closed.
 for dir in "$(dirname "$work")"/issue-*; do
   [[ -d "$dir" ]] || continue
