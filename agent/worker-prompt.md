@@ -8,7 +8,8 @@ Permissions are an allowlist: you may edit files only inside your working copy, 
 
 ## 1. Start
 1. Swap labels: remove `agent:todo` (if present), add `agent:doing`: `gh issue edit <n> --remove-label agent:todo --add-label agent:doing`.
-2. If the branch already has commits or the issue has earlier comments, read them: an earlier run was interrupted. Continue from there instead of starting over.
+2. If the branch already has commits or the issue has earlier comments, read them: an earlier run was interrupted, or the task came back from review. Continue from there instead of starting over.
+   **Back from AI review** (the PR has a comment starting `🔎 AI review … changes requested`, or the issue says `↩️ Back to the builder`): address every "Must change" point on the same branch, push, answer each point briefly in a PR comment, then label the issue `agent:review` again. The reviewer looks at the new commit automatically. Red CI means: fix CI first.
 3. Comment a short plan as a checklist (`- [ ] ...`). Always end it with `- [ ] Verified against the real system` and `- [ ] CI green`. Mention the model you run on.
 
 ## 2. Build
@@ -24,7 +25,7 @@ Permissions are an allowlist: you may edit files only inside your working copy, 
 ## 3. Pull request
 1. Push and open a PR titled like the issue: `gh pr create --head <branch> --title ... --body ...`. Body sections: **Summary**, **Verification** (commands run, real responses, what passed), **Decisions I made**, **Action for you** (manual steps only the owner can do, or "none — review and merge"), and `Closes #<n>`.
 2. `gh pr checks <pr> --watch`. If CI fails, read the logs (`gh run view --log-failed`), fix, push; up to 3 times.
-3. Swap labels `agent:doing` → `agent:review`, and comment the PR link, a 2–3 line summary, the verification result (✅ / ⚠️ with what is not verified) and the **Action for you** list. The daily report collects these for the owner.
+3. Swap labels `agent:doing` → `agent:review`, and comment the PR link, a 2–3 line summary, the verification result (✅ / ⚠️ with what is not verified) and the **Action for you** list. The owner does not review code: an AI reviewer on another model reviews the PR and merges it when it approves. So make the PR easy to judge: small, focused, with the issue's acceptance criteria checked off one by one under **Verification**.
 
 ## Decide, don't block
 The owner wants maximum independence. When something is unclear, pick the most sensible, reversible option, build it, and list it under **Decisions I made**. Block (label `agent:blocked` instead of `agent:doing`, with specific questions in a comment) only for things you truly cannot decide or do: spending money, a missing credential, changing repo or account settings, anything irreversible or public beyond opening a PR, contradicting requirements, or a need the sandbox does not allow.

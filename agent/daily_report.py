@@ -61,7 +61,7 @@ def collect(now):
     day = (now - timedelta(days=1)).strftime("%Y-%m-%d")
     issues = [i for i in gh_json("api", f"repos/{REPO}/issues?state=open&per_page=100") if "pull_request" not in i]
     prs = gh_json("pr", "list", "-R", REPO, "--state", "open", "--limit", "50", "--json",
-                  "number,title,url,body,createdAt,headRefName,statusCheckRollup")
+                  "number,title,url,body,createdAt,headRefName,headRefOid,statusCheckRollup,comments")
     merged = gh_json("pr", "list", "-R", REPO, "--state", "merged", "--search", f"merged:>={day}", "--limit", "50",
                      "--json", "number,title,url,mergedAt")
     comments = gh_json("api", f"repos/{REPO}/issues/comments?since={since}&per_page=100")
@@ -111,19 +111,25 @@ def analyse(d):
     for i in d["issues"]:
         if "owner:todo" in labels(i):
             actions.append(f"Do: {i['title']} (#{i['number']}): {first_lines(i['body'], 200)} → close the issue when done: {i['html_url']}")
+    in_review = []
     for pr in sorted(d["prs"], key=lambda p: p["createdAt"]):
         if not AGENT_BRANCH.match(pr["headRefName"]):
             continue
-        age_h = (now - datetime.fromisoformat(pr["createdAt"].replace("Z", "+00:00"))).total_seconds() / 3600
-        ci = ci_state(pr)
+        bodies = [c.get("body") or "" for c in pr.get("comments") or []]
+        approved_for_owner = any("<!-- automated:needs-owner-merge -->" in b
+                                 and f"automated:review:{pr['headRefOid']}" in b for b in bodies)
         m = ACTION.search(pr["body"] or "")
         extra = first_lines(m.group(1), 220) if m else ""
-        extra = "" if re.match(r"(?i)none\b", extra) else extra
-        if ci == "red":
-            blockers.append(f"PR #{pr['number']} {pr['title']}: CI is red ({pr['url']})")
-            continue
-        step = f"Review and merge PR #{pr['number']} {pr['title']} (CI {ci}, open {age_h:.0f} h)"
-        actions.append(step + (f"; first: {extra}" if extra else "") + f" → {pr['url']}")
+        extra = "" if re.match(r"(?i)(none|review and merge)\b", extra) else extra
+        if approved_for_owner:
+            actions.append(f"Merge PR #{pr['number']} {pr['title']}: approved by the AI review; it changes the automation, "
+                           f"so it needs your tap on Merge (no code reading)" + (f"; also: {extra}" if extra else "") + f" → {pr['url']}")
+        elif ci_state(pr) == "red":
+            blockers.append(f"PR #{pr['number']} {pr['title']}: CI is red, back with the builder ({pr['url']})")
+        else:
+            in_review.append(f"#{pr['number']}")
+            if extra:
+                actions.append(f"For PR #{pr['number']} {pr['title']} (in AI review): {extra} → {pr['url']}")
     fails, escalations = {}, []
     for c in d["comments"]:
         n = int(c["issue_url"].rsplit("/", 1)[1])
@@ -148,6 +154,7 @@ def analyse(d):
         "merged": [f"#{p['number']} {p['title']}" for p in d["merged"]],
         "opened": [f"#{p['number']} {p['title']}" for p in opened],
         "queue": states,
+        "in_review": in_review,
         "milestones": [f"{m['title']}: {m['closed_issues']}/{m['open_issues'] + m['closed_issues']} done"
                        for m in sorted(d["milestones"], key=lambda m: m["title"])],
     }
@@ -223,6 +230,7 @@ def render(a, ideas, now):
 - Merged: {', '.join(p['merged']) or 'none'}
 - PRs opened: {', '.join(p['opened']) or 'none'}
 - Queue: {', '.join(f'{k} {v}' for k, v in p['queue'].items()) or 'empty'}
+- In AI review: {', '.join(p['in_review']) or 'none'}
 - Milestones: {'; '.join(p['milestones']) or 'none yet'}
 - Budget: {'; '.join(a['budget']) or 'no data yet'}
 

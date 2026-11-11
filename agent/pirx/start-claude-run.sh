@@ -34,6 +34,27 @@ if [[ "$(free_slots)" -eq 0 ]]; then
   echo "BUSY: every pirx slot is taken"; exit 0
 fi
 
+# Reviews come first: a reviewed PR is merged work, and waiting PRs hold back the queue (review limit).
+rev="$RUNTIME/state/review-next.json"
+if (cd "$RUNNER_DIR" && python3 agent/review_queue.py --next-json) > "$rev" 2>/dev/null; then
+  pr="$(json_get "$rev" pr)"; rmodel="$(json_get "$rev" model)"; fallback="$(json_get "$rev" fallback)"
+  if [[ "$rmodel" == "opus" ]]; then
+    AGENT_SLOT=$slot AGENT_MODEL=opus python3 "$RUNNER_DIR/agent/budget.py" < "$usage" > "$budget.opus"
+    [[ "$(json_get "$budget.opus" decision)" == "RUN" ]] || rmodel="$fallback"
+  fi
+  if [[ -n "$rmodel" ]]; then
+    unit="automated-review-$pr"
+    if ! systemctl --user is-active -q "$unit"; then
+      systemd-run --user --quiet --collect --unit "$unit" -p RuntimeMaxSec=3600 -p Nice=5 --setenv=HOME="$HOME" \
+        /bin/bash "$RUNNER_DIR/agent/pirx/review-run.sh" "$pr" "$rmodel"
+      log "started $unit (model $rmodel, slot $slot)"
+      echo "STARTED: review of PR #$pr with $rmodel on pirx (unit $unit)"; exit 0
+    fi
+  else
+    log "review of PR #$pr waits for Opus headroom (security)"
+  fi
+fi
+
 spill=(); [[ "$(json_get "$budget" spillover_ok)" == "true" ]] && spill=(--spillover)
 task="$RUNTIME/state/claude-next.json"
 if ! (cd "$RUNNER_DIR" && AUTOMATED_LOCK_SCRIPT="$LOCK" python3 agent/pick_task.py --next-json --executor claude "${spill[@]}") > "$task"; then

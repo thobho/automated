@@ -7,8 +7,9 @@ pirx (the always-on Linux box) builds the queue. Everything runs as the unprivil
 |---|---|---|---|
 | `automated-dispatcher` (scheduled task, `agent/scheduled-task.md`) | Mac desktop app | hourly at :07 | reads the plan limits, then one SSH call |
 | `start-claude-run.sh` | pirx, `agent` | the dispatcher | Claude plan gate (`agent/budget.py`), memory gate, slot, task, Opus headroom |
-| `claude-run.sh` | pirx, `agent` (systemd-run, ≤3 h) | `start-claude-run.sh` | one issue; Claude Code sandbox (`claude-settings.json`) |
+| `claude-run.sh` | pirx, `agent` (systemd-run, ≤3 h) | `start-claude-run.sh` | one issue; command allowlist (`claude-settings.json`) |
 | `opencode-worker.sh` | pirx, `agent` (timer `automated-opencode`) | hourly at :17 | OpenRouter gate (`agent/openrouter_budget.py`), per-task spend watchdog |
+| `review-run.sh` | pirx, `agent` (systemd-run, ≤1 h) | `start-claude-run.sh`, before any build | AI review on another model; merges approved PRs, protected ones wait for the owner |
 | `daily_report.py` | pirx, `agent` (timer `automated-report`) | 07:45 Warsaw | posts a comment on the "📋 Daily report" issue |
 | `report-send.sh` | pirx, **owner's user** (timer `automated-report-send`) | 08:00 Warsaw | sends the WhatsApp part through Hermes (`hermes send`, no AI) |
 
@@ -16,7 +17,8 @@ The agent never talks to Hermes: the report goes through GitHub, and the owner's
 
 ## Isolation, in layers
 1. **The `agent` user**: unprivileged, `/home/user` unreadable, LAN and tailnet blocked by nftables, caps in `user-<uid>.slice`.
-2. **Claude Code sandbox** (bubblewrap): shell commands write only in the working copy and caches, and reach only GitHub and PyPI; file edits are auto-accepted in the working copy, anything needing a prompt is refused.
+2. **Claude Code allowlist** (`claude-settings.json`, `dontAsk` mode): file edits only in the working copy, only listed shell commands, everything else refused. (Claude Code's OS sandbox can't start on Ubuntu 26.04 without relaxing its user-namespace restriction; the owner chose the allowlist.)
+5. **AI review**: every agent PR is reviewed by a separate run on another model; it merges only on approval with green CI. PRs that change the automation wait for the owner's one-tap merge.
 3. **OpenCode** (`opencode.json`): may not push, run `gh`, leave the working copy or read keys; the runner script pushes and opens the PR.
 4. **GitHub**: the token reaches only `thobho/automated`; branch protection on `main` keeps agents to PRs.
 
