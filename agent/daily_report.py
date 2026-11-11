@@ -183,7 +183,8 @@ def llm_ideas(a):
     facts = {k: a[k] for k in ("blockers", "progress", "budget")}
     facts["open_actions"] = len(a["actions"])
     body = {
-        "model": IDEAS_MODEL, "max_tokens": 300, "temperature": 0.3,
+        "model": IDEAS_MODEL, "max_tokens": 1200, "temperature": 0.3,
+        "reasoning": {"effort": "low", "exclude": True},
         "provider": {"data_collection": "deny"},
         "messages": [
             {"role": "system", "content": "You advise the owner of an autonomous coding-agent setup. Give at most 3 concrete, "
@@ -196,8 +197,10 @@ def llm_ideas(a):
                                  headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
     try:
         with urllib.request.urlopen(req, timeout=60) as r:
-            text = json.load(r)["choices"][0]["message"]["content"]
+            text = json.load(r)["choices"][0]["message"].get("content")
     except Exception:
+        return None
+    if not text:
         return None
     lines = [re.sub(r"^\s*(?:[-*•]|\d+[.)])\s*", "", l).strip() for l in text.splitlines()]
     return [l for l in lines if l][:3] or None
