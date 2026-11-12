@@ -1,0 +1,18 @@
+{% load static i18n %}<!doctype html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% translate "Artyści dla szkół" %}{% endblock %}</title>
+  {% block head %}{% endblock %}
+  {# HTMX is vendored (D11): never load it from a CDN. #}
+  <script src="{% static 'vendor/htmx/htmx.min.js' %}" defer></script>
+</head>
+{# Send the CSRF token with every HTMX request. #}
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
