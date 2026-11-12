@@ -65,3 +65,12 @@ def test_page_is_read_only(client, superuser):
     delete = reverse("admin:procrastinate_procrastinatejob_delete", args=[job_id])
     assert client.post(delete, {"post": "yes"}).status_code == 403
     assert ProcrastinateJob.objects.filter(pk=job_id).exists()
+
+
+@pytest.mark.parametrize("action", ["cancel", "retry", "abort"])
+def test_bulk_actions_are_not_available(client, superuser, action):
+    job_id = jobs.enqueue(tasks.ping, token=f"act-{action}")
+    page = client.get(LIST_URL).content.decode()
+    assert 'name="action"' not in page
+    client.post(LIST_URL, {"action": action, "_selected_action": [job_id]})
+    assert ProcrastinateJob.objects.get(pk=job_id).status == "todo"
