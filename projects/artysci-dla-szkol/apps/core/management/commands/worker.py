@@ -1,5 +1,5 @@
 from django.core.management import call_command
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 
 from apps.core.jobs import QUEUES
 
@@ -16,6 +16,8 @@ class Command(BaseCommand):
         parser.add_argument("--concurrency", type=int, default=2)
 
     def handle(self, *args, **options):
+        if options["concurrency"] < 1:
+            raise CommandError("--concurrency must be at least 1")
         self.stdout.write("worker: started, queues=" + ",".join(QUEUES))
         call_command(
             "procrastinate",
