@@ -19,5 +19,8 @@ DATABASES = {"default": env.db_url_config(require("DATABASE_URL", _MODULE))}
 DATABASES["default"]["CONN_MAX_AGE"] = DATABASE_CONN_MAX_AGE
 
 CSRF_TRUSTED_ORIGINS = env.list("DJANGO_CSRF_TRUSTED_ORIGINS", default=[])
+EMAIL_BACKEND = env.str(
+    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"
+)
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True

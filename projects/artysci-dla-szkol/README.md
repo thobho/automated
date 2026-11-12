@@ -26,13 +26,37 @@ uv run python manage.py runserver
 curl http://127.0.0.1:8000/healthz   # {"db": "ok"}
 ```
 
-No Postgres at hand? Start one quickly (a proper Compose setup comes in T02):
+## Local environment (Compose)
 
-```bash
-podman run -d --name artysci-db -p 5432:5432 \
-  -e POSTGRES_USER=artysci -e POSTGRES_PASSWORD=artysci -e POSTGRES_DB=artysci \
-  docker.io/library/postgres:17
-```
+`compose.yaml` has two profiles; the `Makefile` wraps them (needs `make`, rootless Podman or
+Docker with Compose, and uv). Run from this folder.
+
+| Command | What it does |
+| --- | --- |
+| `make up-lite` | `postgres:17` (shared_buffers 64MB, 256m limit) + Mailpit (64m). Fits a 4 GB machine. |
+| `make web` | migrate, then `runserver` natively on `127.0.0.1:18001` (talks to the lite stack) |
+| `make worker` | native background worker (placeholder until the job queue, T05) |
+| `make seed` | synthetic data, idempotent: 10 artists, 5 institutions (`@example.invalid`, no passwords) |
+| `make up-full` | lite + MinIO + `web` (gunicorn) and `worker` containers built from `Dockerfile` |
+| `make down` | stop and remove all containers (data stays in the state dir) |
+| `make test` / `make lint` | pytest with coverage / ruff + format check + migrations check |
+
+Ports (all bound to `127.0.0.1`, chosen to avoid 3000, 5037, 8080, 8384, 22000 on pirx;
+override in `.env`, see `.env.example`):
+
+| Service | Port | Variable |
+| --- | --- | --- |
+| PostgreSQL | 54320 | `POSTGRES_PORT` |
+| Mailpit SMTP / web UI | 12025 / 18025 | `MAILPIT_SMTP_PORT` / `MAILPIT_UI_PORT` |
+| MinIO API / console (full) | 19000 / 19001 | `MINIO_PORT` / `MINIO_CONSOLE_PORT` |
+| web container (full) | 18000 | `WEB_PORT` |
+| native `make web` | 18001 | `WEB_NATIVE_PORT` |
+
+State (database, MinIO data) lives outside the repo in `ARTYSCI_STATE_DIR`, default
+`~/runtime/artysci-dla-szkol/` (the Makefile sets it; without `make` set it in `.env`).
+Without `make`: `podman compose -f compose.yaml --profile lite up -d`.
+The `full` web container runs `config.settings.prod`, so over plain HTTP the admin login cookies
+are `Secure`-only; `/healthz` and `/readyz` work as usual.
 
 ## Tests and lint
 

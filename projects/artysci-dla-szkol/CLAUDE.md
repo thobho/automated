@@ -18,6 +18,8 @@ from other `projects/` folders. Product overview and quick start: [README.md](RE
 ## Run, test, lint (from this folder)
 - `uv sync` · `uv run python manage.py migrate` · `uv run python manage.py runserver`
   (dev settings need PostgreSQL; see README for a one-line container).
+- Local stack: `make up-lite && make web` (or `make up-full`); see README "Local environment".
+  Seed data is synthetic only (`example.invalid`), idempotent: `make seed`.
 - `uv run pytest --cov` — test settings, SQLite in memory unless `DATABASE_URL` is set.
 - `uv run ruff check . && uv run ruff format --check .`
 - `uv run python manage.py makemigrations --check --dry-run --settings=config.settings.test`

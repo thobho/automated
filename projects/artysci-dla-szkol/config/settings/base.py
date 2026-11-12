@@ -76,6 +76,10 @@ TEMPLATES = [
 # Per-environment modules build DATABASES; this is applied to all of them.
 DATABASE_CONN_MAX_AGE = env.int("DATABASE_CONN_MAX_AGE", default=60)
 
+# SMTP target used when the SMTP backend is selected (Mailpit locally); prod sets the backend.
+EMAIL_HOST = env.str("EMAIL_HOST", default="localhost")
+EMAIL_PORT = env.int("EMAIL_PORT", default=25)
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Auth -----------------------------------------------------------------------------------

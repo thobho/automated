@@ -1,0 +1,93 @@
+# Local environment. Profiles:
+#   lite: postgres + mailpit (fits pirx's 4 GB); run web/worker natively with `make web` / `make worker`.
+#   full: lite + minio + web + worker in containers (same shape as the future server).
+# Start with `make up-lite` / `make up-full`. Every value is overridable in .env (see .env.example).
+# All ports bind to 127.0.0.1 only. State lives outside the repo (ARTYSCI_STATE_DIR).
+
+name: artysci
+
+x-app-env: &app-env
+  DJANGO_SETTINGS_MODULE: config.settings.prod
+  DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-compose-only-insecure-key-change-me-0123456789}
+  DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+  DATABASE_URL: postgres://${POSTGRES_USER:-artysci}:${POSTGRES_PASSWORD:-artysci}@db:5432/${POSTGRES_DB:-artysci}
+  DJANGO_EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
+  EMAIL_HOST: mailpit
+  EMAIL_PORT: "1025"
+
+services:
+  db:
+    image: docker.io/library/postgres:17
+    profiles: [lite, full]
+    restart: unless-stopped
+    mem_limit: 256m
+    command: ["postgres", "-c", "shared_buffers=64MB", "-c", "max_connections=30"]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-artysci}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-artysci}
+      POSTGRES_DB: ${POSTGRES_DB:-artysci}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-54320}:5432"
+    volumes:
+      - ${ARTYSCI_STATE_DIR}/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mailpit:
+    image: docker.io/axllent/mailpit:latest
+    profiles: [lite, full]
+    restart: unless-stopped
+    mem_limit: 64m
+    ports:
+      - "127.0.0.1:${MAILPIT_SMTP_PORT:-12025}:1025"
+      - "127.0.0.1:${MAILPIT_UI_PORT:-18025}:8025"
+
+  minio:
+    # The official minio/minio images are no longer published; this is the last community image
+    # that still pulls (frozen, dev-only). Swap for a maintained S3 server when T06 picks storage.
+    image: docker.io/bitnamilegacy/minio:latest
+    profiles: [full]
+    restart: unless-stopped
+    mem_limit: 384m
+    user: "0"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-artysci}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-artysci-minio-dev}
+    ports:
+      - "127.0.0.1:${MINIO_PORT:-19000}:9000"
+      - "127.0.0.1:${MINIO_CONSOLE_PORT:-19001}:9001"
+    volumes:
+      - ${ARTYSCI_STATE_DIR}/minio:/bitnami/minio/data
+
+  web:
+    build: .
+    image: artysci-app:local
+    profiles: [full]
+    restart: unless-stopped
+    mem_limit: 384m
+    environment: *app-env
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput &&
+             exec gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 2"
+    ports:
+      - "127.0.0.1:${WEB_PORT:-18000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  worker:
+    image: artysci-app:local
+    profiles: [full]
+    restart: unless-stopped
+    mem_limit: 256m
+    environment: *app-env
+    command: ["python", "manage.py", "worker"]
+    depends_on:
+      db:
+        condition: service_healthy
+      web:
+        condition: service_started
