@@ -1,0 +1,50 @@
+[project]
+name = "artysci-dla-szkol"
+version = "0.1.0"
+description = "Artyści dla szkół: artists' pages, catalog and inquiries for schools and institutions."
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "django>=5.2,<5.3",
+    "django-environ>=0.12",
+    "psycopg[binary]>=3.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "pytest-django>=4.9",
+    "ruff>=0.8",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+addopts = "--strict-markers"
+
+[tool.coverage.run]
+source = ["config", "apps"]
+omit = ["*/migrations/*", "*/tests/*", "config/wsgi.py", "config/asgi.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+extend-exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "DJ", "S", "SIM"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/*" = ["S101", "S105", "S106"]
+"**/test_*.py" = ["S101", "S105", "S106"]
+"config/settings/test.py" = ["S105"]
+"config/settings/dev.py" = ["S105"]
