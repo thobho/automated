@@ -35,7 +35,7 @@ Docker with Compose, and uv). Run from this folder.
 | --- | --- |
 | `make up-lite` | `postgres:17` (shared_buffers 64MB, 256m limit) + Mailpit (64m). Fits a 4 GB machine. |
 | `make web` | migrate, then `runserver` natively on `127.0.0.1:18001` (talks to the lite stack) |
-| `make worker` | native background worker (placeholder until the job queue, T05) |
+| `make worker` | native Procrastinate worker on all queues (see "Background jobs") |
 | `make seed` | synthetic data, idempotent: 10 artists, 5 institutions (`@example.invalid`, no passwords) |
 | `make up-full` | lite + MinIO + `web` (gunicorn) and `worker` containers built from `Dockerfile` |
 | `make down` | stop and remove all containers (data stays in the state dir) |
@@ -86,9 +86,31 @@ documented in [`.env.example`](.env.example).
 - `/django-admin/`: Django's built-in admin (staff only). The product's own staff tools will live
   in the `adminpanel` app.
 
+## Background jobs
+
+[Procrastinate](https://procrastinate.readthedocs.io) (Django integration) keeps the queue in
+PostgreSQL; there is no Redis. Queues: `default`, `ai`, `media`, `email` (`apps/core/jobs.py`).
+
+- Define a task in `apps/<name>/tasks.py` with `@app.task(queue=..., retry=default_retry())`
+  (`from procrastinate.contrib.django import app`). Retries back off exponentially
+  (5 s, 10 s, 20 s, ... up to 5 attempts).
+- Defer with `jobs.enqueue(task, idempotency_key="...", **kwargs)`. While a job with the same key
+  is still waiting, deferring again does nothing (returns `None`). Once it started the key is
+  free, so tasks must still be safe to run twice.
+- Periodic (cron-like) tasks: `@app.periodic(cron="...")` above a task taking `timestamp: int`;
+  see `core.cleanup_old_jobs` in `apps/core/tasks.py`.
+- `make worker` runs `manage.py worker` (`--once` processes due jobs
+  and exits). The Compose `full` profile runs the same command in the `worker` container.
+- Recent jobs and failures: `/django-admin/procrastinate/procrastinatejob/` (read-only, staff).
+- Demo job `core.ping` writes a `PingRecord` row (used by tests and the smoke check):
+  `uv run python manage.py shell -c "from apps.core import jobs, tasks; jobs.enqueue(tasks.ping, token='x')"`.
+- Tests use the in-memory connector (`apps/core/testing.py`) on SQLite and run against real
+  PostgreSQL when `DATABASE_URL` is set (`test_jobs_postgres.py`).
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python
 3.13, Django 5.2 LTS, PostgreSQL 17, HTMX, uv), D91 (hosting not decided, stay provider-neutral).
+Added with T05: `procrastinate[django]` as the job queue (on PostgreSQL, no extra service).
 New dependencies or structural choices need a line in the decision log first
 (see [CLAUDE.md](CLAUDE.md)).
