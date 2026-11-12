@@ -16,7 +16,7 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["localhost", "127.0.0.
 DATABASES = {
     "default": env.db(
         "DATABASE_URL",
-        default="postgres://artysci:artysci@localhost:5432/artysci",
+        default="postgres://artysci:artysci@127.0.0.1:54320/artysci",
     )
 }
 DATABASES["default"]["CONN_MAX_AGE"] = DATABASE_CONN_MAX_AGE

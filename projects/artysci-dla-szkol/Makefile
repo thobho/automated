@@ -10,7 +10,10 @@ WEB_NATIVE_PORT ?= 18001
 ARTYSCI_STATE_DIR ?= $(HOME)/runtime/artysci-dla-szkol
 export ARTYSCI_STATE_DIR
 # Native web/worker talk to the published ports on 127.0.0.1.
-export DATABASE_URL ?= postgres://artysci:artysci@127.0.0.1:$(POSTGRES_PORT)/artysci
+POSTGRES_USER ?= artysci
+POSTGRES_PASSWORD ?= artysci
+POSTGRES_DB ?= artysci
+export DATABASE_URL ?= postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@127.0.0.1:$(POSTGRES_PORT)/$(POSTGRES_DB)
 export DJANGO_EMAIL_BACKEND ?= django.core.mail.backends.smtp.EmailBackend
 export EMAIL_HOST ?= 127.0.0.1
 export EMAIL_PORT ?= $(MAILPIT_SMTP_PORT)
