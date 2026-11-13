@@ -19,6 +19,11 @@ dev = [
     "pytest-django>=4.9",
     "ruff>=0.8",
 ]
+e2e = [
+    "axe-playwright-python>=0.1.8",
+    "playwright>=1.65.1",
+    "pytest-playwright>=0.10.0",
+]
 
 [tool.uv]
 package = false
