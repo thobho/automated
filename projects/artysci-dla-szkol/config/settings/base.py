@@ -44,7 +44,9 @@ INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 AUTH_USER_MODEL = "accounts.User"
 
 MIDDLEWARE = [
+    "apps.core.logs.RequestIdMiddleware",  # first: every response gets a request id + access log
     "django.middleware.security.SecurityMiddleware",
+    "apps.core.security.SecurityHeadersMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -69,6 +71,7 @@ TEMPLATES = [
                 "django.template.context_processors.i18n",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "apps.core.security.csp_nonce",
             ],
         },
     },
@@ -92,16 +95,78 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# Logging: console only (the worker and web log to stdout/stderr; the host collects them) ---
+# Login throttling scaffold (apps/accounts/throttling.py), wired into login by E1.
+LOGIN_THROTTLE_LIMIT = env.int("LOGIN_THROTTLE_LIMIT", default=5)
+LOGIN_THROTTLE_WINDOW = env.int("LOGIN_THROTTLE_WINDOW", default=900)  # seconds
+LOGIN_THROTTLE_CACHE = "default"
+
+# Security headers (SECURITY.md) ----------------------------------------------------------
+# HSTS, SSL redirect and Secure cookies are prod-only (prod.py).
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin"
+X_FRAME_OPTIONS = "DENY"  # legacy twin of frame-ancestors 'none'
+
+# Strict CSP: no inline script or style, no eval; "{nonce}" adds the per-request nonce
+# (`{{ csp_nonce }}` in templates). User files will come from a separate origin (D62, T06):
+# add that origin to img-src/media-src then.
+CSP_DIRECTIVES = {
+    "default-src": ["'self'"],
+    "script-src": ["'self'", "{nonce}"],
+    "style-src": ["'self'"],
+    "img-src": ["'self'", "data:"],
+    "font-src": ["'self'"],
+    "connect-src": ["'self'"],
+    "object-src": ["'none'"],
+    "base-uri": ["'none'"],
+    "form-action": ["'self'"],
+    "frame-ancestors": ["'none'"],
+}
+# Browser features nobody on this site needs; each is sent as `feature=()`.
+PERMISSIONS_POLICY = [
+    "camera",
+    "microphone",
+    "geolocation",
+    "payment",
+    "usb",
+    "accelerometer",
+    "gyroscope",
+    "magnetometer",
+    "browsing-topics",
+]
+
+# Cookies: HttpOnly + SameSite=Lax everywhere; Secure and __Host- names in prod.
+# The CSRF token reaches HTMX through the template (hx-headers), so its cookie is HttpOnly too.
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = "Lax"
+CSRF_HEADER_NAME = "HTTP_X_CSRFTOKEN"  # HTMX sends X-CSRFToken (templates/base.html)
+
+# Logging: one JSON line per event on stdout, same config everywhere (apps/core/logs.py) ----
+# The host collects stdout. django.server (runserver) is muted: its lines carry query strings;
+# the access logger (RequestIdMiddleware) replaces it.
+
+LOG_LEVEL = env.str("LOG_LEVEL", default="INFO")
 
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "formatters": {"plain": {"format": "%(asctime)s %(levelname)s %(name)s %(message)s"}},
-    "handlers": {"console": {"class": "logging.StreamHandler", "formatter": "plain"}},
+    "filters": {"request_context": {"()": "apps.core.logs.RequestContextFilter"}},
+    "formatters": {"json": {"()": "apps.core.logs.JsonFormatter"}},
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "json",
+            "filters": ["request_context"],
+        },
+        "null": {"class": "logging.NullHandler"},
+    },
+    "root": {"handlers": ["console"], "level": LOG_LEVEL},
     "loggers": {
-        "procrastinate": {"handlers": ["console"], "level": "INFO"},
-        "apps": {"handlers": ["console"], "level": "INFO"},
+        "django": {"handlers": ["console"], "level": LOG_LEVEL, "propagate": False},
+        "django.server": {"handlers": ["null"], "propagate": False},
     },
 }
 
