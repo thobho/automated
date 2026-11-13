@@ -7,7 +7,8 @@ from other `projects/` folders. Product overview and quick start: [README.md](RE
 - `config/` — project package: `urls.py`, `wsgi.py`, `asgi.py`, `settings/{base,dev,test,prod}.py`,
   `settings/env.py` (`env`, `require()` for mandatory vars).
 - `apps/<name>/` — one Django app per concern (label = folder name):
-  `accounts` (custom `User`, email login), `artists`, `institutions`, `profiles` (page generator),
+  `accounts` (custom `User`, email login), `artists`, `institutions`, `profiles` (page generator;
+  `profiles/ai/` is the only way to call an LLM: never call a provider directly),
   `catalog`, `inquiries`, `notices`, `notifications`, `trust`, `adminpanel`, `analytics`,
   `quality` (E11), `core` (health checks, home page, security headers `security.py`, JSON
   logging `logs.py`; nothing domain-specific).
