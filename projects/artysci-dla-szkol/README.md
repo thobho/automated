@@ -107,10 +107,33 @@ PostgreSQL; there is no Redis. Queues: `default`, `ai`, `media`, `email` (`apps/
 - Tests use the in-memory connector (`apps/core/testing.py`) on SQLite and run against real
   PostgreSQL when `DATABASE_URL` is set (`test_jobs_postgres.py`).
 
+## File storage
+
+One API (`apps/core/media.py`, `apps/core/uploads.py`), two backends chosen by `STORAGE_BACKEND`:
+`filesystem` (default; lean pirx, tests) or `s3` (`django-storages`; MinIO in Compose `full` and CI,
+any S3-compatible service later). Two storages: **private** (originals, documents) and **public**
+(processed images, video).
+
+- Store: `uploads.store_upload(file, kind="photo"|"video"|"audio"|"pdf", visibility="private"|"public")`.
+  It enforces the size limit (photo 15 MB, video 500 MB, audio 50 MB, PDF 20 MB), sniffs the
+  content type from magic bytes (the name is ignored), uses a random key and re-encodes images
+  without EXIF/GPS. Failures raise `UploadRejected(code, message)`.
+- Private files: only `media.signed_url(key, expires=...)` (default `MEDIA_SIGNED_URL_TTL`, 300 s).
+  S3: presigned bucket URL. Filesystem: a signed token served by `/media/private/<token>` as an
+  attachment with `nosniff` and a sandbox CSP.
+- Public files: `media.public_url(key)`, always under `MEDIA_PUBLIC_BASE_URL`, a different origin
+  from the app (prod requires it). Filesystem backend: `make media` (or
+  `manage.py serve_public_media --port 8101`) serves `MEDIA_PUBLIC_ROOT` there.
+- S3: `manage.py ensure_buckets` creates both buckets (public one gets anonymous read); Compose
+  `full` runs it at web start-up. Run the suite against MinIO by setting `S3_*` (see
+  `.env.example`) and `S3_ENDPOINT_URL`; without it the S3-parametrised tests are skipped.
+- Not covered yet: video transcoding and image variants (E2), virus scanning (later).
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python
 3.13, Django 5.2 LTS, PostgreSQL 17, HTMX, uv), D91 (hosting not decided, stay provider-neutral).
+Added with T06: `django-storages[s3]` (+ boto3) for the S3 backend, `Pillow` for EXIF stripping.
 Added with T05: `procrastinate[django]` as the job queue (on PostgreSQL, no extra service).
 New dependencies or structural choices need a line in the decision log first
 (see [CLAUDE.md](CLAUDE.md)).

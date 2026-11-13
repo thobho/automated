@@ -14,6 +14,7 @@ PROD_VARS = {
     "DJANGO_SECRET_KEY": "x" * 50,
     "DJANGO_ALLOWED_HOSTS": "example.pl, www.example.pl",
     "DATABASE_URL": "postgres://u:p@db.example:5432/app",
+    "MEDIA_PUBLIC_BASE_URL": "https://media.example.pl/",
 }
 
 

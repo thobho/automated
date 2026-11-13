@@ -12,10 +12,16 @@ def test_settings_pick_up_compose_env(monkeypatch):
     monkeypatch.setenv("DATABASE_URL", "postgres://artysci:pw@db:5432/artysci")
     monkeypatch.setenv("DJANGO_SECRET_KEY", "k" * 50)
     monkeypatch.setenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1")
-    sys.modules.pop("config.settings.prod", None)
+    monkeypatch.setenv("MEDIA_PUBLIC_BASE_URL", "http://127.0.0.1:19000/public/")
+    monkeypatch.setenv("STORAGE_BACKEND", "s3")
+    monkeypatch.setenv("S3_ENDPOINT_URL", "http://minio:9000")
+    for module in ("config.settings.base", "config.settings.prod"):
+        sys.modules.pop(module, None)
     prod = importlib.import_module("config.settings.prod")
     assert prod.DATABASES["default"]["HOST"] == "db"
     assert prod.ALLOWED_HOSTS == ["localhost", "127.0.0.1"]
+    assert prod.STORAGES["public"]["OPTIONS"]["custom_domain"] == "127.0.0.1:19000/public"
+    assert prod.STORAGES["private"]["OPTIONS"]["endpoint_url"] == "http://minio:9000"
 
 
 def test_default_database_ports_agree():

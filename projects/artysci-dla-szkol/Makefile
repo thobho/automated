@@ -18,7 +18,7 @@ export DJANGO_EMAIL_BACKEND ?= django.core.mail.backends.smtp.EmailBackend
 export EMAIL_HOST ?= 127.0.0.1
 export EMAIL_PORT ?= $(MAILPIT_SMTP_PORT)
 
-.PHONY: up-lite up-full down web worker seed test lint migrate
+.PHONY: up-lite up-full down web media worker seed test lint migrate
 
 up-lite:
 	mkdir -p $(ARTYSCI_STATE_DIR)/postgres
@@ -36,6 +36,10 @@ migrate:
 
 web: migrate
 	uv run python manage.py runserver 127.0.0.1:$(WEB_NATIVE_PORT)
+
+MEDIA_PORT ?= 8101
+media:
+	uv run python manage.py serve_public_media --host 0.0.0.0 --port $(MEDIA_PORT)
 
 worker:
 	uv run python manage.py worker
