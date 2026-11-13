@@ -14,6 +14,13 @@ x-app-env: &app-env
   DJANGO_EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
   EMAIL_HOST: mailpit
   EMAIL_PORT: "1025"
+  # Media: S3 against the minio service. Public files are read by the browser straight from
+  # the public bucket on the host-published port: a different origin from the app.
+  STORAGE_BACKEND: s3
+  S3_ENDPOINT_URL: http://minio:9000
+  S3_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-artysci}
+  S3_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:-artysci-minio-dev}
+  MEDIA_PUBLIC_BASE_URL: ${MEDIA_PUBLIC_BASE_URL:-http://127.0.0.1:19000/public/}
 
 services:
   db:
@@ -71,6 +78,7 @@ services:
     environment: *app-env
     command: >
       sh -c "python manage.py migrate --noinput &&
+             python manage.py ensure_buckets &&
              python manage.py collectstatic --noinput &&
              exec gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 2"
     ports:
@@ -78,6 +86,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      minio:
+        condition: service_started
 
   worker:
     image: artysci-app:local

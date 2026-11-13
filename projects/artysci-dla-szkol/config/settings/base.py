@@ -7,6 +7,7 @@ DATABASES, reading them from environment variables.
 from pathlib import Path
 
 from .env import env
+from .storage import build_storages
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -119,3 +120,18 @@ LOCALE_PATHS = [BASE_DIR / "locale"]
 STATIC_URL = env.str("DJANGO_STATIC_URL", default="/static/")
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = env.path("DJANGO_STATIC_ROOT", default=BASE_DIR / "staticfiles")
+
+# Media (see storage.py): private = signed URLs only; public = separate origin ---------------
+
+STORAGE_BACKEND = env.str("STORAGE_BACKEND", default="filesystem")
+MEDIA_PUBLIC_BASE_URL = env.str("MEDIA_PUBLIC_BASE_URL", default="http://localhost:8101/")
+MEDIA_PRIVATE_ROOT = env.path("MEDIA_PRIVATE_ROOT", default=BASE_DIR / "media" / "private")
+MEDIA_PUBLIC_ROOT = env.path("MEDIA_PUBLIC_ROOT", default=BASE_DIR / "media" / "public")
+MEDIA_SIGNED_URL_TTL = env.int("MEDIA_SIGNED_URL_TTL", default=300)  # seconds
+STORAGES = build_storages(
+    STORAGE_BACKEND,
+    public_base_url=MEDIA_PUBLIC_BASE_URL,
+    private_root=MEDIA_PRIVATE_ROOT,
+    public_root=MEDIA_PUBLIC_ROOT,
+    signed_url_ttl=MEDIA_SIGNED_URL_TTL,
+)
