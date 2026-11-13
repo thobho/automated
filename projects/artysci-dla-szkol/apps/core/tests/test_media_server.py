@@ -34,6 +34,13 @@ def test_public_origin_has_no_directory_listing(served):
     assert err.value.code == 404
 
 
+def test_media_roots_are_pathlib_paths(settings):
+    from pathlib import Path
+
+    assert isinstance(settings.MEDIA_PUBLIC_ROOT, Path)
+    assert isinstance(settings.MEDIA_PRIVATE_ROOT, Path)
+
+
 def test_ensure_buckets_is_a_noop_on_filesystem(settings, capsys):
     settings.STORAGE_BACKEND = "filesystem"
     call_command("ensure_buckets")

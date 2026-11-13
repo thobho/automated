@@ -125,8 +125,8 @@ STATIC_ROOT = env.path("DJANGO_STATIC_ROOT", default=BASE_DIR / "staticfiles")
 
 STORAGE_BACKEND = env.str("STORAGE_BACKEND", default="filesystem")
 MEDIA_PUBLIC_BASE_URL = env.str("MEDIA_PUBLIC_BASE_URL", default="http://localhost:8101/")
-MEDIA_PRIVATE_ROOT = env.path("MEDIA_PRIVATE_ROOT", default=BASE_DIR / "media" / "private")
-MEDIA_PUBLIC_ROOT = env.path("MEDIA_PUBLIC_ROOT", default=BASE_DIR / "media" / "public")
+MEDIA_PRIVATE_ROOT = Path(env.str("MEDIA_PRIVATE_ROOT", default=str(BASE_DIR / "media/private")))
+MEDIA_PUBLIC_ROOT = Path(env.str("MEDIA_PUBLIC_ROOT", default=str(BASE_DIR / "media/public")))
 MEDIA_SIGNED_URL_TTL = env.int("MEDIA_SIGNED_URL_TTL", default=300)  # seconds
 STORAGES = build_storages(
     STORAGE_BACKEND,
