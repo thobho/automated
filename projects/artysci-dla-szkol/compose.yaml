@@ -10,6 +10,8 @@ x-app-env: &app-env
   DJANGO_SETTINGS_MODULE: config.settings.prod
   DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-compose-only-insecure-key-change-me-0123456789}
   DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+  # Local containers speak plain HTTP; a real deployment keeps the redirect to HTTPS on.
+  DJANGO_SECURE_SSL_REDIRECT: "false"
   DATABASE_URL: postgres://${POSTGRES_USER:-artysci}:${POSTGRES_PASSWORD:-artysci}@db:5432/${POSTGRES_DB:-artysci}
   DJANGO_EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
   EMAIL_HOST: mailpit
