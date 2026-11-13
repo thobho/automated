@@ -16,7 +16,9 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 - Accounts and sessions (takeover means impersonating an artist or a school).
 - Uploaded files: photos, documents (T06, E2).
 - Integrity of public pages and the catalog (defacement, spam, scams aimed at schools).
-- Secrets: `DJANGO_SECRET_KEY`, database and SMTP credentials (env only, never in the repo).
+- Secrets: `DJANGO_SECRET_KEY`, database and SMTP credentials, `OPENROUTER_API_KEY` (env only,
+  never in the repo).
+- AI budget: the OpenRouter balance (D63).
 
 **Trust boundaries**
 1. Browser → web app (internet). Everything from the browser is untrusted: validated in forms and
@@ -25,6 +27,9 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 3. Web app → user-files origin (D62): uploaded content never runs on the app's origin.
 4. Worker (Procrastinate) → same database; jobs carry ids, not personal data.
 5. Logs → host log collector: JSON on stdout without e-mails, full IPs, cookies or secrets.
+6. Web app / worker → OpenRouter → model providers (internet, T07). Only artists' marketing
+   materials, scrubbed of e-mails, phones, IBANs and listed names (D59); only ZDR endpoints
+   that do not collect data, from an allowlist; the user is an HMAC pseudonym.
 
 **Main threats and controls**
 
@@ -38,6 +43,8 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 | Malicious uploads | separate origin, type/size checks (T06, E2) |
 | Data leak through logs | redaction in `apps/core/logs.py`, pseudonymised user ids, no query strings |
 | Account enumeration, spam | E1 (generic errors), E2+ (moderation, rate limits) |
+| Personal data leaking to AI providers | `apps/profiles/ai`: scrubber before every call, `data_collection: deny` + `zdr: true`, provider allowlist, no prompt text stored or logged |
+| Runaway AI cost (bug, loop, abuse) | per-call and daily caps checked before sending (`AICapExceeded`), `AI_KILL_SWITCH`, low-limit key |
 
 ## What is in place (T04)
 

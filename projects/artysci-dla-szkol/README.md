@@ -120,6 +120,38 @@ PostgreSQL; there is no Redis. Queues: `default`, `ai`, `media`, `email` (`apps/
 - Tests use the in-memory connector (`apps/core/testing.py`) on SQLite and run against real
   PostgreSQL when `DATABASE_URL` is set (`test_jobs_postgres.py`).
 
+## AI adapter
+
+`apps/profiles/ai` is the only way to call an LLM (D46, D59, D60, D63):
+
+```python
+from apps.profiles import ai
+
+result = ai.complete(
+    [{"role": "user", "content": "..."}],
+    purpose="profile_draft",   # label stored in AICall
+    max_cost_usd="0.01",       # ceiling for this call, at most AI_PER_CALL_CAP_USD
+    schema=None,               # JSON Schema -> structured output in result.data
+    user_ref=artist.pk,        # sent only as an HMAC pseudonym
+)
+```
+
+- `AI_CLIENT=fake` (default in dev and tests; deterministic, offline) or `openrouter` (prod
+  default). Tests always use the fake client and never reach the network.
+- Before anything is sent: kill switch `AI_KILL_SWITCH` (`AIDisabled`), PII scrubbing (e-mails,
+  phone numbers, IBANs/account numbers, names in `AI_SCRUB_NAMES` or `scrub_names=`), per-call
+  cap (`max_tokens` is limited so the prompt plus the longest reply fit in `max_cost_usd`) and
+  the daily cap `AI_DAILY_CAP_USD` (Europe/Warsaw day). A cap breach raises `AICapExceeded`.
+- Each call is an `AICall` row (model, provider, tokens, `usage.cost`, purpose, latency,
+  status; never prompt or reply text), visible read-only at `/django-admin/profiles/aicall/`.
+  The row is created `pending` with the worst-case cost (so concurrent calls see it) and
+  settled with the real cost.
+- OpenRouter requests: pinned `AI_MODEL`; `provider` with `data_collection: "deny"`,
+  `zdr: true`, `only`/`order` = `AI_PROVIDERS` (fallbacks stay inside the list) and
+  `max_price` from `AI_PRICE_*_USD_PER_MTOK`. Change the model and its prices together.
+- The key comes only from `OPENROUTER_API_KEY` and never appears in logs or errors.
+- Only artists' marketing materials go to AI; never messages, inquiries or contact data.
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python
@@ -128,5 +160,9 @@ Added with T05: `procrastinate[django]` as the job queue (on PostgreSQL, no extr
 Added with T04: no new dependency for security (own CSP middleware, own JSON formatter and
 cache-based login throttle instead of django-csp, python-json-logger and django-axes); D61
 (ASVS 5.0 L1 + chosen L2), D62 (user files on a separate origin).
+Added with T07: no new dependency for the AI adapter (OpenRouter over the standard library's
+`urllib`); D46, D60 (OpenRouter with ZDR-only routing, pinned model), D59 (PII minimisation),
+D63 (daily and per-call cost caps, kill switch). Default model `anthropic/claude-haiku-5.5` on
+Google Vertex / Amazon Bedrock ZDR endpoints until model selection in E11.
 New dependencies or structural choices need a line in the decision log first
 (see [CLAUDE.md](CLAUDE.md)).
