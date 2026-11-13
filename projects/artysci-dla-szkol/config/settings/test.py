@@ -12,6 +12,11 @@ ALLOWED_HOSTS = ["testserver", "localhost", "127.0.0.1"]
 
 DATABASES = {"default": env.db("DATABASE_URL", default="sqlite://:memory:")}
 
+if DATABASES["default"]["ENGINE"].endswith("sqlite3"):  # noqa: F405
+    # Procrastinate's schema is PostgreSQL-only SQL; its tables are not built on SQLite.
+    # Job tests use an in-memory connector there (see apps/core/tests/conftest.py).
+    MIGRATION_MODULES = {"procrastinate": None}
+
 # Fast hashing: tests create many users.
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"

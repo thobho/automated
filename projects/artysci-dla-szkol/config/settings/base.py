@@ -19,6 +19,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "procrastinate.contrib.django",  # job queue on PostgreSQL; read-only jobs admin
 ]
 
 # One app per concern. accounts owns AUTH_USER_MODEL.
@@ -90,6 +91,19 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+
+# Logging: console only (the worker and web log to stdout/stderr; the host collects them) ---
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {"plain": {"format": "%(asctime)s %(levelname)s %(name)s %(message)s"}},
+    "handlers": {"console": {"class": "logging.StreamHandler", "formatter": "plain"}},
+    "loggers": {
+        "procrastinate": {"handlers": ["console"], "level": "INFO"},
+        "apps": {"handlers": ["console"], "level": "INFO"},
+    },
+}
 
 # Locale: Polish only, Warsaw time --------------------------------------------------------
 
