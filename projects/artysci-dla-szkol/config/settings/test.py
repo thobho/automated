@@ -20,3 +20,8 @@ if DATABASES["default"]["ENGINE"].endswith("sqlite3"):  # noqa: F405
 # Fast hashing: tests create many users.
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
+
+# Tests never reach a real AI provider, whatever the environment says.
+AI_CLIENT = "fake"
+OPENROUTER_API_KEY = ""
+AI_KILL_SWITCH = False

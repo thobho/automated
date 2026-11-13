@@ -170,6 +170,24 @@ LOGGING = {
     },
 }
 
+# AI adapter (apps/profiles/ai, T07: D46, D59, D60, D63) ----------------------------------
+# "fake" is deterministic and offline (tests, CI, local); prod defaults to "openrouter".
+AI_CLIENT = env.str("AI_CLIENT", default="fake")
+OPENROUTER_API_KEY = env.str("OPENROUTER_API_KEY", default="")  # env only, never logged
+AI_KILL_SWITCH = env.bool("AI_KILL_SWITCH", default=False)
+AI_DAILY_CAP_USD = env.str("AI_DAILY_CAP_USD", default="1.00")
+AI_PER_CALL_CAP_USD = env.str("AI_PER_CALL_CAP_USD", default="0.05")
+# Pinned model and the only providers OpenRouter may route to (all with ZDR endpoints).
+AI_MODEL = env.str("AI_MODEL", default="anthropic/claude-haiku-5.5")
+AI_PROVIDERS = env.list("AI_PROVIDERS", default=["google-vertex", "amazon-bedrock"])
+# Price ceiling of the pinned model, USD per million tokens (cost estimate + max_price).
+AI_PRICE_PROMPT_USD_PER_MTOK = env.str("AI_PRICE_PROMPT_USD_PER_MTOK", default="0.11")
+AI_PRICE_COMPLETION_USD_PER_MTOK = env.str("AI_PRICE_COMPLETION_USD_PER_MTOK", default="0.55")
+AI_MAX_TOKENS = env.int("AI_MAX_TOKENS", default=2048)
+AI_TIMEOUT_SECONDS = env.float("AI_TIMEOUT_SECONDS", default=60.0)
+# Names removed from every prompt (D59), e.g. staff or test persons; comma-separated.
+AI_SCRUB_NAMES = env.list("AI_SCRUB_NAMES", default=[])
+
 # Locale: Polish only, Warsaw time --------------------------------------------------------
 
 LANGUAGE_CODE = "pl"

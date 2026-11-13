@@ -22,6 +22,9 @@ CSRF_TRUSTED_ORIGINS = env.list("DJANGO_CSRF_TRUSTED_ORIGINS", default=[])
 EMAIL_BACKEND = env.str(
     "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"
 )
+# Real AI in prod. OPENROUTER_API_KEY is checked when the first AI call is made (no feature
+# uses AI before E2), so startup does not require it yet.
+AI_CLIENT = env.str("AI_CLIENT", default="openrouter")
 
 # TLS and cookies (SECURITY.md). `check --deploy --fail-level WARNING` is clean with these.
 SESSION_COOKIE_SECURE = True
