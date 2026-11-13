@@ -100,7 +100,8 @@ class RequestContextFilter(logging.Filter):
     """Adds `request_id` and `user` to every record logged while a request is handled."""
 
     def filter(self, record):
-        request = _current_request.get()
+        # django.request logs 4xx/5xx after the middleware chain returned; it attaches the request.
+        request = _current_request.get() or getattr(record, "request", None)
         if not hasattr(record, "request_id"):
             record.request_id = getattr(request, "request_id", "-") if request else "-"
         if not hasattr(record, "user"):

@@ -38,6 +38,10 @@ def test_other_security_headers(home):
     assert "geolocation=()" in home["Permissions-Policy"]
 
 
+def test_trace_is_not_allowed(client):
+    assert client.generic("TRACE", "/").status_code == 405
+
+
 def test_no_hsts_outside_prod(home):
     assert "Strict-Transport-Security" not in home
 

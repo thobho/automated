@@ -78,6 +78,19 @@ uv run python manage.py makemigrations --check --dry-run --settings=config.setti
 `DJANGO_SECRET_KEY`, `DJANGO_ALLOWED_HOSTS` or `DATABASE_URL` is missing. All variables are
 documented in [`.env.example`](.env.example).
 
+## Security and logging
+
+Threat model, headers, cookie rules and the ASVS checklist: [SECURITY.md](SECURITY.md).
+
+- Every response carries a strict CSP (no inline script; use `nonce="{{ csp_nonce }}"` if one is
+  ever unavoidable), Permissions-Policy, nosniff, Referrer-Policy and `frame-ancestors 'none'`.
+  Prod adds HSTS, the HTTPS redirect and `__Host-` cookies.
+- HTMX POSTs send the CSRF token as `X-CSRFToken` (`templates/base.html`); nothing to add per form.
+- Logs are JSON lines on stdout in every environment (`apps/core/logs.py`): request id (also in
+  the `X-Request-ID` response header), pseudonymised user, an `access` line per request without
+  the query string. Never log e-mails or tokens on purpose; the redaction is a safety net.
+- Login throttling for E1: `apps/accounts/throttling.py` (`is_locked`, `register_failure`, `reset`).
+
 ## Endpoints
 
 - `/healthz`: liveness, `{"db": "ok"}` with 200, or 503 when the database is unreachable.
@@ -112,5 +125,8 @@ PostgreSQL; there is no Redis. Queues: `default`, `ai`, `media`, `email` (`apps/
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python
 3.13, Django 5.2 LTS, PostgreSQL 17, HTMX, uv), D91 (hosting not decided, stay provider-neutral).
 Added with T05: `procrastinate[django]` as the job queue (on PostgreSQL, no extra service).
+Added with T04: no new dependency for security (own CSP middleware, own JSON formatter and
+cache-based login throttle instead of django-csp, python-json-logger and django-axes); D61
+(ASVS 5.0 L1 + chosen L2), D62 (user files on a separate origin).
 New dependencies or structural choices need a line in the decision log first
 (see [CLAUDE.md](CLAUDE.md)).

@@ -18,10 +18,13 @@ def captured():
     handler = logging.StreamHandler(stream)
     handler.setFormatter(logs.JsonFormatter())
     handler.addFilter(logs.RequestContextFilter())
-    root = logging.getLogger()
-    root.addHandler(handler)
+    # "django" does not propagate to root (see LOGGING), so listen on both.
+    loggers = [logging.getLogger(), logging.getLogger("django")]
+    for logger in loggers:
+        logger.addHandler(handler)
     yield lambda: [json.loads(line) for line in stream.getvalue().splitlines()]
-    root.removeHandler(handler)
+    for logger in loggers:
+        logger.removeHandler(handler)
 
 
 # --- redact --------------------------------------------------------------------------------
@@ -176,3 +179,11 @@ def test_user_lookup_failure_does_not_break_logging(rf):
     request = rf.get("/")
     request.user = Broken()
     assert logs._user_of(request, resolve=True) == "-"
+
+
+@pytestmark_db
+def test_django_request_warnings_carry_the_request_id(client, captured):
+    response = client.get(f"/no-such-page?email={FAKE_EMAIL}")
+    line = next(line for line in captured() if line["logger"] == "django.request")
+    assert line["msg"] == "Not Found: /no-such-page"
+    assert line["request_id"] == response["X-Request-ID"]
