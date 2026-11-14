@@ -120,6 +120,23 @@ PostgreSQL; there is no Redis. Queues: `default`, `ai`, `media`, `email` (`apps/
 - Tests use the in-memory connector (`apps/core/testing.py`) on SQLite and run against real
   PostgreSQL when `DATABASE_URL` is set (`test_jobs_postgres.py`).
 
+## Analytics (events and visits)
+
+App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
+
+- **Events:** `services.track("inquiry_sent", actor=user, obj=inquiry, inquiry_id=1)`. Only names
+  and properties listed in `apps/analytics/catalog.py` are accepted; anything else raises
+  `UnknownEvent` / `DisallowedProperty`. The actor is stored as an HMAC pseudonym, the object as
+  type and id. To add an event, extend the catalog, emit it from the feature's service, and move
+  it from `PENDING` to `EMITTERS` in `tests/test_events.py`.
+- **Visits:** `VisitMiddleware` counts successful HTML `GET` views per path and day in `Visit`
+  (one row per day, path and visitor hash, with a view counter). The visitor hash is
+  HMAC-SHA256 of IP + user agent under a random per-day salt (`DailySalt`); salts of earlier
+  days are deleted on first use of a new day, so old hashes cannot be recomputed. Excluded:
+  bots and empty user agents, `/healthz`, `/readyz`, `/static/`, `/django-admin/`.
+- Unique visitors for a day and path = `Visit.objects.filter(day=..., path=...).count()`.
+  Dashboards come later (E10).
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python
