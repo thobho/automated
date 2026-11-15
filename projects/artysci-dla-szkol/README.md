@@ -1,5 +1,7 @@
 # Artyści dla szkół
 
+[![CI](https://github.com/thobho/automated/actions/workflows/artysci-dla-szkol-ci.yml/badge.svg)](https://github.com/thobho/automated/actions/workflows/artysci-dla-szkol-ci.yml)
+
 A Polish web service that connects **artists** (musicians, actors, educators, workshop leaders)
 with **schools and other institutions** that want to invite them. Artists get a generated public
 page and appear in a searchable catalog; institutions send inquiries or post notices that artists
@@ -78,6 +80,19 @@ uv run python manage.py makemigrations --check --dry-run --settings=config.setti
 `DJANGO_SECRET_KEY`, `DJANGO_ALLOWED_HOSTS` or `DATABASE_URL` is missing. All variables are
 documented in [`.env.example`](.env.example).
 
+## Security and logging
+
+Threat model, headers, cookie rules and the ASVS checklist: [SECURITY.md](SECURITY.md).
+
+- Every response carries a strict CSP (no inline script; use `nonce="{{ csp_nonce }}"` if one is
+  ever unavoidable), Permissions-Policy, nosniff, Referrer-Policy and `frame-ancestors 'none'`.
+  Prod adds HSTS, the HTTPS redirect and `__Host-` cookies.
+- HTMX POSTs send the CSRF token as `X-CSRFToken` (`templates/base.html`); nothing to add per form.
+- Logs are JSON lines on stdout in every environment (`apps/core/logs.py`): request id (also in
+  the `X-Request-ID` response header), pseudonymised user, an `access` line per request without
+  the query string. Never log e-mails or tokens on purpose; the redaction is a safety net.
+- Login throttling for E1: `apps/accounts/throttling.py` (`is_locked`, `register_failure`, `reset`).
+
 ## Endpoints
 
 - `/healthz`: liveness, `{"db": "ok"}` with 200, or 503 when the database is unreachable.
@@ -129,11 +144,31 @@ any S3-compatible service later). Two storages: **private** (originals, document
   `.env.example`) and `S3_ENDPOINT_URL`; without it the S3-parametrised tests are skipped.
 - Not covered yet: video transcoding and image variants (E2), virus scanning (later).
 
+## Analytics (events and visits)
+
+App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
+
+- **Events:** `services.track("inquiry_sent", actor=user, obj=inquiry, inquiry_id=1)`. Only names
+  and properties listed in `apps/analytics/catalog.py` are accepted; anything else raises
+  `UnknownEvent` / `DisallowedProperty`. The actor is stored as an HMAC pseudonym, the object as
+  type and id. To add an event, extend the catalog, emit it from the feature's service, and move
+  it from `PENDING` to `EMITTERS` in `tests/test_events.py`.
+- **Visits:** `VisitMiddleware` counts successful HTML `GET` views per path and day in `Visit`
+  (one row per day, path and visitor hash, with a view counter). The visitor hash is
+  HMAC-SHA256 of IP + user agent under a random per-day salt (`DailySalt`); salts of earlier
+  days are deleted on first use of a new day, so old hashes cannot be recomputed. Excluded:
+  bots and empty user agents, `/healthz`, `/readyz`, `/static/`, `/django-admin/`.
+- Unique visitors for a day and path = `Visit.objects.filter(day=..., path=...).count()`.
+  Dashboards come later (E10).
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python
 3.13, Django 5.2 LTS, PostgreSQL 17, HTMX, uv), D91 (hosting not decided, stay provider-neutral).
 Added with T06: `django-storages[s3]` (+ boto3) for the S3 backend, `Pillow` for EXIF stripping.
 Added with T05: `procrastinate[django]` as the job queue (on PostgreSQL, no extra service).
+Added with T04: no new dependency for security (own CSP middleware, own JSON formatter and
+cache-based login throttle instead of django-csp, python-json-logger and django-axes); D61
+(ASVS 5.0 L1 + chosen L2), D62 (user files on a separate origin).
 New dependencies or structural choices need a line in the decision log first
 (see [CLAUDE.md](CLAUDE.md)).

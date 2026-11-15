@@ -9,7 +9,9 @@ from other `projects/` folders. Product overview and quick start: [README.md](RE
 - `apps/<name>/` — one Django app per concern (label = folder name):
   `accounts` (custom `User`, email login), `artists`, `institutions`, `profiles` (page generator),
   `catalog`, `inquiries`, `notices`, `notifications`, `trust`, `adminpanel`, `analytics`,
-  `quality` (E11), `core` (health checks, home page; nothing domain-specific).
+  `quality` (E11), `core` (health checks, home page, security headers `security.py`, JSON
+  logging `logs.py`; nothing domain-specific).
+- `SECURITY.md` — threat model and ASVS checklist. Update a row's status when a task delivers it.
 - `templates/base.html` — base layout (Polish, vendored HTMX, CSRF header for HTMX).
   App templates live in `apps/<name>/templates/<name>/`.
 - `static/vendor/` — vendored front-end libraries with a `VERSION` note. No CDNs (D11).
@@ -41,5 +43,7 @@ from other `projects/` folders. Product overview and quick start: [README.md](RE
 - **Users:** always `get_user_model()` / `settings.AUTH_USER_MODEL`; the user logs in by email,
   there is no username. Never add migrations that run before `accounts.0001_initial`.
 - **Migrations:** commit them with the model change; `makemigrations --check` must be clean.
+- **Security:** no inline `<script>`/`<style>` or `style=""` (strict CSP); unsafe methods stay
+  CSRF-protected (no `csrf_exempt`); never put e-mails, tokens or IPs into log messages or URLs.
 - Time zone is Europe/Warsaw with `USE_TZ = True`: store aware datetimes, use `django.utils.timezone`.
 - Hosting is undecided (D91): no provider-specific code or settings.
