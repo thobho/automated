@@ -1,5 +1,7 @@
 # Artyści dla szkół
 
+[![CI](https://github.com/thobho/automated/actions/workflows/artysci-dla-szkol-ci.yml/badge.svg)](https://github.com/thobho/automated/actions/workflows/artysci-dla-szkol-ci.yml)
+
 A Polish web service that connects **artists** (musicians, actors, educators, workshop leaders)
 with **schools and other institutions** that want to invite them. Artists get a generated public
 page and appear in a searchable catalog; institutions send inquiries or post notices that artists

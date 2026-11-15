@@ -19,6 +19,11 @@ dev = [
     "pytest-django>=4.9",
     "ruff>=0.8",
 ]
+e2e = [
+    "axe-playwright-python>=0.1.8",
+    "playwright>=1.65.1",
+    "pytest-playwright>=0.10.0",
+]
 
 [tool.uv]
 package = false
@@ -26,7 +31,7 @@ package = false
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
-addopts = "--strict-markers"
+addopts = "--strict-markers --ignore=tests/e2e"
 
 [tool.coverage.run]
 source = ["config", "apps"]
