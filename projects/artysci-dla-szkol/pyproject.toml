@@ -31,7 +31,7 @@ package = false
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
-addopts = "--strict-markers"
+addopts = "--strict-markers --ignore=tests/e2e"
 
 [tool.coverage.run]
 source = ["config", "apps"]
