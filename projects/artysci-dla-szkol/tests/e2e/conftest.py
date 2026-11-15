@@ -1,5 +1,5 @@
-"""Playwright smoke tests run against a live server (CI e2e job). The normal `pytest` run skips (addopts ignores tests/e2e)
-this folder; run: `uv run --group e2e pytest tests/e2e --base-url http://127.0.0.1:8000`."""
+"""Playwright smoke tests run against a live server (CI e2e job). The normal `pytest` run skips
+this folder (addopts ignores tests/e2e); run: `uv run --group e2e pytest tests/e2e --base-url http://127.0.0.1:8000`."""
 
 import os
 from pathlib import Path
