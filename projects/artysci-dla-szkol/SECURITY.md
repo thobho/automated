@@ -61,6 +61,11 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   auth headers and IP host parts are redacted from messages and tracebacks.
 - **Log inventory**: web and worker write only to stdout/stderr; nothing is written to files.
   `django.server` (runserver) is muted because its lines contain query strings.
+- **Uploads (T06)**: size limits per kind, content type sniffed from magic bytes, random
+  keys, EXIF/GPS stripped from images, private files only through short-lived signed URLs,
+  public files on a separate origin (`MEDIA_PUBLIC_BASE_URL`, required in prod). **Virus
+  scanning is deferred**: uploads are not scanned yet; this is planned before uploads from
+  untrusted users go live.
 
 Remediation time frames for vulnerable dependencies (ASVS 15.1.1): critical 7 days, high 30
 days, others with the next regular update; dependencies are reviewed at least monthly.
