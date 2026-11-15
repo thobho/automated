@@ -71,6 +71,49 @@ def test_django_startup_with_prod_and_no_env_fails_with_clear_message():
     assert "Missing required environment variable DJANGO_SECRET_KEY" in result.stderr
 
 
+def test_prod_tls_and_cookie_hardening(prod_env):
+    prod = _load("config.settings.prod")
+    assert prod.SECURE_SSL_REDIRECT is True
+    assert prod.SECURE_HSTS_SECONDS >= 31_536_000
+    assert prod.SECURE_HSTS_INCLUDE_SUBDOMAINS is True
+    assert prod.SESSION_COOKIE_NAME.startswith("__Host-")
+    assert prod.CSRF_COOKIE_NAME.startswith("__Host-")
+    assert not hasattr(prod, "SECURE_PROXY_SSL_HEADER")
+    assert prod.SILENCED_SYSTEM_CHECKS == ["security.W021"]
+
+
+def test_prod_preload_and_proxy_header_opt_in(prod_env):
+    prod_env.setenv("DJANGO_SECURE_HSTS_PRELOAD", "true")
+    prod_env.setenv("DJANGO_TRUST_X_FORWARDED_PROTO", "true")
+    prod = _load("config.settings.prod")
+    assert prod.SECURE_HSTS_PRELOAD is True
+    assert prod.SECURE_PROXY_SSL_HEADER == ("HTTP_X_FORWARDED_PROTO", "https")
+    assert "security.W021" not in getattr(prod, "SILENCED_SYSTEM_CHECKS", [])
+
+
+def test_check_deploy_is_clean_with_prod_settings():
+    """`manage.py check --deploy --fail-level WARNING` under prod with the required env."""
+    env = {
+        "PATH": os.environ.get("PATH", ""),
+        "HOME": os.environ.get("HOME", ""),
+        "DJANGO_SETTINGS_MODULE": "config.settings.prod",
+        "DJANGO_SECRET_KEY": "test-only-not-a-secret-" + "abcdefghij" * 3,
+        "DJANGO_ALLOWED_HOSTS": "artysci.example",
+        "DATABASE_URL": PROD_VARS["DATABASE_URL"],
+    }
+    result = subprocess.run(  # noqa: S603 - fixed argv, no shell
+        [sys.executable, "manage.py", "check", "--deploy", "--fail-level", "WARNING"],
+        cwd=PROJECT_DIR,
+        env=env,
+        capture_output=True,
+        text=True,
+        timeout=60,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "System check identified no issues" in result.stdout
+
+
 def test_dev_uses_postgres_by_default(monkeypatch, tmp_path):
     monkeypatch.delenv("DATABASE_URL", raising=False)
     dev = _load("config.settings.dev")
