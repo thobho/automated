@@ -5,7 +5,7 @@ Home for projects that an autonomous Claude Code worker builds from a GitHub iss
 ## Layout
 - `projects/<name>/` — one folder per project. Projects are **completely independent**: own README, own CLAUDE.md, own dependencies, own tests. Never import, share or reference code across project folders.
 - `agent/` — the worker: `budget.py` (may we spend tokens now?) and `worker-prompt.md` (what a scheduled run does).
-- `scripts/` — `queue.sh`, `update-status.sh`, `setup-labels.sh`.
+- `scripts/` — `queue.sh`, `update-status.sh`, `setup-labels.sh`, and the sudo request queue (`sudo-request.sh` for the agent, `owner-apply.sh` for the owner; see `scripts/SUDO-QUEUE.md`).
 
 ## Task queue = GitHub issues
 Every task is an issue with `agent:todo` and exactly one `project:<name>` label. State moves through labels:
