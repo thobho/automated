@@ -25,9 +25,13 @@ Transport = Callable[[str, dict, bytes, float], tuple[int, bytes]]
 
 
 def urllib_transport(url: str, headers: dict, body: bytes, timeout: float) -> tuple[int, bytes]:
+    # Only HTTPS: urlopen also accepts file:// and custom schemes (bandit B310).
+    if not url.startswith("https://"):
+        raise AIConfigError("The AI endpoint must use https://.")
     request = urllib.request.Request(url, data=body, headers=headers, method="POST")  # noqa: S310
     try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310
+        # Scheme checked above, so B310 does not apply.
+        with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310  # nosec B310
             return response.status, response.read()
     except urllib.error.HTTPError as exc:
         return exc.code, exc.read()

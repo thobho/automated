@@ -375,6 +375,16 @@ def test_urllib_transport_posts_and_returns_body(monkeypatch):
     assert seen == {"method": "POST", "data": b"{}", "timeout": 5}
 
 
+@pytest.mark.parametrize("url", ["file:///etc/passwd", "http://example.invalid", "ftp://x"])
+def test_urllib_transport_refuses_non_https(monkeypatch, url):
+    def fake_urlopen(request, timeout):  # pragma: no cover - must not be reached
+        raise AssertionError("urlopen called")
+
+    monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
+    with pytest.raises(ai.AIConfigError):
+        urllib_transport(url, {}, b"{}", 5)
+
+
 def test_urllib_transport_returns_http_errors(monkeypatch):
     def fake_urlopen(request, timeout):
         raise urllib.error.HTTPError(
