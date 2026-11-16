@@ -1,20 +1,6 @@
-# Scheduled task: automated-dispatcher
+# Dispatcher: runs on pirx (no Mac task)
 
-The Claude work itself runs on pirx (see `agent/pirx/README.md`). Only the Mac's desktop app can read the plan limits, so this hourly Mac task reads them and hands them to pirx in one SSH call. It must stay tiny: it is the only Claude cost of a run that ends up waiting.
-
-Create it in the Claude desktop app (Code tab → Scheduled tasks), or ask Claude to create it.
-- **Schedule:** every hour, at minute 7 (cron `7 * * * *`, local time)
-- **Model:** the cheapest available (Haiku)
-- **Prompt:**
-
-```
-You are the dispatcher for the agent runs of the repo thobho/automated. Nobody is watching: never ask questions. Do exactly this and nothing else:
-1. Call the get_usage tool (mcp__ccd_session_mgmt__get_usage; load it with ToolSearch if it is deferred).
-2. Write its JSON output, unchanged, to /tmp/automated-usage.json.
-3. Run: ssh -o BatchMode=yes -o ConnectTimeout=15 agent@192.168.68.62 'bash ~/Projects/automated-work/runner/agent/pirx/start-claude-run.sh' < /tmp/automated-usage.json
-4. Reply with the one line it printed (or the SSH error) and end the run.
-Do not read files, do not investigate errors, do not retry more than once.
-```
+Since 2026-11-16 the hourly dispatcher is the systemd timer `automated-dispatch` on pirx (`agent/pirx/dispatch.sh`). It reads the Claude plan limits from pirx's own Claude Code (`agent/usage_probe.py`), so the agent runtime never depends on the Mac. The former Mac scheduled task `automated-dispatcher` is paused; delete it from the app once the pirx timer has run for a few days.
 
 # Scheduled task: idea-generator
 
