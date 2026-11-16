@@ -107,6 +107,8 @@ class OpenRouterClient(AIClient):
             data = json.loads(raw, parse_float=Decimal)
         except ValueError as exc:
             raise AIProviderError(f"OpenRouter HTTP {status}: not JSON.", code="bad_json") from exc
+        if not isinstance(data, dict):
+            raise AIProviderError(f"OpenRouter HTTP {status}: not a JSON object.", code="bad_json")
         if status != 200 or "error" in data:
             error = data.get("error") or {}
             code = str(error.get("code") or status)

@@ -129,10 +129,10 @@ from apps.profiles import ai
 
 result = ai.complete(
     [{"role": "user", "content": "..."}],
-    purpose="profile_draft",   # label stored in AICall
-    max_cost_usd="0.01",       # ceiling for this call, at most AI_PER_CALL_CAP_USD
-    schema=None,               # JSON Schema -> structured output in result.data
-    user_ref=artist.pk,        # sent only as an HMAC pseudonym
+    purpose="profile_draft",  # label stored in AICall
+    max_cost_usd="0.01",  # ceiling for this call, at most AI_PER_CALL_CAP_USD
+    schema=None,  # JSON Schema -> structured output in result.data
+    user_ref=artist.pk,  # sent only as an HMAC pseudonym
 )
 ```
 

@@ -108,7 +108,11 @@ def check_daily_cap(max_cost_usd: Decimal) -> None:
 
 
 def _lock_budget() -> None:
-    """Serialise reservations across processes (PostgreSQL; SQLite serialises writes itself)."""
+    """Serialise reservations across processes.
+
+    Only PostgreSQL (dev, prod) takes a lock. On SQLite (tests only) the read-then-insert is not
+    strictly serialised between processes; that is acceptable there.
+    """
     if connection.vendor == "postgresql":
         with connection.cursor() as cursor:
             cursor.execute("SELECT pg_advisory_xact_lock(%s)", [BUDGET_LOCK_ID])

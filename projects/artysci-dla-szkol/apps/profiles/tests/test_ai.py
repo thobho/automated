@@ -161,6 +161,7 @@ def test_missing_usage_cost_keeps_worst_case():
         (402, {"error": {"code": 402, "message": "Insufficient credits"}}, "http_402"),
         (200, {"error": {"code": 502, "message": "upstream"}}, "http_502"),
         (500, b"<html>oops</html>", "bad_json"),
+        (200, b"[1, 2]", "bad_json"),
         (200, {"choices": []}, "no_choices"),
     ],
 )
