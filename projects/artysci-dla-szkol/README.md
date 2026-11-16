@@ -150,6 +150,8 @@ result = ai.complete(
   `zdr: true`, `only`/`order` = `AI_PROVIDERS` (fallbacks stay inside the list) and
   `max_price` from `AI_PRICE_*_USD_PER_MTOK`. Change the model and its prices together.
 - The key comes only from `OPENROUTER_API_KEY` and never appears in logs or errors.
+- Check a key by hand: `uv run python manage.py ai_smoke [--key-file path/to/secrets.env]`
+  makes one real, tiny call (synthetic prompt, well under $0.001) and prints the `AICall` row.
 - Only artists' marketing materials go to AI; never messages, inquiries or contact data.
 
 ## Decision log
