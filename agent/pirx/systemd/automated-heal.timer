@@ -1,0 +1,9 @@
+[Unit]
+Description=automated: run the healer every 30 minutes
+
+[Timer]
+OnCalendar=*:20,50
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,4 +1,5 @@
 [Unit]
+OnFailure=automated-heal.service
 Description=automated: build the daily report and post it on GitHub
 After=network-online.target
 

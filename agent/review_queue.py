@@ -17,9 +17,11 @@ A PR that conflicts with main is not reviewed: it goes to the conflict resolver 
 then reviewed as usual. Each attempt leaves `<!-- automated:conflict-attempt -->`; after
 MAX_CONFLICT_ATTEMPTS failed attempts the task is blocked. Attempt 1 runs on Sonnet, later ones on Opus.
 
-Protected PRs (they change the automation itself: `agent/`, `scripts/`, `.github/` except a project's
-`<project>-ci.yml` workflow, or files in the repo root) are reviewed but never merged automatically:
-the owner merges them with one tap after an approving review.
+Automation PRs (they change `agent/`, `scripts/`, `.github/` except a project's `<project>-ci.yml`,
+or files in the repo root) are reviewed by Opus only, never a fallback, and merged on approval like
+any other PR. Guarded PRs, the subset that touches money or permissions (budget gates, settings and
+allowlists, the root helper, the merge rules, the dispatcher, setup scripts, workflows, root files),
+are reviewed but never merged automatically: the owner merges them with one tap.
 
 Usage:
   agent/review_queue.py              list open agent PRs and their review state
@@ -58,8 +60,19 @@ def ci_state(pr):
     return "green"
 
 
-def protected(paths):
-    """Paths that change the automation itself (or the repo root) need the owner's merge."""
+GUARDED = re.compile(r"""^(
+    agent/(budget|openrouter_budget|review_queue|usage_probe)\.py
+  | agent/pirx/(review-run|start-claude-run|dispatch|opencode-worker|heal-diagnose|setup|setup-agent-user)\.sh
+  | agent/pirx/[^/]*settings\.json | agent/pirx/opencode\.json | agent/pirx/root/.*
+  | scripts/(owner-apply|sudo-request|worker-lock)\.sh
+)$""", re.VERBOSE)
+
+
+MONEY = re.compile(r"^agent/(budget|openrouter_budget)\.py$")
+
+
+def automation(paths):
+    """Paths that change the automation itself (or the repo root)."""
     hits = []
     for p in paths:
         if "/" not in p or p.startswith(("agent/", "scripts/")):
@@ -69,9 +82,14 @@ def protected(paths):
     return hits
 
 
-def review_model(issue_labels):
+def protected(paths):
+    """Automation paths that touch money or permissions: these PRs need the owner's merge."""
+    return [p for p in automation(paths) if "/" not in p or p.startswith(".github/") or GUARDED.match(p)]
+
+
+def review_model(issue_labels, paths=()):
     """(preferred, fallback) reviewer models for a PR whose linked issue has these labels."""
-    if "area:security" in issue_labels:
+    if "area:security" in issue_labels or automation(paths):
         return "opus", None
     if "model:opus" in issue_labels:
         return "sonnet", None
@@ -84,8 +102,8 @@ def assess(pr, issue_labels):
     reviewed = any(REVIEW_MARK.format(sha=sha) in b for b in bodies)
     ci = ci_state(pr)
     m = CLOSES.search(pr.get("body") or "")
-    preferred, fallback = review_model(issue_labels)
     paths = [f["path"] for f in pr.get("files") or []]
+    preferred, fallback = review_model(issue_labels, paths)
     conflicting = pr.get("mergeable") == "CONFLICTING"
     attempts = sum(CONFLICT_MARK in b for b in bodies)
     with_builder = bool(issue_labels & WITH_BUILDER)
@@ -99,6 +117,8 @@ def assess(pr, issue_labels):
         "reviewed": reviewed,
         "rounds": sum(CHANGES_MARK in b for b in bodies),
         "protected": protected(paths),
+        "automation": automation(paths),
+        "money": [p for p in paths if MONEY.match(p)],
         "model": preferred,
         "fallback": fallback,
         "conflicting": conflicting,

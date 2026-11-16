@@ -1,0 +1,9 @@
+[Unit]
+Description=automated: healer (fixes stuck tasks, failed units, disk, the owner's services; alerts only for money)
+After=network-online.target
+
+[Service]
+Type=oneshot
+Environment=HOME=%h
+ExecStart=/bin/bash %h/Projects/automated-work/runner/agent/pirx/heal.sh
+TimeoutStartSec=15min

@@ -35,8 +35,11 @@ COMPONENTS = {
     "opencode": ("OpenCode worker (pirx timer)", timedelta(hours=2), "check `systemctl --user status automated-opencode` as agent"),
     "health": ("This page (pirx timer)", timedelta(hours=1), "check `systemctl --user status automated-health` as agent"),
     "report": ("Daily report (07:45)", timedelta(hours=26), "check `systemctl --user status automated-report` as agent"),
+    "heal": ("Healer (pirx timer, every 30 min)", timedelta(hours=1), "check `systemctl --user status automated-heal` as agent"),
     "claude-run": ("Last Claude build run", None, None),
     "review": ("Last AI review", None, None),
+    "conflict": ("Last conflict resolver run", None, None),
+    "heal-diagnose": ("Last healer diagnosis (model)", None, None),
 }
 
 

@@ -3,7 +3,7 @@
 #   review-run.sh <pr> <model>
 # The reviewer model only writes a verdict (.agent/REVIEW.json); this script acts on it:
 #   approve + CI green (or no CI) + mergeable + not protected -> squash-merge, delete the branch
-#   approve + protected (changes the automation)            -> comment, the owner merges with one tap
+#   approve + protected (automation money/permission rules) -> comment, the owner merges with one tap
 #   changes  -> comment with the points, issue back to agent:todo (after 3 rounds: agent:blocked)
 #   blocked  -> comment, issue to agent:blocked
 # Red CI goes straight back to the builder, without a model call.
@@ -18,13 +18,14 @@ bash "$LOCK" claim "pr$pr" >/dev/null || { log "review #$pr: already claimed"; e
 
 info="$RUNTIME/state/review-$pr.json"
 gh pr view "$pr" --json number,title,body,headRefName,headRefOid,mergeable,statusCheckRollup,files,comments > "$info"
-read -r sha branch issue ci rounds prot <<<"$(python3 - "$info" "$RUNNER_DIR/agent" <<'EOF'
+read -r sha branch issue ci rounds prot auto money <<<"$(python3 - "$info" "$RUNNER_DIR/agent" <<'EOF'
 import json, sys
 sys.path.insert(0, sys.argv[2])
 import review_queue as rq
 pr = json.load(open(sys.argv[1]))
 a = rq.assess(pr, set())
-print(a["sha"], a["branch"], a["issue"] or 0, a["ci"], a["rounds"], "yes" if a["protected"] else "no")
+print(a["sha"], a["branch"], a["issue"] or 0, a["ci"], a["rounds"], "yes" if a["protected"] else "no",
+      "yes" if a["automation"] else "no", "yes" if a["money"] else "no")
 EOF
 )"
 mark="<!-- automated:review:$sha -->"
@@ -56,7 +57,7 @@ prompt="$(cat "$RUNNER_DIR/agent/review-prompt.md")
 ## This review
 - PR #$pr ($(json_get "$info" title)), head ${sha:0:7}, branch $branch
 - Linked issue: #$issue
-- CI: $ci$([[ "$prot" == yes ]] && echo "; this PR changes the automation itself, so be strict: the owner will merge it only on your approval")
+- CI: $ci$([[ "$prot" == yes ]] && echo "; this PR touches the automation's money or permission rules, so be strict: the owner merges it only on your approval")$([[ "$auto" == yes && "$prot" == no ]] && echo "; this PR changes the automation itself and is merged on your approval, so be strict: it must not weaken a budget gate, a permission or a check, and must keep the automation running")
 - Review round: $((rounds + 1)) of 3
 - You run on: $model"
 
@@ -115,8 +116,12 @@ Not merged yet: the branch conflicts with \`main\`. The conflict resolver merges
     elif [[ "$prot" == yes ]]; then
       gh pr comment "$pr" --body "$body
 
-This PR changes the automation itself, so it is not merged automatically: **owner, merge it with one tap.** $mark <!-- automated:needs-owner-merge -->" >/dev/null
-      status_update "PR #$pr approved by AI review; waits for the owner's merge (automation change)"
+This PR touches the automation's money or permission rules, so it is not merged automatically: **owner, merge it with one tap.** $mark <!-- automated:needs-owner-merge -->" >/dev/null
+      if [[ "$money" == yes ]]; then   # spending rules change: the one kind of PR the owner hears about
+        gh issue create --label owner:money --title "💰 Merge PR #$pr: it changes the spending limits" \
+          --body "PR #$pr changes \`agent/budget.py\` or \`agent/openrouter_budget.py\` (how much of the Claude plan or OpenRouter money the automation spends). The AI review approved it. Merge it if you agree, or close it; then close this issue." >/dev/null
+      fi
+      status_update "PR #$pr approved by AI review; waits for the owner's merge (money or permission rules)"
     elif [[ "$now" != "$sha MERGEABLE" ]]; then
       gh pr comment "$pr" --body "$body
 

@@ -1,0 +1,9 @@
+[Unit]
+Description=automated: check for owner:money issues every 15 minutes
+
+[Timer]
+OnCalendar=*:03,18,33,48
+Persistent=true
+
+[Install]
+WantedBy=timers.target
