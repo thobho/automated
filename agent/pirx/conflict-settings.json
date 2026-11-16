@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "defaultMode": "dontAsk",
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Bash",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Bash(sudo *)",
+      "Bash(su *)",
+      "Bash(git push *)",
+      "Bash(git push)",
+      "Bash(git rebase *)",
+      "Bash(git reset *)",
+      "Bash(git config *)",
+      "Bash(gh pr merge *)",
+      "Bash(gh api *)",
+      "Bash(gh repo *)",
+      "Bash(gh auth *)",
+      "Read(~/.claude/.credentials.json)",
+      "Read(~/.config/automated/**)",
+      "Read(~/.config/gh/**)",
+      "Read(~/.ssh/**)",
+      "Edit(~/.config/**)",
+      "Edit(~/.claude/**)",
+      "Edit(~/.ssh/**)",
+      "Edit(~/Projects/automated-work/runner/**)",
+      "WebSearch"
+    ]
+  }
+}

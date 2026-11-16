@@ -9,7 +9,6 @@ Permissions are an allowlist: you may edit files only inside your working copy, 
 ## 1. Start
 1. Swap labels: remove `agent:todo` (if present), add `agent:doing`: `gh issue edit <n> --remove-label agent:todo --add-label agent:doing`.
 2. If the branch already has commits or the issue has earlier comments, read them: an earlier run was interrupted, or the task came back from review. Continue from there instead of starting over.
-   **Back for a merge conflict** (the issue says `approved but conflicts with main`): `git fetch origin main && git merge origin/main`, resolve the conflicts keeping both sides' intent (for README or docs that usually means keeping both sections), run the project's tests and lint, push, and label the issue `agent:review`. Do not change anything else.
    **Back from AI review** (the PR has a comment starting `🔎 AI review … changes requested`, or the issue says `↩️ Back to the builder`): address every "Must change" point on the same branch, push, answer each point briefly in a PR comment, then label the issue `agent:review` again. The reviewer looks at the new commit automatically. Red CI means: fix CI first.
 3. Comment a short plan as a checklist (`- [ ] ...`). Always end it with `- [ ] Verified against the real system` and `- [ ] CI green`. Mention the model you run on.
 
