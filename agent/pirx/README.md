@@ -10,7 +10,7 @@ pirx (the always-on Linux box) builds the queue. Everything runs as the unprivil
 | `claude-run.sh` | pirx, `agent` (systemd-run, ≤3 h) | `start-claude-run.sh` | one issue; command allowlist (`claude-settings.json`) |
 | `opencode-worker.sh` | pirx, `agent` (timer `automated-opencode`) | hourly at :17 | OpenRouter gate (`agent/openrouter_budget.py`), per-task spend watchdog |
 | `review-run.sh` | pirx, `agent` (systemd-run, ≤1 h) | `start-claude-run.sh`, before any build | AI review on another model; merges approved PRs, protected ones wait for the owner |
-| `conflict-run.sh` | pirx, `agent` (systemd-run, ≤1 h) | `start-claude-run.sh`, before reviews | merges `main` into a conflicting PR; Claude resolves with wide permissions in the agent account (`conflict-settings.json`, no push), the script checks and pushes; 2 attempts (Sonnet, then Opus), then blocked |
+| `conflict-run.sh` | pirx, `agent` (systemd-run, ≤1 h) | `start-claude-run.sh`, before reviews | merges `main` into a conflicting PR; Claude resolves with wide permissions in the agent account (`conflict-settings.json`; its push deny is soft, the script's checks before its own push are the guarantee); 2 failed attempts in a row (Sonnet, then Opus), then blocked |
 | `daily_report.py` | pirx, `agent` (timer `automated-report`) | 07:45 Warsaw | posts a comment on the "📋 Daily report" issue |
 | `report-send.sh` | pirx, **owner's user** (timer `automated-report-send`) | 08:00 Warsaw | sends the WhatsApp part through Hermes (`hermes send`, no AI) |
 

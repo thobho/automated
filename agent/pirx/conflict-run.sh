@@ -6,10 +6,12 @@
 # 2. Otherwise a Claude run resolves the conflicts, runs the project's checks and commits the merge.
 #    It runs with wide permissions inside the agent account (agent/pirx/conflict-settings.json) but
 #    cannot push: this script checks the result and pushes it.
-# 3. Check: the merge is committed, origin/main is in the history, the old branch head is the first
-#    parent (no rewritten history) and no conflict markers are left. Then a normal push (never forced).
-# The new head commit then goes through the AI review as usual. Every attempt leaves a
-# <!-- automated:conflict-attempt --> comment; after 2 failed attempts the task is blocked.
+# 3. Check: the merge is committed, origin/main is in the history, the old branch head is still in it
+#    (no rewritten history) and no conflict markers are left. Then a normal push (never forced).
+# The new head commit then goes through the AI review as usual. A failed model attempt leaves
+# <!-- automated:conflict-failed -->, a success <!-- automated:conflict-resolved -->; 2 failures in a row
+# block the task. Infrastructure trouble (fetch, checkout, a branch that moved) does not count.
+# "No push" is enforced by this script's checks, not by the deny list alone (Bash is allowed broadly).
 set -uo pipefail
 source "$(dirname "$0")/common.sh"
 
@@ -30,7 +32,7 @@ print(a["sha"], a["branch"], a["issue"] or 0, a["conflict_attempts"], "yes" if a
 PYEOF
 )"
 [[ "$conflicting" == yes ]] || { log "conflict #$pr: no longer conflicting"; exit 0; }
-mark="<!-- automated:conflict-attempt -->"
+mark="<!-- automated:conflict-failed -->"
 runlog="$RUNTIME/logs/conflict-$pr-$(date -u +%Y%m%dT%H%M%SZ).jsonl"
 
 failed() {  # failed "<why>"
@@ -41,17 +43,20 @@ failed() {  # failed "<why>"
     [[ "$issue" -gt 0 ]] && gh issue comment "$issue" --body "🛑 PR #$pr conflicts with \`main\` and two resolver runs could not fix it ($1)." >/dev/null
     status_update "PR #$pr: conflict with main not resolved after 2 attempts (blocked)"
   else
-    gh pr comment "$pr" --body "🔀 Conflict with \`main\` not resolved ($1), attempt $n of 2; the next attempt runs on Opus. $mark" >/dev/null
+    gh pr comment "$pr" --body "🔀 Conflict with \`main\` not resolved ($1), attempt $n of 2; the next attempt runs on Opus (Sonnet if Opus has no budget headroom). $mark" >/dev/null
     status_update "PR #$pr: conflict resolver attempt $n failed ($1)"
   fi
   log "conflict #$pr: failed ($1)"; exit 0
 }
+retry_later() {  # retry_later "<why>": infrastructure trouble, not counted as an attempt
+  log "conflict #$pr: $1, retry next dispatch"; status_update "PR #$pr: conflict resolver could not start ($1); retries next hour"; exit 0
+}
 
-git -C "$REPO_ROOT" fetch -q origin main "$branch" || failed "fetch failed"
+git -C "$REPO_ROOT" fetch -q origin main "$branch" || retry_later "fetch failed"
 work="$(dirname "$RUNNER_DIR")/conflict-$pr"
 git -C "$REPO_ROOT" worktree remove --force "$work" >/dev/null 2>&1
-git -C "$REPO_ROOT" worktree add -q --detach "$work" "$sha" || failed "checkout failed"
-cd "$work" || failed "no working copy"
+git -C "$REPO_ROOT" worktree add -q --detach "$work" "$sha" || retry_later "checkout failed"
+cd "$work" || retry_later "no working copy"
 git -c user.name=automated -c user.email=automated@pirx merge --no-edit origin/main >/dev/null 2>&1
 how="a clean merge, no model needed"
 
@@ -75,9 +80,9 @@ beat conflict
 git merge-base --is-ancestor origin/main HEAD || failed "main is not in the result"
 git merge-base --is-ancestor "$sha" HEAD || failed "the branch history was rewritten"
 git grep -qnE '^(<<<<<<<|>>>>>>>) ' HEAD && failed "conflict markers left"
-git push -q origin "HEAD:refs/heads/$branch" 2>>"$runlog" || failed "push rejected (the branch moved?)"
+git push -q origin "HEAD:refs/heads/$branch" 2>>"$runlog" || retry_later "push rejected (the branch moved?)"
 
 new="$(git rev-parse --short HEAD)"
-gh pr comment "$pr" --body "🔀 Merged \`main\` into this branch ($how). New head \`$new\`; the AI review looks at it next. $mark" >/dev/null
+gh pr comment "$pr" --body "🔀 Merged \`main\` into this branch ($how). New head \`$new\`; the AI review looks at it next. <!-- automated:conflict-resolved -->" >/dev/null
 log "conflict #$pr: resolved ($new)"; status_update "PR #$pr: conflict with main resolved ($how)"
 exit 0
