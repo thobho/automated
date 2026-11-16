@@ -78,10 +78,10 @@ for line in open(sys.argv[1], errors="replace"):
         continue
     if d.get("type") == "result":
         result = d.get("result") or ""
-blocks = re.findall(r"```json\s*(\{.*?\})\s*```", result, re.S)
+blocks = re.findall(r"```json\s*(.*?)```", result, re.S)
 if not blocks:
     sys.exit(1)
-print(json.dumps(json.loads(blocks[-1])))
+print(json.dumps(json.loads(blocks[-1].strip())))
 PYEOF
   rm -f "$verdict_file.tmp"
 fi
