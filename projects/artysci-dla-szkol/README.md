@@ -60,6 +60,34 @@ Without `make`: `podman compose -f compose.yaml --profile lite up -d`.
 The `full` web container runs `config.settings.prod`, so over plain HTTP the admin login cookies
 are `Secure`-only; `/healthz` and `/readyz` work as usual.
 
+## Dev instance on pirx
+
+Reachable from the home network, plain HTTP, **never public** (D55), synthetic data only (D57).
+
+| What | URL / place |
+|---|---|
+| Web (gunicorn, 2 workers) | `http://192.168.68.62:8100/` (`/healthz`, `/readyz`) |
+| Public media origin | `http://192.168.68.62:8101/` |
+| Postgres, Mailpit | `127.0.0.1` only (54320, SMTP 12025, UI 18025); all mail goes to Mailpit |
+| Logs (rotated hourly at 5 MB, 5 files) | `~/runtime/artysci-dla-szkol/logs/{web,worker,media}.log` |
+| Config (secrets, outside the repo) | `~/.config/artysci-dla-szkol/pirx.env` (template: `deploy/pirx/pirx.env.example`) |
+
+Settings: `config.settings.pirx` = prod without TLS-only parts (no Secure/`__Host-` cookies, no
+HTTPS redirect or HSTS; `/static/` served by the app). The AI uses only the dev key with a low
+limit (`ANTHROPIC_API_KEY` in `pirx.env`, unset until needed).
+
+systemd user units (`deploy/pirx/ads-*.service`): `ads-lite` (Postgres + Mailpit containers),
+`ads-web`, `ads-worker`, `ads-media`, `ads-logrotate.timer`. Restart on failure, enabled at boot
+(needs `loginctl enable-linger agent`).
+
+- One-time setup, owner (needs root once: `deploy/pirx/root-setup.sh` via the sudo queue, see
+  `scripts/SUDO-QUEUE.md`). Then, in a dedicated clone, e.g. `~/runtime/artysci-dla-szkol/app`:
+  `cd projects/artysci-dla-szkol && make install-units-pirx`.
+- Update: `make deploy-pirx` (`DEPLOY_REF=main` by default): fetch + fast-forward, `uv sync --frozen`,
+  migrate, collectstatic, restart units, smoke test (`/healthz`, `/`, `/readyz`, a static file, a
+  `core.ping` job processed by the worker). Run just the smoke test with `make smoke-pirx`.
+- Status: `systemctl --user status ads-web ads-worker`; logs: `tail -f ~/runtime/artysci-dla-szkol/logs/web.log`.
+
 ## Tests and lint
 
 ```bash

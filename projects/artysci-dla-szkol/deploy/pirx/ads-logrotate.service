@@ -1,0 +1,6 @@
+[Unit]
+Description=artysci dev: rotate logs
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 @PROJECT@/deploy/pirx/rotate_logs.py %h/runtime/artysci-dla-szkol/logs

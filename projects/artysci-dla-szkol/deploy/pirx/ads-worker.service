@@ -1,0 +1,17 @@
+[Unit]
+Description=artysci dev: background job worker (Procrastinate)
+Wants=ads-lite.service
+After=ads-lite.service
+StartLimitIntervalSec=0
+
+[Service]
+WorkingDirectory=@PROJECT@
+EnvironmentFile=%h/.config/artysci-dla-szkol/pirx.env
+ExecStart=@UV@ run --frozen --no-dev python manage.py worker
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:%h/runtime/artysci-dla-szkol/logs/worker.log
+StandardError=append:%h/runtime/artysci-dla-szkol/logs/worker.log
+
+[Install]
+WantedBy=default.target

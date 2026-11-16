@@ -1,0 +1,15 @@
+[Unit]
+Description=artysci dev: Postgres and Mailpit containers (127.0.0.1 only)
+After=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=@PROJECT@
+EnvironmentFile=%h/.config/artysci-dla-szkol/pirx.env
+ExecStart=/usr/bin/podman compose --profile lite up -d
+ExecStop=/usr/bin/podman compose --profile lite stop
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
