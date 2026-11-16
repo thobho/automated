@@ -94,6 +94,15 @@ case "$verdict" in
 
 This PR changes the automation itself, so it is not merged automatically: **owner, merge it with one tap.** $mark <!-- automated:needs-owner-merge -->" >/dev/null
       status_update "PR #$pr approved by AI review; waits for the owner's merge (automation change)"
+    elif [[ "$now" == "$sha CONFLICTING" ]]; then
+      gh pr comment "$pr" --body "$body
+
+Not merged: the branch conflicts with \`main\`. Sent back to the builder to merge \`main\`; this does not use a review round. $mark" >/dev/null
+      if [[ "$issue" -gt 0 ]]; then
+        gh issue edit "$issue" --remove-label agent:review --add-label agent:todo >/dev/null
+        gh issue comment "$issue" --body "↩️ Back to the builder: PR #$pr is approved but conflicts with \`main\`. Merge \`origin/main\` into the branch, resolve conflicts keeping both sides' intent, run the checks, push, then label \`agent:review\` again." >/dev/null
+      fi
+      log "review #$pr: approved but conflicting, back to builder"; status_update "PR #$pr approved but conflicts with main; sent back to the builder"
     elif [[ "$now" != "$sha MERGEABLE" ]]; then
       gh pr comment "$pr" --body "$body
 

@@ -117,6 +117,23 @@ def recent_events(now, hours=24):
     return events
 
 
+STUCK_AFTER = timedelta(hours=float(os.environ.get("AGENT_STUCK_HOURS", 3)))
+
+
+def stuck(issues, now):
+    """Issues in agent:doing or agent:review with no activity for STUCK_AFTER: nobody is moving them."""
+    out = []
+    for i in issues:
+        names = {l["name"] for l in i["labels"]}
+        state = next((s for s in ("doing", "review") if f"agent:{s}" in names), None)
+        if not state:
+            continue
+        updated = datetime.fromisoformat(i["updated_at"].replace("Z", "+00:00")).timestamp()
+        if now - updated > STUCK_AFTER.total_seconds():
+            out.append(f"#{i['number']} {i['title']}: stuck in {state} for {ago(now - updated).replace(' ago', '')} with no activity")
+    return out
+
+
 def render(now):
     beat_rows, late, late_keys = heartbeats(now)
     events = recent_events(now)
@@ -142,6 +159,7 @@ def render(now):
 
     problems = late + [f"Failed systemd unit: `{u}`" for u in units]
     problems += [f"#{i['number']} {i['title']}: blocked, needs your answer" for i in blocked]
+    problems += stuck(issues, now)
     problems += [f"PR #{p['number']} {p['title']}: CI is red" for p in red]
     problems += [f"{datetime.fromisoformat(ts.replace('Z', '+00:00')).astimezone(TZ):%a %H:%M} {n}" for ts, n in errors[-8:]]
 
