@@ -14,8 +14,9 @@ by Opus is reviewed by Sonnet. The reviewer is always a separate run from the bu
 
 A PR that conflicts with main is not reviewed: it goes to the conflict resolver first
 (agent/pirx/conflict-run.sh), which merges main into the branch and pushes; the new head commit is
-then reviewed as usual. Each attempt leaves `<!-- automated:conflict-attempt -->`; after
-MAX_CONFLICT_ATTEMPTS failed attempts the task is blocked. Attempt 1 runs on Sonnet, later ones on Opus.
+then reviewed as usual. A failed attempt leaves `<!-- automated:conflict-failed -->`, a success
+`<!-- automated:conflict-resolved -->`; only failures since the last success count. After
+MAX_CONFLICT_ATTEMPTS failures in a row the task is blocked. Attempt 1 runs on Sonnet, the next on Opus.
 
 Automation PRs (they change `agent/`, `scripts/`, `.github/` except a project's `<project>-ci.yml`,
 or files in the repo root) are reviewed by Opus only, never a fallback, and merged on approval like
@@ -38,7 +39,8 @@ CLOSES = re.compile(r"\b(?:closes|fixes|resolves)\s+#(\d+)", re.IGNORECASE)
 PROJECT_CI = re.compile(r"^\.github/workflows/[a-z0-9-]+-ci\.ya?ml$")
 REVIEW_MARK = "<!-- automated:review:{sha} -->"
 CHANGES_MARK = "<!-- automated:review-changes -->"
-CONFLICT_MARK = "<!-- automated:conflict-attempt -->"
+CONFLICT_FAILED = "<!-- automated:conflict-failed -->"
+CONFLICT_RESOLVED = "<!-- automated:conflict-resolved -->"
 MAX_CONFLICT_ATTEMPTS = 2
 WITH_BUILDER = {"agent:todo", "agent:doing", "agent:blocked"}
 
@@ -105,7 +107,8 @@ def assess(pr, issue_labels):
     paths = [f["path"] for f in pr.get("files") or []]
     preferred, fallback = review_model(issue_labels, paths)
     conflicting = pr.get("mergeable") == "CONFLICTING"
-    attempts = sum(CONFLICT_MARK in b for b in bodies)
+    since = max((i for i, b in enumerate(bodies) if CONFLICT_RESOLVED in b), default=-1)
+    attempts = sum(CONFLICT_FAILED in b for b in bodies[since + 1:])
     with_builder = bool(issue_labels & WITH_BUILDER)
     return {
         "pr": pr["number"],
