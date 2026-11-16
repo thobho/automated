@@ -1,0 +1,9 @@
+[Unit]
+Description=automated: hourly dispatcher (reads Claude plan limits on pirx, starts a review or a build)
+After=network-online.target
+
+[Service]
+Type=oneshot
+Environment=HOME=%h
+ExecStart=/bin/bash %h/Projects/automated-work/runner/agent/pirx/dispatch.sh
+TimeoutStartSec=10min
