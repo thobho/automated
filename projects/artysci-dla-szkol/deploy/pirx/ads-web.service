@@ -1,0 +1,17 @@
+[Unit]
+Description=artysci dev: web (gunicorn, 2 workers, LAN port 8100)
+Wants=ads-lite.service
+After=ads-lite.service
+StartLimitIntervalSec=0
+
+[Service]
+WorkingDirectory=@PROJECT@
+EnvironmentFile=%h/.config/artysci-dla-szkol/pirx.env
+ExecStart=@UV@ run --frozen --no-dev gunicorn config.wsgi:application --bind 0.0.0.0:8100 --workers 2
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:%h/runtime/artysci-dla-szkol/logs/web.log
+StandardError=append:%h/runtime/artysci-dla-szkol/logs/web.log
+
+[Install]
+WantedBy=default.target

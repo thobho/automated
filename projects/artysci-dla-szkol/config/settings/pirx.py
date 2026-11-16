@@ -1,0 +1,20 @@
+"""Dev instance on pirx (LAN, plain HTTP, no proxy, synthetic data only: D55, D57).
+
+Prod with the TLS-only parts turned off: browsers drop `Secure` and `__Host-` cookies over plain
+HTTP, so login would break. Never use this module on a public host. Everything else (required
+env vars, storage, logging) is inherited from prod.
+"""
+
+from .prod import *  # noqa: F403
+
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_NAME = "sessionid"
+CSRF_COOKIE_NAME = "csrftoken"
+
+SECURE_SSL_REDIRECT = False
+SECURE_HSTS_SECONDS = 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+
+# No reverse proxy and no whitenoise here: the app serves collectstatic output itself (urls.py).
+SERVE_STATIC = True
