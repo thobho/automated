@@ -24,4 +24,6 @@ Write your verdict as JSON to `.agent/REVIEW.json` (create the folder; it is ign
  "notes": ["optional minor suggestions"],
  "checked": ["what you verified, e.g. ran pytest: 42 passed"]}
 ```
-`points` must be empty for `approve` and non-empty for `changes` and `blocked`. Then end the run.
+`points` must be empty for `approve` and non-empty for `changes` and `blocked`.
+
+Also end your final reply with the same JSON in a ```json code block (the runner reads it from there if the file could not be written). Then end the run.

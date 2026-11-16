@@ -4,7 +4,8 @@
 A PR needs a review when:
   - its branch is `agent/...` (task PRs) or `agent-setup/...` (automation PRs),
   - its CI has finished (green or red; a PR without checks counts as finished),
-  - there is no review comment yet for its current head commit
+  - there is no review comment yet for its current head commit, and
+  - its linked issue is not back with the builder (`agent:todo`, `agent:doing` or `agent:blocked`),
     (`<!-- automated:review:<sha> -->`, written by agent/pirx/review-run.sh).
 
 Model: security work (`area:security` on the linked issue) is always reviewed by Opus, never a fallback.
@@ -88,7 +89,8 @@ def assess(pr, issue_labels):
         "protected": protected(paths),
         "model": preferred,
         "fallback": fallback,
-        "needs_review": not reviewed and ci != "running" and not pr.get("isDraft"),
+        "needs_review": not reviewed and ci != "running" and not pr.get("isDraft")
+                        and not (issue_labels & {"agent:todo", "agent:doing", "agent:blocked"}),
     }
 
 
