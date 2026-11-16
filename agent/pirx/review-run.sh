@@ -67,6 +67,24 @@ log "review #$pr: starts ($model, ${sha:0:7}, protected $prot)"
 
 beat review
 verdict_file="$work/.agent/REVIEW.json"
+if [[ ! -s "$verdict_file" ]]; then   # fallback: the ```json block at the end of the reviewer's final reply
+  python3 - "$runlog" > "$verdict_file.tmp" <<'PYEOF' && mv "$verdict_file.tmp" "$verdict_file"
+import json, re, sys
+result = ""
+for line in open(sys.argv[1], errors="replace"):
+    try:
+        d = json.loads(line)
+    except ValueError:
+        continue
+    if d.get("type") == "result":
+        result = d.get("result") or ""
+blocks = re.findall(r"```json\s*(\{.*?\})\s*```", result, re.S)
+if not blocks:
+    sys.exit(1)
+print(json.dumps(json.loads(blocks[-1])))
+PYEOF
+  rm -f "$verdict_file.tmp"
+fi
 if ! python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["verdict"] in ("approve","changes","blocked")' "$verdict_file" 2>/dev/null; then
   log "review #$pr: no valid verdict"; status_update "Review of PR #$pr ended without a verdict (log $runlog)"; exit 0
 fi

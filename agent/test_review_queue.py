@@ -41,6 +41,13 @@ class Assess(unittest.TestCase):
         self.assertTrue(a["needs_review"])
 
 
+class BackWithBuilder(unittest.TestCase):
+    def test_task_sent_back_is_not_reviewed_again(self):
+        for state in ("agent:todo", "agent:doing", "agent:blocked"):
+            self.assertFalse(rq.assess(pr(1), {state})["needs_review"], state)
+        self.assertTrue(rq.assess(pr(1), {"agent:review"})["needs_review"])
+
+
 class Protected(unittest.TestCase):
     def test_automation_paths_are_protected(self):
         self.assertEqual(rq.protected(["agent/budget.py", "scripts/x.sh", ".github/workflows/deploy-pages.yml",
