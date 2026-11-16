@@ -1,0 +1,10 @@
+[Unit]
+Description=automated: hourly dispatcher at :07
+
+[Timer]
+OnCalendar=*-*-* *:07:00
+RandomizedDelaySec=60
+Persistent=false
+
+[Install]
+WantedBy=timers.target

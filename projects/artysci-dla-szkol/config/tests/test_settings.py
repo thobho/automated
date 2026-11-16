@@ -14,6 +14,7 @@ PROD_VARS = {
     "DJANGO_SECRET_KEY": "x" * 50,
     "DJANGO_ALLOWED_HOSTS": "example.pl, www.example.pl",
     "DATABASE_URL": "postgres://u:p@db.example:5432/app",
+    "MEDIA_PUBLIC_BASE_URL": "https://media.example.pl/",
 }
 
 
@@ -100,6 +101,7 @@ def test_check_deploy_is_clean_with_prod_settings():
         "DJANGO_SECRET_KEY": "test-only-not-a-secret-" + "abcdefghij" * 3,
         "DJANGO_ALLOWED_HOSTS": "artysci.example",
         "DATABASE_URL": PROD_VARS["DATABASE_URL"],
+        "MEDIA_PUBLIC_BASE_URL": PROD_VARS["MEDIA_PUBLIC_BASE_URL"],
     }
     result = subprocess.run(  # noqa: S603 - fixed argv, no shell
         [sys.executable, "manage.py", "check", "--deploy", "--fail-level", "WARNING"],

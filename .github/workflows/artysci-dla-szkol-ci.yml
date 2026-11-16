@@ -1,0 +1,214 @@
+name: artysci-dla-szkol CI
+
+on:
+  pull_request:
+    paths:
+      - 'projects/artysci-dla-szkol/**'
+      - '.github/workflows/artysci-dla-szkol-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'projects/artysci-dla-szkol/**'
+      - '.github/workflows/artysci-dla-szkol-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: artysci-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: projects/artysci-dla-szkol
+
+env:
+  UV_FROZEN: '1'
+  # Dev-only MinIO credentials for the throwaway CI service; not secrets.
+  MINIO_ROOT_USER: artysci
+  MINIO_ROOT_PASSWORD: artysci-minio-ci
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
+      - run: uv sync
+      - run: uv run ruff check --output-format=github .
+      - run: uv run ruff format --check .
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: artysci
+          POSTGRES_PASSWORD: artysci
+          POSTGRES_DB: artysci
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U artysci" --health-interval 5s
+          --health-timeout 5s --health-retries 10
+      minio:
+        image: bitnamilegacy/minio:latest
+        env:
+          MINIO_ROOT_USER: artysci
+          MINIO_ROOT_PASSWORD: artysci-minio-ci
+        ports: ['9000:9000']
+    env:
+      DATABASE_URL: postgres://artysci:artysci@127.0.0.1:5432/artysci
+      S3_ENDPOINT_URL: http://127.0.0.1:9000
+      S3_ACCESS_KEY_ID: artysci
+      S3_SECRET_ACCESS_KEY: artysci-minio-ci
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
+      - run: uv sync
+      - name: Wait for MinIO
+        run: |
+          for i in $(seq 1 60); do
+            curl -fs http://127.0.0.1:9000/minio/health/live && exit 0
+            sleep 1
+          done
+          echo "MinIO did not start"; exit 1
+      - name: Migrations are up to date
+        run: uv run python manage.py makemigrations --check --dry-run
+      - name: pytest (PostgreSQL 17 + MinIO)
+        run: uv run pytest -ra --cov --cov-report=xml --cov-report=term
+      - name: Coverage on changed code >= 85%
+        if: github.event_name == 'pull_request'
+        run: >-
+          uvx diff-cover coverage.xml
+          --compare-branch=origin/${{ github.base_ref }}
+          --fail-under=85
+
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
+      - name: pip-audit (locked dependencies)
+        run: |
+          uv export --no-emit-project --format requirements-txt > "$RUNNER_TEMP/requirements.txt"
+          uvx pip-audit --strict --disable-pip -r "$RUNNER_TEMP/requirements.txt"
+      - name: bandit
+        run: uvx bandit -ll -r apps config -x '*/tests/*,*/migrations/*'
+      - name: gitleaks (commits in this change)
+        working-directory: .
+        run: |
+          docker run --rm -v "$PWD:/repo" ghcr.io/gitleaks/gitleaks:v8.24.3 \
+            git /repo --redact --verbose --log-opts="${{ github.event_name == 'pull_request'
+              && format('{0}..{1}', github.event.pull_request.base.sha, github.event.pull_request.head.sha)
+              || format('{0}~1..{0}', github.sha) }}"
+
+  image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: projects/artysci-dla-szkol
+          platforms: linux/amd64,linux/arm64
+          push: false
+          cache-from: type=gha,scope=artysci
+          cache-to: type=gha,mode=max,scope=artysci
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: artysci
+          POSTGRES_PASSWORD: artysci
+          POSTGRES_DB: artysci
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U artysci" --health-interval 5s
+          --health-timeout 5s --health-retries 10
+      minio:
+        image: bitnamilegacy/minio:latest
+        env:
+          MINIO_ROOT_USER: artysci
+          MINIO_ROOT_PASSWORD: artysci-minio-ci
+        ports: ['9000:9000']
+    env:
+      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DATABASE_URL: postgres://artysci:artysci@127.0.0.1:5432/artysci
+      S3_ENDPOINT_URL: http://127.0.0.1:9000
+      S3_ACCESS_KEY_ID: artysci
+      S3_SECRET_ACCESS_KEY: artysci-minio-ci
+      E2E_SCREENSHOT_DIR: ${{ github.workspace }}/e2e-screenshots
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
+      - run: uv sync --group e2e
+      - name: Wait for MinIO
+        run: |
+          for i in $(seq 1 60); do
+            curl -fs http://127.0.0.1:9000/minio/health/live && exit 0
+            sleep 1
+          done
+          echo "MinIO did not start"; exit 1
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('projects/artysci-dla-szkol/uv.lock') }}
+      - name: Install Chromium
+        run: |
+          if [ "${{ steps.pw-cache.outputs.cache-hit }}" = "true" ]; then
+            uv run playwright install-deps chromium
+          else
+            uv run playwright install --with-deps chromium
+          fi
+      - name: Start the app
+        run: |
+          uv run python manage.py migrate --noinput
+          nohup uv run python manage.py runserver 127.0.0.1:8000 --noreload \
+            > "$RUNNER_TEMP/server.log" 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fs http://127.0.0.1:8000/healthz && exit 0
+            sleep 1
+          done
+          cat "$RUNNER_TEMP/server.log"; exit 1
+      - name: Playwright smoke + axe
+        run: >-
+          uv run pytest tests/e2e -ra -o addopts=--strict-markers
+          --base-url http://127.0.0.1:8000 --browser chromium
+      - name: Server log
+        if: failure()
+        run: cat "$RUNNER_TEMP/server.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e2e-screenshots
+          path: e2e-screenshots/
+          if-no-files-found: warn

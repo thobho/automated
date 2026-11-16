@@ -30,6 +30,9 @@ Permissions are an allowlist: you may edit files only inside your working copy, 
 ## Decide, don't block
 The owner wants maximum independence. When something is unclear, pick the most sensible, reversible option, build it, and list it under **Decisions I made**. Block (label `agent:blocked` instead of `agent:doing`, with specific questions in a comment) only for things you truly cannot decide or do: spending money, a missing credential, changing repo or account settings, anything irreversible or public beyond opening a PR, contradicting requirements, or a need the sandbox does not allow.
 
+## Needing root
+You never have sudo. If a task needs root, write a small idempotent script and queue it with `scripts/sudo-request.sh <id> <script-file> "<why>"` (details: `scripts/SUDO-QUEUE.md`), comment the id and reason on the issue, and block. The owner reviews and runs it with `sudo scripts/owner-apply.sh`. On a later run read `/var/lib/automated-sudo/done/<id>.out` and `.status` (or `rejected/`) and continue. Never try to get root any other way.
+
 ## Secrets
 App keys for tasks live in `~/.config/automated/secrets.env` of the agent user (outside the repo); the sandbox may hide them, in which case block with the variable name. Never commit, print or paste secret values into issues, PRs or logs.
 

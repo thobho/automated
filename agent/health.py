@@ -30,8 +30,8 @@ ERROR_WORDS = re.compile(r"fail|error|without a verdict|without a PR|rejected|ti
 
 # component -> (what it is, how often it should run, a hint when it is late)
 COMPONENTS = {
-    "dispatcher": ("Mac dispatcher → pirx (Claude runs)", timedelta(hours=2),
-                   "the Mac is asleep or the Claude app is closed; Claude runs pause, OpenCode continues"),
+    "dispatcher": ("Dispatcher (pirx timer, Claude runs)", timedelta(hours=2),
+                   "check `systemctl --user status automated-dispatch` as agent, and that the agent's Claude login is valid"),
     "opencode": ("OpenCode worker (pirx timer)", timedelta(hours=2), "check `systemctl --user status automated-opencode` as agent"),
     "health": ("This page (pirx timer)", timedelta(hours=1), "check `systemctl --user status automated-health` as agent"),
     "report": ("Daily report (07:45)", timedelta(hours=26), "check `systemctl --user status automated-report` as agent"),
@@ -148,7 +148,7 @@ def render(now):
     if "opencode" in late_keys or units:
         verdict = "🔴 **Not working on pirx**: its timers are not running (see below)."
     elif "dispatcher" in late_keys:
-        verdict = "🟡 **Claude runs paused**: the Mac dispatcher has not checked in (Mac asleep or Claude app closed)."
+        verdict = "🟡 **Claude runs paused**: the dispatcher on pirx has not checked in (see below)."
     elif problems:
         verdict = f"🟡 **Needs attention**: {len(problems)} item(s) below."
     else:

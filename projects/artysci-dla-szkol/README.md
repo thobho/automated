@@ -1,5 +1,7 @@
 # Artyści dla szkół
 
+[![CI](https://github.com/thobho/automated/actions/workflows/artysci-dla-szkol-ci.yml/badge.svg)](https://github.com/thobho/automated/actions/workflows/artysci-dla-szkol-ci.yml)
+
 A Polish web service that connects **artists** (musicians, actors, educators, workshop leaders)
 with **schools and other institutions** that want to invite them. Artists get a generated public
 page and appear in a searchable catalog; institutions send inquiries or post notices that artists
@@ -57,6 +59,34 @@ State (database, MinIO data) lives outside the repo in `ARTYSCI_STATE_DIR`, defa
 Without `make`: `podman compose -f compose.yaml --profile lite up -d`.
 The `full` web container runs `config.settings.prod`, so over plain HTTP the admin login cookies
 are `Secure`-only; `/healthz` and `/readyz` work as usual.
+
+## Dev instance on pirx
+
+Reachable from the home network, plain HTTP, **never public** (D55), synthetic data only (D57).
+
+| What | URL / place |
+|---|---|
+| Web (gunicorn, 2 workers) | `http://192.168.68.62:8100/` (`/healthz`, `/readyz`) |
+| Public media origin | `http://192.168.68.62:8101/` |
+| Postgres, Mailpit | `127.0.0.1` only (54320, SMTP 12025, UI 18025); all mail goes to Mailpit |
+| Logs (rotated hourly at 5 MB, 5 files) | `~/runtime/artysci-dla-szkol/logs/{web,worker,media}.log` |
+| Config (secrets, outside the repo) | `~/.config/artysci-dla-szkol/pirx.env` (template: `deploy/pirx/pirx.env.example`) |
+
+Settings: `config.settings.pirx` = prod without TLS-only parts (no Secure/`__Host-` cookies, no
+HTTPS redirect or HSTS; `/static/` served by the app). The AI uses only the dev key with a low
+limit (`ANTHROPIC_API_KEY` in `pirx.env`, unset until needed).
+
+systemd user units (`deploy/pirx/ads-*.service`): `ads-lite` (Postgres + Mailpit containers),
+`ads-web`, `ads-worker`, `ads-media`, `ads-logrotate.timer`. Restart on failure, enabled at boot
+(needs `loginctl enable-linger agent`).
+
+- One-time setup, owner (needs root once: `deploy/pirx/root-setup.sh` via the sudo queue, see
+  `scripts/SUDO-QUEUE.md`). Then, in a dedicated clone, e.g. `~/runtime/artysci-dla-szkol/app`:
+  `cd projects/artysci-dla-szkol && make install-units-pirx`.
+- Update: `make deploy-pirx` (`DEPLOY_REF=main` by default): fetch + fast-forward, `uv sync --frozen`,
+  migrate, collectstatic, restart units, smoke test (`/healthz`, `/`, `/readyz`, a static file, a
+  `core.ping` job processed by the worker). Run just the smoke test with `make smoke-pirx`.
+- Status: `systemctl --user status ads-web ads-worker`; logs: `tail -f ~/runtime/artysci-dla-szkol/logs/web.log`.
 
 ## Tests and lint
 
@@ -154,10 +184,50 @@ result = ai.complete(
   makes one real, tiny call (synthetic prompt, well under $0.001) and prints the `AICall` row.
 - Only artists' marketing materials go to AI; never messages, inquiries or contact data.
 
+## File storage
+
+One API (`apps/core/media.py`, `apps/core/uploads.py`), two backends chosen by `STORAGE_BACKEND`:
+`filesystem` (default; lean pirx, tests) or `s3` (`django-storages`; MinIO in Compose `full` and CI,
+any S3-compatible service later). Two storages: **private** (originals, documents) and **public**
+(processed images, video).
+
+- Store: `uploads.store_upload(file, kind="photo"|"video"|"audio"|"pdf", visibility="private"|"public")`.
+  It enforces the size limit (photo 15 MB, video 500 MB, audio 50 MB, PDF 20 MB), sniffs the
+  content type from magic bytes (the name is ignored), uses a random key and re-encodes images
+  without EXIF/GPS. Failures raise `UploadRejected(code, message)`.
+- Private files: only `media.signed_url(key, expires=...)` (default `MEDIA_SIGNED_URL_TTL`, 300 s).
+  S3: presigned bucket URL. Filesystem: a signed token served by `/media/private/<token>` as an
+  attachment with `nosniff` and a sandbox CSP.
+- Public files: `media.public_url(key)`, always under `MEDIA_PUBLIC_BASE_URL`, a different origin
+  from the app (prod requires it). Filesystem backend: `make media` (or
+  `manage.py serve_public_media --port 8101`) serves `MEDIA_PUBLIC_ROOT` there.
+- S3: `manage.py ensure_buckets` creates both buckets (public one gets anonymous read); Compose
+  `full` runs it at web start-up. Run the suite against MinIO by setting `S3_*` (see
+  `.env.example`) and `S3_ENDPOINT_URL`; without it the S3-parametrised tests are skipped.
+- Not covered yet: video transcoding and image variants (E2), virus scanning (later).
+
+## Analytics (events and visits)
+
+App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
+
+- **Events:** `services.track("inquiry_sent", actor=user, obj=inquiry, inquiry_id=1)`. Only names
+  and properties listed in `apps/analytics/catalog.py` are accepted; anything else raises
+  `UnknownEvent` / `DisallowedProperty`. The actor is stored as an HMAC pseudonym, the object as
+  type and id. To add an event, extend the catalog, emit it from the feature's service, and move
+  it from `PENDING` to `EMITTERS` in `tests/test_events.py`.
+- **Visits:** `VisitMiddleware` counts successful HTML `GET` views per path and day in `Visit`
+  (one row per day, path and visitor hash, with a view counter). The visitor hash is
+  HMAC-SHA256 of IP + user agent under a random per-day salt (`DailySalt`); salts of earlier
+  days are deleted on first use of a new day, so old hashes cannot be recomputed. Excluded:
+  bots and empty user agents, `/healthz`, `/readyz`, `/static/`, `/django-admin/`.
+- Unique visitors for a day and path = `Visit.objects.filter(day=..., path=...).count()`.
+  Dashboards come later (E10).
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python
 3.13, Django 5.2 LTS, PostgreSQL 17, HTMX, uv), D91 (hosting not decided, stay provider-neutral).
+Added with T06: `django-storages[s3]` (+ boto3) for the S3 backend, `Pillow` for EXIF stripping.
 Added with T05: `procrastinate[django]` as the job queue (on PostgreSQL, no extra service).
 Added with T04: no new dependency for security (own CSP middleware, own JSON formatter and
 cache-based login throttle instead of django-csp, python-json-logger and django-axes); D61

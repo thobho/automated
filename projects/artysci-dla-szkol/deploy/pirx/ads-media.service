@@ -1,0 +1,15 @@
+[Unit]
+Description=artysci dev: public media origin (LAN port 8101)
+StartLimitIntervalSec=0
+
+[Service]
+WorkingDirectory=@PROJECT@
+EnvironmentFile=%h/.config/artysci-dla-szkol/pirx.env
+ExecStart=@UV@ run --frozen --no-dev python manage.py serve_public_media --host 0.0.0.0 --port 8101
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:%h/runtime/artysci-dla-szkol/logs/media.log
+StandardError=append:%h/runtime/artysci-dla-szkol/logs/media.log
+
+[Install]
+WantedBy=default.target

@@ -24,7 +24,10 @@ def test_ping_end_to_end_and_idempotency():
     assert jobs.enqueue(tasks.ping, idempotency_key="pg-1", token="pg") is None
     run_worker()
     assert PingRecord.objects.filter(token="pg").count() == 1
-    assert list(ProcrastinateJob.objects.values_list("status", flat=True)) == ["succeeded"]
+    # Scope to this test's job: Procrastinate writes over its own connection, so jobs deferred
+    # by earlier tests are not rolled back and may still be in the table.
+    mine = ProcrastinateJob.objects.filter(task_name="core.ping", args__token="pg")
+    assert list(mine.values_list("status", flat=True)) == ["succeeded"]
 
 
 def test_jobs_admin_page_lists_jobs(client):

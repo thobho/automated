@@ -6,6 +6,7 @@ Hosting is not decided (D91): nothing here assumes a provider.
 from .base import *  # noqa: F403
 from .base import DATABASE_CONN_MAX_AGE
 from .env import env, require
+from .storage import build_storages
 
 _MODULE = "config.settings.prod"
 
@@ -25,6 +26,16 @@ EMAIL_BACKEND = env.str(
 # Real AI in prod. OPENROUTER_API_KEY is checked when the first AI call is made (no feature
 # uses AI before E2), so startup does not require it yet.
 AI_CLIENT = env.str("AI_CLIENT", default="openrouter")
+
+# Public media must come from its own origin, never the app's: no localhost default in prod.
+MEDIA_PUBLIC_BASE_URL = require("MEDIA_PUBLIC_BASE_URL", _MODULE)
+STORAGES = build_storages(
+    STORAGE_BACKEND,  # noqa: F405
+    public_base_url=MEDIA_PUBLIC_BASE_URL,
+    private_root=MEDIA_PRIVATE_ROOT,  # noqa: F405
+    public_root=MEDIA_PUBLIC_ROOT,  # noqa: F405
+    signed_url_ttl=MEDIA_SIGNED_URL_TTL,  # noqa: F405
+)
 
 # TLS and cookies (SECURITY.md). `check --deploy --fail-level WARNING` is clean with these.
 SESSION_COOKIE_SECURE = True
