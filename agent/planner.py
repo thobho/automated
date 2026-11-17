@@ -25,6 +25,7 @@ Usage:
   agent/planner.py                   the same, one line
 Exit code is 0 only when the action is PLAN, so shell code can `if planner.py --json > f; then`.
 State (last plan time) lives in $AUTOMATED_RUNTIME/state/planner.json; `--mark-planned` updates it.
+  agent/planner.py --format-stories <decision.json> [--ids]   the prompt's story lines (or the ids) for planner-run.sh
 """
 import glob
 import json
@@ -131,6 +132,15 @@ def decide(stories, planned, backlog, last_plan_ts, now, *, min_backlog=None, co
     return {"action": "PLAN", "reason": f"{len(chosen)} unplanned stories, backlog {backlog}", "stories": chosen}
 
 
+def format_stories(decision):
+    """The "Stories to plan" lines for the planner prompt, one per story, in planning order."""
+    lines = []
+    for s in decision.get("stories", []):
+        dep = ", ".join(s.get("depends") or []) or "none"
+        lines.append(f"- {s['id']}: {s['title']} (depends on stories: {dep})")
+    return "\n".join(lines)
+
+
 def gh_json(args):
     out = subprocess.run(["gh"] + args, check=True, capture_output=True, text=True).stdout
     return json.loads(out)
@@ -163,6 +173,14 @@ def write_state(state):
 def main():
     root = os.environ.get("AUTOMATED_RUNNER_DIR", os.path.expanduser("~/Projects/automated-work/runner"))
     state = read_state()
+    if "--format-stories" in sys.argv:  # --format-stories <decision.json>: prompt lines, or "ids" with --ids
+        with open(sys.argv[sys.argv.index("--format-stories") + 1], encoding="utf-8") as f:
+            decision = json.load(f)
+        if "--ids" in sys.argv:
+            print(" ".join(s["id"] for s in decision.get("stories", [])))
+        else:
+            print(format_stories(decision))
+        return
     if "--mark-planned" in sys.argv:
         state["last_plan_ts"] = time.time()
         write_state(state)

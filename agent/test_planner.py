@@ -128,5 +128,42 @@ class Decide(unittest.TestCase):
         self.assertEqual([s["id"] for s in r["stories"]], ["US-2.1"])
 
 
+class FormatStories(unittest.TestCase):
+    def test_lines_with_dependencies(self):
+        d = {"stories": [{"id": "US-1.1", "title": "Artist registration", "depends": []},
+                         {"id": "US-1.2", "title": "Public page", "depends": ["US-1.1", "US-0.1"]}]}
+        self.assertEqual(planner.format_stories(d),
+                         "- US-1.1: Artist registration (depends on stories: none)\n"
+                         "- US-1.2: Public page (depends on stories: US-1.1, US-0.1)")
+
+    def test_empty(self):
+        self.assertEqual(planner.format_stories({"stories": []}), "")
+        self.assertEqual(planner.format_stories({}), "")
+
+    def test_cli_prints_lines_and_ids(self):
+        import json, subprocess, tempfile
+        d = {"stories": [{"id": "US-1.1", "title": "A", "depends": []}, {"id": "US-1.2", "title": "B", "depends": ["US-1.1"]}]}
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+            json.dump(d, f)
+        script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "planner.py")
+        lines = subprocess.run([sys.executable, script, "--format-stories", f.name], capture_output=True, text=True)
+        ids = subprocess.run([sys.executable, script, "--format-stories", f.name, "--ids"], capture_output=True, text=True)
+        os.unlink(f.name)
+        self.assertEqual(lines.returncode, 0, lines.stderr)
+        self.assertEqual(lines.stdout.strip().splitlines()[0], "- US-1.1: A (depends on stories: none)")
+        self.assertEqual(ids.stdout.strip(), "US-1.1 US-1.2")
+
+
+class RunScript(unittest.TestCase):
+    def test_no_inline_python_with_escaped_quotes(self):
+        """Regression: an f-string with backslash-escaped quotes inside planner-run.sh is a SyntaxError
+        on Python 3.14, which left the story list empty and the model with nothing to plan."""
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pirx", "planner-run.sh")
+        with open(path, encoding="utf-8") as f:
+            text = f.read()
+        self.assertNotIn("python3 -c", text)  # logic lives in planner.py, where it is tested
+        self.assertIn("--format-stories", text)
+
+
 if __name__ == "__main__":
     unittest.main()
