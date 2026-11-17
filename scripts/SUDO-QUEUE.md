@@ -22,7 +22,7 @@ For each request you see the sha256, the reason and the full script, then `y` (r
 The log is `/var/lib/automated-sudo/apply.log`.
 
 ## Why it is safe
-- No `NOPASSWD` entry and no sudoers change: `agent` cannot start the runner.
+- The queue adds no `NOPASSWD` entry: `agent` cannot start the runner. (The only sudoers rule for `agent` is the root helper's, `agent/pirx/root/`, which runs a fixed list of verbs: restart listed services, install listed packages, reload the firewall, a rate-limited reboot. Everything else comes here.)
 - The script is copied to a root-owned temp dir before you see it; the copy is what runs, so the agent cannot swap it after your review.
 - Symlinks, files not owned by `agent`, bad ids and reused ids are skipped.
 - Results are written to a root-owned directory, never into agent-writable paths.

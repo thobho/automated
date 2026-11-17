@@ -79,10 +79,39 @@ class Conflicts(unittest.TestCase):
 
 
 class Protected(unittest.TestCase):
-    def test_automation_paths_are_protected(self):
-        self.assertEqual(rq.protected(["agent/budget.py", "scripts/x.sh", ".github/workflows/deploy-pages.yml",
-                                       "CLAUDE.md", "projects/p/a.py", ".github/workflows/artysci-dla-szkol-ci.yml"]),
-                         ["agent/budget.py", "scripts/x.sh", ".github/workflows/deploy-pages.yml", "CLAUDE.md"])
+    def test_automation_paths(self):
+        self.assertEqual(rq.automation(["agent/health.py", "scripts/x.sh", ".github/workflows/deploy-pages.yml",
+                                        "CLAUDE.md", "projects/p/a.py", ".github/workflows/artysci-dla-szkol-ci.yml"]),
+                         ["agent/health.py", "scripts/x.sh", ".github/workflows/deploy-pages.yml", "CLAUDE.md"])
+
+    def test_money_and_permission_paths_need_the_owner(self):
+        guarded = ["agent/budget.py", "agent/openrouter_budget.py", "agent/review_queue.py",
+                   "agent/pirx/claude-settings.json", "agent/pirx/heal-settings.json", "agent/pirx/root/automated-root",
+                   "agent/pirx/review-run.sh", "agent/pirx/start-claude-run.sh", "agent/pirx/heal-diagnose.sh",
+                   "scripts/owner-apply.sh", ".github/workflows/deploy-pages.yml", "CLAUDE.md"]
+        self.assertEqual(rq.protected(guarded), guarded)
+
+    def test_permission_and_merge_rule_files_are_guarded(self):
+        """Every file that sets a run's --settings or model, the slot lock, the root helper call, the merge
+        standard, live systemd units and owner-side code needs the owner's merge (review of PR #88)."""
+        paths = ["agent/pirx/claude-run.sh", "agent/pirx/conflict-run.sh", "agent/pirx/planner-run.sh",
+                 "agent/pirx/heal.sh", "agent/pirx/common.sh", "agent/pirx/some-future-run.sh",
+                 "agent/pirx/systemd/automated-heal.service", "agent/pirx/systemd/automated-heal.timer",
+                 "agent/pirx/owner/install.sh", "agent/pirx/owner/money-notify.sh",
+                 "agent/review-prompt.md", "agent/pirx/planner-settings.json"]
+        for path in paths:
+            self.assertEqual(rq.protected([path]), [path], path)
+
+    def test_non_guarded_prompts_and_tests_still_merge_after_review(self):
+        for path in ("agent/planner-prompt.md", "agent/worker-prompt.md", "agent/test_planner.py", "agent/planner.py"):
+            self.assertEqual(rq.protected([path]), [], path)
+
+    def test_spending_rules_are_money(self):
+        self.assertEqual(rq.assess(pr(1, files=("agent/budget.py", "agent/health.py")), set())["money"], ["agent/budget.py"])
+
+    def test_other_automation_merges_after_review(self):
+        self.assertEqual(rq.protected(["agent/health.py", "agent/worker-prompt.md",
+                                       "scripts/queue.sh", "projects/p/a.py"]), [])
 
 
 class Models(unittest.TestCase):
@@ -91,6 +120,9 @@ class Models(unittest.TestCase):
 
     def test_opus_built_reviewed_by_sonnet(self):
         self.assertEqual(rq.review_model({"model:opus"}), ("sonnet", None))
+
+    def test_automation_always_opus(self):
+        self.assertEqual(rq.review_model({"model:opus"}, ["agent/health.py"]), ("opus", None))
 
     def test_default_prefers_opus(self):
         self.assertEqual(rq.review_model({"model:pirx"}), ("opus", "sonnet"))

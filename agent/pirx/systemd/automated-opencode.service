@@ -1,4 +1,5 @@
 [Unit]
+OnFailure=automated-heal.service
 Description=automated: OpenCode worker run (one task, paced by the OpenRouter budget)
 After=network-online.target
 

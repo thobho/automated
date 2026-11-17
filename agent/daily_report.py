@@ -122,7 +122,7 @@ def analyse(d):
         extra = first_lines(m.group(1), 220) if m else ""
         extra = "" if re.match(r"(?i)(none|review and merge)\b", extra) else extra
         if approved_for_owner:
-            actions.append(f"Merge PR #{pr['number']} {pr['title']}: approved by the AI review; it changes the automation, "
+            actions.append(f"Merge PR #{pr['number']} {pr['title']}: approved by the AI review; it touches money or permission rules, "
                            f"so it needs your tap on Merge (no code reading)" + (f"; also: {extra}" if extra else "") + f" → {pr['url']}")
         elif ci_state(pr) == "red":
             blockers.append(f"PR #{pr['number']} {pr['title']}: CI is red, back with the builder ({pr['url']})")

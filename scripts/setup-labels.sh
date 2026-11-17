@@ -20,4 +20,5 @@ label "model:pirx"    "C5DEF5" "Build with OpenCode on pirx (simple tasks, OpenR
 label "area:security" "B60205" "Security-sensitive: never built by OpenCode, reviewed with Opus"
 label "risk:low"      "D4C5F9" "Low-risk change: may auto-merge after green CI and AI review (from M1)"
 label "owner:todo"    "FEF2C0" "A task for the owner (listed in the daily report)"
+label "owner:money"   "D93F0B" "Needs the owner to pay for something: the only alert sent to WhatsApp"
 label "agent:report"  "C2E0C6" "The daily report issue (one comment per day)"

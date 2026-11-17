@@ -1,0 +1,7 @@
+[Unit]
+Description=automated: send owner:money issues to WhatsApp (the only alerts to the owner)
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash %h/.local/bin/automated-money-notify.sh

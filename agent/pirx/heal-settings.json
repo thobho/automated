@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "defaultMode": "dontAsk",
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Bash",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Bash(su *)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git push --force-with-lease *)",
+      "Bash(git push origin main *)",
+      "Bash(git push origin HEAD:main *)",
+      "Bash(git config *)",
+      "Bash(gh pr merge *)",
+      "Bash(gh issue delete *)",
+      "Bash(gh repo *)",
+      "Bash(gh auth *)",
+      "Bash(gh api -X DELETE *)",
+      "Bash(gh api --method DELETE *)",
+      "Read(~/.claude/.credentials.json)",
+      "Read(~/.config/automated/*.key)",
+      "Read(~/.config/automated/secrets.env)",
+      "Read(~/.config/gh/**)",
+      "Read(~/.ssh/**)",
+      "Edit(~/.config/automated/*.key)",
+      "Edit(~/.config/automated/secrets.env)",
+      "Edit(~/.config/gh/**)",
+      "Edit(~/.claude/**)",
+      "Edit(~/.ssh/**)",
+      "Edit(~/Projects/automated-work/runner/**)"
+    ]
+  }
+}

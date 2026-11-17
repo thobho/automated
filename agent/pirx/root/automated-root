@@ -1,0 +1,51 @@
+#!/bin/bash
+# Root helper for the automation on pirx: the only thing the `agent` user may run as root.
+# Installed by install-root-helper.sh as /usr/local/sbin/automated-root (root:root, 0755); the agent runs
+#   sudo -n /usr/local/sbin/automated-root <verb> [arg]
+# The installed copy is root-owned, so the agent cannot change what it does: a new version takes effect
+# only when the owner runs install-root-helper.sh again. Every call is logged to /var/log/automated-root.log.
+# Lists (services, packages) live in /etc/automated/root-helper.conf (root-owned). Phone-farm is never listed.
+set -euo pipefail
+export PATH=/usr/sbin:/usr/bin:/sbin:/bin
+CONF=/etc/automated/root-helper.conf
+SYSTEM_SERVICES=""; OWNER_USER=""; OWNER_SERVICES=""; PACKAGES=""; FIREWALL_UNIT="agent-netguard.service"
+# shellcheck source=/dev/null
+[[ -f "$CONF" && "$(stat -c %u "$CONF")" == 0 ]] && source "$CONF"
+LOG=/var/log/automated-root.log
+STAMP=/var/lib/automated-root; mkdir -p "$STAMP"
+
+verb="${1:-help}"; arg="${2:-}"
+echo "$(date -u +%FT%TZ) ${SUDO_USER:-?} $verb $arg" >> "$LOG"
+deny() { echo "DENIED: $*" >&2; echo "$(date -u +%FT%TZ) denied: $*" >> "$LOG"; exit 3; }
+listed() { [[ "$arg" =~ ^[A-Za-z0-9@._-]+$ ]] && [[ " $1 " == *" $arg "* ]]; }
+owner() { systemctl --user -M "$OWNER_USER@" "$@"; }
+
+case "$verb" in
+  ping) echo ok ;;
+  help)
+    cat <<HELP
+status                        state of the listed services and the agent firewall
+restart-system <unit>         restart a listed system service: $SYSTEM_SERVICES
+restart-owner <unit>          restart a listed service of $OWNER_USER: $OWNER_SERVICES
+install-package <name>        apt-get install a listed package: $PACKAGES
+reload-firewall               restart $FIREWALL_UNIT (rules from /etc, never from the repo)
+reboot                        reboot pirx (at most once a day, not in the first 6 hours after a boot)
+HELP
+    ;;
+  status)
+    for u in $SYSTEM_SERVICES; do echo "system $u $(systemctl show -p ActiveState --value "$u")"; done
+    [[ -n "$OWNER_USER" ]] && for u in $OWNER_SERVICES; do echo "owner $u $(owner show -p ActiveState --value "$u" 2>/dev/null || echo unknown)"; done
+    echo "firewall $FIREWALL_UNIT $(systemctl show -p ActiveState --value "$FIREWALL_UNIT")"
+    ;;
+  restart-system) listed "$SYSTEM_SERVICES" || deny "service not listed: $arg"; systemctl restart "$arg" ;;
+  restart-owner) [[ -n "$OWNER_USER" ]] && listed "$OWNER_SERVICES" || deny "owner service not listed: $arg"; owner restart "$arg" ;;
+  install-package)
+    listed "$PACKAGES" || deny "package not listed: $arg"
+    DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends "$arg" ;;
+  reload-firewall) systemctl restart "$FIREWALL_UNIT"; systemctl is-active "$FIREWALL_UNIT" ;;
+  reboot)
+    up="$(cut -d. -f1 /proc/uptime)"; (( up > 6 * 3600 )) || deny "booted less than 6 hours ago"
+    last="$(cat "$STAMP/last-reboot" 2>/dev/null || echo 0)"; (( $(date +%s) - last > 86400 )) || deny "rebooted in the last 24 hours"
+    date +%s > "$STAMP/last-reboot"; systemctl reboot ;;
+  *) deny "unknown verb: $verb" ;;
+esac
