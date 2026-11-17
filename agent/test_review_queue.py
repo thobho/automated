@@ -91,12 +91,27 @@ class Protected(unittest.TestCase):
                    "scripts/owner-apply.sh", ".github/workflows/deploy-pages.yml", "CLAUDE.md"]
         self.assertEqual(rq.protected(guarded), guarded)
 
+    def test_permission_and_merge_rule_files_are_guarded(self):
+        """Every file that sets a run's --settings or model, the slot lock, the root helper call, the merge
+        standard, live systemd units and owner-side code needs the owner's merge (review of PR #88)."""
+        paths = ["agent/pirx/claude-run.sh", "agent/pirx/conflict-run.sh", "agent/pirx/planner-run.sh",
+                 "agent/pirx/heal.sh", "agent/pirx/common.sh", "agent/pirx/some-future-run.sh",
+                 "agent/pirx/systemd/automated-heal.service", "agent/pirx/systemd/automated-heal.timer",
+                 "agent/pirx/owner/install.sh", "agent/pirx/owner/money-notify.sh",
+                 "agent/review-prompt.md", "agent/pirx/planner-settings.json"]
+        for path in paths:
+            self.assertEqual(rq.protected([path]), [path], path)
+
+    def test_non_guarded_prompts_and_tests_still_merge_after_review(self):
+        for path in ("agent/planner-prompt.md", "agent/worker-prompt.md", "agent/test_planner.py", "agent/planner.py"):
+            self.assertEqual(rq.protected([path]), [], path)
+
     def test_spending_rules_are_money(self):
         self.assertEqual(rq.assess(pr(1, files=("agent/budget.py", "agent/health.py")), set())["money"], ["agent/budget.py"])
 
     def test_other_automation_merges_after_review(self):
-        self.assertEqual(rq.protected(["agent/health.py", "agent/pirx/heal.sh", "agent/worker-prompt.md",
-                                       "agent/pirx/conflict-run.sh", "scripts/queue.sh", "projects/p/a.py"]), [])
+        self.assertEqual(rq.protected(["agent/health.py", "agent/worker-prompt.md",
+                                       "scripts/queue.sh", "projects/p/a.py"]), [])
 
 
 class Models(unittest.TestCase):

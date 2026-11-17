@@ -1,16 +1,44 @@
 #!/bin/bash
-# Install (or update) the automation's root helper on pirx. Run by the owner, once and after each change:
-#   sudo bash ~/Projects/automated-work/runner/agent/pirx/root/install-root-helper.sh
+# Install (or update) the automation's root helper on pirx. Run by the owner, once and after each change,
+# from a checkout the owner owns (never the agent's runner checkout), using merged main:
+#   git -C ~/Projects/automated fetch -q && git -C ~/Projects/automated worktree add --detach /tmp/ah origin/main && sudo bash /tmp/ah/agent/pirx/root/install-root-helper.sh; git -C ~/Projects/automated worktree remove --force /tmp/ah
 # It installs /usr/local/sbin/automated-root (root-owned copy), writes /etc/automated/root-helper.conf on
 # the first run (edit it to change the lists; it is kept on updates), and one sudoers rule:
 #   agent ALL=(root) NOPASSWD: /usr/local/sbin/automated-root
 # That is the agent's only root access: the fixed verbs of the helper. Nothing else changes.
+#
+# Safety: root must never install a file the agent can write between review and install. So:
+#   1. this script refuses to run from a file or directory that anyone but root or the owner can write
+#      (the agent's runner checkout belongs to the agent and is refused);
+#   2. the helper is NOT read from the working tree: it is copied out of git (`git show <ref>:path`, the
+#      reviewed, merged content, default ref origin/main) into a root-owned temp directory, and that copy
+#      is installed. Override the checkout with AUTOMATED_REPO and the ref with AUTOMATED_REF.
 set -euo pipefail
 [[ "$(id -u)" == 0 ]] || { echo "run with sudo"; exit 1; }
 here="$(cd "$(dirname "$0")" && pwd)"
 owner="${OWNER_USER:-${SUDO_USER:-user}}"
+repo="${AUTOMATED_REPO:-$(getent passwd "$owner" | cut -d: -f6)/Projects/automated}"
+ref="${AUTOMATED_REF:-origin/main}"
 
-install -o root -g root -m 0755 "$here/automated-root" /usr/local/sbin/automated-root
+untrusted() {  # untrusted <path>: true when the path is not owned by root/owner or is group/world writable
+  local o m; o="$(stat -L -c %U "$1")"; m="$(stat -L -c %a "$1")"
+  [[ "$o" != root && "$o" != "$owner" ]] && return 0
+  (( (8#$m & 8#022) != 0 )) && return 0
+  return 1
+}
+for path in "$0" "$here"; do
+  if untrusted "$path"; then
+    echo "refusing: $path is writable by someone other than root or $owner (run it from a checkout you own, not the agent's runner checkout)"; exit 1
+  fi
+done
+git -c safe.directory="$repo" -C "$repo" rev-parse --verify -q "$ref^{commit}" >/dev/null \
+  || { echo "refusing: $repo has no $ref (git fetch there first)"; exit 1; }
+tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
+chmod 0700 "$tmp"
+git -c safe.directory="$repo" -C "$repo" show "$ref:agent/pirx/root/automated-root" > "$tmp/automated-root"
+echo "installing agent/pirx/root/automated-root from $ref ($(git -c safe.directory="$repo" -C "$repo" rev-parse --short "$ref"), sha256 $(sha256sum "$tmp/automated-root" | cut -c1-16))"
+
+install -o root -g root -m 0755 "$tmp/automated-root" /usr/local/sbin/automated-root
 install -d -o root -g root -m 0755 /etc/automated
 if [[ ! -f /etc/automated/root-helper.conf ]]; then
   cat > /etc/automated/root-helper.conf <<CONF

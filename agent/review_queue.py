@@ -64,10 +64,17 @@ def ci_state(pr):
 
 GUARDED = re.compile(r"""^(
     agent/(budget|openrouter_budget|review_queue|usage_probe)\.py
-  | agent/pirx/(review-run|start-claude-run|dispatch|opencode-worker|heal-diagnose|setup|setup-agent-user)\.sh
+  | agent/review-prompt\.md
+  | agent/pirx/[^/]*\.sh
   | agent/pirx/[^/]*settings\.json | agent/pirx/opencode\.json | agent/pirx/root/.*
+  | agent/pirx/systemd/.* | agent/pirx/owner/.*
   | scripts/(owner-apply|sudo-request|worker-lock)\.sh
 )$""", re.VERBOSE)
+# Why each group is guarded: the budget and merge code decide what is spent and merged; every
+# agent/pirx/*.sh either picks the model and --settings of a Claude run (claude-run, conflict-run,
+# planner-run, review-run), holds the slot lock and memory gate (common), or calls the root helper
+# (heal); systemd units are copied live by the healer; review-prompt.md is the merge standard;
+# owner/* runs in the owner's account; root/* is the agent's only root access.
 
 
 MONEY = re.compile(r"^agent/(budget|openrouter_budget)\.py$")
