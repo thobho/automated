@@ -77,6 +77,25 @@ spill=(); [[ "$(json_get "$budget" spillover_ok)" == "true" ]] && spill=(--spill
 task="$RUNTIME/state/claude-next.json"
 if ! (cd "$RUNNER_DIR" && AUTOMATED_LOCK_SCRIPT="$LOCK" python3 agent/pick_task.py --next-json --executor claude "${spill[@]}") > "$task"; then
   queue="$(cd "$RUNNER_DIR" && AUTOMATED_LOCK_SCRIPT="$LOCK" python3 agent/pick_task.py | head -5 | paste -sd ';' -)"
+  # Nothing to build: let the planner turn the next roadmap stories into issues (agent/planner.py
+  # decides: small backlog, cooldown, only stories already in the roadmap). Opus if it has headroom.
+  plan="$RUNTIME/state/planner-next.json"
+  (cd "$RUNNER_DIR" && AUTOMATED_RUNNER_DIR="$RUNNER_DIR" python3 agent/planner.py --json) > "$plan" 2>/dev/null
+  paction="$(json_get "$plan" action)"
+  if [[ "$paction" == PLAN || "$paction" == NEED_ROADMAP ]]; then
+    pmodel=sonnet
+    if [[ "$paction" == PLAN ]]; then
+      AGENT_SLOT=$slot AGENT_MODEL=opus python3 "$RUNNER_DIR/agent/budget.py" < "$usage" > "$budget.opus"
+      [[ "$(json_get "$budget.opus" decision)" == "RUN" ]] && pmodel=opus
+    fi
+    unit="automated-planner"
+    if ! systemctl --user is-active -q "$unit"; then
+      systemd-run --user --quiet --collect --unit "$unit" -p RuntimeMaxSec=3600 -p Nice=5 --setenv=HOME="$HOME" \
+        /bin/bash "$RUNNER_DIR/agent/pirx/planner-run.sh" "$pmodel" "$plan"
+      log "started $unit ($paction, model $pmodel, slot $slot)"
+      echo "STARTED: planner ($paction) with $pmodel on pirx (unit $unit)"; exit 0
+    fi
+  fi
   status_update "Nothing ready for Claude: ${queue:-queue empty}"; echo "IDLE: nothing ready"; exit 0
 fi
 num="$(json_get "$task" number)"; model="$(json_get "$task" model)"
