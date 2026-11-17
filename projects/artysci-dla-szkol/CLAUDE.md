@@ -3,6 +3,13 @@
 Django 5.2 LTS service connecting artists with schools. Independent project: never import code
 from other `projects/` folders. Product overview and quick start: [README.md](README.md).
 
+## Plan and decisions
+- [ROADMAP.md](ROADMAP.md) — owner-approved milestones and stories; the planner makes issues from it.
+- [docs/STORIES.md](docs/STORIES.md) — full approved stories with acceptance criteria (Polish). Every task's
+  `Story:` id is defined there; build to those criteria, not to your own reading of the title.
+- [docs/DECISIONS.md](docs/DECISIONS.md) — the decision log (D1, D2, ...); later entries override earlier ones.
+  Append new decisions there with the next free number.
+
 ## Layout
 - `config/` — project package: `urls.py`, `wsgi.py`, `asgi.py`, `settings/{base,dev,test,prod}.py`,
   `settings/env.py` (`env`, `require()` for mandatory vars).
