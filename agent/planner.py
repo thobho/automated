@@ -78,13 +78,21 @@ def planned_ids(issues):
     return found
 
 
-def backlog_size(issues):
-    """Issues the dispatcher can pick up soon: labelled agent:todo or agent:doing."""
+def backlog_size(issues, project=None):
+    """Open issues the dispatcher can pick up soon: agent:todo or agent:doing, not agent:done.
+
+    Closed issues are ignored (merged tasks can keep a stale agent:todo label), and with `project`
+    only that project's issues count, so another project's queue does not stop the planner."""
     n = 0
     for issue in issues:
+        if str(issue.get("state", "OPEN")).upper() != "OPEN":
+            continue
         labels = {l["name"] for l in issue.get("labels", [])}
-        if labels & {"agent:todo", "agent:doing"}:
-            n += 1
+        if "agent:done" in labels or not labels & {"agent:todo", "agent:doing"}:
+            continue
+        if project and f"project:{project}" not in labels:
+            continue
+        n += 1
     return n
 
 
@@ -159,13 +167,12 @@ def main():
         state["last_plan_ts"] = time.time()
         write_state(state)
         return
-    issues = gh_json(["issue", "list", "--state", "all", "--limit", "500", "--json", "number,body,labels"])
+    issues = gh_json(["issue", "list", "--state", "all", "--limit", "500", "--json", "number,state,body,labels"])
     roadmaps = load_roadmaps(root)
     planned = planned_ids(issues)
-    backlog = backlog_size(issues)
     result = None
     for project, stories in roadmaps.items():
-        d = decide(stories, planned, backlog, state.get("last_plan_ts"), time.time())
+        d = decide(stories, planned, backlog_size(issues, project), state.get("last_plan_ts"), time.time())
         d["project"] = project
         d["milestone"] = d["stories"][0]["milestone"] if d["stories"] else None
         d["milestone_title"] = d["stories"][0]["milestone_title"] if d["stories"] else None

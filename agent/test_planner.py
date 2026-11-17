@@ -60,6 +60,15 @@ class Planned(unittest.TestCase):
                   issue(labels=["agent:review"]), issue(labels=["agent:blocked"]), issue(labels=["agent:done"])]
         self.assertEqual(planner.backlog_size(issues), 2)
 
+    def test_backlog_ignores_closed_done_and_other_projects(self):
+        closed = dict(issue(labels=["agent:todo", "project:a"]), state="CLOSED")
+        stale = issue(labels=["agent:todo", "agent:done", "project:a"])
+        other = issue(labels=["agent:todo", "project:b"])
+        mine = dict(issue(labels=["agent:todo", "project:a"]), state="OPEN")
+        self.assertEqual(planner.backlog_size([closed, stale, other, mine], "a"), 1)
+        self.assertEqual(planner.backlog_size([closed, stale, other, mine], "b"), 1)
+        self.assertEqual(planner.backlog_size([closed, stale, other, mine]), 2)
+
 
 class Decide(unittest.TestCase):
     def setUp(self):
