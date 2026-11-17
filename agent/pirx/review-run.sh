@@ -107,7 +107,12 @@ EOF
 case "$verdict" in
   approve)
     now="$(gh pr view "$pr" --json headRefOid,mergeable -q '.headRefOid + " " + .mergeable')"
-    if [[ "$prot" == yes ]]; then
+    if [[ "$now" == "$sha CONFLICTING" ]]; then   # before the protected check: the owner cannot merge a conflict either
+      gh pr comment "$pr" --body "$body
+
+Not merged yet: the branch conflicts with \`main\`. The conflict resolver merges \`main\` into it next, then the new commit is reviewed again (this does not use a review round). $mark" >/dev/null
+      log "review #$pr: approved but conflicting, to the conflict resolver"; status_update "PR #$pr approved but conflicts with main; the conflict resolver takes it"
+    elif [[ "$prot" == yes ]]; then
       gh pr comment "$pr" --body "$body
 
 This PR changes the automation itself, so it is not merged automatically: **owner, merge it with one tap.** $mark <!-- automated:needs-owner-merge -->" >/dev/null

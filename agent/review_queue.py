@@ -12,6 +12,12 @@ Model: security work (`area:security` on the linked issue) is always reviewed by
 Other PRs prefer Opus and fall back to Sonnet when the plan budget has no Opus headroom; a PR built
 by Opus is reviewed by Sonnet. The reviewer is always a separate run from the builder.
 
+A PR that conflicts with main is not reviewed: it goes to the conflict resolver first
+(agent/pirx/conflict-run.sh), which merges main into the branch and pushes; the new head commit is
+then reviewed as usual. A failed attempt leaves `<!-- automated:conflict-failed -->`, a success
+`<!-- automated:conflict-resolved -->`; only failures since the last success count. After
+MAX_CONFLICT_ATTEMPTS failures in a row the task is blocked. Attempt 1 runs on Sonnet, the next on Opus.
+
 Protected PRs (they change the automation itself: `agent/`, `scripts/`, `.github/` except a project's
 `<project>-ci.yml` workflow, or files in the repo root) are reviewed but never merged automatically:
 the owner merges them with one tap after an approving review.
@@ -19,6 +25,7 @@ the owner merges them with one tap after an approving review.
 Usage:
   agent/review_queue.py              list open agent PRs and their review state
   agent/review_queue.py --next-json  the next PR to review as JSON; exit 1 if none
+  agent/review_queue.py --next-conflict-json  the next conflicting PR to resolve as JSON; exit 1 if none
 """
 import json
 import re
@@ -30,6 +37,10 @@ CLOSES = re.compile(r"\b(?:closes|fixes|resolves)\s+#(\d+)", re.IGNORECASE)
 PROJECT_CI = re.compile(r"^\.github/workflows/[a-z0-9-]+-ci\.ya?ml$")
 REVIEW_MARK = "<!-- automated:review:{sha} -->"
 CHANGES_MARK = "<!-- automated:review-changes -->"
+CONFLICT_FAILED = "<!-- automated:conflict-failed -->"
+CONFLICT_RESOLVED = "<!-- automated:conflict-resolved -->"
+MAX_CONFLICT_ATTEMPTS = 2
+WITH_BUILDER = {"agent:todo", "agent:doing", "agent:blocked"}
 
 
 def gh_json(*args):
@@ -77,6 +88,10 @@ def assess(pr, issue_labels):
     m = CLOSES.search(pr.get("body") or "")
     preferred, fallback = review_model(issue_labels)
     paths = [f["path"] for f in pr.get("files") or []]
+    conflicting = pr.get("mergeable") == "CONFLICTING"
+    since = max((i for i, b in enumerate(bodies) if CONFLICT_RESOLVED in b), default=-1)
+    attempts = sum(CONFLICT_FAILED in b for b in bodies[since + 1:])
+    with_builder = bool(issue_labels & WITH_BUILDER)
     return {
         "pr": pr["number"],
         "title": pr["title"],
@@ -89,8 +104,13 @@ def assess(pr, issue_labels):
         "protected": protected(paths),
         "model": preferred,
         "fallback": fallback,
-        "needs_review": not reviewed and ci != "running" and not pr.get("isDraft")
-                        and not (issue_labels & {"agent:todo", "agent:doing", "agent:blocked"}),
+        "conflicting": conflicting,
+        "conflict_attempts": attempts,
+        "conflict_model": "sonnet" if attempts == 0 else "opus",
+        "needs_resolve": conflicting and not pr.get("isDraft") and not with_builder
+                         and attempts < MAX_CONFLICT_ATTEMPTS,
+        "needs_review": not reviewed and not conflicting and ci != "running" and not pr.get("isDraft")
+                        and not with_builder,
     }
 
 
@@ -106,7 +126,7 @@ def queue(prs, labels_of):
 
 def main():
     prs = gh_json("pr", "list", "--state", "open", "--limit", "50", "--json",
-                  "number,title,body,headRefName,headRefOid,isDraft,statusCheckRollup,comments,files")
+                  "number,title,body,headRefName,headRefOid,isDraft,mergeable,statusCheckRollup,comments,files")
     cache = {}
 
     def labels_of(pr):
@@ -122,6 +142,12 @@ def main():
         return cache[n]
 
     q = queue(prs, labels_of)
+    if "--next-conflict-json" in sys.argv:
+        todo = [t for t in q if t["needs_resolve"]]
+        if not todo:
+            sys.exit(1)
+        print(json.dumps(todo[0]))
+        return
     if "--next-json" in sys.argv:
         todo = [t for t in q if t["needs_review"]]
         if not todo:
@@ -129,7 +155,8 @@ def main():
         print(json.dumps(todo[0]))
         return
     for t in q:
-        state = "needs review" if t["needs_review"] else ("reviewed" if t["reviewed"] else f"CI {t['ci']}")
+        state = ("conflict" if t["conflicting"] else "needs review" if t["needs_review"]
+                 else "reviewed" if t["reviewed"] else f"CI {t['ci']}")
         prot = " [owner merges]" if t["protected"] else ""
         print(f"PR #{t['pr']:<4} {state:<13} CI {t['ci']:<7} {t['model']}/{t['fallback'] or '-'} {t['title']}{prot}")
 

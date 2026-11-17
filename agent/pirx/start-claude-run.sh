@@ -35,6 +35,23 @@ if [[ "$(free_slots)" -eq 0 ]]; then
   echo "BUSY: every pirx slot is taken"; exit 0
 fi
 
+# Conflicts come first: an approved PR that conflicts with main blocks everything that waits on it.
+con="$RUNTIME/state/conflict-next.json"
+if (cd "$RUNNER_DIR" && python3 agent/review_queue.py --next-conflict-json) > "$con" 2>/dev/null; then
+  pr="$(json_get "$con" pr)"; cmodel="$(json_get "$con" conflict_model)"
+  if [[ "$cmodel" == "opus" ]]; then
+    AGENT_SLOT=$slot AGENT_MODEL=opus python3 "$RUNNER_DIR/agent/budget.py" < "$usage" > "$budget.opus"
+    [[ "$(json_get "$budget.opus" decision)" == "RUN" ]] || cmodel=sonnet
+  fi
+  unit="automated-conflict-$pr"
+  if ! systemctl --user is-active -q "$unit"; then
+    systemd-run --user --quiet --collect --unit "$unit" -p RuntimeMaxSec=3600 -p Nice=5 --setenv=HOME="$HOME" \
+      /bin/bash "$RUNNER_DIR/agent/pirx/conflict-run.sh" "$pr" "$cmodel"
+    log "started $unit (model $cmodel, slot $slot)"
+    echo "STARTED: conflict resolver for PR #$pr with $cmodel on pirx (unit $unit)"; exit 0
+  fi
+fi
+
 # Reviews come first: a reviewed PR is merged work, and waiting PRs hold back the queue (review limit).
 rev="$RUNTIME/state/review-next.json"
 if (cd "$RUNNER_DIR" && python3 agent/review_queue.py --next-json) > "$rev" 2>/dev/null; then

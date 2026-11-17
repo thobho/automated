@@ -6,9 +6,9 @@ import review_queue as rq
 
 
 def pr(n, branch="agent/5-x", sha="abc", checks=("SUCCESS",), comments=(), files=("projects/p/app.py",),
-       body="Closes #5", draft=False):
+       body="Closes #5", draft=False, mergeable="MERGEABLE"):
     return {"number": n, "title": f"pr {n}", "headRefName": branch, "headRefOid": sha, "body": body,
-            "isDraft": draft, "statusCheckRollup": [{"conclusion": c} for c in checks],
+            "isDraft": draft, "mergeable": mergeable, "statusCheckRollup": [{"conclusion": c} for c in checks],
             "comments": [{"body": b} for b in comments], "files": [{"path": f} for f in files]}
 
 
@@ -46,6 +46,36 @@ class BackWithBuilder(unittest.TestCase):
         for state in ("agent:todo", "agent:doing", "agent:blocked"):
             self.assertFalse(rq.assess(pr(1), {state})["needs_review"], state)
         self.assertTrue(rq.assess(pr(1), {"agent:review"})["needs_review"])
+
+
+class Conflicts(unittest.TestCase):
+    def test_conflicting_pr_is_resolved_not_reviewed(self):
+        a = rq.assess(pr(1, mergeable="CONFLICTING"), {"agent:review"})
+        self.assertTrue(a["needs_resolve"])
+        self.assertFalse(a["needs_review"])
+        self.assertEqual((a["conflict_attempts"], a["conflict_model"]), (0, "sonnet"))
+
+    def test_second_attempt_uses_opus_and_the_limit_stops_it(self):
+        one = rq.assess(pr(1, mergeable="CONFLICTING", comments=["x " + rq.CONFLICT_FAILED]), set())
+        self.assertEqual((one["needs_resolve"], one["conflict_model"]), (True, "opus"))
+        two = rq.assess(pr(1, mergeable="CONFLICTING", comments=[rq.CONFLICT_FAILED, rq.CONFLICT_FAILED]), set())
+        self.assertFalse(two["needs_resolve"])
+
+    def test_successes_do_not_use_up_attempts(self):
+        c = [rq.CONFLICT_FAILED, rq.CONFLICT_RESOLVED, rq.CONFLICT_RESOLVED]
+        a = rq.assess(pr(1, mergeable="CONFLICTING", comments=c), set())
+        self.assertEqual((a["needs_resolve"], a["conflict_attempts"], a["conflict_model"]), (True, 0, "sonnet"))
+        a = rq.assess(pr(1, mergeable="CONFLICTING", comments=c + [rq.CONFLICT_FAILED]), set())
+        self.assertEqual((a["conflict_attempts"], a["conflict_model"]), (1, "opus"))
+
+    def test_builder_owns_conflicts_while_it_works(self):
+        for state in ("agent:todo", "agent:doing", "agent:blocked"):
+            self.assertFalse(rq.assess(pr(1, mergeable="CONFLICTING"), {state})["needs_resolve"], state)
+
+    def test_unknown_mergeable_is_not_a_conflict(self):
+        a = rq.assess(pr(1, mergeable="UNKNOWN"), set())
+        self.assertFalse(a["needs_resolve"])
+        self.assertTrue(a["needs_review"])
 
 
 class Protected(unittest.TestCase):
