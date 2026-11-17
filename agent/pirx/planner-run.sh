@@ -39,7 +39,7 @@ trap 'bash "$LOCK" release >/dev/null' EXIT
 bash "$LOCK" claim "planner" >/dev/null || { log "planner: already claimed"; exit 0; }
 
 project="$(json_get "$decision" project)"; ms="$(json_get "$decision" milestone)"; mtitle="$(json_get "$decision" milestone_title)"
-ids="$(python3 -c 'import json,sys; print(" ".join(s["id"] for s in json.load(open(sys.argv[1]))["stories"]))' "$decision")"
+ids="$(python3 "$RUNNER_DIR/agent/planner.py" --format-stories "$decision" --ids)"
 ms_name="$ms${mtitle:+ $mtitle}"
 
 # The milestone is created by this script, not by the model (the model has no `gh api`).
@@ -48,11 +48,8 @@ if [[ -z "$(gh api "repos/$GH_REPO/milestones?state=all&per_page=100" --jq ".[] 
 fi
 ms_name="$(gh api "repos/$GH_REPO/milestones?state=all&per_page=100" --jq ".[] | select(.title | startswith(\"$ms \") or . == \"$ms\") | .title" | head -1)"
 
-stories="$(python3 -c '
-import json, sys
-for s in json.load(open(sys.argv[1]))["stories"]:
-    dep = ", ".join(s["depends"]) or "none"
-    print(f"- {s[\"id\"]}: {s[\"title\"]} (depends on stories: {dep})")' "$decision")"
+stories="$(python3 "$RUNNER_DIR/agent/planner.py" --format-stories "$decision")"
+[[ -n "$stories" ]] || { log "planner: no stories in $decision, not calling the model"; status_update "Planner: empty story list, nothing sent to the model (bug)"; exit 0; }
 prompt="$(cat "$RUNNER_DIR/agent/planner-prompt.md")
 
 ## This run
