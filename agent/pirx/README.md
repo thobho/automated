@@ -11,6 +11,7 @@ pirx (the always-on Linux box) builds the queue. Everything runs as the unprivil
 | `opencode-worker.sh` | pirx, `agent` (timer `automated-opencode`) | hourly at :17 | OpenRouter gate (`agent/openrouter_budget.py`), per-task spend watchdog |
 | `review-run.sh` | pirx, `agent` (systemd-run, ≤1 h) | `start-claude-run.sh`, before any build | AI review on another model; merges approved PRs, protected ones wait for the owner |
 | `conflict-run.sh` | pirx, `agent` (systemd-run, ≤1 h) | `start-claude-run.sh`, before reviews | merges `main` into a conflicting PR; Claude resolves with wide permissions in the agent account (`conflict-settings.json`; its push deny is soft, the script's checks before its own push are the guarantee); 2 failed attempts in a row (Sonnet, then Opus), then blocked |
+| `planner-run.sh` | pirx, `agent` (systemd-run, ≤1 h) | `start-claude-run.sh`, when nothing is ready | Turns unplanned stories of `projects/<project>/ROADMAP.md` into issues (`agent/planner.py` decides: fewer than 2 queued tasks, 6 h cooldown, at most 4 stories, earliest milestone first). Creates issues only (`planner-settings.json`: no edits, pushes or PRs); no roadmap → one `owner:todo` issue asks for it. Opus if it has plan headroom, else Sonnet |
 | `daily_report.py` | pirx, `agent` (timer `automated-report`) | 07:45 Warsaw | posts a comment on the "📋 Daily report" issue |
 | `report-send.sh` | pirx, **owner's user** (timer `automated-report-send`) | 08:00 Warsaw | sends the WhatsApp part through Hermes (`hermes send`, no AI) |
 
