@@ -39,7 +39,7 @@ bash ~/Projects/automated/agent/pirx/owner/install.sh
 ```
 Root helper (as `user`, once and after each change to `agent/pirx/root/`):
 ```
-git -C ~/Projects/automated fetch -q && git -C ~/Projects/automated worktree add --detach /tmp/ah origin/main && sudo bash /tmp/ah/agent/pirx/root/install-root-helper.sh; git -C ~/Projects/automated worktree remove --force /tmp/ah
+d=$(mktemp -d) && git -C ~/Projects/automated fetch -q && git -C ~/Projects/automated worktree add --detach "$d/ah" origin/main && sudo bash "$d/ah/agent/pirx/root/install-root-helper.sh"; git -C ~/Projects/automated worktree remove --force "$d/ah"; rmdir "$d"
 ```
 
 ## Settings

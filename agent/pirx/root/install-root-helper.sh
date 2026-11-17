@@ -1,15 +1,16 @@
 #!/bin/bash
 # Install (or update) the automation's root helper on pirx. Run by the owner, once and after each change,
 # from a checkout the owner owns (never the agent's runner checkout), using merged main:
-#   git -C ~/Projects/automated fetch -q && git -C ~/Projects/automated worktree add --detach /tmp/ah origin/main && sudo bash /tmp/ah/agent/pirx/root/install-root-helper.sh; git -C ~/Projects/automated worktree remove --force /tmp/ah
+#   d=$(mktemp -d) && git -C ~/Projects/automated fetch -q && git -C ~/Projects/automated worktree add --detach "$d/ah" origin/main && sudo bash "$d/ah/agent/pirx/root/install-root-helper.sh"; git -C ~/Projects/automated worktree remove --force "$d/ah"; rmdir "$d"
 # It installs /usr/local/sbin/automated-root (root-owned copy), writes /etc/automated/root-helper.conf on
 # the first run (edit it to change the lists; it is kept on updates), and one sudoers rule:
 #   agent ALL=(root) NOPASSWD: /usr/local/sbin/automated-root
 # That is the agent's only root access: the fixed verbs of the helper. Nothing else changes.
 #
 # Safety: root must never install a file the agent can write between review and install. So:
-#   1. this script refuses to run from a file or directory that anyone but root or the owner can write
-#      (the agent's runner checkout belongs to the agent and is refused);
+#   1. this script refuses to run from a file whose directory, or any directory above it, can be changed by
+#      anyone but root or the owner (the agent's runner checkout and a fixed, pre-creatable /tmp path are
+#      refused; mktemp -d makes a private 0700 directory; a sticky root-owned /tmp itself is accepted);
 #   2. the helper is NOT read from the working tree: it is copied out of git (`git show <ref>:path`, the
 #      reviewed, merged content, default ref origin/main) into a root-owned temp directory, and that copy
 #      is installed. Override the checkout with AUTOMATED_REPO and the ref with AUTOMATED_REF.
@@ -20,15 +21,23 @@ owner="${OWNER_USER:-${SUDO_USER:-user}}"
 repo="${AUTOMATED_REPO:-$(getent passwd "$owner" | cut -d: -f6)/Projects/automated}"
 ref="${AUTOMATED_REF:-origin/main}"
 
-untrusted() {  # untrusted <path>: true when the path is not owned by root/owner or is group/world writable
-  local o m; o="$(stat -L -c %U "$1")"; m="$(stat -L -c %a "$1")"
-  [[ "$o" != root && "$o" != "$owner" ]] && return 0
-  (( (8#$m & 8#022) != 0 )) && return 0
-  return 1
+untrusted() {  # untrusted <path>: true when the path, or any directory above it, can be changed by someone else
+  local p o m
+  p="$(readlink -f "$1")"
+  while :; do
+    o="$(stat -L -c %U "$p")"; m="$(stat -L -c %a "$p")"
+    [[ "$o" != root && "$o" != "$owner" ]] && return 0
+    if (( (8#$m & 8#022) != 0 )); then
+      # A sticky root-owned directory (/tmp) is fine: nobody can rename or replace another user's entries in it.
+      [[ -d "$p" && "$o" == root ]] && (( (8#$m & 8#1000) != 0 )) || return 0
+    fi
+    [[ "$p" == / ]] && return 1
+    p="$(dirname "$p")"
+  done
 }
 for path in "$0" "$here"; do
   if untrusted "$path"; then
-    echo "refusing: $path is writable by someone other than root or $owner (run it from a checkout you own, not the agent's runner checkout)"; exit 1
+    echo "refusing: $path, or a directory above it, is writable by someone other than root or $owner (run it from a checkout you own in a private directory, not the agent's runner checkout or a fixed /tmp path)"; exit 1
   fi
 done
 git -c safe.directory="$repo" -C "$repo" rev-parse --verify -q "$ref^{commit}" >/dev/null \
