@@ -93,6 +93,7 @@ deploy-pirx:
 	systemctl --user start ads-lite
 	$(PIRX_SH) uv run --frozen --no-dev python manage.py migrate --noinput
 	$(PIRX_SH) uv run --frozen --no-dev python manage.py collectstatic --noinput
+	$(PIRX_SH) uv run --frozen --no-dev python manage.py seed
 	systemctl --user restart ads-web ads-worker ads-media
 	$(MAKE) smoke-pirx
 
