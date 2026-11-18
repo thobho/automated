@@ -38,7 +38,7 @@ Docker with Compose, and uv). Run from this folder.
 | `make up-lite` | `postgres:17` (shared_buffers 64MB, 256m limit) + Mailpit (64m). Fits a 4 GB machine. |
 | `make web` | migrate, then `runserver` natively on `127.0.0.1:18001` (talks to the lite stack) |
 | `make worker` | native Procrastinate worker on all queues (see "Background jobs") |
-| `make seed` | synthetic data, idempotent: 10 artists, 5 institutions (`@example.invalid`, no passwords), 6 synthetic RSPO entries, placeholder v1 of each legal document ("PROJEKT – tekst zastępczy…") |
+| `make seed` | synthetic data, idempotent: 10 artists, 5 institutions with their roles (`@example.invalid`, no passwords), 6 synthetic RSPO entries, placeholder v1 of each legal document ("PROJEKT – tekst zastępczy…") |
 | `make up-full` | lite + MinIO + `web` (gunicorn) and `worker` containers built from `Dockerfile` |
 | `make down` | stop and remove all containers (data stays in the state dir) |
 | `make test` / `make lint` | pytest with coverage / ruff + format check + migrations check |
@@ -213,6 +213,32 @@ App `apps/institutions`, logic in `services.py`, same flow as artist registratio
   e-mail with `institutions:start` (`/placowka/`, a placeholder until M2) as `next`.
 - `make seed` adds six synthetic RSPO rows (numbers 900001+, e.g. "Szkoła Podstawowa nr 5" in
   Wrocław and in Opole) to try the suggestions.
+
+## Roles and permissions (US-1.5)
+
+Code in `apps/accounts/roles.py` (rules) and `apps/accounts/permissions.py` (view guards); D99.
+
+- One role per account, derived, not stored: `roles.role_of(user)` returns `anonymous`,
+  `admin` (`is_staff` or `is_superuser`), `artist` (has an `Artist`) or `institution` (has an
+  `InstitutionMember`); `none` for an account with no record or, failing closed, with both.
+- Rules for views and later features: `can_create_artist_profile(user)` (artists),
+  `can_create_inquiry(user)`, `can_create_notice(user)` (institutions; E6 adds verification, D3).
+- Guards: `@role_required("artist")` for function views, `RoleRequiredMixin` with
+  `required_roles = ("institution",)` for class views. Anonymous visitors go to
+  `/logowanie/?next=<path>`; another role gets the Polish 403 page (`templates/403.html`) and one
+  JSON log line `permission denied` with `user` (pseudonym), `role`, `url_name`, `required_role`.
+- **Admin accounts only from the server:** `uv run python manage.py create_admin <email>` (on pirx:
+  `cd ~/runtime/artysci-dla-szkol/app/projects/artysci-dla-szkol && uv run --frozen --no-dev
+  python manage.py create_admin <email>` with the instance's env). It creates the account if needed
+  (no password) or upgrades one without a role, sets `is_staff` and `is_superuser`, and refuses an
+  artist or institution account. The admin logs in with the normal e-mail link or code; that
+  session also opens `/django-admin/`. No form or view can set these flags.
+- **Permission matrix:** `apps/accounts/tests/test_permission_matrix.py` lists every URL name with
+  the expected answer for each role. A new route without a row fails the test with its name, so
+  add the row with the route. `uv run pytest -k "permission or role" -v` prints how many routes it
+  covered.
+- `make seed` gives the seed accounts their roles: `artysta01..10` have an artist record,
+  `szkola01..05` are members of institutions made from the synthetic RSPO rows.
 
 ## Legal documents (US-8.1)
 
