@@ -43,6 +43,6 @@ d=$(mktemp -d) && git -C ~/Projects/automated fetch -q && git -C ~/Projects/auto
 ```
 
 ## Settings
-`~/.config/automated/pirx.env` (agent): `PIRX_SLOTS` (1 now, 2 after the RAM upgrade), `PIRX_MIN_FREE_MB`, `OPENCODE_MODEL`, `OPENCODE_TIMEOUT_MIN`, `CLAUDE_MAX_RUN_H`, `AUTOMATED_RUNNER_REF`. After the RAM upgrade also raise `MEM_HIGH`/`MEM_MAX` by re-running `setup-agent-user.sh` with them set.
+`~/.config/automated/pirx.env` (agent): `PIRX_SLOTS` (2 since the RAM upgrade to 11 GB), `PIRX_MIN_FREE_MB`, `OPENCODE_MODEL`, `OPENCODE_TIMEOUT_MIN`, `CLAUDE_MAX_RUN_H`, `AUTOMATED_RUNNER_REF`. Two slots need the agent memory cap of `setup-agent-user.sh` (default `MEM_HIGH=6G`, `MEM_MAX=7G`); with less RAM set `PIRX_SLOTS=1` and lower both.
 
 Logs: `~agent/runtime/automated/logs/` (`runner.log`, one file per run).

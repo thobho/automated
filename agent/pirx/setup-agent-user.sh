@@ -18,8 +18,8 @@ set -euo pipefail
 AGENT="${AGENT:-agent}"
 REPO="thobho/automated"
 MAC_PUBKEY="${MAC_PUBKEY:-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE0xpNj+dv0KPjZ6aL99KhGW3GRDgKHcDoyNrXc+Bmne mac}"
-MEM_HIGH="${MEM_HIGH:-1300M}"     # soft cap for 4 GB pirx; raise after the RAM upgrade (e.g. 6G)
-MEM_MAX="${MEM_MAX:-1700M}"       # hard cap: the agent's processes are killed above this, never Hermes
+MEM_HIGH="${MEM_HIGH:-6G}"        # soft cap; pirx has 11 GB since the RAM upgrade (was 1300M on 4 GB), room for 2 runs
+MEM_MAX="${MEM_MAX:-7G}"          # hard cap: the agent's processes are killed above this, never Hermes (~4 GB stays for the owner)
 CPU_QUOTA="${CPU_QUOTA:-300%}"    # at most 3 of the 4 threads
 BLOCK_LAN="${BLOCK_LAN:-1}"
 

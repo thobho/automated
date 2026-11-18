@@ -6,7 +6,7 @@
 #   - clones thobho/automated to ~/Projects/automated if missing (the agent's own shared checkout);
 #   - a runner worktree (~/Projects/automated-work/runner) pinned to RUNNER_REF, so the tooling never
 #     depends on which branch the shared checkout is on;
-#   - the slot lock in ~/.config/automated/ with PIRX_SLOTS slots (1 while pirx has 4 GB, 2 after the upgrade);
+#   - the slot lock in ~/.config/automated/ with PIRX_SLOTS slots (2 since the RAM upgrade to 11 GB; 1 on the old 4 GB);
 #   - ~/.config/automated/pirx.env with defaults (kept if it exists);
 #   - systemd user timers: dispatcher (:07), OpenCode worker (:17), health page (:05/:35), healer (:20/:50)
 #     and the daily report (07:45 Warsaw).
@@ -29,7 +29,7 @@ chmod 700 "$CONF_DIR"
 if [[ ! -f "$CONF_DIR/pirx.env" ]]; then
   cat > "$CONF_DIR/pirx.env" <<'EOF'
 # Agent runner settings for pirx (not in git).
-PIRX_SLOTS=1                 # 1 while pirx has 4 GB RAM; 2 after the upgrade
+PIRX_SLOTS=2                 # 2 since the RAM upgrade (11 GB, agent cap 6G/7G); 1 on 4 GB
 PIRX_MIN_FREE_MB=1000        # a run starts only with this much MemAvailable
 OPENCODE_MODEL=openrouter/deepseek/deepseek-v4.1-flash-1017
 OPENCODE_TIMEOUT_MIN=40
