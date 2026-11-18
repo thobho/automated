@@ -38,7 +38,7 @@ Docker with Compose, and uv). Run from this folder.
 | `make up-lite` | `postgres:17` (shared_buffers 64MB, 256m limit) + Mailpit (64m). Fits a 4 GB machine. |
 | `make web` | migrate, then `runserver` natively on `127.0.0.1:18001` (talks to the lite stack) |
 | `make worker` | native Procrastinate worker on all queues (see "Background jobs") |
-| `make seed` | synthetic data, idempotent: 10 artists, 5 institutions (`@example.invalid`, no passwords), placeholder v1 of each legal document ("PROJEKT – tekst zastępczy…") |
+| `make seed` | synthetic data, idempotent: 10 artists, 5 institutions (`@example.invalid`, no passwords), 6 synthetic RSPO entries, placeholder v1 of each legal document ("PROJEKT – tekst zastępczy…") |
 | `make up-full` | lite + MinIO + `web` (gunicorn) and `worker` containers built from `Dockerfile` |
 | `make down` | stop and remove all containers (data stays in the state dir) |
 | `make test` / `make lint` | pytest with coverage / ruff + format check + migrations check |
@@ -155,6 +155,8 @@ list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d3
   POST logs in), `/wyloguj/` (POST only).
 - `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard start, a
   placeholder until US-2.1; login required).
+- `/rejestracja/placowka/` (institution registration), `/rejestracja/placowka/rspo/` (HTMX RSPO
+  suggestions, GET, anonymous), `/placowka/` (institution start, a placeholder; login required).
 
 ## Login (US-1.3)
 
@@ -191,6 +193,26 @@ App `apps/artists`, logic in `services.register_artist(email, name, client_ip, l
 - The page after sending has the code form; the code or the link (15 minutes) confirms the
   account and opens `artists:start`. An expired code is not a dead end: logging in from
   `/logowanie/` confirms the account too.
+
+## Institution registration (US-1.2)
+
+App `apps/institutions`, logic in `services.py`, same flow as artist registration (D97, D98):
+
+- Models: `Institution` (type, name, locality, one of the 16 voivodeships, optional unique RSPO
+  number, `verification_status` "niezweryfikowana"), `InstitutionMember` (one-to-one with the
+  user, function, `needs_review`), `RspoEntry` (registry reference rows; write them with
+  `add_rspo_entry()`, which fills the case-folded search columns; the CSV import is US-1.4).
+- `suggest_rspo(name, locality)`: every word of the name must occur (case-insensitive, also for
+  Polish letters), locality is a prefix; at most 10 rows, nothing below 3 characters. The page
+  calls `/rejestracja/placowka/rspo/?name=...&locality=...` with HTMX and shows radio buttons.
+- `register_institution(email, details, function, client_ip, rspo_number=..., link_base=...)`:
+  with an RSPO number the institution data come from the registry, whatever the form sent; an
+  RSPO number that already has an `Institution` links the new member to it with
+  `needs_review=True` (admin: `/django-admin/institutions/institutionmember/?needs_review__exact=1`).
+  Records `institution_registered` (type, `rspo_matched`, `linked_existing`) and sends the login
+  e-mail with `institutions:start` (`/placowka/`, a placeholder until M2) as `next`.
+- `make seed` adds six synthetic RSPO rows (numbers 900001+, e.g. "Szkoła Podstawowa nr 5" in
+  Wrocław and in Opole) to try the suggestions.
 
 ## Legal documents (US-8.1)
 
