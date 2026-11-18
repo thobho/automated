@@ -161,6 +161,9 @@ SESSION_COOKIE_SAMESITE = "Lax"
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_HEADER_NAME = "HTTP_X_CSRFTOKEN"  # HTMX sends X-CSRFToken (templates/base.html)
+# Only essential cookies (D32, apps/core/cookies.py): flash messages live in the session, not in
+# a `messages` cookie. There is no language cookie either (Polish only: no set_language view).
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 # Logging: one JSON line per event on stdout, same config everywhere (apps/core/logs.py) ----
 # The host collects stdout. django.server (runserver) is muted: its lines carry query strings;
