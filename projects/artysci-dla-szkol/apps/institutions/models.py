@@ -34,9 +34,15 @@ class Voivodeship(models.TextChoices):
 
 
 class VerificationStatus(models.TextChoices):
-    """US-1.2 only knows the default; US-1.4 adds the verified states."""
-
     UNVERIFIED = "unverified", _("niezweryfikowana")
+    VERIFIED = "verified", _("zweryfikowana")
+
+
+class VerificationMethod(models.TextChoices):
+    """How an institution became verified (US-1.4)."""
+
+    DOMAIN = "domain", _("domena")
+    MANUAL = "manual", _("ręcznie")
 
 
 class MemberFunction(models.TextChoices):
@@ -60,6 +66,19 @@ class Institution(models.Model):
         max_length=32,
         choices=VerificationStatus.choices,
         default=VerificationStatus.UNVERIFIED,
+    )
+    # Set together by `services.verify()` only (US-1.4); never edited by hand.
+    verified_at = models.DateTimeField(_("zweryfikowano"), null=True, blank=True)
+    verification_method = models.CharField(
+        _("metoda weryfikacji"), max_length=16, choices=VerificationMethod.choices, blank=True
+    )
+    verified_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+        verbose_name=_("zatwierdził(a)"),
     )
     created_at = models.DateTimeField(_("utworzono"), default=timezone.now)
 
@@ -97,15 +116,17 @@ class InstitutionMember(models.Model):
 
 
 class RspoEntry(models.Model):
-    """Minimal reference copy of the public RSPO registry (read-only in US-1.2; the CSV import
-    is US-1.4). Rows are written through `services.add_rspo_entry()`, which fills the
-    `*_search` columns (case-folded, so matching ignores case on SQLite and PostgreSQL)."""
+    """Minimal reference copy of the public RSPO registry, filled by `manage.py import_rspo`
+    (US-1.4) and the seed. Rows are written through `services.add_rspo_entry()`, which fills
+    the `*_search` columns (case-folded, so matching ignores case on SQLite and PostgreSQL).
+    Of the registry's e-mail address only the domain is kept (for the domain rule)."""
 
     rspo_number = models.PositiveIntegerField(_("numer RSPO"), unique=True)
     name = models.CharField(_("nazwa"), max_length=300)
     institution_type = models.CharField(_("typ"), max_length=32, choices=InstitutionType.choices)
     locality = models.CharField(_("miejscowość"), max_length=100)
     voivodeship = models.CharField(_("województwo"), max_length=32, choices=Voivodeship.choices)
+    email_domain = models.CharField(_("domena e-mail"), max_length=253, blank=True)
     name_search = models.CharField(max_length=300, editable=False)
     locality_search = models.CharField(max_length=100, editable=False)
 

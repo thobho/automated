@@ -1,5 +1,8 @@
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ngettext
 
+from . import services
 from .models import Institution, InstitutionMember, RspoEntry
 
 
@@ -20,11 +23,36 @@ class InstitutionAdmin(admin.ModelAdmin):
         "voivodeship",
         "rspo_number",
         "verification_status",
+        "verification_method",
+        "verified_at",
     )
-    list_filter = ("verification_status", "institution_type", "voivodeship")
+    list_filter = ("verification_status", "verification_method", "institution_type", "voivodeship")
     search_fields = ("name", "locality", "=rspo_number")
-    readonly_fields = ("created_at",)
+    # Verification changes only through the action below (it records the event once).
+    readonly_fields = (
+        "verification_status",
+        "verification_method",
+        "verified_at",
+        "verified_by",
+        "created_at",
+    )
     inlines = (MemberInline,)
+    actions = ("approve",)
+
+    @admin.action(description=_("Zatwierdź placówkę"), permissions=("change",))
+    def approve(self, request, queryset):
+        """Manual verification (US-1.4); already verified institutions are left as they are."""
+        count = services.approve(queryset, by=request.user)
+        self.message_user(
+            request,
+            ngettext(
+                "Zatwierdzono %(count)d placówkę.",
+                "Zatwierdzono %(count)d placówek.",
+                count,
+            )
+            % {"count": count},
+            messages.SUCCESS,
+        )
 
 
 @admin.register(InstitutionMember)
@@ -41,9 +69,16 @@ class InstitutionMemberAdmin(admin.ModelAdmin):
 
 @admin.register(RspoEntry)
 class RspoEntryAdmin(admin.ModelAdmin):
-    """Read-only here: rows come from the seed now and the CSV import in US-1.4."""
+    """Read-only here: rows come from `manage.py import_rspo` (US-1.4) and the seed."""
 
-    list_display = ("rspo_number", "name", "institution_type", "locality", "voivodeship")
+    list_display = (
+        "rspo_number",
+        "name",
+        "institution_type",
+        "locality",
+        "voivodeship",
+        "email_domain",
+    )
     list_filter = ("institution_type", "voivodeship")
     search_fields = ("name", "locality", "=rspo_number")
 

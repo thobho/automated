@@ -12,6 +12,7 @@ EMITTERS: dict[str, str] = {
     "artist_registered": "apps.artists.services.register_artist",
     "institution_registered": "apps.institutions.services.register_institution",
     "account_confirmed": "apps.accounts.services.confirm_email",
+    "institution_verified": "apps.institutions.services.verify",
 }
 PENDING = set(EVENT_CATALOG) - set(EMITTERS)
 
@@ -21,6 +22,7 @@ def test_catalog_has_the_agreed_events():
         "artist_registered",
         "institution_registered",
         "account_confirmed",
+        "institution_verified",
         "profile_generated",
         "profile_published",
         "inquiry_sent",
@@ -85,6 +87,17 @@ def test_track_pseudonymises_actor_and_stores_object(django_user_model):
     assert len(event.actor) == 32 and str(user.pk) != event.actor
     assert event.actor == services.actor_id(user)
     assert "x@example.invalid" not in repr(event.__dict__)
+
+
+def test_institution_verified_contract():
+    """`institution_verified` takes only `method` (an enum value), nothing personal (D39)."""
+    from apps.institutions.models import VerificationMethod
+
+    assert EVENT_CATALOG["institution_verified"] == frozenset({"method"})
+    for method in VerificationMethod.values:
+        services.track("institution_verified", method=method)
+    with pytest.raises(services.DisallowedProperty):
+        services.track("institution_verified", method="manual", institution_name="SP 5")
 
 
 def test_actor_id_anonymous_is_empty():

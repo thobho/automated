@@ -30,7 +30,7 @@ from django.utils.translation import gettext
 from apps.core import jobs
 from apps.core.logs import pseudonymise_user
 
-from . import throttling
+from . import signals, throttling
 from .managers import normalize_email_address
 from .models import LoginChallenge
 
@@ -150,6 +150,7 @@ def confirm_email(user, *, now=None) -> bool:
     user.email_confirmed_at = now
     analytics.track("account_confirmed", actor=user, obj=user)
     _log("account confirmed", "account_confirmed", user)
+    signals.email_confirmed.send(sender=type(user), user=user)
     return True
 
 

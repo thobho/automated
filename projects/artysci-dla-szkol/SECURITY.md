@@ -108,6 +108,18 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   suggestion endpoint `/rejestracja/placowka/rspo/` is anonymous, GET only, read-only, returns
   at most 10 public registry rows and nothing for fewer than 3 characters (query capped at 200
   characters). Events hold the institution type and two booleans only, no names or e-mails.
+- **Institution verification (T16, US-1.4, D3, D100)**: "zweryfikowana" only through
+  `institutions.services.verify()`, by the domain rule or by staff. Domain rule: a confirmed,
+  active member's e-mail domain must equal the RSPO e-mail domain exactly (case-insensitive, no
+  subdomain or parent-domain guessing); free mailbox domains (`PUBLIC_MAILBOX_DOMAINS`: gmail.com,
+  wp.pl, o2.pl, onet.pl, interia.pl, op.pl, outlook.com, ...) never verify, because anyone can
+  get an address there. Manual approval is the Django admin action "Zatwierdź placówkę"
+  (`/django-admin/` is staff only; the action also needs the change permission) and records
+  the admin. The verification fields are read-only in the admin, so the event cannot be
+  skipped. The RSPO import is a server command (`manage.py import_rspo <path>`), not a web
+  upload; it keeps only the domain of the registry's e-mail address (not the address, not the
+  director's name) and never logs row content, only counts. `institution_verified` carries the
+  method only (D39).
 - **Roles and access control (T15, US-1.5, D37, D99)**: one role per account, derived from data
   (`apps/accounts/roles.py`: `admin` = `is_staff`/`is_superuser`, `artist` = has `Artist`,
   `institution` = has `InstitutionMember`; contradictory data fails closed). Views declare their
@@ -161,7 +173,7 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 1.3.2 | No `eval()` / dynamic code | done (CSP without `unsafe-eval`, HTMX `allowEval: false`) |
 | 1.5.1 | Safe XML parser config | n/a (no XML input) |
 | 2.1.1 | Input validation rules documented | planned (per feature, E1+) |
-| 2.2.1 | Input validated against business rules | planned (per feature, Django forms) |
+| 2.2.1 | Input validated against business rules | partial (Django forms per feature; T16: RSPO import validates every row, skips invalid ones with a count) |
 | 2.2.2 | Validation at a trusted service layer | done by design (`services.py` rule, CLAUDE.md) |
 | 2.3.1 | Business flow steps in order | partial (re-acceptance gate before using the app, T10); inquiries, notices planned |
 | 3.2.1 | Content not rendered in wrong context | done (nosniff, correct Content-Type, user files on own origin in T06) |
