@@ -24,3 +24,6 @@ DATABASES["default"]["CONN_MAX_AGE"] = DATABASE_CONN_MAX_AGE
 EMAIL_BACKEND = env.str(
     "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
 )
+# base.py read these before .env was loaded; read them again so .env works without `make`.
+EMAIL_HOST = env.str("EMAIL_HOST", default="localhost")
+EMAIL_PORT = env.int("EMAIL_PORT", default=25)
