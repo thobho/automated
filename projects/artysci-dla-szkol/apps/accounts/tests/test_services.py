@@ -189,7 +189,7 @@ def test_consume_is_single_use_under_a_race(user, clock):
 # --- housekeeping ----------------------------------------------------------------------------
 
 
-def test_purge_expired(user, clock):
+def test_purge_expired(user, clock, queue):
     from django.contrib.sessions.backends.db import SessionStore
 
     issue(user)
@@ -197,5 +197,11 @@ def test_purge_expired(user, clock):
     session["x"] = 1
     session.create()
     throttling.hit(throttling.CODE, EMAIL)
+    services.request_email_change(user, "nowy@example.invalid", "203.0.113.9", link_base="x")
     clock.advance(days=31)
-    assert services.purge_expired() == {"challenges": 1, "throttle_events": 1, "sessions": 1}
+    assert services.purge_expired() == {
+        "challenges": 1,
+        "email_changes": 1,
+        "throttle_events": 3,  # failed code + change per user + per IP
+        "sessions": 1,
+    }

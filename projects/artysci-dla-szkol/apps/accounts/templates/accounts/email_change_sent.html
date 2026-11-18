@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Zmiana adresu e-mail" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Zmiana adresu e-mail" %}</h1>
+  {% if rate_limited %}
+    <p role="alert">{% translate "Wysłaliśmy już kilka wiadomości. Spróbuj ponownie później." %}</p>
+  {% elif error %}
+    <p id="change-code-error" role="alert">{% translate "Kod jest nieprawidłowy lub nieaktualny. Sprawdź go albo poproś o nową zmianę adresu." %}</p>
+    {% include "accounts/_email_change_code_form.html" %}
+  {% else %}
+    <p>{% translate "Jeśli adres jest poprawny, wysłaliśmy na niego wiadomość z linkiem i 6-cyfrowym kodem. Są ważne 15 minut. Adres konta zmieni się dopiero po potwierdzeniu." %}</p>
+    {% include "accounts/_email_change_code_form.html" %}
+  {% endif %}
+  <p><a href="{% url 'accounts:settings' %}">{% translate "Wróć do ustawień konta" %}</a></p>
+{% endblock %}

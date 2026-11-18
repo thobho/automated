@@ -1,0 +1,7 @@
+{% load i18n %}{% autoescape off %}{% translate "Dzień dobry," %}
+
+{% translate "w Twoim koncie w serwisie Artyści dla szkół poproszono o zmianę adresu e-mail używanego do logowania." %}
+
+{% translate "Zmiana zacznie działać dopiero po potwierdzeniu z nowego adresu. Do tego czasu logujesz się tym adresem jak dotąd." %}
+{% translate "Jeśli to nie Ty, zaloguj się i sprawdź ustawienia konta: ktoś mógł uzyskać dostęp do Twojej sesji." %}
+{% endautoescape %}

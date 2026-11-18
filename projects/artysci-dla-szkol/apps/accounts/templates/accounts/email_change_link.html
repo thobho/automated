@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Zmiana adresu e-mail" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Zmiana adresu e-mail" %}</h1>
+  {% if valid %}
+    <p>{% translate "Naciśnij przycisk, aby potwierdzić nowy adres e-mail. Pozostałe urządzenia zostaną wylogowane." %}</p>
+    <form method="post" action="{% url 'accounts:email_change_link' %}">
+      {% csrf_token %}
+      <input type="hidden" name="t" value="{{ token }}">
+      <button type="submit">{% translate "Potwierdź" %}</button>
+    </form>
+  {% else %}
+    <p role="alert">{% translate "Ten link wygasł, został już użyty albo dotyczy innego konta. Zaloguj się na konto, na którym zmieniasz adres." %}</p>
+    <p><a href="{% url 'accounts:settings' %}">{% translate "Przejdź do ustawień konta" %}</a></p>
+  {% endif %}
+{% endblock %}

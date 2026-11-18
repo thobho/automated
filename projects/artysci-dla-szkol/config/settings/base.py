@@ -111,6 +111,8 @@ LOGIN_THROTTLE_WINDOW = env.int("LOGIN_THROTTLE_WINDOW", default=900)  # seconds
 LOGIN_EMAIL_LIMIT_PER_ADDRESS = env.int("LOGIN_EMAIL_LIMIT_PER_ADDRESS", default=5)
 LOGIN_EMAIL_LIMIT_PER_IP = env.int("LOGIN_EMAIL_LIMIT_PER_IP", default=20)
 LOGIN_EMAIL_WINDOW = env.int("LOGIN_EMAIL_WINDOW", default=3600)  # seconds
+# E-mail change requests per user (US-1.6) within LOGIN_EMAIL_WINDOW; the per-IP limit is shared.
+EMAIL_CHANGE_LIMIT_PER_USER = env.int("EMAIL_CHANGE_LIMIT_PER_USER", default=5)
 
 # Sessions in the database (django.contrib.sessions default), 30 days of inactivity: every
 # request re-saves the session, which moves its expiry 30 days ahead.
