@@ -111,6 +111,8 @@ documented in [`.env.example`](.env.example).
 ## Security and logging
 
 Threat model, headers, cookie rules and the ASVS checklist: [SECURITY.md](SECURITY.md).
+Only the session and CSRF cookies are ever set; a test enforces it (`uv run pytest -k cookie`,
+list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d32)).
 
 - Every response carries a strict CSP (no inline script; use `nonce="{{ csp_nonce }}"` if one is
   ever unavoidable), Permissions-Policy, nosniff, Referrer-Policy and `frame-ancestors 'none'`.

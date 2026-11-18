@@ -99,6 +99,21 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 Remediation time frames for vulnerable dependencies (ASVS 15.1.1): critical 7 days, high 30
 days, others with the next regular update; dependencies are reviewed at least monthly.
 
+## Cookies (US-8.8, D32)
+
+The site sets only essential cookies, so no consent banner is needed. The allowlist is
+`apps/core/cookies.py` (`essential_cookie_names()`, derived from settings). The test
+`apps/core/tests/test_cookies.py` requests every reversible route anonymously and logged in and
+fails with the path and cookie name for any other `Set-Cookie`; routes with arguments are listed
+in `ROUTES_WITH_ARGUMENTS` there (extend it with new features). A test-only URLconf proves the
+check catches a stray cookie. Analytics use no cookies (D38, D39); flash messages use session
+storage (`MESSAGE_STORAGE`); there is no language cookie.
+
+| Cookie (prod / dev) | Purpose | Lifetime | Flags |
+|---|---|---|---|
+| `__Host-sessionid` / `sessionid` | Login session | 30 days idle (`SESSION_COOKIE_AGE`) | HttpOnly, SameSite=Lax, Secure in prod |
+| `__Host-csrftoken` / `csrftoken` | CSRF protection | 1 year (Django default) | HttpOnly, SameSite=Lax, Secure in prod |
+
 ## ASVS 5.0 level 1 checklist
 
 Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (feature absent).
