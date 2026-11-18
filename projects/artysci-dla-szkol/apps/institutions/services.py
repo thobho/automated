@@ -544,7 +544,7 @@ def verify(institution: Institution, method: str, *, by=None, now=None) -> bool:
     if by is not None:
         extra["user"] = pseudonymise_user(by.pk)
     verification_logger.info(
-        "institution %s verified by %s", institution.pk, method.value, extra=extra
+        "institution %s verified (method %s)", institution.pk, method.value, extra=extra
     )
     return True
 

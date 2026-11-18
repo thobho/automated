@@ -201,7 +201,7 @@ App `apps/institutions`, logic in `services.py`, same flow as artist registratio
 - Models: `Institution` (type, name, locality, one of the 16 voivodeships, optional unique RSPO
   number, `verification_status` "niezweryfikowana"), `InstitutionMember` (one-to-one with the
   user, function, `needs_review`), `RspoEntry` (registry reference rows; write them with
-  `add_rspo_entry()`, which fills the case-folded search columns; the CSV import is US-1.4).
+  `add_rspo_entry()` / `upsert_rspo_entry()`, which fill the case-folded search columns).
 - `suggest_rspo(name, locality)`: every word of the name must occur (case-insensitive, also for
   Polish letters), locality is a prefix; at most 10 rows, nothing below 3 characters. The page
   calls `/rejestracja/placowka/rspo/?name=...&locality=...` with HTMX and shows radio buttons.
@@ -213,6 +213,34 @@ App `apps/institutions`, logic in `services.py`, same flow as artist registratio
   e-mail with `institutions:start` (`/placowka/`, a placeholder until M2) as `next`.
 - `make seed` adds six synthetic RSPO rows (numbers 900001+, e.g. "Szkoła Podstawowa nr 5" in
   Wrocław and in Opole) to try the suggestions.
+
+## Institution verification and RSPO import (US-1.4)
+
+Logic in `apps/institutions/services.py` (D3, D100):
+
+- **Import:** download the CSV on [rspo.gov.pl](https://rspo.gov.pl/) ("Pobierz CSV" under the
+  search results; UTF-8 with BOM, `;`, 54 columns) and run
+  `uv run python manage.py import_rspo <path>`. It upserts `RspoEntry` by "Numer RSPO" (running
+  it twice changes nothing) and prints
+  `import_rspo: created N, updated N, unchanged N, skipped N, verified N`. Rows without a valid
+  number, name, locality or voivodeship are skipped and counted, never printed or logged.
+  `RSPO_COLUMNS` is the one place that maps header names to fields; Windows-1250 and `,`/tab
+  files (an export re-saved in Excel) work too. Of "E-mail" only the domain is stored.
+  Never commit a real export: the test fixture `apps/institutions/tests/fixtures/rspo_sample.csv`
+  is synthetic (regenerate with `uv run python -m apps.institutions.tests.rspo_fixture`).
+- **States:** `Institution.verification_status` is "niezweryfikowana" or "zweryfikowana", with
+  `verified_at`, `verification_method` ("domena" or "ręcznie") and, for manual approval,
+  `verified_by`. Only `services.verify()` sets them (records `institution_verified` with
+  `method`, once per institution).
+- **Domain rule:** an institution with an RSPO number becomes verified ("domena") when a
+  confirmed member's e-mail domain equals its RSPO e-mail domain exactly (case-insensitive).
+  Free mailbox domains (`PUBLIC_MAILBOX_DOMAINS`) never count. Checked when an account is
+  confirmed (`accounts.signals.email_confirmed`) and after each import.
+- **Manual approval:** `/django-admin/institutions/institution/`, select institutions, action
+  "Zatwierdź placówkę" (staff only). Already verified institutions stay as they are.
+- **Badge:** `services.is_verified(institution)` and, in templates,
+  `{% load institutions %}{% institution_badge institution %}` (nothing for unverified). Shown on
+  `/placowka/` now; inquiries and notices use it in M2/M3.
 
 ## Roles and permissions (US-1.5)
 
