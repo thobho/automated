@@ -95,7 +95,13 @@ systemd user units (`deploy/pirx/ads-*.service`): `ads-lite` (Postgres + Mailpit
   `make deploy-pirx` + `make smoke-pirx`, then records the commit. Nothing new = silent exit. On
   failure it rolls back (`make rollback-pirx`: last good commit, restart) and keeps the state file;
   one commit is tried at most 3 times (`failed.commit` holds the count; a newer commit resets it).
-  Migrations are not reversed, so keep them backward compatible.
+  Migrations are not reversed, so keep them backward compatible. After a failed deploy the checkout
+  stays on a detached HEAD at the last good commit; the next successful deploy checks `main` out again.
+  A dirty deployment checkout or a failed `git fetch` is logged in one line and nothing is deployed.
+  `deployed.commit` is `git rev-parse HEAD` after the green smoke test.
+  - Unit files: `make deploy-pirx` runs `deploy/pirx/refresh-units.sh`, which rewrites only the
+    `ads-*` units whose rendered content changed, runs `daemon-reload`, enables and restarts changed
+    timers (and `ads-lite`); web/worker/media restart as part of the deploy anyway.
   - Log: `~/runtime/artysci-dla-szkol/logs/redeploy.log` (rotated with the others).
   - Pause (owner): `systemctl --user stop ads-redeploy.timer`; resume with `start`.
   - Force a deploy now: `systemctl --user start ads-redeploy.service` (or, to retry a commit that
