@@ -124,6 +124,30 @@ def seed_rspo() -> int:
     return sum(add_rspo_entry(*row)[1] for row in SEED_RSPO)
 
 
+def seed_members() -> int:
+    """An institution and a member link for each synthetic ``szkolaNN@example.invalid`` seed
+    user, from the synthetic RSPO rows (idempotent; run after `seed_users` and `seed_rspo`).
+    Returns how many members were created."""
+    from django.contrib.auth import get_user_model
+
+    created = 0
+    for number, row in enumerate(SEED_RSPO[: accounts.INSTITUTION_COUNT], start=1):
+        user = (
+            get_user_model()
+            .objects.filter(email=f"szkola{number:02d}@{accounts.SEED_DOMAIN}")
+            .first()
+        )
+        if user is None or user.is_staff or user.is_superuser:
+            continue
+        if InstitutionMember.objects.filter(user=user).exists():
+            continue
+        entry = RspoEntry.objects.get(rspo_number=row[0])
+        institution, _ = _institution_for(InstitutionDetails(), entry)
+        InstitutionMember.objects.create(user=user, institution=institution, function="director")
+        created += 1
+    return created
+
+
 # --- registration ----------------------------------------------------------------------------
 
 

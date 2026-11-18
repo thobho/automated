@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Brak dostępu" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Brak dostępu" %}</h1>
+  <p>{% translate "Ta strona jest dostępna dla innego rodzaju konta." %}</p>
+  <p><a href="{% url 'core:home' %}">{% translate "Wróć na stronę główną" %}</a></p>
+{% endblock %}

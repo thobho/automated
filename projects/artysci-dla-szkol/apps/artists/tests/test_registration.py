@@ -268,12 +268,12 @@ def test_wizard_start_needs_login(web, db):
     assert response.status_code == 302 and response["Location"].startswith(LOGIN)
 
 
-def test_wizard_start_sends_non_artists_home(client, documents):
+def test_wizard_start_refuses_non_artists(client, documents):
     user = User.objects.create_user(email=EXISTING_EMAIL)
     trust.record_acceptance(user, ["terms", "privacy"])
     client.force_login(user)
     response = client.get(START)
-    assert response.status_code == 302 and response["Location"] == "/"
+    assert response.status_code == 403
 
 
 def test_register_rejects_other_methods(web, db):

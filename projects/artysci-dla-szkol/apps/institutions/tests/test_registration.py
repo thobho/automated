@@ -390,12 +390,12 @@ def test_start_needs_login(web, db):
     assert response.status_code == 302 and response["Location"].startswith(LOGIN)
 
 
-def test_start_sends_non_members_home(client, documents):
+def test_start_refuses_non_members(client, documents):
     user = User.objects.create_user(email=EXISTING_EMAIL)
     trust.record_acceptance(user, ["terms", "privacy"])
     client.force_login(user)
     response = client.get(START)
-    assert response.status_code == 302 and response["Location"] == "/"
+    assert response.status_code == 403
 
 
 # --- analytics -------------------------------------------------------------------------------

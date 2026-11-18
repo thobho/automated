@@ -108,6 +108,19 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   suggestion endpoint `/rejestracja/placowka/rspo/` is anonymous, GET only, read-only, returns
   at most 10 public registry rows and nothing for fewer than 3 characters (query capped at 200
   characters). Events hold the institution type and two booleans only, no names or e-mails.
+- **Roles and access control (T15, US-1.5, D37, D99)**: one role per account, derived from data
+  (`apps/accounts/roles.py`: `admin` = `is_staff`/`is_superuser`, `artist` = has `Artist`,
+  `institution` = has `InstitutionMember`; contradictory data fails closed). Views declare their
+  roles with `role_required(...)` / `RoleRequiredMixin` (`apps/accounts/permissions.py`):
+  anonymous -> login page with a local `next`, wrong role -> 403 (Polish page) and one
+  `permission denied` line (pseudonymised user, role, URL name, required role; no e-mail, IP or
+  query string). Registration services never add a second role to an existing address, forms
+  have no role fields (extra POST fields are ignored), and admin accounts exist only through
+  `manage.py create_admin` on the server. The permission matrix
+  `apps/accounts/tests/test_permission_matrix.py` checks every URL name for anonymous, artist,
+  institution and admin, and fails on a route without a row (excluded by name: `/django-admin/`,
+  `/healthz`, `/readyz`; static files are not a URL name). It is part of the pre-pilot security
+  gate (D65).
 - **The one allowed token in a URL**: the login link `/logowanie/link/?t=<token>`. The token
   is only in the query string, which the access log never contains (path only, `django.server`
   muted); `Referrer-Policy: strict-origin-when-cross-origin` keeps it out of cross-origin
@@ -177,10 +190,10 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 7.2.4 | New session on login | done (T12: `django.contrib.auth.login()` rotates the key) |
 | 7.4.1 | Logout/expiry ends the session | done (T12: POST logout flushes the DB session; expiry after 30 idle days, activity refreshes it) |
 | 7.4.2 | Disabling a user ends their sessions | planned (E1, E9) |
-| 8.1.1 | Authorisation rules documented | planned (E1 roles) |
-| 8.2.1 | Function-level access control | planned (per feature; admin is staff-only) |
-| 8.2.2 | Data-level access control (IDOR) | planned (per feature) |
-| 8.3.1 | Authorisation in the service layer | planned (per feature, `services.py`) |
+| 8.1.1 | Authorisation rules documented | done (T15: roles and rules in `apps/accounts/roles.py`, per-route table in `apps/accounts/tests/test_permission_matrix.py`, "Roles and access control" above) |
+| 8.2.1 | Function-level access control | done (T15: `role_required` / `RoleRequiredMixin`, 403 + log; every route in the permission matrix; `/django-admin/` staff only) |
+| 8.2.2 | Data-level access control (IDOR) | planned (per feature; no user-owned objects are exposed by id yet) |
+| 8.3.1 | Authorisation in the service layer | partial (T15: rule functions `can_create_artist_profile`, `can_create_inquiry`, `can_create_notice`; E5/E6 call them in their services) |
 | 9.1.1–9.2.1 | Self-contained tokens (JWT etc.) | n/a (none; Django signed tokens use HMAC) |
 | 10.4.1–10.4.5 | OAuth authorisation server | n/a |
 | 11.3.1 | No ECB / weak padding | n/a (no own encryption) |
@@ -215,6 +228,7 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 16.2.4 | Common log format | done (JSON lines) |
 | 16.2.5 | Sensitive data kept out of logs | done (redaction, pseudonyms) |
 | 16.3.1 | Authentication events logged | done (T12: `login_requested`, `login_email_sent`, `login_succeeded`, `login_code_failed`, `login_link_failed`, `login_locked`, `login_rate_limited`, `logout`; pseudonymised user, no e-mail, IP, code or token) |
+| 16.3.2 | Failed authorisation attempts logged | done (T15: one `permission denied` line per 403 from a permission check) |
 | 16.4.1 | Log injection prevented | done (JSON encoding) |
 | 16.5.1 | Generic error messages | done (`DEBUG = False` in prod) |
 
