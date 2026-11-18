@@ -79,7 +79,7 @@ def test_every_reversible_route_sets_only_essential_cookies(user, capsys):
 
 def test_walker_finds_known_routes():
     paths = reversible_paths()
-    for expected in ("/", "/healthz", "/logowanie/", "/ciasteczka/"):
+    for expected in ("/", "/healthz", "/logowanie/", "/ciasteczka/", "/konto/", "/konto/email/"):
         assert expected in paths
     assert not any(p.startswith("/django-admin/") for p in paths)
 

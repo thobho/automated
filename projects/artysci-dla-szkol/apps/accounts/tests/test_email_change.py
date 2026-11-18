@@ -266,6 +266,15 @@ def test_link_and_check_refuse_garbage(user, queue, clock):
     assert services.confirm_email_change_link(user, "nie-ma-takiego") is False
 
 
+def test_task_wrappers_call_the_services(user, queue, clock):
+    from apps.accounts import tasks
+
+    request(user)
+    tasks.send_email_change_email(change_id=EmailChangeRequest.objects.get().pk, link_base="x")
+    tasks.send_email_change_notice(user_id=user.pk)
+    assert sorted(m.to[0] for m in mail.outbox) == [EMAIL, EMAIL, NEW]
+
+
 def test_session_hash_follows_the_email(user):
     before = user.get_session_auth_hash()
     user.email = NEW

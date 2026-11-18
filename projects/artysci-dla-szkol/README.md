@@ -153,6 +153,9 @@ list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d3
 - `/akceptacja-dokumentow/`: re-acceptance page (logged-in users with pending versions).
 - `/logowanie/` (e-mail), `/logowanie/kod/` (POST code), `/logowanie/link/?t=...` (GET button,
   POST logs in), `/wyloguj/` (POST only).
+- `/konto/` (account settings), `/konto/email/` (POST new address), `/konto/email/kod/` (POST
+  code), `/konto/email/link/?t=...` (GET button, POST confirms), `/konto/dane/` and
+  `/konto/usun/` (placeholders until US-8.6); all login required.
 - `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard start, a
   placeholder until US-2.1; login required).
 - `/rejestracja/placowka/` (institution registration), `/rejestracja/placowka/rspo/` (HTMX RSPO
@@ -178,6 +181,28 @@ No passwords (D1). App `apps/accounts`, logic in `services.py`:
 - Try it locally: `make up-lite && make seed && make web` and `make worker`, open
   `http://127.0.0.1:8000/logowanie/`, enter `artysta01@example.invalid`, read the e-mail in
   Mailpit (`http://127.0.0.1:18025`).
+
+## Account settings and e-mail change (US-1.6)
+
+`/konto/` (any logged-in account; linked as "Ustawienia konta" in the header), logic in
+`apps/accounts/services.py` (D101):
+
+- `account_overview(user)` and `update_names(user, full_name=..., artist_name=...)`; the artist
+  name goes through `artists.services.rename_artist()`.
+- `request_email_change(user, new_email, client_ip, link_base=...)`: 5 requests per hour per user
+  (`EMAIL_CHANGE_LIMIT_PER_USER`) and the login per-IP limit (20/h). The page answer is the same
+  for a free and a taken address. Free address: an `EmailChangeRequest` is stored and the job
+  `accounts.send_email_change_email` sends a link (`/konto/email/link/?t=...`) and a 6-digit code
+  to the new address (15 minutes, single use, only hashes stored) and a notice without a link to
+  the old one. Taken address: only the notice (`accounts.send_email_change_notice`).
+- `confirm_email_change_code(user, code)` / `confirm_email_change_link(user, token)`: only the
+  logged-in user who asked; sets the e-mail and `email_confirmed_at`. 5 wrong codes lock code
+  entry for 15 minutes. The view keeps the current session with a new key; every other session
+  of the user stops authenticating (the session hash includes the e-mail).
+- Until confirmed, login works with the old address only. A new request replaces an older one.
+- `/konto/dane/` and `/konto/usun/` are placeholders until US-8.6.
+- Try it locally: log in as `artysta01@example.invalid`, open `/konto/`, enter a new
+  `@example.invalid` address, read both e-mails in Mailpit and enter the code.
 
 ## Artist registration (US-1.1)
 

@@ -133,7 +133,22 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   institution and admin, and fails on a route without a row (excluded by name: `/django-admin/`,
   `/healthz`, `/readyz`; static files are not a URL name). It is part of the pre-pilot security
   gate (D65).
-- **The one allowed token in a URL**: the login link `/logowanie/link/?t=<token>`. The token
+- **Account settings and e-mail change (T17, US-1.6, D101)**: the login e-mail changes only
+  after confirmation from the new address, by the same logged-in account. `/konto/email/`
+  answers identically for a free and a taken address; a taken address gets nothing and nothing
+  changes. The old address always gets a notice without link or code (so its absence tells
+  nothing). The new address gets a link token and a 6-digit code made like a login challenge
+  (`secrets`, 15 minutes, single use, SHA-256 / salted HMAC, constant-time compare; the job gets
+  only the request id). Limits: 5 requests/h per user, 20/h per IP shared with login; 5 wrong
+  codes lock code entry for 15 minutes. A link opened by another account is refused (and stays
+  valid for its owner). Confirmation sets `email_confirmed_at`, closes open login challenges,
+  gives the current session a new key and ends every other session: the session auth hash
+  covers the e-mail (`User._get_session_auth_hash`). Until then login works with the old address
+  only. Events `email_change_requested`, `email_change_email_sent`, `email_change_notice_sent`,
+  `email_change_refused`, `email_change_confirmed`, `email_change_rate_limited` carry a
+  pseudonymised user only.
+- **The one allowed token in a URL**: the login link `/logowanie/link/?t=<token>` (and, built the
+  same way, the e-mail change link `/konto/email/link/?t=<token>`). The token
   is only in the query string, which the access log never contains (path only, `django.server`
   muted); `Referrer-Policy: strict-origin-when-cross-origin` keeps it out of cross-origin
   `Referer` headers. Opening the link (GET) only shows a "Zaloguj" button, so mail scanners
@@ -201,7 +216,7 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 7.2.3 | Tokens from a CSPRNG | done (Django sessions) |
 | 7.2.4 | New session on login | done (T12: `django.contrib.auth.login()` rotates the key) |
 | 7.4.1 | Logout/expiry ends the session | done (T12: POST logout flushes the DB session; expiry after 30 idle days, activity refreshes it) |
-| 7.4.2 | Disabling a user ends their sessions | planned (E1, E9) |
+| 7.4.2 | Disabling a user ends their sessions | planned (E1, E9); T17: changing the login e-mail ends all other sessions |
 | 8.1.1 | Authorisation rules documented | done (T15: roles and rules in `apps/accounts/roles.py`, per-route table in `apps/accounts/tests/test_permission_matrix.py`, "Roles and access control" above) |
 | 8.2.1 | Function-level access control | done (T15: `role_required` / `RoleRequiredMixin`, 403 + log; every route in the permission matrix; `/django-admin/` staff only) |
 | 8.2.2 | Data-level access control (IDOR) | planned (per feature; no user-owned objects are exposed by id yet) |
@@ -239,7 +254,9 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 16.2.2 | UTC timestamps | done |
 | 16.2.4 | Common log format | done (JSON lines) |
 | 16.2.5 | Sensitive data kept out of logs | done (redaction, pseudonyms) |
-| 16.3.1 | Authentication events logged | done (T12: `login_requested`, `login_email_sent`, `login_succeeded`, `login_code_failed`, `login_link_failed`, `login_locked`, `login_rate_limited`, `logout`; pseudonymised user, no e-mail, IP, code or token) |
+| 6.3.7 | Users notified after updates to authentication details | done (T17: an e-mail change request always sends a notice without link or code to the current address; the change needs confirmation from the new one) |
+| 6.6 (e-mail as factor) | Out-of-band authenticators; e-mail is not a strong OOB channel | accepted deviation (D1: the e-mail link + code *is* the login factor, no passwords). Mitigations: 15 min single-use codes stored as hashes, 5-failure lock, send limits, a changed login e-mail needs confirmation from the new address by the same logged-in account and ends other sessions (T17); admin TOTP planned (US-9.1) |
+| 16.3.1 | Authentication events logged | done (T12: `login_requested`, `login_email_sent`, `login_succeeded`, `login_code_failed`, `login_link_failed`, `login_locked`, `login_rate_limited`, `logout`; T17: `email_change_requested`, `email_change_confirmed`, `email_change_refused`, `email_change_rate_limited`; pseudonymised user, no e-mail, IP, code or token) |
 | 16.3.2 | Failed authorisation attempts logged | done (T15: one `permission denied` line per 403 from a permission check) |
 | 16.4.1 | Log injection prevented | done (JSON encoding) |
 | 16.5.1 | Generic error messages | done (`DEBUG = False` in prod) |
