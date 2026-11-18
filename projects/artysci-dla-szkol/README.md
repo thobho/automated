@@ -88,6 +88,19 @@ systemd user units (`deploy/pirx/ads-*.service`): `ads-lite` (Postgres + Mailpit
   `core.ping` job processed by the worker). Run just the smoke test with `make smoke-pirx`.
   Deploy also runs `manage.py seed` (synthetic users, placeholder legal documents); the smoke test
   checks `/regulamin/`, `/polityka-prywatnosci/` and `/ciasteczka/` (200, version, "PROJEKT" text).
+- Automatic redeploy: `ads-redeploy.timer` (user timer, every 10 min, installed by
+  `make install-units-pirx`) runs `deploy/pirx/redeploy.sh` from the deployment checkout. It takes a
+  `flock`, fetches, and if `origin/main` differs from the commit in
+  `~/runtime/artysci-dla-szkol/deployed.commit` (last commit with a green smoke test) it runs
+  `make deploy-pirx` + `make smoke-pirx`, then records the commit. Nothing new = silent exit. On
+  failure it rolls back (`make rollback-pirx`: last good commit, restart) and keeps the state file;
+  one commit is tried at most 3 times (`failed.commit` holds the count; a newer commit resets it).
+  Migrations are not reversed, so keep them backward compatible.
+  - Log: `~/runtime/artysci-dla-szkol/logs/redeploy.log` (rotated with the others).
+  - Pause (owner): `systemctl --user stop ads-redeploy.timer`; resume with `start`.
+  - Force a deploy now: `systemctl --user start ads-redeploy.service` (or, to retry a commit that
+    hit the cap, `rm ~/runtime/artysci-dla-szkol/failed.commit` first).
+  - Check: `systemctl --user list-timers 'ads-*'`.
 - Status: `systemctl --user status ads-web ads-worker`; logs: `tail -f ~/runtime/artysci-dla-szkol/logs/web.log`.
 - Restart: `systemctl --user restart ads-web ads-worker` (both are back within seconds).
 - Working URLs on pirx itself: `http://127.0.0.1:8100/healthz` (`{"db": "ok"}`), `/readyz`,

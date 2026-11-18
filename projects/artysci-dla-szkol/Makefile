@@ -19,7 +19,7 @@ export EMAIL_HOST ?= 127.0.0.1
 export EMAIL_PORT ?= $(MAILPIT_SMTP_PORT)
 
 .PHONY: up-lite stop-lite up-full down web media worker seed test lint migrate \
-	install-units-pirx deploy-pirx smoke-pirx
+	install-units-pirx deploy-pirx rollback-pirx smoke-pirx
 
 up-lite:
 	mkdir -p $(ARTYSCI_STATE_DIR)/postgres
@@ -80,8 +80,8 @@ install-units-pirx:
 		sed -e "s|@PROJECT@|$(CURDIR)|g" -e "s|@UV@|$(UV_BIN)|g" $$f > $(PIRX_UNIT_DIR)/$$(basename $$f); \
 	done
 	systemctl --user daemon-reload
-	systemctl --user enable --now ads-lite ads-web ads-worker ads-media ads-logrotate.timer
-	systemctl --user --no-pager status ads-lite ads-web ads-worker ads-media ads-logrotate.timer || true
+	systemctl --user enable --now ads-lite ads-web ads-worker ads-media ads-logrotate.timer ads-redeploy.timer
+	systemctl --user --no-pager status ads-lite ads-web ads-worker ads-media ads-logrotate.timer ads-redeploy.timer || true
 
 # Update the dev instance: pull, sync, migrate, collectstatic, restart, smoke test.
 deploy-pirx:
@@ -96,6 +96,16 @@ deploy-pirx:
 	$(PIRX_SH) uv run --frozen --no-dev python manage.py seed
 	systemctl --user restart ads-web ads-worker ads-media
 	$(MAKE) smoke-pirx
+
+# Put an already deployed older commit back (used by redeploy.sh after a failed deploy).
+# Migrations are not reversed; deploy migrations must stay backward compatible.
+rollback-pirx:
+	@test -n "$(ROLLBACK_REF)" || { echo "ROLLBACK_REF is required"; exit 1; }
+	git checkout --detach $(ROLLBACK_REF)
+	$(PIRX_SH) uv sync --frozen --no-dev
+	systemctl --user start ads-lite
+	$(PIRX_SH) uv run --frozen --no-dev python manage.py collectstatic --noinput
+	systemctl --user restart ads-web ads-worker ads-media
 
 smoke-pirx:
 	$(PIRX_SH) bash deploy/pirx/smoke.sh
