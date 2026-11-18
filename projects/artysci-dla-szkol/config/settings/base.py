@@ -98,10 +98,25 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# Login throttling scaffold (apps/accounts/throttling.py), wired into login by E1.
-LOGIN_THROTTLE_LIMIT = env.int("LOGIN_THROTTLE_LIMIT", default=5)
-LOGIN_THROTTLE_WINDOW = env.int("LOGIN_THROTTLE_WINDOW", default=900)  # seconds
-LOGIN_THROTTLE_CACHE = "default"
+# E-mail login (US-1.3, D1): no passwords; a link + 6-digit code, single use.
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+LOGIN_CHALLENGE_TTL = env.int("LOGIN_CHALLENGE_TTL", default=900)  # seconds
+DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL", default="Artyści dla szkół <no-reply@localhost>")
+
+# Limits (apps/accounts/throttling.py), counted in PostgreSQL so all workers share them (D96).
+LOGIN_THROTTLE_LIMIT = env.int("LOGIN_THROTTLE_LIMIT", default=5)  # failed codes per e-mail
+LOGIN_THROTTLE_WINDOW = env.int("LOGIN_THROTTLE_WINDOW", default=900)  # seconds (lock time)
+LOGIN_EMAIL_LIMIT_PER_ADDRESS = env.int("LOGIN_EMAIL_LIMIT_PER_ADDRESS", default=5)
+LOGIN_EMAIL_LIMIT_PER_IP = env.int("LOGIN_EMAIL_LIMIT_PER_IP", default=20)
+LOGIN_EMAIL_WINDOW = env.int("LOGIN_EMAIL_WINDOW", default=3600)  # seconds
+
+# Sessions in the database (django.contrib.sessions default), 30 days of inactivity: every
+# request re-saves the session, which moves its expiry 30 days ahead.
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_COOKIE_AGE = env.int("SESSION_COOKIE_AGE", default=30 * 24 * 3600)
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Security headers (SECURITY.md) ----------------------------------------------------------
 # HSTS, SSL redirect and Secure cookies are prod-only (prod.py).

@@ -1,76 +1,114 @@
-import logging
+from datetime import timedelta
 
 import pytest
-from django.core.cache import cache
+from django.db import connection, connections
 
 from apps.accounts import throttling
+from apps.accounts.models import ThrottleEvent
 
-EMAIL = "Artysta01@example.invalid"
+from .conftest import EMAIL
 
-
-@pytest.fixture(autouse=True)
-def _clean_cache(settings):
-    settings.LOGIN_THROTTLE_LIMIT = 3
-    settings.LOGIN_THROTTLE_WINDOW = 60
-    cache.clear()
-    yield
-    cache.clear()
+pytestmark = pytest.mark.django_db
 
 
-def test_locks_after_limit():
-    for _ in range(2):
-        throttling.register_failure(EMAIL)
-    assert not throttling.is_locked(EMAIL)
-    throttling.register_failure(EMAIL)
-    assert throttling.is_locked(EMAIL)
+def test_limit_reached_after_n_hits(clock):
+    for _ in range(4):
+        throttling.hit(throttling.CODE, EMAIL)
+    assert not throttling.exceeded(throttling.CODE, EMAIL)
+    assert throttling.hit(throttling.CODE, EMAIL) == 5
+    assert throttling.exceeded(throttling.CODE, EMAIL)
 
 
-def test_keys_are_normalised():
-    for _ in range(3):
-        throttling.register_failure(f"  {EMAIL.upper()} ")
-    assert throttling.is_locked(EMAIL.lower())
+def test_sliding_window_forgets_old_events(clock):
+    for _ in range(5):
+        throttling.hit(throttling.CODE, EMAIL)
+    clock.advance(seconds=899)
+    assert throttling.exceeded(throttling.CODE, EMAIL)
+    clock.advance(seconds=1)
+    assert not throttling.exceeded(throttling.CODE, EMAIL)
 
 
-def test_any_locked_key_locks():
-    for _ in range(3):
-        throttling.register_failure("203.0.113.0")
-    assert throttling.is_locked("someone@example.invalid", "203.0.113.0")
-    assert not throttling.is_locked("someone@example.invalid")
+def test_explicit_now_argument(clock):
+    then = clock.now - timedelta(hours=2)
+    throttling.hit(throttling.EMAIL_PER_ADDRESS, EMAIL, now=then)
+    assert throttling.count(throttling.EMAIL_PER_ADDRESS, EMAIL, now=then) == 1
+    assert throttling.count(throttling.EMAIL_PER_ADDRESS, EMAIL) == 0
 
 
-def test_reset_clears_failures():
-    for _ in range(3):
-        throttling.register_failure(EMAIL)
-    throttling.reset(EMAIL)
-    assert throttling.failures(EMAIL) == 0
-    assert not throttling.is_locked(EMAIL)
+def test_keys_are_normalised_and_scoped(clock):
+    throttling.hit(throttling.CODE, f"  {EMAIL.upper()} ")
+    assert throttling.count(throttling.CODE, EMAIL) == 1
+    assert throttling.count(throttling.EMAIL_PER_ADDRESS, EMAIL) == 0
 
 
-def test_empty_keys_are_ignored():
-    throttling.register_failure("", EMAIL)
-    assert throttling.failures(EMAIL) == 1
-    assert not throttling.is_locked("")
+def test_reset_clears_one_key(clock):
+    throttling.hit(throttling.CODE, EMAIL)
+    throttling.hit(throttling.CODE, "other@example.invalid")
+    throttling.reset(throttling.CODE, EMAIL)
+    assert throttling.count(throttling.CODE, EMAIL) == 0
+    assert throttling.count(throttling.CODE, "other@example.invalid") == 1
 
 
-def test_cache_never_holds_the_raw_identifier():
-    throttling.register_failure(EMAIL)
-    key = throttling._cache_key(EMAIL)
-    assert EMAIL.lower() not in key and cache.get(key) == 1
+def test_database_never_holds_the_raw_identifier(clock):
+    throttling.hit(throttling.CODE, EMAIL)
+    (event,) = ThrottleEvent.objects.all()
+    assert EMAIL not in event.key_hash
+    assert event.key_hash == throttling.key_hash(throttling.CODE, EMAIL)
+    assert event.key_hash != throttling.key_hash(throttling.EMAIL_PER_ADDRESS, EMAIL)
 
 
-def test_window_expiry_between_add_and_incr(monkeypatch):
-    def incr(*args, **kwargs):
-        raise ValueError
+def test_purge_drops_events_older_than_longest_window(clock):
+    throttling.hit(throttling.EMAIL_PER_IP, "203.0.113.7")
+    clock.advance(minutes=59)
+    throttling.hit(throttling.EMAIL_PER_IP, "203.0.113.7")
+    clock.advance(minutes=1)
+    assert throttling.purge() == 1
+    assert ThrottleEvent.objects.count() == 1
 
-    monkeypatch.setattr(cache, "incr", incr)
-    throttling.register_failure(EMAIL)
-    assert throttling.failures(EMAIL) == 1
+
+def test_unknown_scope_is_an_error():
+    with pytest.raises(ValueError):
+        throttling.limit_for("nope")
 
 
-def test_lockout_is_logged_without_the_identifier(caplog):
-    with caplog.at_level(logging.WARNING, logger="apps.accounts.throttling"):
-        for _ in range(3):
-            throttling.register_failure(EMAIL)
-    (record,) = caplog.records
-    assert record.event == "login_throttled"
-    assert EMAIL.lower() not in caplog.text.lower()
+@pytest.mark.parametrize(
+    ("addr", "key"),
+    [
+        ("203.0.113.7", "203.0.113.7"),
+        ("2001:db8:1:2:3:4:5:6", "2001:db8:1:2::"),
+        ("", "invalid"),
+        ("garbage", "invalid"),
+    ],
+)
+def test_ip_identifier(addr, key):
+    assert throttling.ip_identifier(addr) == key
+
+
+@pytest.mark.skipif(connection.vendor != "postgresql", reason="needs PostgreSQL")
+@pytest.mark.django_db(transaction=True)
+def test_counters_are_shared_between_database_connections(clock):
+    """Two connections stand in for two gunicorn workers: each sees the other's events."""
+    other = connections.create_connection("default")
+    try:
+        for _ in range(5):
+            throttling.hit(throttling.CODE, EMAIL)  # "worker A"
+        with other.cursor() as cursor:  # "worker B" reads A's failures
+            cursor.execute(
+                "SELECT count(*) FROM accounts_throttleevent WHERE scope = %s AND key_hash = %s",
+                [throttling.CODE, throttling.key_hash(throttling.CODE, EMAIL)],
+            )
+            assert cursor.fetchone()[0] == 5
+            for _ in range(5):  # B records five login e-mails ...
+                cursor.execute(
+                    "INSERT INTO accounts_throttleevent (scope, key_hash, created_at) "
+                    "VALUES (%s, %s, %s)",
+                    [
+                        throttling.EMAIL_PER_ADDRESS,
+                        throttling.key_hash(throttling.EMAIL_PER_ADDRESS, EMAIL),
+                        clock.now,
+                    ],
+                )
+        # (Django connections autocommit, so B's rows are visible now) ... and A refuses the sixth.
+        assert throttling.exceeded(throttling.EMAIL_PER_ADDRESS, EMAIL)
+    finally:
+        other.close()

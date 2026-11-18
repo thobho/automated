@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Wpisz kod" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Sprawdź skrzynkę" %}</h1>
+  {% if rate_limited %}
+    <p role="alert">{% translate "Wysłaliśmy już kilka wiadomości. Spróbuj ponownie później." %}</p>
+  {% else %}
+    <p>{% translate "Jeśli to konto istnieje, wysłaliśmy na podany adres link do logowania i 6-cyfrowy kod. Są ważne 15 minut." %}</p>
+  {% endif %}
+  {% if error %}
+    <p id="code-error" role="alert">{% translate "Kod jest nieprawidłowy lub nieaktualny. Sprawdź go albo poproś o nowy." %}</p>
+  {% endif %}
+  <form method="post" action="{% url 'accounts:login_code' %}">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <input type="hidden" name="email" value="{{ email }}">
+    <p>
+      <label for="id_code">{% translate "Kod z wiadomości" %}</label>
+      <input type="text" id="id_code" name="code" inputmode="numeric" pattern="[0-9]{6}"
+             maxlength="6" autocomplete="one-time-code" required
+             {% if error %}aria-invalid="true" aria-describedby="code-error"{% endif %}>
+    </p>
+    <button type="submit">{% translate "Zaloguj" %}</button>
+  </form>
+  <p><a href="{% url 'accounts:login' %}">{% translate "Poproś o nowy kod lub użyj innego adresu" %}</a></p>
+{% endblock %}

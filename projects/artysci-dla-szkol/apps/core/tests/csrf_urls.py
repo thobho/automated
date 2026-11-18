@@ -16,4 +16,5 @@ urlpatterns = [
     path("", HomeView.as_view()),
     path("echo", echo),
     path("", include("apps.trust.urls")),  # base.html links the legal pages
+    path("", include("apps.accounts.urls")),  # ... and login / logout
 ]

@@ -1,0 +1,13 @@
+{% load i18n %}{% autoescape off %}{% translate "Dzień dobry," %}
+
+{% translate "ktoś (zapewne Ty) poprosił o zalogowanie się do serwisu Artyści dla szkół." %}
+
+{% translate "Aby się zalogować, otwórz link i naciśnij przycisk „Zaloguj”:" %}
+{{ link }}
+
+{% translate "Albo wpisz ten kod na stronie logowania:" %}
+{{ code }}
+
+{% blocktranslate %}Link i kod są ważne {{ minutes }} minut i działają tylko raz.{% endblocktranslate %}
+{% translate "Jeśli to nie Ty, zignoruj tę wiadomość: nikt nie zaloguje się bez dostępu do Twojej skrzynki." %}
+{% endautoescape %}
