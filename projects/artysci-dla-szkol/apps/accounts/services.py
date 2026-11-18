@@ -3,8 +3,9 @@
 Login flow: `request_login()` (rate-limited, silent for unknown or inactive addresses) queues
 `send_login_email()` on the `email` queue; that job creates the challenge, so the raw link
 token and code exist only in the e-mail and never in the jobs table. The user then calls
-`login_with_code()` or `login_with_link()`; either one consumes the challenge, and the view
-starts the session with `start_session()`.
+`login_with_code()` or `login_with_link()`; either one consumes the challenge, confirms the
+address on first use (`confirm_email()`, US-1.1), and the view starts the session with
+`start_session()`.
 
 Auth events are logged with a pseudonymised user only: never an e-mail, IP, code or token.
 """
@@ -19,6 +20,7 @@ from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
+from django.db import IntegrityError, transaction
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
@@ -71,23 +73,35 @@ def _code_hash(salt: str, code: str) -> str:
 # --- login -----------------------------------------------------------------------------------
 
 
-def request_login(email: str, client_ip: str, *, link_base: str, now=None) -> bool:
+def login_email_allowed(email: str, client_ip: str, *, now=None) -> bool:
+    """True if a login e-mail for this address from this IP is within the sending limits.
+    Counts nothing (registration checks this before it creates an account)."""
+    now = _now(now)
+    email = normalize_email_address(email)
+    ip_key = throttling.ip_identifier(client_ip)
+    return not (
+        throttling.exceeded(throttling.EMAIL_PER_ADDRESS, email, now=now)
+        or throttling.exceeded(throttling.EMAIL_PER_IP, ip_key, now=now)
+    )
+
+
+def request_login(
+    email: str, client_ip: str, *, link_base: str, next_path: str = "", now=None
+) -> bool:
     """Ask for a login e-mail. Returns False only when a sending limit is reached.
 
     The result is the same for known, unknown and inactive addresses (no enumeration): the
     limits count every request, and only an active user gets an e-mail. `link_base` is the
-    site origin the link points to (e.g. ``https://host/``).
+    site origin the link points to (e.g. ``https://host/``); `next_path` is an optional local
+    path the link leads to after logging in (registration sends the wizard start).
     """
     now = _now(now)
     email = normalize_email_address(email)
-    ip_key = throttling.ip_identifier(client_ip)
-    if throttling.exceeded(throttling.EMAIL_PER_ADDRESS, email, now=now) or throttling.exceeded(
-        throttling.EMAIL_PER_IP, ip_key, now=now
-    ):
+    if not login_email_allowed(email, client_ip, now=now):
         _log("login e-mail rate limited", "login_rate_limited", level=logging.WARNING)
         return False
     throttling.hit(throttling.EMAIL_PER_ADDRESS, email, now=now)
-    throttling.hit(throttling.EMAIL_PER_IP, ip_key, now=now)
+    throttling.hit(throttling.EMAIL_PER_IP, throttling.ip_identifier(client_ip), now=now)
 
     user = _active_user(email)
     _log("login requested", "login_requested", user)
@@ -99,7 +113,43 @@ def request_login(email: str, client_ip: str, *, link_base: str, now=None) -> bo
             idempotency_key=f"accounts.login_email:{user.pk}",
             user_id=user.pk,
             link_base=link_base,
+            next_path=next_path,
         )
+    return True
+
+
+def get_or_create_unconfirmed_user(email: str) -> tuple:
+    """(user, created) for a registration. A new user has no password and stays
+    "niepotwierdzone" (`email_confirmed_at` is None) until a link or code login. An existing
+    user (any state) is returned untouched."""
+    user_model = get_user_model()
+    email = normalize_email_address(email)
+    existing = user_model.objects.filter(email=email).first()
+    if existing is not None:
+        return existing, False
+    try:
+        with transaction.atomic():
+            return user_model.objects.create_user(email=email), True
+    except IntegrityError:  # the same address registered concurrently
+        return user_model.objects.get(email=email), False
+
+
+def confirm_email(user, *, now=None) -> bool:
+    """Mark the address confirmed: the user just proved access to the mailbox. True only the
+    first time (then `account_confirmed` is recorded); later logins change nothing."""
+    from apps.analytics import services as analytics
+
+    now = _now(now)
+    updated = (
+        get_user_model()
+        .objects.filter(pk=user.pk, email_confirmed_at__isnull=True)
+        .update(email_confirmed_at=now)
+    )
+    if not updated:
+        return False
+    user.email_confirmed_at = now
+    analytics.track("account_confirmed", actor=user, obj=user)
+    _log("account confirmed", "account_confirmed", user)
     return True
 
 
@@ -122,12 +172,16 @@ def create_challenge(user, *, now=None) -> tuple[LoginChallenge, str, str]:
     return challenge, token, code
 
 
-def login_link(link_base: str, token: str) -> str:
-    """Absolute link for the e-mail. The token is only ever in the query string (SECURITY.md)."""
-    return f"{link_base.rstrip('/')}{reverse('accounts:login_link')}?{urlencode({'t': token})}"
+def login_link(link_base: str, token: str, next_path: str = "") -> str:
+    """Absolute link for the e-mail. The token is only ever in the query string (SECURITY.md).
+    `next_path` must be a local path (``/...``); anything else is dropped."""
+    query = {"t": token}
+    if next_path.startswith("/") and not next_path.startswith("//"):
+        query["next"] = next_path
+    return f"{link_base.rstrip('/')}{reverse('accounts:login_link')}?{urlencode(query)}"
 
 
-def send_login_email(user_id: int, link_base: str, *, now=None) -> bool:
+def send_login_email(user_id: int, link_base: str, next_path: str = "", *, now=None) -> bool:
     """Job body: create a challenge and e-mail its link and code. False if the user is gone
     or inactive (nothing is sent)."""
     user = get_user_model().objects.filter(pk=user_id, is_active=True).first()
@@ -137,7 +191,7 @@ def send_login_email(user_id: int, link_base: str, *, now=None) -> bool:
     minutes = settings.LOGIN_CHALLENGE_TTL // 60
     body = render_to_string(
         "accounts/email/login.txt",
-        {"link": login_link(link_base, token), "code": code, "minutes": minutes},
+        {"link": login_link(link_base, token, next_path), "code": code, "minutes": minutes},
     )
     send_mail(gettext("Logowanie do serwisu Artyści dla szkół"), body, None, [user.email])
     _log("login e-mail sent", "login_email_sent", user)
@@ -187,6 +241,7 @@ def login_with_code(email: str, code: str, *, now=None):
     if not _consume(challenge, now):
         return None
     throttling.reset(throttling.CODE, email)
+    confirm_email(user, now=now)
     return user
 
 
@@ -214,6 +269,7 @@ def login_with_link(token: str, *, now=None):
     if not _consume(challenge, now):
         return None
     throttling.reset(throttling.CODE, challenge.user.email)
+    confirm_email(challenge.user, now=now)
     return challenge.user
 
 

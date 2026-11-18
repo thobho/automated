@@ -10,6 +10,7 @@
     <form method="post" action="{% url 'accounts:login_link' %}">
       {% csrf_token %}
       <input type="hidden" name="t" value="{{ token }}">
+      <input type="hidden" name="next" value="{{ next }}">
       <button type="submit">{% translate "Zaloguj" %}</button>
     </form>
   {% else %}

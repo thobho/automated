@@ -24,7 +24,8 @@ def test_request_for_active_user_queues_one_email_job(user, queue, clock):
     assert services.request_login(EMAIL, IP, link_base=LINK_BASE) is True
     (job,) = login_jobs(queue)
     assert job["queue_name"] == "email"
-    assert job["args"] == {"user_id": user.pk, "link_base": LINK_BASE}  # no code, no token
+    # no code, no token
+    assert job["args"] == {"user_id": user.pk, "link_base": LINK_BASE, "next_path": ""}
 
 
 @pytest.mark.parametrize("email", [UNKNOWN_EMAIL, INACTIVE_EMAIL])
