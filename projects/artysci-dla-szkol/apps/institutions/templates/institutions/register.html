@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Rejestracja placówki" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Rejestracja placówki" %}</h1>
+  <p>{% translate "Załóż konto placówki, aby szukać artystów i wysyłać zapytania. Wyślemy Ci link i 6-cyfrowy kod do potwierdzenia adresu. Nie używamy haseł." %}</p>
+  {% if unavailable %}
+    <p id="form-error" role="alert">{% translate "Rejestracja jest chwilowo niedostępna. Spróbuj ponownie później." %}</p>
+  {% endif %}
+  <form method="post" action="{% url 'institutions:register' %}" novalidate>
+    {% csrf_token %}
+    <p>
+      <label for="id_name">{% translate "Nazwa placówki" %}</label>
+      {# Typing 3+ characters asks the server for RSPO suggestions (HTMX, GET, public data). #}
+      <input type="text" id="id_name" name="name" value="{{ form.name.value|default:'' }}"
+             maxlength="200" autocomplete="organization"
+             hx-get="{% url 'institutions:rspo_suggestions' %}"
+             hx-trigger="input changed delay:300ms" hx-include="#id_locality"
+             hx-target="#rspo-suggestions" hx-sync="closest form:replace"
+             aria-describedby="name-hint{% if form.name.errors %} name-error{% endif %}"
+             {% if form.name.errors %}aria-invalid="true"{% endif %}>
+    </p>
+    <p id="name-hint">{% translate "Po wpisaniu co najmniej 3 znaków podpowiemy placówki z rejestru RSPO." %}</p>
+    {% if form.name.errors %}
+      <p id="name-error" role="alert">{% translate "Podaj nazwę placówki (do 200 znaków) albo wybierz ją z listy RSPO." %}</p>
+    {% endif %}
+    <p>
+      <label for="id_locality">{% translate "Miejscowość" %}</label>
+      <input type="text" id="id_locality" name="locality" value="{{ form.locality.value|default:'' }}"
+             maxlength="100" autocomplete="address-level2"
+             hx-get="{% url 'institutions:rspo_suggestions' %}"
+             hx-trigger="input changed delay:300ms" hx-include="#id_name"
+             hx-target="#rspo-suggestions" hx-sync="closest form:replace"
+             {% if form.locality.errors %}aria-invalid="true" aria-describedby="locality-error"{% endif %}>
+    </p>
+    {% if form.locality.errors %}
+      <p id="locality-error" role="alert">{% translate "Podaj miejscowość." %}</p>
+    {% endif %}
+    <div id="rspo-suggestions" aria-live="polite">
+      {% include "institutions/rspo_suggestions.html" %}
+    </div>
+    {% if form.rspo_number.errors %}
+      <p id="rspo-error" role="alert">{{ form.rspo_number.errors.0 }}</p>
+    {% endif %}
+    <p>{% translate "Jeśli wybierzesz placówkę z listy RSPO, typ, nazwę, miejscowość i województwo weźmiemy z rejestru." %}</p>
+    <p>
+      <label for="id_institution_type">{% translate "Typ placówki" %}</label>
+      <select id="id_institution_type" name="institution_type"
+              {% if form.institution_type.errors %}aria-invalid="true" aria-describedby="type-error"{% endif %}>
+        <option value="">{% translate "– wybierz –" %}</option>
+        {% for value, label in types %}
+          <option value="{{ value }}"{% if form.institution_type.value == value %} selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </p>
+    {% if form.institution_type.errors %}
+      <p id="type-error" role="alert">{% translate "Wybierz typ placówki." %}</p>
+    {% endif %}
+    <p>
+      <label for="id_voivodeship">{% translate "Województwo" %}</label>
+      <select id="id_voivodeship" name="voivodeship"
+              {% if form.voivodeship.errors %}aria-invalid="true" aria-describedby="voivodeship-error"{% endif %}>
+        <option value="">{% translate "– wybierz –" %}</option>
+        {% for value, label in voivodeships %}
+          <option value="{{ value }}"{% if form.voivodeship.value == value %} selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </p>
+    {% if form.voivodeship.errors %}
+      <p id="voivodeship-error" role="alert">{% translate "Wybierz województwo." %}</p>
+    {% endif %}
+    <p>
+      <label for="id_function">{% translate "Twoja funkcja w placówce" %}</label>
+      <select id="id_function" name="function" required
+              {% if form.function.errors %}aria-invalid="true" aria-describedby="function-error"{% endif %}>
+        <option value="">{% translate "– wybierz –" %}</option>
+        {% for value, label in functions %}
+          <option value="{{ value }}"{% if form.function.value == value %} selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </p>
+    {% if form.function.errors %}
+      <p id="function-error" role="alert">{% translate "Wybierz swoją funkcję." %}</p>
+    {% endif %}
+    <p>
+      <label for="id_email">{% translate "Adres e-mail" %}</label>
+      <input type="email" id="id_email" name="email" value="{{ form.email.value|default:'' }}"
+             autocomplete="email" maxlength="254" required
+             {% if form.email.errors %}aria-invalid="true" aria-describedby="email-error"{% endif %}>
+    </p>
+    {% if form.email.errors %}
+      <p id="email-error" role="alert">{% translate "Podaj poprawny adres e-mail." %}</p>
+    {% endif %}
+    <p>
+      <input type="checkbox" id="id_accept" name="accept" value="1" required
+             {% if form.accept.value %}checked{% endif %}
+             {% if form.accept.errors %}aria-invalid="true" aria-describedby="accept-error"{% endif %}>
+      <label for="id_accept">{% translate "Akceptuję" %}
+        <a href="{% url 'trust:terms' %}">{% translate "regulamin" %}</a>
+        {% translate "i" %}
+        <a href="{% url 'trust:privacy' %}">{% translate "politykę prywatności" %}</a>.</label>
+    </p>
+    {% if form.accept.errors %}
+      <p id="accept-error" role="alert">{{ form.accept.errors.0 }}</p>
+    {% endif %}
+    <button type="submit">{% translate "Załóż konto placówki" %}</button>
+  </form>
+  <p>{% translate "Masz już konto?" %} <a href="{% url 'accounts:login' %}">{% translate "Zaloguj się" %}</a></p>
+{% endblock %}
