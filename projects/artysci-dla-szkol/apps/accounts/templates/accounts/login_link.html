@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Logowanie" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Logowanie" %}</h1>
+  {% if valid %}
+    <p>{% translate "Naciśnij przycisk, aby zalogować się na tym urządzeniu." %}</p>
+    <form method="post" action="{% url 'accounts:login_link' %}">
+      {% csrf_token %}
+      <input type="hidden" name="t" value="{{ token }}">
+      <button type="submit">{% translate "Zaloguj" %}</button>
+    </form>
+  {% else %}
+    <p role="alert">{% translate "Ten link wygasł albo został już użyty." %}</p>
+    <p><a href="{% url 'accounts:login' %}">{% translate "Poproś o nowy link" %}</a></p>
+  {% endif %}
+{% endblock %}

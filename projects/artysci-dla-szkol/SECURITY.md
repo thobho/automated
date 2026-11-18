@@ -39,10 +39,10 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 | CSRF (also via HTMX) | `CsrfViewMiddleware` on all unsafe methods; HTMX sends `X-CSRFToken`; cookies `SameSite=Lax` |
 | Clickjacking | `frame-ancestors 'none'` + `X-Frame-Options: DENY` |
 | Session theft | `HttpOnly`, `Secure` + `__Host-` cookies in prod, HSTS, SSL redirect |
-| Credential stuffing / brute force | `apps/accounts/throttling.py` (scaffold, wired into login by E1) |
+| Credential stuffing / brute force | no passwords (D1); 6-digit codes lock after 5 failures per e-mail for 15 min; login e-mails limited to 5/h per address and 20/h per IP; counters in PostgreSQL (`apps/accounts/throttling.py`, D96) |
 | Malicious uploads | separate origin, type/size checks (T06, E2) |
 | Data leak through logs | redaction in `apps/core/logs.py`, pseudonymised user ids, no query strings |
-| Account enumeration, spam | E1 (generic errors), E2+ (moderation, rate limits) |
+| Account enumeration, spam | the login page answers identically for known, unknown and inactive addresses (also when rate-limited) and only active users get e-mail (T12); E2+ moderation |
 | Personal data leaking to AI providers | `apps/profiles/ai`: scrubber before every call, `data_collection: deny` + `zdr: true`, provider allowlist, no prompt text stored or logged |
 | Disputed or altered legal consent | `apps/trust`: immutable versioned documents, acceptance rows with version + time (PROTECT), consent only to the versions the page showed, re-acceptance gate after material changes |
 | Runaway AI cost (bug, loop, abuse) | per-call and daily caps checked before sending (`AICapExceeded`), `AI_KILL_SWITCH`, low-limit key |
@@ -79,6 +79,22 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   queryset and admin all refuse). The re-acceptance gate redirects only to a fixed URL; the
   `next` target is checked with `url_has_allowed_host_and_scheme`; the accept form is a CSRF-
   protected POST.
+- **E-mail login (T12, D1, D96)**: no passwords. `/logowanie/` answers identically whether or
+  not the address has an active account; only active users get an e-mail. One challenge is a
+  `secrets.token_urlsafe(32)` link token plus a 6-digit code, valid 15 minutes, single use
+  (using either consumes it; a newer e-mail closes the older one). Stored as SHA-256 (token)
+  and HMAC-SHA256 with SECRET_KEY and a per-row salt (code); codes compared in constant time.
+  The e-mail job receives only the user id and site origin and creates the challenge itself,
+  so codes and tokens never reach the jobs table. Limits: 5 failed codes per e-mail lock code
+  login for 15 minutes; 5 login e-mails per hour per address, 20 per IP (IPv6: per /64).
+  Sessions: database, key rotated on login, 30 days idle expiry; logout is a CSRF-protected
+  POST that deletes the session row and sends `Clear-Site-Data: "cookies", "storage"`.
+- **The one allowed token in a URL**: the login link `/logowanie/link/?t=<token>`. The token
+  is only in the query string, which the access log never contains (path only, `django.server`
+  muted); `Referrer-Policy: strict-origin-when-cross-origin` keeps it out of cross-origin
+  `Referer` headers. Opening the link (GET) only shows a "Zaloguj" button, so mail scanners
+  that fetch links cannot consume it; the POST logs in. The page is `Cache-Control: no-cache,
+  no-store` and the token is single use and expires in 15 minutes.
 
 Remediation time frames for vulnerable dependencies (ASVS 15.1.1): critical 7 days, high 30
 days, others with the next regular update; dependencies are reviewed at least monthly.
@@ -116,23 +132,16 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 5.3.1 | Uploads never executed | planned (T06: separate origin, D62) |
 | 5.3.2 | Server-generated file paths | planned (T06) |
 | 6.1.1 | Rate limiting / anti-automation documented | done (this file, `throttling.py`) |
-| 6.2.1 | Passwords ≥ 8 chars | done (`MinimumLengthValidator`) |
-| 6.2.2 | Users can change password | planned (E1) |
-| 6.2.3 | Change needs current + new password | planned (E1) |
-| 6.2.4 | Check against common passwords | done (`CommonPasswordValidator`) |
-| 6.2.5 | No composition rules | partial (`NumericPasswordValidator` rejects all-digit passwords; review in E1) |
-| 6.2.6 | `type=password` fields | planned (E1) |
-| 6.2.7 | Paste / password managers allowed | planned (E1) |
-| 6.2.8 | Password checked exactly as entered | done (Django hashers) |
-| 6.3.1 | Brute force / stuffing controls | partial (scaffold T04, wired in E1) |
+| 6.2.1–6.2.8 | Password rules (length, change, common lists, composition, fields, paste, exact check) | n/a (no passwords: e-mail link + code only, D1; users have unusable passwords. Django-admin staff logins keep Django's password validators until admin TOTP, US-9.1) |
+| 6.3.1 | Brute force / stuffing controls | done (T12: 5 failed codes per e-mail lock code login for 15 min, even a correct code; send limits 5/h per address, 20/h per IP; shared in PostgreSQL) |
 | 6.3.2 | No default accounts | done (none created; seed users have unusable passwords) |
-| 6.4.1 | Initial passwords/codes random, expiring | planned (E1) |
+| 6.4.1 | Initial passwords/codes random, expiring | done (T12: `secrets` link token + 6-digit code, 15 min, single use, only hashes stored, constant-time compare) |
 | 6.4.2 | No password hints / secret questions | done (none) |
 | 7.2.1 | Session checked on the backend | done (Django sessions) |
 | 7.2.2 | Dynamic session tokens | done (Django sessions) |
 | 7.2.3 | Tokens from a CSPRNG | done (Django sessions) |
-| 7.2.4 | New session on login | planned (E1, Django `login()` rotates the key) |
-| 7.4.1 | Logout/expiry ends the session | planned (E1) |
+| 7.2.4 | New session on login | done (T12: `django.contrib.auth.login()` rotates the key) |
+| 7.4.1 | Logout/expiry ends the session | done (T12: POST logout flushes the DB session; expiry after 30 idle days, activity refreshes it) |
 | 7.4.2 | Disabling a user ends their sessions | planned (E1, E9) |
 | 8.1.1 | Authorisation rules documented | planned (E1 roles) |
 | 8.2.1 | Function-level access control | planned (per feature; admin is staff-only) |
@@ -147,8 +156,8 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 12.2.1 | TLS for all external connections | partial (app redirects + HSTS; proxy at deployment, D91) |
 | 12.2.2 | Publicly trusted certificates | planned (deployment, D91) |
 | 13.4.1 | No `.git` in the deployment | done (`.dockerignore`) |
-| 14.2.1 | No sensitive data in URLs | partial (query strings never logged; per feature in E1+) |
-| 14.3.1 | Client storage cleared on logout | planned (E1, `Clear-Site-Data`) |
+| 14.2.1 | No sensitive data in URLs | partial (query strings never logged; the login link token is the one allowed exception, see "E-mail login") |
+| 14.3.1 | Client storage cleared on logout | done (T12: `Clear-Site-Data: "cookies", "storage"`) |
 | 15.1.1 | Remediation time frames documented | done (above) |
 | 15.2.1 | Components within those time frames | planned (dependency audit in CI) |
 | 15.3.1 | Return only needed fields | done so far (health endpoints); per feature |
@@ -171,7 +180,7 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 16.2.2 | UTC timestamps | done |
 | 16.2.4 | Common log format | done (JSON lines) |
 | 16.2.5 | Sensitive data kept out of logs | done (redaction, pseudonyms) |
-| 16.3.1 | Authentication events logged | planned (E1; throttle lockout logged now) |
+| 16.3.1 | Authentication events logged | done (T12: `login_requested`, `login_email_sent`, `login_succeeded`, `login_code_failed`, `login_link_failed`, `login_locked`, `login_rate_limited`, `logout`; pseudonymised user, no e-mail, IP, code or token) |
 | 16.4.1 | Log injection prevented | done (JSON encoding) |
 | 16.5.1 | Generic error messages | done (`DEBUG = False` in prod) |
 

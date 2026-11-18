@@ -132,7 +132,7 @@ def test_anonymous_is_never_gated(client):
 def test_accept_page_requires_login(client):
     response = client.get(ACCEPT)
     assert response.status_code == 302
-    assert "login" in response["Location"]
+    assert response["Location"].startswith("/logowanie/?next=")
 
 
 def test_accept_page_without_pending_redirects_to_next(client, accepted_v1):

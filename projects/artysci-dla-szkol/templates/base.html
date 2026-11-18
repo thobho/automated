@@ -13,6 +13,19 @@
 </head>
 {# Send the CSRF token with every HTMX request. #}
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <header>
+    <nav aria-label="{% translate 'Konto' %}">
+      {% if user.is_authenticated %}
+        {# Logout is POST-only (CSRF-protected); the server ends the session. #}
+        <form method="post" action="{% url 'accounts:logout' %}">
+          {% csrf_token %}
+          <button type="submit">{% translate "Wyloguj" %}</button>
+        </form>
+      {% else %}
+        <a href="{% url 'accounts:login' %}">{% translate "Zaloguj" %}</a>
+      {% endif %}
+    </nav>
+  </header>
   <main id="main">
     {% block content %}{% endblock %}
   </main>
