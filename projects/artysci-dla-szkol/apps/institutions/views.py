@@ -2,12 +2,13 @@
 placeholder. Views parse the request, call `services`, render a response."""
 
 from django import forms
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_http_methods
+
+from apps.accounts.permissions import role_required
 
 from . import services
 from .models import InstitutionType, MemberFunction, Voivodeship
@@ -109,11 +110,8 @@ def rspo_suggestions(request):
     )
 
 
-@login_required
+@role_required("institution")
 def start(request):
-    """Institution start: a placeholder until the catalog and inquiries (M2). Accounts
-    without an institution go to the home page."""
+    """Institution start: a placeholder until the catalog and inquiries (M2)."""
     member = services.member_for(request.user)
-    if member is None:
-        return redirect("/")
     return render(request, "institutions/start.html", {"member": member})

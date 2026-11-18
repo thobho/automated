@@ -301,6 +301,30 @@ def purge_expired(*, now=None) -> dict[str, int]:
     }
 
 
+# --- admin accounts (D37, D99) ----------------------------------------------------------------
+
+
+class AdminRefused(Exception):
+    """The address already belongs to an artist or institution account (one role per account)."""
+
+
+def create_admin(email: str) -> tuple:
+    """Make `email` an admin: the only way to set `is_staff`/`is_superuser` (run on the server
+    with `manage.py create_admin`). Creates the account if needed, without a password: the admin
+    logs in with the normal e-mail link or code. Idempotent. Returns (user, created)."""
+    from .roles import Role, role_of
+
+    user, created = get_or_create_unconfirmed_user(email)
+    role = role_of(user)
+    if role in (Role.ARTIST, Role.INSTITUTION):
+        raise AdminRefused(role)
+    if not (user.is_staff and user.is_superuser):
+        user.is_staff = user.is_superuser = True
+        user.save(update_fields=["is_staff", "is_superuser"])
+        _log("admin role granted", "admin_granted", user)
+    return user, created
+
+
 # --- seed ------------------------------------------------------------------------------------
 
 

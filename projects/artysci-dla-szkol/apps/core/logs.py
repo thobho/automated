@@ -24,7 +24,19 @@ REQUEST_ID_HEADER = "X-Request-ID"
 _INCOMING_ID = re.compile(r"^[A-Za-z0-9_.-]{8,64}$")
 
 # Extra fields a log call may pass with `extra={...}` that end up in the JSON line.
-EXTRA_FIELDS = ("method", "path", "status", "duration_ms", "ip", "event", "count")
+EXTRA_FIELDS = (
+    "method",
+    "path",
+    "status",
+    "duration_ms",
+    "ip",
+    "event",
+    "count",
+    # permission checks (apps/accounts/roles.py)
+    "role",
+    "url_name",
+    "required_role",
+)
 
 # --- Redaction -----------------------------------------------------------------------------
 

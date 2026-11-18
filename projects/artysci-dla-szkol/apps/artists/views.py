@@ -2,12 +2,13 @@
 call `services`, render a response."""
 
 from django import forms
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods
+
+from apps.accounts.permissions import role_required
 
 from . import services
 from .services import Registration
@@ -57,9 +58,7 @@ def register(request):
     return render(request, "artists/register_sent.html", context, status=status)
 
 
-@login_required
+@role_required("artist")
 def start(request):
-    """Profile wizard start: a placeholder until US-2.1. Non-artists go to the home page."""
-    if services.artist_for(request.user) is None:
-        return redirect("/")
+    """Profile wizard start (`can_create_artist_profile`): a placeholder until US-2.1."""
     return render(request, "artists/start.html")
