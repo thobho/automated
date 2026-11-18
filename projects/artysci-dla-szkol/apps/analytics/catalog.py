@@ -9,6 +9,7 @@ EVENT_CATALOG: dict[str, frozenset[str]] = {
     "artist_registered": frozenset({"source"}),
     "institution_registered": frozenset({"institution_type", "rspo_matched", "linked_existing"}),
     "account_confirmed": frozenset(),
+    "institution_verified": frozenset({"method"}),
     "profile_generated": frozenset({"duration_ms", "attempt"}),
     "profile_published": frozenset({"profile_id"}),
     "inquiry_sent": frozenset({"inquiry_id", "artist_count"}),

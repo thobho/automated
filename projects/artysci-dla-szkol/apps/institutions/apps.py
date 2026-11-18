@@ -7,3 +7,8 @@ class InstitutionsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "apps.institutions"
     label = "institutions"
+
+    def ready(self) -> None:
+        from . import receivers
+
+        receivers.connect()
