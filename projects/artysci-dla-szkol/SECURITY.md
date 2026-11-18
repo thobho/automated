@@ -98,6 +98,16 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   optional `next` in the e-mailed link is a local path only (`login_link()` drops anything
   else, and the login views check it again with `url_has_allowed_host_and_scheme`). Logs and
   events carry a pseudonymised user only, never the e-mail or the name.
+- **Institution registration (T14, US-1.2, D98)**: `/rejestracja/placowka/` follows the artist
+  flow above (same answer for new and existing addresses, limits checked first, no password,
+  unconfirmed until the first login). A chosen RSPO suggestion is sent as its number only; the
+  server copies name, type, locality and voivodeship from `RspoEntry`, so a tampered POST
+  cannot rename a registry institution. A second account for an RSPO number that already has
+  an institution is linked with `needs_review=True` for the admin and gets no access to the
+  other members' data (inquiries in M2 are scoped to the member, not the institution). The
+  suggestion endpoint `/rejestracja/placowka/rspo/` is anonymous, GET only, read-only, returns
+  at most 10 public registry rows and nothing for fewer than 3 characters (query capped at 200
+  characters). Events hold the institution type and two booleans only, no names or e-mails.
 - **The one allowed token in a URL**: the login link `/logowanie/link/?t=<token>`. The token
   is only in the query string, which the access log never contains (path only, `django.server`
   muted); `Referrer-Policy: strict-origin-when-cross-origin` keeps it out of cross-origin

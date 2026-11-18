@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 
 from apps.accounts import services
+from apps.institutions import services as institution_services
 from apps.trust import services as trust_services
 
 
@@ -10,7 +11,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         created = services.seed_users()
         documents = trust_services.seed_placeholders()
+        rspo = institution_services.seed_rspo()
         self.stdout.write(
             f"seed: created {created['artists']} artists, {created['institutions']} institutions, "
-            f"{documents} placeholder legal documents (offers: no model yet)"
+            f"{documents} placeholder legal documents, {rspo} synthetic RSPO entries "
+            "(offers: no model yet)"
         )

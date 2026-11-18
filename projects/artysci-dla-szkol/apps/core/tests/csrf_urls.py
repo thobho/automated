@@ -17,4 +17,6 @@ urlpatterns = [
     path("echo", echo),
     path("", include("apps.trust.urls")),  # base.html links the legal pages
     path("", include("apps.accounts.urls")),  # ... and login / logout
+    path("", include("apps.artists.urls")),  # the home page links both registrations
+    path("", include("apps.institutions.urls")),
 ]

@@ -7,6 +7,7 @@ that carry e-mails, names, free text or IPs; use ids, counts, enums and duration
 
 EVENT_CATALOG: dict[str, frozenset[str]] = {
     "artist_registered": frozenset({"source"}),
+    "institution_registered": frozenset({"institution_type", "rspo_matched", "linked_existing"}),
     "account_confirmed": frozenset(),
     "profile_generated": frozenset({"duration_ms", "attempt"}),
     "profile_published": frozenset({"profile_id"}),

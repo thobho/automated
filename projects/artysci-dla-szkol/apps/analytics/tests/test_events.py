@@ -10,6 +10,7 @@ pytestmark = pytest.mark.django_db
 # an entry listed in PENDING is a known gap, anything else must have an emitter test.
 EMITTERS: dict[str, str] = {
     "artist_registered": "apps.artists.services.register_artist",
+    "institution_registered": "apps.institutions.services.register_institution",
     "account_confirmed": "apps.accounts.services.confirm_email",
 }
 PENDING = set(EVENT_CATALOG) - set(EMITTERS)
@@ -18,6 +19,7 @@ PENDING = set(EVENT_CATALOG) - set(EMITTERS)
 def test_catalog_has_the_agreed_events():
     assert set(EVENT_CATALOG) == {
         "artist_registered",
+        "institution_registered",
         "account_confirmed",
         "profile_generated",
         "profile_published",
