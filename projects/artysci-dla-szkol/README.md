@@ -86,8 +86,13 @@ systemd user units (`deploy/pirx/ads-*.service`): `ads-lite` (Postgres + Mailpit
 - Update: `make deploy-pirx` (`DEPLOY_REF=main` by default): fetch + fast-forward, `uv sync --frozen`,
   migrate, collectstatic, restart units, smoke test (`/healthz`, `/`, `/readyz`, a static file, a
   `core.ping` job processed by the worker). Run just the smoke test with `make smoke-pirx`.
+  Deploy also runs `manage.py seed` (synthetic users, placeholder legal documents); the smoke test
+  checks `/regulamin/`, `/polityka-prywatnosci/` and `/ciasteczka/` (200, version, "PROJEKT" text).
 - Status: `systemctl --user status ads-web ads-worker`; logs: `tail -f ~/runtime/artysci-dla-szkol/logs/web.log`.
-
+- Restart: `systemctl --user restart ads-web ads-worker` (both are back within seconds).
+- Working URLs on pirx itself: `http://127.0.0.1:8100/healthz` (`{"db": "ok"}`), `/readyz`,
+  `/regulamin/`, `/polityka-prywatnosci/`, `/ciasteczka/`, `/logowanie/` (login e-mails land in
+  Mailpit: `http://127.0.0.1:18025`). From the home network: `http://192.168.68.62:8100/`.
 ## Tests and lint
 
 ```bash
