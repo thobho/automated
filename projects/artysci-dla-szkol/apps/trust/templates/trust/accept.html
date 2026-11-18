@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Zmiany w dokumentach" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Zmiany w dokumentach" %}</h1>
+  <p>{% translate "Zmieniły się dokumenty serwisu. Aby dalej z niego korzystać, zapoznaj się z nowymi wersjami i zaakceptuj je." %}</p>
+  {% if error %}
+    <p role="alert">{% translate "Zaznacz potwierdzenie. Jeśli w międzyczasie opublikowano nową wersję, sprawdź listę poniżej jeszcze raz." %}</p>
+  {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <ul>
+      {% for item in items %}
+        <li>
+          <a href="{% url 'trust:'|add:item.document.kind %}">{{ item.document.get_kind_display }}</a>:
+          {% blocktranslate with version=item.document.version trimmed %}nowa wersja {{ version }}{% endblocktranslate %}
+          ({{ item.document.published_at|date:"j E Y" }}){% if item.accepted_version %},
+          {% blocktranslate with version=item.accepted_version trimmed %}wcześniej zaakceptowana wersja {{ version }}{% endblocktranslate %}{% endif %}
+          <input type="hidden" name="document" value="{{ item.document.pk }}">
+        </li>
+      {% endfor %}
+    </ul>
+    <p>
+      <input type="checkbox" id="confirm" name="confirm" value="1" required>
+      <label for="confirm">{% translate "Przeczytałem(-am) i akceptuję powyższe dokumenty." %}</label>
+    </p>
+    <button type="submit">{% translate "Akceptuję" %}</button>
+  </form>
+{% endblock %}
