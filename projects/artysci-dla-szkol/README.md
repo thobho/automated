@@ -38,7 +38,7 @@ Docker with Compose, and uv). Run from this folder.
 | `make up-lite` | `postgres:17` (shared_buffers 64MB, 256m limit) + Mailpit (64m). Fits a 4 GB machine. |
 | `make web` | migrate, then `runserver` natively on `127.0.0.1:18001` (talks to the lite stack) |
 | `make worker` | native Procrastinate worker on all queues (see "Background jobs") |
-| `make seed` | synthetic data, idempotent: 10 artists, 5 institutions (`@example.invalid`, no passwords) |
+| `make seed` | synthetic data, idempotent: 10 artists, 5 institutions (`@example.invalid`, no passwords), placeholder v1 of each legal document ("PROJEKT – tekst zastępczy…") |
 | `make up-full` | lite + MinIO + `web` (gunicorn) and `worker` containers built from `Dockerfile` |
 | `make down` | stop and remove all containers (data stays in the state dir) |
 | `make test` / `make lint` | pytest with coverage / ruff + format check + migrations check |
@@ -128,6 +128,27 @@ Threat model, headers, cookie rules and the ASVS checklist: [SECURITY.md](SECURI
   down or migrations are pending.
 - `/django-admin/`: Django's built-in admin (staff only). The product's own staff tools will live
   in the `adminpanel` app.
+- `/regulamin/`, `/polityka-prywatnosci/`, `/ciasteczka/`: current version of each legal
+  document (404 until one is published), linked from the footer.
+- `/akceptacja-dokumentow/`: re-acceptance page (logged-in users with pending versions).
+
+## Legal documents (US-8.1)
+
+App `apps/trust`. The texts come from the owner's lawyer (D30); agents only build the mechanism.
+
+- `LegalDocument`: kind (`terms`, `privacy`, `cookies`), version (1, 2, ... per kind), plain-text
+  body (rendered escaped with `linebreaks`), `published_at`, `material`. Published versions are
+  immutable (model `save()`/`delete()` and queryset `update()`/`delete()` raise
+  `DocumentImmutable`); a correction is a new version.
+- `services.publish(kind, body, material)`, `current(kind)`, `record_acceptance(user, kinds)`
+  (stores the current version of each kind, raises `NoPublishedVersion` if one is missing; US-1.1
+  calls it at registration), `pending_acceptances(user)`.
+- `LegalAcceptanceMiddleware` redirects a logged-in user who has not accepted the newest
+  *material* `terms`/`privacy` version to the acceptance page (HTMX requests get `HX-Redirect`).
+  Exempt: the legal pages, the acceptance page, logout, `/healthz`, `/readyz`, static files.
+- **Publishing a new version:** `/django-admin/trust/legaldocument/add/` (staff), pick the kind,
+  paste the text, tick "Istotna zmiana" if users must accept again. Versions cannot be edited
+  or deleted there. Acceptances are read-only at `/django-admin/trust/legalacceptance/`.
 
 ## Background jobs
 
@@ -227,6 +248,7 @@ App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python
 3.13, Django 5.2 LTS, PostgreSQL 17, HTMX, uv), D91 (hosting not decided, stay provider-neutral).
+Added with T10: no new dependency; D95 (legal documents: when re-acceptance is required).
 Added with T06: `django-storages[s3]` (+ boto3) for the S3 backend, `Pillow` for EXIF stripping.
 Added with T05: `procrastinate[django]` as the job queue (on PostgreSQL, no extra service).
 Added with T04: no new dependency for security (own CSP middleware, own JSON formatter and

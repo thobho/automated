@@ -44,6 +44,7 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 | Data leak through logs | redaction in `apps/core/logs.py`, pseudonymised user ids, no query strings |
 | Account enumeration, spam | E1 (generic errors), E2+ (moderation, rate limits) |
 | Personal data leaking to AI providers | `apps/profiles/ai`: scrubber before every call, `data_collection: deny` + `zdr: true`, provider allowlist, no prompt text stored or logged |
+| Disputed or altered legal consent | `apps/trust`: immutable versioned documents, acceptance rows with version + time (PROTECT), consent only to the versions the page showed, re-acceptance gate after material changes |
 | Runaway AI cost (bug, loop, abuse) | per-call and daily caps checked before sending (`AICapExceeded`), `AI_KILL_SWITCH`, low-limit key |
 
 ## What is in place (T04)
@@ -73,6 +74,11 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   public files on a separate origin (`MEDIA_PUBLIC_BASE_URL`, required in prod). **Virus
   scanning is deferred**: uploads are not scanned yet; this is planned before uploads from
   untrusted users go live.
+- **Legal documents (T10)**: bodies are plain text from staff, rendered autoescaped
+  (`linebreaks`), never as HTML. Published versions cannot be changed or deleted (model,
+  queryset and admin all refuse). The re-acceptance gate redirects only to a fixed URL; the
+  `next` target is checked with `url_has_allowed_host_and_scheme`; the accept form is a CSRF-
+  protected POST.
 
 Remediation time frames for vulnerable dependencies (ASVS 15.1.1): critical 7 days, high 30
 days, others with the next regular update; dependencies are reviewed at least monthly.
@@ -94,7 +100,7 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 2.1.1 | Input validation rules documented | planned (per feature, E1+) |
 | 2.2.1 | Input validated against business rules | planned (per feature, Django forms) |
 | 2.2.2 | Validation at a trusted service layer | done by design (`services.py` rule, CLAUDE.md) |
-| 2.3.1 | Business flow steps in order | planned (inquiries, notices) |
+| 2.3.1 | Business flow steps in order | partial (re-acceptance gate before using the app, T10); inquiries, notices planned |
 | 3.2.1 | Content not rendered in wrong context | done (nosniff, correct Content-Type, user files on own origin in T06) |
 | 3.2.2 | Text rendered safely | done (autoescape; no own JS using `innerHTML`) |
 | 3.3.1 | Cookies `Secure` with `__Host-`/`__Secure-` prefix | done (prod) |
