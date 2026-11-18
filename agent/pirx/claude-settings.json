@@ -54,7 +54,20 @@
       "Bash(podman *)",
       "Bash(podman-compose *)",
       "Bash(make *)",
-      "Bash(just *)"
+      "Bash(just *)",
+      "Bash(systemctl --user status ads-*)",
+      "Bash(systemctl --user is-active ads-*)",
+      "Bash(systemctl --user is-enabled ads-*)",
+      "Bash(systemctl --user show ads-*)",
+      "Bash(systemctl --user restart ads-*)",
+      "Bash(systemctl --user list-units ads-*)",
+      "Bash(systemctl --user list-timers ads-*)",
+      "Bash(journalctl --user -u ads-*)",
+      "Bash(journalctl --user --unit ads-*)",
+      "Read(~/runtime/artysci-dla-szkol/**)",
+      "Bash(ls ~/runtime/artysci-dla-szkol*)",
+      "Bash(ls ~/.config/artysci-dla-szkol*)",
+      "Bash(tail ~/runtime/artysci-dla-szkol/logs/*)"
     ],
     "deny": [
       "Bash(sudo *)",
@@ -82,7 +95,13 @@
       "Edit(~/.claude/**)",
       "Edit(~/Projects/automated-work/runner/**)",
       "WebFetch",
-      "WebSearch"
+      "WebSearch",
+      "Read(~/.config/artysci-dla-szkol/**)",
+      "Bash(cat ~/.config/artysci-dla-szkol/*)",
+      "Bash(systemctl --user stop *)",
+      "Bash(systemctl --user disable *)",
+      "Bash(systemctl --user mask *)",
+      "Bash(systemctl --user edit *)"
     ]
   }
 }
