@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ document.get_kind_display }} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <article>
+    <h1>{{ document.get_kind_display }}</h1>
+    <p>
+      {% blocktranslate with version=document.version trimmed %}Wersja {{ version }}{% endblocktranslate %},
+      {% translate "opublikowana" %}
+      <time datetime="{{ document.published_at|date:'c' }}">{{ document.published_at|date:"j E Y" }}</time>
+    </p>
+    {# Plain text from the database: autoescaped, then paragraphs (no HTML is ever trusted). #}
+    {{ document.body|linebreaks }}
+  </article>
+{% endblock %}

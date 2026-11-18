@@ -16,5 +16,12 @@
   <main id="main">
     {% block content %}{% endblock %}
   </main>
+  <footer>
+    <nav aria-label="{% translate 'Dokumenty prawne' %}">
+      <a href="{% url 'trust:terms' %}">{% translate "Regulamin" %}</a>
+      <a href="{% url 'trust:privacy' %}">{% translate "Polityka prywatności" %}</a>
+      <a href="{% url 'trust:cookies' %}">{% translate "Informacja o ciasteczkach" %}</a>
+    </nav>
+  </footer>
 </body>
 </html>

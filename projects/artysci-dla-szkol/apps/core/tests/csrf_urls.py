@@ -1,7 +1,7 @@
 """URLconf used only by test_security.py: the home page plus a POST endpoint behind CSRF."""
 
 from django.http import HttpResponse
-from django.urls import path
+from django.urls import include, path
 from django.views.decorators.http import require_POST
 
 from apps.core.views import HomeView
@@ -15,4 +15,5 @@ def echo(request):
 urlpatterns = [
     path("", HomeView.as_view()),
     path("echo", echo),
+    path("", include("apps.trust.urls")),  # base.html links the legal pages
 ]
