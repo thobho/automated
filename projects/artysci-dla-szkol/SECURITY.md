@@ -89,6 +89,15 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   login for 15 minutes; 5 login e-mails per hour per address, 20 per IP (IPv6: per /64).
   Sessions: database, key rotated on login, 30 days idle expiry; logout is a CSRF-protected
   POST that deletes the session row and sends `Clear-Site-Data: "cookies", "storage"`.
+- **Artist registration (T13, US-1.1, D97)**: `/rejestracja/artysta/` gives a valid form the
+  same status and text for a new and an already registered address; for an existing one
+  nothing is created or recorded and the owner gets a normal login e-mail. Registration
+  checks the login e-mail limits *before* creating anything, so it cannot be used to create
+  accounts beyond 5/h per address and 20/h per IP. New accounts have no password and stay
+  unconfirmed (`email_confirmed_at` empty) until the first successful link or code login. The
+  optional `next` in the e-mailed link is a local path only (`login_link()` drops anything
+  else, and the login views check it again with `url_has_allowed_host_and_scheme`). Logs and
+  events carry a pseudonymised user only, never the e-mail or the name.
 - **The one allowed token in a URL**: the login link `/logowanie/link/?t=<token>`. The token
   is only in the query string, which the access log never contains (path only, `django.server`
   muted); `Referrer-Policy: strict-origin-when-cross-origin` keeps it out of cross-origin

@@ -80,7 +80,7 @@ def login_link(request):
         return render(request, "accounts/login_link.html", {"valid": False}, status=400)
     token = request.GET.get("t", "")[:128]
     valid = services.check_link(token)
-    context = {"valid": valid, "token": token if valid else ""}
+    context = {"valid": valid, "token": token if valid else "", "next": _safe_next(request)}
     return render(request, "accounts/login_link.html", context, status=200 if valid else 400)
 
 

@@ -135,6 +135,8 @@ list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d3
 - `/akceptacja-dokumentow/`: re-acceptance page (logged-in users with pending versions).
 - `/logowanie/` (e-mail), `/logowanie/kod/` (POST code), `/logowanie/link/?t=...` (GET button,
   POST logs in), `/wyloguj/` (POST only).
+- `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard start, a
+  placeholder until US-2.1; login required).
 
 ## Login (US-1.3)
 
@@ -150,10 +152,27 @@ No passwords (D1). App `apps/accounts`, logic in `services.py`:
   failure). 5 wrong codes for an e-mail lock code login for 15 minutes.
 - `start_session(request, user)` (rotates the session key) and `end_session(request)` (deletes
   the session row). Sessions live in the database and expire after 30 idle days.
-- Registration (US-1.1, US-1.2) reuses `request_login` / `create_challenge`.
+- A successful link or code login confirms an unconfirmed account (`confirm_email()`, records
+  `account_confirmed` once). `request_login(..., next_path=...)` puts a local path into the
+  e-mailed link, so the link lands there after logging in.
 - Try it locally: `make up-lite && make seed && make web` and `make worker`, open
   `http://127.0.0.1:8000/logowanie/`, enter `artysta01@example.invalid`, read the e-mail in
   Mailpit (`http://127.0.0.1:18025`).
+
+## Artist registration (US-1.1)
+
+App `apps/artists`, logic in `services.register_artist(email, name, client_ip, link_base=...)`:
+
+- Refuses (503 page, nothing created) when the terms or the privacy policy has no published
+  version, and (429) when the login e-mail limits are reached.
+- New address: one transaction creates an unconfirmed `User` (`email_confirmed_at` empty, no
+  password), its `Artist` (one-to-one, D2, holds the name) and the acceptance of the current
+  terms and privacy versions (`trust.record_acceptance`). Records `artist_registered` and sends
+  the login e-mail through `accounts.services.request_login` with the wizard start as `next`.
+- Existing address: same answer, nothing created, a normal login e-mail goes to the owner.
+- The page after sending has the code form; the code or the link (15 minutes) confirms the
+  account and opens `artists:start`. An expired code is not a dead end: logging in from
+  `/logowanie/` confirms the account too.
 
 ## Legal documents (US-8.1)
 

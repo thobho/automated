@@ -15,6 +15,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_("aktywny"), default=True)
     is_staff = models.BooleanField(_("dostęp do panelu Django"), default=False)
     date_joined = models.DateTimeField(_("data rejestracji"), default=timezone.now)
+    # None = "niepotwierdzone" (US-1.1): set by the first successful link or code login.
+    email_confirmed_at = models.DateTimeField(_("e-mail potwierdzony"), null=True, blank=True)
 
     objects = UserManager()
 
@@ -28,6 +30,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self) -> str:
         return self.email
+
+    @property
+    def is_confirmed(self) -> bool:
+        return self.email_confirmed_at is not None
 
     def clean(self) -> None:
         super().clean()

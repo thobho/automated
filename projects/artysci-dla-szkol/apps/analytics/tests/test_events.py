@@ -8,13 +8,17 @@ pytestmark = pytest.mark.django_db
 
 # Event name -> dotted path of the code that emits it. Filled in as features land (E1+);
 # an entry listed in PENDING is a known gap, anything else must have an emitter test.
-EMITTERS: dict[str, str] = {}
+EMITTERS: dict[str, str] = {
+    "artist_registered": "apps.artists.services.register_artist",
+    "account_confirmed": "apps.accounts.services.confirm_email",
+}
 PENDING = set(EVENT_CATALOG) - set(EMITTERS)
 
 
 def test_catalog_has_the_agreed_events():
     assert set(EVENT_CATALOG) == {
         "artist_registered",
+        "account_confirmed",
         "profile_generated",
         "profile_published",
         "inquiry_sent",
@@ -38,6 +42,18 @@ def test_catalog_entry_is_valid(name):
 def test_every_catalog_entry_has_emitter_or_is_pending(name):
     """Contract scaffold: once a feature emits the event, move it from PENDING to EMITTERS."""
     assert name in EMITTERS or name in PENDING
+
+
+@pytest.mark.parametrize("name", sorted(EMITTERS))
+def test_emitter_exists_and_mentions_the_event(name):
+    """The listed emitter is real code that records this event (behaviour is tested in the
+    owning app: apps/artists/tests, apps/accounts/tests)."""
+    import importlib
+    import inspect
+
+    module_path, func_name = EMITTERS[name].rsplit(".", 1)
+    func = getattr(importlib.import_module(module_path), func_name)
+    assert f'"{name}"' in inspect.getsource(func)
 
 
 def test_track_records_event():
