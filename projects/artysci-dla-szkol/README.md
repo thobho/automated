@@ -119,7 +119,7 @@ Threat model, headers, cookie rules and the ASVS checklist: [SECURITY.md](SECURI
 - Logs are JSON lines on stdout in every environment (`apps/core/logs.py`): request id (also in
   the `X-Request-ID` response header), pseudonymised user, an `access` line per request without
   the query string. Never log e-mails or tokens on purpose; the redaction is a safety net.
-- Login throttling for E1: `apps/accounts/throttling.py` (`is_locked`, `register_failure`, `reset`).
+- Login limits: `apps/accounts/throttling.py` (`exceeded`, `hit`, `reset`; rows in PostgreSQL).
 
 ## Endpoints
 
@@ -131,6 +131,27 @@ Threat model, headers, cookie rules and the ASVS checklist: [SECURITY.md](SECURI
 - `/regulamin/`, `/polityka-prywatnosci/`, `/ciasteczka/`: current version of each legal
   document (404 until one is published), linked from the footer.
 - `/akceptacja-dokumentow/`: re-acceptance page (logged-in users with pending versions).
+- `/logowanie/` (e-mail), `/logowanie/kod/` (POST code), `/logowanie/link/?t=...` (GET button,
+  POST logs in), `/wyloguj/` (POST only).
+
+## Login (US-1.3)
+
+No passwords (D1). App `apps/accounts`, logic in `services.py`:
+
+- `request_login(email, client_ip, link_base=...)`: checks the send limits (5/h per address,
+  20/h per IP), then queues `accounts.send_login_email` on the `email` queue for an active user.
+  Unknown or inactive addresses get the same page and nothing is sent. Returns False only when
+  rate-limited.
+- The job calls `send_login_email(user_id, link_base)`: creates a `LoginChallenge` (link token +
+  6-digit code, 15 minutes, single use, only hashes stored) and sends a plain-text Polish e-mail.
+- `login_with_code(email, code)` / `login_with_link(token)` return the user or None (one generic
+  failure). 5 wrong codes for an e-mail lock code login for 15 minutes.
+- `start_session(request, user)` (rotates the session key) and `end_session(request)` (deletes
+  the session row). Sessions live in the database and expire after 30 idle days.
+- Registration (US-1.1, US-1.2) reuses `request_login` / `create_challenge`.
+- Try it locally: `make up-lite && make seed && make web` and `make worker`, open
+  `http://127.0.0.1:8000/logowanie/`, enter `artysta01@example.invalid`, read the e-mail in
+  Mailpit (`http://127.0.0.1:18025`).
 
 ## Legal documents (US-8.1)
 
