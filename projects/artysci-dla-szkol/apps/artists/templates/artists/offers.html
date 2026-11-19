@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Oferty" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Oferty" %}</h1>
+  <p>{% translate "Każdy spektakl, koncert lub warsztat to osobna oferta. Do publikacji profilu potrzebna jest co najmniej jedna." %}</p>
+  <p><a href="{% url 'artists:offer_add' %}">{% translate "Dodaj ofertę" %}</a></p>
+  {% if items %}
+    <ol class="offers" data-count="{{ items|length }}">
+      {% for offer, poster in items %}
+        <li id="offer-{{ offer.pk }}" data-offer="{{ offer.pk }}">
+          <h2>{{ offer.title }}</h2>
+          <p>{{ offer.description|linebreaksbr }}</p>
+          <dl>
+            {% if offer.age_from is not None or offer.age_to is not None %}
+              <dt>{% translate "Wiek widzów" %}</dt>
+              <dd data-field="age">{% if offer.age_from is not None %}{{ offer.age_from }}{% endif %}–{% if offer.age_to is not None %}{{ offer.age_to }}{% endif %} {% translate "lat" %}</dd>
+            {% endif %}
+            {% if offer.duration_minutes %}
+              <dt>{% translate "Czas trwania" %}</dt>
+              <dd data-field="duration">{{ offer.duration_minutes }} {% translate "min" %}</dd>
+            {% endif %}
+            <dt>{% translate "Cena" %}</dt>
+            <dd data-field="price">{% if offer.price_on_request %}{% translate "na zapytanie" %}{% else %}{{ offer.price_pln }} {% translate "zł" %}{% endif %}</dd>
+          </dl>
+          {% if poster %}
+            <p><a href="{{ poster }}" data-field="poster">{% translate "Zobacz plakat" %}</a></p>
+          {% endif %}
+          <p>
+            <a href="{% url 'artists:offer_edit' offer.pk %}">{% translate "Edytuj" %}</a>
+            · <a href="{% url 'artists:offer_delete' offer.pk %}">{% translate "Usuń" %}</a>
+          </p>
+          <form method="post" action="{% url 'artists:offer_move' offer.pk %}">
+            {% csrf_token %}
+            {% if not forloop.first %}
+              <button type="submit" name="direction" value="up">{% translate "W górę" %}</button>
+            {% endif %}
+            {% if not forloop.last %}
+              <button type="submit" name="direction" value="down">{% translate "W dół" %}</button>
+            {% endif %}
+          </form>
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p>{% translate "Nie masz jeszcze żadnej oferty." %}</p>
+  {% endif %}
+  <p><a href="{% url 'artists:start' %}">{% translate "Wróć do kreatora" %}</a></p>
+{% endblock %}

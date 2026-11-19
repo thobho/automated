@@ -26,6 +26,9 @@ EXCLUDED = {
 # Arguments for routes that need them (URL name -> kwargs).
 ARGUMENTS = {
     "core:private-media": {"token": "not-a-real-token"},
+    "artists:offer_edit": {"offer_id": 999999},
+    "artists:offer_delete": {"offer_id": 999999},
+    "artists:offer_move": {"offer_id": 999999},
 }
 
 #: URL name -> expected answer for (anonymous, artist, institution, admin)
@@ -51,6 +54,10 @@ MATRIX = {
     "artists:basics": ("login", "200", "403", "403"),
     # later wizard steps: the matrix artist has empty basics -> redirected to step 1
     "artists:offers": ("login", "home", "403", "403"),
+    "artists:offer_add": ("login", "home", "403", "403"),
+    "artists:offer_edit": ("login", "home", "403", "403"),
+    "artists:offer_delete": ("login", "home", "403", "403"),
+    "artists:offer_move": ("login", "405", "403", "403"),  # POST only
     "artists:statements": ("login", "home", "403", "403"),
     "artists:materials": ("login", "home", "403", "403"),
     "institutions:register": ("200", "200", "200", "200"),

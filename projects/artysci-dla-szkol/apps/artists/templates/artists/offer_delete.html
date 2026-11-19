@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Usunąć ofertę?" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Usunąć ofertę?" %}</h1>
+  <p>{% blocktranslate with title=offer.title %}Oferta „{{ title }}” zostanie usunięta razem z plakatem. Tego nie można cofnąć.{% endblocktranslate %}</p>
+  <form method="post" action="{% url 'artists:offer_delete' offer.pk %}">
+    {% csrf_token %}
+    <button type="submit">{% translate "Tak, usuń ofertę" %}</button>
+  </form>
+  <p><a href="{% url 'artists:offers' %}">{% translate "Nie, wróć do listy ofert" %}</a></p>
+{% endblock %}

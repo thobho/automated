@@ -18,6 +18,8 @@
         –
         {% if item.step.required %}
           {% if item.done %}{% translate "gotowe" %}{% else %}<strong>{% translate "obowiązkowe" %}</strong>{% endif %}
+        {% elif item.done %}
+          {% translate "gotowe" %}
         {% elif item.available %}
           {% translate "później (możesz pominąć)" %}
         {% else %}
