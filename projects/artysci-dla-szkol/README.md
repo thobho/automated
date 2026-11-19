@@ -471,7 +471,7 @@ can be reproduced and generator changes can be compared (D13, D14). Code: `apps/
   `AICall` rows). A finished generation and every component version are append-only.
 - **Stored versions** (`GeneratorComponentVersion`, one row per content hash): instructions and
   schemas keep a full text snapshot; validators and templates keep the file list and hash,
-  pointing at the code in git. `versions_of(generation)` returns exactly that.
+  pointing at the code in git (declared with inline content, they keep the content). `versions_of(generation)` returns exactly that.
 - **Input fingerprint** (`input_fingerprint(artist)`, D107): SHA-256 over the ready materials
   (by id: id + a hash of the row's content fields) and the questionnaire values. Same input,
   same fingerprint; no copy of the materials is kept (D12).

@@ -112,6 +112,9 @@ def test_snapshot_for_text_kinds_and_git_pointer_for_code(artist):
     }
     stored = GeneratorComponentVersion.objects.get(kind="validator")
     assert stored.content == ""
+    # A code kind declared inline has no file in git: its content is kept.
+    assert versions["template"]["content"] == "<h1>{{ title }}</h1>"
+    assert "source" not in versions["template"]
 
 
 def test_same_version_with_other_content_is_refused(artist):

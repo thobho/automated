@@ -66,7 +66,9 @@ def component_version(component: Component) -> GeneratorComponentVersion:
     ).first()
     if existing is not None:
         return existing
-    snapshot = component.text() if component.kind in SNAPSHOT_KINDS else ""
+    # Inline content has no file in git to point at, so it is always kept.
+    keep = component.kind in SNAPSHOT_KINDS or not component.files
+    snapshot = component.text() if keep else ""
     try:
         with transaction.atomic():
             return GeneratorComponentVersion.objects.create(
@@ -200,7 +202,7 @@ def versions_of(generation: Generation) -> list[dict]:
             "version": row.version,
             "content_hash": row.content_hash,
         }
-        if row.kind in SNAPSHOT_KINDS:
+        if row.kind in SNAPSHOT_KINDS or not row.files:
             item["content"] = row.content
         else:
             item["source"] = "git"

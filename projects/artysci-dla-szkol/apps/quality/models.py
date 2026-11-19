@@ -27,7 +27,8 @@ class GeneratorComponentVersion(models.Model):
     """One version of one generator component, deduplicated by its content hash.
 
     `content` is a full snapshot for the text kinds (instructions, schema); for code kinds
-    (validator, template) it is empty and `files` + `content_hash` identify the code in git.
+    (validator, template) declared by files it is empty and `files` + `content_hash` identify
+    the code in git (a code kind declared with inline content keeps that content).
     """
 
     kind = models.CharField(_("rodzaj"), max_length=20, choices=[(k, k) for k in KINDS])
