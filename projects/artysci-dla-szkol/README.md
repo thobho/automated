@@ -159,7 +159,9 @@ list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d3
 - `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard overview),
   `/artysta/profil/dane/` (step 1, basics), `/artysta/profil/oferty/` (offers; `nowa/`,
   `<id>/edycja/`, `<id>/usun/`, `<id>/przesun/` POST), `/artysta/profil/oswiadczenia/`
-  (statements, GET + POST), `/materialy/` (placeholder); artists only, login required.
+  (statements, GET + POST), `/artysta/profil/materialy/` (materials),
+  `/artysta/profil/import/` (website import, GET + POST) and `/artysta/profil/import/<id>/`
+  (import status); artists only, login required.
 - `/rejestracja/placowka/` (institution registration), `/rejestracja/placowka/rspo/` (HTMX RSPO
   suggestions, GET, anonymous), `/placowka/` (institution start, a placeholder; login required).
 
@@ -473,6 +475,21 @@ any S3-compatible service later). Two storages: **private** (originals, document
   YouTube/Vimeo links are parsed to a video id and checked through the fixed oEmbed endpoints
   only (`OEMBED_TIMEOUT_SECONDS`); other hosts are refused without a request. Offer posters
   (`Offer.poster_status`) go through the same scan (`artists.scan_poster`).
+- **Import from the artist's website** (US-2.2, `apps/artists/website_import.py`,
+  `/artysta/profil/import/`, status at `/artysta/profil/import/<id>/`): the artist pastes the URL
+  and ticks the rights checkbox (records or reuses the `material_rights` statement). The
+  `artists.run_website_import` job (`media` queue) fetches up to `WEBSITE_IMPORT_MAX_PAGES` (10)
+  pages of the same host, `WEBSITE_IMPORT_PAGE_TIMEOUT` (30 s) per request and
+  `WEBSITE_IMPORT_MAX_BYTES` (20 MB) in total including photos, at most
+  `WEBSITE_IMPORT_MAX_REDIRECTS` (3) redirects. It stores the visible text scrubbed
+  (`apps/profiles/ai/scrub.py` + postal addresses), copies photos through `materials.add_file`
+  (imported, scanned, 40-photo limit), adds YouTube/Vimeo links through oEmbed, and keeps
+  e-mails, phones and addresses separately for the artist only. Status: `w kolejce`, `trwa`,
+  `gotowy`, `częściowy`, `nieudany`, with a readable message and what was skipped. Every
+  user-given URL goes through **`apps/core/safefetch.py`** (the only fetcher of user URLs: public
+  addresses only, connection pinned to the checked IP, redirects re-checked). For a local test
+  site in dev only, `SAFE_FETCH_ALLOW_LOOPBACK=true` lets it reach `127.0.0.1` on any port; prod
+  and pirx settings refuse to start with it.
 - Not covered yet: video and audio upload, transcoding, image variants (E2), HEIC photos.
 
 ## Analytics (events and visits)
@@ -506,5 +523,7 @@ Added with T07: no new dependency for the AI adapter (OpenRouter over the standa
 `urllib`); D46, D60 (OpenRouter with ZDR-only routing, pinned model), D59 (PII minimisation),
 D63 (daily and per-call cost caps, kill switch). Default model `anthropic/claude-haiku-5.5` on
 Google Vertex / Amazon Bedrock ZDR endpoints until model selection in E11.
+Added with T26: no new dependency; D106 (website import: SSRF-safe fetcher, limits, scrub of
+PESEL and ID card numbers, contact data kept for the artist only).
 New dependencies or structural choices need a line in the decision log first
 (see [CLAUDE.md](CLAUDE.md)).
