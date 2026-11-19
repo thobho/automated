@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 
 from apps.accounts import services
 from apps.artists import services as artist_services
+from apps.artists.models import Offer
 from apps.institutions import services as institution_services
 from apps.trust import services as trust_services
 
@@ -19,5 +20,5 @@ class Command(BaseCommand):
             f"seed: created {created['artists']} artists, {created['institutions']} institutions, "
             f"{documents} placeholder legal documents, {rspo} synthetic RSPO entries, "
             f"{artists} artist profiles, {members} institution members "
-            "(offers: no model yet)"
+            f"({Offer.objects.count()} offers in total)"
         )

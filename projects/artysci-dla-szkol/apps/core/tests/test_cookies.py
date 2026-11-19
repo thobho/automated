@@ -12,6 +12,9 @@ pytestmark = pytest.mark.django_db
 # one (path -> why it is listed). Every entry is requested like a walked route.
 ROUTES_WITH_ARGUMENTS = {
     "/media/private/not-a-real-token": "core:private-media (signed token)",
+    "/artysta/profil/oferty/1/edycja/": "artists:offer_edit (offer id)",
+    "/artysta/profil/oferty/1/usun/": "artists:offer_delete (offer id)",
+    "/artysta/profil/oferty/1/przesun/": "artists:offer_move (offer id, POST only)",
 }
 
 # Never requested: staff only, Django's own cookies are the same session/CSRF ones.

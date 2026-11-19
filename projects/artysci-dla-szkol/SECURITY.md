@@ -154,6 +154,20 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   fields, so tampered values get a 400 form error, and `save_basics()` validates again and saves
   all or nothing. The POST is CSRF-protected; the log line `artist_basics_saved` carries a
   pseudonymised user only, no field values.
+- **Offers and posters (T22, US-2.9, D103)**: the offer pages are artist-only and need complete
+  basics. Every lookup is `Offer.objects.get(artist=<request.user's artist>, pk=...)`, so another
+  artist's offer id and a missing id both give the same 404 and nothing changes (IDOR test);
+  institution and admin accounts get 403. Changes are CSRF-protected POSTs (delete only after a
+  confirmation page). Title and description are plain text rendered autoescaped (`linebreaksbr`),
+  never as HTML. **Posters use the T06 upload path**: `store_upload(kind="photo",
+  visibility="private")`, so the type is sniffed from magic bytes (a PDF renamed `.jpg` is
+  refused), the 15 MB limit applies (D8), EXIF/GPS is stripped by re-encoding, the key is random
+  and the file sits in the private storage; the artist sees it only through a short-lived
+  `media.signed_url` (attachment, `nosniff`, sandbox CSP). It becomes public only with
+  publication (US-2.8). A rejected upload saves nothing; a replaced or removed poster and a
+  deleted offer's poster are deleted from storage after the commit (a storage failure is logged
+  as `offer_poster_orphan` without the key). Posters are not malware-scanned yet: they switch to
+  the scanning path with US-2.3A. Log lines carry a pseudonymised user and the offer id only.
 - **The one allowed token in a URL**: the login link `/logowanie/link/?t=<token>` (and, built the
   same way, the e-mail change link `/konto/email/link/?t=<token>`). The token
   is only in the query string, which the access log never contains (path only, `django.server`
@@ -208,10 +222,10 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 3.5.3 | Sensitive actions use POST/PUT/... | done so far (`require_GET`/`require_POST`); per feature |
 | 4.1.1 | Content-Type with charset | done (Django default `utf-8`) |
 | 4.4.1 | WebSockets over TLS | n/a (no WebSockets) |
-| 5.2.1 | File size limits | planned (T06, E2) |
-| 5.2.2 | File extension and content checked | planned (T06, E2) |
-| 5.3.1 | Uploads never executed | planned (T06: separate origin, D62) |
-| 5.3.2 | Server-generated file paths | planned (T06) |
+| 5.2.1 | File size limits | done for offer posters (T06 limits, used by T22); other uploads in E2 |
+| 5.2.2 | File extension and content checked | done for offer posters (sniffed type, T22); other uploads in E2 |
+| 5.3.1 | Uploads never executed | planned (T06: separate origin, D62; private files are attachments with a sandbox CSP) |
+| 5.3.2 | Server-generated file paths | done (random keys from `store_upload`, T06; posters T22) |
 | 6.1.1 | Rate limiting / anti-automation documented | done (this file, `throttling.py`) |
 | 6.2.1–6.2.8 | Password rules (length, change, common lists, composition, fields, paste, exact check) | n/a (no passwords: e-mail link + code only, D1; users have unusable passwords. Django-admin staff logins keep Django's password validators until admin TOTP, US-9.1) |
 | 6.3.1 | Brute force / stuffing controls | done (T12: 5 failed codes per e-mail lock code login for 15 min, even a correct code; send limits 5/h per address, 20/h per IP; shared in PostgreSQL) |
@@ -226,7 +240,7 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 7.4.2 | Disabling a user ends their sessions | planned (E1, E9); T17: changing the login e-mail ends all other sessions |
 | 8.1.1 | Authorisation rules documented | done (T15: roles and rules in `apps/accounts/roles.py`, per-route table in `apps/accounts/tests/test_permission_matrix.py`, "Roles and access control" above) |
 | 8.2.1 | Function-level access control | done (T15: `role_required` / `RoleRequiredMixin`, 403 + log; every route in the permission matrix; `/django-admin/` staff only) |
-| 8.2.2 | Data-level access control (IDOR) | planned (per feature; no user-owned objects are exposed by id yet; T21's wizard edits only `request.user`'s own artist) |
+| 8.2.2 | Data-level access control (IDOR) | per feature: T21's wizard edits only `request.user`'s own artist; T22 offers are looked up with the owner in the query (foreign id = 404, tested) |
 | 8.3.1 | Authorisation in the service layer | partial (T15: rule functions `can_create_artist_profile`, `can_create_inquiry`, `can_create_notice`; E5/E6 call them in their services) |
 | 9.1.1–9.2.1 | Self-contained tokens (JWT etc.) | n/a (none; Django signed tokens use HMAC) |
 | 10.4.1–10.4.5 | OAuth authorisation server | n/a |

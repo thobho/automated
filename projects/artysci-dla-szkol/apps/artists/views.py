@@ -2,20 +2,23 @@
 call `services`, render a response."""
 
 from dataclasses import asdict
+from functools import wraps
 
 from django import forms
 from django.contrib import messages
+from django.http import Http404, HttpResponseBadRequest
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_POST
 
 from apps.accounts.permissions import role_required
 from apps.core.regions import Voivodeship
+from apps.core.uploads import UploadRejected
 
 from . import services
-from .models import ArtistType, Audience
+from .models import MAX_AGE, ArtistType, Audience, Offer
 from .services import Registration
 
 
@@ -128,14 +131,25 @@ def basics(request):
     return redirect("artists:start")
 
 
+def _basics_required(view):
+    """Later wizard steps open only with complete basics (#117 rule); else back to step 1."""
+
+    @wraps(view)
+    def wrapper(request, *args, **kwargs):
+        if not services.basics_complete(_artist(request)):
+            messages.info(request, _("Najpierw uzupełnij dane podstawowe."))
+            return redirect("artists:basics")
+        return view(request, *args, **kwargs)
+
+    return wrapper
+
+
 def _later_step(key):
     step = services.LATER_STEPS[key]
 
     @role_required("artist")
+    @_basics_required
     def view(request):
-        if not services.basics_complete(_artist(request)):
-            messages.info(request, _("Najpierw uzupełnij dane podstawowe."))
-            return redirect("artists:basics")
         return render(request, "artists/later_step.html", {"step": step})
 
     view.__name__ = view.__qualname__ = key
@@ -143,6 +157,158 @@ def _later_step(key):
     return view
 
 
-offers = _later_step("offers")
 statements = _later_step("statements")
 materials = _later_step("materials")
+
+
+# --- wizard step "Oferty" (US-2.9) -----------------------------------------------------------
+
+
+class OfferForm(forms.Form):
+    """Field types and limits here; the cross-field rules (price XOR "na zapytanie", age
+    from <= to) come from `services.offer_errors`, the same rules the services enforce."""
+
+    title = forms.CharField(
+        label=_("Tytuł"), max_length=200, error_messages={"required": _("Podaj tytuł.")}
+    )
+    description = forms.CharField(
+        label=_("Opis"),
+        max_length=5000,
+        widget=forms.Textarea,
+        error_messages={"required": _("Podaj opis.")},
+    )
+    age_from = forms.IntegerField(
+        label=_("Wiek widzów od (lat)"), min_value=0, max_value=MAX_AGE, required=False
+    )
+    age_to = forms.IntegerField(
+        label=_("Wiek widzów do (lat)"), min_value=0, max_value=MAX_AGE, required=False
+    )
+    duration_minutes = forms.IntegerField(
+        label=_("Czas trwania (minuty)"), min_value=1, required=False
+    )
+    price_pln = forms.IntegerField(label=_("Cena (zł)"), min_value=1, required=False)
+    price_on_request = forms.BooleanField(label=_("Cena na zapytanie"), required=False)
+    poster = forms.FileField(
+        label=_("Plakat (JPG, PNG lub WebP, do 15 MB)"), required=False, allow_empty_file=True
+    )
+    remove_poster = forms.BooleanField(label=_("Usuń obecny plakat"), required=False)
+
+    def clean(self):
+        cleaned = super().clean()
+        for field, message in services.offer_errors(cleaned).items():
+            if field not in self.errors:
+                self.add_error(field, message)
+        return cleaned
+
+
+def _offer_form_page(request, form, *, offer=None, status=200):
+    context = {
+        "form": form,
+        "offer": offer,
+        "poster_url": services.poster_url(offer) if offer else "",
+    }
+    return render(request, "artists/offer_form.html", context, status=status)
+
+
+def _own_offer(request, offer_id):
+    try:
+        return services.get_offer(_artist(request), offer_id)
+    except Offer.DoesNotExist as exc:
+        raise Http404 from exc
+
+
+@never_cache
+@role_required("artist")
+@_basics_required
+def offers(request):
+    """The artist's offers in order, with add / edit / delete / move up and down."""
+    items = [(offer, services.poster_url(offer)) for offer in services.offers_for(_artist(request))]
+    return render(request, "artists/offers.html", {"items": items})
+
+
+def _save_offer(request, form, offer=None):
+    """Call the service for a valid form; None on success, else the error page."""
+    artist = _artist(request)
+    data = {field: form.cleaned_data.get(field) for field in services.OFFER_FIELDS}
+    poster = form.cleaned_data.get("poster") or None
+    try:
+        if offer is None:
+            services.create_offer(artist, data, poster=poster)
+        else:
+            services.update_offer(
+                artist,
+                offer.pk,
+                data,
+                poster=poster,
+                remove_poster=form.cleaned_data.get("remove_poster", False),
+            )
+    except UploadRejected as exc:
+        form.add_error("poster", exc.message)
+    except services.InvalidOffer as exc:  # the form uses the same rules: only on a race
+        for field, message in exc.errors.items():
+            form.add_error(field, message)
+    else:
+        return None
+    return _offer_form_page(request, form, offer=offer, status=400)
+
+
+@never_cache
+@require_http_methods(["GET", "HEAD", "POST"])
+@role_required("artist")
+@_basics_required
+def offer_add(request):
+    if request.method != "POST":
+        return _offer_form_page(request, OfferForm())
+    form = OfferForm(request.POST, request.FILES)
+    if not form.is_valid():
+        return _offer_form_page(request, form, status=400)
+    error_page = _save_offer(request, form)
+    if error_page:
+        return error_page
+    messages.success(request, _("Dodano ofertę."))
+    return redirect("artists:offers")
+
+
+@never_cache
+@require_http_methods(["GET", "HEAD", "POST"])
+@role_required("artist")
+@_basics_required
+def offer_edit(request, offer_id):
+    offer = _own_offer(request, offer_id)
+    if request.method != "POST":
+        return _offer_form_page(request, OfferForm(initial=services.offer_data(offer)), offer=offer)
+    form = OfferForm(request.POST, request.FILES)
+    if not form.is_valid():
+        return _offer_form_page(request, form, offer=offer, status=400)
+    error_page = _save_offer(request, form, offer)
+    if error_page:
+        return error_page
+    messages.success(request, _("Zapisano ofertę."))
+    return redirect("artists:offers")
+
+
+@never_cache
+@require_http_methods(["GET", "HEAD", "POST"])
+@role_required("artist")
+@_basics_required
+def offer_delete(request, offer_id):
+    """GET asks for confirmation, POST deletes (with the poster file)."""
+    offer = _own_offer(request, offer_id)
+    if request.method != "POST":
+        return render(request, "artists/offer_delete.html", {"offer": offer})
+    services.delete_offer(_artist(request), offer.pk)
+    messages.success(request, _("Usunięto ofertę."))
+    return redirect("artists:offers")
+
+
+@role_required("artist")
+@require_POST
+@_basics_required
+def offer_move(request, offer_id):
+    """POST ``direction=up|down`` moves the offer one place."""
+    offer = _own_offer(request, offer_id)
+    direction = request.POST.get("direction")
+    if direction not in ("up", "down"):
+        return HttpResponseBadRequest()
+    services.move_offer(_artist(request), offer.pk, direction)
+    return redirect(f"{reverse('artists:offers')}#offer-{offer.pk}")
