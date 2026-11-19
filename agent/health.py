@@ -3,6 +3,7 @@
 that answers two questions at a glance:
   1. Is the automation alive and working?  (heartbeat of every component, last decisions)
   2. Do I have blockers or errors?          (blocked tasks, failed runs, red CI, failed units, owner tasks)
+  3. How well is it working?                (last 7 days: agent/metrics.py, cached hourly)
 
 Runs on pirx as the `agent` user: after every runner event (status_update in agent/pirx/common.sh) and every
 30 minutes from the `automated-health` timer, so a component that stops shows up as late even when
@@ -137,6 +138,14 @@ def stuck(issues, now):
     return out
 
 
+def quality(now):
+    try:
+        import metrics
+        return metrics.render(metrics.cached(now))
+    except Exception as e:  # metrics must never break the health page
+        return f"### 3. How well is it working?\n_Metrics unavailable: {type(e).__name__}._"
+
+
 def render(now):
     beat_rows, late, late_keys = heartbeats(now)
     events = recent_events(now)
@@ -194,6 +203,8 @@ _Updated {datetime.fromtimestamp(now, TZ):%a %d %b %H:%M} (Warsaw). Refreshes ev
 
 ### 2. Blockers and errors
 {lst(problems, '✅ None.')}
+
+{quality(now)}
 
 ### Your open actions ({len(owner)})
 {lst([f"#{i['number']} {i['title']}" for i in owner], '✅ None.')}
