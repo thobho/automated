@@ -2,7 +2,7 @@
 # One Claude Code run on pirx for one issue, as the unprivileged `agent` user.
 # Started detached by start-claude-run.sh (systemd-run --user).
 #   claude-run.sh <issue> <model> [spillover]
-# Isolation: the agent user has no sudo and no access to /home/user or the LAN; on top of that Claude Code
+# Isolation: the agent user has no sudo except the root helper's fixed verbs (agent/pirx/root/), and no access to /home/user or the LAN; on top of that Claude Code
 # runs in `dontAsk` mode with a command allowlist (agent/pirx/claude-settings.json): file edits only inside
 # the working copy, shell commands only from the list (git, gh issue/pr/run, uv, pytest, ruff, curl, ...),
 # everything else is refused. (Claude Code's OS sandbox cannot start on Ubuntu 26.04 without relaxing its
