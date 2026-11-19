@@ -45,6 +45,7 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 | Account enumeration, spam | the login page answers identically for known, unknown and inactive addresses (also when rate-limited) and only active users get e-mail (T12); E2+ moderation |
 | Personal data leaking to AI providers | `apps/profiles/ai`: scrubber before every call, `data_collection: deny` + `zdr: true`, provider allowlist, no prompt text stored or logged |
 | Disputed or altered legal consent | `apps/trust`: immutable versioned documents, acceptance rows with version + time (PROTECT), consent only to the versions the page showed, re-acceptance gate after material changes |
+| Disputed or altered artist statements (US-8.2) | `apps/trust`: append-only `ArtistStatement` rows (model and queryset refuse edits and deletes; withdrawal is a row) with the wording version and an aware time; statements only on the version the page showed (`StaleWording`); artist-only view; shown as "Oświadczenie artysty", never as a check by the service (D31) |
 | Runaway AI cost (bug, loop, abuse) | per-call and daily caps checked before sending (`AICapExceeded`), `AI_KILL_SWITCH`, low-limit key |
 
 ## What is in place (T04)
@@ -178,6 +179,19 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 
 Remediation time frames for vulnerable dependencies (ASVS 15.1.1): critical 7 days, high 30
 days, others with the next regular update; dependencies are reviewed at least monthly.
+
+## Artist statements (US-8.2, D104)
+
+Statements (child protection, rights to materials, image consents, billing form, OC with its
+validity date) are **personal data of the artist** and evidence: who declared which wording
+version when. They are visible only to the artist (`/artysta/profil/oswiadczenia/`, role check,
+403 for others) and read-only to staff in the Django admin. The counted ones appear publicly
+only as the "Oświadczenie artysty" badges (kind, billing form, OC date), never the rows.
+Logs carry the pseudonymised user and the kind only; the OC reminder job carries the statement
+id only, the address is read when the e-mail is sent. Rows are `PROTECT`ed like legal
+acceptances, so an artist account cannot be deleted while statements exist.
+**Open question for US-8.7 (retention):** how long statements and withdrawals are kept after a
+withdrawal or account deletion (proof of what was declared vs. data minimisation).
 
 ## Cookies (US-8.8, D32)
 

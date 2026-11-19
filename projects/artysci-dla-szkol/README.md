@@ -158,8 +158,8 @@ list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d3
   `/konto/usun/` (placeholders until US-8.6); all login required.
 - `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard overview),
   `/artysta/profil/dane/` (step 1, basics), `/artysta/profil/oferty/` (offers; `nowa/`,
-  `<id>/edycja/`, `<id>/usun/`, `<id>/przesun/` POST), `/oswiadczenia/`, `/materialy/` (later
-  steps, placeholders); artists only, login required.
+  `<id>/edycja/`, `<id>/usun/`, `<id>/przesun/` POST), `/artysta/profil/oswiadczenia/`
+  (statements, GET + POST), `/materialy/` (placeholder); artists only, login required.
 - `/rejestracja/placowka/` (institution registration), `/rejestracja/placowka/rspo/` (HTMX RSPO
   suggestions, GET, anonymous), `/placowka/` (institution start, a placeholder; login required).
 
@@ -237,7 +237,7 @@ App `apps/artists`, logic in `services.py` (D102):
 - `/artysta/kreator/` lists step 1 (required) and the later steps (offers, statements,
   materials). Until the basics are complete the later steps are shown disabled and their URLs
   redirect to step 1 with a message; afterwards they can be skipped and opened in any order
-  (statements and materials are placeholders until US-8.2, US-2.3A).
+  (materials is a placeholder until US-2.3A).
 - `make seed` fills basics for `artysta01`–`artysta09`; `artysta10@example.invalid` keeps empty
   basics to try the wizard.
 
@@ -260,6 +260,34 @@ App `apps/artists`, model `Offer`, logic in `services.py` (D103):
 - `/artysta/profil/oferty/` lists the offers with edit, delete (confirmation page, then POST) and
   up/down buttons; the wizard overview marks the step done with at least one offer.
 - `make seed` gives `artysta01@example.invalid` a synthetic 20-offer repertoire (no posters), once.
+
+## Artist statements (US-8.2)
+
+App `apps/trust`, logic in `services.py` (D104). Wordings come from the owner's lawyer (D30);
+`make seed` publishes placeholders starting with "PROJEKT – tekst zastępczy".
+
+- Six statement kinds are `LegalDocument` kinds (versioned, immutable): `child_protection`,
+  `material_rights` (D4), `image_adults`, `image_children` (parents or school, D7),
+  `billing_form`, `insurance` (OC). Publish a new wording at `/django-admin/trust/legaldocument/add/`;
+  every new version asks artists to make that statement again (the "Istotna zmiana" box does not
+  matter for statements).
+- `ArtistStatement` rows are append-only (renewal, a new billing form or OC date and a withdrawal
+  are new rows; read-only in the admin). The newest row per kind counts when it is not a
+  withdrawal, refers to the current wording and, for OC, `valid_until` (optional) has not passed.
+- Services: `make_statement(artist, kind, billing_form=..., valid_until=..., shown_document_id=...)`
+  (`faktura`/`rachunek` only, date only for OC; `NoPublishedVersion`, `InvalidStatement`,
+  `StaleWording`), `withdraw_statement(artist, kind)`, `statement_overview(artist)` (status per
+  kind: unavailable, not made, current, "wymaga ponownego oświadczenia", expired),
+  `current_statements(artist)`, `has_child_protection_statement(artist)` (D6, for US-2.8).
+- `/artysta/profil/oswiadczenia/`: wording, status, checkbox + submit per statement, billing form
+  choice, OC date, withdraw. The step is done with a counted child-protection statement.
+- `{% load statements %}{% artist_statement_badges artist %}` lists the counted statements under
+  "Oświadczenie artysty" with a note that the service does not check them (D31); on the wizard
+  overview now, the public profile (US-3.1) reuses it.
+- Daily job `trust.check_insurance_expiry` (07:00) queues one plain-text reminder
+  (`trust.send_insurance_reminder`, `email` queue, statement id only) per expired OC statement,
+  once (`StatementReminder`). An expired OC stops counting by date even before the job runs.
+  Run it by hand: `uv run python manage.py shell -c "from apps.trust import services; print(services.queue_insurance_reminders())"`.
 
 ## Institution registration (US-1.2)
 
