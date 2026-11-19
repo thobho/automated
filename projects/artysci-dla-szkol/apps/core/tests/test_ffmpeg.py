@@ -3,6 +3,7 @@ error mapping with a mocked subprocess; real runs on generated samples where ffm
 (CI installs it; skipped locally without it)."""
 
 import json
+import os
 import resource
 import shutil
 import subprocess
@@ -12,7 +13,15 @@ import pytest
 from apps.core import ffmpeg
 
 HAVE_FFMPEG = bool(shutil.which("ffmpeg") and shutil.which("ffprobe"))
-needs_ffmpeg = pytest.mark.skipif(not HAVE_FFMPEG, reason="ffmpeg not installed (runs in CI)")
+# CI sets REQUIRE_FFMPEG=1: there a missing ffmpeg fails the run instead of skipping tests.
+REQUIRE_FFMPEG = os.environ.get("REQUIRE_FFMPEG") == "1"
+needs_ffmpeg = pytest.mark.skipif(
+    not HAVE_FFMPEG and not REQUIRE_FFMPEG, reason="ffmpeg not installed (runs in CI)"
+)
+
+
+def test_ffmpeg_is_installed_where_required():
+    assert HAVE_FFMPEG or not REQUIRE_FFMPEG, "REQUIRE_FFMPEG=1 but ffmpeg/ffprobe not found"
 
 
 class FakeRun:
