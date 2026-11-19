@@ -16,6 +16,12 @@ ROUTES_WITH_ARGUMENTS = {
     "/artysta/profil/oferty/1/usun/": "artists:offer_delete (offer id)",
     "/artysta/profil/oferty/1/przesun/": "artists:offer_move (offer id, POST only)",
     "/artysta/profil/materialy/1/usun/": "artists:material_delete (material id, POST only)",
+    "/artysta/profil/materialy/wysylki/00000000-0000-4000-8000-000000000000/": (
+        "artists:upload_chunk (upload session id)"
+    ),
+    "/artysta/profil/materialy/wysylki/00000000-0000-4000-8000-000000000000/zakoncz/": (
+        "artists:upload_complete (upload session id, POST only)"
+    ),
 }
 
 # Never requested: staff only, Django's own cookies are the same session/CSRF ones.

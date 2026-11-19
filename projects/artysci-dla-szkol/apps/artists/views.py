@@ -5,8 +5,9 @@ from dataclasses import asdict
 from functools import wraps
 
 from django import forms
+from django.conf import settings
 from django.contrib import messages
-from django.http import Http404, HttpResponseBadRequest
+from django.http import Http404, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -21,7 +22,7 @@ from apps.trust import services as trust
 from apps.trust.errors import NoPublishedVersion, StaleWording
 from apps.trust.models import STATEMENT_KINDS, BillingForm
 
-from . import materials, services
+from . import materials, resumable, services
 from .models import MAX_AGE, ArtistType, Audience, Material, MaterialKind, Offer
 from .services import Registration
 
@@ -154,33 +155,63 @@ UPLOAD_KINDS = {
     MaterialKind.PHOTO: {
         "accept": "image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp",
         "formats": "JPG, PNG, WebP",
+        "url": "artists:materials_photos",
     },
-    MaterialKind.PDF: {"accept": "application/pdf,.pdf", "formats": "PDF"},
+    MaterialKind.PDF: {
+        "accept": "application/pdf,.pdf",
+        "formats": "PDF",
+        "url": "artists:materials_pdfs",
+    },
+    # video and audio: resumable uploads through materials.js (US-2.3B)
+    MaterialKind.VIDEO: {
+        "accept": "video/mp4,video/quicktime,video/webm,.mp4,.mov,.webm",
+        "formats": "MP4, MOV, WebM",
+        "url": "artists:upload_create",
+    },
+    MaterialKind.AUDIO: {
+        "accept": "audio/mpeg,audio/mp4,audio/x-m4a,audio/wav,audio/x-wav,.mp3,.m4a,.wav",
+        "formats": "MP3, M4A, WAV",
+        "url": "artists:upload_create",
+    },
 }
 
 
 def _upload_box(artist, kind, errors=()):
     max_bytes = KINDS[kind][0]
+    options = UPLOAD_KINDS[kind]
     return {
         "kind": kind,
-        "url": reverse("artists:materials_photos" if kind == "photo" else "artists:materials_pdfs"),
         "limit": materials.limit_for(kind),
         "remaining": materials.remaining(artist, kind),
         "max_bytes": max_bytes,
         "max_mb": max_bytes // MB,
         "errors": list(errors),
-        **UPLOAD_KINDS[kind],
+        "max_seconds": settings.MEDIA_MAX_DURATION_SECONDS if kind == MaterialKind.VIDEO else 0,
+        "max_minutes": settings.MEDIA_MAX_DURATION_SECONDS // 60,
+        **options,
+        "url": reverse(options["url"]),
+    }
+
+
+def _item(material):
+    return {
+        "material": material,
+        "url": materials.file_url(material),
+        "thumbnail": materials.thumbnail_url(material),
+        "duration": materials.format_duration(material.duration_seconds),
     }
 
 
 def _materials_page(request, *, photo_errors=(), pdf_errors=(), link_error="", link_url="",
                     status=200):  # fmt: skip
     artist = _artist(request)
-    items = [(m, materials.file_url(m)) for m in materials.materials_for(artist)]
+    items = [_item(m) for m in materials.materials_for(artist)]
     context = {
         "items": items,
         "photos": _upload_box(artist, MaterialKind.PHOTO, photo_errors),
         "pdfs": _upload_box(artist, MaterialKind.PDF, pdf_errors),
+        "videos": _upload_box(artist, MaterialKind.VIDEO),
+        "audio": _upload_box(artist, MaterialKind.AUDIO),
         "link_error": link_error,
         "link_url": link_url,
         "questionnaire_filled": materials.questionnaire_filled(artist),
@@ -192,7 +223,8 @@ def _materials_page(request, *, photo_errors=(), pdf_errors=(), link_error="", l
 @role_required("artist")
 @_basics_required
 def materials_page(request):
-    """Photos, PDFs and video links with their scan status; links to the questionnaire."""
+    """Photos, PDFs, video links, video and audio files with their scan and processing
+    status; links to the questionnaire."""
     return _materials_page(request)
 
 
@@ -255,6 +287,89 @@ def material_delete(request, material_id):
         raise Http404 from exc
     messages.success(request, _("Usunięto materiał."))
     return redirect("artists:materials")
+
+
+# --- resumable video / audio uploads (US-2.3B): JSON for static/js/materials.js -------------
+
+
+def _refused(message, status, **extra):
+    return JsonResponse({"error": str(message), **extra}, status=status)
+
+
+def _session_answer(session, status=200):
+    data = {
+        **resumable.state(session),
+        "url": reverse("artists:upload_chunk", args=[session.pk]),
+        "complete_url": reverse("artists:upload_complete", args=[session.pk]),
+    }
+    return JsonResponse(data, status=status)
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+@_basics_required
+def upload_create(request):
+    """POST ``kind`` (video/audio), ``size`` (bytes) and ``name``: opens an upload session
+    after the kind, size and count checks (before any byte is sent)."""
+    try:
+        session = resumable.create_session(
+            _artist(request),
+            request.POST.get("kind", ""),
+            request.POST.get("size"),
+            request.POST.get("name", ""),
+        )
+    except resumable.UploadRefused as exc:
+        return _refused(exc.message, exc.status)
+    except materials.MaterialRejected as exc:
+        return _refused(exc.message, 400)
+    return _session_answer(session, status=201)
+
+
+@never_cache
+@role_required("artist")
+@require_http_methods(["GET", "HEAD", "POST"])
+@_basics_required
+def upload_chunk(request, session_id):
+    """GET: the received offset (to resume). POST: raw bytes of one chunk, its start in the
+    ``Upload-Offset`` header. Another artist's or an expired session is 404."""
+    artist = _artist(request)
+    try:
+        if request.method == "POST":
+            session = resumable.append_chunk(
+                artist,
+                session_id,
+                request.headers.get("Upload-Offset"),
+                request.META.get("CONTENT_LENGTH"),
+                request,
+            )
+        else:
+            session = resumable.get_session(artist, session_id)
+    except resumable.SessionGone as exc:
+        raise Http404 from exc
+    except resumable.UploadRefused as exc:
+        return _refused(exc.message, exc.status, offset=exc.offset)
+    return _session_answer(session)
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+@_basics_required
+def upload_complete(request, session_id):
+    """POST once every byte is there: the file is checked, stored and queued for the scan."""
+    try:
+        material = resumable.complete(_artist(request), session_id)
+    except resumable.SessionGone as exc:
+        raise Http404 from exc
+    except resumable.UploadRefused as exc:
+        return _refused(exc.message, exc.status, offset=exc.offset)
+    except (materials.MaterialRejected, UploadRejected) as exc:
+        return _refused(exc.message, 400)
+    messages.success(request, _("Dodano plik. Sprawdzamy go i przetwarzamy, zanim zostanie użyty."))
+    return JsonResponse(
+        {"material": material.pk, "redirect": reverse("artists:materials")}, status=201
+    )
 
 
 class QuestionnaireForm(forms.Form):

@@ -28,6 +28,17 @@ urlpatterns = [
         name="materials_pdfs",
     ),
     path("artysta/profil/materialy/film/", views.materials_link, name="materials_link"),
+    path("artysta/profil/materialy/wysylki/", views.upload_create, name="upload_create"),
+    path(
+        "artysta/profil/materialy/wysylki/<uuid:session_id>/",
+        views.upload_chunk,
+        name="upload_chunk",
+    ),
+    path(
+        "artysta/profil/materialy/wysylki/<uuid:session_id>/zakoncz/",
+        views.upload_complete,
+        name="upload_complete",
+    ),
     path(
         "artysta/profil/materialy/<int:material_id>/usun/",
         views.material_delete,
