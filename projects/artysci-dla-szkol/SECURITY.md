@@ -147,6 +147,13 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   only. Events `email_change_requested`, `email_change_email_sent`, `email_change_notice_sent`,
   `email_change_refused`, `email_change_confirmed`, `email_change_rate_limited` carry a
   pseudonymised user only.
+- **Artist profile wizard, step 1 (T21, US-2.1, D102)**: `/artysta/kreator/`,
+  `/artysta/profil/dane/` and the later-step placeholders are artist-only (`role_required`; rows
+  in the permission matrix). The form edits only the logged-in user's own `Artist` (looked up by
+  `request.user`, no id in the URL, so no IDOR); type, voivodeships and audiences are choice
+  fields, so tampered values get a 400 form error, and `save_basics()` validates again and saves
+  all or nothing. The POST is CSRF-protected; the log line `artist_basics_saved` carries a
+  pseudonymised user only, no field values.
 - **The one allowed token in a URL**: the login link `/logowanie/link/?t=<token>` (and, built the
   same way, the e-mail change link `/konto/email/link/?t=<token>`). The token
   is only in the query string, which the access log never contains (path only, `django.server`
@@ -219,7 +226,7 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 7.4.2 | Disabling a user ends their sessions | planned (E1, E9); T17: changing the login e-mail ends all other sessions |
 | 8.1.1 | Authorisation rules documented | done (T15: roles and rules in `apps/accounts/roles.py`, per-route table in `apps/accounts/tests/test_permission_matrix.py`, "Roles and access control" above) |
 | 8.2.1 | Function-level access control | done (T15: `role_required` / `RoleRequiredMixin`, 403 + log; every route in the permission matrix; `/django-admin/` staff only) |
-| 8.2.2 | Data-level access control (IDOR) | planned (per feature; no user-owned objects are exposed by id yet) |
+| 8.2.2 | Data-level access control (IDOR) | planned (per feature; no user-owned objects are exposed by id yet; T21's wizard edits only `request.user`'s own artist) |
 | 8.3.1 | Authorisation in the service layer | partial (T15: rule functions `can_create_artist_profile`, `can_create_inquiry`, `can_create_notice`; E5/E6 call them in their services) |
 | 9.1.1–9.2.1 | Self-contained tokens (JWT etc.) | n/a (none; Django signed tokens use HMAC) |
 | 10.4.1–10.4.5 | OAuth authorisation server | n/a |
