@@ -156,8 +156,9 @@ list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d3
 - `/konto/` (account settings), `/konto/email/` (POST new address), `/konto/email/kod/` (POST
   code), `/konto/email/link/?t=...` (GET button, POST confirms), `/konto/dane/` and
   `/konto/usun/` (placeholders until US-8.6); all login required.
-- `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard start, a
-  placeholder until US-2.1; login required).
+- `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard overview),
+  `/artysta/profil/dane/` (step 1, basics), `/artysta/profil/oferty/`, `/oswiadczenia/`,
+  `/materialy/` (later steps, placeholders); artists only, login required.
 - `/rejestracja/placowka/` (institution registration), `/rejestracja/placowka/rspo/` (HTMX RSPO
   suggestions, GET, anonymous), `/placowka/` (institution start, a placeholder; login required).
 
@@ -220,6 +221,24 @@ App `apps/artists`, logic in `services.register_artist(email, name, client_ip, l
 - The page after sending has the code form; the code or the link (15 minutes) confirms the
   account and opens `artists:start`. An expired code is not a dead end: logging in from
   `/logowanie/` confirms the account too.
+
+## Artist profile wizard, step 1: basics (US-2.1)
+
+App `apps/artists`, logic in `services.py` (D102):
+
+- `Artist` has `artist_type` (teatr, iluzja, muzyka, pokaz naukowy, pokaz ze zwierzętami,
+  warsztaty, inne), `name` and `city`; voivodeships of activity (the shared
+  `apps.core.regions.Voivodeship` list) and audiences are child rows `ArtistVoivodeship` /
+  `ArtistAudience` (one row per value; filter with `Artist.objects.filter(voivodeships__voivodeship=...)`).
+- `save_basics(user, data)` stores all fields at once (the name through `rename_artist()`) or
+  raises `InvalidBasics`; `basics_complete(artist)`; `basics_of(artist)` for prefilling;
+  `wizard_steps(artist)` for the overview.
+- `/artysta/kreator/` lists step 1 (required) and the later steps (offers, statements,
+  materials). Until the basics are complete the later steps are shown disabled and their URLs
+  redirect to step 1 with a message; afterwards they can be skipped and opened in any order
+  (placeholders until US-2.9, US-8.2, US-2.3A).
+- `make seed` fills basics for `artysta01`–`artysta09`; `artysta10@example.invalid` keeps empty
+  basics to try the wizard.
 
 ## Institution registration (US-1.2)
 
