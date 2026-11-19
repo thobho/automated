@@ -29,6 +29,7 @@ ARGUMENTS = {
     "artists:offer_edit": {"offer_id": 999999},
     "artists:offer_delete": {"offer_id": 999999},
     "artists:offer_move": {"offer_id": 999999},
+    "artists:material_delete": {"material_id": 999999},
 }
 
 #: URL name -> expected answer for (anonymous, artist, institution, admin)
@@ -60,6 +61,11 @@ MATRIX = {
     "artists:offer_move": ("login", "405", "403", "403"),  # POST only
     "artists:statements": ("login", "home", "403", "403"),
     "artists:materials": ("login", "home", "403", "403"),
+    "artists:materials_photos": ("login", "405", "403", "403"),  # POST only
+    "artists:materials_pdfs": ("login", "405", "403", "403"),  # POST only
+    "artists:materials_link": ("login", "405", "403", "403"),  # POST only
+    "artists:material_delete": ("login", "405", "403", "403"),  # POST only
+    "artists:questionnaire": ("login", "home", "403", "403"),
     "institutions:register": ("200", "200", "200", "200"),
     "institutions:rspo_suggestions": ("200", "200", "200", "200"),
     "institutions:start": ("login", "403", "200", "403"),

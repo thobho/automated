@@ -72,9 +72,26 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   `django.server` (runserver) is muted because its lines contain query strings.
 - **Uploads (T06)**: size limits per kind, content type sniffed from magic bytes, random
   keys, EXIF/GPS stripped from images, private files only through short-lived signed URLs,
-  public files on a separate origin (`MEDIA_PUBLIC_BASE_URL`, required in prod). **Virus
-  scanning is deferred**: uploads are not scanned yet; this is planned before uploads from
-  untrusted users go live.
+  public files on a separate origin (`MEDIA_PUBLIC_BASE_URL`, required in prod). **Malware
+  scanning (T24, US-2.3A)**: every artist material and offer poster is scanned by a `media`
+  job (`apps/core/scanning.py`, ClamAV `clamd` over INSTREAM) before it counts; infected files
+  are deleted. Prod refuses to load with `MALWARE_SCANNER` other than `clamd`. **Open owner
+  decision:** clamd needs ~1 GB of RAM, which pirx in light mode does not have (D87), so pirx
+  and dev run `MALWARE_SCANNER=none` (files logged as `upload_unscanned`); a host with clamd is
+  needed before uploads from real users go live.
+- **Artist materials (T24, US-2.3A)**: the materials step and questionnaire are artist-only
+  with complete basics (permission matrix). Photos and PDFs use the T06 upload path (sniffed
+  type, size limits, EXIF stripped, random key, private storage, signed URLs only) and the
+  per-artist counts (40 photos, 10 PDFs) are checked before storing and again under a row lock.
+  A material counts only when `ready` (scanned clean). Deleting looks the material up with the
+  owner in the query (foreign id = 404) and removes the file after the commit. Video links:
+  the URL is parsed locally to a YouTube/Vimeo id and only the fixed oEmbed endpoints
+  (`https://www.youtube.com/oembed`, `https://vimeo.com/api/oembed.json`) are called, with the
+  canonical URL rebuilt from the id, a 5 s timeout, no redirects and a 64 KB answer limit:
+  any other host, port or user-info is refused without a request (no SSRF). PDF text is
+  extracted by `pypdf` (pure Python, no external program) within page, character and time
+  limits; encrypted and broken PDFs end as a status. File names are stored cleaned and
+  rendered autoescaped. Logs carry a pseudonymised user and the material id only.
 - **Legal documents (T10)**: bodies are plain text from staff, rendered autoescaped
   (`linebreaks`), never as HTML. Published versions cannot be changed or deleted (model,
   queryset and admin all refuse). The re-acceptance gate redirects only to a fixed URL; the
@@ -167,8 +184,9 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   `media.signed_url` (attachment, `nosniff`, sandbox CSP). It becomes public only with
   publication (US-2.8). A rejected upload saves nothing; a replaced or removed poster and a
   deleted offer's poster are deleted from storage after the commit (a storage failure is logged
-  as `offer_poster_orphan` without the key). Posters are not malware-scanned yet: they switch to
-  the scanning path with US-2.3A. Log lines carry a pseudonymised user and the offer id only.
+  as `offer_poster_orphan` without the key). Posters are malware-scanned like materials (T24:
+  `poster_status`, an infected poster is deleted). Log lines carry a pseudonymised user and the
+  offer id only.
 - **The one allowed token in a URL**: the login link `/logowanie/link/?t=<token>` (and, built the
   same way, the e-mail change link `/konto/email/link/?t=<token>`). The token
   is only in the query string, which the access log never contains (path only, `django.server`
@@ -236,10 +254,10 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 3.5.3 | Sensitive actions use POST/PUT/... | done so far (`require_GET`/`require_POST`); per feature |
 | 4.1.1 | Content-Type with charset | done (Django default `utf-8`) |
 | 4.4.1 | WebSockets over TLS | n/a (no WebSockets) |
-| 5.2.1 | File size limits | done for offer posters (T06 limits, used by T22); other uploads in E2 |
-| 5.2.2 | File extension and content checked | done for offer posters (sniffed type, T22); other uploads in E2 |
-| 5.3.1 | Uploads never executed | planned (T06: separate origin, D62; private files are attachments with a sandbox CSP) |
-| 5.3.2 | Server-generated file paths | done (random keys from `store_upload`, T06; posters T22) |
+| 5.2.1 | File size limits | done for offer posters, photos and PDFs (T06 limits, T22, T24; per-artist counts T24); video/audio in US-2.3B |
+| 5.2.2 | File extension and content checked | done for offer posters, photos and PDFs (sniffed type, T22, T24); video/audio in US-2.3B |
+| 5.3.1 | Uploads never executed | done (T06: separate origin, D62; private files are attachments with a sandbox CSP; T24: malware scan with clamd before a file counts, prod refuses no scanner; PDF text read by pure-Python `pypdf`, never an external program) |
+| 5.3.2 | Server-generated file paths | done (random keys from `store_upload`, T06; posters T22; materials T24) |
 | 6.1.1 | Rate limiting / anti-automation documented | done (this file, `throttling.py`) |
 | 6.2.1–6.2.8 | Password rules (length, change, common lists, composition, fields, paste, exact check) | n/a (no passwords: e-mail link + code only, D1; users have unusable passwords. Django-admin staff logins keep Django's password validators until admin TOTP, US-9.1) |
 | 6.3.1 | Brute force / stuffing controls | done (T12: 5 failed codes per e-mail lock code login for 15 min, even a correct code; send limits 5/h per address, 20/h per IP; shared in PostgreSQL) |
@@ -254,7 +272,7 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 7.4.2 | Disabling a user ends their sessions | planned (E1, E9); T17: changing the login e-mail ends all other sessions |
 | 8.1.1 | Authorisation rules documented | done (T15: roles and rules in `apps/accounts/roles.py`, per-route table in `apps/accounts/tests/test_permission_matrix.py`, "Roles and access control" above) |
 | 8.2.1 | Function-level access control | done (T15: `role_required` / `RoleRequiredMixin`, 403 + log; every route in the permission matrix; `/django-admin/` staff only) |
-| 8.2.2 | Data-level access control (IDOR) | per feature: T21's wizard edits only `request.user`'s own artist; T22 offers are looked up with the owner in the query (foreign id = 404, tested) |
+| 8.2.2 | Data-level access control (IDOR) | per feature: T21's wizard edits only `request.user`'s own artist; T22 offers and T24 materials are looked up with the owner in the query (foreign id = 404, tested) |
 | 8.3.1 | Authorisation in the service layer | partial (T15: rule functions `can_create_artist_profile`, `can_create_inquiry`, `can_create_notice`; E5/E6 call them in their services) |
 | 9.1.1–9.2.1 | Self-contained tokens (JWT etc.) | n/a (none; Django signed tokens use HMAC) |
 | 10.4.1–10.4.5 | OAuth authorisation server | n/a |

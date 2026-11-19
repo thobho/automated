@@ -25,3 +25,9 @@ EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 AI_CLIENT = "fake"
 OPENROUTER_API_KEY = ""
 AI_KILL_SWITCH = False
+
+# Tests never reach a real scanner; the fake answers MALWARE_SCANNER_FAKE_RESULT.
+MALWARE_SCANNER = "fake"
+MALWARE_SCANNER_FAKE_RESULT = "clean"
+CLAMD_HOST = ""
+CLAMD_SOCKET = ""

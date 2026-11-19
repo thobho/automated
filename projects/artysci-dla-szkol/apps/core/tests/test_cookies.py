@@ -15,6 +15,7 @@ ROUTES_WITH_ARGUMENTS = {
     "/artysta/profil/oferty/1/edycja/": "artists:offer_edit (offer id)",
     "/artysta/profil/oferty/1/usun/": "artists:offer_delete (offer id)",
     "/artysta/profil/oferty/1/przesun/": "artists:offer_move (offer id, POST only)",
+    "/artysta/profil/materialy/1/usun/": "artists:material_delete (material id, POST only)",
 }
 
 # Never requested: staff only, Django's own cookies are the same session/CSRF ones.
@@ -120,6 +121,7 @@ def test_prod_allowlist_is_host_prefixed(monkeypatch):
     }.items():
         monkeypatch.setenv(key, value)
     monkeypatch.delitem(sys.modules, "config.settings.prod", raising=False)
+    monkeypatch.delitem(sys.modules, "config.settings.hosted", raising=False)
     prod = importlib.import_module("config.settings.prod")
     assert {prod.SESSION_COOKIE_NAME, prod.CSRF_COOKIE_NAME} == {
         "__Host-sessionid",

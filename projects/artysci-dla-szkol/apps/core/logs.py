@@ -36,6 +36,9 @@ EXTRA_FIELDS = (
     "role",
     "url_name",
     "required_role",
+    # artist materials and offers (ids only)
+    "material",
+    "offer",
 )
 
 # --- Redaction -----------------------------------------------------------------------------

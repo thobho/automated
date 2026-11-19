@@ -6,7 +6,7 @@ DATABASES, reading them from environment variables.
 
 from pathlib import Path
 
-from .env import env
+from .env import env, scanner_from_env
 from .storage import build_storages
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -240,3 +240,21 @@ STORAGES = build_storages(
     public_root=MEDIA_PUBLIC_ROOT,
     signed_url_ttl=MEDIA_SIGNED_URL_TTL,
 )
+
+# Malware scanning of uploads (apps/core/scanning.py, US-2.3A) -------------------------------
+# clamd = ClamAV daemon (prod accepts only this); none = unscanned, logged (dev, pirx: D87).
+MALWARE_SCANNER = scanner_from_env(("clamd", "none"), default="none", module="config.settings")
+CLAMD_HOST = env.str("CLAMD_HOST", default="")
+CLAMD_PORT = env.int("CLAMD_PORT", default=3310)
+CLAMD_SOCKET = env.str("CLAMD_SOCKET", default="")  # Unix socket path; wins over host/port
+CLAMD_TIMEOUT = env.float("CLAMD_TIMEOUT", default=30.0)  # seconds
+
+# Artist materials (US-2.3A, D8): per-artist counts; size limits are in apps/core/uploads.py.
+MATERIAL_MAX_PHOTOS = 40
+MATERIAL_MAX_PDFS = 10
+# PDF text extraction limits (the job stops at the first one reached).
+PDF_TEXT_MAX_PAGES = env.int("PDF_TEXT_MAX_PAGES", default=100)
+PDF_TEXT_MAX_CHARS = env.int("PDF_TEXT_MAX_CHARS", default=100_000)
+PDF_TEXT_MAX_SECONDS = env.float("PDF_TEXT_MAX_SECONDS", default=30.0)
+# YouTube / Vimeo oEmbed lookups (fixed public endpoints only)
+OEMBED_TIMEOUT_SECONDS = env.float("OEMBED_TIMEOUT_SECONDS", default=5.0)

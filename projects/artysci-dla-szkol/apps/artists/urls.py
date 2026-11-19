@@ -14,5 +14,24 @@ urlpatterns = [
     path("artysta/profil/oferty/<int:offer_id>/usun/", views.offer_delete, name="offer_delete"),
     path("artysta/profil/oferty/<int:offer_id>/przesun/", views.offer_move, name="offer_move"),
     path("artysta/profil/oswiadczenia/", views.statements, name="statements"),
-    path("artysta/profil/materialy/", views.materials, name="materials"),
+    path("artysta/profil/materialy/", views.materials_page, name="materials"),
+    path(
+        "artysta/profil/materialy/zdjecia/",
+        views.materials_upload,
+        {"kind": "photo"},
+        name="materials_photos",
+    ),
+    path(
+        "artysta/profil/materialy/pdf/",
+        views.materials_upload,
+        {"kind": "pdf"},
+        name="materials_pdfs",
+    ),
+    path("artysta/profil/materialy/film/", views.materials_link, name="materials_link"),
+    path(
+        "artysta/profil/materialy/<int:material_id>/usun/",
+        views.material_delete,
+        name="material_delete",
+    ),
+    path("artysta/profil/kwestionariusz/", views.questionnaire, name="questionnaire"),
 ]

@@ -21,3 +21,14 @@ def require(name: str, settings_module: str) -> str:
             f"Set it in the environment (see .env.example)."
         )
     return value
+
+
+def scanner_from_env(allowed: tuple[str, ...], *, default: str, module: str) -> str:
+    """`MALWARE_SCANNER` if it is one of `allowed`, else fail fast (prod allows only clamd)."""
+    value = env.str("MALWARE_SCANNER", default=default).strip().lower() or default
+    if value not in allowed:
+        raise ImproperlyConfigured(
+            f"MALWARE_SCANNER={value!r} is not allowed in {module}; "
+            f"use one of: {', '.join(allowed)} (see .env.example)."
+        )
+    return value

@@ -19,7 +19,8 @@ PROD_VARS = {
 
 
 def _load(module: str):
-    sys.modules.pop(module, None)
+    for name in (module, "config.settings.hosted"):  # prod and pirx build on hosted
+        sys.modules.pop(name, None)
     return importlib.import_module(module)
 
 
@@ -90,6 +91,33 @@ def test_prod_preload_and_proxy_header_opt_in(prod_env):
     assert prod.SECURE_HSTS_PRELOAD is True
     assert prod.SECURE_PROXY_SSL_HEADER == ("HTTP_X_FORWARDED_PROTO", "https")
     assert "security.W021" not in getattr(prod, "SILENCED_SYSTEM_CHECKS", [])
+
+
+def test_prod_scans_uploads_with_clamd_by_default(prod_env):
+    assert _load("config.settings.prod").MALWARE_SCANNER == "clamd"
+
+
+@pytest.mark.parametrize("value", ["none", "fake", "magic"])
+def test_prod_refuses_to_load_without_a_real_scanner(prod_env, value):
+    prod_env.setenv("MALWARE_SCANNER", value)
+    with pytest.raises(ImproperlyConfigured, match="MALWARE_SCANNER"):
+        _load("config.settings.prod")
+
+
+def test_pirx_may_run_unscanned(prod_env):
+    pirx = _load("config.settings.pirx")
+    assert pirx.MALWARE_SCANNER == "none"
+    prod_env.setenv("MALWARE_SCANNER", "clamd")
+    assert _load("config.settings.pirx").MALWARE_SCANNER == "clamd"
+    prod_env.setenv("MALWARE_SCANNER", "fake")
+    with pytest.raises(ImproperlyConfigured, match="MALWARE_SCANNER"):
+        _load("config.settings.pirx")
+
+
+def test_dev_defaults_to_no_scanner(monkeypatch):
+    monkeypatch.delenv("MALWARE_SCANNER", raising=False)
+    sys.modules.pop("config.settings.base", None)
+    assert _load("config.settings.dev").MALWARE_SCANNER == "none"
 
 
 def test_check_deploy_is_clean_with_prod_settings():

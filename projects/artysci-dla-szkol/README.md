@@ -456,7 +456,24 @@ any S3-compatible service later). Two storages: **private** (originals, document
 - S3: `manage.py ensure_buckets` creates both buckets (public one gets anonymous read); Compose
   `full` runs it at web start-up. Run the suite against MinIO by setting `S3_*` (see
   `.env.example`) and `S3_ENDPOINT_URL`; without it the S3-parametrised tests are skipped.
-- Not covered yet: video transcoding and image variants (E2), virus scanning (later).
+- **Malware scan** (`apps/core/scanning.py`): `scan(file) -> clean | infected | error`, backend
+  from `MALWARE_SCANNER`: `clamd` (ClamAV daemon, INSTREAM over TCP `CLAMD_HOST`/`CLAMD_PORT` or
+  the Unix socket `CLAMD_SOCKET`, stdlib only), `none` (nothing scanned, each file logged as
+  `upload_unscanned`; dev and pirx, which has no RAM for clamd: D87) or `fake` (tests). **Prod
+  refuses to start with anything but `clamd`**; with no clamd address every scan is an error, so
+  no upload ever becomes ready. Run the real-clamd test with `CLAMD_HOST=... uv run pytest
+  apps/core/tests/test_scanning.py`.
+- **Artist materials** (`apps/artists/materials.py`, `/artysta/profil/materialy/`): photos (JPG,
+  PNG, WebP, 15 MB, at most 40) and PDFs (20 MB, at most 10) go through `store_upload(...,
+  visibility="private")` and become a `Material` in `pending`. The `artists.scan_material` job
+  (`media` queue) marks it `ready` (clean), deletes the file and marks it `rejected` (infected), or
+  retries 3 times and leaves it `pending` (scanner error). Only `ready` materials count
+  (`ready_materials()`). A clean PDF gets the `artists.extract_pdf_text` job (`pypdf`, limits
+  `PDF_TEXT_MAX_PAGES`/`_CHARS`/`_SECONDS`; encrypted or broken files end as a text status).
+  YouTube/Vimeo links are parsed to a video id and checked through the fixed oEmbed endpoints
+  only (`OEMBED_TIMEOUT_SECONDS`); other hosts are refused without a request. Offer posters
+  (`Offer.poster_status`) go through the same scan (`artists.scan_poster`).
+- Not covered yet: video and audio upload, transcoding, image variants (E2), HEIC photos.
 
 ## Analytics (events and visits)
 
