@@ -8,7 +8,7 @@ import pytest
 from django.core import mail
 from django.template import Context, Template
 
-from apps.accounts.tests.conftest import make_artist
+from apps.accounts.tests.conftest import make_artist, run_worker
 from apps.artists.models import Artist
 from apps.core.testing import in_memory_queue
 from apps.trust import services, tasks
@@ -287,6 +287,15 @@ def test_periodic_job_queues_and_email_job_sends_plain_polish_text(artist, wordi
     assert "Oświadczenia" in message.body
     assert not message.alternatives  # plain text only
     assert all(EMAIL not in r.getMessage() for r in caplog.records)
+
+
+@pytest.mark.django_db(transaction=True)
+def test_worker_runs_the_reminder_job(artist, wordings, queue):
+    services.make_statement(artist, K.INSURANCE, valid_until=YESTERDAY, now=NOW - timedelta(9))
+    assert services.queue_insurance_reminders(now=NOW) == 1
+    run_worker()
+    assert [j["status"] for j in reminder_jobs(queue)] == ["succeeded"]
+    assert len(mail.outbox) == 1 and mail.outbox[0].to == [EMAIL]
 
 
 def test_reminder_email_skips_missing_or_inactive(artist, wordings):
