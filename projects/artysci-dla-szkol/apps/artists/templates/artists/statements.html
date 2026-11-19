@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Oświadczenia" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Oświadczenia" %}</h1>
+  <p>{% translate "Każde oświadczenie składasz osobno. Zapisujemy datę i wersję treści, której dotyczy. Gdy treść się zmieni, poprosimy o ponowne oświadczenie." %}</p>
+  <p>{% translate "To Twoje własne oświadczenia: serwis ich nie sprawdza i nie wymaga dokumentów." %}</p>
+
+  {% for state in states %}
+    <section class="statement" id="statement-{{ state.kind }}" data-kind="{{ state.kind }}" data-status="{{ state.status }}">
+      <h2>{{ state.label }}</h2>
+
+      <p class="statement-status">
+        {% if state.status == "unavailable" %}
+          {% translate "Niedostępne: treść tego oświadczenia nie jest jeszcze opublikowana." %}
+        {% elif state.status == "not_made" %}
+          {% translate "Nie złożono." %}
+        {% elif state.status == "outdated" %}
+          <strong>{% translate "wymaga ponownego oświadczenia" %}</strong>:
+          {% blocktranslate with version=state.latest.document.version date=state.latest.made_at|date:"j E Y" trimmed %}
+            złożone {{ date }} na wersję {{ version }}, od tego czasu treść się zmieniła.
+          {% endblocktranslate %}
+        {% else %}
+          {% blocktranslate with version=state.document.version date=state.latest.made_at|date:"j E Y" trimmed %}
+            Złożone {{ date }}, wersja {{ version }}.
+          {% endblocktranslate %}
+          {% if state.latest.billing_form %}{% translate "Forma rozliczenia:" %} {{ state.latest.get_billing_form_display }}.{% endif %}
+          {% if state.latest.valid_until %}
+            {% if state.status == "expired" %}
+              <strong>{% blocktranslate with date=state.latest.valid_until|date:"j E Y" %}Wygasło: polisa była ważna do {{ date }}.{% endblocktranslate %}</strong>
+            {% else %}
+              {% blocktranslate with date=state.latest.valid_until|date:"j E Y" %}Polisa ważna do {{ date }}.{% endblocktranslate %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      </p>
+
+      {% if error_kind == state.kind and form %}
+        {% for error in form.non_field_errors %}<p role="alert">{{ error }}</p>{% endfor %}
+      {% endif %}
+
+      {% if state.document %}
+        <details {% if state.status != "current" %}open{% endif %}>
+          <summary>{% blocktranslate with version=state.document.version %}Treść oświadczenia (wersja {{ version }}){% endblocktranslate %}</summary>
+          {{ state.document.body|linebreaks }}
+        </details>
+
+        <form method="post" action="{% url 'artists:statements' %}#statement-{{ state.kind }}" novalidate>
+          {% csrf_token %}
+          <input type="hidden" name="kind" value="{{ state.kind }}">
+          <input type="hidden" name="action" value="make">
+          <input type="hidden" name="document" value="{{ state.document.pk }}">
+
+          {% if state.kind == "billing_form" %}
+            <fieldset {% if error_kind == state.kind and form.billing_form.errors %}aria-describedby="billing_form-error"{% endif %}>
+              <legend>{% translate "Forma rozliczenia" %}</legend>
+              {% for value, label in billing_choices %}
+                <label for="billing-{{ value }}"><input type="radio" id="billing-{{ value }}" name="billing_form" value="{{ value }}"{% if state.latest.billing_form == value %} checked{% endif %}> {{ label }}</label><br>
+              {% endfor %}
+            </fieldset>
+            {% if error_kind == state.kind %}{% for error in form.billing_form.errors %}<p id="billing_form-error" role="alert">{{ error }}</p>{% endfor %}{% endif %}
+          {% endif %}
+
+          {% if state.kind == "insurance" %}
+            <p>
+              <label for="insurance-valid-until">{% translate "Polisa ważna do (opcjonalnie)" %}</label>
+              <input type="date" id="insurance-valid-until" name="valid_until"
+                     value="{{ state.latest.valid_until|date:'Y-m-d' }}"
+                     {% if error_kind == state.kind and form.valid_until.errors %}aria-invalid="true" aria-describedby="valid_until-error"{% endif %}>
+            </p>
+            {% if error_kind == state.kind %}{% for error in form.valid_until.errors %}<p id="valid_until-error" role="alert">{{ error }}</p>{% endfor %}{% endif %}
+          {% endif %}
+
+          <p>
+            <label for="{{ state.kind }}-confirm">
+              <input type="checkbox" id="{{ state.kind }}-confirm" name="confirm" value="1"
+                     {% if error_kind == state.kind and form.confirm.errors %}aria-invalid="true" aria-describedby="confirm-error"{% endif %}>
+              {% translate "Oświadczam, że zapoznałem/zapoznałam się z treścią i składam to oświadczenie." %}
+            </label>
+          </p>
+          {% if error_kind == state.kind %}{% for error in form.confirm.errors %}<p id="confirm-error" role="alert">{{ error }}</p>{% endfor %}{% endif %}
+          <button type="submit">
+            {% if state.status == "not_made" %}{% translate "Złóż oświadczenie" %}{% else %}{% translate "Złóż ponownie" %}{% endif %}
+          </button>
+        </form>
+      {% endif %}
+
+      {% if state.latest %}
+        <form method="post" action="{% url 'artists:statements' %}">
+          {% csrf_token %}
+          <input type="hidden" name="kind" value="{{ state.kind }}">
+          <input type="hidden" name="action" value="withdraw">
+          <button type="submit">{% translate "Wycofaj oświadczenie" %}</button>
+        </form>
+      {% endif %}
+    </section>
+  {% endfor %}
+
+  <p><a href="{% url 'artists:start' %}">{% translate "Wróć do kreatora" %}</a></p>
+{% endblock %}

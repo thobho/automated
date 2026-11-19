@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.http import Http404, HttpResponseBadRequest
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods, require_POST
@@ -16,6 +17,9 @@ from django.views.decorators.http import require_http_methods, require_POST
 from apps.accounts.permissions import role_required
 from apps.core.regions import Voivodeship
 from apps.core.uploads import UploadRejected
+from apps.trust import services as trust
+from apps.trust.errors import NoPublishedVersion, StaleWording
+from apps.trust.models import STATEMENT_KINDS, BillingForm
 
 from . import services
 from .models import MAX_AGE, ArtistType, Audience, Offer
@@ -157,8 +161,102 @@ def _later_step(key):
     return view
 
 
-statements = _later_step("statements")
 materials = _later_step("materials")
+
+
+# --- wizard step "Oświadczenia" (US-8.2) ------------------------------------------------------
+
+
+class DateInput(forms.DateInput):
+    input_type = "date"
+
+
+class StatementForm(forms.Form):
+    """One statement per submit. `document` is the wording version the page showed."""
+
+    kind = forms.ChoiceField(choices=[(k, k) for k in STATEMENT_KINDS])
+    action = forms.ChoiceField(choices=[("make", "make"), ("withdraw", "withdraw")])
+    document = forms.IntegerField(required=False)
+    confirm = forms.BooleanField(required=False)
+    billing_form = forms.ChoiceField(
+        label=_("Forma rozliczenia"),
+        choices=BillingForm.choices,
+        widget=forms.RadioSelect,
+        required=False,
+        error_messages={"invalid_choice": _("Wybierz fakturę albo rachunek.")},
+    )
+    valid_until = forms.DateField(
+        label=_("Polisa ważna do (opcjonalnie)"), required=False, widget=DateInput
+    )
+
+    def __init__(self, *args, today=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.today = today
+
+    def clean(self):
+        cleaned = super().clean()
+        if cleaned.get("action") != "make" or "kind" not in cleaned:
+            return cleaned
+        kind = cleaned["kind"]
+        if not cleaned.get("confirm"):
+            self.add_error("confirm", _("Zaznacz, że składasz to oświadczenie."))
+        if kind == trust.Kind.BILLING_FORM:
+            if not cleaned.get("billing_form") and "billing_form" not in self.errors:
+                self.add_error("billing_form", _("Wybierz fakturę albo rachunek."))
+        else:
+            cleaned["billing_form"] = ""
+        if kind != trust.Kind.INSURANCE:
+            cleaned["valid_until"] = None
+        elif cleaned.get("valid_until") and self.today and cleaned["valid_until"] < self.today:
+            self.add_error("valid_until", _("Data ważności nie może być z przeszłości."))
+        return cleaned
+
+
+def _statements_page(request, *, form=None, error_kind="", status=200):
+    context = {
+        "states": trust.statement_overview(_artist(request)),
+        "form": form,
+        "error_kind": error_kind,
+        "billing_choices": BillingForm.choices,
+    }
+    return render(request, "artists/statements.html", context, status=status)
+
+
+@never_cache
+@require_http_methods(["GET", "HEAD", "POST"])
+@role_required("artist")
+@_basics_required
+def statements(request):
+    """Each statement with its current wording and the artist's status; POST makes or
+    withdraws one statement."""
+    if request.method != "POST":
+        return _statements_page(request)
+    form = StatementForm(request.POST, today=timezone.localdate())
+    if not form.is_valid():
+        return _statements_page(
+            request, form=form, error_kind=request.POST.get("kind", ""), status=400
+        )
+    data, artist = form.cleaned_data, _artist(request)
+    if data["action"] == "withdraw":
+        trust.withdraw_statement(artist, data["kind"])
+        messages.success(request, _("Wycofano oświadczenie."))
+        return redirect("artists:statements")
+    try:
+        trust.make_statement(
+            artist,
+            data["kind"],
+            billing_form=data["billing_form"],
+            valid_until=data["valid_until"],
+            shown_document_id=data["document"] or 0,
+        )
+    except NoPublishedVersion:
+        form.add_error(None, _("To oświadczenie nie jest jeszcze dostępne."))
+    except StaleWording:
+        form.add_error(None, _("Treść oświadczenia zmieniła się. Przeczytaj nową wersję."))
+    else:
+        messages.success(request, _("Zapisano oświadczenie."))
+        return redirect("artists:statements")
+    return _statements_page(request, form=form, error_kind=data["kind"], status=400)
 
 
 # --- wizard step "Oferty" (US-2.9) -----------------------------------------------------------

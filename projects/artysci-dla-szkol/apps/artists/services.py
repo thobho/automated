@@ -238,10 +238,15 @@ class StepStatus:
 
 def wizard_steps(artist: Artist) -> list[StepStatus]:
     """Each wizard step with whether it is done and whether it can be opened. Later steps
-    open once the basics are complete. Offers are done with at least one offer (D6); the
-    statements and materials steps are placeholders (never done) until US-8.2 and US-2.3A."""
+    open once the basics are complete. Offers are done with at least one offer (D6);
+    statements with a counted child-protection statement (D6, US-8.2); the materials step is a
+    placeholder (never done) until US-2.3A."""
     complete = basics_complete(artist)
-    done = {"basics": complete, "offers": complete and has_offers(artist)}
+    done = {
+        "basics": complete,
+        "offers": complete and has_offers(artist),
+        "statements": complete and trust.has_child_protection_statement(artist),
+    }
     return [
         StepStatus(
             step=step,
