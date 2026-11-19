@@ -2,7 +2,7 @@
 # One AI review run on pirx for one PR, as the `agent` user. Started detached by start-claude-run.sh.
 #   review-run.sh <pr> <model>
 # The reviewer model only writes a verdict (.agent/REVIEW.json); this script acts on it:
-#   approve + CI green (or no CI) + mergeable + not protected -> squash-merge, delete the branch
+#   approve + CI green (or no CI) + mergeable + not protected -> merge-ready.sh: merged against the current main
 #   approve + protected (automation money/permission rules) -> comment, the owner merges with one tap
 #   changes  -> comment with the points, issue back to agent:todo (after 3 rounds: agent:blocked)
 #   blocked  -> comment, issue to agent:blocked
@@ -126,14 +126,10 @@ This PR touches the automation's money or permission rules, so it is not merged 
       gh pr comment "$pr" --body "$body
 
 Not merged: the PR changed or is not mergeable now ($now). It will be reviewed again. $mark" >/dev/null
-    else
-      gh pr comment "$pr" --body "$body $mark" >/dev/null
-      if gh pr merge "$pr" --squash --delete-branch --match-head-commit "$sha" >/dev/null 2>>"$runlog"; then
-        [[ "$issue" -gt 0 ]] && gh issue edit "$issue" --remove-label agent:review --add-label agent:done >/dev/null 2>&1
-        log "review #$pr: approved and merged"; status_update "PR #$pr approved by AI review ($model) and merged"
-      else
-        log "review #$pr: merge failed"; status_update "PR #$pr approved but the merge failed (log $runlog)"
-      fi
+    else   # merge-ready.sh merges it only against the current main and while main is green
+      gh pr comment "$pr" --body "$body $mark <!-- automated:approved:$sha -->" >/dev/null
+      log "review #$pr: approved ($model)"; status_update "PR #$pr approved by AI review ($model)"
+      bash "$RUNNER_DIR/agent/pirx/merge-ready.sh" "$pr"
     fi ;;
   changes)
     gh pr comment "$pr" --body "$body $mark <!-- automated:review-changes -->" >/dev/null
