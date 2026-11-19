@@ -2,6 +2,8 @@
 
 pirx (the always-on Linux box) builds the queue and heals itself; the owner hears from it only when money is needed. Everything runs as the **`agent`** user, created once with `setup-agent-user.sh` (sudo): no sudo except the root helper's fixed verbs, no access to `/home/user`, Hermes or the home LAN, memory and CPU caps, its own GitHub token (only `thobho/automated`), its own Claude login and its own OpenRouter key.
 
+Design principles (why it is a pipeline with checks, not a swarm, and the rules for changing it): [`agent/DESIGN.md`](../DESIGN.md).
+
 ## Who runs what
 | Piece | Where | Trigger | Budget |
 |---|---|---|---|
