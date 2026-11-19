@@ -16,6 +16,7 @@ ROUTES_WITH_ARGUMENTS = {
     "/artysta/profil/oferty/1/usun/": "artists:offer_delete (offer id)",
     "/artysta/profil/oferty/1/przesun/": "artists:offer_move (offer id, POST only)",
     "/artysta/profil/materialy/1/usun/": "artists:material_delete (material id, POST only)",
+    "/artysta/profil/import/1/": "artists:website_import_status (import id)",
 }
 
 # Never requested: staff only, Django's own cookies are the same session/CSRF ones.

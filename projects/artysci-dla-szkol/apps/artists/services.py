@@ -27,7 +27,7 @@ from apps.core.regions import Voivodeship
 from apps.trust import services as trust
 from apps.trust.errors import NoPublishedVersion
 
-from . import materials
+from . import materials, website_import
 from .models import MAX_AGE, Artist, ArtistType, Audience, Offer, ScanStatus
 
 logger = logging.getLogger("apps.artists.registration")
@@ -226,6 +226,7 @@ STEPS = (
     Step("offers", _("Oferty"), "artists:offers"),
     Step("statements", _("Oświadczenia"), "artists:statements"),
     Step("materials", _("Materiały i kwestionariusz"), "artists:materials"),
+    Step("import", _("Import ze strony (opcjonalnie)"), "artists:website_import"),
 )
 
 
@@ -247,6 +248,7 @@ def wizard_steps(artist: Artist) -> list[StepStatus]:
         "offers": complete and has_offers(artist),
         "statements": complete and trust.has_child_protection_statement(artist),
         "materials": complete and materials.has_ready_materials(artist),
+        "import": complete and website_import.has_finished_import(artist),
     }
     return [
         StepStatus(

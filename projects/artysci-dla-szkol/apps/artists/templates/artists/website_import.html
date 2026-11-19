@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Import ze strony" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Import ze strony" %}</h1>
+  <p>{% blocktranslate trimmed %}Wklej adres swojej strony. W tle pobierzemy najwyżej {{ max_pages }} podstron z tej samej domeny (do {{ page_timeout }} s na stronę i {{ max_mb }} MB łącznie) i zapiszemy tekst, zdjęcia i linki do filmów jako Twoje materiały.{% endblocktranslate %}</p>
+  <p>{% translate "Numery kont, PESEL, numery dowodów oraz dane kontaktowe usuwamy z tekstu, zanim cokolwiek trafi do generatora. Dane kontaktowe pokażemy tylko Tobie." %}</p>
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div role="alert" id="import-errors">{% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}</div>
+    {% endif %}
+    <p>
+      <label for="{{ form.url.id_for_label }}">{{ form.url.label }}</label><br>
+      <input type="url" name="url" id="{{ form.url.id_for_label }}" maxlength="2000"
+             value="{{ form.url.value|default:'' }}" placeholder="https://www.example.invalid/"
+             {% if form.url.errors %}aria-invalid="true" aria-describedby="url-error"{% endif %}>
+    </p>
+    {% if form.url.errors %}<p id="url-error" role="alert">{{ form.url.errors.0 }}</p>{% endif %}
+    <p>
+      <input type="checkbox" name="confirm" id="{{ form.confirm.id_for_label }}" value="1"
+             {% if form.confirm.value %}checked{% endif %}
+             {% if form.confirm.errors %}aria-invalid="true" aria-describedby="confirm-error"{% endif %}>
+      <label for="{{ form.confirm.id_for_label }}">{{ form.confirm.label }}</label>
+    </p>
+    {% if form.confirm.errors %}<p id="confirm-error" role="alert">{{ form.confirm.errors.0 }}</p>{% endif %}
+    <button type="submit">{% translate "Importuj" %}</button>
+  </form>
+
+  {% if imports %}
+    <section aria-labelledby="history-heading">
+      <h2 id="history-heading">{% translate "Ostatnie importy" %}</h2>
+      <ul>
+        {% for item in imports %}
+          <li data-import="{{ item.pk }}" data-status="{{ item.status }}">
+            <a href="{% url 'artists:website_import_status' item.pk %}">{{ item.created_at|date:"j.m.Y H:i" }}</a>
+            — {{ item.get_status_display }}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  <p>{% translate "Nie masz strony albo import się nie udał? Wszystko możesz uzupełnić ręcznie:" %}
+    <a href="{% url 'artists:materials' %}">{% translate "materiały" %}</a>,
+    <a href="{% url 'artists:offers' %}">{% translate "oferty" %}</a>.</p>
+  <p><a href="{% url 'artists:start' %}">{% translate "Wróć do kreatora" %}</a></p>
+{% endblock %}

@@ -258,3 +258,13 @@ PDF_TEXT_MAX_CHARS = env.int("PDF_TEXT_MAX_CHARS", default=100_000)
 PDF_TEXT_MAX_SECONDS = env.float("PDF_TEXT_MAX_SECONDS", default=30.0)
 # YouTube / Vimeo oEmbed lookups (fixed public endpoints only)
 OEMBED_TIMEOUT_SECONDS = env.float("OEMBED_TIMEOUT_SECONDS", default=5.0)
+
+# Import from the artist's own website (US-2.2, apps/core/safefetch.py) ----------------------
+WEBSITE_IMPORT_MAX_PAGES = env.int("WEBSITE_IMPORT_MAX_PAGES", default=10)
+WEBSITE_IMPORT_MAX_BYTES = env.int("WEBSITE_IMPORT_MAX_BYTES", default=20 * 1024 * 1024)
+WEBSITE_IMPORT_PAGE_TIMEOUT = env.float("WEBSITE_IMPORT_PAGE_TIMEOUT", default=30.0)  # seconds
+WEBSITE_IMPORT_MAX_REDIRECTS = env.int("WEBSITE_IMPORT_MAX_REDIRECTS", default=3)
+WEBSITE_IMPORT_MAX_TEXT_CHARS = env.int("WEBSITE_IMPORT_MAX_TEXT_CHARS", default=200_000)
+# Test only: lets the fetcher reach loopback addresses on any port, so a synthetic site served
+# locally can be imported in dev. Hosted settings (prod, pirx) refuse to start with it on.
+SAFE_FETCH_ALLOW_LOOPBACK = env.bool("SAFE_FETCH_ALLOW_LOOPBACK", default=False)

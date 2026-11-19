@@ -5,6 +5,7 @@ from dataclasses import asdict
 from functools import wraps
 
 from django import forms
+from django.conf import settings
 from django.contrib import messages
 from django.http import Http404, HttpResponseBadRequest
 from django.shortcuts import redirect, render
@@ -21,8 +22,8 @@ from apps.trust import services as trust
 from apps.trust.errors import NoPublishedVersion, StaleWording
 from apps.trust.models import STATEMENT_KINDS, BillingForm
 
-from . import materials, services
-from .models import MAX_AGE, ArtistType, Audience, Material, MaterialKind, Offer
+from . import materials, services, website_import
+from .models import MAX_AGE, ArtistType, Audience, Material, MaterialKind, Offer, WebsiteImport
 from .services import Registration
 
 
@@ -316,6 +317,76 @@ def questionnaire(request):
         return render(request, "artists/questionnaire.html", {"form": form}, status=400)
     messages.success(request, _("Zapisano kwestionariusz."))
     return redirect("artists:materials")
+
+
+# --- wizard step "Import ze strony" (US-2.2) ---------------------------------------------------
+
+
+class WebsiteImportForm(forms.Form):
+    url = forms.CharField(
+        label=_("Adres Twojej strony"),
+        max_length=2000,
+        error_messages={"required": _("Podaj adres strony.")},
+    )
+    confirm = forms.BooleanField(
+        label=_(
+            "Oświadczam, że to moja strona i mam prawa do jej treści i zdjęć "
+            "(oświadczenie „Prawa do materiałów”)."
+        ),
+        error_messages={
+            "required": _("Zaznacz, że strona jest Twoja i masz prawa do jej treści i zdjęć.")
+        },
+    )
+
+
+def _import_page(request, form, *, status=200):
+    artist = _artist(request)
+    context = {
+        "form": form,
+        "imports": website_import.imports_for(artist)[:5],
+        "max_pages": settings.WEBSITE_IMPORT_MAX_PAGES,
+        "max_mb": settings.WEBSITE_IMPORT_MAX_BYTES // MB,
+        "page_timeout": int(settings.WEBSITE_IMPORT_PAGE_TIMEOUT),
+    }
+    return render(request, "artists/website_import.html", context, status=status)
+
+
+@never_cache
+@require_http_methods(["GET", "HEAD", "POST"])
+@role_required("artist")
+@_basics_required
+def website_import_view(request):
+    """The URL and the rights checkbox; POST queues an import and shows its status page."""
+    if request.method != "POST":
+        return _import_page(request, WebsiteImportForm())
+    form = WebsiteImportForm(request.POST)
+    if not form.is_valid():
+        return _import_page(request, form, status=400)
+    try:
+        record = website_import.start_import(
+            _artist(request), form.cleaned_data["url"], rights_confirmed=True
+        )
+    except website_import.ImportRefused as exc:
+        form.add_error(None, exc.message)
+        return _import_page(request, form, status=400)
+    return redirect("artists:website_import_status", import_id=record.pk)
+
+
+@never_cache
+@role_required("artist")
+@_basics_required
+def website_import_status(request, import_id):
+    """Status and result of the artist's own import; another artist's id is 404."""
+    try:
+        record = website_import.get_import(_artist(request), import_id)
+    except WebsiteImport.DoesNotExist as exc:
+        raise Http404 from exc
+    context = {
+        "record": record,
+        "materials": website_import.imported_materials(record),
+        "refresh": not record.finished,
+    }
+    return render(request, "artists/website_import_status.html", context)
 
 
 # --- wizard step "Oświadczenia" (US-8.2) ------------------------------------------------------

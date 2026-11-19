@@ -34,4 +34,10 @@ urlpatterns = [
         name="material_delete",
     ),
     path("artysta/profil/kwestionariusz/", views.questionnaire, name="questionnaire"),
+    path("artysta/profil/import/", views.website_import_view, name="website_import"),
+    path(
+        "artysta/profil/import/<int:import_id>/",
+        views.website_import_status,
+        name="website_import_status",
+    ),
 ]
