@@ -102,11 +102,17 @@ def test_placeholders_say_later(web):
 def test_free_and_taken_address_get_identical_answers(web, user, queue, clock):
     get_user_model().objects.create_user(email=OTHER)
     free = web.post(CHANGE, {"email": NEW})
+    deliver(queue)
+    settings_after_free = web.get(SETTINGS)
     taken = web.post(CHANGE, {"email": OTHER})
+    deliver(queue)
+    settings_after_taken = web.get(SETTINGS)
     assert free.status_code == taken.status_code == 200
     assert _page(free) == _page(taken)
     assert "Jeśli adres jest poprawny, wysłaliśmy na niego wiadomość" in _page(free)
-    deliver(queue)
+    # /konto/ afterwards must not tell whether the address is registered (pending in both).
+    assert _page(settings_after_free) == _page(settings_after_taken)
+    assert "Czekamy na potwierdzenie nowego adresu" in _page(settings_after_taken)
     assert mails_to(OTHER) == [] and len(mails_to(NEW)) == 1
     assert get_user_model().objects.get(pk=user.pk).email == EMAIL
 

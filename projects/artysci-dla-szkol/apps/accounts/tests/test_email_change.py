@@ -128,7 +128,49 @@ def test_taken_address_gets_nothing_and_nothing_changes(user, other, queue, cloc
     deliver(queue)
     assert mails_to(OTHER) == []
     assert [m.to for m in mail.outbox] == [[EMAIL]]  # only the notice
-    assert not EmailChangeRequest.objects.exists()
+    change = EmailChangeRequest.objects.get()
+    assert not change.is_usable(clock.now) and not change.code_hash and change.token_hash is None
+    assert reload(user).email == EMAIL and reload(other).email == OTHER
+
+
+def test_taken_and_free_address_leave_the_same_pending_state(user, other, queue, clock):
+    second = get_user_model().objects.create_user(email="drugi.uzytkownik@example.invalid")
+    assert request(user, OTHER)
+    assert request(second, NEW)
+    deliver(queue)
+    taken_view = services.account_overview(user)
+    free_view = services.account_overview(second)
+    assert taken_view["change_pending"] is True and free_view["change_pending"] is True
+    taken_change = services.pending_email_change(user)
+    free_change = services.pending_email_change(second)
+    assert taken_change.expires_at - taken_change.created_at == (
+        free_change.expires_at - free_change.created_at
+    )
+    clock.advance(minutes=15)
+    assert services.account_overview(user)["change_pending"] is False
+    assert services.account_overview(second)["change_pending"] is False
+
+
+def test_taken_address_request_replaces_an_older_pending_one(user, other, queue, clock):
+    code, token = requested(user, queue, "pierwszy@example.invalid")
+    assert request(user, OTHER)
+    deliver(queue)
+    assert services.check_email_change_link(user, token) is False
+    assert services.confirm_email_change_link(user, token) is False
+    assert services.confirm_email_change_code(user, code) is False
+    assert reload(user).email == EMAIL
+
+
+def test_taken_address_request_cannot_be_confirmed(user, other, queue, clock):
+    assert request(user, OTHER)
+    deliver(queue)
+    change = EmailChangeRequest.objects.get()
+    assert services.send_email_change_email(change.pk, LINK_BASE) is False  # never gets hashes
+    change.refresh_from_db()
+    assert not change.code_hash and change.token_hash is None
+    assert mails_to(OTHER) == []
+    for code in ("000000", "123456"):
+        assert services.confirm_email_change_code(user, code) is False
     assert reload(user).email == EMAIL and reload(other).email == OTHER
 
 

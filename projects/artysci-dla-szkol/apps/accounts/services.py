@@ -368,15 +368,24 @@ def request_email_change(user, new_email: str, client_ip: str, *, link_base: str
     throttling.hit(throttling.CHANGE_PER_USER, _change_key(user), now=now)
     throttling.hit(throttling.EMAIL_PER_IP, ip_key, now=now)
 
-    if get_user_model().objects.filter(email=new_email).exists():  # also the user's own address
-        _log("e-mail change refused, address in use", "email_change_refused", user)
-        jobs.enqueue(tasks.send_email_change_notice, user_id=user.pk)
-        return True
+    taken = get_user_model().objects.filter(email=new_email).exists()  # also the user's own
+    # Both cases leave the same state: older open requests closed, one new open request with
+    # the same expiry, so /konto/ shows "pending" either way. A request for a taken address
+    # never gets hashes, so it can never be confirmed (`is_usable` needs a code hash).
     with transaction.atomic():
         EmailChangeRequest.objects.filter(user=user, consumed_at__isnull=True).update(
             consumed_at=now
         )
-        change = EmailChangeRequest.objects.create(user=user, new_email=new_email, created_at=now)
+        change = EmailChangeRequest.objects.create(
+            user=user,
+            new_email=new_email,
+            created_at=now,
+            expires_at=now + timedelta(seconds=settings.LOGIN_CHALLENGE_TTL),
+        )
+    if taken:
+        _log("e-mail change refused, address in use", "email_change_refused", user)
+        jobs.enqueue(tasks.send_email_change_notice, user_id=user.pk)
+        return True
     _log("e-mail change requested", "email_change_requested", user)
     jobs.enqueue(tasks.send_email_change_email, change_id=change.pk, link_base=link_base)
     return True
@@ -405,6 +414,8 @@ def send_email_change_email(change_id: int, link_base: str, *, now=None) -> bool
     )
     if change is None:
         return False
+    if get_user_model().objects.filter(email=change.new_email).exists():
+        return False  # in use (also taken since the request): nothing goes to that address
     token = secrets.token_urlsafe(32)
     code = f"{secrets.randbelow(10**CODE_DIGITS):0{CODE_DIGITS}d}"
     salt = secrets.token_hex(16)

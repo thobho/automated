@@ -87,9 +87,11 @@ class LoginChallenge(models.Model):
 class EmailChangeRequest(models.Model):
     """A requested new login e-mail, waiting for confirmation from that address (US-1.6).
 
-    Created by the request (with the new address only); the e-mail job then sets the hashes
-    and the expiry, so the raw link token and code exist only in the e-mail, as in
-    `LoginChallenge`. Hashes stay empty until the e-mail is sent; an empty hash never matches.
+    Created by the request (with the new address and an expiry); the e-mail job then sets the
+    hashes and restarts the expiry, so the raw link token and code exist only in the e-mail,
+    as in `LoginChallenge`. Hashes stay empty until the e-mail is sent; an empty hash never
+    matches. A request for an address that is already in use is recorded the same way but
+    never gets hashes, so it looks pending without ever being usable (no enumeration).
     A newer request closes the older open ones (`consumed_at`), and so does using one.
     """
 

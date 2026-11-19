@@ -194,7 +194,9 @@ No passwords (D1). App `apps/accounts`, logic in `services.py`:
   for a free and a taken address. Free address: an `EmailChangeRequest` is stored and the job
   `accounts.send_email_change_email` sends a link (`/konto/email/link/?t=...`) and a 6-digit code
   to the new address (15 minutes, single use, only hashes stored) and a notice without a link to
-  the old one. Taken address: only the notice (`accounts.send_email_change_notice`).
+  the old one. Taken address: only the notice (`accounts.send_email_change_notice`), plus a
+  request without hashes that can never be confirmed, so `/konto/` shows the same pending
+  state either way. Both cases close the user's older open request.
 - `confirm_email_change_code(user, code)` / `confirm_email_change_link(user, token)`: only the
   logged-in user who asked; sets the e-mail and `email_confirmed_at`. 5 wrong codes lock code
   entry for 15 minutes. The view keeps the current session with a new key; every other session
