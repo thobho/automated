@@ -86,6 +86,15 @@ def artist_for(user) -> Artist | None:
     return Artist.objects.filter(user=user).first()
 
 
+def rename_artist(user, name: str) -> bool:
+    """Set the artist name of `user` (account settings, US-1.6). False if `user` is not an
+    artist or the name is blank (nothing changes)."""
+    name = name.strip()
+    if not name:
+        return False
+    return Artist.objects.filter(user_id=user.pk).update(name=name) == 1
+
+
 def seed_artists() -> int:
     """Artist records for the synthetic ``artystaNN@example.invalid`` seed users (idempotent;
     run after `accounts.services.seed_users`). Returns how many were created."""

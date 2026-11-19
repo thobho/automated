@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{{ title }}</h1>
+  <p>{% translate "Ta funkcja będzie dostępna wkrótce." %}</p>
+  <p><a href="{% url 'accounts:settings' %}">{% translate "Wróć do ustawień konta" %}</a></p>
+{% endblock %}

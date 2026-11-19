@@ -40,6 +40,12 @@ MATRIX = {
     "accounts:login_code": ("405", "405", "405", "405"),  # POST only
     "accounts:login_link": ("400", "400", "400", "400"),  # no token -> "link invalid"
     "accounts:logout": ("405", "405", "405", "405"),  # POST only
+    "accounts:settings": ("login", "200", "200", "200"),
+    "accounts:email_change": ("login", "405", "405", "405"),  # POST only
+    "accounts:email_change_code": ("login", "405", "405", "405"),  # POST only
+    "accounts:email_change_link": ("login", "400", "400", "400"),  # no token -> "link invalid"
+    "accounts:data_export": ("login", "200", "200", "200"),  # placeholder (US-8.6)
+    "accounts:delete_account": ("login", "200", "200", "200"),  # placeholder (US-8.6)
     "artists:register": ("200", "200", "200", "200"),
     "artists:start": ("login", "200", "403", "403"),
     "institutions:register": ("200", "200", "200", "200"),

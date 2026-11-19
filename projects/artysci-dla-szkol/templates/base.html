@@ -16,6 +16,7 @@
   <header>
     <nav aria-label="{% translate 'Konto' %}">
       {% if user.is_authenticated %}
+        <a href="{% url 'accounts:settings' %}">{% translate "Ustawienia konta" %}</a>
         {# Logout is POST-only (CSRF-protected); the server ends the session. #}
         <form method="post" action="{% url 'accounts:logout' %}">
           {% csrf_token %}
@@ -27,6 +28,11 @@
     </nav>
   </header>
   <main id="main">
+    {% if messages %}
+      <ul role="status">
+        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+      </ul>
+    {% endif %}
     {% block content %}{% endblock %}
   </main>
   <footer>

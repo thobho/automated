@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Ustawienia konta" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Ustawienia konta" %}</h1>
+
+  <h2>{% translate "Dane" %}</h2>
+  <form method="post" action="{% url 'accounts:settings' %}" novalidate>
+    {% csrf_token %}
+    <p>
+      <label for="id_full_name">{% translate "Imię i nazwisko" %}</label>
+      <input type="text" id="id_full_name" name="full_name"
+             value="{{ names_form.full_name.value|default:'' }}" autocomplete="name" maxlength="200"
+             {% if names_form.full_name.errors %}aria-invalid="true" aria-describedby="full-name-error"{% endif %}>
+    </p>
+    {% if names_form.full_name.errors %}
+      <p id="full-name-error" role="alert">{% translate "Podaj imię i nazwisko (do 200 znaków)." %}</p>
+    {% endif %}
+    {% if is_artist %}
+      <p>
+        <label for="id_artist_name">{% translate "Nazwa artysty (imię i nazwisko, zespół lub firma)" %}</label>
+        <input type="text" id="id_artist_name" name="artist_name"
+               value="{{ names_form.artist_name.value|default:'' }}" maxlength="200" required
+               {% if names_form.artist_name.errors %}aria-invalid="true" aria-describedby="artist-name-error"{% endif %}>
+      </p>
+      {% if names_form.artist_name.errors %}
+        <p id="artist-name-error" role="alert">{% translate "Podaj nazwę artysty (do 200 znaków)." %}</p>
+      {% endif %}
+    {% endif %}
+    <button type="submit">{% translate "Zapisz" %}</button>
+  </form>
+
+  <h2>{% translate "Adres e-mail" %}</h2>
+  <p>{% translate "Logujesz się adresem:" %} <strong>{{ email }}</strong></p>
+  {% if change_pending %}
+    <p>{% translate "Czekamy na potwierdzenie nowego adresu. Do tego czasu logujesz się dotychczasowym." %}</p>
+    {% include "accounts/_email_change_code_form.html" %}
+  {% endif %}
+  <form method="post" action="{% url 'accounts:email_change' %}" novalidate>
+    {% csrf_token %}
+    <p>
+      <label for="id_email">{% translate "Nowy adres e-mail" %}</label>
+      <input type="email" id="id_email" name="email" value="{{ email_form.email.value|default:'' }}"
+             autocomplete="email" maxlength="254" required
+             {% if email_form.email.errors %}aria-invalid="true" aria-describedby="email-error"{% endif %}>
+    </p>
+    {% if email_form.email.errors %}
+      <p id="email-error" role="alert">{% translate "Podaj poprawny adres e-mail." %}</p>
+    {% endif %}
+    <p>{% translate "Wyślemy na nowy adres link i 6-cyfrowy kod. Adres zmieni się dopiero po potwierdzeniu." %}</p>
+    <button type="submit">{% translate "Zmień adres" %}</button>
+  </form>
+
+  <h2>{% translate "Twoje dane i konto" %}</h2>
+  <ul>
+    <li><a href="{% url 'accounts:data_export' %}">{% translate "Pobierz moje dane" %}</a></li>
+    <li><a href="{% url 'accounts:delete_account' %}">{% translate "Usuń konto" %}</a></li>
+  </ul>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% load i18n %}{% autoescape off %}{% translate "Dzień dobry," %}
+
+{% translate "ktoś (zapewne Ty) poprosił o zmianę adresu e-mail konta w serwisie Artyści dla szkół na ten adres." %}
+
+{% translate "Aby potwierdzić zmianę, zaloguj się na swoje konto, otwórz link i naciśnij przycisk „Potwierdź”:" %}
+{{ link }}
+
+{% translate "Albo wpisz ten kod w ustawieniach konta:" %}
+{{ code }}
+
+{% blocktranslate %}Link i kod są ważne {{ minutes }} minut i działają tylko raz.{% endblocktranslate %}
+{% translate "Jeśli to nie Ty, zignoruj tę wiadomość: bez potwierdzenia adres konta się nie zmieni." %}
+{% endautoescape %}
