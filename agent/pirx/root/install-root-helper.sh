@@ -57,7 +57,7 @@ if [[ ! -f /etc/automated/root-helper.conf ]]; then
 SYSTEM_SERVICES="tailscaled.service chrony.service"
 OWNER_USER="$owner"
 OWNER_SERVICES="hermes-gateway.service hermes-session.service gallery.service claude-session.service opencode.service"
-PACKAGES="podman podman-compose buildah make just jq sqlite3 postgresql-client build-essential pkg-config libpq-dev python3-dev ffmpeg imagemagick unzip"
+PACKAGES="podman podman-compose buildah make just jq sqlite3 postgresql-client build-essential pkg-config libpq-dev python3-dev ffmpeg imagemagick unzip libatk1.0-0t64 libatk-bridge2.0-0t64 libatspi2.0-0t64 libxcomposite1 libxdamage1 fonts-liberation fonts-noto-color-emoji"
 FIREWALL_UNIT="agent-netguard.service"
 CONF
   chmod 0644 /etc/automated/root-helper.conf
