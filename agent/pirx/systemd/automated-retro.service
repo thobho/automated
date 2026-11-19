@@ -1,0 +1,10 @@
+[Unit]
+OnFailure=automated-heal.service
+Description=automated: weekly retro run
+After=network-online.target
+
+[Service]
+Type=oneshot
+Environment=HOME=%h
+TimeoutStartSec=3600
+ExecStart=/bin/bash %h/Projects/automated-work/runner/agent/pirx/retro-run.sh
