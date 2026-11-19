@@ -81,6 +81,8 @@ def test_walker_finds_known_routes():
     paths = reversible_paths()
     for expected in ("/", "/healthz", "/logowanie/", "/ciasteczka/", "/konto/", "/konto/email/"):
         assert expected in paths
+    for wizard in ("/artysta/kreator/", "/artysta/profil/dane/", "/artysta/profil/oferty/"):
+        assert wizard in paths  # US-2.1 wizard routes (no arguments: walked automatically)
     assert not any(p.startswith("/django-admin/") for p in paths)
 
 

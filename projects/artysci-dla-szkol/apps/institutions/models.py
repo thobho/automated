@@ -3,6 +3,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from apps.core.regions import Voivodeship  # noqa: F401  (shared list, D102; re-exported)
+
 
 class InstitutionType(models.TextChoices):
     PRIMARY_SCHOOL = "primary_school", _("szkoła podstawowa")
@@ -10,27 +12,6 @@ class InstitutionType(models.TextChoices):
     SECONDARY_SCHOOL = "secondary_school", _("szkoła ponadpodstawowa")
     CULTURE_CENTRE = "culture_centre", _("dom kultury")
     OTHER = "other", _("inne")
-
-
-class Voivodeship(models.TextChoices):
-    """The 16 Polish voivodeships (a fixed choice)."""
-
-    DOLNOSLASKIE = "dolnoslaskie", _("dolnośląskie")
-    KUJAWSKO_POMORSKIE = "kujawsko-pomorskie", _("kujawsko-pomorskie")
-    LUBELSKIE = "lubelskie", _("lubelskie")
-    LUBUSKIE = "lubuskie", _("lubuskie")
-    LODZKIE = "lodzkie", _("łódzkie")
-    MALOPOLSKIE = "malopolskie", _("małopolskie")
-    MAZOWIECKIE = "mazowieckie", _("mazowieckie")
-    OPOLSKIE = "opolskie", _("opolskie")
-    PODKARPACKIE = "podkarpackie", _("podkarpackie")
-    PODLASKIE = "podlaskie", _("podlaskie")
-    POMORSKIE = "pomorskie", _("pomorskie")
-    SLASKIE = "slaskie", _("śląskie")
-    SWIETOKRZYSKIE = "swietokrzyskie", _("świętokrzyskie")
-    WARMINSKO_MAZURSKIE = "warminsko-mazurskie", _("warmińsko-mazurskie")
-    WIELKOPOLSKIE = "wielkopolskie", _("wielkopolskie")
-    ZACHODNIOPOMORSKIE = "zachodniopomorskie", _("zachodniopomorskie")
 
 
 class VerificationStatus(models.TextChoices):
