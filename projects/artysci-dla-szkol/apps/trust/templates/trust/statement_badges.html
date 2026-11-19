@@ -1,0 +1,13 @@
+{% load i18n %}{% if statements %}
+<section class="statement-badges" aria-labelledby="statement-badges-title">
+  <h2 id="statement-badges-title">{% translate "Oświadczenie artysty" %}</h2>
+  <p>{% translate "Własne oświadczenia artysty. Serwis ich nie sprawdza." %}</p>
+  <ul>
+    {% for statement in statements %}
+      <li data-kind="{{ statement.kind }}">
+        {{ statement.get_kind_display }}{% if statement.billing_form %}: {{ statement.get_billing_form_display }}{% endif %}{% if statement.valid_until %} ({% blocktranslate with date=statement.valid_until|date:"j E Y" %}ważne do {{ date }}{% endblocktranslate %}){% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n statements %}
 
 {% block title %}{% translate "Kreator profilu" %} – {% translate "Artyści dla szkół" %}{% endblock %}
 
@@ -28,4 +28,5 @@
       </li>
     {% endfor %}
   </ol>
+  {% artist_statement_badges artist %}
 {% endblock %}

@@ -148,9 +148,9 @@ def test_accept_pending_requires_what_was_shown(user):
 
 
 def test_seed_placeholders_idempotent():
-    assert services.seed_placeholders() == 3
+    assert services.seed_placeholders() == 9  # 3 legal documents + 6 statement wordings
     assert services.seed_placeholders() == 0
-    assert LegalDocument.objects.count() == 3
+    assert LegalDocument.objects.count() == 9
     for kind in LegalDocument.Kind.values:
         document = services.current(kind)
         assert document.body.startswith(services.PLACEHOLDER_PREFIX)
@@ -165,10 +165,10 @@ def test_seed_placeholders_keep_real_versions():
 
 def test_seed_command_adds_placeholders_once(capsys):
     call_command("seed")
-    assert "3 placeholder legal documents" in capsys.readouterr().out
+    assert "9 placeholder legal documents" in capsys.readouterr().out
     call_command("seed")
     assert "0 placeholder legal documents" in capsys.readouterr().out
-    assert LegalDocument.objects.count() == 3
+    assert LegalDocument.objects.count() == 9
 
 
 def test_str_representations(user):
