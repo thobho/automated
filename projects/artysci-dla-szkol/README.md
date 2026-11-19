@@ -157,8 +157,9 @@ list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d3
   code), `/konto/email/link/?t=...` (GET button, POST confirms), `/konto/dane/` and
   `/konto/usun/` (placeholders until US-8.6); all login required.
 - `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard overview),
-  `/artysta/profil/dane/` (step 1, basics), `/artysta/profil/oferty/`, `/oswiadczenia/`,
-  `/materialy/` (later steps, placeholders); artists only, login required.
+  `/artysta/profil/dane/` (step 1, basics), `/artysta/profil/oferty/` (offers; `nowa/`,
+  `<id>/edycja/`, `<id>/usun/`, `<id>/przesun/` POST), `/oswiadczenia/`, `/materialy/` (later
+  steps, placeholders); artists only, login required.
 - `/rejestracja/placowka/` (institution registration), `/rejestracja/placowka/rspo/` (HTMX RSPO
   suggestions, GET, anonymous), `/placowka/` (institution start, a placeholder; login required).
 
@@ -236,9 +237,29 @@ App `apps/artists`, logic in `services.py` (D102):
 - `/artysta/kreator/` lists step 1 (required) and the later steps (offers, statements,
   materials). Until the basics are complete the later steps are shown disabled and their URLs
   redirect to step 1 with a message; afterwards they can be skipped and opened in any order
-  (placeholders until US-2.9, US-8.2, US-2.3A).
+  (statements and materials are placeholders until US-8.2, US-2.3A).
 - `make seed` fills basics for `artysta01`–`artysta09`; `artysta10@example.invalid` keeps empty
   basics to try the wizard.
+
+## Artist profile wizard: offers and repertoire (US-2.9)
+
+App `apps/artists`, model `Offer`, logic in `services.py` (D103):
+
+- An offer has a title and a plain-text description (required), audience age from–to in years
+  (optional, 0–99, from ≤ to), duration in minutes (optional, > 0), a price as whole PLN **or**
+  "na zapytanie" (exactly one; also a DB check constraint), a position and an optional poster.
+  A theatre's repertoire of 20+ shows is many offers in one profile (D2).
+- Services: `offers_for(artist)` (in order), `get_offer(artist, id)` (own offers only),
+  `create_offer(artist, data, poster=None)`, `update_offer(artist, id, data, poster=None,
+  remove_poster=False)`, `delete_offer(artist, id)`, `move_offer(artist, id, "up"|"down")`,
+  `reorder_offers(artist, ids)`, `has_offers(artist)` (D6 rule for publication, US-2.8),
+  `offer_errors(data)` (the validation the form shares), `poster_url(offer)`.
+- Posters go through `apps.core.uploads.store_upload(kind="photo", visibility="private")` (15 MB,
+  sniffed type, EXIF stripped) and are shown to the artist through `media.signed_url`. A
+  replaced/removed poster and a deleted offer's poster leave storage after the commit.
+- `/artysta/profil/oferty/` lists the offers with edit, delete (confirmation page, then POST) and
+  up/down buttons; the wizard overview marks the step done with at least one offer.
+- `make seed` gives `artysta01@example.invalid` a synthetic 20-offer repertoire (no posters), once.
 
 ## Institution registration (US-1.2)
 
