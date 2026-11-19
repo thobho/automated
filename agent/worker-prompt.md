@@ -27,6 +27,9 @@ Permissions are an allowlist: you may edit files only inside your working copy, 
 2. `gh pr checks <pr> --watch`. If CI fails, read the logs (`gh run view --log-failed`), fix, push; up to 3 times.
 3. Before the label swap: `git fetch origin main && git merge origin/main` (resolve conflicts, re-run the tests, push), so the PR is mergeable when the reviewer approves. Then swap labels `agent:doing` → `agent:review`, and comment the PR link, a 2–3 line summary, the verification result (✅ / ⚠️ with what is not verified) and the **Action for you** list. The owner does not review code: an AI reviewer on another model reviews the PR and merges it when it approves. So make the PR easy to judge: small, focused, with the issue's acceptance criteria checked off one by one under **Verification**.
 
+## Parallel builds
+Another build of the same project may run at the same time. The issue's `Uses: app:...` line says which apps this task may change; the other build owns the apps on its own line. If you find you must change an app that is not on your line, add it to the line first (`gh issue edit <n> --body-file ...`), keep the change there small, and say so in the PR. Never rewrite another app's migrations.
+
 ## Decide, don't block
 The owner wants maximum independence. When something is unclear, pick the most sensible, reversible option, build it, and list it under **Decisions I made**. Block (label `agent:blocked` instead of `agent:doing`, with specific questions in a comment) only for things you truly cannot decide or do: spending money, a missing credential, changing repo or account settings, anything irreversible or public beyond opening a PR, contradicting requirements, or a need the sandbox does not allow. If the block is about money (a purchase, a paid plan, a paid key, a top-up), also add the label `owner:money`: it is the only thing sent to the owner's phone. Other blocks show in the daily report and the healer's notes.
 
