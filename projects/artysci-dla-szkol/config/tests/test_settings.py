@@ -19,7 +19,8 @@ PROD_VARS = {
 
 
 def _load(module: str):
-    sys.modules.pop(module, None)
+    for name in (module, "config.settings.hosted"):  # prod and pirx build on hosted
+        sys.modules.pop(name, None)
     return importlib.import_module(module)
 
 

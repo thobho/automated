@@ -27,7 +27,8 @@ from apps.core.regions import Voivodeship
 from apps.trust import services as trust
 from apps.trust.errors import NoPublishedVersion
 
-from .models import MAX_AGE, Artist, ArtistType, Audience, Offer
+from . import materials
+from .models import MAX_AGE, Artist, ArtistType, Audience, Offer, ScanStatus
 
 logger = logging.getLogger("apps.artists.registration")
 profile_logger = logging.getLogger("apps.artists.profile")
@@ -226,7 +227,6 @@ STEPS = (
     Step("statements", _("Oświadczenia"), "artists:statements"),
     Step("materials", _("Materiały i kwestionariusz"), "artists:materials"),
 )
-LATER_STEPS = {step.key: step for step in STEPS if not step.required}
 
 
 @dataclass(frozen=True)
@@ -239,13 +239,14 @@ class StepStatus:
 def wizard_steps(artist: Artist) -> list[StepStatus]:
     """Each wizard step with whether it is done and whether it can be opened. Later steps
     open once the basics are complete. Offers are done with at least one offer (D6);
-    statements with a counted child-protection statement (D6, US-8.2); the materials step is a
-    placeholder (never done) until US-2.3A."""
+    statements with a counted child-protection statement (D6, US-8.2); materials with at least
+    one ready material (scanned file or checked link, US-2.3A)."""
     complete = basics_complete(artist)
     done = {
         "basics": complete,
         "offers": complete and has_offers(artist),
         "statements": complete and trust.has_child_protection_statement(artist),
+        "materials": complete and materials.has_ready_materials(artist),
     }
     return [
         StepStatus(
@@ -407,8 +408,11 @@ def create_offer(artist: Artist, data, *, poster=None) -> Offer:
                 artist=artist,
                 position=last.position + 1 if last else 0,
                 poster_key=key,
+                poster_status=ScanStatus.PENDING if key else "",
                 **asdict(cleaned),
             )
+            if key:
+                materials.enqueue_poster_scan(offer.pk, key)
     except Exception:
         _delete_file(key)
         raise
@@ -431,10 +435,13 @@ def update_offer(artist: Artist, offer_id, data, *, poster=None, remove_poster=F
                 setattr(offer, field, value)
             if new_key or remove_poster:
                 offer.poster_key = new_key
+                offer.poster_status = ScanStatus.PENDING if new_key else ""
             offer.updated_at = timezone.now()
             offer.save()
             if offer.poster_key != old_key:
                 _delete_after_commit(old_key)
+            if new_key:
+                materials.enqueue_poster_scan(offer.pk, new_key)
     except Exception:
         _delete_file(new_key)
         raise

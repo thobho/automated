@@ -26,7 +26,11 @@
             <dd data-field="price">{% if offer.price_on_request %}{% translate "na zapytanie" %}{% else %}{{ offer.price_pln }} {% translate "zł" %}{% endif %}</dd>
           </dl>
           {% if poster %}
-            <p><a href="{{ poster }}" data-field="poster">{% translate "Zobacz plakat" %}</a></p>
+            <p><a href="{{ poster }}" data-field="poster">{% translate "Zobacz plakat" %}</a>
+              {% if offer.poster_status == "pending" %}({% translate "oczekuje na skan" %}){% endif %}</p>
+          {% endif %}
+          {% if offer.poster_status == "rejected" %}
+            <p role="alert" data-field="poster-rejected">{% translate "Plakat odrzucony: skaner wykrył złośliwe oprogramowanie. Plik usunęliśmy; dodaj czystą kopię." %}</p>
           {% endif %}
           <p>
             <a href="{% url 'artists:offer_edit' offer.pk %}">{% translate "Edytuj" %}</a>

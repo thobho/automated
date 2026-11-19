@@ -2,10 +2,14 @@
 
 Prod with the TLS-only parts turned off: browsers drop `Secure` and `__Host-` cookies over plain
 HTTP, so login would break. Never use this module on a public host. Everything else (required
-env vars, storage, logging) is inherited from prod.
+env vars, storage, logging) is shared with prod through `hosted`.
 """
 
-from .prod import *  # noqa: F403
+from .env import scanner_from_env
+from .hosted import *  # noqa: F403
+
+# pirx in light mode has no RAM for clamd (D87): uploads are unscanned and logged as such.
+MALWARE_SCANNER = scanner_from_env(("clamd", "none"), default="none", module="config.settings.pirx")
 
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False

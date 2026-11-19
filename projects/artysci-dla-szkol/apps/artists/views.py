@@ -16,13 +16,13 @@ from django.views.decorators.http import require_http_methods, require_POST
 
 from apps.accounts.permissions import role_required
 from apps.core.regions import Voivodeship
-from apps.core.uploads import UploadRejected
+from apps.core.uploads import KINDS, MB, UploadRejected
 from apps.trust import services as trust
 from apps.trust.errors import NoPublishedVersion, StaleWording
 from apps.trust.models import STATEMENT_KINDS, BillingForm
 
-from . import services
-from .models import MAX_AGE, ArtistType, Audience, Offer
+from . import materials, services
+from .models import MAX_AGE, ArtistType, Audience, Material, MaterialKind, Offer
 from .services import Registration
 
 
@@ -148,20 +148,174 @@ def _basics_required(view):
     return wrapper
 
 
-def _later_step(key):
-    step = services.LATER_STEPS[key]
+# --- wizard step "Materiały i kwestionariusz" (US-2.3A) ---------------------------------------
 
-    @role_required("artist")
-    @_basics_required
-    def view(request):
-        return render(request, "artists/later_step.html", {"step": step})
-
-    view.__name__ = view.__qualname__ = key
-    view.__doc__ = f"Wizard step {key!r}: a placeholder until its task lands."
-    return view
+UPLOAD_KINDS = {
+    MaterialKind.PHOTO: {
+        "accept": "image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp",
+        "formats": "JPG, PNG, WebP",
+    },
+    MaterialKind.PDF: {"accept": "application/pdf,.pdf", "formats": "PDF"},
+}
 
 
-materials = _later_step("materials")
+def _upload_box(artist, kind, errors=()):
+    max_bytes = KINDS[kind][0]
+    return {
+        "kind": kind,
+        "url": reverse("artists:materials_photos" if kind == "photo" else "artists:materials_pdfs"),
+        "limit": materials.limit_for(kind),
+        "remaining": materials.remaining(artist, kind),
+        "max_bytes": max_bytes,
+        "max_mb": max_bytes // MB,
+        "errors": list(errors),
+        **UPLOAD_KINDS[kind],
+    }
+
+
+def _materials_page(request, *, photo_errors=(), pdf_errors=(), link_error="", link_url="",
+                    status=200):  # fmt: skip
+    artist = _artist(request)
+    items = [(m, materials.file_url(m)) for m in materials.materials_for(artist)]
+    context = {
+        "items": items,
+        "photos": _upload_box(artist, MaterialKind.PHOTO, photo_errors),
+        "pdfs": _upload_box(artist, MaterialKind.PDF, pdf_errors),
+        "link_error": link_error,
+        "link_url": link_url,
+        "questionnaire_filled": materials.questionnaire_filled(artist),
+    }
+    return render(request, "artists/materials.html", context, status=status)
+
+
+@never_cache
+@role_required("artist")
+@_basics_required
+def materials_page(request):
+    """Photos, PDFs and video links with their scan status; links to the questionnaire."""
+    return _materials_page(request)
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+@_basics_required
+def materials_upload(request, kind):
+    """POST one or more files of `kind` (field ``files``). All must fit the remaining count,
+    else nothing is stored; then each file is stored or refused on its own."""
+    files = request.FILES.getlist("files")
+    errors_key = "photo_errors" if kind == MaterialKind.PHOTO else "pdf_errors"
+    if not files:
+        return _materials_page(request, status=400, **{errors_key: [_("Wybierz plik.")]})
+    artist = _artist(request)
+    try:
+        materials.check_room(artist, kind, len(files))
+    except materials.MaterialRejected as exc:
+        return _materials_page(request, status=400, **{errors_key: [exc.message]})
+    errors, added = [], 0
+    for file in files:
+        try:
+            materials.add_file(artist, kind, file)
+        except (UploadRejected, materials.MaterialRejected) as exc:
+            errors.append(f"{materials.clean_name(file.name)}: {exc.message}")
+        else:
+            added += 1
+    if added:
+        messages.success(
+            request, _("Dodano plików: %(n)d. Sprawdzamy je, zanim zostaną użyte.") % {"n": added}
+        )
+    if errors:
+        return _materials_page(request, status=400, **{errors_key: errors})
+    return redirect("artists:materials")
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+@_basics_required
+def materials_link(request):
+    """POST ``url``: a YouTube or Vimeo link, checked through the provider's oEmbed."""
+    url = request.POST.get("url", "").strip()[:500]
+    try:
+        materials.add_link(_artist(request), url)
+    except materials.MaterialRejected as exc:
+        return _materials_page(request, status=400, link_error=exc.message, link_url=url)
+    messages.success(request, _("Dodano film."))
+    return redirect("artists:materials")
+
+
+@role_required("artist")
+@require_POST
+@_basics_required
+def material_delete(request, material_id):
+    """POST deletes the artist's own material (and its file); another artist's id is 404."""
+    try:
+        materials.delete_material(_artist(request), material_id)
+    except Material.DoesNotExist as exc:
+        raise Http404 from exc
+    messages.success(request, _("Usunięto materiał."))
+    return redirect("artists:materials")
+
+
+class QuestionnaireForm(forms.Form):
+    """Every field is optional; cross-field rules come from `materials.questionnaire_errors`."""
+
+    q_age_from = forms.IntegerField(
+        label=_("Wiek widzów od (lat)"), min_value=0, max_value=MAX_AGE, required=False
+    )
+    q_age_to = forms.IntegerField(
+        label=_("Wiek widzów do (lat)"), min_value=0, max_value=MAX_AGE, required=False
+    )
+    q_duration_minutes = forms.IntegerField(
+        label=_("Czas trwania (minuty)"), min_value=1, max_value=materials.MAX_DURATION,
+        required=False,
+    )  # fmt: skip
+    q_max_audience = forms.IntegerField(
+        label=_("Maksymalna liczba widzów"), min_value=1, max_value=materials.MAX_AUDIENCE,
+        required=False,
+    )  # fmt: skip
+    q_tech_room = forms.CharField(label=_("Wymagania: sala"), max_length=500, required=False)
+    q_tech_power = forms.CharField(label=_("Wymagania: prąd"), max_length=500, required=False)
+    q_tech_sound = forms.CharField(
+        label=_("Wymagania: nagłośnienie"), max_length=500, required=False
+    )
+    q_price_from_pln = forms.IntegerField(
+        label=_("Cena od (zł)"), min_value=1, max_value=materials.MAX_PRICE, required=False
+    )
+    q_price_to_pln = forms.IntegerField(
+        label=_("Cena do (zł)"), min_value=1, max_value=materials.MAX_PRICE, required=False
+    )
+    q_price_on_request = forms.BooleanField(label=_("Cena na zapytanie"), required=False)
+
+    def clean(self):
+        cleaned = super().clean()
+        for field, message in materials.questionnaire_errors(cleaned).items():
+            if field not in self.errors:
+                self.add_error(field, message)
+        return cleaned
+
+
+@never_cache
+@require_http_methods(["GET", "HEAD", "POST"])
+@role_required("artist")
+@_basics_required
+def questionnaire(request):
+    """The school questionnaire, prefilled on every visit."""
+    artist = _artist(request)
+    if request.method != "POST":
+        form = QuestionnaireForm(initial=materials.questionnaire_of(artist))
+        return render(request, "artists/questionnaire.html", {"form": form})
+    form = QuestionnaireForm(request.POST)
+    if not form.is_valid():
+        return render(request, "artists/questionnaire.html", {"form": form}, status=400)
+    try:
+        materials.save_questionnaire(artist, form.cleaned_data)
+    except materials.InvalidQuestionnaire as exc:  # same rules as the form: never expected
+        for field, message in exc.errors.items():
+            form.add_error(field, message)
+        return render(request, "artists/questionnaire.html", {"form": form}, status=400)
+    messages.success(request, _("Zapisano kwestionariusz."))
+    return redirect("artists:materials")
 
 
 # --- wizard step "Oświadczenia" (US-8.2) ------------------------------------------------------

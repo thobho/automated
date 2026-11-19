@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block title %}{% translate "Materiały" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block head %}<script src="{% static 'js/materials.js' %}" defer></script>{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Materiały i kwestionariusz" %}</h1>
+  <p>{% translate "Zdjęcia, pliki PDF (np. opis spektaklu) i filmy z YouTube lub Vimeo. Każdy plik sprawdzamy, zanim zostanie użyty." %}</p>
+
+  {% include "artists/_upload_box.html" with box=photos title=_("Zdjęcia") %}
+  {% include "artists/_upload_box.html" with box=pdfs title=_("Pliki PDF") %}
+
+  <section aria-labelledby="link-heading">
+    <h2 id="link-heading">{% translate "Filmy (YouTube, Vimeo)" %}</h2>
+    <form method="post" action="{% url 'artists:materials_link' %}" novalidate>
+      {% csrf_token %}
+      <p>
+        <label for="id_url">{% translate "Link do filmu" %}</label><br>
+        <input type="url" id="id_url" name="url" maxlength="500" value="{{ link_url }}"
+               placeholder="https://www.youtube.com/watch?v=…"
+               {% if link_error %}aria-invalid="true" aria-describedby="url-error"{% endif %}>
+      </p>
+      {% if link_error %}<p id="url-error" role="alert">{{ link_error }}</p>{% endif %}
+      <button type="submit">{% translate "Dodaj film" %}</button>
+    </form>
+  </section>
+
+  <section aria-labelledby="list-heading">
+    <h2 id="list-heading">{% translate "Twoje materiały" %}</h2>
+    {% if items %}
+      <ul class="materials" data-count="{{ items|length }}">
+        {% for material, url in items %}
+          <li id="material-{{ material.pk }}" data-material="{{ material.pk }}"
+              data-kind="{{ material.kind }}" data-status="{{ material.status }}">
+            <strong>{{ material.get_kind_display }}</strong>:
+            {% if material.kind == "link" %}
+              <a href="{{ material.canonical_url }}" rel="noopener noreferrer">{{ material.title|default:material.canonical_url }}</a>
+              ({{ material.get_provider_display }})
+            {% elif url and material.status == "ready" %}
+              <a href="{{ url }}">{{ material.original_name|default:_("plik") }}</a>
+            {% else %}
+              {{ material.original_name|default:_("plik") }}
+            {% endif %}
+            — <span data-field="status">{{ material.get_status_display }}</span>
+            {% if material.status == "rejected" %}
+              <p role="alert">{% translate "Plik odrzucony: skaner wykrył złośliwe oprogramowanie. Plik usunęliśmy; sprawdź komputer programem antywirusowym i dodaj czystą kopię." %}</p>
+            {% elif material.status == "pending" %}
+              <span>({% translate "plik zostanie użyty po sprawdzeniu" %})</span>
+            {% endif %}
+            {% if material.kind == "pdf" and material.text_status %}
+              <span data-field="text-status">· {{ material.get_text_status_display }}</span>
+            {% endif %}
+            <form method="post" action="{% url 'artists:material_delete' material.pk %}">
+              {% csrf_token %}
+              <button type="submit">{% translate "Usuń" %}</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>{% translate "Nie masz jeszcze żadnych materiałów." %}</p>
+    {% endif %}
+  </section>
+
+  <section aria-labelledby="questionnaire-heading">
+    <h2 id="questionnaire-heading">{% translate "Kwestionariusz dla szkół" %}</h2>
+    <p>{% translate "Wiek widzów, czas trwania, liczba widzów, wymagania techniczne i cena. Wszystko jest opcjonalne." %}</p>
+    <p><a href="{% url 'artists:questionnaire' %}">{% if questionnaire_filled %}{% translate "Edytuj kwestionariusz" %}{% else %}{% translate "Wypełnij kwestionariusz" %}{% endif %}</a></p>
+  </section>
+
+  <p><a href="{% url 'artists:start' %}">{% translate "Wróć do kreatora" %}</a></p>
+{% endblock %}
