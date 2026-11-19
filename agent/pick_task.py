@@ -27,6 +27,11 @@ Parallel runs:
     running and never picked again.
   - A `Uses: gus-bdl, playwright` line names shared resources. An issue is not
     ready while a running issue uses one of the same resources.
+  - Code areas use the same line: the planner writes `Uses: app:artists, app:core`
+    for the Django apps (or folders) a story changes. Two builds of one project run
+    side by side only when both name their areas and none overlap (migrations clash
+    only within one app). An issue without a `Uses:` line counts as touching the
+    whole project: it waits for, and holds back, the project's other running builds.
 
 Usage:
   agent/pick_task.py                          the queue in order, with what each one waits on
@@ -110,6 +115,11 @@ def claimed_issues():
 def build_queue(issues, is_closed, claimed):
     """issues: open GitHub issues (dicts with number, title, body, labels, optional milestone). Returns them ordered."""
     busy = {r for i in issues if i["number"] in claimed for r in resources(i["body"])}
+    running_projects = {}  # project -> True when a running issue in it has no Uses line (whole project)
+    for i in issues:
+        if i["number"] in claimed:
+            proj = next((l["name"].split(":", 1)[1] for l in i["labels"] if l["name"].startswith("project:")), None)
+            running_projects[proj] = running_projects.get(proj, False) or not resources(i["body"])
     open_numbers = {i["number"] for i in issues}
     unblocks = {}
     for i in issues:
@@ -136,6 +146,8 @@ def build_queue(issues, is_closed, claimed):
         waiting_on = [n for n in deps if n != issue["number"] and not is_closed(n)]
         uses = sorted(resources(issue["body"]))
         resource_busy = [] if running else [r for r in uses if r in busy]
+        if not running and project in running_projects and (running_projects[project] or not uses):
+            resource_busy.append(f"project:{project}")  # one side touches the whole project
         review_limit = state == "todo" and reviews.get(project, 0) >= MAX_OPEN_REVIEWS
         priority = 0 if "priority:high" in labels else 2 if "priority:low" in labels else 1
         model = model_of(labels, issue["body"])
