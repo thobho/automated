@@ -32,7 +32,7 @@ prompt="$(cat "$RUNNER_DIR/agent/worker-prompt.md")
 - Issue: #$num ($title) in $GH_REPO
 - Model: $model$([[ "$spillover" == "true" ]] && echo " (spillover: a simple OpenCode task, built by Claude)")
 - Working copy: $work (branch agent/$num-$slug). Work only there; scratch files go to $RUNTIME/scratch.
-- Machine: pirx (Linux, lean mode: browser tests in CI; 11 GB RAM, up to 2 runs share the agent's 6 GB cap). The slot and the claim are already held for you."
+- Machine: pirx (Linux, 11 GB RAM, up to 2 runs share the agent's 6 GB cap; headless Chromium for browser tests, D107). The slot and the claim are already held for you."
 
 log "#$num: claude run starts (model $model, $work)"
 (cd "$work" && claude -p "$prompt" --model "$model" --output-format stream-json --verbose \
