@@ -137,6 +137,19 @@ def check_url(url: str) -> Target:
     return Target(scheme=scheme, host=host, port=port, path=path)
 
 
+def check_offline(url: str) -> Target:
+    """`check_url` plus the address check of an IP literal host: everything that can be refused
+    without DNS. A host name passes (it is resolved and checked by `fetch`)."""
+    target = check_url(url)
+    try:
+        ipaddress.ip_address(target.host)
+    except ValueError:
+        return target
+    if not is_public(target.host):
+        raise _error("blocked")
+    return target
+
+
 def _unwrap(ip: ipaddress.IPv4Address | ipaddress.IPv6Address):
     """The IPv4 address an IPv6 address carries (mapped, 6to4, NAT64), else the address."""
     if ip.version == 6:

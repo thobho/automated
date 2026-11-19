@@ -258,6 +258,19 @@ class Material(models.Model):
     )
     created_at = models.DateTimeField(_("utworzono"), default=timezone.now)
     scanned_at = models.DateTimeField(_("zeskanowano"), null=True, blank=True)
+    # Set for photos and links copied by an import from the artist's website (US-2.2).
+    source_import = models.ForeignKey(
+        "WebsiteImport",
+        verbose_name=_("z importu"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="materials",
+    )
+
+    @property
+    def imported(self) -> bool:
+        return self.source_import_id is not None
 
     class Meta:
         verbose_name = _("materiał")
@@ -274,3 +287,63 @@ class Material(models.Model):
 
     def __str__(self) -> str:
         return f"Material {self.pk}"
+
+
+class ImportStatus(models.TextChoices):
+    QUEUED = "queued", _("w kolejce")
+    RUNNING = "running", _("trwa")
+    DONE = "done", _("gotowy")
+    PARTIAL = "partial", _("częściowy")
+    FAILED = "failed", _("nieudany")
+
+
+class WebsiteImport(models.Model):
+    """One import from the artist's own website (US-2.2, D4). Only `artists.website_import`
+    creates and changes rows; the fetching runs as a job through `apps/core/safefetch.py`.
+
+    `text` is the visible text of the fetched pages, already scrubbed (D59: no contact data,
+    account, PESEL or ID card numbers). `contacts` holds the general contact data found
+    (e-mails, phones, addresses) for the artist to see: never published, never sent to AI.
+    A newer finished import with text empties the text of the older ones.
+    """
+
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name="website_imports")
+    url = models.CharField(_("adres strony"), max_length=2000)
+    status = models.CharField(
+        _("status"), max_length=10, choices=ImportStatus.choices, default=ImportStatus.QUEUED
+    )
+    message = models.TextField(_("komunikat"), blank=True)
+    # The artist confirmed for this URL that the site is theirs and they hold the rights (D4).
+    rights_confirmed_at = models.DateTimeField(_("potwierdzenie praw"))
+    rights_statement = models.ForeignKey(
+        "trust.ArtistStatement",
+        verbose_name=_("oświadczenie o prawach do materiałów"),
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
+    page_count = models.PositiveIntegerField(_("liczba podstron"), default=0)
+    bytes_fetched = models.PositiveBigIntegerField(_("pobrano (B)"), default=0)
+    photo_count = models.PositiveIntegerField(_("zdjęcia"), default=0)
+    link_count = models.PositiveIntegerField(_("filmy"), default=0)
+    pages = models.JSONField(_("podstrony"), default=list, blank=True)  # [{"url", "title"}]
+    skipped = models.JSONField(_("pominięte"), default=list, blank=True)  # [{"what", "why"}]
+    contacts = models.JSONField(_("dane kontaktowe"), default=dict, blank=True)
+    text = models.TextField(_("tekst ze strony"), blank=True)
+    created_at = models.DateTimeField(_("utworzono"), default=timezone.now)
+    started_at = models.DateTimeField(_("rozpoczęto"), null=True, blank=True)
+    finished_at = models.DateTimeField(_("zakończono"), null=True, blank=True)
+
+    class Meta:
+        verbose_name = _("import ze strony")
+        verbose_name_plural = _("importy ze strony")
+        ordering = ("-created_at", "-pk")
+        indexes = [models.Index(fields=("artist", "-created_at"), name="import_artist_created")]
+
+    def __str__(self) -> str:
+        return f"WebsiteImport {self.pk}"
+
+    @property
+    def finished(self) -> bool:
+        return self.status in (ImportStatus.DONE, ImportStatus.PARTIAL, ImportStatus.FAILED)

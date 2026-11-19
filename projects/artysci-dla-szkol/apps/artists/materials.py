@@ -146,8 +146,9 @@ def clean_name(name: str) -> str:
     return "".join(ch for ch in name if ch.isprintable())[:200]
 
 
-def add_file(artist: Artist, kind: str, file) -> Material:
-    """Store one photo or PDF as a pending material and queue its scan.
+def add_file(artist: Artist, kind: str, file, *, source_import=None) -> Material:
+    """Store one photo or PDF as a pending material and queue its scan. `source_import`
+    marks a photo copied by a website import (US-2.2).
 
     Raises `MaterialRejected` (limit reached) or `UploadRejected` (size, type, unreadable
     image); nothing is stored in either case.
@@ -169,6 +170,7 @@ def add_file(artist: Artist, kind: str, file) -> Material:
                 content_type=stored.content_type,
                 size=stored.size,
                 original_name=clean_name(getattr(file, "name", "")),
+                source_import=source_import,
             )
             _enqueue_scan(material)
     except Exception:
@@ -471,7 +473,7 @@ def oembed_title(ref: VideoRef) -> str:
     return title.strip()[: Material._meta.get_field("title").max_length]
 
 
-def add_link(artist: Artist, url: str) -> Material:
+def add_link(artist: Artist, url: str, *, source_import=None) -> Material:
     """Add a YouTube or Vimeo link checked through oEmbed. Raises `MaterialRejected`
     ("unsupported" without any request, "duplicate", "not_found", "unavailable")."""
     ref = parse_video_url(url)
@@ -495,6 +497,7 @@ def add_link(artist: Artist, url: str) -> Material:
             video_id=ref.video_id,
             canonical_url=ref.canonical_url,
             title=title,
+            source_import=source_import,
         )
     _log("material_link_added", artist, material.pk)
     return material
