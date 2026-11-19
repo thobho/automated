@@ -27,3 +27,5 @@ EMAIL_BACKEND = env.str(
 # base.py read these before .env was loaded; read them again so .env works without `make`.
 EMAIL_HOST = env.str("EMAIL_HOST", default="localhost")
 EMAIL_PORT = env.int("EMAIL_PORT", default=25)
+# Test-only loopback hatch of the website import (base.py); dev may set it in .env.
+SAFE_FETCH_ALLOW_LOOPBACK = env.bool("SAFE_FETCH_ALLOW_LOOPBACK", default=False)

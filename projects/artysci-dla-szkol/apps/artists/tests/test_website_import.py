@@ -225,6 +225,21 @@ def test_links_to_files_are_not_fetched_as_pages(artist, wording, net):
     assert [c[2] for c in net.connections] == ["/"]
 
 
+def test_index_page_and_root_are_one_page(artist, wording, net):
+    net.pages[f"{SITE}/index.html"] = page(html("Start", '<p>Teatr</p><a href="/">Start</a>'))
+    record = run(artist, f"{SITE}/index.html")
+    assert record.page_count == 1 and [c[2] for c in net.connections] == ["/index.html"]
+
+
+def test_address_does_not_swallow_the_next_line():
+    text = "ul. Teatralna 5, 50-001 Wrocław\nWpłaty: konto\n02-495 Warszawa Ursus, tel."
+    assert website_import.addresses_in(text) == [
+        "ul. Teatralna 5, 50-001 Wrocław",
+        "02-495 Warszawa Ursus",
+    ]
+    assert website_import.scrub_text(text) == "[address]\nWpłaty: konto\n[address], tel."
+
+
 @pytest.mark.parametrize(
     "url",
     [

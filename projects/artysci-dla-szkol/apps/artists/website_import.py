@@ -64,10 +64,11 @@ SKIPPED_EXTENSIONS = (
 IMAGE_SKIPPED_EXTENSIONS = (".svg", ".gif", ".ico", ".bmp")
 ADDRESS = "[address]"
 # Polish postal code with the place name after it, and the street part before it if any.
+# Spaces only within a line ([ \t]), so an address never swallows the next line.
 _ADDRESS = re.compile(
-    r"(?:(?:ul\.|al\.|os\.|pl\.)\s*[^\n,;]{1,60}?\s*\d+[A-Za-z]?(?:/\d+)?[,\s]+)?"
-    r"(?<!\d)\d{2}-\d{3}(?!\d)\s+[A-ZĄĆĘŁŃÓŚŹŻ][\wąćęłńóśźżĄĆĘŁŃÓŚŹŻ-]+"
-    r"(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][\wąćęłńóśźżĄĆĘŁŃÓŚŹŻ-]+)?"
+    r"(?:(?:ul\.|al\.|os\.|pl\.)[ \t]*[^\n,;]{1,60}?[ \t]*\d+[A-Za-z]?(?:/\d+)?[, \t]+)?"
+    r"(?<!\d)\d{2}-\d{3}(?!\d)[ \t]+[A-ZĄĆĘŁŃÓŚŹŻ][\wąćęłńóśźżĄĆĘŁŃÓŚŹŻ-]+"
+    r"(?:[ \t]+[A-ZĄĆĘŁŃÓŚŹŻ][\wąćęłńóśźżĄĆĘŁŃÓŚŹŻ-]+)?"
 )
 
 NOT_AVAILABLE = _("Oświadczenie o prawach do materiałów nie jest jeszcze dostępne.")
@@ -392,7 +393,8 @@ def absolute(base: str, href: str) -> str:
 def _page_key(url: str) -> str:
     parts = urllib.parse.urlsplit(url)
     host = (parts.hostname or "").lower().removeprefix("www.")
-    return f"{host}{parts.path.rstrip('/') or '/'}?{parts.query}"
+    path = re.sub(r"/index\.(?:html?|php)$", "/", parts.path, flags=re.IGNORECASE)
+    return f"{host}{path.rstrip('/') or '/'}?{parts.query}"
 
 
 _EMBEDS = (
