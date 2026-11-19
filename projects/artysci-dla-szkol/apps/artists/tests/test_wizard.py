@@ -264,5 +264,11 @@ def test_institution_post_to_step_1_saves_nothing():
     assert not Artist.objects.exists()
 
 
+def test_child_rows_print_their_value(artist_user):
+    artist = services.save_basics(artist_user, VALID)
+    assert str(artist.voivodeships.first()) in VALID["voivodeships"]
+    assert str(artist.audiences.first()) in VALID["audiences"]
+
+
 def test_basics_page_rejects_other_methods(web):
     assert web.put(BASICS).status_code == 405
