@@ -36,7 +36,7 @@ for f in "$RUNNER_DIR"/agent/pirx/systemd/automated-*; do
   cmp -s "$f" "$units/$b" || { install -m 644 "$f" "$units/"; changed=true; }
 done
 if $changed; then systemctl --user daemon-reload; fixed "unit files updated from the runner"; fi
-for t in dispatch opencode health report heal; do
+for t in dispatch opencode health report heal retro; do
   if ! systemctl --user is-active -q "automated-$t.timer"; then
     if systemctl --user enable --now "automated-$t.timer" >/dev/null 2>&1; then fixed "timer automated-$t re-enabled"
     else problem "timer:$t" "systemctl --user enable --now automated-$t.timer failed"; fi
@@ -70,7 +70,7 @@ fi
 # 3. Worktrees and the runner (only when no run is active).
 if [[ "$held" -eq 0 ]]; then
   git -C "$REPO_ROOT" worktree prune
-  for d in "$(dirname "$RUNNER_DIR")"/{review,conflict,heal}-*; do
+  for d in "$(dirname "$RUNNER_DIR")"/{review,conflict,heal,retro}-*; do
     [[ -d "$d" ]] || continue
     git -C "$REPO_ROOT" worktree remove --force "$d" >/dev/null 2>&1 && fixed "removed leftover worktree $(basename "$d")"
   done

@@ -1,0 +1,45 @@
+{
+  "permissions": {
+    "defaultMode": "dontAsk",
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Edit(projects/*/CLAUDE.md)",
+      "Edit(agent/worker-prompt.md)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git diff *)",
+      "Bash(git grep *)",
+      "Bash(gh pr view *)",
+      "Bash(gh issue view *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(wc *)",
+      "Bash(grep *)",
+      "Bash(rg *)"
+    ],
+    "deny": [
+      "Write",
+      "Bash(sudo *)",
+      "Bash(su *)",
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "Bash(git checkout *)",
+      "Bash(git reset *)",
+      "Bash(git config *)",
+      "Bash(gh pr create *)",
+      "Bash(gh pr merge *)",
+      "Bash(gh issue edit *)",
+      "Bash(gh issue close *)",
+      "Bash(gh api *)",
+      "Read(~/.claude/.credentials.json)",
+      "Read(~/.config/automated/**)",
+      "Read(~/.config/gh/**)",
+      "Read(~/.ssh/**)",
+      "WebFetch",
+      "WebSearch"
+    ]
+  }
+}

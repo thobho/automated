@@ -1,0 +1,9 @@
+[Unit]
+Description=automated: weekly retro (rules from repeated review findings), Monday 05:30 Warsaw
+
+[Timer]
+OnCalendar=Mon *-*-* 05:30:00 Europe/Warsaw
+Persistent=true
+
+[Install]
+WantedBy=timers.target
