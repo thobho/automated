@@ -268,10 +268,6 @@ class Material(models.Model):
         related_name="materials",
     )
 
-    @property
-    def imported(self) -> bool:
-        return self.source_import_id is not None
-
     class Meta:
         verbose_name = _("materiał")
         verbose_name_plural = _("materiały")
@@ -287,6 +283,10 @@ class Material(models.Model):
 
     def __str__(self) -> str:
         return f"Material {self.pk}"
+
+    @property
+    def imported(self) -> bool:
+        return self.source_import_id is not None
 
 
 class ImportStatus(models.TextChoices):

@@ -39,6 +39,9 @@ EXTRA_FIELDS = (
     # artist materials and offers (ids only)
     "material",
     "offer",
+    # website import (US-2.2): the import id and a stable error code, never the URL
+    "website_import",
+    "code",
 )
 
 # --- Redaction -----------------------------------------------------------------------------

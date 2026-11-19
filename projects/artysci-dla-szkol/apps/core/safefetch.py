@@ -16,6 +16,7 @@ No other code may request user-given URLs. The rules:
 Error messages are Polish and safe to show; they never contain the address.
 """
 
+import contextlib
 import http.client
 import ipaddress
 import socket
@@ -227,10 +228,8 @@ class _PinnedHTTPSConnection(http.client.HTTPSConnection):
 def _shutdown(conn) -> None:
     sock = conn.raw_sock
     if sock is not None:
-        try:
+        with contextlib.suppress(OSError):
             sock.shutdown(socket.SHUT_RDWR)
-        except OSError:
-            pass
 
 
 def socket_transport(target: Target, address: str, *, timeout: float, max_bytes: int):
@@ -284,7 +283,7 @@ def socket_transport(target: Target, address: str, *, timeout: float, max_bytes:
         raise
     except ssl.SSLError as exc:
         raise _error("timeout" if expired.is_set() else "tls") from exc
-    except (TimeoutError, socket.timeout) as exc:
+    except TimeoutError as exc:
         raise _error("timeout") from exc
     except (OSError, http.client.HTTPException) as exc:
         raise _error("timeout" if expired.is_set() else "network") from exc

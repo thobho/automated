@@ -531,7 +531,7 @@ def _import_photos(run: _Run, images: list[str]) -> int:
     for url in images[:MAX_IMAGES]:
         name = materials.clean_name(urllib.parse.urlsplit(url).path) or "zdjecie"
         if urllib.parse.urlsplit(url).path.lower().endswith(IMAGE_SKIPPED_EXTENSIONS):
-            run.skip(name, gettext("Ten format obrazu nie jest obsługiwany (tylko JPG, PNG, WebP)."))
+            run.skip(name, gettext("Ten format obrazu nie jest obsługiwany (JPG, PNG, WebP)."))
             continue
         if materials.remaining(artist, MaterialKind.PHOTO) <= 0:
             run.skip(
