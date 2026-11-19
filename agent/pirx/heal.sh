@@ -11,6 +11,8 @@
 #      system services in its list are restarted when down, and the agent firewall is reloaded
 #   7. OpenRouter keys close to their limit open an `owner:money` issue: the only alert sent to the
 #      owner's phone (agent/pirx/owner/money-notify.sh)
+#   8. a project's CI failing on main opens one priority:high fix task (label red-main); merge-ready.sh
+#      holds that project's other PRs meanwhile and merges approved PRs that are ready
 # A problem that survives 3 runs in a row goes to a model: heal-diagnose.sh (Sonnet, once per 6 h each).
 set -uo pipefail
 source "$(dirname "$0")/common.sh"
@@ -136,6 +138,35 @@ check_key() {  # check_key <name> <key>
 }
 check_key opencode "$(cat "$CONF_DIR/openrouter-opencode.key" 2>/dev/null)"
 check_key app "$(sed -n 's/^OPENROUTER_API_KEY=//p' "$CONF_DIR/secrets.env" 2>/dev/null | tr -d '"'"'"' ')"
+
+# 8. Red main: one priority:high fix task per project whose CI fails on main; then merge what is ready.
+for wf in "$RUNNER_DIR"/.github/workflows/*-ci.yml; do
+  p="$(basename "$wf" -ci.yml)"
+  [[ -d "$RUNNER_DIR/projects/$p" ]] || continue
+  read -r concl sha url <<<"$(gh run list --branch main --workflow "$(basename "$wf")" --status completed --limit 1 \
+    --json conclusion,headSha,url -q '.[0] | "\(.conclusion) \(.headSha) \(.url)"' 2>/dev/null)"
+  [[ "$concl" == failure ]] || continue
+  [[ -n "$(gh issue list --label red-main --label "project:$p" --state open --json number -q '.[0].number' 2>/dev/null)" ]] && continue
+  gh label create red-main --color B60205 --description "CI is red on main; fix first" >/dev/null 2>&1
+  subject="$(gh api "repos/$GH_REPO/commits/$sha" --jq '.commit.message' 2>/dev/null | head -1)"
+  if gh issue create --title "Fix red main: $p CI fails on ${sha:0:7}" \
+      --label agent:todo --label priority:high --label red-main --label "project:$p" --label model:opus \
+      --body "**Project:** $p
+
+**Goal:** the project's CI is red on \`main\` since \`${sha:0:7}\` ($subject). Make it green again. Other PRs of this project are held (not merged) until it is.
+
+**Failed run:** $url
+
+**Acceptance criteria**
+- Given the fix is merged, when CI runs on \`main\`, then every job of \`$(basename "$wf")\` passes.
+- No test is deleted, skipped or weakened to get there; if a test is wrong, say why in the PR.
+- The PR explains the cause (which merged change broke it, or which flaky step) in 2-3 lines." >/dev/null; then
+    fixed "main is red for $p (${sha:0:7}): fix task opened"
+  else
+    problem "red-main:$p" "CI is red on main for $p ($url) and the fix issue could not be created"
+  fi
+done
+bash "$RUNNER_DIR/agent/pirx/merge-ready.sh"
 
 # Repeating problems go to a model; new ones and fixes go to the health page.
 out="$(python3 "$RUNNER_DIR/agent/heal.py" track "$st/heal-state.json" "${problems[@]}")"

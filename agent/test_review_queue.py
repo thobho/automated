@@ -6,10 +6,72 @@ import review_queue as rq
 
 
 def pr(n, branch="agent/5-x", sha="abc", checks=("SUCCESS",), comments=(), files=("projects/p/app.py",),
-       body="Closes #5", draft=False, mergeable="MERGEABLE"):
-    return {"number": n, "title": f"pr {n}", "headRefName": branch, "headRefOid": sha, "body": body,
+       body="Closes #5", draft=False, mergeable="MERGEABLE", parents=None):
+    return {"headParents": parents or [], "number": n, "title": f"pr {n}", "headRefName": branch, "headRefOid": sha, "body": body,
             "isDraft": draft, "mergeable": mergeable, "statusCheckRollup": [{"conclusion": c} for c in checks],
             "comments": [{"body": b} for b in comments], "files": [{"path": f} for f in files]}
+
+
+class MergeSafety(unittest.TestCase):
+    APPROVED = "ok <!-- automated:review:aaa1111 --> <!-- automated:approved:aaa1111 -->"
+
+    def test_update_of_approved_commit_merges_without_a_new_review(self):
+        a = rq.assess(pr(1, sha="bbb2222", comments=[self.APPROVED], parents=["aaa1111", "main999"]), {"agent:review"})
+        self.assertTrue(a["needs_merge"])
+        self.assertFalse(a["needs_review"])
+        self.assertEqual(a["updates"], 0)
+
+    def test_approved_head_waits_in_merge_ready(self):
+        a = rq.assess(pr(1, sha="aaa1111", comments=[self.APPROVED]), set())
+        self.assertTrue(a["needs_merge"])
+        self.assertFalse(a["needs_review"])
+
+    def test_protected_pr_is_never_merged_here(self):
+        a = rq.assess(pr(1, sha="aaa1111", comments=[self.APPROVED], files=("agent/budget.py",)), set())
+        self.assertFalse(a["needs_merge"])
+
+    def test_updates_are_counted(self):
+        up = "updated <!-- automated:approved:bbb2222 --> <!-- automated:updated -->"
+        a = rq.assess(pr(1, sha="ccc3333", comments=[self.APPROVED, up], parents=["bbb2222", "m"]), {"red-main"})
+        self.assertTrue(a["needs_merge"])
+        self.assertEqual(a["updates"], 1)
+        self.assertTrue(a["red_main_fix"])
+
+    def test_update_waits_for_ci(self):
+        a = rq.assess(pr(1, sha="bbb2222", checks=("IN_PROGRESS",), comments=[self.APPROVED],
+                         parents=["aaa1111", "main999"]), set())
+        self.assertFalse(a["needs_merge"])
+
+    def test_red_ci_after_update_is_still_handled_by_merge_ready(self):
+        a = rq.assess(pr(1, sha="bbb2222", checks=("FAILURE",), comments=[self.APPROVED],
+                         parents=["aaa1111", "main999"]), set())
+        self.assertTrue(a["needs_merge"])
+        self.assertEqual(a["ci"], "red")
+
+    def test_builder_push_after_approval_needs_a_real_review(self):
+        a = rq.assess(pr(1, sha="ccc3333", comments=[self.APPROVED], parents=["aaa1111"]), set())
+        self.assertFalse(a["needs_merge"])
+        self.assertTrue(a["needs_review"])
+
+    def test_merge_of_main_into_unapproved_commit_needs_review(self):
+        a = rq.assess(pr(1, sha="ccc3333", comments=[self.APPROVED], parents=["fff0000", "main999"]), set())
+        self.assertFalse(a["needs_merge"])
+        self.assertTrue(a["needs_review"])
+
+    def test_conflict_resolver_merge_is_reviewed_again(self):
+        a = rq.assess(pr(1, sha="bbb2222", comments=[self.APPROVED, "resolved <!-- automated:conflict-resolved -->"],
+                         parents=["aaa1111", "main999"]), set())
+        self.assertFalse(a["needs_merge"])
+        self.assertTrue(a["needs_review"])
+
+    def test_with_builder_is_not_merged(self):
+        a = rq.assess(pr(1, sha="bbb2222", comments=[self.APPROVED], parents=["aaa1111", "m"]), {"agent:todo"})
+        self.assertFalse(a["needs_merge"])
+
+    def test_project_of(self):
+        self.assertEqual(rq.project_of(["projects/a/x.py", "projects/a/y.py"]), "a")
+        self.assertIsNone(rq.project_of(["projects/a/x.py", "projects/b/y.py"]))
+        self.assertIsNone(rq.project_of(["agent/x.py"]))
 
 
 class Assess(unittest.TestCase):
