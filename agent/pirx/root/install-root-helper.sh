@@ -1,7 +1,8 @@
 #!/bin/bash
 # Install (or update) the automation's root helper on pirx. Run by the owner, once and after each change,
-# from a checkout the owner owns (never the agent's runner checkout), using merged main:
-#   d=$(mktemp -d) && git -C ~/Projects/automated fetch -q && git -C ~/Projects/automated worktree add --detach "$d/ah" origin/main && sudo bash "$d/ah/agent/pirx/root/install-root-helper.sh"; git -C ~/Projects/automated worktree remove --force "$d/ah"; rmdir "$d"
+# from a checkout the owner owns (never the agent's runner checkout), using merged main. umask 022:
+# Ubuntu's default 002 checks files out group-writable, which the check below refuses.
+#   (umask 022; d=$(mktemp -d) && git -C ~/Projects/automated fetch -q && git -C ~/Projects/automated worktree add --detach "$d/ah" origin/main && sudo bash "$d/ah/agent/pirx/root/install-root-helper.sh"; git -C ~/Projects/automated worktree remove --force "$d/ah"; rmdir "$d")
 # It installs /usr/local/sbin/automated-root (root-owned copy), writes /etc/automated/root-helper.conf on
 # the first run (edit it to change the lists; it is kept on updates), and one sudoers rule:
 #   agent ALL=(root) NOPASSWD: /usr/local/sbin/automated-root
