@@ -87,6 +87,53 @@ class MergeSafety(unittest.TestCase):
         self.assertIsNone(rq.project_of(["agent/x.py"]))
 
 
+class DiffPolicy(unittest.TestCase):
+    def test_flags(self):
+        files = [
+            {"filename": "projects/p/tests/test_a.py", "status": "removed", "deletions": 40, "additions": 0},
+            {"filename": "projects/p/apps/x/tests/test_b.py", "status": "modified", "additions": 3, "deletions": 1,
+             "patch": "@@ -1 +1 @@\n+@pytest.mark.skipif(not shutil.which('ffmpeg'), reason='no ffmpeg')\n def test_x():"},
+            {"filename": ".github/workflows/p-ci.yml", "status": "modified", "patch": "+  run: pytest"},
+            {"filename": "projects/p/pyproject.toml", "status": "modified", "patch": "+addopts = '-k not slow'"},
+            {"filename": "projects/p/apps/x/views.py", "status": "modified", "patch": "+def view(): pass"},
+        ]
+        flags = rq.diff_policy(files)
+        self.assertEqual(len(flags), 4)
+        self.assertIn("test file deleted: projects/p/tests/test_a.py", flags)
+        self.assertTrue(any("pytest.mark.skipif" in f for f in flags))
+
+    def test_new_workflow_and_plain_code_are_not_flagged(self):
+        files = [{"filename": ".github/workflows/new-ci.yml", "status": "added", "patch": "+on: push"},
+                 {"filename": "projects/p/pyproject.toml", "status": "modified", "patch": "+django = '5.2'"}]
+        self.assertEqual(rq.diff_policy(files), [])
+
+
+class Enforce(unittest.TestCase):
+    OK = {"verdict": "approve", "summary": "s", "points": [],
+          "criteria": [{"criterion": "c1", "met": True, "evidence": "test_c1 passes"}]}
+
+    def test_complete_approval_stays(self):
+        self.assertEqual(rq.enforce(self.OK, [])["verdict"], "approve")
+
+    def test_missing_evidence_becomes_changes(self):
+        v = dict(self.OK, criteria=[{"criterion": "c1", "met": True, "evidence": ""}])
+        out = rq.enforce(v, [])
+        self.assertEqual(out["verdict"], "changes")
+        self.assertEqual(len(out["points"]), 1)
+
+    def test_unjudged_flag_becomes_changes(self):
+        self.assertEqual(rq.enforce(self.OK, ["x.py: adds `pytest.mark.skip`"])["verdict"], "changes")
+
+    def test_justified_flag_stays_approved(self):
+        flag = "x.py: adds `pytest.mark.skip`"
+        v = dict(self.OK, policy=[{"flag": flag, "ok": True, "why": "binary missing locally; CI sets REQUIRE_FFMPEG"}])
+        self.assertEqual(rq.enforce(v, [flag])["verdict"], "approve")
+
+    def test_changes_verdict_is_untouched(self):
+        v = {"verdict": "changes", "points": [{"issue": "x"}]}
+        self.assertIs(rq.enforce(v, ["f"]), v)
+
+
 class Assess(unittest.TestCase):
     def test_green_unreviewed_needs_review(self):
         a = rq.assess(pr(1), set())

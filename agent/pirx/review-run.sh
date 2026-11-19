@@ -51,6 +51,10 @@ work="$(dirname "$RUNNER_DIR")/review-$pr"
 git -C "$REPO_ROOT" worktree remove --force "$work" >/dev/null 2>&1
 git -C "$REPO_ROOT" worktree add -q --detach "$work" "$sha" || { log "review #$pr: checkout failed"; exit 1; }
 mkdir -p "$work/.agent"
+# Diff policy (agent/review_queue.py): deleted tests, new skips, changed CI or test settings.
+gh api "repos/$GH_REPO/pulls/$pr/files?per_page=100" > "$RUNTIME/state/review-$pr-files.json" 2>/dev/null || echo '[]' > "$RUNTIME/state/review-$pr-files.json"
+flags="$RUNTIME/state/review-$pr-flags.txt"
+(cd "$RUNNER_DIR" && python3 agent/review_queue.py --policy "$RUNTIME/state/review-$pr-files.json") > "$flags" 2>/dev/null || : > "$flags"
 
 prompt="$(cat "$RUNNER_DIR/agent/review-prompt.md")
 
@@ -59,7 +63,7 @@ prompt="$(cat "$RUNNER_DIR/agent/review-prompt.md")
 - Linked issue: #$issue
 - CI: $ci$([[ "$prot" == yes ]] && echo "; this PR touches the automation's money or permission rules, so be strict: the owner merges it only on your approval")$([[ "$auto" == yes && "$prot" == no ]] && echo "; this PR changes the automation itself and is merged on your approval, so be strict: it must not weaken a budget gate, a permission or a check, and must keep the automation running")
 - Review round: $((rounds + 1)) of 3
-- You run on: $model"
+- You run on: $model$([[ -s "$flags" ]] && printf '\n\n## Diff-policy flags (judge each one in `policy`, copying the flag text exactly)\n%s' "$(sed 's/^/- /' "$flags")")"
 
 runlog="$RUNTIME/logs/review-$pr-$(date -u +%Y%m%dT%H%M%SZ).jsonl"
 log "review #$pr: starts ($model, ${sha:0:7}, protected $prot)"
@@ -89,7 +93,9 @@ fi
 if ! python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["verdict"] in ("approve","changes","blocked")' "$verdict_file" 2>/dev/null; then
   log "review #$pr: no valid verdict"; status_update "Review of PR #$pr ended without a verdict (log $runlog)"; exit 0
 fi
-verdict="$(json_get "$verdict_file" verdict)"
+before="$(json_get "$verdict_file" verdict)"
+verdict="$(cd "$RUNNER_DIR" && python3 agent/review_queue.py --enforce "$verdict_file" "$flags")"
+[[ "$before" != "$verdict" ]] && log "review #$pr: approval turned into $verdict (missing evidence or unjudged flags)"
 body="$(python3 - "$verdict_file" "$model" "${sha:0:7}" <<'EOF'
 import json, sys
 d = json.load(open(sys.argv[1])); model, sha = sys.argv[2], sys.argv[3]
@@ -99,6 +105,10 @@ if d.get("points"):
     out += ["", "**Must change:**"] + [f"{i}. {('`'+p['file']+'`: ') if p.get('file') else ''}{p.get('issue','')} → {p.get('fix','')}" for i, p in enumerate(d["points"], 1)]
 if d.get("notes"):
     out += ["", "**Notes:**"] + [f"- {n}" for n in d["notes"]]
+if d.get("criteria"):
+    out += ["", "**Acceptance criteria:**"] + [f"- {'✅' if c.get('met') else '❌'} {c.get('criterion','')}: {c.get('evidence','')}" for c in d["criteria"]]
+if d.get("policy"):
+    out += ["", "**Diff policy:**"] + [f"- {'✅' if p.get('ok') else '❌'} {p.get('flag','')}: {p.get('why','')}" for p in d["policy"]]
 if d.get("checked"):
     out += ["", "**Checked:** " + "; ".join(d["checked"])]
 print("\n".join(out))
