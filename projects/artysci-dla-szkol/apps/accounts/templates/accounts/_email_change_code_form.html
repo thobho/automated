@@ -1,0 +1,10 @@
+{% load i18n %}<form method="post" action="{% url 'accounts:email_change_code' %}">
+  {% csrf_token %}
+  <p>
+    <label for="id_change_code">{% translate "Kod z wiadomości wysłanej na nowy adres" %}</label>
+    <input type="text" id="id_change_code" name="code" inputmode="numeric" pattern="[0-9]{6}"
+           maxlength="6" autocomplete="one-time-code" required
+           {% if error %}aria-invalid="true" aria-describedby="change-code-error"{% endif %}>
+  </p>
+  <button type="submit">{% translate "Potwierdź nowy adres" %}</button>
+</form>

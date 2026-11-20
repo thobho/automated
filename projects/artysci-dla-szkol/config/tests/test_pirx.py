@@ -10,17 +10,18 @@ ENV = {
     "DATABASE_URL": "postgres://u:p@127.0.0.1:1/db",
     "MEDIA_PUBLIC_BASE_URL": "http://192.168.68.62:8101/",
 }
+MODULES = ("config.settings.pirx", "config.settings.prod", "config.settings.hosted")
 
 
 @pytest.fixture
 def pirx(monkeypatch):
     for key, value in ENV.items():
         monkeypatch.setenv(key, value)
-    for name in ("config.settings.pirx", "config.settings.prod"):
+    for name in MODULES:
         sys.modules.pop(name, None)
     module = importlib.import_module("config.settings.pirx")
     yield module
-    for name in ("config.settings.pirx", "config.settings.prod"):
+    for name in MODULES:
         sys.modules.pop(name, None)
 
 

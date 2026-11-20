@@ -12,6 +12,7 @@ dependencies = [
     "pillow>=13.0.0",
     "procrastinate[django]>=3.11.0",
     "psycopg[binary]>=3.2",
+    "pypdf>=5",
 ]
 
 [dependency-groups]

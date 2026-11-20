@@ -12,6 +12,10 @@ Scopes and their settings:
   At the limit, code login for that e-mail is locked; even a correct code is refused.
 - ``email_addr`` / ``email_ip``: login e-mails requested per address / per client IP
   (LOGIN_EMAIL_LIMIT_PER_ADDRESS / LOGIN_EMAIL_LIMIT_PER_IP within LOGIN_EMAIL_LIMIT_WINDOW).
+  E-mail change requests (US-1.6) count against ``email_ip`` too.
+- ``change_user``: e-mail change requests per user id (EMAIL_CHANGE_LIMIT_PER_USER within
+  LOGIN_EMAIL_WINDOW).
+- ``change_code``: failed e-mail change codes per user id (same limit and lock as ``code``).
 
 Every function takes an explicit ``now`` so tests control time without sleeping.
 
@@ -32,6 +36,9 @@ from .models import ThrottleEvent
 CODE = "code"
 EMAIL_PER_ADDRESS = "email_addr"
 EMAIL_PER_IP = "email_ip"
+CHANGE_PER_USER = "change_user"
+CHANGE_CODE = "change_code"
+SCOPES = (CODE, EMAIL_PER_ADDRESS, EMAIL_PER_IP, CHANGE_PER_USER, CHANGE_CODE)
 
 
 @dataclass(frozen=True)
@@ -48,6 +55,10 @@ def limit_for(scope: str) -> Limit:
         return Limit(scope, settings.LOGIN_EMAIL_LIMIT_PER_ADDRESS, settings.LOGIN_EMAIL_WINDOW)
     if scope == EMAIL_PER_IP:
         return Limit(scope, settings.LOGIN_EMAIL_LIMIT_PER_IP, settings.LOGIN_EMAIL_WINDOW)
+    if scope == CHANGE_PER_USER:
+        return Limit(scope, settings.EMAIL_CHANGE_LIMIT_PER_USER, settings.LOGIN_EMAIL_WINDOW)
+    if scope == CHANGE_CODE:
+        return Limit(scope, settings.LOGIN_THROTTLE_LIMIT, settings.LOGIN_THROTTLE_WINDOW)
     raise ValueError(f"unknown throttle scope {scope!r}")
 
 
@@ -104,7 +115,7 @@ def reset(scope: str, identifier: str) -> None:
 def purge(*, now: datetime | None = None) -> int:
     """Delete events older than the longest window; returns how many were removed."""
     now = _now(now)
-    longest = max(limit_for(s).window for s in (CODE, EMAIL_PER_ADDRESS, EMAIL_PER_IP))
+    longest = max(limit_for(s).window for s in SCOPES)
     deleted, _ = ThrottleEvent.objects.filter(
         created_at__lte=now - timedelta(seconds=longest)
     ).delete()

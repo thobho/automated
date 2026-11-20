@@ -10,7 +10,11 @@ pytestmark = pytest.mark.django_db
 # an entry listed in PENDING is a known gap, anything else must have an emitter test.
 EMITTERS: dict[str, str] = {
     "artist_registered": "apps.artists.services.register_artist",
+    "institution_registered": "apps.institutions.services.register_institution",
     "account_confirmed": "apps.accounts.services.confirm_email",
+    "institution_verified": "apps.institutions.services.verify",
+    "website_import_started": "apps.artists.website_import.start_import",
+    "website_import_finished": "apps.artists.website_import._finish",
 }
 PENDING = set(EVENT_CATALOG) - set(EMITTERS)
 
@@ -18,7 +22,11 @@ PENDING = set(EVENT_CATALOG) - set(EMITTERS)
 def test_catalog_has_the_agreed_events():
     assert set(EVENT_CATALOG) == {
         "artist_registered",
+        "institution_registered",
         "account_confirmed",
+        "institution_verified",
+        "website_import_started",
+        "website_import_finished",
         "profile_generated",
         "profile_published",
         "inquiry_sent",
@@ -83,6 +91,35 @@ def test_track_pseudonymises_actor_and_stores_object(django_user_model):
     assert len(event.actor) == 32 and str(user.pk) != event.actor
     assert event.actor == services.actor_id(user)
     assert "x@example.invalid" not in repr(event.__dict__)
+
+
+def test_institution_verified_contract():
+    """`institution_verified` takes only `method` (an enum value), nothing personal (D39)."""
+    from apps.institutions.models import VerificationMethod
+
+    assert EVENT_CATALOG["institution_verified"] == frozenset({"method"})
+    for method in VerificationMethod.values:
+        services.track("institution_verified", method=method)
+    with pytest.raises(services.DisallowedProperty):
+        services.track("institution_verified", method="manual", institution_name="SP 5")
+
+
+def test_website_import_events_contract():
+    """US-2.2: counts, a status code and a duration only; never the URL or contact data."""
+    assert EVENT_CATALOG["website_import_started"] == frozenset()
+    assert EVENT_CATALOG["website_import_finished"] == frozenset(
+        {"status", "page_count", "photo_count", "duration_ms"}
+    )
+    services.track(
+        "website_import_finished", status="done", page_count=3, photo_count=2, duration_ms=900
+    )
+    for name, props in (
+        ("website_import_started", {"url": "https://example.invalid/"}),
+        ("website_import_finished", {"url": "https://example.invalid/"}),
+        ("website_import_finished", {"host": "example.invalid"}),
+    ):
+        with pytest.raises(services.DisallowedProperty):
+            services.track(name, **props)
 
 
 def test_actor_id_anonymous_is_empty():

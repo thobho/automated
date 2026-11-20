@@ -90,6 +90,67 @@ def test_long_text_scrubs_in_linear_time(filler):
     assert out.endswith("[email]")
 
 
+VALID_PESEL = "44051401359"
+VALID_ID_CARD = "ABA300000"
+
+
+@pytest.mark.parametrize("pesel", [VALID_PESEL, "02070803628"])
+def test_valid_pesel_removed(pesel):
+    assert scrub(f"PESEL: {pesel}, dziękujemy.") == "PESEL: [pesel], dziękujemy."
+
+
+@pytest.mark.parametrize(
+    "kept",
+    [
+        "Numer zamówienia 44051401358 z wtorku",  # wrong checksum
+        "Kod 12345678901",  # wrong checksum
+        "Seria 440514013590",  # 12 digits
+        "ID x44051401359",  # inside a word
+    ],
+)
+def test_eleven_digits_without_pesel_checksum_kept(kept):
+    assert scrub(kept) == kept
+
+
+@pytest.mark.parametrize("card", [VALID_ID_CARD, "ABA 300000"])
+def test_valid_id_card_removed(card):
+    assert scrub(f"Dowód {card}.") == "Dowód [id_card]."
+
+
+@pytest.mark.parametrize(
+    "kept",
+    [
+        "Dowód ABA300001",  # wrong checksum
+        "kod aba300000",  # lower case: not an ID card
+        "XABA300000",  # longer token
+        "Sala ABC123",  # too few digits
+    ],
+)
+def test_id_card_false_positives_kept(kept):
+    assert scrub(kept) == kept
+
+
+def test_all_identifiers_in_one_text():
+    text = (
+        f"Konto PL61 1090 1014 0000 0712 1981 2874, NRB 61 1090 1014 0000 0712 1981 2874, "
+        f"PESEL {VALID_PESEL}, dowód {VALID_ID_CARD}, inny numer 44051401358."
+    )
+    assert scrub(text) == (
+        "Konto [iban], NRB [iban], PESEL [pesel], dowód [id_card], inny numer 44051401358."
+    )
+
+
+def test_contact_helpers_list_emails_and_phones_only():
+    from apps.profiles.ai.scrub import emails_in, phones_in
+
+    text = (
+        "Pisz: a@example.invalid lub a@example.invalid, tel. +48 601  234 567, "
+        f"konto 61 1090 1014 0000 0712 1981 2874, PESEL {VALID_PESEL}"
+    )
+    assert emails_in(text) == ["a@example.invalid"]
+    assert phones_in(text) == ["+48 601 234 567"]
+
+
 def test_scrub_messages_copies_and_scrubs_content():
     messages = [{"role": "user", "content": "mail a@example.invalid"}]
     out = scrub_messages(messages)

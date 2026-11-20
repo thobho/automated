@@ -17,6 +17,15 @@ class DocumentImmutable(LegalDocumentError):
     """A published version cannot be changed; a correction is a new version."""
 
 
+class InvalidStatement(LegalDocumentError, ValueError):
+    """An artist statement got data it does not take (e.g. a billing form outside
+    `faktura`/`rachunek`, or a date on a statement other than OC). Nothing was stored."""
+
+
+class StaleWording(LegalDocumentError):
+    """The wording the artist was shown is no longer the current version of its kind."""
+
+
 class UnknownKind(LegalDocumentError, ValueError):
     """The kind is not one of LegalDocument.Kind."""
 

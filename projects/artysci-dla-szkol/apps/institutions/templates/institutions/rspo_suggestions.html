@@ -1,0 +1,15 @@
+{% load i18n %}{% if suggestions %}
+<fieldset>
+  <legend>{% translate "Podpowiedzi z rejestru RSPO" %}</legend>
+  {% for entry in suggestions %}
+    <p>
+      <input type="radio" id="rspo-{{ entry.rspo_number }}" name="rspo_number" value="{{ entry.rspo_number }}"{% if entry.rspo_number == chosen %} checked{% endif %}>
+      <label for="rspo-{{ entry.rspo_number }}">{{ entry.name }}, {{ entry.locality }} ({{ entry.get_voivodeship_display }}), {% translate "RSPO" %} {{ entry.rspo_number }}</label>
+    </p>
+  {% endfor %}
+  <p>
+    <input type="radio" id="rspo-none" name="rspo_number" value=""{% if not chosen %} checked{% endif %}>
+    <label for="rspo-none">{% translate "Żadna z powyższych, wpiszę dane ręcznie" %}</label>
+  </p>
+</fieldset>
+{% endif %}

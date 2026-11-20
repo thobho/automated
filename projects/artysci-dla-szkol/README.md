@@ -38,7 +38,7 @@ Docker with Compose, and uv). Run from this folder.
 | `make up-lite` | `postgres:17` (shared_buffers 64MB, 256m limit) + Mailpit (64m). Fits a 4 GB machine. |
 | `make web` | migrate, then `runserver` natively on `127.0.0.1:18001` (talks to the lite stack) |
 | `make worker` | native Procrastinate worker on all queues (see "Background jobs") |
-| `make seed` | synthetic data, idempotent: 10 artists, 5 institutions (`@example.invalid`, no passwords), placeholder v1 of each legal document ("PROJEKT – tekst zastępczy…") |
+| `make seed` | synthetic data, idempotent: 10 artists, 5 institutions with their roles (`@example.invalid`, no passwords), 6 synthetic RSPO entries, placeholder v1 of each legal document ("PROJEKT – tekst zastępczy…") |
 | `make up-full` | lite + MinIO + `web` (gunicorn) and `worker` containers built from `Dockerfile` |
 | `make down` | stop and remove all containers (data stays in the state dir) |
 | `make test` / `make lint` | pytest with coverage / ruff + format check + migrations check |
@@ -159,8 +159,17 @@ list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d3
 - `/akceptacja-dokumentow/`: re-acceptance page (logged-in users with pending versions).
 - `/logowanie/` (e-mail), `/logowanie/kod/` (POST code), `/logowanie/link/?t=...` (GET button,
   POST logs in), `/wyloguj/` (POST only).
-- `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard start, a
-  placeholder until US-2.1; login required).
+- `/konto/` (account settings), `/konto/email/` (POST new address), `/konto/email/kod/` (POST
+  code), `/konto/email/link/?t=...` (GET button, POST confirms), `/konto/dane/` and
+  `/konto/usun/` (placeholders until US-8.6); all login required.
+- `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard overview),
+  `/artysta/profil/dane/` (step 1, basics), `/artysta/profil/oferty/` (offers; `nowa/`,
+  `<id>/edycja/`, `<id>/usun/`, `<id>/przesun/` POST), `/artysta/profil/oswiadczenia/`
+  (statements, GET + POST), `/artysta/profil/materialy/` (materials),
+  `/artysta/profil/import/` (website import, GET + POST) and `/artysta/profil/import/<id>/`
+  (import status); artists only, login required.
+- `/rejestracja/placowka/` (institution registration), `/rejestracja/placowka/rspo/` (HTMX RSPO
+  suggestions, GET, anonymous), `/placowka/` (institution start, a placeholder; login required).
 
 ## Login (US-1.3)
 
@@ -183,6 +192,30 @@ No passwords (D1). App `apps/accounts`, logic in `services.py`:
   `http://127.0.0.1:8000/logowanie/`, enter `artysta01@example.invalid`, read the e-mail in
   Mailpit (`http://127.0.0.1:18025`).
 
+## Account settings and e-mail change (US-1.6)
+
+`/konto/` (any logged-in account; linked as "Ustawienia konta" in the header), logic in
+`apps/accounts/services.py` (D101):
+
+- `account_overview(user)` and `update_names(user, full_name=..., artist_name=...)`; the artist
+  name goes through `artists.services.rename_artist()`.
+- `request_email_change(user, new_email, client_ip, link_base=...)`: 5 requests per hour per user
+  (`EMAIL_CHANGE_LIMIT_PER_USER`) and the login per-IP limit (20/h). The page answer is the same
+  for a free and a taken address. Free address: an `EmailChangeRequest` is stored and the job
+  `accounts.send_email_change_email` sends a link (`/konto/email/link/?t=...`) and a 6-digit code
+  to the new address (15 minutes, single use, only hashes stored) and a notice without a link to
+  the old one. Taken address: only the notice (`accounts.send_email_change_notice`), plus a
+  request without hashes that can never be confirmed, so `/konto/` shows the same pending
+  state either way. Both cases close the user's older open request.
+- `confirm_email_change_code(user, code)` / `confirm_email_change_link(user, token)`: only the
+  logged-in user who asked; sets the e-mail and `email_confirmed_at`. 5 wrong codes lock code
+  entry for 15 minutes. The view keeps the current session with a new key; every other session
+  of the user stops authenticating (the session hash includes the e-mail).
+- Until confirmed, login works with the old address only. A new request replaces an older one.
+- `/konto/dane/` and `/konto/usun/` are placeholders until US-8.6.
+- Try it locally: log in as `artysta01@example.invalid`, open `/konto/`, enter a new
+  `@example.invalid` address, read both e-mails in Mailpit and enter the code.
+
 ## Artist registration (US-1.1)
 
 App `apps/artists`, logic in `services.register_artist(email, name, client_ip, link_base=...)`:
@@ -197,6 +230,146 @@ App `apps/artists`, logic in `services.register_artist(email, name, client_ip, l
 - The page after sending has the code form; the code or the link (15 minutes) confirms the
   account and opens `artists:start`. An expired code is not a dead end: logging in from
   `/logowanie/` confirms the account too.
+
+## Artist profile wizard, step 1: basics (US-2.1)
+
+App `apps/artists`, logic in `services.py` (D102):
+
+- `Artist` has `artist_type` (teatr, iluzja, muzyka, pokaz naukowy, pokaz ze zwierzętami,
+  warsztaty, inne), `name` and `city`; voivodeships of activity (the shared
+  `apps.core.regions.Voivodeship` list) and audiences are child rows `ArtistVoivodeship` /
+  `ArtistAudience` (one row per value; filter with `Artist.objects.filter(voivodeships__voivodeship=...)`).
+- `save_basics(user, data)` stores all fields at once (the name through `rename_artist()`) or
+  raises `InvalidBasics`; `basics_complete(artist)`; `basics_of(artist)` for prefilling;
+  `wizard_steps(artist)` for the overview.
+- `/artysta/kreator/` lists step 1 (required) and the later steps (offers, statements,
+  materials). Until the basics are complete the later steps are shown disabled and their URLs
+  redirect to step 1 with a message; afterwards they can be skipped and opened in any order
+  (materials is a placeholder until US-2.3A).
+- `make seed` fills basics for `artysta01`–`artysta09`; `artysta10@example.invalid` keeps empty
+  basics to try the wizard.
+
+## Artist profile wizard: offers and repertoire (US-2.9)
+
+App `apps/artists`, model `Offer`, logic in `services.py` (D103):
+
+- An offer has a title and a plain-text description (required), audience age from–to in years
+  (optional, 0–99, from ≤ to), duration in minutes (optional, > 0), a price as whole PLN **or**
+  "na zapytanie" (exactly one; also a DB check constraint), a position and an optional poster.
+  A theatre's repertoire of 20+ shows is many offers in one profile (D2).
+- Services: `offers_for(artist)` (in order), `get_offer(artist, id)` (own offers only),
+  `create_offer(artist, data, poster=None)`, `update_offer(artist, id, data, poster=None,
+  remove_poster=False)`, `delete_offer(artist, id)`, `move_offer(artist, id, "up"|"down")`,
+  `reorder_offers(artist, ids)`, `has_offers(artist)` (D6 rule for publication, US-2.8),
+  `offer_errors(data)` (the validation the form shares), `poster_url(offer)`.
+- Posters go through `apps.core.uploads.store_upload(kind="photo", visibility="private")` (15 MB,
+  sniffed type, EXIF stripped) and are shown to the artist through `media.signed_url`. A
+  replaced/removed poster and a deleted offer's poster leave storage after the commit.
+- `/artysta/profil/oferty/` lists the offers with edit, delete (confirmation page, then POST) and
+  up/down buttons; the wizard overview marks the step done with at least one offer.
+- `make seed` gives `artysta01@example.invalid` a synthetic 20-offer repertoire (no posters), once.
+
+## Artist statements (US-8.2)
+
+App `apps/trust`, logic in `services.py` (D104). Wordings come from the owner's lawyer (D30);
+`make seed` publishes placeholders starting with "PROJEKT – tekst zastępczy".
+
+- Six statement kinds are `LegalDocument` kinds (versioned, immutable): `child_protection`,
+  `material_rights` (D4), `image_adults`, `image_children` (parents or school, D7),
+  `billing_form`, `insurance` (OC). Publish a new wording at `/django-admin/trust/legaldocument/add/`;
+  every new version asks artists to make that statement again (the "Istotna zmiana" box does not
+  matter for statements).
+- `ArtistStatement` rows are append-only (renewal, a new billing form or OC date and a withdrawal
+  are new rows; read-only in the admin). The newest row per kind counts when it is not a
+  withdrawal, refers to the current wording and, for OC, `valid_until` (optional) has not passed.
+- Services: `make_statement(artist, kind, billing_form=..., valid_until=..., shown_document_id=...)`
+  (`faktura`/`rachunek` only, date only for OC; `NoPublishedVersion`, `InvalidStatement`,
+  `StaleWording`), `withdraw_statement(artist, kind)`, `statement_overview(artist)` (status per
+  kind: unavailable, not made, current, "wymaga ponownego oświadczenia", expired),
+  `current_statements(artist)`, `has_child_protection_statement(artist)` (D6, for US-2.8).
+- `/artysta/profil/oswiadczenia/`: wording, status, checkbox + submit per statement, billing form
+  choice, OC date, withdraw. The step is done with a counted child-protection statement.
+- `{% load statements %}{% artist_statement_badges artist %}` lists the counted statements under
+  "Oświadczenie artysty" with a note that the service does not check them (D31); on the wizard
+  overview now, the public profile (US-3.1) reuses it.
+- Daily job `trust.check_insurance_expiry` (07:00) queues one plain-text reminder
+  (`trust.send_insurance_reminder`, `email` queue, statement id only) per expired OC statement,
+  once (`StatementReminder`). An expired OC stops counting by date even before the job runs.
+  Run it by hand: `uv run python manage.py shell -c "from apps.trust import services; print(services.queue_insurance_reminders())"`.
+
+## Institution registration (US-1.2)
+
+App `apps/institutions`, logic in `services.py`, same flow as artist registration (D97, D98):
+
+- Models: `Institution` (type, name, locality, one of the 16 voivodeships, optional unique RSPO
+  number, `verification_status` "niezweryfikowana"), `InstitutionMember` (one-to-one with the
+  user, function, `needs_review`), `RspoEntry` (registry reference rows; write them with
+  `add_rspo_entry()` / `upsert_rspo_entry()`, which fill the case-folded search columns).
+- `suggest_rspo(name, locality)`: every word of the name must occur (case-insensitive, also for
+  Polish letters), locality is a prefix; at most 10 rows, nothing below 3 characters. The page
+  calls `/rejestracja/placowka/rspo/?name=...&locality=...` with HTMX and shows radio buttons.
+- `register_institution(email, details, function, client_ip, rspo_number=..., link_base=...)`:
+  with an RSPO number the institution data come from the registry, whatever the form sent; an
+  RSPO number that already has an `Institution` links the new member to it with
+  `needs_review=True` (admin: `/django-admin/institutions/institutionmember/?needs_review__exact=1`).
+  Records `institution_registered` (type, `rspo_matched`, `linked_existing`) and sends the login
+  e-mail with `institutions:start` (`/placowka/`, a placeholder until M2) as `next`.
+- `make seed` adds six synthetic RSPO rows (numbers 900001+, e.g. "Szkoła Podstawowa nr 5" in
+  Wrocław and in Opole) to try the suggestions.
+
+## Institution verification and RSPO import (US-1.4)
+
+Logic in `apps/institutions/services.py` (D3, D100):
+
+- **Import:** download the CSV on [rspo.gov.pl](https://rspo.gov.pl/) ("Pobierz CSV" under the
+  search results; UTF-8 with BOM, `;`, 54 columns) and run
+  `uv run python manage.py import_rspo <path>`. It upserts `RspoEntry` by "Numer RSPO" (running
+  it twice changes nothing) and prints
+  `import_rspo: created N, updated N, unchanged N, skipped N, verified N`. Rows without a valid
+  number, name, locality or voivodeship are skipped and counted, never printed or logged.
+  `RSPO_COLUMNS` is the one place that maps header names to fields; Windows-1250 and `,`/tab
+  files (an export re-saved in Excel) work too. Of "E-mail" only the domain is stored.
+  Never commit a real export: the test fixture `apps/institutions/tests/fixtures/rspo_sample.csv`
+  is synthetic (regenerate with `uv run python -m apps.institutions.tests.rspo_fixture`).
+- **States:** `Institution.verification_status` is "niezweryfikowana" or "zweryfikowana", with
+  `verified_at`, `verification_method` ("domena" or "ręcznie") and, for manual approval,
+  `verified_by`. Only `services.verify()` sets them (records `institution_verified` with
+  `method`, once per institution).
+- **Domain rule:** an institution with an RSPO number becomes verified ("domena") when a
+  confirmed member's e-mail domain equals its RSPO e-mail domain exactly (case-insensitive).
+  Free mailbox domains (`PUBLIC_MAILBOX_DOMAINS`) never count. Checked when an account is
+  confirmed (`accounts.signals.email_confirmed`) and after each import.
+- **Manual approval:** `/django-admin/institutions/institution/`, select institutions, action
+  "Zatwierdź placówkę" (staff only). Already verified institutions stay as they are.
+- **Badge:** `services.is_verified(institution)` and, in templates,
+  `{% load institutions %}{% institution_badge institution %}` (nothing for unverified). Shown on
+  `/placowka/` now; inquiries and notices use it in M2/M3.
+
+## Roles and permissions (US-1.5)
+
+Code in `apps/accounts/roles.py` (rules) and `apps/accounts/permissions.py` (view guards); D99.
+
+- One role per account, derived, not stored: `roles.role_of(user)` returns `anonymous`,
+  `admin` (`is_staff` or `is_superuser`), `artist` (has an `Artist`) or `institution` (has an
+  `InstitutionMember`); `none` for an account with no record or, failing closed, with both.
+- Rules for views and later features: `can_create_artist_profile(user)` (artists),
+  `can_create_inquiry(user)`, `can_create_notice(user)` (institutions; E6 adds verification, D3).
+- Guards: `@role_required("artist")` for function views, `RoleRequiredMixin` with
+  `required_roles = ("institution",)` for class views. Anonymous visitors go to
+  `/logowanie/?next=<path>`; another role gets the Polish 403 page (`templates/403.html`) and one
+  JSON log line `permission denied` with `user` (pseudonym), `role`, `url_name`, `required_role`.
+- **Admin accounts only from the server:** `uv run python manage.py create_admin <email>` (on pirx:
+  `cd ~/runtime/artysci-dla-szkol/app/projects/artysci-dla-szkol && uv run --frozen --no-dev
+  python manage.py create_admin <email>` with the instance's env). It creates the account if needed
+  (no password) or upgrades one without a role, sets `is_staff` and `is_superuser`, and refuses an
+  artist or institution account. The admin logs in with the normal e-mail link or code; that
+  session also opens `/django-admin/`. No form or view can set these flags.
+- **Permission matrix:** `apps/accounts/tests/test_permission_matrix.py` lists every URL name with
+  the expected answer for each role. A new route without a row fails the test with its name, so
+  add the row with the route. `uv run pytest -k "permission or role" -v` prints how many routes it
+  covered.
+- `make seed` gives the seed accounts their roles: `artysta01..10` have an artist record,
+  `szkola01..05` are members of institutions made from the synthetic RSPO rows.
 
 ## Legal documents (US-8.1)
 
@@ -270,6 +443,50 @@ result = ai.complete(
 - Check a key by hand: `uv run python manage.py ai_smoke [--key-file path/to/secrets.env]`
   makes one real, tiny call (synthetic prompt, well under $0.001) and prints the `AICall` row.
 - Only artists' marketing materials go to AI; never messages, inquiries or contact data.
+- `generation=` (a running `quality.Generation`) links the `AICall` row to a profile generation.
+
+## Generator versioning (US-11.1)
+
+Every profile generation records which versions of the generator's parts produced it, so a page
+can be reproduced and generator changes can be compared (D13, D14). Code: `apps/quality`.
+
+- **Components** are declared in code with a kind (`instructions`, `schema`, `validator`,
+  `template`), a name, a version string and their files (paths from the project folder) or
+  inline content; register them in a module imported at startup (e.g. the owning app's
+  `AppConfig.ready()`):
+
+  ```python
+  from apps.quality.registry import Component, registry
+
+  DRAFT = registry.register(
+      Component("instructions", "profile_draft", "1", files=("apps/profiles/prompts/draft.md",))
+  )
+  ```
+- **Bumping a version.** `apps/quality/components.json` records `kind:name` → version → SHA-256
+  of the content. `test_every_registered_component_matches_the_manifest` fails, naming the
+  component, when its content changed without a new version. To change a component: edit it,
+  raise its `version`, run `uv run python manage.py generator_manifest --write` and commit
+  `components.json` with the change. A recorded version is never rewritten (the command
+  refuses); `generator_manifest` without `--write` only checks.
+- **A run** goes through `apps/quality/services.py`: `start_generation(artist, trigger,
+  components)` (trigger `import`, `questionnaire`, `manual` or `rerun`), AI calls with
+  `ai.complete(..., generation=g)` or `record_ai_call(g, result.call_id)`, then
+  `finish_generation(g, result, warnings, repair_rounds, status)` (status `ready` „gotowa”,
+  `review` „do przeglądu”, `error` „błąd”; `running` „trwa” until then). Finishing stores the
+  times, the duration, the AI model(s) the adapter reported and the cost (sum of the linked
+  `AICall` rows). A finished generation and every component version are append-only.
+- **Stored versions** (`GeneratorComponentVersion`, one row per content hash): instructions and
+  schemas keep a full text snapshot; validators and templates keep the file list and hash,
+  pointing at the code in git (declared with inline content, they keep the content). `versions_of(generation)` returns exactly that.
+- **Input fingerprint** (`input_fingerprint(artist)`, D107): SHA-256 over the ready materials
+  (by id: id + a hash of the row's content fields) and the questionnaire values. Same input,
+  same fingerprint; no copy of the materials is kept (D12).
+- **Inspect:** read-only Django admin at `/django-admin/quality/generation/` (staff only) and
+  `uv run python manage.py generation_show <id>` (JSON: versions, fingerprint, status, warnings,
+  rounds, duration, cost, AI call ids; no prompt, reply or instruction text).
+- Not here yet: the real components (US-2.5a–c, US-3.1), re-running a stored generation and the
+  evaluation set (US-11.2–11.4). `apps/quality/tests/fake_generator.py` is a test-only
+  generator showing the full flow.
 
 ## File storage
 
@@ -291,7 +508,39 @@ any S3-compatible service later). Two storages: **private** (originals, document
 - S3: `manage.py ensure_buckets` creates both buckets (public one gets anonymous read); Compose
   `full` runs it at web start-up. Run the suite against MinIO by setting `S3_*` (see
   `.env.example`) and `S3_ENDPOINT_URL`; without it the S3-parametrised tests are skipped.
-- Not covered yet: video transcoding and image variants (E2), virus scanning (later).
+- **Malware scan** (`apps/core/scanning.py`): `scan(file) -> clean | infected | error`, backend
+  from `MALWARE_SCANNER`: `clamd` (ClamAV daemon, INSTREAM over TCP `CLAMD_HOST`/`CLAMD_PORT` or
+  the Unix socket `CLAMD_SOCKET`, stdlib only), `none` (nothing scanned, each file logged as
+  `upload_unscanned`; dev and pirx, which has no RAM for clamd: D87) or `fake` (tests). **Prod
+  refuses to start with anything but `clamd`**; with no clamd address every scan is an error, so
+  no upload ever becomes ready. Run the real-clamd test with `CLAMD_HOST=... uv run pytest
+  apps/core/tests/test_scanning.py`.
+- **Artist materials** (`apps/artists/materials.py`, `/artysta/profil/materialy/`): photos (JPG,
+  PNG, WebP, 15 MB, at most 40) and PDFs (20 MB, at most 10) go through `store_upload(...,
+  visibility="private")` and become a `Material` in `pending`. The `artists.scan_material` job
+  (`media` queue) marks it `ready` (clean), deletes the file and marks it `rejected` (infected), or
+  retries 3 times and leaves it `pending` (scanner error). Only `ready` materials count
+  (`ready_materials()`). A clean PDF gets the `artists.extract_pdf_text` job (`pypdf`, limits
+  `PDF_TEXT_MAX_PAGES`/`_CHARS`/`_SECONDS`; encrypted or broken files end as a text status).
+  YouTube/Vimeo links are parsed to a video id and checked through the fixed oEmbed endpoints
+  only (`OEMBED_TIMEOUT_SECONDS`); other hosts are refused without a request. Offer posters
+  (`Offer.poster_status`) go through the same scan (`artists.scan_poster`).
+- **Import from the artist's website** (US-2.2, `apps/artists/website_import.py`,
+  `/artysta/profil/import/`, status at `/artysta/profil/import/<id>/`): the artist pastes the URL
+  and ticks the rights checkbox (records or reuses the `material_rights` statement). The
+  `artists.run_website_import` job (`media` queue) fetches up to `WEBSITE_IMPORT_MAX_PAGES` (10)
+  pages of the same host, `WEBSITE_IMPORT_PAGE_TIMEOUT` (30 s) per request and
+  `WEBSITE_IMPORT_MAX_BYTES` (20 MB) in total including photos, at most
+  `WEBSITE_IMPORT_MAX_REDIRECTS` (3) redirects. It stores the visible text scrubbed
+  (`apps/profiles/ai/scrub.py` + postal addresses), copies photos through `materials.add_file`
+  (imported, scanned, 40-photo limit), adds YouTube/Vimeo links through oEmbed, and keeps
+  e-mails, phones and addresses separately for the artist only. Status: `w kolejce`, `trwa`,
+  `gotowy`, `częściowy`, `nieudany`, with a readable message and what was skipped. Every
+  user-given URL goes through **`apps/core/safefetch.py`** (the only fetcher of user URLs: public
+  addresses only, connection pinned to the checked IP, redirects re-checked). For a local test
+  site in dev only, `SAFE_FETCH_ALLOW_LOOPBACK=true` lets it reach `127.0.0.1` on any port; prod
+  and pirx settings refuse to start with it.
+- Not covered yet: video and audio upload, transcoding, image variants (E2), HEIC photos.
 
 ## Analytics (events and visits)
 
@@ -324,5 +573,7 @@ Added with T07: no new dependency for the AI adapter (OpenRouter over the standa
 `urllib`); D46, D60 (OpenRouter with ZDR-only routing, pinned model), D59 (PII minimisation),
 D63 (daily and per-call cost caps, kill switch). Default model `anthropic/claude-haiku-5.5` on
 Google Vertex / Amazon Bedrock ZDR endpoints until model selection in E11.
+Added with T26: no new dependency; D106 (website import: SSRF-safe fetcher, limits, scrub of
+PESEL and ID card numbers, contact data kept for the artist only).
 New dependencies or structural choices need a line in the decision log first
 (see [CLAUDE.md](CLAUDE.md)).

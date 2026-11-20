@@ -3,7 +3,7 @@
 from django.contrib import admin
 
 from . import services
-from .models import LegalAcceptance, LegalDocument
+from .models import ArtistStatement, LegalAcceptance, LegalDocument
 
 
 @admin.register(LegalDocument)
@@ -38,6 +38,28 @@ class LegalDocumentAdmin(admin.ModelAdmin):
         obj.material, obj.body = document.material, document.body
         obj._state.adding = False
         obj._state.db = document._state.db
+
+
+class ReadOnlyAdmin(admin.ModelAdmin):
+    """Evidence rows: visible to staff, never added, changed or deleted in the admin."""
+
+    actions = None
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(ArtistStatement)
+class ArtistStatementAdmin(ReadOnlyAdmin):
+    list_display = ("artist", "kind", "document", "made_at", "withdrawn", "billing_form")
+    list_filter = ("kind", "withdrawn")
+    list_select_related = ("artist", "document")
 
 
 @admin.register(LegalAcceptance)

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Kwestionariusz dla szkół" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Kwestionariusz dla szkół" %}</h1>
+  <p>{% translate "Wszystkie pola są opcjonalne. Cenę podaj jako kwotę (od–do) albo zaznacz „na zapytanie”." %}</p>
+  <form method="post" action="{% url 'artists:questionnaire' %}" novalidate>
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}<p role="alert">{{ error }}</p>{% endfor %}
+    {% for field in form %}
+      <p>
+        {% if field.name == "q_price_on_request" %}
+          <label for="{{ field.id_for_label }}">
+            <input type="checkbox" id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                   {% if field.value %}checked{% endif %}
+                   {% if field.errors %}aria-invalid="true" aria-describedby="{{ field.name }}-error"{% endif %}>
+            {{ field.label }}
+          </label>
+        {% else %}
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label><br>
+          <input id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+                 {% if field.name == "q_tech_room" or field.name == "q_tech_power" or field.name == "q_tech_sound" %}type="text" maxlength="500"{% else %}type="number" inputmode="numeric" min="{% if field.name == 'q_age_from' or field.name == 'q_age_to' %}0{% else %}1{% endif %}"{% endif %}
+                 value="{{ field.value|default_if_none:'' }}"
+                 {% if field.errors %}aria-invalid="true" aria-describedby="{{ field.name }}-error"{% endif %}>
+        {% endif %}
+      </p>
+      {% for error in field.errors %}
+        <p id="{{ field.name }}-error" role="alert">{{ error }}</p>
+      {% endfor %}
+    {% endfor %}
+    <button type="submit">{% translate "Zapisz" %}</button>
+  </form>
+  <p><a href="{% url 'artists:materials' %}">{% translate "Wróć do materiałów" %}</a></p>
+{% endblock %}

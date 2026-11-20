@@ -1,0 +1,8 @@
+{% load i18n %}{% autoescape off %}{% translate "Dzień dobry," %}
+
+{% blocktranslate with date=valid_until|date:"j E Y" %}Twoje oświadczenie o ubezpieczeniu OC w serwisie Artyści dla szkół było ważne do {{ date }}. Nie pokazujemy go już wśród Twoich oświadczeń.{% endblocktranslate %}
+
+{% translate "Jeśli masz nową polisę, zaloguj się i złóż oświadczenie ponownie w kreatorze profilu, w kroku „Oświadczenia”." %}
+
+{% translate "To wiadomość automatyczna, wysyłamy ją jeden raz." %}
+{% endautoescape %}

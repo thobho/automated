@@ -1,0 +1,28 @@
+{% load i18n %}
+<section aria-labelledby="{{ box.kind }}-heading" data-upload="{{ box.kind }}">
+  <h2 id="{{ box.kind }}-heading">{{ title }}</h2>
+  <p data-field="limit">
+    {% blocktranslate with formats=box.formats mb=box.max_mb limit=box.limit %}{{ formats }}, do {{ mb }} MB każdy, najwyżej {{ limit }}.{% endblocktranslate %}
+    {% blocktranslate with n=box.remaining %}Pozostało miejsc: {{ n }}.{% endblocktranslate %}
+  </p>
+  {% if box.remaining %}
+    <form method="post" action="{{ box.url }}" enctype="multipart/form-data" novalidate
+          data-upload-check data-max-bytes="{{ box.max_bytes }}" data-max-mb="{{ box.max_mb }}"
+          data-remaining="{{ box.remaining }}" data-accept="{{ box.accept }}">
+      {% csrf_token %}
+      <p>
+        <label for="id_files_{{ box.kind }}">{% translate "Wybierz pliki" %}</label><br>
+        <input type="file" id="id_files_{{ box.kind }}" name="files" multiple accept="{{ box.accept }}"
+               aria-describedby="{{ box.kind }}-message"
+               {% if box.errors %}aria-invalid="true"{% endif %}>
+      </p>
+      <div id="{{ box.kind }}-message" role="alert" data-upload-message>
+        {% for error in box.errors %}<p>{{ error }}</p>{% endfor %}
+      </div>
+      <button type="submit">{% translate "Wyślij" %}</button>
+    </form>
+  {% else %}
+    <p role="status">{% translate "Osiągnięto limit. Usuń któryś plik, aby dodać nowy." %}</p>
+    {% for error in box.errors %}<p role="alert">{{ error }}</p>{% endfor %}
+  {% endif %}
+</section>

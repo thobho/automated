@@ -12,6 +12,11 @@ pytestmark = pytest.mark.django_db
 # one (path -> why it is listed). Every entry is requested like a walked route.
 ROUTES_WITH_ARGUMENTS = {
     "/media/private/not-a-real-token": "core:private-media (signed token)",
+    "/artysta/profil/oferty/1/edycja/": "artists:offer_edit (offer id)",
+    "/artysta/profil/oferty/1/usun/": "artists:offer_delete (offer id)",
+    "/artysta/profil/oferty/1/przesun/": "artists:offer_move (offer id, POST only)",
+    "/artysta/profil/materialy/1/usun/": "artists:material_delete (material id, POST only)",
+    "/artysta/profil/import/1/": "artists:website_import_status (import id)",
 }
 
 # Never requested: staff only, Django's own cookies are the same session/CSRF ones.
@@ -79,8 +84,10 @@ def test_every_reversible_route_sets_only_essential_cookies(user, capsys):
 
 def test_walker_finds_known_routes():
     paths = reversible_paths()
-    for expected in ("/", "/healthz", "/logowanie/", "/ciasteczka/"):
+    for expected in ("/", "/healthz", "/logowanie/", "/ciasteczka/", "/konto/", "/konto/email/"):
         assert expected in paths
+    for wizard in ("/artysta/kreator/", "/artysta/profil/dane/", "/artysta/profil/oferty/"):
+        assert wizard in paths  # US-2.1 wizard routes (no arguments: walked automatically)
     assert not any(p.startswith("/django-admin/") for p in paths)
 
 
@@ -115,6 +122,7 @@ def test_prod_allowlist_is_host_prefixed(monkeypatch):
     }.items():
         monkeypatch.setenv(key, value)
     monkeypatch.delitem(sys.modules, "config.settings.prod", raising=False)
+    monkeypatch.delitem(sys.modules, "config.settings.hosted", raising=False)
     prod = importlib.import_module("config.settings.prod")
     assert {prod.SESSION_COOKIE_NAME, prod.CSRF_COOKIE_NAME} == {
         "__Host-sessionid",

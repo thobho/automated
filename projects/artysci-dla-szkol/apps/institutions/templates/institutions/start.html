@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n institutions %}
+
+{% block title %}{% translate "Konto placówki" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Konto placówki" %}</h1>
+  <p>{% translate "Konto jest potwierdzone." %}</p>
+  <p>{% translate "Placówka:" %} {{ member.institution.name }}, {{ member.institution.locality }}.
+    {% translate "Status:" %} {{ member.institution.get_verification_status_display }}.
+    {% institution_badge member.institution %}</p>
+  {% if member.needs_review %}
+    <p>{% translate "Ta placówka miała już konto. Administrator sprawdzi powiązanie Twojego konta." %}</p>
+  {% endif %}
+  <p>{% translate "Katalog artystów i zapytania będą dostępne wkrótce." %}</p>
+{% endblock %}

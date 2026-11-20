@@ -20,5 +20,6 @@
     {% endif %}
     <button type="submit">{% translate "Wyślij link i kod" %}</button>
   </form>
-  <p>{% translate "Nie masz konta?" %} <a href="{% url 'artists:register' %}">{% translate "Zarejestruj się jako artysta" %}</a></p>
+  <p>{% translate "Nie masz konta?" %} <a href="{% url 'artists:register' %}">{% translate "Zarejestruj się jako artysta" %}</a>
+    {% translate "albo" %} <a href="{% url 'institutions:register' %}">{% translate "załóż konto placówki" %}</a></p>
 {% endblock %}

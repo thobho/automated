@@ -1,9 +1,32 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n statements %}
 
 {% block title %}{% translate "Kreator profilu" %} – {% translate "Artyści dla szkół" %}{% endblock %}
 
 {% block content %}
   <h1>{% translate "Kreator profilu" %}</h1>
-  <p>{% translate "Konto jest potwierdzone. Kreator profilu artysty będzie dostępny wkrótce." %}</p>
+  <p>{% translate "Dane podstawowe są obowiązkowe. Pozostałe kroki możesz pominąć i wrócić do nich później." %}</p>
+  <ol class="wizard-steps">
+    {% for item in steps %}
+      <li data-step="{{ item.step.key }}"
+          data-status="{% if item.done %}done{% elif item.available %}open{% else %}locked{% endif %}">
+        {% if item.available %}
+          <a href="{% url item.step.url_name %}">{{ item.step.title }}</a>
+        {% else %}
+          <span aria-disabled="true">{{ item.step.title }}</span>
+        {% endif %}
+        –
+        {% if item.step.required %}
+          {% if item.done %}{% translate "gotowe" %}{% else %}<strong>{% translate "obowiązkowe" %}</strong>{% endif %}
+        {% elif item.done %}
+          {% translate "gotowe" %}
+        {% elif item.available %}
+          {% translate "później (możesz pominąć)" %}
+        {% else %}
+          {% translate "jeszcze niedostępne: najpierw uzupełnij dane podstawowe" %}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+  {% artist_statement_badges artist %}
 {% endblock %}

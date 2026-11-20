@@ -10,6 +10,12 @@ NEW_EMAIL = "nowy.artysta@example.invalid"
 NAME = "Zespół Testowy Kwiatki"
 
 
+@pytest.fixture(autouse=True)
+def _jobs_in_memory(queue):  # noqa: F811 - uses the imported fixture
+    """Uploads defer scan jobs: keep every artist test's jobs in memory (no PostgreSQL)."""
+    return queue
+
+
 @pytest.fixture
 def documents(db):
     """Published v1 of the terms and the privacy policy."""
