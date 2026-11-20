@@ -98,6 +98,7 @@ class AIClient:
         max_cost_usd,
         user_ref=None,
         scrub_names=(),
+        generation=None,
     ) -> AIResult:
         """Send chat `messages` and return the reply.
 
@@ -105,11 +106,14 @@ class AIClient:
         call's ceiling (at most AI_PER_CALL_CAP_USD). `schema` (JSON Schema) asks for structured
         output; the parsed object is in `AIResult.data`. `user_ref` (e.g. the artist's pk) is
         sent only as an HMAC pseudonym. `scrub_names` adds names to remove for this call.
+        `generation` (a running `quality.Generation`) links the AICall row to that run.
 
         Raises AIDisabled, AICapExceeded (nothing sent), AIProviderError or AIError.
         """
         if not purpose or len(purpose) > 50:
             raise AIError("purpose must be 1-50 characters.")
+        if generation is not None and (generation.pk is None or generation.finished):
+            raise AIError("AI calls can be linked only to a running generation.")
         try:
             budget.check_kill_switch()
             names = [*settings.AI_SCRUB_NAMES, *scrub_names]
@@ -117,7 +121,11 @@ class AIClient:
             max_cost = Decimal(str(max_cost_usd))
             plan = budget.plan_call(clean, max_cost, self.prices)
             call = budget.reserve(
-                client=self.name, purpose=purpose, model=self.model, max_cost_usd=max_cost
+                client=self.name,
+                purpose=purpose,
+                model=self.model,
+                max_cost_usd=max_cost,
+                generation=generation,
             )
         except AIError as exc:
             logger.warning("AI call blocked purpose=%s: %s", purpose, exc)
