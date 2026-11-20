@@ -4,7 +4,7 @@ from procrastinate.contrib.django import app
 
 from apps.core.jobs import QUEUE_DEFAULT, QUEUE_MEDIA, default_retry
 
-from . import materials, recordings, resumable, website_import
+from . import checks, materials, recordings, resumable, website_import
 
 # A scanner error retries 3 more times (after 5, 10, 20 s); then the job fails and the file
 # stays "oczekuje na skan" (never counted). The jobs admin lists the failed job.
@@ -32,6 +32,13 @@ def process_media(material_id: int) -> None:
     """ffprobe, and for a video the MP4 conversion and thumbnail (US-2.3B). Never fails: a
     timeout or crash ends as a rejected material with a readable message."""
     recordings.process_media(material_id)
+
+
+@app.task(name="artists.check_material", queue=QUEUE_MEDIA)
+def check_material(material_id: int) -> None:
+    """Quality flags of a ready photo or video and the frames of a video (US-2.4). Never fails
+    for a bad file; a missing ffmpeg only leaves the frames for the backfill command."""
+    checks.check_material(material_id)
 
 
 @app.periodic(cron="17 * * * *")

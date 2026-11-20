@@ -200,6 +200,8 @@ def _record(material_id: int, outcome: Outcome) -> str:
             material.width, material.height = outcome.width, outcome.height
             material.converted_key = outcome.new_keys.get("converted_key", "")
             material.thumbnail_key = outcome.new_keys.get("thumbnail_key", "")
+            if material.kind == MaterialKind.VIDEO:
+                materials.enqueue_check(material.pk)  # flags and frames (US-2.4)
         else:  # the file goes, the row stays so the artist sees why (like an infected file)
             old_keys = material.stored_keys() + new_keys
             material.status = ScanStatus.REJECTED
