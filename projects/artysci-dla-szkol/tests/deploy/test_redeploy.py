@@ -15,9 +15,13 @@ SCRIPT = Path(__file__).resolve().parents[2] / "deploy/pirx/redeploy.sh"
 FAKE_MAKE = """#!/usr/bin/env bash
 echo "$*" >> "$STATE/make.calls"
 case "$1" in
-  deploy-pirx) [ -e "$STATE/fail-deploy" ] && exit 1 ;;
+  deploy-pirx)
+    [ -e "$STATE/fail-deploy" ] && exit 1
+    git checkout -q main && git merge -q --ff-only origin/main ;;
   smoke-pirx) [ -e "$STATE/fail-smoke" ] && exit 1 ;;
-  rollback-pirx) [ -e "$STATE/fail-rollback" ] && exit 1 ;;
+  rollback-pirx)
+    [ -e "$STATE/fail-rollback" ] && exit 1
+    git checkout -q --detach "${2#ROLLBACK_REF=}" ;;
 esac
 exit 0
 """
@@ -183,3 +187,99 @@ def test_lock_held_means_no_deploy(env):
         assert env.run().returncode == 0
     assert env.calls == []
     assert env.deployed is None
+
+
+def test_records_checked_out_head_not_fetched_target(env):
+    env.run()
+    new = env.commit("two")
+    env.run()
+    assert env.deployed == git(env.checkout, "rev-parse", "HEAD") == new
+
+
+def test_fetch_failure_is_one_clear_line_and_no_deploy(env):
+    env.run()
+    env.commit("two")
+    git(env.checkout, "remote", "set-url", "origin", str(env.checkout.parent / "nowhere"))
+    before = len(env.calls)
+    assert env.run().returncode == 1
+    assert len(env.calls) == before
+    assert env.log.count("git fetch failed") == 1
+
+
+def test_dirty_checkout_is_logged_and_not_deployed(env):
+    env.run()
+    env.commit("two")
+    (env.checkout / "one").write_text("local edit")
+    before = len(env.calls)
+    assert env.run().returncode == 1
+    assert len(env.calls) == before
+    assert env.log.count("local changes, not deploying") == 1
+    assert env.deployed != git(env.origin, "rev-parse", "HEAD")
+
+
+REFRESH = Path(__file__).resolve().parents[2] / "deploy/pirx/refresh-units.sh"
+
+
+class Units:
+    def __init__(self, tmp_path):
+        self.project = tmp_path / "proj"
+        (self.project / "deploy/pirx").mkdir(parents=True)
+        self.unit_dir = tmp_path / "units"
+        self.calls = tmp_path / "systemctl.calls"
+        fake = tmp_path / "fakectl"
+        fake.write_text(f'#!/usr/bin/env bash\necho "$*" >> {self.calls}\n')
+        fake.chmod(0o755)
+        self.fake = fake
+
+    def write(self, name, body):
+        (self.project / "deploy/pirx" / name).write_text(body)
+
+    def run(self):
+        env = {
+            **os.environ,
+            "PROJECT": str(self.project),
+            "UV_BIN": "/bin/uv",
+            "PIRX_UNIT_DIR": str(self.unit_dir),
+            "SYSTEMCTL": str(self.fake),
+        }
+        return subprocess.run(["bash", str(REFRESH)], env=env, capture_output=True, text=True)
+
+    @property
+    def ctl(self):
+        return self.calls.read_text().splitlines() if self.calls.exists() else []
+
+
+def test_refresh_installs_new_timer_and_enables_it(tmp_path):
+    u = Units(tmp_path)
+    u.write("ads-redeploy.timer", "[Timer]\nOnCalendar=*:0/10\n")
+    u.write("ads-web.service", "[Service]\nExecStart=@UV@ run @PROJECT@/x\n")
+    assert u.run().returncode == 0
+    assert (u.unit_dir / "ads-web.service").read_text().strip() == (
+        f"[Service]\nExecStart=/bin/uv run {u.project}/x"
+    )
+    assert u.ctl[0] == "daemon-reload"
+    assert "enable ads-redeploy.timer" in u.ctl
+    assert "restart ads-redeploy.timer" in u.ctl
+    assert not any("ads-web" in c for c in u.ctl)  # restarted by deploy-pirx, not here
+
+
+def test_refresh_unchanged_does_nothing(tmp_path):
+    u = Units(tmp_path)
+    u.write("ads-redeploy.timer", "[Timer]\nOnCalendar=*:0/10\n")
+    u.run()
+    u.calls.unlink()
+    r = u.run()
+    assert r.returncode == 0
+    assert "unchanged" in r.stdout
+    assert u.ctl == []
+
+
+def test_refresh_only_touches_changed_units(tmp_path):
+    u = Units(tmp_path)
+    u.write("ads-redeploy.timer", "[Timer]\nA=1\n")
+    u.write("ads-lite.service", "[Service]\nA=1\n")
+    u.run()
+    u.calls.unlink()
+    u.write("ads-lite.service", "[Service]\nA=2\n")
+    assert u.run().returncode == 0
+    assert u.ctl == ["daemon-reload", "restart ads-lite.service"]
