@@ -1,0 +1,30 @@
+{% load i18n %}
+<section aria-labelledby="{{ box.kind }}-heading" data-upload="{{ box.kind }}">
+  <h2 id="{{ box.kind }}-heading">{{ title }}</h2>
+  <p data-field="limit">
+    {% blocktranslate with formats=box.formats mb=box.max_mb limit=box.limit %}{{ formats }}, do {{ mb }} MB każdy, najwyżej {{ limit }}.{% endblocktranslate %}
+    {% if box.max_seconds %}{% blocktranslate with minutes=box.max_minutes %}Film może trwać najwyżej {{ minutes }} minut.{% endblocktranslate %}{% endif %}
+    {% blocktranslate with n=box.remaining %}Pozostało miejsc: {{ n }}.{% endblocktranslate %}
+  </p>
+  {% if box.remaining %}
+    <form method="post" action="{{ box.url }}" novalidate
+          data-resumable data-kind="{{ box.kind }}" data-max-bytes="{{ box.max_bytes }}"
+          data-max-mb="{{ box.max_mb }}" data-remaining="{{ box.remaining }}"
+          data-accept="{{ box.accept }}" data-max-seconds="{{ box.max_seconds }}"
+          data-max-minutes="{{ box.max_minutes }}">
+      {% csrf_token %}
+      <p>
+        <label for="id_file_{{ box.kind }}">{% translate "Wybierz plik" %}</label><br>
+        <input type="file" id="id_file_{{ box.kind }}" name="file" accept="{{ box.accept }}"
+               aria-describedby="{{ box.kind }}-message">
+      </p>
+      <p><progress max="100" value="0" hidden data-upload-progress></progress>
+        <span role="status" data-upload-status></span></p>
+      <div id="{{ box.kind }}-message" role="alert" data-upload-message></div>
+      <noscript><p>{% translate "Wysyłanie filmów i nagrań wymaga włączonego JavaScriptu." %}</p></noscript>
+      <button type="submit">{% translate "Wyślij" %}</button>
+    </form>
+  {% else %}
+    <p role="status">{% translate "Osiągnięto limit. Usuń któryś plik, aby dodać nowy." %}</p>
+  {% endif %}
+</section>
