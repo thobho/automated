@@ -26,6 +26,15 @@ class AICall(models.Model):
     completion_tokens = models.PositiveIntegerField(default=0)
     cost_usd = models.DecimalField(max_digits=16, decimal_places=10, default=0)
     latency_ms = models.PositiveIntegerField(default=0)
+    # The profile generation this call belongs to (US-11.1), set by the caller through
+    # `complete(..., generation=)` or `quality.services.record_ai_call()`.
+    profile_generation = models.ForeignKey(
+        "quality.Generation",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="ai_calls",
+    )
 
     class Meta:
         ordering = ["-id"]
