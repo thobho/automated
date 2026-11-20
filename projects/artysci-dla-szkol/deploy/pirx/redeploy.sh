@@ -32,6 +32,10 @@ if ! git fetch -q origin >>"$LOG" 2>&1; then
     log "git fetch failed, will try again next run"
     exit 1
 fi
+if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+    log "deployment checkout has local changes, not deploying (clean it: git status in $PROJECT)"
+    exit 1
+fi
 target="$(git rev-parse "origin/$BRANCH")" || exit 1
 good="$(cat "$DEPLOYED" 2>/dev/null || true)"
 
@@ -45,9 +49,10 @@ fi
 
 log "deploying ${target:0:12} (last good: ${good:0:12})"
 if $MAKE deploy-pirx DEPLOY_REF="$BRANCH" >>"$LOG" 2>&1 && $MAKE smoke-pirx >>"$LOG" 2>&1; then
-    echo "$target" >"$DEPLOYED"
+    deployed="$(git rev-parse HEAD)"   # what is really checked out and smoke-tested
+    echo "$deployed" >"$DEPLOYED"
     rm -f "$FAILED"
-    log "deployed ${target:0:12}, smoke test green"
+    log "deployed ${deployed:0:12}, smoke test green"
     exit 0
 fi
 

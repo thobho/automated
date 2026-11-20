@@ -89,6 +89,7 @@ deploy-pirx:
 	git fetch origin
 	git checkout $(DEPLOY_REF)
 	git merge --ff-only origin/$(DEPLOY_REF)
+	bash deploy/pirx/refresh-units.sh
 	$(PIRX_SH) uv sync --frozen --no-dev
 	systemctl --user start ads-lite
 	$(PIRX_SH) uv run --frozen --no-dev python manage.py migrate --noinput

@@ -157,6 +157,7 @@ def test_size_limits_per_kind(kind, limit_mb, head):
         (b"RIFF\x00\x00\x00\x00WAVEfmt ", "audio/wav"),
         (b"\x00\x00\x00\x18ftypM4A ", "audio/mp4"),
         (b"\x00\x00\x00\x18ftypisom", "video/mp4"),
+        (b"\x00\x00\x00\x14ftypqt  ", "video/quicktime"),  # MOV (D8)
         (b"\x1a\x45\xdf\xa3\x01", "video/webm"),
         (b"OggS\x00", "audio/ogg"),
         (b"ID3\x03", "audio/mpeg"),

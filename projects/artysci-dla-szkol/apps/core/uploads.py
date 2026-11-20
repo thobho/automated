@@ -21,7 +21,7 @@ MB = 1024 * 1024
 # kind -> (max bytes, allowed sniffed content types)
 KINDS: dict[str, tuple[int, frozenset[str]]] = {
     "photo": (15 * MB, frozenset({"image/jpeg", "image/png", "image/webp"})),
-    "video": (500 * MB, frozenset({"video/mp4", "video/webm"})),
+    "video": (500 * MB, frozenset({"video/mp4", "video/quicktime", "video/webm"})),
     "audio": (50 * MB, frozenset({"audio/mpeg", "audio/ogg", "audio/wav", "audio/mp4"})),
     "pdf": (20 * MB, frozenset({"application/pdf"})),
 }
@@ -31,6 +31,7 @@ EXTENSIONS = {
     "image/png": "png",
     "image/webp": "webp",
     "video/mp4": "mp4",
+    "video/quicktime": "mov",
     "video/webm": "webm",
     "audio/mpeg": "mp3",
     "audio/ogg": "ogg",
@@ -73,7 +74,9 @@ def sniff_content_type(head: bytes) -> str | None:
     if head.startswith(b"%PDF-"):
         return "application/pdf"
     if head[4:8] == b"ftyp":
-        return "audio/mp4" if head[8:12] in (b"M4A ", b"M4B ") else "video/mp4"
+        if head[8:12] in (b"M4A ", b"M4B "):
+            return "audio/mp4"
+        return "video/quicktime" if head[8:12] == b"qt  " else "video/mp4"
     if head.startswith(b"\x1a\x45\xdf\xa3"):
         return "video/webm"
     if head.startswith(b"OggS"):
