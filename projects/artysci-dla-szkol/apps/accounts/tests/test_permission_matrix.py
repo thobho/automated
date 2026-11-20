@@ -31,7 +31,8 @@ ARGUMENTS = {
     "artists:offer_move": {"offer_id": 999999},
     "artists:material_delete": {"material_id": 999999},
     "artists:upload_chunk": {"session_id": "00000000-0000-4000-8000-000000000000"},
-    "artists:upload_complete": {"session_id": "00000000-0000-4000-8000-000000000000"},    "artists:website_import_status": {"import_id": 999999},
+    "artists:upload_complete": {"session_id": "00000000-0000-4000-8000-000000000000"},
+    "artists:website_import_status": {"import_id": 999999},
 }
 
 #: URL name -> expected answer for (anonymous, artist, institution, admin)

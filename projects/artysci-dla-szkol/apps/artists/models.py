@@ -313,6 +313,10 @@ class Material(models.Model):
         """Every storage key of this material (original, converted file, thumbnail)."""
         return [k for k in (self.storage_key, self.converted_key, self.thumbnail_key) if k]
 
+    @property
+    def imported(self) -> bool:
+        return self.source_import_id is not None
+
 
 class UploadSession(models.Model):
     """A resumable upload of one video or audio file (US-2.3B). The bytes received so far sit
@@ -342,10 +346,6 @@ class UploadSession(models.Model):
 
     def __str__(self) -> str:
         return f"UploadSession {self.pk}"
-
-    @property
-    def imported(self) -> bool:
-        return self.source_import_id is not None
 
 
 class ImportStatus(models.TextChoices):
