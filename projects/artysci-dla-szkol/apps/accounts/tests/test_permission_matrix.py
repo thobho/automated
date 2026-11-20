@@ -55,6 +55,7 @@ MATRIX = {
     "accounts:delete_account": ("login", "200", "200", "200"),  # placeholder (US-8.6)
     "artists:register": ("200", "200", "200", "200"),
     "artists:start": ("login", "200", "403", "403"),
+    "profiles:preview": ("login", "200", "403", "403"),
     "artists:basics": ("login", "200", "403", "403"),
     # later wizard steps: the matrix artist has empty basics -> redirected to step 1
     "artists:offers": ("login", "home", "403", "403"),
