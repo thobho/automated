@@ -95,7 +95,13 @@ systemd user units (`deploy/pirx/ads-*.service`): `ads-lite` (Postgres + Mailpit
   `make deploy-pirx` + `make smoke-pirx`, then records the commit. Nothing new = silent exit. On
   failure it rolls back (`make rollback-pirx`: last good commit, restart) and keeps the state file;
   one commit is tried at most 3 times (`failed.commit` holds the count; a newer commit resets it).
-  Migrations are not reversed, so keep them backward compatible.
+  Migrations are not reversed, so keep them backward compatible. After a failed deploy the checkout
+  stays on a detached HEAD at the last good commit; the next successful deploy checks `main` out again.
+  A dirty deployment checkout or a failed `git fetch` is logged in one line and nothing is deployed.
+  `deployed.commit` is `git rev-parse HEAD` after the green smoke test.
+  - Unit files: `make deploy-pirx` runs `deploy/pirx/refresh-units.sh`, which rewrites only the
+    `ads-*` units whose rendered content changed, runs `daemon-reload`, enables and restarts changed
+    timers (and `ads-lite`); web/worker/media restart as part of the deploy anyway.
   - Log: `~/runtime/artysci-dla-szkol/logs/redeploy.log` (rotated with the others).
   - Pause (owner): `systemctl --user stop ads-redeploy.timer`; resume with `start`.
   - Force a deploy now: `systemctl --user start ads-redeploy.service` (or, to retry a commit that
@@ -519,6 +525,27 @@ any S3-compatible service later). Two storages: **private** (originals, document
   YouTube/Vimeo links are parsed to a video id and checked through the fixed oEmbed endpoints
   only (`OEMBED_TIMEOUT_SECONDS`); other hosts are refused without a request. Offer posters
   (`Offer.poster_status`) go through the same scan (`artists.scan_poster`).
+- **Video and audio** (US-2.3B): videos (MP4, MOV, WebM, 500 MB, at most 5, at most 10 minutes)
+  and recordings (MP3, M4A, WAV, 50 MB, at most 10) are sent by `static/js/materials.js` in
+  resumable chunks (`apps/artists/resumable.py`, own small protocol, no library):
+  `POST /artysta/profil/materialy/wysylki/` (`kind`, `size`, `name`; limits checked before any
+  byte) → `POST .../wysylki/<id>/` with header `Upload-Offset` and raw bytes (at most
+  `UPLOAD_CHUNK_BYTES`; a wrong offset is 409 with the server's offset, bytes past the declared
+  size 413) · `GET .../wysylki/<id>/` answers the received offset (resume after a lost connection
+  or reload; the browser keeps the session URL per file in `localStorage`) · `POST
+  .../wysylki/<id>/zakoncz/` sends the file through `store_upload` and the scan. Chunks live in
+  `UPLOAD_TEMP_DIR` (one file per session, never served); sessions expire after
+  `UPLOAD_SESSION_TTL_HOURS` and the hourly `artists.cleanup_upload_sessions` job deletes them.
+  After a clean scan the `artists.process_media` job (`media` queue, `apps/artists/recordings.py`)
+  runs `ffprobe` (container, duration, size) and for a video converts it to MP4 (H.264 + AAC,
+  shorter side at most 720 px) with a JPEG thumbnail (`Material.converted_key`, `thumbnail_key`,
+  private storage; the list shows them through `media.signed_url`); audio stays as uploaded. Too
+  long, unreadable, timeout or crash → `rejected` with `processing_message`, file deleted.
+  ffmpeg runs through `apps/core/ffmpeg.py` (argument list, no shell, `FFMPEG_TIMEOUT_SECONDS`,
+  `FFMPEG_MEMORY_MB` as `RLIMIT_AS`, paths `FFMPEG_PATH`/`FFPROBE_PATH`). Install ffmpeg locally
+  (`apt install ffmpeg`) to run the real conversion tests; without it they are skipped (CI sets
+  `REQUIRE_FFMPEG=1`, so there they must run). The Docker image includes ffmpeg.
+- Not covered yet: image variants (E2), HEIC photos, players on the public page (US-3.1).
 - **Import from the artist's website** (US-2.2, `apps/artists/website_import.py`,
   `/artysta/profil/import/`, status at `/artysta/profil/import/<id>/`): the artist pastes the URL
   and ticks the rights checkbox (records or reuses the `material_rights` statement). The
@@ -534,7 +561,7 @@ any S3-compatible service later). Two storages: **private** (originals, document
   addresses only, connection pinned to the checked IP, redirects re-checked). For a local test
   site in dev only, `SAFE_FETCH_ALLOW_LOOPBACK=true` lets it reach `127.0.0.1` on any port; prod
   and pirx settings refuse to start with it.
-- Not covered yet: video and audio upload, transcoding, image variants (E2), HEIC photos.
+
 
 ## Analytics (events and visits)
 

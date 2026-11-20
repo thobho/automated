@@ -30,6 +30,8 @@ ARGUMENTS = {
     "artists:offer_delete": {"offer_id": 999999},
     "artists:offer_move": {"offer_id": 999999},
     "artists:material_delete": {"material_id": 999999},
+    "artists:upload_chunk": {"session_id": "00000000-0000-4000-8000-000000000000"},
+    "artists:upload_complete": {"session_id": "00000000-0000-4000-8000-000000000000"},
     "artists:website_import_status": {"import_id": 999999},
 }
 
@@ -66,6 +68,9 @@ MATRIX = {
     "artists:materials_pdfs": ("login", "405", "403", "403"),  # POST only
     "artists:materials_link": ("login", "405", "403", "403"),  # POST only
     "artists:material_delete": ("login", "405", "403", "403"),  # POST only
+    "artists:upload_create": ("login", "405", "403", "403"),  # POST only
+    "artists:upload_chunk": ("login", "home", "403", "403"),  # GET = offset, POST = chunk
+    "artists:upload_complete": ("login", "405", "403", "403"),  # POST only
     "artists:questionnaire": ("login", "home", "403", "403"),
     "artists:website_import": ("login", "home", "403", "403"),
     "artists:website_import_status": ("login", "home", "403", "403"),
