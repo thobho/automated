@@ -95,7 +95,13 @@ systemd user units (`deploy/pirx/ads-*.service`): `ads-lite` (Postgres + Mailpit
   `make deploy-pirx` + `make smoke-pirx`, then records the commit. Nothing new = silent exit. On
   failure it rolls back (`make rollback-pirx`: last good commit, restart) and keeps the state file;
   one commit is tried at most 3 times (`failed.commit` holds the count; a newer commit resets it).
-  Migrations are not reversed, so keep them backward compatible.
+  Migrations are not reversed, so keep them backward compatible. After a failed deploy the checkout
+  stays on a detached HEAD at the last good commit; the next successful deploy checks `main` out again.
+  A dirty deployment checkout or a failed `git fetch` is logged in one line and nothing is deployed.
+  `deployed.commit` is `git rev-parse HEAD` after the green smoke test.
+  - Unit files: `make deploy-pirx` runs `deploy/pirx/refresh-units.sh`, which rewrites only the
+    `ads-*` units whose rendered content changed, runs `daemon-reload`, enables and restarts changed
+    timers (and `ads-lite`); web/worker/media restart as part of the deploy anyway.
   - Log: `~/runtime/artysci-dla-szkol/logs/redeploy.log` (rotated with the others).
   - Pause (owner): `systemctl --user stop ads-redeploy.timer`; resume with `start`.
   - Force a deploy now: `systemctl --user start ads-redeploy.service` (or, to retry a commit that
@@ -159,7 +165,9 @@ list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d3
 - `/rejestracja/artysta/` (artist registration), `/artysta/kreator/` (profile wizard overview),
   `/artysta/profil/dane/` (step 1, basics), `/artysta/profil/oferty/` (offers; `nowa/`,
   `<id>/edycja/`, `<id>/usun/`, `<id>/przesun/` POST), `/artysta/profil/oswiadczenia/`
-  (statements, GET + POST), `/materialy/` (placeholder); artists only, login required.
+  (statements, GET + POST), `/artysta/profil/materialy/` (materials),
+  `/artysta/profil/import/` (website import, GET + POST) and `/artysta/profil/import/<id>/`
+  (import status); artists only, login required.
 - `/rejestracja/placowka/` (institution registration), `/rejestracja/placowka/rspo/` (HTMX RSPO
   suggestions, GET, anonymous), `/placowka/` (institution start, a placeholder; login required).
 
@@ -435,6 +443,50 @@ result = ai.complete(
 - Check a key by hand: `uv run python manage.py ai_smoke [--key-file path/to/secrets.env]`
   makes one real, tiny call (synthetic prompt, well under $0.001) and prints the `AICall` row.
 - Only artists' marketing materials go to AI; never messages, inquiries or contact data.
+- `generation=` (a running `quality.Generation`) links the `AICall` row to a profile generation.
+
+## Generator versioning (US-11.1)
+
+Every profile generation records which versions of the generator's parts produced it, so a page
+can be reproduced and generator changes can be compared (D13, D14). Code: `apps/quality`.
+
+- **Components** are declared in code with a kind (`instructions`, `schema`, `validator`,
+  `template`), a name, a version string and their files (paths from the project folder) or
+  inline content; register them in a module imported at startup (e.g. the owning app's
+  `AppConfig.ready()`):
+
+  ```python
+  from apps.quality.registry import Component, registry
+
+  DRAFT = registry.register(
+      Component("instructions", "profile_draft", "1", files=("apps/profiles/prompts/draft.md",))
+  )
+  ```
+- **Bumping a version.** `apps/quality/components.json` records `kind:name` → version → SHA-256
+  of the content. `test_every_registered_component_matches_the_manifest` fails, naming the
+  component, when its content changed without a new version. To change a component: edit it,
+  raise its `version`, run `uv run python manage.py generator_manifest --write` and commit
+  `components.json` with the change. A recorded version is never rewritten (the command
+  refuses); `generator_manifest` without `--write` only checks.
+- **A run** goes through `apps/quality/services.py`: `start_generation(artist, trigger,
+  components)` (trigger `import`, `questionnaire`, `manual` or `rerun`), AI calls with
+  `ai.complete(..., generation=g)` or `record_ai_call(g, result.call_id)`, then
+  `finish_generation(g, result, warnings, repair_rounds, status)` (status `ready` „gotowa”,
+  `review` „do przeglądu”, `error` „błąd”; `running` „trwa” until then). Finishing stores the
+  times, the duration, the AI model(s) the adapter reported and the cost (sum of the linked
+  `AICall` rows). A finished generation and every component version are append-only.
+- **Stored versions** (`GeneratorComponentVersion`, one row per content hash): instructions and
+  schemas keep a full text snapshot; validators and templates keep the file list and hash,
+  pointing at the code in git (declared with inline content, they keep the content). `versions_of(generation)` returns exactly that.
+- **Input fingerprint** (`input_fingerprint(artist)`, D107): SHA-256 over the ready materials
+  (by id: id + a hash of the row's content fields) and the questionnaire values. Same input,
+  same fingerprint; no copy of the materials is kept (D12).
+- **Inspect:** read-only Django admin at `/django-admin/quality/generation/` (staff only) and
+  `uv run python manage.py generation_show <id>` (JSON: versions, fingerprint, status, warnings,
+  rounds, duration, cost, AI call ids; no prompt, reply or instruction text).
+- Not here yet: the real components (US-2.5a–c, US-3.1), re-running a stored generation and the
+  evaluation set (US-11.2–11.4). `apps/quality/tests/fake_generator.py` is a test-only
+  generator showing the full flow.
 
 ## File storage
 
@@ -494,6 +546,22 @@ any S3-compatible service later). Two storages: **private** (originals, document
   (`apt install ffmpeg`) to run the real conversion tests; without it they are skipped (CI sets
   `REQUIRE_FFMPEG=1`, so there they must run). The Docker image includes ffmpeg.
 - Not covered yet: image variants (E2), HEIC photos, players on the public page (US-3.1).
+- **Import from the artist's website** (US-2.2, `apps/artists/website_import.py`,
+  `/artysta/profil/import/`, status at `/artysta/profil/import/<id>/`): the artist pastes the URL
+  and ticks the rights checkbox (records or reuses the `material_rights` statement). The
+  `artists.run_website_import` job (`media` queue) fetches up to `WEBSITE_IMPORT_MAX_PAGES` (10)
+  pages of the same host, `WEBSITE_IMPORT_PAGE_TIMEOUT` (30 s) per request and
+  `WEBSITE_IMPORT_MAX_BYTES` (20 MB) in total including photos, at most
+  `WEBSITE_IMPORT_MAX_REDIRECTS` (3) redirects. It stores the visible text scrubbed
+  (`apps/profiles/ai/scrub.py` + postal addresses), copies photos through `materials.add_file`
+  (imported, scanned, 40-photo limit), adds YouTube/Vimeo links through oEmbed, and keeps
+  e-mails, phones and addresses separately for the artist only. Status: `w kolejce`, `trwa`,
+  `gotowy`, `częściowy`, `nieudany`, with a readable message and what was skipped. Every
+  user-given URL goes through **`apps/core/safefetch.py`** (the only fetcher of user URLs: public
+  addresses only, connection pinned to the checked IP, redirects re-checked). For a local test
+  site in dev only, `SAFE_FETCH_ALLOW_LOOPBACK=true` lets it reach `127.0.0.1` on any port; prod
+  and pirx settings refuse to start with it.
+
 
 ## Analytics (events and visits)
 
@@ -526,5 +594,7 @@ Added with T07: no new dependency for the AI adapter (OpenRouter over the standa
 `urllib`); D46, D60 (OpenRouter with ZDR-only routing, pinned model), D59 (PII minimisation),
 D63 (daily and per-call cost caps, kill switch). Default model `anthropic/claude-haiku-5.5` on
 Google Vertex / Amazon Bedrock ZDR endpoints until model selection in E11.
+Added with T26: no new dependency; D106 (website import: SSRF-safe fetcher, limits, scrub of
+PESEL and ID card numbers, contact data kept for the artist only).
 New dependencies or structural choices need a line in the decision log first
 (see [CLAUDE.md](CLAUDE.md)).

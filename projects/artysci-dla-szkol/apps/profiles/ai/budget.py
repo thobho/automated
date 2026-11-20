@@ -118,8 +118,9 @@ def _lock_budget() -> None:
             cursor.execute("SELECT pg_advisory_xact_lock(%s)", [BUDGET_LOCK_ID])
 
 
-def reserve(*, client: str, purpose: str, model: str, max_cost_usd: Decimal):
-    """Check the daily cap and record a `pending` AICall holding `max_cost_usd`."""
+def reserve(*, client: str, purpose: str, model: str, max_cost_usd: Decimal, generation=None):
+    """Check the daily cap and record a `pending` AICall holding `max_cost_usd`, linked to the
+    running `quality.Generation` when one is given."""
     from apps.profiles.models import AICall
 
     with transaction.atomic():
@@ -131,4 +132,5 @@ def reserve(*, client: str, purpose: str, model: str, max_cost_usd: Decimal):
             model=model,
             status=AICall.Status.PENDING,
             cost_usd=max_cost_usd,
+            profile_generation=generation,
         )

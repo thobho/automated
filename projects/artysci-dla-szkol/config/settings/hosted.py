@@ -5,12 +5,18 @@ fast if one is missing.
 Hosting is not decided (D91): nothing here assumes a provider.
 """
 
+from django.core.exceptions import ImproperlyConfigured
+
 from .base import *  # noqa: F403
-from .base import DATABASE_CONN_MAX_AGE
+from .base import DATABASE_CONN_MAX_AGE, SAFE_FETCH_ALLOW_LOOPBACK
 from .env import env, require
 from .storage import build_storages
 
 _MODULE = "config.settings.prod"  # error messages name the module the owner sets
+
+# The website import must never reach loopback on a hosted instance (SSRF, SECURITY.md).
+if SAFE_FETCH_ALLOW_LOOPBACK:
+    raise ImproperlyConfigured("SAFE_FETCH_ALLOW_LOOPBACK is for local tests only; unset it.")
 
 DEBUG = False
 SECRET_KEY = require("DJANGO_SECRET_KEY", _MODULE)

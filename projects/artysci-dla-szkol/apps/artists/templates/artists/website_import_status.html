@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Wynik importu" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block head %}{% if refresh %}<meta http-equiv="refresh" content="5">{% endif %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Import ze strony" %}</h1>
+  <p>{% translate "Adres" %}: <span data-field="url">{{ record.url }}</span></p>
+  <p>{% translate "Status" %}: <strong data-field="status" data-status="{{ record.status }}">{{ record.get_status_display }}</strong></p>
+
+  {% if record.message %}
+    <p {% if record.status == "failed" or record.status == "partial" %}role="alert"{% endif %} data-field="message">{{ record.message }}</p>
+  {% endif %}
+
+  {% if refresh %}
+    <p>{% translate "Pobieramy Twoją stronę. Ta strona odświeży się sama." %}</p>
+  {% else %}
+    <dl class="import-summary">
+      <dt>{% translate "Pobrane podstrony" %}</dt><dd data-field="pages">{{ record.page_count }}</dd>
+      <dt>{% translate "Zdjęcia" %}</dt><dd data-field="photos">{{ record.photo_count }}</dd>
+      <dt>{% translate "Filmy" %}</dt><dd data-field="links">{{ record.link_count }}</dd>
+    </dl>
+
+    {% if record.pages %}
+      <h2>{% translate "Podstrony" %}</h2>
+      <ul>{% for page in record.pages %}<li>{{ page.title|default:page.url }}</li>{% endfor %}</ul>
+    {% endif %}
+
+    {% if materials %}
+      <h2>{% translate "Dodane materiały" %}</h2>
+      <ul>
+        {% for material in materials %}
+          <li data-material="{{ material.pk }}">{{ material.get_kind_display }}: {{ material.title|default:material.original_name }} — {{ material.get_status_display }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if record.skipped %}
+      <h2>{% translate "Pominięte" %}</h2>
+      <ul data-field="skipped">{% for item in record.skipped %}<li>{{ item.what }}: {{ item.why }}</li>{% endfor %}</ul>
+    {% endif %}
+
+    {% if record.contacts.emails or record.contacts.phones or record.contacts.addresses %}
+      <section aria-labelledby="contacts-heading" data-field="contacts">
+        <h2 id="contacts-heading">{% translate "Dane kontaktowe ze strony" %}</h2>
+        <p>{% translate "Widzisz je tylko Ty. Nie publikujemy ich i nie przekazujemy do generatora; szkoły kontaktują się przez formularz zapytania." %}</p>
+        <ul>
+          {% for email in record.contacts.emails %}<li>{% translate "e-mail" %}: {{ email }}</li>{% endfor %}
+          {% for phone in record.contacts.phones %}<li>{% translate "telefon" %}: {{ phone }}</li>{% endfor %}
+          {% for address in record.contacts.addresses %}<li>{% translate "adres" %}: {{ address }}</li>{% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    {% if record.status == "failed" or record.status == "partial" %}
+      <p>{% translate "Brakujące dane możesz uzupełnić ręcznie:" %}
+        <a href="{% url 'artists:materials' %}">{% translate "materiały" %}</a>,
+        <a href="{% url 'artists:offers' %}">{% translate "oferty" %}</a>,
+        <a href="{% url 'artists:basics' %}">{% translate "dane podstawowe" %}</a>.</p>
+    {% endif %}
+  {% endif %}
+
+  <p><a href="{% url 'artists:website_import' %}">{% translate "Nowy import" %}</a> · <a href="{% url 'artists:start' %}">{% translate "Wróć do kreatora" %}</a></p>
+{% endblock %}

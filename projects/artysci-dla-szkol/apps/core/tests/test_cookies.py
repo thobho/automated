@@ -21,7 +21,7 @@ ROUTES_WITH_ARGUMENTS = {
     ),
     "/artysta/profil/materialy/wysylki/00000000-0000-4000-8000-000000000000/zakoncz/": (
         "artists:upload_complete (upload session id, POST only)"
-    ),
+    ),    "/artysta/profil/import/1/": "artists:website_import_status (import id)",
 }
 
 # Never requested: staff only, Django's own cookies are the same session/CSRF ones.

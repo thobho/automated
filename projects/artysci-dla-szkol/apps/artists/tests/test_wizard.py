@@ -132,6 +132,7 @@ def test_wizard_steps(artist_user):
         ("offers", False, False),
         ("statements", False, False),
         ("materials", False, False),
+        ("import", False, False),
     ]
     steps = services.wizard_steps(services.save_basics(artist_user, VALID))
     assert [(s.step.key, s.done, s.available) for s in steps] == [
@@ -139,6 +140,7 @@ def test_wizard_steps(artist_user):
         ("offers", False, True),
         ("statements", False, True),
         ("materials", False, True),
+        ("import", False, True),
     ]
 
 
@@ -169,7 +171,7 @@ def test_overview_with_empty_basics(web):
     assert response.status_code == 200
     assert 'data-step="basics"\n          data-status="open"' in body
     assert "obowiązkowe" in body
-    for key in ("offers", "statements", "materials"):
+    for key in ("offers", "statements", "materials", "import"):
         assert f'data-step="{key}"\n          data-status="locked"' in body
     assert 'href="/artysta/profil/oferty/"' not in body
 

@@ -4,7 +4,7 @@ from procrastinate.contrib.django import app
 
 from apps.core.jobs import QUEUE_DEFAULT, QUEUE_MEDIA, default_retry
 
-from . import materials, recordings, resumable
+from . import materials, recordings, resumable, website_import
 
 # A scanner error retries 3 more times (after 5, 10, 20 s); then the job fails and the file
 # stays "oczekuje na skan" (never counted). The jobs admin lists the failed job.
@@ -43,3 +43,10 @@ def process_media(material_id: int) -> None:
 def cleanup_upload_sessions(timestamp: int) -> None:
     """Hourly: delete expired resumable-upload sessions and their temporary data."""
     resumable.cleanup_expired()
+
+
+@app.task(name="artists.run_website_import", queue=QUEUE_MEDIA)
+def run_website_import(import_id: int) -> None:
+    """Import from the artist's website (US-2.2). Never retried: every failure ends as a
+    readable status on the import, and the artist can start a new one."""
+    website_import.run_import(import_id)

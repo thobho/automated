@@ -281,3 +281,12 @@ FFMPEG_MEMORY_MB = env.int("FFMPEG_MEMORY_MB", default=1536)  # address space pe
 FFMPEG_THREADS = env.int("FFMPEG_THREADS", default=2)
 # Scratch directory for ffmpeg input/output (a fresh temporary directory per job inside it).
 MEDIA_WORK_DIR = env.str("MEDIA_WORK_DIR", default="")  # empty = the system temp directory
+# Import from the artist's own website (US-2.2, apps/core/safefetch.py) ----------------------
+WEBSITE_IMPORT_MAX_PAGES = env.int("WEBSITE_IMPORT_MAX_PAGES", default=10)
+WEBSITE_IMPORT_MAX_BYTES = env.int("WEBSITE_IMPORT_MAX_BYTES", default=20 * 1024 * 1024)
+WEBSITE_IMPORT_PAGE_TIMEOUT = env.float("WEBSITE_IMPORT_PAGE_TIMEOUT", default=30.0)  # seconds
+WEBSITE_IMPORT_MAX_REDIRECTS = env.int("WEBSITE_IMPORT_MAX_REDIRECTS", default=3)
+WEBSITE_IMPORT_MAX_TEXT_CHARS = env.int("WEBSITE_IMPORT_MAX_TEXT_CHARS", default=200_000)
+# Test only: lets the fetcher reach loopback addresses on any port, so a synthetic site served
+# locally can be imported in dev. Hosted settings (prod, pirx) refuse to start with it on.
+SAFE_FETCH_ALLOW_LOOPBACK = env.bool("SAFE_FETCH_ALLOW_LOOPBACK", default=False)

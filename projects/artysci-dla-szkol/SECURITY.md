@@ -47,6 +47,7 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 | Disputed or altered legal consent | `apps/trust`: immutable versioned documents, acceptance rows with version + time (PROTECT), consent only to the versions the page showed, re-acceptance gate after material changes |
 | Disputed or altered artist statements (US-8.2) | `apps/trust`: append-only `ArtistStatement` rows (model and queryset refuse edits and deletes; withdrawal is a row) with the wording version and an aware time; statements only on the version the page showed (`StaleWording`); artist-only view; shown as "Oświadczenie artysty", never as a check by the service (D31) |
 | Runaway AI cost (bug, loop, abuse) | per-call and daily caps checked before sending (`AICapExceeded`), `AI_KILL_SWITCH`, low-limit key |
+| Untraceable or silently changed generator (US-11.1, D13, D14) | `apps/quality`: every component version is hashed and checked against the checked-in `components.json` (test fails on a change without a version bump); append-only `Generation` and `GeneratorComponentVersion` rows (model and queryset refuse edits and deletes once finished); the input is kept only as a SHA-256 fingerprint (D107), never a copy of the materials; no prompt or reply text in `AICall`, `Generation` or `generation_show`; admin read-only and staff-only |
 
 ## What is in place (T04)
 
@@ -112,6 +113,27 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   `media-src 'self' blob:` so the page can read a chosen video's duration locally. **Owner
   note:** clamd scans streams only up to `StreamMaxLength` (default 25 MB); scanning 500 MB
   videos needs that raised on the future host, with the RAM decision (D87).
+- **Import from the artist's website, SSRF (T26, US-2.2, STORIES "Import ze strony")**: done.
+  All user-given URLs are fetched only by `apps/core/safefetch.py`: `http`/`https` only, no
+  user-info, default ports only; the host is resolved once and every address must be public
+  (loopback, private, link-local incl. `169.254.169.254`, shared `100.64/10`, multicast,
+  reserved, unspecified, documentation and benchmarking ranges, IPv6 unique-local, link-local,
+  Teredo, and IPv4 wrapped in IPv4-mapped, 6to4 or NAT64 addresses are refused before any
+  connection); the socket connects to the checked address (no second DNS lookup, so no DNS
+  rebinding window) with the original name for `Host`, SNI and the certificate check; each of
+  at most 3 redirects is checked the same way and, after the first page, must stay on the site's
+  host. One hard deadline per request (a watchdog shuts the socket, so drip-feeding cannot hold
+  the job), a byte cap per request, 20 MB per import, `Accept-Encoding: identity` (no
+  decompression bombs), only HTML parsed with the stdlib parser, JavaScript never run. Table
+  test with the forbidden-address list in `apps/core/tests/test_safefetch.py`. The dev-only
+  `SAFE_FETCH_ALLOW_LOOPBACK` (loopback on any port, for a local synthetic site) makes the
+  hosted settings (prod, pirx) refuse to load. The import needs the rights checkbox, which
+  records the `material_rights` statement (D4, D104). Imported text is scrubbed before it is
+  stored (D59: e-mails, phones, IBAN/NRB, PESEL and ID card numbers with valid checksums, postal
+  addresses); contact data found is kept on the import for the artist only, never published
+  and never sent to AI. Photos go through the normal upload path (sniffed type, EXIF stripped,
+  private storage, malware scan, 40-photo limit). Logs and events carry the import id, counts
+  and error codes, never the URL. One running import per artist, at most 10 per day.
 - **Legal documents (T10)**: bodies are plain text from staff, rendered autoescaped
   (`linebreaks`), never as HTML. Published versions cannot be changed or deleted (model,
   queryset and admin all refuse). The re-acceptance gate redirects only to a fixed URL; the

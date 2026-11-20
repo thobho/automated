@@ -31,7 +31,7 @@ ARGUMENTS = {
     "artists:offer_move": {"offer_id": 999999},
     "artists:material_delete": {"material_id": 999999},
     "artists:upload_chunk": {"session_id": "00000000-0000-4000-8000-000000000000"},
-    "artists:upload_complete": {"session_id": "00000000-0000-4000-8000-000000000000"},
+    "artists:upload_complete": {"session_id": "00000000-0000-4000-8000-000000000000"},    "artists:website_import_status": {"import_id": 999999},
 }
 
 #: URL name -> expected answer for (anonymous, artist, institution, admin)
@@ -71,6 +71,8 @@ MATRIX = {
     "artists:upload_chunk": ("login", "home", "403", "403"),  # GET = offset, POST = chunk
     "artists:upload_complete": ("login", "405", "403", "403"),  # POST only
     "artists:questionnaire": ("login", "home", "403", "403"),
+    "artists:website_import": ("login", "home", "403", "403"),
+    "artists:website_import_status": ("login", "home", "403", "403"),
     "institutions:register": ("200", "200", "200", "200"),
     "institutions:rspo_suggestions": ("200", "200", "200", "200"),
     "institutions:start": ("login", "403", "200", "403"),

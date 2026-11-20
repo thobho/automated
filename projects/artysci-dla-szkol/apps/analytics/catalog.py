@@ -10,6 +10,9 @@ EVENT_CATALOG: dict[str, frozenset[str]] = {
     "institution_registered": frozenset({"institution_type", "rspo_matched", "linked_existing"}),
     "account_confirmed": frozenset(),
     "institution_verified": frozenset({"method"}),
+    # US-2.2: never the URL; status is the import status code, counts and duration only.
+    "website_import_started": frozenset(),
+    "website_import_finished": frozenset({"status", "page_count", "photo_count", "duration_ms"}),
     "profile_generated": frozenset({"duration_ms", "attempt"}),
     "profile_published": frozenset({"profile_id"}),
     "inquiry_sent": frozenset({"inquiry_id", "artist_count"}),
