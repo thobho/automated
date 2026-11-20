@@ -68,6 +68,7 @@ jobs:
       S3_ENDPOINT_URL: http://127.0.0.1:9000
       S3_ACCESS_KEY_ID: artysci
       S3_SECRET_ACCESS_KEY: artysci-minio-ci
+      REQUIRE_FFMPEG: '1'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -77,6 +78,11 @@ jobs:
           enable-cache: true
           cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
       - run: uv sync
+      - name: Install ffmpeg (video/audio tests run on generated samples)
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends ffmpeg
+          ffmpeg -version | head -n 1
       - name: Wait for MinIO
         run: |
           for i in $(seq 1 60); do

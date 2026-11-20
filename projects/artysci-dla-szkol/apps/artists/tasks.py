@@ -1,10 +1,10 @@
-"""Media jobs of artist materials (US-2.3A). Arguments are ids and storage keys only."""
+"""Media jobs of artist materials (US-2.3A/B). Arguments are ids and storage keys only."""
 
 from procrastinate.contrib.django import app
 
-from apps.core.jobs import QUEUE_MEDIA, default_retry
+from apps.core.jobs import QUEUE_DEFAULT, QUEUE_MEDIA, default_retry
 
-from . import materials, website_import
+from . import materials, recordings, resumable, website_import
 
 # A scanner error retries 3 more times (after 5, 10, 20 s); then the job fails and the file
 # stays "oczekuje na skan" (never counted). The jobs admin lists the failed job.
@@ -25,6 +25,24 @@ def scan_poster(offer_id: int, key: str) -> None:
 def extract_pdf_text(material_id: int) -> None:
     """Never fails for a bad PDF: encrypted and broken files end as a text status."""
     materials.extract_pdf_text(material_id)
+
+
+@app.task(name="artists.process_media", queue=QUEUE_MEDIA)
+def process_media(material_id: int) -> None:
+    """ffprobe, and for a video the MP4 conversion and thumbnail (US-2.3B). Never fails: a
+    timeout or crash ends as a rejected material with a readable message."""
+    recordings.process_media(material_id)
+
+
+@app.periodic(cron="17 * * * *")
+@app.task(
+    name="artists.cleanup_upload_sessions",
+    queue=QUEUE_DEFAULT,
+    queueing_lock="artists.cleanup_upload_sessions",
+)
+def cleanup_upload_sessions(timestamp: int) -> None:
+    """Hourly: delete expired resumable-upload sessions and their temporary data."""
+    resumable.cleanup_expired()
 
 
 @app.task(name="artists.run_website_import", queue=QUEUE_MEDIA)

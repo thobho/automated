@@ -1,11 +1,13 @@
-"""Artist materials (US-2.3A, D8, D62): photos, PDFs and YouTube/Vimeo links, the malware scan
-and PDF text extraction jobs, and the school questionnaire.
+"""Artist materials (US-2.3A/B, D8, D62): photos, PDFs, YouTube/Vimeo links, video and audio
+files, the malware scan and PDF text extraction jobs, and the school questionnaire.
 
 Files go through the T06 upload path (`store_upload`, private storage: sniffed type, size limit,
 EXIF stripped, random key). Each new file is a `Material` in ``pending`` and a scan job on the
 ``media`` queue: clean -> ``ready`` (a PDF then gets a text extraction job), infected -> the file
 is deleted and the material is ``rejected``, scanner error -> the job retries and the material
 stays ``pending``. Only ``ready`` materials count (`ready_materials`, used by US-2.5a).
+Video and audio arrive through resumable uploads (`resumable.py`); after a clean scan they stay
+``pending`` until the ffprobe/ffmpeg job (`recordings.py`) makes them ``ready`` or ``rejected``.
 
 Links are checked against the fixed public oEmbed endpoints of YouTube and Vimeo only; any other
 host is refused before a request is made. Log lines carry a pseudonymised user and ids only.
@@ -35,6 +37,7 @@ from .models import (
     Material,
     MaterialKind,
     Offer,
+    ProcessingStatus,
     ScanStatus,
     TextStatus,
     VideoProvider,
@@ -43,6 +46,7 @@ from .models import (
 logger = logging.getLogger("apps.artists.materials")
 
 FILE_KINDS = (MaterialKind.PHOTO, MaterialKind.PDF)
+AV_KINDS = (MaterialKind.VIDEO, MaterialKind.AUDIO)
 
 
 class MaterialRejected(Exception):
@@ -79,6 +83,8 @@ def limit_for(kind: str) -> int:
     return {
         MaterialKind.PHOTO: settings.MATERIAL_MAX_PHOTOS,
         MaterialKind.PDF: settings.MATERIAL_MAX_PDFS,
+        MaterialKind.VIDEO: settings.MATERIAL_MAX_VIDEOS,
+        MaterialKind.AUDIO: settings.MATERIAL_MAX_AUDIO,
     }[kind]
 
 
@@ -104,18 +110,27 @@ def remaining(artist: Artist, kind: str) -> int:
     return max(0, limit_for(kind) - _counted(artist, kind).count())
 
 
-def _limit_error(kind: str) -> MaterialRejected:
-    if kind == MaterialKind.PHOTO:
-        message = _("Osiągnięto limit %(n)d zdjęć. Usuń któreś, aby dodać nowe.")
-    else:
-        message = _("Osiągnięto limit %(n)d plików PDF. Usuń któryś, aby dodać nowy.")
-    return MaterialRejected("limit", message % {"n": limit_for(kind)})
+LIMIT_MESSAGES = {
+    MaterialKind.PHOTO: _("Osiągnięto limit %(n)d zdjęć. Usuń któreś, aby dodać nowe."),
+    MaterialKind.PDF: _("Osiągnięto limit %(n)d plików PDF. Usuń któryś, aby dodać nowy."),
+    MaterialKind.VIDEO: _("Osiągnięto limit %(n)d filmów. Usuń któryś, aby dodać nowy."),
+    MaterialKind.AUDIO: _("Osiągnięto limit %(n)d nagrań. Usuń któreś, aby dodać nowe."),
+}
+
+
+def limit_error(kind: str) -> MaterialRejected:
+    return MaterialRejected("limit", LIMIT_MESSAGES[kind] % {"n": limit_for(kind)})
+
+
+def is_full(artist: Artist, kind: str) -> bool:
+    """The limit is used up. Call under the artist row lock to settle parallel uploads."""
+    return _counted(artist, kind).count() >= limit_for(kind)
 
 
 def check_room(artist: Artist, kind: str, count: int) -> None:
     """Raise `MaterialRejected` if `count` more files of `kind` do not fit the limit."""
     if count > remaining(artist, kind):
-        raise _limit_error(kind)
+        raise limit_error(kind)
 
 
 def get_material(artist: Artist, material_id) -> Material:
@@ -124,11 +139,30 @@ def get_material(artist: Artist, material_id) -> Material:
 
 
 def file_url(material: Material) -> str:
-    """Short-lived signed URL of a stored file ("" for links and deleted files)."""
-    return media.signed_url(material.storage_key) if material.storage_key else ""
+    """Short-lived signed URL of a stored file ("" for links and deleted files). A converted
+    video links to its MP4."""
+    key = material.converted_key or material.storage_key
+    return media.signed_url(key) if key else ""
+
+
+def thumbnail_url(material: Material) -> str:
+    return media.signed_url(material.thumbnail_key) if material.thumbnail_key else ""
+
+
+def format_duration(seconds: float | None) -> str:
+    """Duration for the list: "m:ss" ("" when unknown)."""
+    if seconds is None:
+        return ""
+    total = round(seconds)
+    return f"{total // 60}:{total % 60:02d}"
 
 
 # --- files -----------------------------------------------------------------------------------
+
+
+def delete_files(keys) -> None:
+    for key in keys:
+        _delete_file(key)
 
 
 def _delete_file(key: str) -> None:
@@ -160,8 +194,8 @@ def add_file(artist: Artist, kind: str, file, *, source_import=None) -> Material
     try:
         with transaction.atomic():
             Artist.objects.select_for_update().filter(pk=artist.pk).first()
-            if _counted(artist, kind).count() >= limit_for(kind):  # a parallel upload won
-                raise _limit_error(kind)
+            if is_full(artist, kind):  # a parallel upload won
+                raise limit_error(kind)
             material = Material.objects.create(
                 artist=artist,
                 kind=kind,
@@ -195,10 +229,10 @@ def delete_material(artist: Artist, material_id) -> None:
     `Material.DoesNotExist`."""
     with transaction.atomic():
         material = Material.objects.select_for_update().get(artist=artist, pk=material_id)
-        key = material.storage_key
+        keys = material.stored_keys()  # original, converted MP4, thumbnail
         material.delete()
-        if key:
-            transaction.on_commit(lambda: _delete_file(key))
+        if keys:
+            transaction.on_commit(lambda: delete_files(keys))
     _log("material_deleted", artist, material_id)
 
 
@@ -223,7 +257,12 @@ def scan_material(material_id: int) -> str:
         if material is None or material.status != ScanStatus.PENDING:
             return material.status if material else ""
         material.scanned_at = timezone.now()
-        if result == ScanResult.CLEAN:
+        if result == ScanResult.CLEAN and material.kind in AV_KINDS:
+            # still pending: ready only after ffprobe (and the conversion for a video)
+            material.processing_status = ProcessingStatus.PENDING
+            _enqueue_processing(material)
+            material.save(update_fields=["scanned_at", "processing_status"])
+        elif result == ScanResult.CLEAN:
             material.status = ScanStatus.READY
             if material.kind == MaterialKind.PDF:
                 material.text_status = TextStatus.PENDING
@@ -237,6 +276,16 @@ def scan_material(material_id: int) -> str:
             transaction.on_commit(lambda: _delete_file(key))
     _log(f"material_scan_{result}", material.artist.user_id, material.pk)
     return material.status
+
+
+def _enqueue_processing(material: Material) -> None:
+    from . import tasks
+
+    jobs.enqueue(
+        tasks.process_media,
+        idempotency_key=f"artists.process_media:{material.pk}",
+        material_id=material.pk,
+    )
 
 
 def _enqueue_extraction(material: Material) -> None:
