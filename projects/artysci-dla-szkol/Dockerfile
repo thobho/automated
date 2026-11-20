@@ -9,6 +9,11 @@ ENV UV_COMPILE_BYTECODE=1 \
     PATH="/opt/venv/bin:$PATH" \
     PYTHONUNBUFFERED=1
 
+# ffmpeg/ffprobe for video and audio materials (US-2.3B); Debian's build is multi-arch.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN useradd --create-home --uid 10001 app
 WORKDIR /app
 

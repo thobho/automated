@@ -7,10 +7,12 @@
 
 {% block content %}
   <h1>{% translate "Materiały i kwestionariusz" %}</h1>
-  <p>{% translate "Zdjęcia, pliki PDF (np. opis spektaklu) i filmy z YouTube lub Vimeo. Każdy plik sprawdzamy, zanim zostanie użyty." %}</p>
+  <p>{% translate "Zdjęcia, pliki PDF (np. opis spektaklu), filmy z YouTube lub Vimeo, pliki wideo i nagrania. Każdy plik sprawdzamy, zanim zostanie użyty." %}</p>
 
   {% include "artists/_upload_box.html" with box=photos title=_("Zdjęcia") %}
   {% include "artists/_upload_box.html" with box=pdfs title=_("Pliki PDF") %}
+  {% include "artists/_media_box.html" with box=videos title=_("Filmy (pliki)") %}
+  {% include "artists/_media_box.html" with box=audio title=_("Nagrania dźwiękowe") %}
 
   <section aria-labelledby="link-heading">
     <h2 id="link-heading">{% translate "Filmy (YouTube, Vimeo)" %}</h2>
@@ -31,9 +33,13 @@
     <h2 id="list-heading">{% translate "Twoje materiały" %}</h2>
     {% if items %}
       <ul class="materials" data-count="{{ items|length }}">
-        {% for material, url in items %}
+        {% for item in items %}{% with material=item.material url=item.url %}
           <li id="material-{{ material.pk }}" data-material="{{ material.pk }}"
-              data-kind="{{ material.kind }}" data-status="{{ material.status }}">
+              data-kind="{{ material.kind }}" data-status="{{ material.status }}"
+              {% if material.processing_status %}data-processing="{{ material.processing_status }}"{% endif %}>
+            {% if item.thumbnail %}
+              <img src="{{ item.thumbnail }}" alt="" width="160" data-field="thumbnail">
+            {% endif %}
             <strong>{{ material.get_kind_display }}</strong>:
             {% if material.kind == "link" %}
               <a href="{{ material.canonical_url }}" rel="noopener noreferrer">{{ material.title|default:material.canonical_url }}</a>
@@ -43,8 +49,11 @@
             {% else %}
               {{ material.original_name|default:_("plik") }}
             {% endif %}
-            — <span data-field="status">{{ material.get_status_display }}</span>
-            {% if material.status == "rejected" %}
+            {% if item.duration %}<span data-field="duration">({{ item.duration }}{% if material.width %}, {{ material.width }}×{{ material.height }}{% endif %})</span>{% endif %}
+            — <span data-field="status">{% if material.status == "pending" and material.processing_status == "pending" %}{{ material.get_processing_status_display }}{% else %}{{ material.get_status_display }}{% endif %}</span>
+            {% if material.status == "rejected" and material.processing_message %}
+              <p role="alert" data-field="message">{{ material.processing_message }}</p>
+            {% elif material.status == "rejected" %}
               <p role="alert">{% translate "Plik odrzucony: skaner wykrył złośliwe oprogramowanie. Plik usunęliśmy; sprawdź komputer programem antywirusowym i dodaj czystą kopię." %}</p>
             {% elif material.status == "pending" %}
               <span>({% translate "plik zostanie użyty po sprawdzeniu" %})</span>
@@ -57,7 +66,7 @@
               <button type="submit">{% translate "Usuń" %}</button>
             </form>
           </li>
-        {% endfor %}
+        {% endwith %}{% endfor %}
       </ul>
     {% else %}
       <p>{% translate "Nie masz jeszcze żadnych materiałów." %}</p>

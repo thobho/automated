@@ -4,6 +4,7 @@ Environment-specific modules (dev, test, prod) set SECRET_KEY, DEBUG, ALLOWED_HO
 DATABASES, reading them from environment variables.
 """
 
+import tempfile
 from pathlib import Path
 
 from .env import env, scanner_from_env
@@ -138,6 +139,8 @@ CSP_DIRECTIVES = {
     "img-src": ["'self'", "data:"],
     "font-src": ["'self'"],
     "connect-src": ["'self'"],
+    # blob: lets materials.js read a chosen video's duration locally before uploading it
+    "media-src": ["'self'", "blob:"],
     "object-src": ["'none'"],
     "base-uri": ["'none'"],
     "form-action": ["'self'"],
@@ -259,6 +262,25 @@ PDF_TEXT_MAX_SECONDS = env.float("PDF_TEXT_MAX_SECONDS", default=30.0)
 # YouTube / Vimeo oEmbed lookups (fixed public endpoints only)
 OEMBED_TIMEOUT_SECONDS = env.float("OEMBED_TIMEOUT_SECONDS", default=5.0)
 
+# Video and audio (US-2.3B, D8): counts and the 10-minute limit; sizes are in uploads.py.
+MATERIAL_MAX_VIDEOS = 5
+MATERIAL_MAX_AUDIO = 10
+MEDIA_MAX_DURATION_SECONDS = 600
+# Resumable uploads: chunks go to this directory (never a served storage), one file per session.
+UPLOAD_TEMP_DIR = Path(
+    env.str("UPLOAD_TEMP_DIR", default=str(Path(tempfile.gettempdir()) / "artysci-uploads"))
+)
+UPLOAD_CHUNK_BYTES = env.int("UPLOAD_CHUNK_BYTES", default=4 * 1024 * 1024)
+UPLOAD_SESSION_TTL_HOURS = env.int("UPLOAD_SESSION_TTL_HOURS", default=24)
+# ffmpeg / ffprobe run as subprocesses (argument list, no shell) with these limits.
+FFMPEG_PATH = env.str("FFMPEG_PATH", default="ffmpeg")
+FFPROBE_PATH = env.str("FFPROBE_PATH", default="ffprobe")
+FFMPEG_TIMEOUT_SECONDS = env.float("FFMPEG_TIMEOUT_SECONDS", default=900.0)
+FFPROBE_TIMEOUT_SECONDS = env.float("FFPROBE_TIMEOUT_SECONDS", default=30.0)
+FFMPEG_MEMORY_MB = env.int("FFMPEG_MEMORY_MB", default=1536)  # address space per process
+FFMPEG_THREADS = env.int("FFMPEG_THREADS", default=2)
+# Scratch directory for ffmpeg input/output (a fresh temporary directory per job inside it).
+MEDIA_WORK_DIR = env.str("MEDIA_WORK_DIR", default="")  # empty = the system temp directory
 # Import from the artist's own website (US-2.2, apps/core/safefetch.py) ----------------------
 WEBSITE_IMPORT_MAX_PAGES = env.int("WEBSITE_IMPORT_MAX_PAGES", default=10)
 WEBSITE_IMPORT_MAX_BYTES = env.int("WEBSITE_IMPORT_MAX_BYTES", default=20 * 1024 * 1024)
