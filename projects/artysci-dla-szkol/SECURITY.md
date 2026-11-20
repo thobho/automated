@@ -47,6 +47,7 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 | Disputed or altered legal consent | `apps/trust`: immutable versioned documents, acceptance rows with version + time (PROTECT), consent only to the versions the page showed, re-acceptance gate after material changes |
 | Disputed or altered artist statements (US-8.2) | `apps/trust`: append-only `ArtistStatement` rows (model and queryset refuse edits and deletes; withdrawal is a row) with the wording version and an aware time; statements only on the version the page showed (`StaleWording`); artist-only view; shown as "Oświadczenie artysty", never as a check by the service (D31) |
 | Runaway AI cost (bug, loop, abuse) | per-call and daily caps checked before sending (`AICapExceeded`), `AI_KILL_SWITCH`, low-limit key |
+| Untraceable or silently changed generator (US-11.1, D13, D14) | `apps/quality`: every component version is hashed and checked against the checked-in `components.json` (test fails on a change without a version bump); append-only `Generation` and `GeneratorComponentVersion` rows (model and queryset refuse edits and deletes once finished); the input is kept only as a SHA-256 fingerprint (D107), never a copy of the materials; no prompt or reply text in `AICall`, `Generation` or `generation_show`; admin read-only and staff-only |
 
 ## What is in place (T04)
 
