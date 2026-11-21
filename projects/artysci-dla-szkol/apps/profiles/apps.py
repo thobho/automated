@@ -7,3 +7,6 @@ class ProfilesConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "apps.profiles"
     label = "profiles"
+
+    def ready(self):
+        from . import generator_components  # noqa: F401  (registers the v0.2 components)

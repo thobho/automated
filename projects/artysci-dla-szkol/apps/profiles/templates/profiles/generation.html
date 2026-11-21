@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Generowanie profilu" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Generowanie profilu" %}</h1>
+  <p>{% translate "Na podstawie Twoich materiałów, kwestionariusza i ofert przygotujemy szkic profilu. Zwykle trwa to krócej niż 2 minuty." %}</p>
+
+  {% include "profiles/_generation_status.html" %}
+
+  <p><a href="{% url 'artists:start' %}">{% translate "Wróć do kreatora" %}</a></p>
+{% endblock %}
