@@ -52,9 +52,16 @@ git -C "$REPO_ROOT" worktree remove --force "$work" >/dev/null 2>&1
 git -C "$REPO_ROOT" worktree add -q --detach "$work" "$sha" || { log "review #$pr: checkout failed"; exit 1; }
 mkdir -p "$work/.agent"
 # Diff policy (agent/review_queue.py): deleted tests, new skips, changed CI or test settings.
-gh api "repos/$GH_REPO/pulls/$pr/files?per_page=100" > "$RUNTIME/state/review-$pr-files.json" 2>/dev/null || echo '[]' > "$RUNTIME/state/review-$pr-files.json"
-flags="$RUNTIME/state/review-$pr-flags.txt"
-(cd "$RUNNER_DIR" && python3 agent/review_queue.py --policy "$RUNTIME/state/review-$pr-files.json") > "$flags" 2>/dev/null || : > "$flags"
+# A step that cannot run becomes a flag the reviewer cannot judge "ok", so the policy never fails open.
+files_json="$RUNTIME/state/review-$pr-files.json"; flags="$RUNTIME/state/review-$pr-flags.txt"
+if gh api --paginate "repos/$GH_REPO/pulls/$pr/files?per_page=100" --jq '.[]' 2>/dev/null \
+    | python3 -c 'import json,sys; json.dump([json.loads(l) for l in sys.stdin if l.strip()], sys.stdout)' > "$files_json" 2>/dev/null; then
+  (cd "$RUNNER_DIR" && python3 agent/review_queue.py --policy "$files_json") > "$flags" 2>/dev/null \
+    || echo "diff policy could not run: the policy check failed" > "$flags"
+else
+  echo "diff policy could not run: the PR's file list could not be fetched" > "$flags"
+fi
+min_criteria="$( [[ "$issue" -gt 0 ]] && gh issue view "$issue" --json body -q .body 2>/dev/null | (cd "$RUNNER_DIR" && python3 agent/review_queue.py --criteria-count) || echo 0)"
 
 prompt="$(cat "$RUNNER_DIR/agent/review-prompt.md")
 
@@ -94,7 +101,8 @@ if ! python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); assert d["verd
   log "review #$pr: no valid verdict"; status_update "Review of PR #$pr ended without a verdict (log $runlog)"; exit 0
 fi
 before="$(json_get "$verdict_file" verdict)"
-verdict="$(cd "$RUNNER_DIR" && python3 agent/review_queue.py --enforce "$verdict_file" "$flags")"
+verdict="$(cd "$RUNNER_DIR" && python3 agent/review_queue.py --enforce "$verdict_file" "$flags" "${min_criteria:-0}")"
+[[ "$verdict" =~ ^(approve|changes|blocked)$ ]] || { verdict=changes; log "review #$pr: enforce gave no verdict, treated as changes"; }
 [[ "$before" != "$verdict" ]] && log "review #$pr: approval turned into $verdict (missing evidence or unjudged flags)"
 body="$(python3 - "$verdict_file" "$model" "${sha:0:7}" <<'EOF'
 import json, sys
