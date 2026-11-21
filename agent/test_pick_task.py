@@ -35,13 +35,13 @@ class Queue(unittest.TestCase):
         self.assertEqual(ready(q), [6, 12])
 
     def test_claimed_issue_is_running_not_ready(self):
-        q = pick_task.build_queue([issue(12), issue(6, "doing")], lambda n: False, {6})
+        q = pick_task.build_queue([issue(12, project="y"), issue(6, "doing")], lambda n: False, {6})
         self.assertEqual(ready(q), [12])
         self.assertEqual(pick_task.status_text(q[0]), "running")
 
     def test_shared_resource_waits(self):
-        issues = [issue(6, "doing", "Uses: gus-bdl"), issue(7, body="Uses: gus-bdl, eurostat"),
-                  issue(12), issue(13, body="Uses: osm")]
+        issues = [issue(6, "doing", "Uses: gus-bdl"), issue(7, body="Uses: gus-bdl, eurostat", project="y"),
+                  issue(12, body="Uses: app:a", project="y"), issue(13, body="Uses: osm", project="y")]
         q = pick_task.build_queue(issues, lambda n: False, {6})
         self.assertEqual(ready(q), [12, 13])
         seven = next(t for t in q if t["number"] == 7)
@@ -147,6 +147,45 @@ class Claims(unittest.TestCase):
             self.assertEqual(pick_task.claimed_issues(), set())
         finally:
             pick_task.LOCK_SCRIPT = old
+
+
+class CodeAreas(unittest.TestCase):
+    def issue(self, n, body="", project="p"):
+        return {"number": n, "title": f"t{n}", "body": body,
+                "labels": [{"name": "agent:todo"}, {"name": f"project:{project}"}]}
+
+    def ready(self, issues, claimed):
+        q = pick_task.build_queue(issues, lambda n: True, claimed)
+        return {t["number"]: t["ready"] for t in q}
+
+    def test_disjoint_apps_run_side_by_side(self):
+        r = self.ready([self.issue(1, "Uses: app:artists"), self.issue(2, "Uses: app:trust")], {1})
+        self.assertTrue(r[2])
+
+    def test_same_app_waits(self):
+        r = self.ready([self.issue(1, "Uses: app:artists, app:core"), self.issue(2, "Uses: app:core")], {1})
+        self.assertFalse(r[2])
+
+    def test_no_uses_line_waits_for_the_project(self):
+        r = self.ready([self.issue(1, "Uses: app:artists"), self.issue(2)], {1})
+        self.assertFalse(r[2])
+
+    def test_running_issue_without_uses_holds_the_project(self):
+        r = self.ready([self.issue(1), self.issue(2, "Uses: app:trust")], {1})
+        self.assertFalse(r[2])
+
+    def test_shared_resource_only_counts_as_whole_project(self):
+        r = self.ready([self.issue(1, "Uses: gus-bdl"), self.issue(2, "Uses: app:artists")], {1})
+        self.assertFalse(r[2])
+        r = self.ready([self.issue(1, "Uses: app:artists"), self.issue(2, "Uses: playwright")], {1})
+        self.assertFalse(r[2])
+
+    def test_areas(self):
+        self.assertEqual(pick_task.areas("Uses: app:artists, playwright, app:core"), {"app:artists", "app:core"})
+
+    def test_other_project_is_free(self):
+        r = self.ready([self.issue(1), self.issue(2, project="q")], {1})
+        self.assertTrue(r[2])
 
 
 if __name__ == "__main__":
