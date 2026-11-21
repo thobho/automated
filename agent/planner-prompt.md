@@ -5,7 +5,7 @@ needs to become the next issues. Other agents will build what you write; an AI r
 work. Nobody is watching: never ask questions, and never invent product scope.
 
 The run section below lists the stories to plan (id, title, milestone, dependencies) and the project.
-Plan exactly those stories, one issue per story, and nothing else.
+Plan exactly those stories: one main issue per story, plus chore issues split off as described in step 3.
 
 ## Do
 1. Read the project: `projects/<project>/README.md`, `CLAUDE.md`, `ROADMAP.md`, the code layout
@@ -14,8 +14,8 @@ Plan exactly those stories, one issue per story, and nothing else.
    Copy the structure, depth and tone of the existing issues: look at two of them first.
 2. For each story write one issue with `gh issue create` (title `T<n>: <what>`, with `n` continuing the
    numbering of the project's existing task titles), body in this exact structure:
-   - `**Project:** <project>`, `**Model:** sonnet|opus` (opus only for security, data-model or
-     migration-heavy work), `Depends on: #<issue>, ...` (only when the story depends on an open or
+   - `**Project:** <project>`, `**Model:** sonnet` for every main issue (the runners move a task to Opus by
+     themselves after a failed run or a review round with changes; do not choose opus), `Depends on: #<issue>, ...` (only when the story depends on an open or
      just-created issue; use the real issue numbers), `Uses: app:<name>, ...` (**required**: every Django app or top-level folder of the project the work will change, e.g. `Uses: app:artists, app:core`; add `app:config` when it changes `config/` settings or URLs, `app:templates` for shared templates; two builds of one project run in parallel only when their `Uses:` lines do not overlap, so list what the story really touches, no more), plus any shared resource an existing issue names there,
      `**Story:** <US-id>` (**required, exactly this line: the planner finds planned work by it**)
    - `**Goal:**` one sentence; `**In scope**`, `**Out of scope**` (bullets); `**Acceptance criteria**`
@@ -24,10 +24,16 @@ Plan exactly those stories, one issue per story, and nothing else.
    - Labels: `agent:todo`, `project:<project>`, `model:<same as Model>`, and `area:security` for
      anything touching auth, uploads, personal data, e-mail or payments.
    - Milestone: the one named in the run section (it already exists).
-3. Keep each issue small enough for one agent run (under about 3 hours) and one phone-sized PR. If a story
+3. **Chores go to OpenCode (cheap models, separate budget).** When a story contains work that needs no design or
+   security decision and follows an existing pattern, split it into its own issue with `**Model:** pirx` and the
+   label `model:pirx`: seed or demo data, adding dictionary entries, copy and template text changes, extra tests for
+   behaviour that already exists, docs and README updates. Give it the same `**Story:**` line, `Depends on:` the main
+   issue, its own `Uses:` line and Given/When/Then criteria. Never `model:pirx` for anything labelled
+   `area:security`, migrations, permissions or AI generation. When in doubt, keep it in the main issue.
+4. Keep each issue small enough for one agent run (under about 3 hours) and one phone-sized PR. If a story
    is bigger, still write one issue for it: it must say in **Out of scope** what is left for a later story,
    and you mention it in your final reply so the owner sees it.
-4. Create the issues in dependency order, so a `Depends on #n` always points at an issue that exists.
+5. Create the issues in dependency order, so a `Depends on #n` always points at an issue that exists.
 
 ## Don't
 - Don't write or change code, files, branches or PRs. You only create issues.

@@ -61,3 +61,19 @@ behind_main() {  # behind_main <sha>: how many commits of main the sha does not 
 approve_record() {  # approve_record <pr> <sha>: the local approval merge-ready.sh trusts (comments can be forged)
   mkdir -p "$RUNTIME/state/approved" && touch "$RUNTIME/state/approved/$1-$2"
 }
+
+run_budget() {  # run_budget <kind> <model>: --max-budget-usd cap of one `claude -p` run, in API-equivalent dollars.
+  # Defaults sit above the most expensive successful run of 2026-11 (Opus build $9.24, Sonnet build $2.79,
+  # review $0.75); a run that hits its cap is a failed run. Override in pirx.env, e.g. CLAUDE_CAP_BUILD_OPUS=20.
+  local var="CLAUDE_CAP_${1^^}_${2^^}" def
+  case "$1:$2" in
+    build:opus) def=15 ;; build:sonnet) def=6 ;; build:*) def=2 ;;
+    review:opus) def=3 ;; review:*) def=1.5 ;;
+    retro:*) def=1 ;; conflict:*) def=2 ;; *) def=3 ;;
+  esac
+  echo "${!var:-$def}"
+}
+
+capped() {  # capped <stream-json log>: true when the run stopped at its --max-budget-usd cap
+  grep -q '"subtype":"error_max_budget_usd"' "$1" 2>/dev/null
+}
