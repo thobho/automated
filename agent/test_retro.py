@@ -35,6 +35,17 @@ class Retro(unittest.TestCase):
         self.assertEqual(retro.project_of([], ["project:b", "agent:todo"]), "b")
         self.assertEqual(retro.project_of(["agent/x.py"]), "automation")
 
+    def test_only_the_automation_account_counts(self):
+        self.assertTrue(retro.trusted({"author": {"login": "bot"}}, {"bot"}))
+        self.assertFalse(retro.trusted({"author": {"login": "stranger"}}, {"bot"}))
+        self.assertFalse(retro.trusted({}, {"bot"}))
+
+    def test_secret_scan(self):
+        self.assertTrue(retro.has_secret("token ghp_" + "a" * 36))
+        self.assertTrue(retro.has_secret("-----BEGIN OPENSSH PRIVATE KEY-----"))
+        self.assertTrue(retro.has_secret("value is s3cr3tvalue1", {"s3cr3tvalue1"}))
+        self.assertFalse(retro.has_secret("Every new view gets a row in the permission matrix test."))
+
     def test_render(self):
         self.assertIn("## a (1)", retro.render({"a": ["PR #1: x"]}, 7))
 

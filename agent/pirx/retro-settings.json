@@ -6,7 +6,6 @@
       "Glob",
       "Grep",
       "Edit(projects/*/CLAUDE.md)",
-      "Edit(agent/worker-prompt.md)",
       "Bash(git log *)",
       "Bash(git show *)",
       "Bash(git diff *)",
@@ -39,7 +38,17 @@
       "Read(~/.config/gh/**)",
       "Read(~/.ssh/**)",
       "WebFetch",
-      "WebSearch"
+      "WebSearch",
+      "Bash(* ~/.config/*)",
+      "Bash(* ~/.ssh/*)",
+      "Bash(* ~/.claude/*)",
+      "Bash(* /home/agent/.config/*)",
+      "Bash(* /home/agent/.ssh/*)",
+      "Bash(* /home/agent/.claude/*)",
+      "Bash(rg --pre*)",
+      "Bash(rg * --pre*)",
+      "Bash(git diff * --output*)",
+      "Bash(git log * --output*)"
     ]
   }
 }
