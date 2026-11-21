@@ -38,6 +38,8 @@ Usage:
   agent/review_queue.py --next-json  the next PR to review as JSON; exit 1 if none
   agent/review_queue.py --next-conflict-json  the next conflicting PR to resolve as JSON; exit 1 if none
   agent/review_queue.py --merge-ready-json    approved PRs updated with main whose CI finished (JSON list)
+  agent/review_queue.py --policy <files.json>   diff-policy flags for a PR's file list (one per line)
+  agent/review_queue.py --enforce <verdict.json> <flags.txt>   rewrite the verdict file per enforce()
 """
 import json
 import os
@@ -116,6 +118,90 @@ def automation(paths):
 def protected(paths):
     """Automation paths that touch money or permissions: these PRs need the owner's merge."""
     return [p for p in automation(paths) if "/" not in p or p.startswith(".github/") or GUARDED.match(p)]
+
+
+# Diff policy: changes that can hide a failure instead of fixing it. They are not forbidden (a skip for a
+# missing binary can be right), but the reviewer must judge each one explicitly; review-run.sh turns an
+# approval that ignores a flag into "changes" (see enforce()).
+TEST_PATH = re.compile(r"(^|/)(tests?/|test_[^/]*\.py$|[^/]*_test\.py$|[^/]*\.(spec|test)\.[jt]sx?$|conftest\.py$)")
+SKIP_ADDED = re.compile(r"^\+(?!\+\+).*?(pytest\.mark\.(?:skipif|skip|xfail)|pytest\.(?:skip|xfail|importorskip)\("
+                        r"|unittest\.skip\w*|@skip\w*|\b(?:it|test|describe)\.(?:skip|only)\(|\.only\(|--deselect"
+                        r"|pragma: no cover|collect_ignore\w*|pytest_collection_modifyitems|pytest_ignore_collect)", re.M)
+CI_CONFIG = re.compile(r"(^|/)(\.github/workflows/[^/]+|pytest\.ini|tox\.ini|\.coveragerc|setup\.cfg|ruff\.toml|\.ruff\.toml)$")
+PYPROJECT_TEST_KEYS = re.compile(r"^[+-](?!\+\+|--).*\b(addopts|testpaths|omit|fail_under|--cov|deselect|filterwarnings"
+                                 r"|extend-ignore|per-file-ignores|exclude)\b", re.M)
+
+
+PACKAGE_TEST_SCRIPT = re.compile(r'^[+-](?!\+\+|--)\s*"test[\w:-]*"\s*:', re.M)
+
+
+def diff_policy(files):
+    """Flags for the reviewer. `files`: entries of GET /repos/{repo}/pulls/{n}/files (filename, status, patch)."""
+    flags = []
+    for f in files:
+        path, status, patch = f.get("filename", ""), f.get("status", ""), f.get("patch") or ""
+        is_test = bool(TEST_PATH.search(path))
+        watched = is_test or CI_CONFIG.search(path) or path.endswith(("pyproject.toml", "package.json"))
+        if watched and status not in ("removed", "added") and "patch" not in f:
+            flags.append(f"patch not available, check manually: {path}")  # GitHub omits very large diffs
+        if path.endswith("package.json") and PACKAGE_TEST_SCRIPT.search(patch):
+            flags.append(f"test script changed: {path}")
+        if is_test and status == "removed":
+            flags.append(f"test file deleted: {path}")
+        elif is_test and f.get("deletions", 0) >= 20 and f.get("deletions", 0) > 2 * f.get("additions", 0):
+            flags.append(f"tests shrunk: {path} (-{f.get('deletions')} +{f.get('additions')})")
+        markers = sorted({m.group(1) for m in SKIP_ADDED.finditer(patch)})
+        if markers:
+            flags.append(f"{path}: adds {', '.join('`' + m + '`' for m in markers)}")
+        if CI_CONFIG.search(path) and status != "added":
+            flags.append(f"CI or test config changed: {path}")
+        if path.endswith("pyproject.toml") and PYPROJECT_TEST_KEYS.search(patch):
+            flags.append(f"test/lint/coverage settings changed: {path}")
+    return flags
+
+
+def criteria_count(issue_body):
+    """How many acceptance criteria an issue lists: bullets under its "Acceptance criteria" heading."""
+    m = re.search(r"acceptance criteria\**:?\s*\n(.*?)(?:\n\s*\n\*\*|\n#|\Z)", issue_body or "", re.I | re.S)
+    return sum(1 for l in (m.group(1) if m else "").splitlines() if re.match(r"\s*[-*]\s+\S", l))
+
+
+def enforce(verdict, flags, min_criteria=0):
+    """An approval must show evidence for every acceptance criterion (at least as many as the issue lists) and
+    judge every diff-policy flag; otherwise it becomes "changes" with the missing items as points. Entries of the
+    wrong type count as missing. Returns the (possibly) new verdict."""
+    if not isinstance(verdict, dict) or verdict.get("verdict") not in ("approve", "changes", "blocked"):
+        return {"verdict": "changes", "summary": "The review verdict could not be processed.",
+                "points": [{"file": "", "issue": "malformed review verdict", "fix": "review again"}]}
+    if verdict.get("verdict") != "approve":
+        return verdict
+    missing = []
+    criteria = verdict.get("criteria") if isinstance(verdict.get("criteria"), list) else []
+    if not criteria:
+        missing.append(("", "no acceptance criteria listed with evidence", "list every criterion of the issue under `criteria`"))
+    elif len(criteria) < min_criteria:
+        missing.append(("", f"{len(criteria)} criteria listed, the issue has {min_criteria}", "list and check every criterion"))
+    for c in criteria:
+        if not isinstance(c, dict) or c.get("met") is not True or not str(c.get("evidence", "")).strip():
+            name = c.get("criterion", "?") if isinstance(c, dict) else str(c)[:80]
+            missing.append(("", f"criterion not shown as met: {name}",
+                            "meet it, or show the test, command output or file:line that proves it"))
+    policy = verdict.get("policy") if isinstance(verdict.get("policy"), list) else []
+    judged = {str(p.get("flag", "")).strip(): p for p in policy if isinstance(p, dict)}
+    for flag in flags:
+        p = judged.get(flag)
+        if p is None:
+            missing.append(("", f"diff-policy flag not judged: {flag}", "justify it or remove it"))
+        elif p.get("ok") is not True or not str(p.get("why", "")).strip():
+            missing.append(("", f"diff-policy flag not acceptable: {flag}", p.get("why") or "remove it or justify it"))
+    if not missing:
+        return verdict
+    out = dict(verdict)
+    out["verdict"] = "changes"
+    out["points"] = list(verdict.get("points") or []) + [{"file": f, "issue": i, "fix": x} for f, i, x in missing]
+    out["summary"] = (verdict.get("summary", "") + " (Approval turned into changes by the runner: "
+                      f"{len(missing)} acceptance or diff-policy item(s) without evidence.)").strip()
+    return out
 
 
 def project_of(paths):
@@ -201,6 +287,26 @@ def queue(prs, labels_of):
 
 
 def main():
+    if "--policy" in sys.argv:
+        for flag in diff_policy(json.load(open(sys.argv[sys.argv.index("--policy") + 1]))):
+            print(flag)
+        return
+    if "--enforce" in sys.argv:  # never crashes: anything unreadable becomes "changes"
+        i = sys.argv.index("--enforce")
+        path, flags_path = sys.argv[i + 1], sys.argv[i + 2]
+        min_criteria = int(sys.argv[i + 3]) if len(sys.argv) > i + 3 and sys.argv[i + 3].isdigit() else 0
+        try:
+            flags = [l.rstrip("\n") for l in open(flags_path) if l.strip()]
+            v = enforce(json.load(open(path)), flags, min_criteria)
+        except Exception as e:
+            v = {"verdict": "changes", "summary": f"The review verdict could not be processed ({type(e).__name__}).",
+                 "points": [{"file": "", "issue": "malformed review verdict", "fix": "review again"}]}
+        json.dump(v, open(path, "w"))
+        print(v["verdict"])
+        return
+    if "--criteria-count" in sys.argv:
+        print(criteria_count(sys.stdin.read()))
+        return
     prs = gh_json("pr", "list", "--state", "open", "--limit", "50", "--json",
                   "number,title,body,headRefName,headRefOid,isDraft,mergeable,statusCheckRollup,comments,files")
     cache = {}
