@@ -1,0 +1,3 @@
+Vendored from https://github.com/emilkowalski/skills/tree/main/skills/review-animations at commit 64eb3deb9a5fbfa041faf783e0bc3fd635872e9c (2026-11-21), unchanged.
+License: MIT, see LICENSE in this folder
+Update: replace this folder with a newer commit through a reviewed PR; never install it globally or add its hooks.

@@ -36,6 +36,20 @@ from other `projects/` folders. Product overview and quick start: [README.md](RE
 - `uv run python manage.py makemigrations --check --dry-run --settings=config.settings.test`
 - Coverage target: ≥85% on new code.
 
+## Design skills (for every user-visible page)
+Vendored, pinned skills in `.claude/skills/` of this folder (sources and licenses in each `NOTICE`). Read the file
+yourself; do not rely on automatic skill loading, which is unreliable in a subfolder.
+- **Building or reshaping UI** (templates, CSS, the public profile and its themes): read and follow
+  `.claude/skills/frontend-design/SKILL.md`. The brief is the story in `docs/STORIES.md` and the decisions in
+  `docs/DECISIONS.md`; do not ask the client to confirm anything, decide and write the design plan (palette, type,
+  layout, principles) into the PR under **Decisions I made**.
+- **Motion** (only where a user action changes something): `.claude/skills/animate/SKILL.md`; ignore its "initial
+  response" line.
+- **Before opening the PR, and for the AI reviewer:** check every changed template and stylesheet against
+  `.claude/skills/web-design-guidelines/references/command.md` (accessibility, focus, forms, images, performance) and
+  any motion against `.claude/skills/review-animations/STANDARDS.md`; list the findings and fixes in the PR. Together
+  with the Playwright test (D110) this is the evidence for a user-visible change.
+
 ## Rules for agents
 - **One app per concern.** Put code in the app that owns the concept; add a new app only with a
   line in the decision log. Apps talk to each other through services, not each other's views.
