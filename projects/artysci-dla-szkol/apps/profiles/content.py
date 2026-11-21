@@ -61,6 +61,11 @@ class VideoItem:
     link_url: str = ""
     provider: str = ""
 
+    def __post_init__(self):
+        # Only http(s) targets: a `javascript:` or `data:` href must never reach the page.
+        if self.link_url and not self.link_url.lower().startswith(("https://", "http://")):
+            self.link_url = ""
+
     @property
     def is_file(self) -> bool:
         return bool(self.src)
@@ -96,6 +101,11 @@ class PageContent:
     videos: list[VideoItem] = field(default_factory=list)
     photos: list[PhotoItem] = field(default_factory=list)
     faq: list[FaqItem] = field(default_factory=list)
+
+    def __post_init__(self):
+        # A video with neither a file nor a safe link has nothing to play: drop it, so the
+        # section (and its heading) disappears when nothing is left.
+        self.videos = [v for v in self.videos if v.src or v.link_url]
 
     @property
     def show_gallery(self) -> bool:

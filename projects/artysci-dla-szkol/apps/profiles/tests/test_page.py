@@ -211,6 +211,15 @@ def test_youtube_link_is_a_button_without_requests():
     assert len(buttons) == 1
 
 
+@pytest.mark.parametrize("bad", ["javascript:alert(1)", "data:text/html,x", "//evil.example/x"])
+def test_unsafe_video_link_is_never_rendered(bad):
+    content = PageContent(slug="a", hero=Hero(name="A"), videos=[VideoItem(link_url=bad)])
+    html = render(content)
+    assert content.videos == []
+    assert "javascript:" not in html and "data:text" not in html and "evil.example" not in html
+    assert "Nagrania" not in html
+
+
 def test_link_with_local_thumbnail():
     link = VideoItem(link_url="https://vimeo.com/1", poster_url="/m/t.jpg")
     html = render(full_content(videos=[link]))
