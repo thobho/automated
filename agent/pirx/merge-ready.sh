@@ -18,22 +18,26 @@ for t in json.load(open(sys.argv[1])):
     if sys.argv[2] and str(t["pr"]) != sys.argv[2]:
         continue
     print(t["pr"], t["sha"], t["ci"], t["project"] or "-", t["issue"] or 0, t["updates"], t["max_updates"],
-          "yes" if t["red_main_fix"] else "no")
+          "yes" if t["red_main_fix"] else "no", "yes" if t["update_of_approved"] else "no")
 PYEOF
-while read -r pr sha ci project issue updates max fix; do
-  if [[ "$ci" == red ]]; then
-    gh pr comment "$pr" --body "🔁 CI is red on \`${sha:0:7}\`, after \`main\` was merged into this approved PR: it clashes with work merged meanwhile. Back to the builder. <!-- automated:review:$sha --> <!-- automated:review-changes -->" >/dev/null
+while read -r pr sha ci project issue updates max fix updated; do
+  if [[ "$ci" == red ]]; then   # once per commit (merge-red mark), with or without a linked issue
+    if [[ "$updated" == yes ]]; then why="after \`main\` was merged into this approved PR: it clashes with work merged meanwhile"
+    else why="on the approved commit itself"; fi
+    gh pr comment "$pr" --body "🔁 CI is red on \`${sha:0:7}\` $why. Not merged; back to the builder. <!-- automated:merge-red:$sha --> <!-- automated:review:$sha --> <!-- automated:review-changes -->" >/dev/null
     if [[ "$issue" -gt 0 ]]; then
       gh issue edit "$issue" --remove-label agent:review --add-label agent:todo >/dev/null
-      gh issue comment "$issue" --body "↩️ Back to the builder: PR #$pr was approved, but CI fails once the latest \`main\` is merged in. Merge \`main\`, fix the clash, push." >/dev/null
+      gh issue comment "$issue" --body "↩️ Back to the builder: PR #$pr was approved, but CI is red $why. Merge \`main\`, fix it, push." >/dev/null
     fi
-    log "merge #$pr: CI red after update, back to builder"; status_update "PR #$pr: CI red after merging main, back to the builder"; continue
+    log "merge #$pr: CI red ($why), back to builder"; status_update "PR #$pr: CI red after approval, back to the builder"; continue
   fi
   if [[ "$fix" != yes ]] && main_red "$project"; then
     log "merge #$pr: held, $project CI is red on main"; continue
   fi
   behind="$(behind_main "$sha")"
+  if [[ -z "$behind" ]]; then log "merge #$pr: could not compare with main, skipped this time"; continue; fi
   if (( behind > 0 && updates < max )); then
+    approve_record "$pr" "$sha"   # the update commit is trusted only as GitHub's merge of this approved commit
     if gh api -X PUT "repos/$GH_REPO/pulls/$pr/update-branch" -f expected_head_sha="$sha" >/dev/null 2>&1; then
       gh pr comment "$pr" --body "⤵️ Approved, but \`main\` moved ($behind new commits). Merged \`main\` into the branch; this PR is merged when CI is green on the updated commit (update $((updates + 1)) of $max, no new review). <!-- automated:approved:$sha --> <!-- automated:updated -->" >/dev/null
       log "merge #$pr: updated with main ($behind behind), waiting for CI"
@@ -41,6 +45,10 @@ while read -r pr sha ci project issue updates max fix; do
       log "merge #$pr: update-branch failed (conflict?), the conflict resolver takes it"
     fi
     continue
+  fi
+  if (( behind > 0 )); then
+    gh pr comment "$pr" --body "⚠️ \`main\` moved again after $max updates; merging on CI of the last update (${behind} commits behind). <!-- automated:max-updates:$sha -->" >/dev/null
+    log "merge #$pr: $max updates used, merging $behind behind main"
   fi
   if gh pr merge "$pr" --squash --delete-branch --match-head-commit "$sha" >/dev/null 2>>"$RUNTIME/logs/runner.log"; then
     [[ "$issue" -gt 0 ]] && gh issue edit "$issue" --remove-label agent:review --add-label agent:done >/dev/null 2>&1

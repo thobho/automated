@@ -146,6 +146,9 @@ for wf in "$RUNNER_DIR"/.github/workflows/*-ci.yml; do
   read -r concl sha url <<<"$(gh run list --branch main --workflow "$(basename "$wf")" --status completed --limit 1 \
     --json conclusion,headSha,url -q '.[0] | "\(.conclusion) \(.headSha) \(.url)"' 2>/dev/null)"
   [[ "$concl" == failure ]] || continue
+  # Only when main has not moved since: after a fix is merged, its CI is still running and the last finished
+  # run is the old failure; a task then would be a duplicate.
+  [[ "$sha" == "$(gh api "repos/$GH_REPO/commits/main" --jq .sha 2>/dev/null)" ]] || continue
   [[ -n "$(gh issue list --label red-main --label "project:$p" --state open --json number -q '.[0].number' 2>/dev/null)" ]] && continue
   gh label create red-main --color B60205 --description "CI is red on main; fix first" >/dev/null 2>&1
   subject="$(gh api "repos/$GH_REPO/commits/$sha" --jq '.commit.message' 2>/dev/null | head -1)"

@@ -6,47 +6,45 @@ import review_queue as rq
 
 
 def pr(n, branch="agent/5-x", sha="abc", checks=("SUCCESS",), comments=(), files=("projects/p/app.py",),
-       body="Closes #5", draft=False, mergeable="MERGEABLE", parents=None):
-    return {"headParents": parents or [], "number": n, "title": f"pr {n}", "headRefName": branch, "headRefOid": sha, "body": body,
+       body="Closes #5", draft=False, mergeable="MERGEABLE", parents=None, committer="noreply@github.com",
+       verified=True, approved=None, has_ci=True):
+    d = {"headCommit": {"parents": parents or [], "committer": committer, "verified": verified},
+         "projectHasCI": has_ci}
+    if approved is not None:
+        d["approvedShas"] = approved
+    return {**d, "number": n, "title": f"pr {n}", "headRefName": branch, "headRefOid": sha, "body": body,
             "isDraft": draft, "mergeable": mergeable, "statusCheckRollup": [{"conclusion": c} for c in checks],
             "comments": [{"body": b} for b in comments], "files": [{"path": f} for f in files]}
 
 
 class MergeSafety(unittest.TestCase):
     APPROVED = "ok <!-- automated:review:aaa1111 --> <!-- automated:approved:aaa1111 -->"
+    UPD = dict(sha="bbb2222", comments=[APPROVED], parents=["aaa1111", "main999"])
 
-    def test_update_of_approved_commit_merges_without_a_new_review(self):
-        a = rq.assess(pr(1, sha="bbb2222", comments=[self.APPROVED], parents=["aaa1111", "main999"]), {"agent:review"})
+    def test_github_update_of_approved_commit_merges_without_a_new_review(self):
+        a = rq.assess(pr(1, **self.UPD), {"agent:review"})
         self.assertTrue(a["needs_merge"])
         self.assertFalse(a["needs_review"])
-        self.assertEqual(a["updates"], 0)
+        self.assertTrue(a["update_of_approved"])
 
-    def test_approved_head_waits_in_merge_ready(self):
-        a = rq.assess(pr(1, sha="aaa1111", comments=[self.APPROVED]), set())
+    def test_update_waits_for_ci_running_or_not_started(self):
+        self.assertFalse(rq.assess(pr(1, checks=("IN_PROGRESS",), **self.UPD), set())["needs_merge"])
+        self.assertFalse(rq.assess(pr(1, checks=(), **self.UPD), set())["needs_merge"])
+
+    def test_no_checks_is_fine_when_the_project_has_no_ci(self):
+        self.assertTrue(rq.assess(pr(1, checks=(), has_ci=False, **self.UPD), set())["needs_merge"])
+
+    def test_red_ci_is_handled_once(self):
+        a = rq.assess(pr(1, checks=("FAILURE",), **self.UPD), set())
         self.assertTrue(a["needs_merge"])
-        self.assertFalse(a["needs_review"])
+        done = dict(self.UPD, comments=[self.APPROVED, "red <!-- automated:merge-red:bbb2222 -->"])
+        self.assertFalse(rq.assess(pr(1, checks=("FAILURE",), **done), set())["needs_merge"])
 
-    def test_protected_pr_is_never_merged_here(self):
-        a = rq.assess(pr(1, sha="aaa1111", comments=[self.APPROVED], files=("agent/budget.py",)), set())
-        self.assertFalse(a["needs_merge"])
-
-    def test_updates_are_counted(self):
-        up = "updated <!-- automated:approved:bbb2222 --> <!-- automated:updated -->"
-        a = rq.assess(pr(1, sha="ccc3333", comments=[self.APPROVED, up], parents=["bbb2222", "m"]), {"red-main"})
-        self.assertTrue(a["needs_merge"])
-        self.assertEqual(a["updates"], 1)
-        self.assertTrue(a["red_main_fix"])
-
-    def test_update_waits_for_ci(self):
-        a = rq.assess(pr(1, sha="bbb2222", checks=("IN_PROGRESS",), comments=[self.APPROVED],
-                         parents=["aaa1111", "main999"]), set())
-        self.assertFalse(a["needs_merge"])
-
-    def test_red_ci_after_update_is_still_handled_by_merge_ready(self):
-        a = rq.assess(pr(1, sha="bbb2222", checks=("FAILURE",), comments=[self.APPROVED],
-                         parents=["aaa1111", "main999"]), set())
-        self.assertTrue(a["needs_merge"])
-        self.assertEqual(a["ci"], "red")
+    def test_merge_not_made_by_github_needs_review(self):
+        for kw in ({"committer": "agent@pirx"}, {"verified": False}):
+            a = rq.assess(pr(1, **self.UPD, **kw), set())
+            self.assertFalse(a["needs_merge"])
+            self.assertTrue(a["needs_review"])
 
     def test_builder_push_after_approval_needs_a_real_review(self):
         a = rq.assess(pr(1, sha="ccc3333", comments=[self.APPROVED], parents=["aaa1111"]), set())
@@ -58,15 +56,30 @@ class MergeSafety(unittest.TestCase):
         self.assertFalse(a["needs_merge"])
         self.assertTrue(a["needs_review"])
 
-    def test_conflict_resolver_merge_is_reviewed_again(self):
-        a = rq.assess(pr(1, sha="bbb2222", comments=[self.APPROVED, "resolved <!-- automated:conflict-resolved -->"],
-                         parents=["aaa1111", "main999"]), set())
+    def test_local_records_win_over_comment_markers(self):
+        forged = rq.assess(pr(1, sha="aaa1111", comments=[self.APPROVED], approved=[]), set())
+        self.assertFalse(forged["needs_merge"])
+        real = rq.assess(pr(1, sha="aaa1111", comments=[], approved=["aaa1111"]), set())
+        self.assertTrue(real["needs_merge"])
+
+    def test_approved_head_waits_in_merge_ready(self):
+        a = rq.assess(pr(1, sha="aaa1111", comments=[self.APPROVED]), set())
+        self.assertTrue(a["needs_merge"])
+        self.assertFalse(a["needs_review"])
+
+    def test_protected_pr_is_never_merged_here(self):
+        a = rq.assess(pr(1, sha="aaa1111", comments=[self.APPROVED], files=("agent/budget.py",)), set())
         self.assertFalse(a["needs_merge"])
-        self.assertTrue(a["needs_review"])
 
     def test_with_builder_is_not_merged(self):
-        a = rq.assess(pr(1, sha="bbb2222", comments=[self.APPROVED], parents=["aaa1111", "m"]), {"agent:todo"})
-        self.assertFalse(a["needs_merge"])
+        self.assertFalse(rq.assess(pr(1, **self.UPD), {"agent:todo"})["needs_merge"])
+
+    def test_updates_are_counted_and_red_main_fix_flagged(self):
+        up = "updated <!-- automated:approved:bbb2222 --> <!-- automated:updated -->"
+        a = rq.assess(pr(1, sha="ccc3333", comments=[self.APPROVED, up], parents=["bbb2222", "m"]), {"red-main"})
+        self.assertTrue(a["needs_merge"])
+        self.assertEqual(a["updates"], 1)
+        self.assertTrue(a["red_main_fix"])
 
     def test_project_of(self):
         self.assertEqual(rq.project_of(["projects/a/x.py", "projects/a/y.py"]), "a")

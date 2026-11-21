@@ -127,6 +127,7 @@ This PR touches the automation's money or permission rules, so it is not merged 
 
 Not merged: the PR changed or is not mergeable now ($now). It will be reviewed again. $mark" >/dev/null
     else   # merge-ready.sh merges it only against the current main and while main is green
+      approve_record "$pr" "$sha"
       gh pr comment "$pr" --body "$body $mark <!-- automated:approved:$sha -->" >/dev/null
       log "review #$pr: approved ($model)"; status_update "PR #$pr approved by AI review ($model)"
       bash "$RUNNER_DIR/agent/pirx/merge-ready.sh" "$pr"

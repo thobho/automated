@@ -53,7 +53,11 @@ main_red() {  # main_red <project>: true when the newest finished run of the pro
   [[ "$(gh run list --branch main --workflow "$1-ci.yml" --status completed --limit 1 --json conclusion -q '.[0].conclusion' 2>/dev/null)" == failure ]]
 }
 
-behind_main() {  # behind_main <sha>: how many commits of main the sha does not contain (0 on error)
+behind_main() {  # behind_main <sha>: how many commits of main the sha does not contain; empty on error
   local n; n="$(gh api "repos/$GH_REPO/compare/main...$1" --jq .behind_by 2>/dev/null)"
-  echo "${n:-0}"
+  [[ "$n" =~ ^[0-9]+$ ]] && echo "$n"
+}
+
+approve_record() {  # approve_record <pr> <sha>: the local approval merge-ready.sh trusts (comments can be forged)
+  mkdir -p "$RUNTIME/state/approved" && touch "$RUNTIME/state/approved/$1-$2"
 }
