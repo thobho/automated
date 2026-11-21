@@ -55,7 +55,10 @@ fi
 # Reviews come first: a reviewed PR is merged work, and waiting PRs hold back the queue (review limit).
 rev="$RUNTIME/state/review-next.json"
 # Without Opus headroom an Opus-only review waits but does not block the PRs behind it (--no-opus).
-AGENT_SLOT=$slot AGENT_MODEL=opus python3 "$RUNNER_DIR/agent/budget.py" < "$usage" > "$budget.opus"
+# A review costs about a tenth of an Opus build, so it needs 1 point of weekly headroom, not 5
+# (AGENT_OPUS_REVIEW_HEADROOM in pirx.env overrides; budget.py's own default stays for builds).
+AGENT_OPUS_HEADROOM="${AGENT_OPUS_REVIEW_HEADROOM:-1}" AGENT_SLOT=$slot AGENT_MODEL=opus \
+  python3 "$RUNNER_DIR/agent/budget.py" < "$usage" > "$budget.opus"
 noopus=(); [[ "$(json_get "$budget.opus" decision)" == "RUN" ]] || noopus=(--no-opus)
 found=false
 (cd "$RUNNER_DIR" && python3 agent/review_queue.py --next-json "${noopus[@]}") > "$rev" 2>/dev/null && found=true
