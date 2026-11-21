@@ -30,8 +30,9 @@ Parallel runs:
   - Code areas use the same line: the planner writes `Uses: app:artists, app:core`
     for the Django apps (or folders) a story changes. Two builds of one project run
     side by side only when both name their areas and none overlap (migrations clash
-    only within one app). An issue without a `Uses:` line counts as touching the
-    whole project: it waits for, and holds back, the project's other running builds.
+    only within one app). An issue without an `app:` entry (no `Uses:` line, or
+    only shared resources like `Uses: playwright`) counts as touching the whole
+    project: it waits for, and holds back, the project's other running builds.
 
 Usage:
   agent/pick_task.py                          the queue in order, with what each one waits on
@@ -82,6 +83,11 @@ def resources(body):
     return found
 
 
+def areas(body):
+    """The code areas of an issue: the `app:` entries of its `Uses:` lines."""
+    return {r for r in resources(body) if r.startswith("app:")}
+
+
 def model_of(labels, body):
     """The model label, else a `Model:` line in the body, else sonnet; security work never goes to pirx."""
     model = next((l.split(":", 1)[1] for l in labels if l.startswith("model:")), None)
@@ -119,7 +125,7 @@ def build_queue(issues, is_closed, claimed):
     for i in issues:
         if i["number"] in claimed:
             proj = next((l["name"].split(":", 1)[1] for l in i["labels"] if l["name"].startswith("project:")), None)
-            running_projects[proj] = running_projects.get(proj, False) or not resources(i["body"])
+            running_projects[proj] = running_projects.get(proj, False) or not areas(i["body"])
     open_numbers = {i["number"] for i in issues}
     unblocks = {}
     for i in issues:
@@ -146,7 +152,7 @@ def build_queue(issues, is_closed, claimed):
         waiting_on = [n for n in deps if n != issue["number"] and not is_closed(n)]
         uses = sorted(resources(issue["body"]))
         resource_busy = [] if running else [r for r in uses if r in busy]
-        if not running and project in running_projects and (running_projects[project] or not uses):
+        if not running and project in running_projects and (running_projects[project] or not areas(issue["body"])):
             resource_busy.append(f"project:{project}")  # one side touches the whole project
         review_limit = state == "todo" and reviews.get(project, 0) >= MAX_OPEN_REVIEWS
         priority = 0 if "priority:high" in labels else 2 if "priority:low" in labels else 1

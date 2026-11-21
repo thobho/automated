@@ -40,8 +40,8 @@ class Queue(unittest.TestCase):
         self.assertEqual(pick_task.status_text(q[0]), "running")
 
     def test_shared_resource_waits(self):
-        issues = [issue(6, "doing", "Uses: gus-bdl"), issue(7, body="Uses: gus-bdl, eurostat"),
-                  issue(12, body="Uses: app:a"), issue(13, body="Uses: osm")]
+        issues = [issue(6, "doing", "Uses: gus-bdl"), issue(7, body="Uses: gus-bdl, eurostat", project="y"),
+                  issue(12, body="Uses: app:a", project="y"), issue(13, body="Uses: osm", project="y")]
         q = pick_task.build_queue(issues, lambda n: False, {6})
         self.assertEqual(ready(q), [12, 13])
         seven = next(t for t in q if t["number"] == 7)
@@ -173,6 +173,15 @@ class CodeAreas(unittest.TestCase):
     def test_running_issue_without_uses_holds_the_project(self):
         r = self.ready([self.issue(1), self.issue(2, "Uses: app:trust")], {1})
         self.assertFalse(r[2])
+
+    def test_shared_resource_only_counts_as_whole_project(self):
+        r = self.ready([self.issue(1, "Uses: gus-bdl"), self.issue(2, "Uses: app:artists")], {1})
+        self.assertFalse(r[2])
+        r = self.ready([self.issue(1, "Uses: app:artists"), self.issue(2, "Uses: playwright")], {1})
+        self.assertFalse(r[2])
+
+    def test_areas(self):
+        self.assertEqual(pick_task.areas("Uses: app:artists, playwright, app:core"), {"app:artists", "app:core"})
 
     def test_other_project_is_free(self):
         r = self.ready([self.issue(1), self.issue(2, project="q")], {1})
