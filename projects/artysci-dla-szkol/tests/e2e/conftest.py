@@ -6,6 +6,10 @@ from pathlib import Path
 
 import pytest
 
+# Playwright's sync API keeps an event loop running in the test thread; tests that prepare data
+# through the Django ORM (the live DB the server uses) would otherwise be refused by Django.
+os.environ.setdefault("DJANGO_ALLOW_ASYNC_UNSAFE", "true")
+
 SCREENSHOT_DIR = Path(os.environ.get("E2E_SCREENSHOT_DIR", "e2e-screenshots"))
 
 
