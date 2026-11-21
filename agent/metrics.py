@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Last-7-days metrics for the health page: how well the agents work, not only whether they run.
 
-  - Merged agent PRs: how many, first-pass approval rate (no "changes" round), median review rounds,
+  - Merged agent PRs: how many, first-pass approval rate (no "changes" round; a review skipped for red CI
+    counts as a round, since it also sent the work back), median review rounds,
     median hours from PR opened to merged, returns to the builder (review changes, red CI).
   - Runs from the logs on pirx (`$AUTOMATED_RUNTIME/logs/<kind>-<n>-<time>.jsonl`): per kind and per build
     model: count, errors, median minutes, API-equivalent cost (what the same tokens would cost on the API;
@@ -122,6 +123,7 @@ def cached(now, max_age=3600):
         pass
     data = collect(now)
     try:
+        os.makedirs(os.path.dirname(CACHE), exist_ok=True)
         with open(CACHE, "w") as f:
             json.dump(data, f)
     except OSError:
@@ -139,7 +141,7 @@ def render(data):
     else:
         lines.append("- No task PR merged in the last 7 days.")
     main = data.get("main", {})
-    red = [k for k, v in main.items() if v == "failure"]
+    red = [k for k, v in main.items() if v not in ("success", "skipped")]  # timed_out, cancelled, ... are not green
     lines.append("- Main: " + (", ".join(f"🔴 **{k} CI red**" for k in red) if red
                                else "✅ CI green on main for every project" if main else "no CI runs on main found"))
     if runs:

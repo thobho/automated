@@ -35,6 +35,11 @@ class Metrics(unittest.TestCase):
         s = metrics.summarize_prs(prs)
         self.assertEqual((s["merged"], s["first_pass"], s["median_hours"], s["returns"]), (2, 50, 4.0, 1))
 
+    def test_timed_out_main_is_not_green(self):
+        out = metrics.render({"prs": {"merged": 0}, "runs": {}, "main": {"p": "timed_out", "q": "success"}})
+        self.assertIn("p CI red", out)
+        self.assertNotIn("q CI red", out)
+
     def test_render(self):
         out = metrics.render({"prs": {"merged": 0}, "runs": {"claude": {"runs": 1, "errors": 0, "median_min": 9.0,
                                                                         "cost": 3.2}}, "main": {"p": "failure"}})

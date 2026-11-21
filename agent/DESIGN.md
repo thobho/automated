@@ -19,7 +19,7 @@ with evidence), so the next step can verify the result without the previous step
    calibrate it with real past cases in `review-prompt.md`. When it approves something it should not have,
    add that case to the calibration examples.
 3. **Test like a user.** Curl and unit tests miss broken pages; user-visible changes need a browser test
-   (D107). A skipped test is not evidence.
+   (D110). A skipped test is not evidence.
 4. **Isolation is not integration.** Worktrees keep files apart, not intent. Two builds of one project run in
    parallel only on disjoint `Uses: app:` claims, approved PRs merge only against the current `main`, and a
    red `main` stops merges for that project until a fix lands (merge-ready.sh, heal.sh).
