@@ -1,0 +1,15 @@
+{% load i18n %}
+<header class="start{% if not content.hero.photo_url %} start--typographic{% endif %}" id="start">
+  {% if content.hero.photo_url %}
+    <img class="start__photo" src="{{ content.hero.photo_url }}"
+         alt="{{ content.hero.photo_alt|default:content.hero.name }}">
+  {% else %}
+    <div class="start__initial" aria-hidden="true">{{ content.hero.initial }}</div>
+  {% endif %}
+  <div class="start__text">
+    <h1>{{ content.hero.name }}</h1>
+    {% if content.hero.tagline %}<p class="start__tagline">{{ content.hero.tagline }}</p>{% endif %}
+    {% if content.hero.city %}<p class="start__city">{{ content.hero.city }}</p>{% endif %}
+    <a class="button" href="#inquiry">{% translate "Sprawdź termin" %}</a>
+  </div>
+</header>

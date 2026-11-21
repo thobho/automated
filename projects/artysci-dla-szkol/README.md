@@ -637,6 +637,22 @@ App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
 - Unique visitors for a day and path = `Visit.objects.filter(day=..., path=...).count()`.
   Dashboards come later (E10).
 
+## Public artist page template (US-3.1)
+
+- `apps/profiles/content.py`: `PageContent` (hero, facts, about, for_schools, offers, videos,
+  photos, faq, slug) is what the template renders. `page_content_for(artist)` fills it from
+  existing data only (name, city, offers, ready photos/videos/links); no AI, no texts, no main
+  photo. US-2.5 (AI) and US-2.6 (editor) fill the rest later.
+- `apps/profiles/templates/profiles/page.html` + `_*.html` partials, CSS in
+  `static/profiles/page.css`. Fixed order: start, facts, about, "Dla szkół i przedszkoli", offer,
+  recordings, photos (only with ≥ 4), questions, "Sprawdź termin". A section without data is not
+  rendered (no heading, no nav anchor). Offers: 6 visible, the rest in `<details>`; tags every
+  offer shares are hidden; no prices anywhere = one note. No public phone or e-mail (D9).
+- A YouTube/Vimeo link is a local thumbnail or placeholder plus a link; nothing is requested from
+  the provider before the click. Uploaded video is a native `<video>`.
+- Owner-only preview: `GET /panel/podglad/` (artist role), `noindex` meta + `X-Robots-Tag`.
+  Publishing and the public URL are US-2.8.
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python

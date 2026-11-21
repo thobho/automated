@@ -1,0 +1,9 @@
+{% load i18n %}
+<section id="photos" aria-labelledby="photos-h">
+  <h2 id="photos-h">{% translate "Zdjęcia" %}</h2>
+  <ul class="gallery">
+    {% for photo in content.photos %}
+      <li><img src="{{ photo.url }}" alt="{{ photo.alt|default:content.hero.name }}"></li>
+    {% endfor %}
+  </ul>
+</section>

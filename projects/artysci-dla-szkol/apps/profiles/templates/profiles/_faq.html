@@ -1,0 +1,10 @@
+{% load i18n %}
+<section id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">{% translate "Pytania" %}</h2>
+  <dl class="faq">
+    {% for item in content.faq %}
+      <dt>{{ item.question }}</dt>
+      <dd>{{ item.answer }}</dd>
+    {% endfor %}
+  </dl>
+</section>

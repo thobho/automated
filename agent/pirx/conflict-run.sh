@@ -71,7 +71,7 @@ if [[ -e "$(git rev-parse --git-path MERGE_HEAD)" ]]; then
 - Attempt $((attempts + 1)) of 2, on $model. Scratch files go to $RUNTIME/scratch."
   log "conflict #$pr: $model resolves $files"
   claude -p "$prompt" --model "$model" --output-format stream-json --verbose \
-    --settings "$RUNNER_DIR/agent/pirx/conflict-settings.json" > "$runlog" 2>&1
+    --max-budget-usd "$(run_budget conflict "$model")" --settings "$RUNNER_DIR/agent/pirx/conflict-settings.json" > "$runlog" 2>&1
 fi
 beat conflict
 

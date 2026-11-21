@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{{ content.hero.name }} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block head %}
+  {% if noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
+  {# Fonts and CSS are served by us (D11): no CDN, no external request from the page. #}
+  <link rel="stylesheet" href="{% static 'profiles/page.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="artist-page">
+    {% include "profiles/_start.html" %}
+    <nav class="page-nav" aria-label="{% translate 'Sekcje strony' %}">
+      <ul>
+        {% for key, label in content.sections %}
+          <li><a href="#{{ key }}">{{ label }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% if content.facts %}{% include "profiles/_facts.html" %}{% endif %}
+    {% if content.about.strip %}{% include "profiles/_about.html" %}{% endif %}
+    {% if content.for_schools.strip %}{% include "profiles/_schools.html" %}{% endif %}
+    {% if content.offers %}{% include "profiles/_offer.html" %}{% endif %}
+    {% if content.videos %}{% include "profiles/_videos.html" %}{% endif %}
+    {% if content.show_gallery %}{% include "profiles/_photos.html" %}{% endif %}
+    {% if content.faq %}{% include "profiles/_faq.html" %}{% endif %}
+    {% include "profiles/_inquiry.html" %}
+  </div>
+{% endblock %}
