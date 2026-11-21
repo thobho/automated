@@ -4,8 +4,9 @@
 # Ubuntu's default 002 checks files out group-writable, which the check below refuses.
 #   (umask 022; d=$(mktemp -d) && git -C ~/Projects/automated fetch -q && git -C ~/Projects/automated worktree add --detach "$d/ah" origin/main && sudo bash "$d/ah/agent/pirx/root/install-root-helper.sh"; git -C ~/Projects/automated worktree remove --force "$d/ah"; rmdir "$d")
 # It installs /usr/local/sbin/automated-root (root-owned copy), writes /etc/automated/root-helper.conf on
-# the first run (edit it to change the lists; it is kept on updates), and one sudoers rule:
+# the first run (edit it to change the lists; it is kept on updates), and two sudoers rules:
 #   agent ALL=(root) NOPASSWD: /usr/local/sbin/automated-root
+#   <owner> ALL=(root) NOPASSWD: /usr/local/sbin/automated-owner-apply   (sudo-queue approvals from Claude on pirx)
 # That is the agent's only root access: the fixed verbs of the helper. Nothing else changes.
 #
 # Safety: root must never install a file the agent can write between review and install. So:
@@ -67,5 +68,19 @@ echo 'agent ALL=(root) NOPASSWD: /usr/local/sbin/automated-root' > "$rule.tmp"
 chmod 0440 "$rule.tmp"
 visudo -cf "$rule.tmp" >/dev/null && mv "$rule.tmp" "$rule" || { rm -f "$rule.tmp"; echo "sudoers check failed"; exit 1; }
 touch /var/log/automated-root.log; chmod 0640 /var/log/automated-root.log
+
+# Owner approvals of the sudo queue from the Claude session on pirx: a root-owned copy of scripts/owner-apply.sh
+# (from git, like the helper) that the owner, and only the owner, may run without a password. It runs a queued
+# script only with `--approve <id> <sha256>` naming exactly the content shown by `--list`. Re-run this installer
+# after a change to scripts/owner-apply.sh.
+if [[ "$owner" != agent && "$owner" != root ]]; then
+  git -c safe.directory="$repo" -C "$repo" show "$ref:scripts/owner-apply.sh" > "$tmp/owner-apply"
+  install -o root -g root -m 0755 "$tmp/owner-apply" /usr/local/sbin/automated-owner-apply
+  orule=/etc/sudoers.d/automated-owner-apply
+  echo "$owner ALL=(root) NOPASSWD: /usr/local/sbin/automated-owner-apply" > "$orule.tmp"
+  chmod 0440 "$orule.tmp"
+  visudo -cf "$orule.tmp" >/dev/null && mv "$orule.tmp" "$orule" || { rm -f "$orule.tmp"; echo "sudoers check failed (owner apply)"; exit 1; }
+  echo "installed owner approvals: as $owner, sudo -n /usr/local/sbin/automated-owner-apply --list"
+fi
 echo "installed. Check as agent: sudo -n /usr/local/sbin/automated-root status"
 sudo -u agent sudo -n /usr/local/sbin/automated-root status

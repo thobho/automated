@@ -46,4 +46,20 @@ check "symlink was not run"       1 test -e "$tmp/marker"
 rm -f "$SUDO_QUEUE_DIR/pending/t4-link.sh"
 check "empty queue is fine"       0 apply y
 
+# Non-interactive approval (the Claude session on pirx): --approve only with the sha shown by --list.
+echo 'echo approved > '"$tmp"'/approved' > "$tmp/c.sh"
+check "queue c"                   0 bash "$DIR/sudo-request.sh" t5-claude "$tmp/c.sh" "approve from Claude"
+sha=$(sha256sum "$tmp/c.sh" | cut -d' ' -f1)
+check "approve needs a sha"       1 bash "$DIR/owner-apply.sh" --approve t5-claude
+check "wrong sha is not run"      0 bash "$DIR/owner-apply.sh" --approve t5-claude "$(printf '0%.0s' {1..64})"
+check "nothing ran on wrong sha"  1 test -e "$tmp/approved"
+check "unknown id fails"          1 bash "$DIR/owner-apply.sh" --approve no-such-id "$sha"
+check "right sha runs it"         0 bash "$DIR/owner-apply.sh" --approve t5-claude "$sha"
+check "it ran"                    0 test -e "$tmp/approved"
+echo 'echo x' > "$tmp/d.sh"
+check "queue d"                   0 bash "$DIR/sudo-request.sh" t6-reject "$tmp/d.sh" "reject from Claude"
+check "reject by id"              0 bash "$DIR/owner-apply.sh" --reject t6-reject
+check "reject recorded"           0 test -f "$SUDO_STATE_DIR/rejected/t6-reject.sh"
+check "no terminal, no flags: refused" 1 bash -c "setsid bash '$DIR/owner-apply.sh' < /dev/null"
+
 echo; [[ $fails == 0 ]] && echo "all passed" || { echo "$fails failed"; exit 1; }
