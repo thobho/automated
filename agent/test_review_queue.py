@@ -282,6 +282,23 @@ class Models(unittest.TestCase):
         self.assertEqual(rq.review_model({"model:pirx"}), ("opus", "sonnet"))
 
 
+class NextReview(unittest.TestCase):
+    TODO = [{"pr": 154, "model": "opus", "fallback": None},
+            {"pr": 155, "model": "opus", "fallback": "sonnet"},
+            {"pr": 157, "model": "sonnet", "fallback": None}]
+
+    def test_with_opus_the_oldest_goes_first(self):
+        self.assertEqual(rq.next_review(self.TODO), (self.TODO[0], []))
+
+    def test_opus_only_pr_waits_without_blocking_the_rest(self):
+        t, waiting = rq.next_review(self.TODO, opus_ok=False)
+        self.assertEqual((t["pr"], t["model"], waiting), (155, "sonnet", [154]))
+
+    def test_nothing_runnable_lists_the_waiting(self):
+        self.assertEqual(rq.next_review(self.TODO[:1], opus_ok=False), (None, [154]))
+        self.assertEqual(rq.next_review([], opus_ok=False), (None, []))
+
+
 class Queue(unittest.TestCase):
     def test_only_agent_branches_oldest_first(self):
         q = rq.queue([pr(9), pr(3, branch="feature/x"), pr(4, branch="agent-setup/y")], lambda p: set())
