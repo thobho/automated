@@ -16,7 +16,7 @@ Plan exactly those stories, one issue per story, and nothing else.
    numbering of the project's existing task titles), body in this exact structure:
    - `**Project:** <project>`, `**Model:** sonnet|opus` (opus only for security, data-model or
      migration-heavy work), `Depends on: #<issue>, ...` (only when the story depends on an open or
-     just-created issue; use the real issue numbers), `Uses: ...` only if an existing issue does,
+     just-created issue; use the real issue numbers), `Uses: app:<name>, ...` (**required**: every Django app or top-level folder of the project the work will change, e.g. `Uses: app:artists, app:core`; add `app:config` when it changes `config/` settings or URLs, `app:templates` for shared templates; two builds of one project run in parallel only when their `Uses:` lines do not overlap, so list what the story really touches, no more), plus any shared resource an existing issue names there,
      `**Story:** <US-id>` (**required, exactly this line: the planner finds planned work by it**)
    - `**Goal:**` one sentence; `**In scope**`, `**Out of scope**` (bullets); `**Acceptance criteria**`
      as Given/When/Then, each observable and testable; `**Tests:**`; `**Verification:**` (a command

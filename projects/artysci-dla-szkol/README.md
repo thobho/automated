@@ -545,6 +545,25 @@ any S3-compatible service later). Two storages: **private** (originals, document
   `FFMPEG_MEMORY_MB` as `RLIMIT_AS`, paths `FFMPEG_PATH`/`FFPROBE_PATH`). Install ffmpeg locally
   (`apt install ffmpeg`) to run the real conversion tests; without it they are skipped (CI sets
   `REQUIRE_FFMPEG=1`, so there they must run). The Docker image includes ffmpeg.
+- **Quality checks and flags** (US-2.4, `apps/artists/checks.py`, D109): after a photo is `ready`
+  (scan) or a video is `ready` (processing) the `artists.check_material` job (`media` queue)
+  stores on the `Material` its size, orientation, `flags` and `checks_version`
+  (`CHECKS_VERSION`). Flags are the closed `Flag` list, each with a Polish label and hint, shown
+  in the material list. Photos: `niska rozdzielczość` (longer side < 1200 px), `mocna kompresja`
+  (original JPEG quality < 60, estimated from the quantisation tables), `duplikat` (64-bit
+  difference hash within 5 bits of an older photo of the same artist), `zdjęcie stockowe` (agency
+  name in the metadata), `zrzut ekranu lub obraz AI` (common screen size with no camera data, or
+  the IPTC `trainedAlgorithmicMedia` / generator markers), `plakat` (flat colour blocks, one
+  dominant colour and lettering-like blocks; a heuristic with fixtures). The metadata-based
+  flags are decided in `store_upload` from the original bytes (`apps/core/imagemeta.py`) before
+  the metadata is stripped; only the flags and one "had camera data" bit are kept. Videos:
+  `za krótkie` (< 15 s), `pionowe`, `niska rozdzielczość` (shorter side < 720 px), from the probe
+  data. A ready video also gets `FRAME_COUNT` (4) JPEG frames (`VideoFrame`, private storage,
+  `ffmpeg.thumbnail`) measured and flagged like photos; the artist can delete a frame
+  (`POST /artysta/profil/materialy/klatki/<id>/usun/`), deleting the video removes them all.
+  `checks.can_be_main(item)` and `checks.main_photo_candidates(artist)` never offer a photo or
+  frame flagged stock, screenshot/AI or poster. Thresholds are named constants at the top of
+  `checks.py`. Existing materials: `python manage.py check_materials [--force]` (idempotent).
 - Not covered yet: image variants (E2), HEIC photos, players on the public page (US-3.1).
 - **Import from the artist's website** (US-2.2, `apps/artists/website_import.py`,
   `/artysta/profil/import/`, status at `/artysta/profil/import/<id>/`): the artist pastes the URL

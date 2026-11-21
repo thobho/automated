@@ -114,7 +114,19 @@
       "Bash(systemctl --user stop *)",
       "Bash(systemctl --user disable *)",
       "Bash(systemctl --user mask *)",
-      "Bash(systemctl --user edit *)"
+      "Bash(systemctl --user edit *)",
+      "Bash(gh api -X *)",
+      "Bash(gh api --method *)",
+      "Bash(gh api * -X *)",
+      "Bash(gh api * --method *)",
+      "Bash(gh api */merge*)",
+      "Bash(gh api */update-branch*)",
+      "Bash(touch ~/runtime/automated/*)",
+      "Bash(cp * ~/runtime/automated/*)",
+      "Bash(mv * ~/runtime/automated/*)",
+      "Bash(mkdir ~/runtime/automated/*)",
+      "Edit(~/runtime/automated/**)",
+      "Write(~/runtime/automated/**)"
     ]
   }
 }

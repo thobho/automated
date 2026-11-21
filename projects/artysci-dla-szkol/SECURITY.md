@@ -109,7 +109,13 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   `FFPROBE_TIMEOUT_SECONDS`) and an address-space limit (`FFMPEG_MEMORY_MB`, `RLIMIT_AS`), with
   input and output in a fresh temporary directory; a timeout, crash or bad file ends as a
   `rejected` material with a readable message and the files deleted, never as a stuck job.
-  Converted MP4s and thumbnails are private and shown only through signed URLs. CSP gains
+  **Quality checks (T27, US-2.4, D59)** run locally on the stored file and on the original's
+  metadata, read in `store_upload` before the stripping (`apps/core/imagemeta.py`: bounded,
+  never raises, no XML parser, only byte-pattern search in the metadata segments). No raw
+  metadata is stored, only the derived flags and a "had camera data" bit; no AI or external
+  service sees a photo. Video frames come from the same ffmpeg wrapper (limits above), are private
+  and shown through signed URLs; a frame is looked up with the owner in the query (foreign id =
+  404, POST only, in the permission matrix). Converted MP4s and thumbnails are private and shown only through signed URLs. CSP gains
   `media-src 'self' blob:` so the page can read a chosen video's duration locally. **Owner
   note:** clamd scans streams only up to `StreamMaxLength` (default 25 MB); scanning 500 MB
   videos needs that raised on the future host, with the RAM decision (D87).

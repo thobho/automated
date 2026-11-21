@@ -189,8 +189,12 @@ def add_file(artist: Artist, kind: str, file, *, source_import=None) -> Material
     """
     if kind not in FILE_KINDS:
         raise ValueError(f"not a file kind: {kind!r}")
+    from . import checks  # checks import this module
+
     check_room(artist, kind, 1)  # before storing anything
     stored = uploads.store_upload(file, kind=kind, visibility="private")
+    # Only the flags derived from the original's metadata are kept, never the metadata (D59).
+    origin = stored.origin if kind == MaterialKind.PHOTO else None
     try:
         with transaction.atomic():
             Artist.objects.select_for_update().filter(pk=artist.pk).first()
@@ -205,6 +209,8 @@ def add_file(artist: Artist, kind: str, file, *, source_import=None) -> Material
                 size=stored.size,
                 original_name=clean_name(getattr(file, "name", "")),
                 source_import=source_import,
+                origin_flags=checks.origin_flags(origin),
+                camera_metadata=origin.camera if origin else None,
             )
             _enqueue_scan(material)
     except Exception:
@@ -224,12 +230,24 @@ def _enqueue_scan(material: Material) -> None:
     )
 
 
+def enqueue_check(material_id: int) -> None:
+    """Queue the quality checks (US-2.4) of a photo or video that just became ready."""
+    from . import tasks
+
+    jobs.enqueue(
+        tasks.check_material,
+        idempotency_key=f"artists.check_material:{material_id}",
+        material_id=material_id,
+    )
+
+
 def delete_material(artist: Artist, material_id) -> None:
-    """Delete the artist's own material and, after the commit, its file. Raises
+    """Delete the artist's own material and, after the commit, its files. Raises
     `Material.DoesNotExist`."""
     with transaction.atomic():
         material = Material.objects.select_for_update().get(artist=artist, pk=material_id)
-        keys = material.stored_keys()  # original, converted MP4, thumbnail
+        # original, converted MP4, thumbnail and the frames cut from a video
+        keys = material.stored_keys() + list(material.frames.values_list("storage_key", flat=True))
         material.delete()
         if keys:
             transaction.on_commit(lambda: delete_files(keys))
@@ -267,6 +285,8 @@ def scan_material(material_id: int) -> str:
             if material.kind == MaterialKind.PDF:
                 material.text_status = TextStatus.PENDING
                 _enqueue_extraction(material)
+            elif material.kind == MaterialKind.PHOTO:
+                enqueue_check(material.pk)
             material.save(update_fields=["status", "scanned_at", "text_status"])
         else:  # INFECTED: the file goes, the row stays so the artist sees why
             key = material.storage_key

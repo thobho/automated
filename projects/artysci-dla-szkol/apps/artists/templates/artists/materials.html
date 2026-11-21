@@ -61,6 +61,35 @@
             {% if material.kind == "pdf" and material.text_status %}
               <span data-field="text-status">· {{ material.get_text_status_display }}</span>
             {% endif %}
+            {% if material.kind == "photo" and material.status == "ready" and material.checks_version %}
+              <span data-field="dimensions">({{ material.width }}×{{ material.height }}, {{ material.get_orientation_display }})</span>
+            {% endif %}
+            {% if item.flags %}
+              <ul class="flags" data-field="flags">
+                {% for flag in item.flags %}
+                  <li data-flag="{{ flag.code }}"><strong>{{ flag.label }}</strong>: {{ flag.hint }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if item.frames %}
+              <div data-field="frames">
+                <p>{% translate "Klatki z filmu (kandydaci na zdjęcie główne):" %}</p>
+                <ul class="frames">
+                  {% for entry in item.frames %}
+                    <li id="frame-{{ entry.frame.pk }}" data-frame="{{ entry.frame.pk }}" data-main-candidate="{{ entry.can_be_main|yesno:'yes,no' }}">
+                      <img src="{{ entry.url }}" alt="" width="160">
+                      {% for flag in entry.flags %}
+                        <span data-flag="{{ flag.code }}"><strong>{{ flag.label }}</strong>: {{ flag.hint }}</span>
+                      {% endfor %}
+                      <form method="post" action="{% url 'artists:frame_delete' entry.frame.pk %}">
+                        {% csrf_token %}
+                        <button type="submit">{% translate "Usuń klatkę" %}</button>
+                      </form>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
             <form method="post" action="{% url 'artists:material_delete' material.pk %}">
               {% csrf_token %}
               <button type="submit">{% translate "Usuń" %}</button>

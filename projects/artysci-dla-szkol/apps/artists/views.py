@@ -16,13 +16,14 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods, require_POST
 
 from apps.accounts.permissions import role_required
+from apps.core import media
 from apps.core.regions import Voivodeship
 from apps.core.uploads import KINDS, MB, UploadRejected
 from apps.trust import services as trust
 from apps.trust.errors import NoPublishedVersion, StaleWording
 from apps.trust.models import STATEMENT_KINDS, BillingForm
 
-from . import materials, resumable, services, website_import
+from . import checks, materials, resumable, services, website_import
 from .models import (
     MAX_AGE,
     ArtistType,
@@ -30,6 +31,7 @@ from .models import (
     Material,
     MaterialKind,
     Offer,
+    VideoFrame,
     WebsiteImport,
 )
 from .services import Registration
@@ -202,11 +204,26 @@ def _upload_box(artist, kind, errors=()):
 
 
 def _item(material):
+    ready = material.status == "ready"
     return {
         "material": material,
         "url": materials.file_url(material),
         "thumbnail": materials.thumbnail_url(material),
         "duration": materials.format_duration(material.duration_seconds),
+        # quality flags with their hints (US-2.4); only a ready, checked file has any
+        "flags": checks.flag_items(material.flags, material.kind) if ready else [],
+        "frames": [
+            {
+                "frame": frame,
+                "url": media.signed_url(frame.storage_key),
+                "flags": checks.flag_items(frame.flags, MaterialKind.PHOTO),
+                "can_be_main": checks.can_be_main(frame),
+            }
+            for frame in checks.frames_of(material)
+        ]
+        if ready and material.kind == MaterialKind.VIDEO
+        else [],
+        "can_be_main": checks.can_be_main(material),
     }
 
 
@@ -294,6 +311,20 @@ def material_delete(request, material_id):
     except Material.DoesNotExist as exc:
         raise Http404 from exc
     messages.success(request, _("Usunięto materiał."))
+    return redirect("artists:materials")
+
+
+@role_required("artist")
+@require_POST
+@_basics_required
+def frame_delete(request, frame_id):
+    """POST deletes one of the artist's own video frames (and its file); another artist's id
+    is 404."""
+    try:
+        checks.delete_frame(_artist(request), frame_id)
+    except VideoFrame.DoesNotExist as exc:
+        raise Http404 from exc
+    messages.success(request, _("Usunięto klatkę."))
     return redirect("artists:materials")
 
 
