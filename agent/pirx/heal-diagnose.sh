@@ -46,7 +46,7 @@ $(tail -20 "$RUNTIME/state/events.log" 2>/dev/null)
 
 log "heal-diagnose: $fp starts"
 (cd "$work" && claude -p "$prompt" --model sonnet --output-format stream-json --verbose \
-   --settings "$RUNNER_DIR/agent/pirx/heal-settings.json") > "$runlog" 2>&1
+   --max-budget-usd "$(run_budget heal sonnet)" --settings "$RUNNER_DIR/agent/pirx/heal-settings.json") > "$runlog" 2>&1
 beat heal-diagnose
 
 report="$(python3 - "$runlog" <<'PYEOF'

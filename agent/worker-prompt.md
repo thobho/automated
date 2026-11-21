@@ -36,7 +36,7 @@ The owner wants maximum independence. When something is unclear, pick the most s
 ## Needing root
 You have no general sudo. Two ways, in this order:
 1. **Root helper** (no owner needed): `sudo -n /usr/local/sbin/automated-root help` lists its fixed verbs and lists: `install-package <name>` (approved packages, e.g. ffmpeg, imagemagick, postgresql-client), `restart-system <unit>`, `status`. Use it, say so in the PR, and continue.
-2. **Sudo queue** for anything else (a package not on the list, a memory limit, a system file): write a small idempotent script and queue it with `bash scripts/sudo-request.sh <id> <script-file> "<why>"` (details: `scripts/SUDO-QUEUE.md`), comment the id and reason on the issue, and block. The owner reviews and runs it with `sudo scripts/owner-apply.sh`. On a later run read `/var/lib/automated-sudo/done/<id>.out` and `.status` (or `rejected/`) and continue.
+2. **Sudo queue** for anything else (a package not on the list, a memory limit, a system file): write a small idempotent script and queue it with `bash scripts/sudo-request.sh <id> <script-file> "<why>"` (details: `scripts/SUDO-QUEUE.md`), comment the id and reason on the issue, and block. The owner approves it in the Claude session on pirx (no SSH). On a later run read `/var/lib/automated-sudo/done/<id>.out` and `.status` (or `rejected/`) and continue.
 
 Your own systemd **user** units for a project's dev instance (`ads-*`) are yours: `systemctl --user daemon-reload`, `start`, `restart`, `enable --now`, `reset-failed`, `status`, `list-timers` and `make install-units-pirx` / `make deploy-pirx` run without the owner. Stop, disable and mask stay refused. Never try to get root any other way.
 
