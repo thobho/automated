@@ -24,12 +24,23 @@ any other PR. Guarded PRs, the subset that touches money or permissions (budget 
 allowlists, the root helper, the merge rules, the dispatcher, setup scripts, workflows, root files),
 are reviewed but never merged automatically: the owner merges them with one tap.
 
+Merge safety (two builds run in parallel, so a PR can be green alone and still break `main`): an approved
+PR is merged only when its head already contains the current `main`. Otherwise review-run.sh asks GitHub
+to merge `main` into the branch ("update branch") and leaves `<!-- automated:approved:<sha> -->`. The new
+head is then not reviewed again by a model: when its only new commit is that update (its first parent is
+the approved sha) and CI on it is green, agent/pirx/merge-ready.sh merges it; red CI there means the PR
+clashes with work merged meanwhile and it goes back to the builder. At most MAX_UPDATES updates, then it
+merges as soon as CI is green. While a project's CI is red on `main`, its PRs are held (not merged) and the
+healer opens one `priority:high` fix task.
+
 Usage:
   agent/review_queue.py              list open agent PRs and their review state
   agent/review_queue.py --next-json  the next PR to review as JSON; exit 1 if none
   agent/review_queue.py --next-conflict-json  the next conflicting PR to resolve as JSON; exit 1 if none
+  agent/review_queue.py --merge-ready-json    approved PRs updated with main whose CI finished (JSON list)
 """
 import json
+import os
 import re
 import subprocess
 import sys
@@ -41,6 +52,17 @@ REVIEW_MARK = "<!-- automated:review:{sha} -->"
 CHANGES_MARK = "<!-- automated:review-changes -->"
 CONFLICT_FAILED = "<!-- automated:conflict-failed -->"
 CONFLICT_RESOLVED = "<!-- automated:conflict-resolved -->"
+APPROVED = re.compile(r"<!-- automated:approved:([0-9a-f]{7,40}) -->")
+MAX_UPDATES = 3
+UPDATED = "<!-- automated:updated -->"
+MERGE_RED = "<!-- automated:merge-red:{sha} -->"
+GITHUB_COMMITTER = "noreply@github.com"
+# Approvals that merge-ready.sh acts on are local records written by review-run.sh (and merge-ready.sh
+# for update commits), not PR comments: builders can post comments, but not write this directory.
+APPROVALS_DIR = os.path.join(os.path.expanduser(os.environ.get("AUTOMATED_RUNTIME", "~/runtime/automated")),
+                             "state", "approved")
+RED_MAIN_LABEL = "red-main"
+PROJECT_PATH = re.compile(r"^projects/([a-z0-9-]+)/")
 MAX_CONFLICT_ATTEMPTS = 2
 WITH_BUILDER = {"agent:todo", "agent:doing", "agent:blocked"}
 
@@ -96,6 +118,12 @@ def protected(paths):
     return [p for p in automation(paths) if "/" not in p or p.startswith(".github/") or GUARDED.match(p)]
 
 
+def project_of(paths):
+    """The single project a PR changes (projects/<name>/...), or None."""
+    names = {m.group(1) for p in paths if (m := PROJECT_PATH.match(p))}
+    return names.pop() if len(names) == 1 else None
+
+
 def review_model(issue_labels, paths=()):
     """(preferred, fallback) reviewer models for a PR whose linked issue has these labels."""
     if "area:security" in issue_labels or automation(paths):
@@ -117,6 +145,20 @@ def assess(pr, issue_labels):
     since = max((i for i, b in enumerate(bodies) if CONFLICT_RESOLVED in b), default=-1)
     attempts = sum(CONFLICT_FAILED in b for b in bodies[since + 1:])
     with_builder = bool(issue_labels & WITH_BUILDER)
+    # Approved commits: the local records when given (production), else the comment markers (tests, listing).
+    approved = list(pr["approvedShas"]) if "approvedShas" in pr else [m.group(1) for b in bodies for m in APPROVED.finditer(b)]
+    head = pr.get("headCommit") or {}
+    parents = head.get("parents") or []
+    # The head is GitHub's own merge of main into an approved commit ("update branch": committed and signed by
+    # GitHub): no new code to review, only CI to wait for. A merge made by anyone else (a builder, the conflict
+    # resolver) may carry hand edits, so it is reviewed again.
+    update_of_approved = (len(parents) == 2 and any(parents[0].startswith(a) for a in approved)
+                          and head.get("committer") == GITHUB_COMMITTER and head.get("verified") is True)
+    head_approved = any(sha.startswith(a) for a in approved)
+    prot = protected(paths)
+    # CI must have really run on the head: right after an update GitHub can show no checks yet ("none").
+    ci_ready = ci == "green" or (ci == "none" and not pr.get("projectHasCI", True))
+    red_handled = MERGE_RED.format(sha=sha) in " ".join(bodies)
     return {
         "pr": pr["number"],
         "title": pr["title"],
@@ -126,18 +168,25 @@ def assess(pr, issue_labels):
         "ci": ci,
         "reviewed": reviewed,
         "rounds": sum(CHANGES_MARK in b for b in bodies),
-        "protected": protected(paths),
+        "protected": prot,
         "automation": automation(paths),
         "money": [p for p in paths if MONEY.match(p)],
         "model": preferred,
         "fallback": fallback,
         "conflicting": conflicting,
+        "project": project_of(paths),
+        "updates": sum(UPDATED in b for b in bodies),
+        "max_updates": MAX_UPDATES,
+        "red_main_fix": RED_MAIN_LABEL in issue_labels,
+        "update_of_approved": update_of_approved,
+        "needs_merge": (head_approved or update_of_approved) and not prot and not conflicting and not pr.get("isDraft")
+                       and not with_builder and (ci_ready or (ci == "red" and not red_handled)),
         "conflict_attempts": attempts,
         "conflict_model": "sonnet" if attempts == 0 else "opus",
         "needs_resolve": conflicting and not pr.get("isDraft") and not with_builder
                          and attempts < MAX_CONFLICT_ATTEMPTS,
         "needs_review": not reviewed and not conflicting and ci != "running" and not pr.get("isDraft")
-                        and not with_builder,
+                        and not with_builder and not update_of_approved,
     }
 
 
@@ -155,6 +204,19 @@ def main():
     prs = gh_json("pr", "list", "--state", "open", "--limit", "50", "--json",
                   "number,title,body,headRefName,headRefOid,isDraft,mergeable,statusCheckRollup,comments,files")
     cache = {}
+    records = os.listdir(APPROVALS_DIR) if os.path.isdir(APPROVALS_DIR) else []
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    for pr in prs:
+        pr["approvedShas"] = [r.split("-", 1)[1] for r in records if r.startswith(f"{pr['number']}-")]
+        proj = project_of([f["path"] for f in pr.get("files") or []])
+        pr["projectHasCI"] = bool(proj) and os.path.exists(os.path.join(root, ".github", "workflows", f"{proj}-ci.yml"))
+        if pr["approvedShas"] and not any(pr["headRefOid"].startswith(s) for s in pr["approvedShas"]):
+            try:  # who made the head commit: only GitHub's own update-branch merge skips the review
+                pr["headCommit"] = gh_json("api", f"repos/{{owner}}/{{repo}}/commits/{pr['headRefOid']}", "--jq",
+                                           "{parents: [.parents[].sha], committer: .commit.committer.email,"
+                                           " verified: .commit.verification.verified}")
+            except subprocess.CalledProcessError:
+                pr["headCommit"] = {}
 
     def labels_of(pr):
         m = CLOSES.search(pr.get("body") or "")
@@ -174,6 +236,9 @@ def main():
         if not todo:
             sys.exit(1)
         print(json.dumps(todo[0]))
+        return
+    if "--merge-ready-json" in sys.argv:  # every approved-and-updated PR whose CI has finished
+        print(json.dumps([t for t in q if t["needs_merge"]]))
         return
     if "--next-json" in sys.argv:
         todo = [t for t in q if t["needs_review"]]
