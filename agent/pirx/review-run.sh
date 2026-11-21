@@ -37,6 +37,20 @@ back_to_builder() {  # back_to_builder "<why>"
   else
     gh issue edit "$issue" --remove-label agent:review --add-label agent:todo >/dev/null
     gh issue comment "$issue" --body "↩️ Back to the builder: $1. See the review on PR #$pr." >/dev/null
+    escalate_on_changes
+  fi
+}
+escalate_on_changes() {  # Sonnet first: the next build runs on Opus after 1 round with changes (security) or 2 (others)
+  local labels cur need=2
+  labels="$(gh issue view "$issue" --json labels -q '[.labels[].name] | join(" ")' 2>/dev/null)"
+  cur="$(grep -o 'model:[a-z]*' <<<"$labels" | head -1)"
+  [[ "$cur" == model:opus || "$cur" == model:pirx ]] && return 0
+  [[ " $labels " == *" area:security "* ]] && need=1
+  if (( rounds + 1 >= need )); then
+    [[ -n "$cur" ]] && gh issue edit "$issue" --remove-label "$cur" >/dev/null 2>&1
+    gh issue edit "$issue" --add-label model:opus >/dev/null
+    gh issue comment "$issue" --body "⬆️ Next build on Opus: $((rounds + 1)) review round(s) with changes on ${cur#model:}." >/dev/null
+    log "review #$pr: issue #$issue escalated to Opus after $((rounds + 1)) round(s)"
   fi
 }
 
@@ -75,6 +89,7 @@ prompt="$(cat "$RUNNER_DIR/agent/review-prompt.md")
 runlog="$RUNTIME/logs/review-$pr-$(date -u +%Y%m%dT%H%M%SZ).jsonl"
 log "review #$pr: starts ($model, ${sha:0:7}, protected $prot)"
 (cd "$work" && claude -p "$prompt" --model "$model" --output-format stream-json --verbose \
+   --max-budget-usd "$(run_budget review "$model")" \
    --settings "$RUNNER_DIR/agent/pirx/claude-settings.json") > "$runlog" 2>&1
 
 beat review

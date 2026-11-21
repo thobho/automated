@@ -8,7 +8,8 @@
 # everything else is refused. (Claude Code's OS sandbox cannot start on Ubuntu 26.04 without relaxing its
 # user-namespace restriction, which the owner chose not to do.)
 # This script holds the slot and the claim, records the outcome and escalates:
-# 3 failed sonnet/haiku runs -> model:opus; 3 failed opus runs -> agent:blocked.
+# 1 failed sonnet/haiku run -> model:opus (Sonnet first, see workspace/docs/agent-fleet-practices.md);
+# 3 failed opus runs -> agent:blocked. A run that hits its --max-budget-usd cap (run_budget) is a failed run.
 # Runs stopped by a usage limit do not count as failures.
 set -uo pipefail
 source "$(dirname "$0")/common.sh"
@@ -36,22 +37,28 @@ prompt="$(cat "$RUNNER_DIR/agent/worker-prompt.md")
 
 log "#$num: claude run starts (model $model, $work)"
 (cd "$work" && claude -p "$prompt" --model "$model" --output-format stream-json --verbose \
+   --max-budget-usd "$(run_budget build "$model")" \
    --settings "$RUNNER_DIR/agent/pirx/claude-settings.json") > "$runlog" 2>&1
 rc=$?
 
 state="$(gh issue view "$num" --json labels -q '[.labels[].name | select(startswith("agent:"))] | join(",")')"
-limited=false
-tail -5 "$runlog" | grep -qiE 'usage limit|rate limit|limit reached|overloaded' && limited=true
-log "#$num: claude run ended (rc $rc, labels $state, usage-limited $limited)"
+limited=false; cap=false
+capped "$runlog" && cap=true
+[[ "$cap" == false ]] && tail -5 "$runlog" | grep -qiE 'usage limit|rate limit|limit reached|overloaded' && limited=true
+log "#$num: claude run ended (rc $rc, labels $state, usage-limited $limited, capped $cap)"
 
 if [[ "$state" == *agent:review* || "$state" == *agent:blocked* ]]; then
   status_update "Claude ($model) finished #$num: $state"
 elif [[ "$limited" == true ]]; then
   status_update "Claude ($model) paused on #$num by a usage limit; it resumes next run"
 else
-  gh issue comment "$num" --body "❌ Claude run ($model) ended without a PR (exit $rc). Log on pirx: \`$runlog\`. <!-- automated:fail:$model -->" >/dev/null
+  why="ended without a PR (exit $rc)"
+  [[ "$cap" == true ]] && why="stopped at its cost cap (\$$(run_budget build "$model"), API-equivalent) without a PR"
+  gh issue comment "$num" --body "❌ Claude run ($model) $why. Log on pirx: \`$runlog\`. <!-- automated:fail:$model -->" >/dev/null
   fails="$(fail_count "$num" "$model")"
-  if [[ "$spillover" != "true" && "$model" != "opus" && "$fails" -ge 3 ]]; then
+  # Sonnet first, Opus on a checkable failure: one failed cheaper run escalates (a review "changes" round
+  # escalates in review-run.sh).
+  if [[ "$spillover" != "true" && "$model" != "opus" && "$fails" -ge 1 ]]; then
     gh issue edit "$num" --remove-label "model:$model" >/dev/null 2>&1
     gh issue edit "$num" --add-label model:opus >/dev/null
     gh issue comment "$num" --body "⬆️ Escalated to Opus after $fails failed $model runs." >/dev/null
