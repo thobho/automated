@@ -46,6 +46,6 @@ Root helper (as `user`, once and after each change to `agent/pirx/root/`):
 ```
 
 ## Settings
-`~/.config/automated/pirx.env` (agent): `PIRX_SLOTS` (2 since the RAM upgrade to 11 GB), `PIRX_MIN_FREE_MB`, `OPENCODE_MODEL`, `OPENCODE_TIMEOUT_MIN`, `CLAUDE_MAX_RUN_H`, `AUTOMATED_RUNNER_REF`. Two slots need the agent memory cap of `setup-agent-user.sh` (default `MEM_HIGH=6G`, `MEM_MAX=7G`); with less RAM set `PIRX_SLOTS=1` and lower both.
+`~/.config/automated/pirx.env` (agent): `PIRX_SLOTS` (2 since the RAM upgrade to 11 GB), `PIRX_MIN_FREE_MB`, `OPENCODE_MODEL`, `OPENCODE_TIMEOUT_MIN`, `CLAUDE_MAX_RUN_H`, `AUTOMATED_RUNNER_REF`, and per-run cost caps `CLAUDE_CAP_<KIND>_<MODEL>` in API-equivalent dollars (defaults in `common.sh` `run_budget`: build Opus 15, build Sonnet 6, review Opus 3, review Sonnet 1.5, planner/heal 3, conflict 2, retro 1; a capped build is a failed run and escalates). Two slots need the agent memory cap of `setup-agent-user.sh` (default `MEM_HIGH=6G`, `MEM_MAX=7G`); with less RAM set `PIRX_SLOTS=1` and lower both.
 
 Logs: `~agent/runtime/automated/logs/` (`runner.log`, one file per run).

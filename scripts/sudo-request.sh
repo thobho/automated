@@ -23,4 +23,4 @@ done
 mkdir -p "$queue/pending"
 cp -- "$script" "$queue/pending/$id.sh"
 printf '%s\n' "$why" > "$queue/pending/$id.md"
-echo "queued $id. Next: label the issue agent:blocked and ask the owner to run: sudo scripts/owner-apply.sh"
+echo "queued $id. Next: label the issue agent:blocked; the owner approves it in the Claude session on pirx (scripts/SUDO-QUEUE.md)"

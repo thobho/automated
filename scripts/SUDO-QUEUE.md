@@ -13,16 +13,22 @@ the owner approves it. Nothing runs as root without the owner typing their passw
 3. On a later run, read the result in `/var/lib/automated-sudo/done/<id>.out` and `<id>.status`
    (or `rejected/<id>.*`) and continue. Ids cannot be reused; pick a new one to retry.
 
-## Owner
-```
-sudo ~/Projects/automated/scripts/owner-apply.sh          # review and run, one by one
-sudo ~/Projects/automated/scripts/owner-apply.sh --list   # look only
-```
-For each request you see the sha256, the reason and the full script, then `y` (run), `N` (reject) or `s` (leave pending).
+## Owner: approve in the Claude session on pirx (no SSH, no password)
+Ask the Claude session on pirx: "show the pending sudo requests". It runs
+`sudo -n /usr/local/sbin/automated-owner-apply --list` and shows each request's id, sha256, reason and full script.
+Then say "approve <id>" or "reject <id>"; it runs `--approve <id> <sha256>` (the sha it showed you, so a request
+changed in between is not run) or `--reject <id>`, and shows the output. It never approves on its own.
+
+This works once the installer has put `/usr/local/sbin/automated-owner-apply` and its sudoers rule in place
+(`agent/pirx/root/install-root-helper.sh`, the last step that needs your password).
+
+In a terminal the interactive mode still works: `sudo scripts/owner-apply.sh` shows each request and asks
+`y` (run), `N` (reject) or `s` (leave pending).
 The log is `/var/lib/automated-sudo/apply.log`.
 
 ## Why it is safe
-- The queue adds no `NOPASSWD` entry: `agent` cannot start the runner. (The only sudoers rule for `agent` is the root helper's, `agent/pirx/root/`, which runs a fixed list of verbs: restart listed services, install listed packages, reload the firewall, a rate-limited reboot. Everything else comes here.)
+- `agent` has no rule for the runner: only the owner may run `automated-owner-apply` without a password, and a
+  queued script runs only with the owner's `--approve <id> <sha256>` naming its exact content. (The only sudoers rule for `agent` is the root helper's, `agent/pirx/root/`, which runs a fixed list of verbs: restart listed services, install listed packages, reload the firewall, a rate-limited reboot. Everything else comes here.)
 - The script is copied to a root-owned temp dir before you see it; the copy is what runs, so the agent cannot swap it after your review.
 - Symlinks, files not owned by `agent`, bad ids and reused ids are skipped.
 - Results are written to a root-owned directory, never into agent-writable paths.
