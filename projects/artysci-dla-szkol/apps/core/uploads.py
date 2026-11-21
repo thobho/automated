@@ -16,6 +16,8 @@ from django.core.files.storage import storages
 from django.utils.translation import gettext_lazy as _
 from PIL import Image, ImageOps, UnidentifiedImageError
 
+from .imagemeta import ImageOrigin, read_origin
+
 MB = 1024 * 1024
 
 # kind -> (max bytes, allowed sniffed content types)
@@ -59,6 +61,9 @@ class StoredFile:
     content_type: str
     size: int
     visibility: str  # "private" or "public"
+    # What the original image said about itself, read before the metadata was stripped
+    # (None for files that are not images). Only derived flags may be kept from it.
+    origin: ImageOrigin | None = None
 
 
 def sniff_content_type(head: bytes) -> str | None:
@@ -135,8 +140,11 @@ def store_upload(file: BinaryIO, *, kind: str, visibility: str) -> StoredFile:
     if content_type is None or content_type not in allowed:
         raise UploadRejected("bad_type", _("Ten typ pliku nie jest dozwolony."))
 
+    origin = None
     if content_type in PILLOW_FORMATS:
-        data = strip_image_metadata(file.read(), content_type)
+        original = file.read()
+        origin = read_origin(original)  # before the stripping below drops the metadata
+        data = strip_image_metadata(original, content_type)
         payload: File = ContentFile(data)
         size = len(data)
     else:
@@ -144,4 +152,6 @@ def store_upload(file: BinaryIO, *, kind: str, visibility: str) -> StoredFile:
 
     key = f"{kind}/{secrets.token_urlsafe(24)}.{EXTENSIONS[content_type]}"
     saved = storages[visibility].save(key, payload)
-    return StoredFile(key=saved, content_type=content_type, size=size, visibility=visibility)
+    return StoredFile(
+        key=saved, content_type=content_type, size=size, visibility=visibility, origin=origin
+    )

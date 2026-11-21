@@ -239,6 +239,12 @@ class TextStatus(models.TextChoices):
     BROKEN = "broken", _("PDF uszkodzony: nie można odczytać tekstu")
 
 
+class Orientation(models.TextChoices):
+    LANDSCAPE = "landscape", _("poziome")
+    PORTRAIT = "portrait", _("pionowe")
+    SQUARE = "square", _("kwadratowe")
+
+
 class Material(models.Model):
     """A source material of an artist (US-2.3A): a photo, a PDF or a YouTube/Vimeo link.
 
@@ -281,6 +287,18 @@ class Material(models.Model):
         _("przetwarzanie"), max_length=10, choices=ProcessingStatus.choices, blank=True
     )
     processing_message = models.CharField(_("komunikat"), max_length=300, blank=True)
+    # Quality checks (US-2.4, D109), written only by `artists.checks`. `width`/`height` above
+    # hold the size of a photo too. `origin_flags` are the flags decided at upload from the
+    # original's metadata (the metadata itself is never kept); `camera_metadata` is whether the
+    # original had camera data (None = unknown, e.g. photos from before the checks existed).
+    orientation = models.CharField(
+        _("układ"), max_length=10, choices=Orientation.choices, blank=True
+    )
+    flags = models.JSONField(_("uwagi"), default=list, blank=True)
+    origin_flags = models.JSONField(default=list, blank=True)
+    camera_metadata = models.BooleanField(null=True, blank=True)
+    phash = models.CharField(_("odcisk zdjęcia"), max_length=16, blank=True)
+    checks_version = models.PositiveSmallIntegerField(_("wersja sprawdzeń"), default=0)
     created_at = models.DateTimeField(_("utworzono"), default=timezone.now)
     scanned_at = models.DateTimeField(_("zeskanowano"), null=True, blank=True)
     # Set for photos and links copied by an import from the artist's website (US-2.2).
@@ -316,6 +334,33 @@ class Material(models.Model):
     @property
     def imported(self) -> bool:
         return self.source_import_id is not None
+
+
+class VideoFrame(models.Model):
+    """One frame of a ready video, a candidate for the main photo (US-2.4). The JPEG sits in
+    the private storage under `storage_key`; it is measured and flagged like a photo. Only
+    `artists.checks` creates frames; the artist can delete one, deleting the video removes all."""
+
+    material = models.ForeignKey(Material, on_delete=models.CASCADE, related_name="frames")
+    storage_key = models.CharField(_("klucz pliku"), max_length=255)
+    position_seconds = models.FloatField(_("moment filmu (s)"), default=0)
+    width = models.PositiveIntegerField(_("szerokość"), null=True, blank=True)
+    height = models.PositiveIntegerField(_("wysokość"), null=True, blank=True)
+    orientation = models.CharField(
+        _("układ"), max_length=10, choices=Orientation.choices, blank=True
+    )
+    flags = models.JSONField(_("uwagi"), default=list, blank=True)
+    phash = models.CharField(_("odcisk zdjęcia"), max_length=16, blank=True)
+    checks_version = models.PositiveSmallIntegerField(_("wersja sprawdzeń"), default=0)
+    created_at = models.DateTimeField(_("utworzono"), default=timezone.now)
+
+    class Meta:
+        verbose_name = _("klatka filmu")
+        verbose_name_plural = _("klatki filmów")
+        ordering = ("material_id", "position_seconds", "pk")
+
+    def __str__(self) -> str:
+        return f"VideoFrame {self.pk}"
 
 
 class UploadSession(models.Model):

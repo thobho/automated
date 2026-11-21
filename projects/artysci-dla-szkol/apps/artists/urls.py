@@ -44,6 +44,11 @@ urlpatterns = [
         views.material_delete,
         name="material_delete",
     ),
+    path(
+        "artysta/profil/materialy/klatki/<int:frame_id>/usun/",
+        views.frame_delete,
+        name="frame_delete",
+    ),
     path("artysta/profil/kwestionariusz/", views.questionnaire, name="questionnaire"),
     path("artysta/profil/import/", views.website_import_view, name="website_import"),
     path(
