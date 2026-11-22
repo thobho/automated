@@ -14,7 +14,9 @@ from apps.artists import services as artist_services
 from apps.quality.models import Generation
 
 from . import generation as generations
+from . import services
 from .content import page_content_for
+from .themes import Theme
 
 
 def _context(request) -> dict:
@@ -67,6 +69,27 @@ def preview(request):
     """The artist's own page rendered from `page_content_for`; not public, not indexed."""
     artist = artist_services.artist_for(request.user)
     content = page_content_for(artist)
-    response = render(request, "profiles/page.html", {"content": content, "noindex": True})
+    context = {
+        "content": content,
+        "noindex": True,
+        "theme_switch": True,
+        "theme_choices": Theme.choices,
+    }
+    response = render(request, "profiles/page.html", context)
     response["X-Robots-Tag"] = "noindex, nofollow"
     return response
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+def theme(request):
+    """Save the artist's own theme choice (owner only: the artist is the logged-in user)."""
+    artist = artist_services.artist_for(request.user)
+    try:
+        services.set_theme(artist, request.POST.get("theme", ""))
+    except services.InvalidTheme:
+        messages.error(request, _("Nieznany motyw."))
+    else:
+        messages.success(request, _("Zapisaliśmy motyw strony."))
+    return redirect("profiles:preview")

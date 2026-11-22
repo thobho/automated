@@ -6,10 +6,13 @@
 {% block head %}
   {% if noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
   {# Fonts and CSS are served by us (D11): no CDN, no external request from the page. #}
+  <link rel="stylesheet" href="{% static 'profiles/themes.css' %}">
   <link rel="stylesheet" href="{% static 'profiles/page.css' %}">
 {% endblock %}
 
 {% block content %}
+  {% if theme_switch %}{% include "profiles/_theme_switch.html" %}{% endif %}
+  <div class="artist-root" data-theme="{{ content.theme }}">
   <div class="artist-page">
     {% include "profiles/_start.html" %}
     <nav class="page-nav" aria-label="{% translate 'Sekcje strony' %}">
@@ -27,5 +30,6 @@
     {% if content.show_gallery %}{% include "profiles/_photos.html" %}{% endif %}
     {% if content.faq %}{% include "profiles/_faq.html" %}{% endif %}
     {% include "profiles/_inquiry.html" %}
+  </div>
   </div>
 {% endblock %}

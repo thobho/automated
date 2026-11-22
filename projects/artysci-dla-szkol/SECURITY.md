@@ -238,6 +238,11 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   as `offer_poster_orphan` without the key). Posters are malware-scanned like materials (T24:
   `poster_status`, an infected poster is deleted). Log lines carry a pseudonymised user and the
   offer id only.
+- **Page themes (T33, US-3.2)**: the theme switch `POST /panel/podglad/motyw/` is artist-only
+  (`role_required`), CSRF-protected and acts on the logged-in user's own artist (no id in the
+  URL). The value is checked against the closed `Theme` list (unknown = refused, nothing stored);
+  a stored unknown value renders the default. Themes are CSS custom properties in a static file,
+  selected by a `data-theme` attribute: no inline style, no external fonts or assets.
 - **Artist page template and owner preview (T32, US-3.1, D9, D10, D11)**: `/panel/podglad/`
   is artist-only (`role_required("artist")`, row in the permission matrix: anonymous -> login,
   institution and admin -> 403) and shows only the logged-in user's own artist (no id in the

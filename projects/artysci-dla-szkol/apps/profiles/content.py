@@ -12,6 +12,8 @@ from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 
+from .themes import DEFAULT_THEME, theme_or_default
+
 MIN_GALLERY_PHOTOS = 4  # US-3.1: a gallery needs at least four photos
 VISIBLE_OFFERS = 6  # the rest collapses under "Pokaż pozostałe"
 
@@ -101,8 +103,10 @@ class PageContent:
     videos: list[VideoItem] = field(default_factory=list)
     photos: list[PhotoItem] = field(default_factory=list)
     faq: list[FaqItem] = field(default_factory=list)
+    theme: str = DEFAULT_THEME.value  # slug; an unknown value falls back to the default
 
     def __post_init__(self):
+        self.theme = theme_or_default(self.theme)
         # A video with neither a file nor a safe link has nothing to play: drop it, so the
         # section (and its heading) disappears when nothing is left.
         self.videos = [v for v in self.videos if v.src or v.link_url]
@@ -172,6 +176,8 @@ def page_content_for(artist) -> PageContent:
     from apps.artists import materials, services
     from apps.artists.models import MaterialKind
 
+    from .services import theme_for
+
     offers = [
         OfferItem(o.title, o.description, _price_note(o), _offer_tags(o))
         for o in services.offers_for(artist)
@@ -203,4 +209,5 @@ def page_content_for(artist) -> PageContent:
         offers=offers,
         videos=videos,
         photos=photos,
+        theme=theme_for(artist),
     )
