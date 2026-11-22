@@ -31,7 +31,8 @@ from other `projects/` folders. Product overview and quick start: [README.md](RE
   (dev settings need PostgreSQL; see README for a one-line container).
 - Local stack: `make up-lite && make web` (or `make up-full`); see README "Local environment".
   Seed data is synthetic only (`example.invalid`), idempotent: `make seed`.
-- `uv run pytest --cov` — test settings, SQLite in memory unless `DATABASE_URL` is set.
+- `uv run pytest -q --tb=short apps/<name>` while working (quiet output saves context);
+  `uv run pytest --cov` once before the PR. Test settings, SQLite in memory unless `DATABASE_URL` is set.
 - `uv run ruff check . && uv run ruff format --check .`
 - `uv run python manage.py makemigrations --check --dry-run --settings=config.settings.test`
 - Coverage target: ≥85% on new code.
