@@ -523,8 +523,37 @@ A background job turns an artist's ready materials, questionnaire and offers int
   editing `validation.py` (the validator component) needs the same.
 - **Browser test:** `uv sync --group e2e && uv run pytest tests/e2e/test_generation.py
   --base-url http://127.0.0.1:<port> --artist-session <session key>` (skipped without a session).
-- Not here yet: hard rules and warnings (US-2.5B), repair and admin review (US-2.5C), preview and
-  editing (US-2.6).
+- Not here yet: repair rounds and the admin review queue (US-2.5C), preview and editing (US-2.6).
+
+### Hard-rule validator (US-2.5B)
+
+`apps/profiles/validator.py`: `validate_profile(result_json, sources) -> ValidationReport` with
+`hard` and `soft` lists of `Finding(rule, path, message, value)` and `ok` (true when `hard` is
+empty). Deterministic, no AI. `inputs.collect_sources(artist)` builds `Sources` from the same
+`build_input` as the AI call (plus the artist's own video links, which the AI never sees). It is
+the registered `validator:profile_checks` component, **v0.1** (`validation.py` + `validator.py`).
+After the schema check the job runs it: no hard finding = `gotowa`, any = `do przeglądu` (repair
+is US-2.5C). `Generation.report` holds the whole report as JSON; soft findings are also the
+generation's `warnings`.
+
+| Rule (code) | What is checked |
+| --- | --- |
+| `liczby i ceny tylko ze źródła` | every number in the public text fields appears in a source (site text, PDF text, video titles, questionnaire, offers, name and city); separators (`1 200`, `1.200`, `1200,00`) are normalised, units and currency are ignored (only the number counts); quotes are left to the next rule |
+| `opinie dosłownie` | each testimonial quote is a substring of a source after collapsing whitespace |
+| `zdjęcia i filmy tylko z materiałów artysty` | main photo, gallery photo and video ids, caption and testimonial material ids and offer ids belong to the artist's ready materials (a video frame counts as a photo); YouTube/Vimeo links in any text must be among the artist's own links |
+| `bez języka procesu i bez dodanych obietnic` | none of `BANNED_PROCESS_PHRASES` / `PROMISE_PHRASES` (case-insensitive) in the public text; quotes are exempt |
+| `fakty` | label and value of each fact ≤ `FACT_MAX_CHARS` (22), no parentheses |
+| `limity długości` | `LENGTH_LIMITS` per field (a text one character over is a finding) |
+
+Soft (report only, never change `ok`): `mało konkretny opis` (no digit, name, city or offer title
+in the description, or under 80 characters) and `brak sekcji` (facts, description, schools points,
+gallery photos, testimonials or FAQ empty).
+
+**Add a rule:** write `_rule_x(profile, sources) -> list[Finding]` in `validator.py`, add it to
+`HARD_RULES` or `SOFT_RULES`, keep thresholds and phrases as named constants, add a passing and a
+failing test (with the boundary value), bump `VALIDATOR_VERSION` in `generator_components.py` and
+run `manage.py generator_manifest --write` (the manifest test fails otherwise). Only rules listed
+in US-2.5 belong here.
 
 ## File storage
 

@@ -115,6 +115,8 @@ class Generation(models.Model):
     )
     result = models.JSONField(_("wynik"), null=True, blank=True)
     warnings = models.JSONField(_("ostrzeżenia"), default=list, blank=True)
+    # Validator report (US-2.5B): {"ok", "hard": [...], "soft": [...]}; None before it ran.
+    report = models.JSONField(_("raport walidatora"), null=True, blank=True)
     repair_rounds = models.PositiveSmallIntegerField(_("rundy poprawek"), default=0)
     started_at = models.DateTimeField(_("rozpoczęto"))
     finished_at = models.DateTimeField(_("zakończono"), null=True, blank=True)

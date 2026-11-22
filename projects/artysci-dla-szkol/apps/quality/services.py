@@ -163,13 +163,16 @@ def finish_generation(
     warnings: Iterable[str],
     repair_rounds: int,
     status: str,
+    report: dict | None = None,
 ) -> Generation:
-    """Close a running generation: result, warnings, rounds, times, AI model and cost."""
+    """Close a running generation: result, warnings, rounds, times, AI model and cost, and the
+    validator's report when there is one."""
     if status not in Generation.Status.values or status == Generation.Status.RUNNING:
         raise GenerationError(f"A generation cannot finish as {status!r}.")
     if repair_rounds < 0:
         raise GenerationError("repair_rounds cannot be negative.")
     warnings = [str(w) for w in warnings]
+    json.dumps(report)
     json.dumps(result)  # refuse what the JSON column could not store, before writing anything
     with transaction.atomic():
         locked = _running(generation)
@@ -181,6 +184,7 @@ def finish_generation(
         locked.status = status
         locked.result = result
         locked.warnings = warnings
+        locked.report = report
         locked.repair_rounds = repair_rounds
         locked.finished_at = finished_at
         locked.duration_ms = int((finished_at - locked.started_at).total_seconds() * 1000)
