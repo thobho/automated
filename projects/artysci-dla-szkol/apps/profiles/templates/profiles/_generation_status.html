@@ -7,6 +7,8 @@
     <p data-field="status"><strong>{% translate "trwa" %}</strong> – {% translate "generujemy Twój profil. Ten status odświeża się sam." %}</p>
   {% elif ready %}
     <p data-field="status"><strong>{% translate "gotowa" %}</strong> – {% translate "profil został wygenerowany." %}</p>
+  {% elif in_review %}
+    <p data-field="status"><strong>{% translate "do przeglądu" %}</strong> – {% translate "Profil czeka na przegląd" %}.</p>
   {% else %}
     <p data-field="status" role="alert"><strong>{% translate "błąd" %}</strong>{% for reason in generation.warnings %} – {{ reason }}{% endfor %}</p>
   {% endif %}

@@ -18,7 +18,7 @@ from axe_playwright_python.sync_playwright import Axe
 PAGE = "/artysta/profil/generowanie/"
 
 
-def _seed_artist(finished: bool):
+def _seed_artist(finished: bool, review: bool = False):
     from django.conf import settings
     from django.test import Client
 
@@ -30,7 +30,11 @@ def _seed_artist(finished: bool):
     artist = make_seed_artist(f"e2e-gen-{uuid.uuid4().hex[:8]}@example.invalid")
     if finished:
         record = quality.start_generation(artist, Generation.Trigger.MANUAL, COMPONENTS)
-        quality.finish_generation(record, valid_profile(), [], 0, Generation.Status.READY)
+        if review:  # hard findings left after the repair rounds: the text must stay hidden
+            profile = valid_profile(hero={**valid_profile()["hero"], "headline": "TAJNY-NAGLOWEK"})
+            quality.finish_generation(record, profile, [], 2, Generation.Status.REVIEW)
+        else:
+            quality.finish_generation(record, valid_profile(), [], 0, Generation.Status.READY)
     client = Client()
     client.force_login(artist.user)
     return settings.SESSION_COOKIE_NAME, client.cookies[settings.SESSION_COOKIE_NAME].value
@@ -59,6 +63,29 @@ def new_artist(django_db_blocker):
 def artist_with_ready_profile(django_db_blocker):
     with django_db_blocker.unblock():
         yield _seed_artist(finished=True)
+
+
+@pytest.fixture
+def artist_waiting_for_review(django_db_blocker):
+    with django_db_blocker.unblock():
+        yield _seed_artist(finished=True, review=True)
+
+
+def test_artist_sees_that_the_profile_waits_for_review(
+    browser, base_url, artist_waiting_for_review, shot_dir
+):
+    context, page = _page(browser, base_url, artist_waiting_for_review)
+    response = page.goto(base_url + PAGE)
+    assert response.status == 200
+    block = page.locator("#generation-status")
+    assert block.get_attribute("data-status") == "review"
+    assert block.get_attribute("hx-get") is None
+    assert "Profil czeka na przegląd" in block.inner_text()
+    assert "gotowa" not in block.inner_text()
+    assert "TAJNY-NAGLOWEK" not in page.content()
+    page.screenshot(path=str(shot_dir / "generation-review.png"), full_page=True)
+    _no_serious_axe_violations(page)
+    context.close()
 
 
 def test_generation_page_is_not_public(page, base_url):

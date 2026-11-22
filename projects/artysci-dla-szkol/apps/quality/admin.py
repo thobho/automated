@@ -1,11 +1,13 @@
 import json
 
-from django.contrib import admin
+from django import forms
+from django.contrib import admin, messages
+from django.contrib.admin.helpers import ActionForm
 from django.utils.html import format_html_join
 from django.utils.translation import gettext_lazy as _
 
 from . import services
-from .models import Generation, GeneratorComponentVersion
+from .models import Generation, GenerationReview, GeneratorComponentVersion, ReviewQueue
 
 
 class ReadOnlyAdmin(admin.ModelAdmin):
@@ -79,3 +81,87 @@ class GeneratorComponentVersionAdmin(ReadOnlyAdmin):
     list_display = ("kind", "name", "version", "content_hash", "created_at")
     list_filter = ("kind", "name")
     readonly_fields = ("kind", "name", "version", "content_hash", "files", "content", "created_at")
+
+
+class ReviewActionForm(ActionForm):
+    note = forms.CharField(label=_("Notatka (wymagana)"), required=False, max_length=2000)
+
+
+@admin.register(ReviewQueue)
+class ReviewQueueAdmin(ReadOnlyAdmin):
+    """Generations waiting for manual review (`do przeglądu`), with the findings left after the
+    repair rounds. Staff can close one as `gotowa` or `błąd` with a note (audited)."""
+
+    list_display = ("id", "started_at", "artist", "repair_rounds", "remaining_findings", "stopped")
+    list_select_related = ("artist",)
+    action_form = ReviewActionForm
+    actions = ["mark_ready", "mark_error"]
+    fields = (
+        "artist",
+        "status",
+        "repair_rounds",
+        "remaining_findings",
+        "stopped",
+        "warnings_list",
+        "started_at",
+        "finished_at",
+        "result_json",
+    )
+    readonly_fields = fields
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).filter(status=Generation.Status.REVIEW)
+
+    def has_review_permission(self, request):
+        user = request.user
+        return user.is_active and user.is_staff and user.has_perm("quality.view_reviewqueue")
+
+    @admin.display(description=_("pozostałe naruszenia"))
+    def remaining_findings(self, obj):
+        hard = (obj.report or {}).get("hard", [])
+        return format_html_join(
+            " | ", "[{}] {}: {}", ((h["rule"], h["path"], h["message"]) for h in hard)
+        )
+
+    @admin.display(description=_("powód przerwania poprawek"))
+    def stopped(self, obj):
+        return ((obj.report or {}).get("repair") or {}).get("stopped") or "—"
+
+    @admin.display(description=_("ostrzeżenia"))
+    def warnings_list(self, obj):
+        return "; ".join(obj.warnings) or "—"
+
+    @admin.display(description=_("wynik"))
+    def result_json(self, obj):
+        return json.dumps(obj.result, ensure_ascii=False, indent=2)
+
+    def _review(self, request, queryset, decision):
+        note = (request.POST.get("note") or "").strip()
+        if not note:
+            self.message_user(request, _("Podaj notatkę."), level=messages.ERROR)
+            return
+        done = 0
+        for generation in queryset:
+            try:
+                services.review_generation(generation, request.user, decision, note)
+            except (services.GenerationError, PermissionError) as exc:
+                self.message_user(request, str(exc), level=messages.ERROR)
+            else:
+                done += 1
+        if done:
+            self.message_user(request, _("Zamknięto generacji: %(n)s.") % {"n": done})
+
+    @admin.action(description=_("Oznacz jako gotowa (z notatką)"), permissions=["review"])
+    def mark_ready(self, request, queryset):
+        self._review(request, queryset, GenerationReview.Decision.READY)
+
+    @admin.action(description=_("Oznacz jako błąd (z notatką)"), permissions=["review"])
+    def mark_error(self, request, queryset):
+        self._review(request, queryset, GenerationReview.Decision.ERROR)
+
+
+@admin.register(GenerationReview)
+class GenerationReviewAdmin(ReadOnlyAdmin):
+    list_display = ("created_at", "generation", "decision", "reviewer", "note")
+    list_filter = ("decision",)
+    readonly_fields = ("generation", "reviewer", "decision", "note", "created_at")

@@ -9,11 +9,13 @@ from apps.quality.registry import Component, registry
 
 PROFILE_VERSION = "0.2"
 
+# v0.3 adds the repair task (US-2.5C); the schema stays v0.2.
+INSTRUCTIONS_VERSION = "0.3"
 INSTRUCTIONS = registry.register(
     Component(
         "instructions",
         "profile_draft",
-        PROFILE_VERSION,
+        INSTRUCTIONS_VERSION,
         files=("apps/profiles/prompts/profile_instructions.md",),
     )
 )
