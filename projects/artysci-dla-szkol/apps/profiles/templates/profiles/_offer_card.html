@@ -1,0 +1,13 @@
+{% load i18n %}
+<li class="offer">
+  <h3>{{ offer.title }}</h3>
+  {% if offer.description %}<p>{{ offer.description }}</p>{% endif %}
+  {% if offer.tags %}
+    <ul class="tags">{% for tag in offer.tags %}<li>{{ tag }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% if offer.price_note %}
+    <p class="offer__price">{{ offer.price_note }}</p>
+  {% elif not block.price_note_once %}
+    <p class="offer__price">{% translate "Cena na zapytanie" %}</p>
+  {% endif %}
+</li>

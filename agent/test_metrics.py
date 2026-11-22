@@ -40,6 +40,22 @@ class Metrics(unittest.TestCase):
         self.assertIn("p CI red", out)
         self.assertNotIn("q CI red", out)
 
+    def test_cost_per_task_counts_builds_reviews_and_escalation(self):
+        b1 = metrics.parse_run([result(0.5, 60000, "claude-sonnet-5-5")])
+        b2 = metrics.parse_run([result(3.0, 60000)])
+        rv = metrics.parse_run([result(0.4, 60000)])
+        prs = [{"number": 9, "headRefName": "agent/5-x", "comments": [{"body": "<!-- automated:review-changes -->"}]},
+               {"number": 10, "headRefName": "agent/6-y", "comments": []}]
+        by = {("claude", "5"): [b1, b2], ("review", "9"): [rv, rv], ("claude", "6"): [b1]}
+        out = metrics.cost_per_task(prs, by)
+        self.assertEqual(out["opus"], {"tasks": 1, "first_pass": 0, "per_task": 4.3, "escalated": 1})
+        self.assertEqual(out["sonnet"], {"tasks": 1, "first_pass": 100, "per_task": 0.5, "escalated": 0})
+
+    def test_render_per_task_table(self):
+        out = metrics.render({"prs": {"merged": 0}, "runs": {}, "main": {},
+                              "per_task": {"sonnet": {"tasks": 3, "first_pass": 67, "per_task": 1.1, "escalated": 1}}})
+        self.assertIn("| sonnet | 3 | 67% | $1.10 | 1 |", out)
+
     def test_render(self):
         out = metrics.render({"prs": {"merged": 0}, "runs": {"claude": {"runs": 1, "errors": 0, "median_min": 9.0,
                                                                         "cost": 3.2}}, "main": {"p": "failure"}})

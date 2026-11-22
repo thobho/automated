@@ -37,7 +37,7 @@ prompt="$(cat "$RUNNER_DIR/agent/retro-prompt.md")
 $(head -c 40000 "$digest")"
 log "retro: starts (sonnet)"
 (cd "$work" && claude -p "$prompt" --model sonnet --output-format stream-json --verbose \
-   --settings "$RUNNER_DIR/agent/pirx/retro-settings.json") > "$runlog" 2>&1
+   --max-budget-usd "$(run_budget retro sonnet)" --settings "$RUNNER_DIR/agent/pirx/retro-settings.json") > "$runlog" 2>&1
 
 changed="$(git -C "$work" status --porcelain)"
 if [[ -z "$changed" ]]; then log "retro: no rule changes"; status_update "Weekly retro: no new rules"; exit 0; fi

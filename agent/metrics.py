@@ -27,7 +27,8 @@ RUNTIME = os.path.expanduser(os.environ.get("AUTOMATED_RUNTIME", "~/runtime/auto
 CACHE = os.path.join(RUNTIME, "state", "metrics.json")
 DAYS = 7
 CHANGES = "<!-- automated:review-changes -->"
-LOG_NAME = re.compile(r"^(claude|review|planner|conflict|retro|heal)-")
+LOG_NAME = re.compile(r"^(claude|review|planner|conflict|retro|heal)-(?:(\d+)-)?")
+BRANCH_ISSUE = re.compile(r"^agent/(\d+)-")
 
 
 def gh_json(*args):
@@ -83,19 +84,46 @@ def summarize_prs(prs):
             "returns": sum(rounds)}
 
 
+def cost_per_task(prs, by_number):
+    """Cost of each merged task: every build run of its issue plus the reviews and conflict fixes of its PR,
+    grouped by the model of the last build (an escalated task counts under Opus). by_number maps
+    (kind, number) -> [parsed runs]. Returns {model: {tasks, first_pass, per_task, escalated}}."""
+    groups = {}
+    for pr in prs:
+        m = BRANCH_ISSUE.match(pr.get("headRefName", ""))
+        builds = by_number.get(("claude", m.group(1)), []) if m else []
+        if not builds:
+            continue
+        model = builds[-1]["model"]
+        cost = sum(r["cost"] for r in builds)
+        cost += sum(r["cost"] for k in ("review", "conflict") for r in by_number.get((k, str(pr["number"])), []))
+        rounds = sum(CHANGES in (c.get("body") or "") for c in pr.get("comments") or [])
+        g = groups.setdefault(model, {"tasks": 0, "first": 0, "cost": 0.0, "escalated": 0})
+        g["tasks"] += 1
+        g["first"] += rounds == 0
+        g["cost"] += cost
+        g["escalated"] += len({r["model"] for r in builds}) > 1
+    return {m: {"tasks": g["tasks"], "first_pass": round(100 * g["first"] / g["tasks"]),
+                "per_task": round(g["cost"] / g["tasks"], 2), "escalated": g["escalated"]} for m, g in groups.items()}
+
+
 def collect(now):
     since = datetime.fromtimestamp(now, timezone.utc) - timedelta(days=DAYS)
-    runs = []
-    for path in glob.glob(os.path.join(RUNTIME, "logs", "*.jsonl")):
+    runs, by_number = [], {}
+    for path in sorted(glob.glob(os.path.join(RUNTIME, "logs", "*.jsonl"))):  # names sort by run time
         m = LOG_NAME.match(os.path.basename(path))
-        if not m or os.path.getmtime(path) < since.timestamp():
+        if not m:
             continue
         try:
             with open(path, errors="replace") as f:
                 r = parse_run(f)
         except OSError:
             continue
-        if r:
+        if not r:
+            continue
+        if m.group(2):  # all kept logs (30 days) count toward a task merged in the window
+            by_number.setdefault((m.group(1), m.group(2)), []).append(r)
+        if os.path.getmtime(path) >= since.timestamp():
             runs.append((m.group(1), r))
     prs = gh_json("pr", "list", "-R", REPO, "--state", "merged", "--limit", "100",
                   "--search", f"merged:>={since:%Y-%m-%d}", "--json", "number,headRefName,createdAt,mergedAt,comments")
@@ -110,7 +138,8 @@ def collect(now):
             continue
         if last:
             red[name[:-len("-ci.yml")]] = last[0]["conclusion"]
-    return {"ts": now, "runs": summarize_runs(runs), "prs": summarize_prs(prs), "main": red}
+    return {"ts": now, "runs": summarize_runs(runs), "prs": summarize_prs(prs), "main": red,
+            "per_task": cost_per_task(prs, by_number)}
 
 
 def cached(now, max_age=3600):
@@ -140,6 +169,14 @@ def render(data):
                      f"{p['returns']} return(s) to the builder")
     else:
         lines.append("- No task PR merged in the last 7 days.")
+    per = data.get("per_task") or {}
+    if per:
+        lines += ["", "| Builder model | merged tasks | approved on first review | cost per merged task | escalated |",
+                  "|---|---|---|---|---|"]
+        for model in sorted(per, key=lambda k: -per[k]["tasks"]):
+            g = per[model]
+            lines.append(f"| {model} | {g['tasks']} | {g['first_pass']}% | ${g['per_task']:.2f} | {g['escalated']} |")
+        lines.append("")
     main = data.get("main", {})
     red = [k for k, v in main.items() if v not in ("success", "skipped")]  # timed_out, cancelled, ... are not green
     lines.append("- Main: " + (", ".join(f"🔴 **{k} CI red**" for k in red) if red

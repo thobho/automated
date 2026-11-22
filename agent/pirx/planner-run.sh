@@ -62,7 +62,7 @@ before="$(gh issue list --state all --limit 500 --json body --jq '[.[] | select(
 log "planner: $model plans $ids for $project ($ms_name)"
 beat planner
 (cd "$RUNNER_DIR" && claude -p "$prompt" --model "$model" --output-format stream-json --verbose \
-  --settings "$RUNNER_DIR/agent/pirx/planner-settings.json" > "$runlog" 2>&1)
+  --max-budget-usd "$(run_budget planner "$model")" --settings "$RUNNER_DIR/agent/pirx/planner-settings.json" > "$runlog" 2>&1)
 
 after="$(gh issue list --state all --limit 500 --json body --jq '[.[] | select(.body | test("(?i)story:"))] | length')"
 created=$(( after - before ))

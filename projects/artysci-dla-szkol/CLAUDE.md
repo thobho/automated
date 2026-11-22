@@ -83,3 +83,6 @@ yourself; do not rely on automatic skill loading, which is unreliable in a subfo
   CSRF-protected (no `csrf_exempt`); never put e-mails, tokens or IPs into log messages or URLs.
 - Time zone is Europe/Warsaw with `USE_TZ = True`: store aware datetimes, use `django.utils.timezone`.
 - Hosting is undecided (D91): no provider-specific code or settings.
+
+## Lessons from reviews
+- Account flows that take an e-mail address (change e-mail, register, reset) must leave the same state and show the same UI whether the address is free or taken: no early return that skips creating or closing the `EmailChangeRequest`. Add a test that compares both cases (PR #116).

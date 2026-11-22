@@ -1,0 +1,21 @@
+{% load i18n %}
+{% with block=content.offer_block %}
+<section id="offer" aria-labelledby="offer-h">
+  <h2 id="offer-h">{% translate "Oferta" %}</h2>
+  {% if block.price_note_once %}
+    <p class="note">{% translate "Ceny ustala artysta indywidualnie: zapytaj o wycenę dla swojej placówki." %}</p>
+  {% endif %}
+  <ul class="offers">
+    {% for offer in block.visible %}{% include "profiles/_offer_card.html" %}{% endfor %}
+  </ul>
+  {% if block.more %}
+    {# <details> works without script (strict CSP). #}
+    <details class="offers-more">
+      <summary>{% translate "Pokaż pozostałe" %} ({{ block.more|length }})</summary>
+      <ul class="offers">
+        {% for offer in block.more %}{% include "profiles/_offer_card.html" %}{% endfor %}
+      </ul>
+    </details>
+  {% endif %}
+</section>
+{% endwith %}
