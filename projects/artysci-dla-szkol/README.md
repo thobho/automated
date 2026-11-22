@@ -524,7 +524,7 @@ A background job turns an artist's ready materials, questionnaire and offers int
 - **Browser test:** `uv sync --group e2e && uv run pytest tests/e2e/test_generation.py
   --base-url http://127.0.0.1:<port> --artist-session <session key>` (skipped without a session).
 - Repair rounds and the admin review fallback: see "Repair loop and manual review (US-2.5C)" below.
-- Not here yet: preview and editing (US-2.6).
+- Preview editing, locks and versions: see "Preview editing" below (US-2.6).
 
 ### Hard-rule validator (US-2.5B)
 
@@ -709,6 +709,23 @@ App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
   the provider before the click. Uploaded video is a native `<video>`.
 - Owner-only preview: `GET /panel/podglad/` (artist role), `noindex` meta + `X-Robots-Tag`.
   Publishing and the public URL are US-2.8.
+
+## Preview editing, locks and versions (US-2.6)
+
+- `PageVersion` (`apps/profiles/models.py`) stores the editable texts (tagline, facts, about,
+  "for schools", FAQ) as JSON, a number, a source (`generated|edited|regenerated|restored`) and the
+  locked field paths (`about`, `facts.0`, `faq.1.answer`). The newest version is current. A `gotowa`
+  run (or an admin-approved one) creates version 1+; a held `do przeglądu` run creates none.
+  Photos, videos and offers always come live from the artist's data.
+- `apps/profiles/pages.py`: `edit_field` (validated with the generator's length limits; facts max 22
+  characters, no brackets; the artist's own numbers are not checked), `unlock`, `restore`
+  (a new version, current locks kept), `apply_locks`. Max 10 versions; the oldest go, never the current.
+- `apps/profiles/sections.py`: regenerate one section (`tagline|facts|about|schools|faq`) as a
+  background job on the AI queue (`trigger=section` run in the registry, counts against the daily
+  cost cap). Locked fields are passed as fixed text and kept; up to 2 repair rounds; on failure or
+  cap no version is created and a Polish reason is shown. Instructions are v0.4.
+- Routes (artist only, POST + CSRF): `/panel/podglad/{edycja,odblokuj,sekcja,przywroc}/`,
+  status `GET /panel/podglad/sekcja/status/` (HTMX).
 
 ## Page themes (US-3.2)
 
