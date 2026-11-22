@@ -4,7 +4,6 @@ from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.helpers import ActionForm
 from django.utils.html import format_html_join
-from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 from . import services
@@ -121,7 +120,7 @@ class ReviewQueueAdmin(ReadOnlyAdmin):
     def remaining_findings(self, obj):
         hard = (obj.report or {}).get("hard", [])
         return format_html_join(
-            mark_safe("<br>"), "[{}] {}: {}", ((h["rule"], h["path"], h["message"]) for h in hard)
+            " | ", "[{}] {}: {}", ((h["rule"], h["path"], h["message"]) for h in hard)
         )
 
     @admin.display(description=_("powód przerwania poprawek"))
