@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Wycofanie strony" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Wycofać stronę?" %}</h1>
+  <p>{% translate "Strona przestanie być dostępna od razu i zniknie z list. Adres zostanie zarezerwowany dla Ciebie: po ponownej publikacji będzie ten sam." %}</p>
+  <form method="post" action="{% url 'profiles:withdraw' %}">
+    {% csrf_token %}
+    <button type="submit">{% translate "Tak, wycofaj stronę" %}</button>
+  </form>
+  <p><a href="{% url 'profiles:publication' %}">{% translate "Anuluj" %}</a></p>
+{% endblock %}

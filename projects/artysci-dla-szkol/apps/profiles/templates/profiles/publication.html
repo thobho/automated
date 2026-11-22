@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Publikacja strony" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Publikacja strony" %}</h1>
+
+  {% if artist.publication_status == "published" %}
+    <p data-state="published">
+      {% translate "Strona jest opublikowana" %}:
+      <a href="{% url 'profiles:public' artist.slug %}" data-public-link>{{ request.scheme }}://{{ request.get_host }}{% url 'profiles:public' artist.slug %}</a>
+    </p>
+    {% if unpublished_changes %}
+      <p data-unpublished>{% translate "Masz zmiany, których nie widać jeszcze publicznie." %}</p>
+    {% endif %}
+    {% if blockers %}
+      {% include "profiles/_publication_blockers.html" %}
+    {% else %}
+      <form method="post" action="{% url 'profiles:publish_changes' %}">
+        {% csrf_token %}
+        <button type="submit">{% translate "Opublikuj zmiany" %}</button>
+      </form>
+    {% endif %}
+    <p><a class="button" href="{% url 'profiles:withdraw_confirm' %}">{% translate "Wycofaj stronę" %}</a></p>
+  {% else %}
+    <p data-state="{{ artist.publication_status }}">
+      {% if artist.publication_status == "withdrawn" %}
+        {% translate "Strona jest wycofana: nie jest widoczna publicznie. Możesz opublikować ją ponownie pod tym samym adresem." %}
+      {% else %}
+        {% translate "Strona nie jest jeszcze opublikowana." %}
+      {% endif %}
+    </p>
+    {% if blockers %}
+      {% include "profiles/_publication_blockers.html" %}
+    {% else %}
+      <form method="post" action="{% url 'profiles:publish' %}">
+        {% csrf_token %}
+        <button type="submit">{% translate "Opublikuj" %}</button>
+      </form>
+    {% endif %}
+  {% endif %}
+
+  <p><a href="{% url 'profiles:preview' %}">{% translate "Zobacz podgląd strony" %}</a></p>
+  <p><a href="{% url 'artists:start' %}">{% translate "Wróć do kreatora" %}</a></p>
+{% endblock %}

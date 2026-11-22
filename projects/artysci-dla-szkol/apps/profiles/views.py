@@ -7,14 +7,14 @@ from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
-from django.views.decorators.cache import never_cache
+from django.views.decorators.cache import cache_control, never_cache
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
 from apps.accounts.permissions import role_required
 from apps.artists import services as artist_services
 from apps.quality.models import Generation
 
-from . import completeness, pages, sections, services
+from . import completeness, pages, publication, sections, services
 from . import generation as generations
 from .models import PageVersion
 from .themes import Theme
@@ -211,3 +211,79 @@ def theme(request):
     else:
         messages.success(request, _("Zapisaliśmy motyw strony."))
     return redirect("profiles:preview")
+
+
+# --- publication (US-2.8) ------------------------------------------------------------------------
+
+
+@never_cache
+@require_http_methods(["GET", "HEAD"])
+@role_required("artist")
+def publication_page(request):
+    artist = artist_services.artist_for(request.user)
+    context = {
+        "artist": artist,
+        "blockers": publication.publication_blockers(artist),
+        "unpublished_changes": publication.has_unpublished_changes(artist),
+    }
+    return render(request, "profiles/publication.html", context)
+
+
+@never_cache
+@require_http_methods(["GET", "HEAD"])
+@role_required("artist")
+def withdraw_confirm(request):
+    """Asks before the page is taken down; the action itself is the POST below."""
+    artist = artist_services.artist_for(request.user)
+    return render(request, "profiles/withdraw_confirm.html", {"artist": artist})
+
+
+def _run(request, action, success):
+    artist = artist_services.artist_for(request.user)
+    try:
+        action(artist)
+    except publication.PublicationRefused as exc:
+        messages.error(request, exc.message)
+    else:
+        messages.success(request, success)
+    return redirect("profiles:publication")
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+def publish(request):
+    return _run(
+        request,
+        lambda artist: publication.publish(artist, actor=request.user),
+        _("Strona jest opublikowana."),
+    )
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+def publish_changes(request):
+    return _run(request, publication.update_published, _("Opublikowaliśmy zmiany."))
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+def withdraw(request):
+    return _run(
+        request,
+        lambda artist: publication.withdraw(artist, actor=request.user),
+        _("Strona została wycofana i nie jest już dostępna."),
+    )
+
+
+# `no-cache`: a cache may keep the page but must ask the server first, so a withdrawal is seen
+# at once. A draft, withdrawn or unknown slug gives the same 404.
+@cache_control(no_cache=True)
+@require_GET
+def public_page(request, slug):
+    content = publication.public_page(slug)
+    if content is None:
+        raise Http404
+    return render(request, "profiles/page.html", {"content": content, "noindex": False})

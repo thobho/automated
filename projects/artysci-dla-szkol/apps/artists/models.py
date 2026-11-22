@@ -31,6 +31,21 @@ class Audience(models.TextChoices):
     FAMILIES = "families", _("rodziny")
 
 
+class PublicationStatus(models.TextChoices):
+    """Where the artist's public page stands (US-2.8)."""
+
+    DRAFT = "draft", _("szkic")
+    PUBLISHED = "published", _("opublikowana")
+    WITHDRAWN = "withdrawn", _("wycofana")
+
+
+class ArtistQuerySet(models.QuerySet):
+    def published(self):
+        """The one definition of "publicly visible": drafts and withdrawn pages are excluded.
+        The public route and the future catalog (US-4.1) must both use this."""
+        return self.filter(publication_status=PublicationStatus.PUBLISHED)
+
+
 class Artist(models.Model):
     """An artist account's profile record: one account = one artist (D2).
 
@@ -65,6 +80,17 @@ class Artist(models.Model):
     # Colour theme of the public page (US-3.2): a slug from `profiles.themes.Theme`, empty = the
     # artist has not chosen. Only `profiles.services.set_theme()` writes it.
     theme = models.CharField(_("motyw strony"), max_length=32, blank=True)
+
+    # Publication (US-2.8): only `profiles.publication` writes these. The slug is made once on
+    # the first publication, never changes and is never reused (the row keeps it after withdrawal).
+    slug = models.SlugField(_("adres strony"), max_length=80, unique=True, null=True, blank=True)
+    publication_status = models.CharField(
+        max_length=12, choices=PublicationStatus.choices, default=PublicationStatus.DRAFT
+    )
+    published_at = models.DateTimeField(null=True, blank=True)
+    withdrawn_at = models.DateTimeField(null=True, blank=True)
+
+    objects = ArtistQuerySet.as_manager()
 
     class Meta:
         verbose_name = _("artysta")
