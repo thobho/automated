@@ -4,6 +4,7 @@ There is no id in the URLs: an artist only ever sees the status of their own lat
 """
 
 from django.contrib import messages
+from django.http import Http404
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
@@ -14,8 +15,8 @@ from apps.artists import services as artist_services
 from apps.quality.models import Generation
 
 from . import generation as generations
-from . import services
-from .content import page_content_for
+from . import pages, sections, services
+from .models import PageVersion
 from .themes import Theme
 
 
@@ -62,22 +63,126 @@ def generation_start(request):
     return redirect("profiles:generation")
 
 
+def _section_context(artist) -> dict:
+    """Status of the latest one-section run: running (poll) or a Polish reason after a failure
+    that is newer than the current version."""
+    record = generations.latest_generation(artist)
+    if record is None or record.trigger != Generation.Trigger.SECTION:
+        return {"section_running": False, "section_error": ""}
+    running = record.status == Generation.Status.RUNNING
+    error = ""
+    if record.status == Generation.Status.ERROR and record.warnings:
+        version = pages.current_version(artist)
+        if version is None or record.finished_at > version.created_at:
+            error = record.warnings[0]
+    return {"section_running": running, "section_error": error}
+
+
 @never_cache
 @require_GET
 @role_required("artist")
 def preview(request):
-    """The artist's own page rendered from `page_content_for`; not public, not indexed."""
+    """The artist's own page (current version of the texts); not public, not indexed."""
     artist = artist_services.artist_for(request.user)
-    content = page_content_for(artist)
+    content = pages.page_content(artist)
+    locks = pages.current_content(artist)[1]
     context = {
         "content": content,
         "noindex": True,
         "theme_switch": True,
         "theme_choices": Theme.choices,
+        "editor": pages.editor_sections(artist),
+        "locks": locks,
+        "versions": pages.versions_of(artist),
+        **_section_context(artist),
     }
     response = render(request, "profiles/page.html", context)
     response["X-Robots-Tag"] = "noindex, nofollow"
     return response
+
+
+@never_cache
+@require_GET
+@role_required("artist")
+def section_status(request):
+    """The regeneration status block (HTMX polls it); a finished run reloads the whole page."""
+    artist = artist_services.artist_for(request.user)
+    context = _section_context(artist)
+    response = render(request, "profiles/_section_status.html", context)
+    if not context["section_running"]:
+        response["HX-Refresh"] = "true"
+    return response
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+def edit_field(request):
+    """Save the artist's own text of one field (new version, the field gets locked)."""
+    artist = artist_services.artist_for(request.user)
+    try:
+        version = pages.edit_field(
+            artist, request.POST.get("path", ""), request.POST.get("value", "")
+        )
+    except pages.InvalidEdit as exc:
+        messages.error(request, exc.message)
+    else:
+        if version is None:
+            messages.info(request, _("Tekst bez zmian."))
+        else:
+            messages.success(
+                request, _("Zapisaliśmy tekst. Pole jest zablokowane przed ponownym generowaniem.")
+            )
+    return redirect("profiles:preview")
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+def unlock_field(request):
+    artist = artist_services.artist_for(request.user)
+    if pages.unlock(artist, request.POST.get("path", "")):
+        messages.success(request, _("Pole odblokowane. Kolejne generowanie może je zmienić."))
+    else:
+        messages.error(request, _("Nieznane pole."))
+    return redirect("profiles:preview")
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+def regenerate_section(request):
+    artist = artist_services.artist_for(request.user)
+    try:
+        sections.request_section(artist, request.POST.get("section", ""))
+    except generations.GenerationRefused as exc:
+        messages.error(request, exc.message)
+    else:
+        messages.success(
+            request, _("Generujemy sekcję od nowa. Pola zablokowane zostaną bez zmian.")
+        )
+    return redirect("profiles:preview")
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+def restore_version(request):
+    artist = artist_services.artist_for(request.user)
+    try:
+        number = int(request.POST.get("number", ""))
+    except ValueError:
+        raise Http404 from None
+    try:
+        version = pages.restore(artist, number)
+    except PageVersion.DoesNotExist:
+        raise Http404 from None
+    messages.success(
+        request,
+        _("Przywrócono wersję %(old)d jako nową wersję %(new)d.")
+        % {"old": number, "new": version.number},
+    )
+    return redirect("profiles:preview")
 
 
 @never_cache

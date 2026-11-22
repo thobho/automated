@@ -349,7 +349,11 @@ def test_preview_for_owner(web, artist_user):
     assert '<meta name="robots" content="noindex' in html
     page = Page(html)
     assert page.h("h1") == ["Artysta Rola"]
-    assert page.h("h2") == ["Oferta", "Sprawdź termin"]
+    assert page.h("h2") == [
+        "Edycja tekstów",
+        "Oferta",
+        "Sprawdź termin",
+    ]  # the owner's editor first
     assert "Show" in page.h("h3")
 
 
@@ -393,7 +397,7 @@ def test_seed_artist_preview_renders_only_existing_data(capsys):
     page = Page(html)
     with capsys.disabled():
         print("SECTION HEADINGS:", page.h("h1"), page.h("h2"))
-    assert page.h("h2") == ["Oferta", "Sprawdź termin"]
+    assert page.h("h2") == ["Edycja tekstów", "Oferta", "Sprawdź termin"]
     assert html.count('class="offer"') == 20
     assert html.split("<details")[1].count('class="offer"') == 14
     assert "mailto:" not in html and "tel:" not in html

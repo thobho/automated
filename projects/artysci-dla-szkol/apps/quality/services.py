@@ -270,4 +270,8 @@ def review_generation(generation: Generation, reviewer, decision: str, note: str
             generation=locked, reviewer=reviewer, decision=decision, note=note[:2000],
             created_at=timezone.now(),
         )  # fmt: skip
+        if decision == GenerationReview.Decision.READY:
+            from apps.profiles import pages  # profiles imports quality
+
+            pages.record_generated(locked)  # an approved run becomes a page version (US-2.6)
     return locked

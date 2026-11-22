@@ -81,3 +81,15 @@
 }
 .swatch__text { color: var(--heading); font-weight: 700; line-height: 1; }
 .swatch__dot { width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--accent); }
+
+/* Owner's text editor and version list in the preview (US-2.6). */
+.editor { max-width: 62rem; margin: 1rem auto; padding: 0 1.25rem; }
+.editor__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
+.editor__section { border: 1px solid #767676; border-radius: .5rem; padding: .5rem 1rem 1rem; margin-block: .75rem; }
+.editor__field { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .5rem; margin-block: .75rem; }
+.editor__field form:first-child { flex: 1 1 24rem; display: grid; gap: .25rem; }
+.editor__field textarea, .editor__field input[type="text"] { width: 100%; font: inherit; padding: .4rem; }
+.editor__lock { font-weight: 700; }
+.editor__versions table { border-collapse: collapse; width: 100%; }
+.editor__versions th, .editor__versions td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid #767676; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

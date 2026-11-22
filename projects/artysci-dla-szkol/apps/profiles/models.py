@@ -1,4 +1,41 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+
+
+class PageVersion(models.Model):
+    """One saved state of an artist's page texts (US-2.6). The newest version is the current one.
+
+    `content` holds only the artist-editable texts (tagline, facts, about, for_schools, faq);
+    photos, videos and offers always come live from the artist's data. `locks` lists the field
+    paths the artist edited ("about", "facts.0", "faq.1.answer"): regeneration keeps them.
+    At most 10 versions per artist are kept (see `pages.py`).
+    """
+
+    class Source(models.TextChoices):
+        GENERATED = "generated", _("wygenerowana")
+        EDITED = "edited", _("edytowana")
+        REGENERATED = "regenerated", _("sekcja wygenerowana ponownie")
+        RESTORED = "restored", _("przywrócona")
+
+    artist = models.ForeignKey("artists.Artist", on_delete=models.CASCADE, related_name="versions")
+    number = models.PositiveIntegerField()
+    source = models.CharField(max_length=12, choices=Source.choices)
+    content = models.JSONField(default=dict)
+    locks = models.JSONField(default=list, blank=True)
+    # The registry row of the AI run this version came from (generated, regenerated).
+    generation = models.ForeignKey(
+        "quality.Generation", on_delete=models.PROTECT, null=True, blank=True, related_name="+"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-number"]
+        constraints = [
+            models.UniqueConstraint(fields=["artist", "number"], name="profiles_version_number")
+        ]
+
+    def __str__(self):
+        return f"{self.artist_id} v{self.number} {self.source}"
 
 
 class AICall(models.Model):

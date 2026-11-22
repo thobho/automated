@@ -238,6 +238,10 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   as `offer_poster_orphan` without the key). Posters are malware-scanned like materials (T24:
   `poster_status`, an infected poster is deleted). Log lines carry a pseudonymised user and the
   offer id only.
+- **Preview editing (T34, US-2.6)**: edit, unlock, regenerate and restore are POST-only, CSRF-protected,
+  `role_required("artist")` and act on the logged-in user's own artist (no artist id in any URL; a version
+  number of another artist is a 404). Edited text is stored as plain text and rendered escaped. Section
+  regeneration goes only through `profiles/ai/` with the cost cap; no prompt or reply text is stored.
 - **Page themes (T33, US-3.2)**: the theme switch `POST /panel/podglad/motyw/` is artist-only
   (`role_required`), CSRF-protected and acts on the logged-in user's own artist (no id in the
   URL). The value is checked against the closed `Theme` list (unknown = refused, nothing stored);
