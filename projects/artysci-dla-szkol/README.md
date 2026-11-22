@@ -484,9 +484,47 @@ can be reproduced and generator changes can be compared (D13, D14). Code: `apps/
 - **Inspect:** read-only Django admin at `/django-admin/quality/generation/` (staff only) and
   `uv run python manage.py generation_show <id>` (JSON: versions, fingerprint, status, warnings,
   rounds, duration, cost, AI call ids; no prompt, reply or instruction text).
-- Not here yet: the real components (US-2.5a–c, US-3.1), re-running a stored generation and the
-  evaluation set (US-11.2–11.4). `apps/quality/tests/fake_generator.py` is a test-only
-  generator showing the full flow.
+- Not here yet: the hard-rule validator and repair loop (US-2.5b–c), the public template
+  (US-3.1), re-running a stored generation and the evaluation set (US-11.2–11.4).
+  `apps/quality/tests/fake_generator.py` is a test-only generator showing the full flow.
+
+## Profile generation (US-2.5A)
+
+A background job turns an artist's ready materials, questionnaire and offers into a profile JSON
+(schema and instructions **v0.2**) and records it as a `Generation`. Code: `apps/profiles`
+(`generation.py`, `inputs.py`, `validation.py`, `tasks.py`, `generator_components.py`), schema in
+`apps/quality/schemas/profile.json`, instructions in `apps/profiles/prompts/profile_instructions.md`.
+
+- **Flow.** `request_generation(artist, trigger)` refuses while a run is `trwa` for the artist
+  (`GenerationRefused`), otherwise records the run (`start_generation`, with the instructions,
+  schema and validator components) and queues `profiles.generate_profile` on the `ai` queue. The
+  job builds the input, calls the AI only through `apps.profiles.ai` with the per-call cap, checks
+  the reply against the JSON Schema and closes the run with `finish_generation`: `gotowa`, or
+  `błąd` with a readable Polish reason (invalid JSON, schema mismatch with the JSON paths but never
+  the values, cost cap, AI off or failing, unexpected error). No retries; the artist starts a new
+  run. A run still `trwa` after `GENERATION_STALE_SECONDS` (900) is closed as failed by the next
+  request, so a killed worker never blocks an artist.
+- **What the AI gets** (`inputs.build_input`): basics, questionnaire values, offers (ids), the
+  imported site text, PDF text, YouTube/Vimeo and video titles, and photos, videos and video frames
+  as ids with their flags (US-2.4). Never file bytes, names, keys or URLs. Only `ready` materials
+  count, and only while the artist has a current „Prawa do materiałów” statement (D4/D7; without
+  it no material or site text is sent). Text is scrubbed (D59) before the adapter scrubs it again.
+- **Artist panel.** `/artysta/profil/generowanie/` shows the status (`trwa` / `gotowa` / `błąd`)
+  and the start button; the status block polls `/artysta/profil/generowanie/status/` with HTMX
+  while a run goes (no inline script). The URLs carry no id: an artist sees only their own latest
+  run; other roles get 403, anonymous visitors go to the login page.
+- **Run it.** With `AI_CLIENT=fake` (default for dev and tests) the fake client returns a minimal
+  profile that matches the schema. Local: `make up-lite`, then `make web` and `make worker`, sign
+  in as an artist with ready materials and press „Generuj profil”. Real model: set
+  `AI_CLIENT=openrouter` and `OPENROUTER_API_KEY` (see "AI adapter"), then check the run with
+  `uv run python manage.py generation_show <id>` (status, duration, cost).
+- **Changing the schema or the instructions** needs a new `PROFILE_VERSION` in
+  `generator_components.py` plus `generator_manifest --write` (see "Generator versioning");
+  editing `validation.py` (the validator component) needs the same.
+- **Browser test:** `uv sync --group e2e && uv run pytest tests/e2e/test_generation.py
+  --base-url http://127.0.0.1:<port> --artist-session <session key>` (skipped without a session).
+- Not here yet: hard rules and warnings (US-2.5B), repair and admin review (US-2.5C), preview and
+  editing (US-2.6).
 
 ## File storage
 

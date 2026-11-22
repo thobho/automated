@@ -29,9 +29,9 @@
   </header>
   <main id="main">
     {% if messages %}
-      <ul role="status">
-        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
-      </ul>
+      <div role="status">
+        <ul>{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>
+      </div>
     {% endif %}
     {% block content %}{% endblock %}
   </main>

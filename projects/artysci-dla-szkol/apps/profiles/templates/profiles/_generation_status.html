@@ -1,0 +1,17 @@
+{% load i18n %}
+<div id="generation-status" data-status="{{ generation.status|default:'none' }}"
+     {% if running %}hx-get="{% url 'profiles:generation_status' %}" hx-trigger="every 3s" hx-swap="outerHTML"{% endif %}>
+  {% if generation is None %}
+    <p data-field="status">{% translate "Profil nie był jeszcze generowany." %}</p>
+  {% elif running %}
+    <p data-field="status"><strong>{% translate "trwa" %}</strong> – {% translate "generujemy Twój profil. Ten status odświeża się sam." %}</p>
+  {% elif ready %}
+    <p data-field="status"><strong>{% translate "gotowa" %}</strong> – {% translate "profil został wygenerowany." %}</p>
+  {% else %}
+    <p data-field="status" role="alert"><strong>{% translate "błąd" %}</strong>{% for reason in generation.warnings %} – {{ reason }}{% endfor %}</p>
+  {% endif %}
+  <form method="post" action="{% url 'profiles:generation_start' %}">
+    {% csrf_token %}
+    <button type="submit"{% if running %} disabled{% endif %}>{% translate "Generuj profil" %}</button>
+  </form>
+</div>

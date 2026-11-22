@@ -1,1 +1,11 @@
-{}
+{
+  "instructions:profile_draft": {
+    "0.2": "e481357844f1d8ff0a5b7f96293812368f20a51d6f81ae9bb6e7282797d30473"
+  },
+  "schema:profile": {
+    "0.2": "f96a291649084135f53263e47f57d45311d62b7fe25c44496fd1c415bb54c230"
+  },
+  "validator:profile_checks": {
+    "0.2": "893827ce7d0243388109d9d9278c0ea082a54ee3b931208305b3963e26a116aa"
+  }
+}

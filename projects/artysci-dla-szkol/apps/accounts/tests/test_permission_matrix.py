@@ -77,6 +77,9 @@ MATRIX = {
     "artists:questionnaire": ("login", "home", "403", "403"),
     "artists:website_import": ("login", "home", "403", "403"),
     "artists:website_import_status": ("login", "home", "403", "403"),
+    "profiles:generation": ("login", "200", "403", "403"),
+    "profiles:generation_status": ("login", "200", "403", "403"),
+    "profiles:generation_start": ("login", "405", "403", "403"),  # POST only
     "institutions:register": ("200", "200", "200", "200"),
     "institutions:rspo_suggestions": ("200", "200", "200", "200"),
     "institutions:start": ("login", "403", "200", "403"),
