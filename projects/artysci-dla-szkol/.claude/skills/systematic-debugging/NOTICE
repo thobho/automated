@@ -1,0 +1,4 @@
+Vendored from https://github.com/obra/superpowers/tree/main/skills/systematic-debugging at commit 22f0b463e7a5e579904dd6211a520321035526f7 (2026-11-21).
+Changed for unattended runs: two superpowers: cross-references point to this project's files; 'discuss with your human partner' became a failure comment on the issue; the partner-signals heading became review/CI signals. Left out: find-polluter.sh, condition-based-waiting-example.ts.
+License: MIT, see LICENSE in this folder
+Update: replace with a newer commit through a reviewed PR; never install the upstream plugin, hooks or scripts.
