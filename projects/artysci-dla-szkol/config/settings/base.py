@@ -203,6 +203,8 @@ OPENROUTER_API_KEY = env.str("OPENROUTER_API_KEY", default="")  # env only, neve
 AI_KILL_SWITCH = env.bool("AI_KILL_SWITCH", default=False)
 AI_DAILY_CAP_USD = env.str("AI_DAILY_CAP_USD", default="1.00")
 AI_PER_CALL_CAP_USD = env.str("AI_PER_CALL_CAP_USD", default="0.05")
+# A profile generation still `trwa` after this long is closed as failed by the next request.
+GENERATION_STALE_SECONDS = env.int("GENERATION_STALE_SECONDS", default=900)
 # Pinned model and the only providers OpenRouter may route to (all with ZDR endpoints).
 AI_MODEL = env.str("AI_MODEL", default="anthropic/claude-haiku-5.5")
 AI_PROVIDERS = env.list("AI_PROVIDERS", default=["google-vertex", "amazon-bedrock"])

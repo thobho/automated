@@ -28,5 +28,6 @@
       </li>
     {% endfor %}
   </ol>
+  <p><a href="{% url 'profiles:generation' %}">{% translate "Generowanie profilu" %}</a></p>
   {% artist_statement_badges artist %}
 {% endblock %}

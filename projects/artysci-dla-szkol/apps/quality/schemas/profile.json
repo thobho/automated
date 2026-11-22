@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Profil artysty v0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "hero",
+    "facts",
+    "description",
+    "schools",
+    "offers",
+    "gallery",
+    "testimonials",
+    "faq",
+    "theme",
+    "seo",
+    "gaps",
+    "claims_audit"
+  ],
+  "properties": {
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["headline", "subheadline", "main_photo_id", "button_label"],
+      "properties": {
+        "headline": {"type": "string"},
+        "subheadline": {"type": "string"},
+        "main_photo_id": {"type": ["integer", "null"]},
+        "button_label": {"type": "string"}
+      }
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "value"],
+        "properties": {
+          "label": {"type": "string"},
+          "value": {"type": "string"}
+        }
+      }
+    },
+    "description": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["paragraphs"],
+      "properties": {
+        "paragraphs": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "schools": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["headline", "points", "age_range", "requirements"],
+      "properties": {
+        "headline": {"type": "string"},
+        "points": {"type": "array", "items": {"type": "string"}},
+        "age_range": {"type": "string"},
+        "requirements": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "offers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["offer_id", "tagline"],
+        "properties": {
+          "offer_id": {"type": "integer"},
+          "tagline": {"type": "string"}
+        }
+      }
+    },
+    "gallery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["photo_ids", "video_ids", "captions"],
+      "properties": {
+        "photo_ids": {"type": "array", "items": {"type": "integer"}},
+        "video_ids": {"type": "array", "items": {"type": "integer"}},
+        "captions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["material_id", "alt"],
+            "properties": {
+              "material_id": {"type": "integer"},
+              "alt": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "testimonials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["quote", "author", "source_material_id"],
+        "properties": {
+          "quote": {"type": "string"},
+          "author": {"type": "string"},
+          "source_material_id": {"type": ["integer", "null"]}
+        }
+      }
+    },
+    "faq": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question", "answer"],
+        "properties": {
+          "question": {"type": "string"},
+          "answer": {"type": "string"}
+        }
+      }
+    },
+    "theme": {
+      "type": "string",
+      "enum": ["burgundy_light", "cream_green", "navy_gold", "coral_dark"]
+    },
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "description"],
+      "properties": {
+        "title": {"type": "string"},
+        "description": {"type": "string"}
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": {"type": "string"},
+          "message": {"type": "string"}
+        }
+      }
+    },
+    "claims_audit": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "source", "source_id"],
+        "properties": {
+          "claim": {"type": "string"},
+          "source": {
+            "type": "string",
+            "enum": ["questionnaire", "offer", "material", "site_text", "basics", "none"]
+          },
+          "source_id": {"type": ["integer", "null"]}
+        }
+      }
+    }
+  }
+}
