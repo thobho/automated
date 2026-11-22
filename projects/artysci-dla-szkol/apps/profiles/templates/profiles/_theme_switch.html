@@ -1,0 +1,18 @@
+{% load i18n %}
+{# Owner-only theme choice (US-3.2): POST + CSRF. Swatches take their colours from themes.css. #}
+<form class="theme-switch" method="post" action="{% url 'profiles:theme' %}">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% translate "Motyw strony" %}</legend>
+    <div class="theme-switch__options">
+      {% for slug, label in theme_choices %}
+        <label>
+          <input type="radio" name="theme" value="{{ slug }}"{% if slug == content.theme %} checked{% endif %}>
+          <span class="swatch" data-swatch="{{ slug }}" aria-hidden="true"><span class="swatch__text">Aa</span><span class="swatch__dot"></span></span>
+          {{ label }}
+        </label>
+      {% endfor %}
+    </div>
+    <button type="submit" class="theme-switch__save">{% translate "Zapisz motyw" %}</button>
+  </fieldset>
+</form>

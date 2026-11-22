@@ -682,6 +682,28 @@ App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
 - Owner-only preview: `GET /panel/podglad/` (artist role), `noindex` meta + `X-Robots-Tag`.
   Publishing and the public URL are US-2.8.
 
+## Page themes (US-3.2)
+
+Four themes, a closed list (`Theme` in `apps/profiles/themes.py`; slugs equal the `theme` enum of
+the AI schema): `burgundy_light` (jasny burgund, the default), `cream_green` (kremowa zieleń),
+`navy_gold` (granat ze złotem), `coral_dark` (ciemny koral). The page root is
+`<div class="artist-root" data-theme="<slug>">`; an unknown value falls back to the default.
+- **Single source of truth:** `THEME_TOKENS` (token → hex) in `themes.py`. `static/profiles/themes.css`
+  holds one `[data-theme="<slug>"]` block per theme with the same values; `test_themes.py` parses the
+  CSS and compares it with the mapping, so they cannot drift. `page.css` uses only `var(--token)`.
+- **Contrast:** `contrast_ratio(fg, bg)` (WCAG relative luminance). `TEXT_PAIRS` (text, link, button
+  text, "for schools" band) must reach 4.5:1, `LARGE_PAIRS` (focus outline, accent) 3:1. Run
+  `uv run pytest -s apps/profiles/tests/test_themes.py -k wcag` to print the ratios.
+- **Choice:** the artist's own pick is `Artist.theme` (empty = not chosen), saved by
+  `POST /panel/podglad/motyw/` from the form in the preview (owner only, CSRF). Without a choice the
+  valid `theme` proposed by the latest finished generation is used, else the default
+  (`services.theme_for`); a later generation never overrides a choice.
+- **Adding a fifth theme:** add a `Theme` member, a full token set in `THEME_TOKENS` (all 14
+  tokens: paper, ink, muted, heading, link, card, band, band-ink, band-link, accent, accent-ink,
+  accent-hover, focus, line), the matching `[data-theme]` and `[data-swatch]` block in
+  `themes.css`, and add the slug to the AI schema enum (separate task: the schema is not changed
+  here). The tests pick it up through `Theme`; they fail until the CSS matches and the contrast holds.
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python

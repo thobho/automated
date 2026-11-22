@@ -41,6 +41,10 @@ migrate:
 web: migrate
 	uv run python manage.py runserver 127.0.0.1:$(WEB_NATIVE_PORT)
 
+# Browser tests against `make web` (needs `uv sync --group e2e`); same DATABASE_URL as the server.
+e2e:
+	DJANGO_SETTINGS_MODULE=config.settings.dev uv run pytest tests/e2e -ra -o addopts=--strict-markers --base-url http://127.0.0.1:$(WEB_NATIVE_PORT) --browser chromium
+
 MEDIA_PORT ?= 8101
 media:
 	uv run python manage.py serve_public_media --host 0.0.0.0 --port $(MEDIA_PORT)

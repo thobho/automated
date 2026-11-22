@@ -1,0 +1,83 @@
+/* Page themes (US-3.2). One block per theme; the values are the same as THEME_TOKENS in
+   apps/profiles/themes.py and a test compares the two, so change both together. The swatches of
+   the owner's theme switch use the same blocks through `data-swatch`. No fonts or assets from
+   outside (D11). */
+[data-theme="burgundy_light"], [data-swatch="burgundy_light"] {
+  --paper: #fbf8f4;
+  --ink: #1d1b20;
+  --muted: #5a5663;
+  --heading: #6b1530;
+  --link: #7a1f3d;
+  --card: #ffffff;
+  --band: #f3e6e8;
+  --band-ink: #1d1b20;
+  --band-link: #7a1f3d;
+  --accent: #7a1f3d;
+  --accent-ink: #ffffff;
+  --accent-hover: #5c1630;
+  --focus: #7a1f3d;
+  --line: #e4dcd2;
+}
+
+[data-theme="cream_green"], [data-swatch="cream_green"] {
+  --paper: #faf6e9;
+  --ink: #1f2a22;
+  --muted: #4f5d52;
+  --heading: #1e4d33;
+  --link: #1e5c3a;
+  --card: #fffdf5;
+  --band: #e6eedb;
+  --band-ink: #1f2a22;
+  --band-link: #1e5c3a;
+  --accent: #1e5c3a;
+  --accent-ink: #ffffff;
+  --accent-hover: #143f28;
+  --focus: #1e5c3a;
+  --line: #d9d4bc;
+}
+
+[data-theme="navy_gold"], [data-swatch="navy_gold"] {
+  --paper: #0f1f3d;
+  --ink: #f4efe0;
+  --muted: #c5c9d6;
+  --heading: #e8c36a;
+  --link: #f0cd7a;
+  --card: #172c54;
+  --band: #1c335f;
+  --band-ink: #f4efe0;
+  --band-link: #f0cd7a;
+  --accent: #e8c36a;
+  --accent-ink: #0f1f3d;
+  --accent-hover: #f5d98f;
+  --focus: #f0cd7a;
+  --line: #34497a;
+}
+
+[data-theme="coral_dark"], [data-swatch="coral_dark"] {
+  --paper: #1e1a1c;
+  --ink: #f6ede9;
+  --muted: #cdbfba;
+  --heading: #ff9a85;
+  --link: #ff9a85;
+  --card: #2b2427;
+  --band: #33292d;
+  --band-ink: #f6ede9;
+  --band-link: #ff9a85;
+  --accent: #ff8a73;
+  --accent-ink: #1e1a1c;
+  --accent-hover: #ffa391;
+  --focus: #ff9a85;
+  --line: #4a3e42;
+}
+
+/* Owner's theme switch in the preview: a swatch per theme (background, heading, button). */
+.theme-switch { max-width: 62rem; margin: 1rem auto; padding: 0 1.25rem; }
+.theme-switch fieldset { border: 1px solid #767676; border-radius: .5rem; padding: .75rem 1rem; }
+.theme-switch__options { display: flex; flex-wrap: wrap; gap: 1rem; }
+.theme-switch label { display: inline-flex; align-items: center; gap: .5rem; cursor: pointer; }
+.swatch {
+  display: inline-flex; align-items: center; gap: .3rem; padding: .3rem .5rem;
+  background: var(--paper); border: 2px solid var(--line); border-radius: .4rem;
+}
+.swatch__text { color: var(--heading); font-weight: 700; line-height: 1; }
+.swatch__dot { width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--accent); }

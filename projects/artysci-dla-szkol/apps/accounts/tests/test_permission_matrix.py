@@ -57,6 +57,7 @@ MATRIX = {
     "artists:register": ("200", "200", "200", "200"),
     "artists:start": ("login", "200", "403", "403"),
     "profiles:preview": ("login", "200", "403", "403"),
+    "profiles:theme": ("login", "405", "403", "403"),  # POST only
     "artists:basics": ("login", "200", "403", "403"),
     # later wizard steps: the matrix artist has empty basics -> redirected to step 1
     "artists:offers": ("login", "home", "403", "403"),

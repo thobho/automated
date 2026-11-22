@@ -62,6 +62,10 @@ class Artist(models.Model):
     q_price_to_pln = models.PositiveIntegerField(_("cena do (zł)"), null=True, blank=True)
     q_price_on_request = models.BooleanField(_("cena na zapytanie"), default=False)
 
+    # Colour theme of the public page (US-3.2): a slug from `profiles.themes.Theme`, empty = the
+    # artist has not chosen. Only `profiles.services.set_theme()` writes it.
+    theme = models.CharField(_("motyw strony"), max_length=32, blank=True)
+
     class Meta:
         verbose_name = _("artysta")
         verbose_name_plural = _("artyści")

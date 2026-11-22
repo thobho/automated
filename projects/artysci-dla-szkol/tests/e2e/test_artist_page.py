@@ -88,3 +88,27 @@ def test_preview_page(browser, base_url, artist_session, shot_dir):
     bad = [v for v in results.response["violations"] if v["impact"] in ("critical", "serious")]
     assert not bad, [f"{v['id']}: {v['help']}" for v in bad]
     context.close()
+
+
+def test_owner_switches_theme_in_preview(browser, base_url, artist_session, shot_dir):
+    context = browser.new_context()
+    name, value = artist_session
+    host = base_url.split("://", 1)[1].split("/")[0].split(":")[0]
+    context.add_cookies([{"name": name, "value": value, "domain": host, "path": "/"}])
+    page = context.new_page()
+    page.goto(base_url + PREVIEW)
+    root = page.locator(".artist-root")
+    assert root.get_attribute("data-theme") == "burgundy_light"
+
+    page.get_by_label("Granat ze złotem").check()
+    page.get_by_role("button", name="Zapisz motyw").click()
+    page.wait_for_url("**" + PREVIEW)
+    assert root.get_attribute("data-theme") == "navy_gold"
+    assert page.get_by_label("Granat ze złotem").is_checked()
+    # The theme really paints the page: dark navy background from themes.css.
+    assert root.evaluate("e => getComputedStyle(e).backgroundColor") == "rgb(15, 31, 61)"
+    page.screenshot(path=str(shot_dir / "artist-page-navy-gold.png"), full_page=True)
+    results = Axe().run(page)
+    bad = [v for v in results.response["violations"] if v["impact"] in ("critical", "serious")]
+    assert not bad, [f"{v['id']}: {v['help']}" for v in bad]
+    context.close()
