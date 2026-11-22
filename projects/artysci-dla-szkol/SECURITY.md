@@ -390,6 +390,7 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 16.3.2 | Failed authorisation attempts logged | done (T15: one `permission denied` line per 403 from a permission check) |
 | 16.4.1 | Log injection prevented | done (JSON encoding) |
 | 16.5.1 | Generic error messages | done (`DEBUG = False` in prod) |
+| 8.2.1 (public profile exposure) | Only published pages are reachable; no contact data leaks | done (T36: `/artysci/<slug>/` serves the snapshot of `Artist.objects.published()`; draft, withdrawn and unknown slugs give one identical 404; no e-mail, phone or inquiry data on the page; publish/update/withdraw are POST-only, CSRF-protected, owner-only; `Cache-Control: no-cache` so a withdrawal is immediate; analytics events carry ids only) |
 
 ## Reporting a vulnerability
 

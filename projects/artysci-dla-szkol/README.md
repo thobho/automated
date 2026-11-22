@@ -746,6 +746,24 @@ App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
   publication minimum. `completeness_percent(artist)` is the function US-2.8 uses for the
   "published" event; no event is emitted here.
 
+## Publication and withdrawal (US-2.8)
+
+`apps/profiles/publication.py`. Panel: `/panel/publikacja/` (status, blockers with links),
+POST-only `opublikuj/`, `zmiany/` ("Opublikuj zmiany"), `wycofaj/`, and a GET confirmation page
+`wycofanie/`. Public page: `/artysci/<slug>/` (anonymous, server-rendered, T32 template).
+
+- `publication_blockers(artist)`: Polish reasons (name, region, generated page, "O artyście" text,
+  an offer, child-protection statement). Publishing is refused while the list is not empty.
+- Publishing copies the current page version (texts + theme) into `PublishedPage`; later edits stay
+  private until "Opublikuj zmiany". Photos, videos and offers are read live from the artist's data.
+- Slug: made once on the first publication from the name (ASCII, lowercase, hyphens, `-2`, `-3` on
+  collision), never changed by renames, kept after withdrawal (never reused, republication gives
+  the same one); reserved words (`RESERVED_SLUGS`) are skipped.
+- Draft, withdrawn and unknown slugs give the same 404. `Cache-Control: no-cache` (a cache must
+  revalidate, so a withdrawal is visible at once). Preview stays `noindex`; the public page is not.
+- `Artist.objects.published()` is the only definition of "publicly visible" (catalog, US-4.1).
+- Events `profile_published` (`profile_id`, `completeness_percent`) and `profile_withdrawn`.
+
 ## Page themes (US-3.2)
 
 Four themes, a closed list (`Theme` in `apps/profiles/themes.py`; slugs equal the `theme` enum of
