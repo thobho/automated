@@ -18,6 +18,7 @@ from apps.trust import services as trust
 from apps.trust.models import LegalDocument
 
 from .ai.scrub import scrub
+from .validator import Sources
 
 PDF_TEXT_STATUSES = (TextStatus.DONE, TextStatus.TRUNCATED)
 
@@ -121,3 +122,57 @@ def build_input(artist: Artist) -> dict:
         elif material.kind == MaterialKind.AUDIO:
             data["audio"].append({"id": material.pk, "duration_seconds": material.duration_seconds})
     return data
+
+
+def _plain(value) -> str:
+    return "" if value in (None, False) else str(value)
+
+
+def collect_sources(artist: Artist, data: dict | None = None) -> Sources:
+    """What the validator (US-2.5B) accepts as the artist's own: derived from `build_input`
+    (pass its result as `data` to avoid reading twice), plus the artist's video links, which
+    the AI never sees. Same rules as the AI input: nothing of an artist without the rights
+    statement, only ready materials."""
+    data = build_input(artist) if data is None else data
+    texts = [data["artist"]["name"], data["artist"]["city"], data["site_text"]]
+    texts += [value for value in map(_plain, data["questionnaire"].values()) if value]
+    anchors = [data["artist"]["name"], data["artist"]["city"]]
+    for offer in data["offers"]:
+        anchors.append(offer["title"])
+        texts += [
+            _plain(offer[key])
+            for key in (
+                "title",
+                "description",
+                "age_from",
+                "age_to",
+                "duration_minutes",
+                "price_pln",
+            )
+        ]
+    texts += [document["text"] for document in data["documents"]]
+    texts += [video["title"] for video in data["videos"]]
+    frames = [frame["id"] for video in data["videos"] for frame in video["frames"]]
+    photo_ids = frozenset([photo["id"] for photo in data["photos"]] + frames)
+    video_ids = frozenset(video["id"] for video in data["videos"])
+    links = frozenset()
+    if data["photos"] or data["videos"] or data["documents"] or data["site_text"]:
+        links = frozenset(
+            (material.provider, material.video_id)
+            for material in materials.ready_materials(artist).filter(kind=MaterialKind.LINK)
+            if material.provider and material.video_id
+        )
+    return Sources(
+        texts=tuple(text for text in texts if text),
+        photo_ids=photo_ids,
+        video_ids=video_ids,
+        material_ids=frozenset(
+            [d["id"] for d in data["documents"]]
+            + [a["id"] for a in data["audio"]]
+            + list(video_ids)
+            + [p["id"] for p in data["photos"]]
+        ),
+        offer_ids=frozenset(offer["id"] for offer in data["offers"]),
+        links=links,
+        anchors=tuple(a for a in anchors if a),
+    )

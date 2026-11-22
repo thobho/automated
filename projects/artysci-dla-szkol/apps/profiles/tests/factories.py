@@ -13,7 +13,7 @@ def valid_profile(**overrides) -> dict:
     profile = {
         "hero": {
             "headline": "Teatr Kwiatki",
-            "subheadline": "Spektakle dla przedszkoli i klas 0–3",
+            "subheadline": "Spektakle dla przedszkoli i klas młodszych",
             "main_photo_id": None,
             "button_label": "Sprawdź termin",
         },

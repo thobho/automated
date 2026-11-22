@@ -26,7 +26,7 @@ from apps.core.logs import pseudonymise_user
 from apps.quality import services as quality
 from apps.quality.models import Generation
 
-from . import ai, inputs, validation
+from . import ai, inputs, validation, validator
 from .generator_components import COMPONENTS, INSTRUCTIONS
 
 logger = logging.getLogger("apps.profiles.generation")
@@ -165,6 +165,30 @@ def run_generation(generation_id: int) -> Generation | None:
             "where": "; ".join(errors[:5])
         }
         return _fail(generation, reason, code="schema", started=started)
-    finished = quality.finish_generation(generation, result.data, [], 0, Generation.Status.READY)
-    _log("generation_ready", finished, duration_ms=_elapsed_ms(started))
+    try:
+        report = validator.validate_profile(
+            result.data, inputs.collect_sources(generation.artist, data)
+        )
+    except Exception:
+        logger.exception("profile validation crashed", extra={"generation": generation.pk})
+        return _fail(
+            generation, _("Nieoczekiwany błąd generowania."), code="validator", started=started
+        )
+    # Hard violations: repair rounds and the review queue are US-2.5C; until then `do przeglądu`.
+    status = Generation.Status.READY if report.ok else Generation.Status.REVIEW
+    finished = quality.finish_generation(
+        generation,
+        result.data,
+        [finding.line() for finding in report.soft],
+        0,
+        status,
+        report=report.as_dict(),
+    )
+    _log(
+        "generation_ready" if report.ok else "generation_needs_review",
+        finished,
+        duration_ms=_elapsed_ms(started),
+        hard=len(report.hard),
+        soft=len(report.soft),
+    )
     return finished

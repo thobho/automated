@@ -20,10 +20,15 @@ INSTRUCTIONS = registry.register(
 SCHEMA = registry.register(
     Component("schema", "profile", PROFILE_VERSION, files=("apps/quality/schemas/profile.json",))
 )
-# Only the schema check for now; US-2.5B replaces this with the hard-rule validator.
+# Schema check plus the hard-rule validator (US-2.5B). Its own version: v0.1 is the first
+# validator with hard rules; the 0.2 entry of the schema-only file stays in the manifest.
+VALIDATOR_VERSION = "0.1"
 VALIDATOR = registry.register(
     Component(
-        "validator", "profile_checks", PROFILE_VERSION, files=("apps/profiles/validation.py",)
+        "validator",
+        "profile_checks",
+        VALIDATOR_VERSION,
+        files=("apps/profiles/validation.py", "apps/profiles/validator.py"),
     )
 )
 

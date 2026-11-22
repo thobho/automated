@@ -59,7 +59,7 @@ def test_the_components_are_registered_with_version_and_hash():
     registered = {c.key: c for c in reg.registry.all()}
     for component in COMPONENTS:
         assert registered[component.key] is component
-        assert component.version == "0.2"
+        assert component.version == ("0.1" if component is VALIDATOR else "0.2")
         assert len(component.content_hash) == 64
     assert (INSTRUCTIONS.kind, SCHEMA.kind, VALIDATOR.kind) == (
         "instructions",
@@ -68,11 +68,26 @@ def test_the_components_are_registered_with_version_and_hash():
     )
 
 
-def test_the_manifest_records_the_v02_hashes():
+def test_the_manifest_records_the_current_hashes():
     manifest = reg.load_manifest()
     assert reg.manifest_errors(COMPONENTS, manifest) == []
     for component in COMPONENTS:
-        assert manifest[component.key]["0.2"] == component.content_hash
+        assert manifest[component.key][component.version] == component.content_hash
+
+
+def test_the_validator_is_v01_and_covers_the_rules_file():
+    assert VALIDATOR.version == "0.1" and "apps/profiles/validator.py" in VALIDATOR.files
+
+
+def test_validator_code_changed_without_a_version_bump_fails_the_manifest(tmp_path):
+    code = tmp_path / "validator.py"
+    code.write_text("RULES = 1\n")
+    component = reg.Component("validator", "profile_checks", "0.1", files=(str(code),))
+    manifest = {"validator:profile_checks": {"0.1": component.content_hash}}
+    assert reg.manifest_errors([component], manifest) == []
+    code.write_text("RULES = 2\n")  # a rule changed, the version did not
+    errors = reg.manifest_errors([component], manifest)
+    assert errors and "changed without a version bump" in errors[0]
 
 
 def test_a_changed_file_without_a_bump_fails_the_manifest(tmp_path):
