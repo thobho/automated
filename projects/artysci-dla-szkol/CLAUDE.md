@@ -31,10 +31,38 @@ from other `projects/` folders. Product overview and quick start: [README.md](RE
   (dev settings need PostgreSQL; see README for a one-line container).
 - Local stack: `make up-lite && make web` (or `make up-full`); see README "Local environment".
   Seed data is synthetic only (`example.invalid`), idempotent: `make seed`.
-- `uv run pytest --cov` — test settings, SQLite in memory unless `DATABASE_URL` is set.
+- `uv run pytest -q --tb=short apps/<name>` while working (quiet output saves context);
+  `uv run pytest --cov` once before the PR. Test settings, SQLite in memory unless `DATABASE_URL` is set.
 - `uv run ruff check . && uv run ruff format --check .`
 - `uv run python manage.py makemigrations --check --dry-run --settings=config.settings.test`
 - Coverage target: ≥85% on new code.
+
+## Skills (read the file yourself)
+Vendored, pinned skills in `.claude/skills/` of this folder (sources and licenses in each `NOTICE`). Read the file
+yourself; do not rely on automatic skill loading, which is unreliable in a subfolder.
+- **Building or reshaping UI** (templates, CSS, the public profile and its themes): read and follow
+  `.claude/skills/frontend-design/SKILL.md`. The brief is the story in `docs/STORIES.md` and the decisions in
+  `docs/DECISIONS.md`; do not ask the client to confirm anything, decide and write the design plan (palette, type,
+  layout, principles) into the PR under **Decisions I made**.
+- **Motion** (only where a user action changes something): `.claude/skills/animate/SKILL.md`; ignore its "initial
+  response" line.
+- **Before opening the PR, and for the AI reviewer:** check every changed template and stylesheet against
+  `.claude/skills/web-design-guidelines/references/command.md` (accessibility, focus, forms, images, performance) and
+  any motion against `.claude/skills/review-animations/STANDARDS.md`; list the findings and fixes in the PR. Together
+  with the Playwright test (D110) this is the evidence for a user-visible change.
+- **Before you say a task is done, open the PR or flip a label:** follow
+  `.claude/skills/verification-before-completion/SKILL.md`: re-read the issue, check every acceptance criterion and
+  in-scope item against fresh command output, and report gaps instead of claiming completion.
+- **A failing test, red CI or a red `main`:** follow `.claude/skills/systematic-debugging/SKILL.md` (root cause before
+  any fix; after 3 failed fixes stop with a ❌ comment).
+- **Security-relevant code** (auth and login, permissions, settings and defaults, tokens and links, uploads, e-mail
+  flows, anything that can reveal whether an account exists): run the four-phase workflow of
+  `.claude/skills/sharp-edges/SKILL.md` yourself (there is no separate agent) with `references/lang-python.md`,
+  `auth-patterns.md` and `config-patterns.md`. The AI reviewer does the same for `area:security` PRs.
+- **Database work** (models, migrations, queries, indexes, Polish full-text search, queues): apply
+  `.claude/skills/postgres-best-practices/` (read `references/_sections.md`, then the matching rule files) through
+  the Django ORM and migrations. Ignore its RLS category: authorization is done in the app, and those rules are not
+  included.
 
 ## Rules for agents
 - **One app per concern.** Put code in the app that owns the concept; add a new app only with a

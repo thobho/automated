@@ -1,0 +1,4 @@
+Vendored from https://github.com/trailofbits/skills/tree/main/plugins/sharp-edges/skills/sharp-edges at commit 149d7b21f4067765b82e67029730b42d228ef4b4 (2026-11-21).
+Unchanged files. Left out: references for languages this project does not use (C, C#, Go, Java, Kotlin, PHP, Ruby, Rust, Swift), agents/, assets/.
+License: CC-BY-SA-4.0 (Trail of Bits), see LICENSE in this folder; adapted copies stay under CC-BY-SA-4.0
+Update: replace with a newer commit through a reviewed PR; never install the upstream plugin, hooks or scripts.
