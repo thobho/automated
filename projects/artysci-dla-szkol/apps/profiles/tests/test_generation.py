@@ -55,7 +55,7 @@ def test_request_then_job_gives_a_ready_generation(artist, client, queue):
     assert record.trigger == "manual" and record.duration_ms is not None
     versions = {(c.kind, c.name): c.version for c in record.components.all()}
     assert versions[("schema", "profile")] == "0.2"
-    assert versions[("instructions", "profile_draft")] == "0.2"
+    assert versions[("instructions", "profile_draft")] == "0.3"
     assert record.cost_usd == Decimal("0.002") == AICall.objects.get().cost_usd
     assert AICall.objects.get().profile_generation_id == record.pk
     assert quality.generation_summary(record)["status"] == "ready"
@@ -66,7 +66,7 @@ def test_the_ai_gets_instructions_schema_and_the_input(artist, client):
     generation.run_generation(record.pk)
     (request,) = client.requests
     system, user = request.messages
-    assert "v0.2" in system["content"] and request.purpose == "profile_draft"
+    assert "v0.3" in system["content"] and request.purpose == "profile_draft"
     assert request.schema["title"].startswith("Profil artysty")
     payload = json.loads(user["content"])
     assert payload["artist"]["name"] == "Teatr Kwiatki"

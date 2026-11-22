@@ -523,7 +523,8 @@ A background job turns an artist's ready materials, questionnaire and offers int
   editing `validation.py` (the validator component) needs the same.
 - **Browser test:** `uv sync --group e2e && uv run pytest tests/e2e/test_generation.py
   --base-url http://127.0.0.1:<port> --artist-session <session key>` (skipped without a session).
-- Not here yet: repair rounds and the admin review queue (US-2.5C), preview and editing (US-2.6).
+- Repair rounds and the admin review fallback: see "Repair loop and manual review (US-2.5C)" below.
+- Not here yet: preview and editing (US-2.6).
 
 ### Hard-rule validator (US-2.5B)
 
@@ -532,8 +533,8 @@ A background job turns an artist's ready materials, questionnaire and offers int
 empty). Deterministic, no AI. `inputs.collect_sources(artist)` builds `Sources` from the same
 `build_input` as the AI call (plus the artist's own video links, which the AI never sees). It is
 the registered `validator:profile_checks` component, **v0.1** (`validation.py` + `validator.py`).
-After the schema check the job runs it: no hard finding = `gotowa`, any = `do przeglądu` (repair
-is US-2.5C). `Generation.report` holds the whole report as JSON; soft findings are also the
+After the schema check the job runs it: no hard finding = `gotowa`, any = repair rounds, then
+`do przeglądu` if still not clean (US-2.5C, below). `Generation.report` holds the whole report as JSON; soft findings are also the
 generation's `warnings`.
 
 | Rule (code) | What is checked |
@@ -554,6 +555,33 @@ gallery photos, testimonials or FAQ empty).
 failing test (with the boundary value), bump `VALIDATOR_VERSION` in `generator_components.py` and
 run `manage.py generator_manifest --write` (the manifest test fails otherwise). Only rules listed
 in US-2.5 belong here.
+
+### Repair loop and manual review (US-2.5C)
+
+`apps/profiles/repair.py`: when the validator finds **hard** findings, `repair_profile` asks the
+AI (through `apps/profiles/ai`, purpose `profile_repair`) for a corrected profile: the user message
+is `{"task": "repair", "previous_result", "findings": [{rule, path, message}], "input"}` (the same
+source input as the first call; the offending value is not repeated, no e-mail or other personal
+data beyond that input, scrubbed as always). The reply is schema-checked and validated again.
+At most **2 rounds** (`MAX_ROUNDS`); the loop ends at the first clean result. Soft findings never
+trigger a repair. Each round is one `AICall` linked to the `Generation`; `Generation.repair_rounds`
+counts the repair calls made. The `instructions` component is **v0.3** (adds the repair task: change
+only the listed fields, add no facts); the schema stays v0.2.
+
+Early stops (recorded in `report["repair"] = {"rounds", "stopped"}` and as a warning): `cost_cap`
+(no call made), `disabled`, `invalid_json`, `schema`, `provider`, `validator`. The last valid result
+and its findings are kept and the generation goes to review, never silently to `gotowa`. A failure of
+the *first* call is still `błąd`.
+
+**Review fallback.** A generation with hard findings after the loop is `do przeglądu`. The artist
+panel shows only „Profil czeka na przegląd” (no generated text). Staff see these in the Django admin
+under *Generacje do przeglądu* (read-only list with the remaining findings and the stop reason; the
+view needs the `quality.view_reviewqueue` permission, superusers have it) and run the action
+*Oznacz jako gotowa / błąd (z notatką)* with a required note. `quality.services.review_generation`
+changes the status (the only edit a finished generation allows, and only from `do przeglądu`) and
+writes an append-only `GenerationReview` row (staff user, time, decision, note; visible read-only in
+the admin). `błąd` shows the artist a neutral reason, not the note. No dashboard queue and no e-mail
+yet (US-9.2).
 
 ## File storage
 
@@ -718,6 +746,7 @@ Added with T07: no new dependency for the AI adapter (OpenRouter over the standa
 `urllib`); D46, D60 (OpenRouter with ZDR-only routing, pinned model), D59 (PII minimisation),
 D63 (daily and per-call cost caps, kill switch). Default model `anthropic/claude-haiku-5.5` on
 Google Vertex / Amazon Bedrock ZDR endpoints until model selection in E11.
+Added with T31: no new dependency; D114 (repair loop: at most 2 rounds, early stops go to review).
 Added with T26: no new dependency; D106 (website import: SSRF-safe fetcher, limits, scrub of
 PESEL and ID card numbers, contact data kept for the artist only).
 New dependencies or structural choices need a line in the decision log first

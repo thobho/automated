@@ -5,6 +5,7 @@ is never edited or deleted; a `Generation` can change only while it runs (`trwa`
 append-only once finished (edits and deletes are refused, like `trust.ArtistStatement`).
 """
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -126,6 +127,7 @@ class Generation(models.Model):
     )
 
     objects = GenerationQuerySet.as_manager()
+    _closing_review = False  # set only by `services.review_generation`
 
     class Meta:
         verbose_name = _("generacja profilu")
@@ -146,10 +148,12 @@ class Generation(models.Model):
         return f"Generation {self.pk} ({self.status})"
 
     def save(self, *args, **kwargs):
-        # Integrity guard, not business logic: a finished generation is never rewritten.
+        # Integrity guard, not business logic: a finished generation is never rewritten. The one
+        # exception: `services.review_generation` closes a `do przeglądu` one (sets the flag).
         if self.pk is not None and not self._state.adding:
-            stored = type(self).objects.filter(pk=self.pk).values_list("status", flat=True)
-            if stored.first() not in (None, self.Status.RUNNING):
+            stored = type(self).objects.filter(pk=self.pk).values_list("status", flat=True).first()
+            closing_review = self._closing_review and stored == self.Status.REVIEW
+            if stored not in (None, self.Status.RUNNING) and not closing_review:
                 raise RegistryImmutable("finished generations cannot be edited")
         super().save(*args, **kwargs)
 
@@ -159,3 +163,55 @@ class Generation(models.Model):
     @property
     def finished(self) -> bool:
         return self.status != self.Status.RUNNING
+
+
+class ReviewQueue(Generation):
+    """Admin-only view of the generations waiting for manual review (`do przeglądu`)."""
+
+    class Meta:
+        proxy = True
+        verbose_name = _("generacja do przeglądu")
+        verbose_name_plural = _("generacje do przeglądu")
+
+
+class GenerationReview(models.Model):
+    """Audit entry: which staff user closed a `do przeglądu` generation, how, when and why.
+
+    Written only by `services.review_generation`; never edited or deleted.
+    """
+
+    class Decision(models.TextChoices):
+        READY = "ready", _("gotowa")
+        ERROR = "error", _("błąd")
+
+    generation = models.OneToOneField(
+        Generation,
+        on_delete=models.PROTECT,
+        related_name="review",
+        verbose_name=_("generacja"),
+    )
+    reviewer = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="+",
+        verbose_name=_("recenzent"),
+    )
+    decision = models.CharField(_("decyzja"), max_length=10, choices=Decision.choices)
+    note = models.TextField(_("notatka"))
+    created_at = models.DateTimeField(_("kiedy"))
+
+    class Meta:
+        verbose_name = _("przegląd generacji")
+        verbose_name_plural = _("przeglądy generacji")
+        ordering = ["-created_at"]
+
+    def __str__(self) -> str:
+        return f"Review of generation {self.generation_id}: {self.decision}"
+
+    def save(self, *args, **kwargs):
+        if self.pk is not None and not self._state.adding:
+            raise RegistryImmutable("review entries cannot be edited")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise RegistryImmutable("review entries cannot be deleted")

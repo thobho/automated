@@ -6,7 +6,9 @@
 `request_generation` records the run through `quality.start_generation` right away (so the artist
 sees `trwa` at once and a second request is refused), the job calls the AI only through
 `apps.profiles.ai`, checks the reply against the JSON Schema and closes the run with
-`finish_generation`: ``gotowa`` or ``błąd`` with a readable reason. No retries. Reasons, logs and
+`finish_generation`: ``gotowa`` or ``błąd`` with a readable reason. Hard validator findings go
+through up to 2 repair rounds (`repair.py`); what is still not clean ends as ``do przeglądu``
+(manual admin review), never as ``gotowa``. No other retries. Reasons, logs and
 the database never hold prompt or reply text, e-mails or tokens.
 """
 
@@ -26,7 +28,7 @@ from apps.core.logs import pseudonymise_user
 from apps.quality import services as quality
 from apps.quality.models import Generation
 
-from . import ai, inputs, validation, validator
+from . import ai, inputs, repair, validation, validator
 from .generator_components import COMPONENTS, INSTRUCTIONS
 
 logger = logging.getLogger("apps.profiles.generation")
@@ -166,23 +168,34 @@ def run_generation(generation_id: int) -> Generation | None:
         }
         return _fail(generation, reason, code="schema", started=started)
     try:
-        report = validator.validate_profile(
-            result.data, inputs.collect_sources(generation.artist, data)
-        )
+        sources = inputs.collect_sources(generation.artist, data)
+        report = validator.validate_profile(result.data, sources)
     except Exception:
         logger.exception("profile validation crashed", extra={"generation": generation.pk})
         return _fail(
             generation, _("Nieoczekiwany błąd generowania."), code="validator", started=started
         )
-    # Hard violations: repair rounds and the review queue are US-2.5C; until then `do przeglądu`.
+    profile, rounds, stopped = result.data, 0, ""
+    if not report.ok:
+        # Hard violations: up to 2 repair rounds, then manual review (US-2.5C). Soft ones never.
+        outcome = repair.repair_profile(generation, data, sources, profile, report)
+        profile, report, rounds, stopped = (
+            outcome.result,
+            outcome.report,
+            outcome.rounds,
+            outcome.stopped,
+        )
     status = Generation.Status.READY if report.ok else Generation.Status.REVIEW
+    warnings = [finding.line() for finding in report.soft]
+    report_data = report.as_dict()
+    if rounds or stopped:
+        report_data["repair"] = {"rounds": rounds, "stopped": stopped}
+    if stopped and not report.ok:
+        warnings.append(
+            _("Poprawki przerwane: %(reason)s") % {"reason": repair.STOP_REASONS[stopped]}
+        )
     finished = quality.finish_generation(
-        generation,
-        result.data,
-        [finding.line() for finding in report.soft],
-        0,
-        status,
-        report=report.as_dict(),
+        generation, profile, warnings, rounds, status, report=report_data
     )
     _log(
         "generation_ready" if report.ok else "generation_needs_review",
@@ -190,5 +203,7 @@ def run_generation(generation_id: int) -> Generation | None:
         duration_ms=_elapsed_ms(started),
         hard=len(report.hard),
         soft=len(report.soft),
+        repair_rounds=rounds,
+        repair_stopped=stopped,
     )
     return finished

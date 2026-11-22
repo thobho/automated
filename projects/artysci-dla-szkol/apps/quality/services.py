@@ -22,7 +22,7 @@ from apps.artists.materials import QUESTIONNAIRE_FIELDS
 from apps.artists.models import Artist, Material, ScanStatus
 from apps.profiles.models import AICall
 
-from .models import Generation, GeneratorComponentVersion, RegistryImmutable
+from .models import Generation, GenerationReview, GeneratorComponentVersion, RegistryImmutable
 from .registry import SNAPSHOT_KINDS, Component, RegistryError
 
 FINGERPRINT_VERSION = 1
@@ -239,3 +239,35 @@ def generation_summary(generation: Generation) -> dict:
             .values_list("pk", flat=True)
         ),
     }
+
+
+# --- manual review (US-2.5C) -----------------------------------------------------------------
+
+
+def review_generation(generation: Generation, reviewer, decision: str, note: str) -> Generation:
+    """A staff user closes a generation waiting for review as `gotowa` or `błąd`, with a note.
+
+    Writes a `GenerationReview` audit row (who, when, what, why). Refuses a non-staff user, an
+    empty note, another decision and a generation that is not `do przeglądu`.
+    """
+    if not (getattr(reviewer, "is_active", False) and getattr(reviewer, "is_staff", False)):
+        raise PermissionError("Only staff can review generations.")
+    if decision not in GenerationReview.Decision.values:
+        raise GenerationError(f"A review cannot end as {decision!r}.")
+    note = (note or "").strip()
+    if not note:
+        raise GenerationError("A review needs a note.")
+    with transaction.atomic():
+        locked = Generation.objects.select_for_update().get(pk=generation.pk)
+        if locked.status != Generation.Status.REVIEW:
+            raise GenerationError(f"Generation {locked.pk} is not waiting for review.")
+        locked.status = decision
+        if decision == GenerationReview.Decision.ERROR:
+            locked.warnings = ["Profil nie przeszedł przeglądu. Spróbuj wygenerować go ponownie."]
+        locked._closing_review = True
+        locked.save()
+        GenerationReview.objects.create(
+            generation=locked, reviewer=reviewer, decision=decision, note=note[:2000],
+            created_at=timezone.now(),
+        )  # fmt: skip
+    return locked

@@ -59,7 +59,8 @@ def test_the_components_are_registered_with_version_and_hash():
     registered = {c.key: c for c in reg.registry.all()}
     for component in COMPONENTS:
         assert registered[component.key] is component
-        assert component.version == ("0.1" if component is VALIDATOR else "0.2")
+        expected = {"validator": "0.1", "instructions": "0.3"}.get(component.kind, "0.2")
+        assert component.version == expected
         assert len(component.content_hash) == 64
     assert (INSTRUCTIONS.kind, SCHEMA.kind, VALIDATOR.kind) == (
         "instructions",

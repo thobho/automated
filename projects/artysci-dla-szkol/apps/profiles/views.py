@@ -25,8 +25,9 @@ def _context(request) -> dict:
     return {
         "generation": record,
         "running": record is not None and record.status == Generation.Status.RUNNING,
-        "ready": record is not None
-        and record.status in (Generation.Status.READY, Generation.Status.REVIEW),
+        "ready": record is not None and record.status == Generation.Status.READY,
+        # Not checked yet: the page says only that it waits, never what was generated.
+        "in_review": record is not None and record.status == Generation.Status.REVIEW,
         "failed": record is not None and record.status == Generation.Status.ERROR,
     }
 
