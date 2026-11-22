@@ -13,22 +13,6 @@ os.environ.setdefault("DJANGO_ALLOW_ASYNC_UNSAFE", "true")
 SCREENSHOT_DIR = Path(os.environ.get("E2E_SCREENSHOT_DIR", "e2e-screenshots"))
 
 
-def pytest_addoption(parser):
-    parser.addoption(
-        "--artist-session",
-        default=os.environ.get("E2E_ARTIST_SESSION", ""),
-        help="Session key (cookie `sessionid`) of a signed-in artist with ready materials.",
-    )
-
-
-@pytest.fixture
-def artist_session(request) -> str:
-    session = request.config.getoption("--artist-session")
-    if not session:
-        pytest.skip("no --artist-session (or E2E_ARTIST_SESSION) given")
-    return session
-
-
 @pytest.fixture(scope="session")
 def shot_dir() -> Path:
     SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
