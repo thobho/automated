@@ -8,6 +8,7 @@ urlpatterns = [
     path("artysta/profil/generowanie/", views.generation_page, name="generation"),
     path("artysta/profil/generowanie/status/", views.generation_status, name="generation_status"),
     path("artysta/profil/generowanie/start/", views.generation_start, name="generation_start"),
+    path("artysta/profil/braki/", views.gaps, name="gaps"),
     path("panel/podglad/", views.preview, name="preview"),
     path("panel/podglad/motyw/", views.theme, name="theme"),
     path("panel/podglad/edycja/", views.edit_field, name="edit_field"),

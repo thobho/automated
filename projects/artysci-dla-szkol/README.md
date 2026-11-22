@@ -166,6 +166,7 @@ list and lifetimes: [SECURITY.md#cookies-us-88-d32](SECURITY.md#cookies-us-88-d3
   `/artysta/profil/dane/` (step 1, basics), `/artysta/profil/oferty/` (offers; `nowa/`,
   `<id>/edycja/`, `<id>/usun/`, `<id>/przesun/` POST), `/artysta/profil/oswiadczenia/`
   (statements, GET + POST), `/artysta/profil/materialy/` (materials),
+  `/artysta/profil/braki/` (missing items, US-2.7),
   `/artysta/profil/import/` (website import, GET + POST) and `/artysta/profil/import/<id>/`
   (import status); artists only, login required.
 - `/rejestracja/placowka/` (institution registration), `/rejestracja/placowka/rspo/` (HTMX RSPO
@@ -726,6 +727,24 @@ App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
   cap no version is created and a Polish reason is shown. Instructions are v0.4.
 - Routes (artist only, POST + CSRF): `/panel/podglad/{edycja,odblokuj,sekcja,przywroc}/`,
   status `GET /panel/podglad/sekcja/status/` (HTMX).
+
+## Missing items and completeness (US-2.7)
+
+- `GET /artysta/profil/braki/` (artist only, own data only): the missing items as a task list, each
+  with an „Uzupełnij” button to the target screen, a `<progress>` bar with the percentage, and a link
+  to the preview. A compact summary with the percentage is on the wizard overview.
+- `apps/profiles/completeness.py` stores nothing: the list is recomputed on each view, so filling an
+  item on its screen removes it. Sources: the `gaps` of the latest finished run when it is `gotowa`
+  (a held `do przeglądu` run shows none), mapped by a closed table (`GAP_KINDS`: photo, offers,
+  price, max audience, duration, age range, tech requirements, questionnaire, child protection,
+  basics) to a screen and a check; an unknown code is listed with the generator's text and no
+  button. Plus the rule-based items (basics, offers, child-protection statement, main-photo
+  candidate, questionnaire, description).
+- Percentage = `round(100 × satisfied / 6)` over the fixed `CHECKLIST`: (1) basics (name, region,
+  type, city, audience), (2) description present, (3) at least one offer, (4) child-protection
+  statement, (5) a main-photo candidate, (6) any questionnaire answer. (1)–(4) are the D6
+  publication minimum. `completeness_percent(artist)` is the function US-2.8 uses for the
+  "published" event; no event is emitted here.
 
 ## Page themes (US-3.2)
 

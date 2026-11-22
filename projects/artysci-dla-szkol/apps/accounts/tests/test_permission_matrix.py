@@ -86,6 +86,7 @@ MATRIX = {
     "profiles:generation": ("login", "200", "403", "403"),
     "profiles:generation_status": ("login", "200", "403", "403"),
     "profiles:generation_start": ("login", "405", "403", "403"),  # POST only
+    "profiles:gaps": ("login", "200", "403", "403"),
     "institutions:register": ("200", "200", "200", "200"),
     "institutions:rspo_suggestions": ("200", "200", "200", "200"),
     "institutions:start": ("login", "403", "200", "403"),

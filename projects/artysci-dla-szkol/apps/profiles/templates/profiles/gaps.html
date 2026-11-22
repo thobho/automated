@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Braki w profilu" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Braki w profilu" %}</h1>
+  <p>
+    <label for="completeness">{% translate "Kompletność profilu" %}: <strong>{{ percent }}%</strong></label>
+    <progress id="completeness" max="100" value="{{ percent }}">{{ percent }}%</progress>
+  </p>
+
+  {% if tasks %}
+    <ul class="gap-tasks">
+      {% for task in tasks %}
+        <li data-task="{{ task.key }}">
+          {{ task.text }}
+          {% if task.has_button %}
+            <a class="button" href="{% url task.url_name %}">{% translate "Uzupełnij" %}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p data-all-done>{% translate "Wszystko uzupełnione. Profil jest kompletny." %}</p>
+  {% endif %}
+
+  <p><a href="{% url 'profiles:preview' %}">{% translate "Zobacz podgląd strony" %}</a></p>
+  <p><a href="{% url 'artists:start' %}">{% translate "Wróć do kreatora" %}</a></p>
+{% endblock %}
