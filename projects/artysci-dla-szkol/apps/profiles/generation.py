@@ -28,7 +28,7 @@ from apps.core.logs import pseudonymise_user
 from apps.quality import services as quality
 from apps.quality.models import Generation
 
-from . import ai, inputs, repair, validation, validator
+from . import ai, inputs, pages, repair, validation, validator
 from .generator_components import COMPONENTS, INSTRUCTIONS
 
 logger = logging.getLogger("apps.profiles.generation")
@@ -86,9 +86,10 @@ def close_stale(artist: Artist) -> None:
         )
 
 
-def request_generation(artist: Artist, trigger: str) -> Generation:
-    """Record a running generation and queue its job. Raises `GenerationRefused` while another
-    one is running for this artist (nothing is queued then)."""
+def request_generation(artist: Artist, trigger: str, *, section: str = "") -> Generation:
+    """Record a running generation and queue its job (the one-section job when `section` is
+    given, US-2.6). Raises `GenerationRefused` while another one is running for this artist
+    (nothing is queued then)."""
     from . import tasks  # tasks import this module
 
     close_stale(artist)
@@ -99,7 +100,10 @@ def request_generation(artist: Artist, trigger: str) -> Generation:
         generation = quality.start_generation(artist, trigger, COMPONENTS)
     # After the commit, so the job always finds the row.
     try:
-        jobs.enqueue(tasks.generate_profile, generation_id=generation.pk)
+        if section:
+            jobs.enqueue(tasks.regenerate_section, generation_id=generation.pk, section=section)
+        else:
+            jobs.enqueue(tasks.generate_profile, generation_id=generation.pk)
     except Exception:
         logger.exception("profile generation job could not be queued")
         _fail(
@@ -109,7 +113,7 @@ def request_generation(artist: Artist, trigger: str) -> Generation:
             started=time.monotonic(),
         )
         raise GenerationRefused(_("Nie udało się zlecić generowania. Spróbuj ponownie.")) from None
-    _log("generation_requested", generation, trigger=trigger)
+    _log("generation_requested", generation, trigger=trigger, section=section)
     return generation
 
 
@@ -206,4 +210,6 @@ def run_generation(generation_id: int) -> Generation | None:
         repair_rounds=rounds,
         repair_stopped=stopped,
     )
+    if finished.status == Generation.Status.READY:
+        pages.record_generated(finished)  # a held (`do przeglądu`) run saves no version
     return finished

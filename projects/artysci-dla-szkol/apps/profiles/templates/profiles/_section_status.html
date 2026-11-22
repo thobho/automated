@@ -1,0 +1,9 @@
+{% load i18n %}
+<div id="section-status" data-running="{{ section_running|yesno:'true,false' }}"
+     {% if section_running %}hx-get="{% url 'profiles:section_status' %}" hx-trigger="every 3s" hx-swap="outerHTML"{% endif %}>
+  {% if section_running %}
+    <p role="status"><strong>{% translate "trwa" %}</strong> – {% translate "generujemy sekcję. Ten status odświeża się sam." %}</p>
+  {% elif section_error %}
+    <p role="alert" data-field="section-error">{{ section_error }} {% translate "Obecna wersja została bez zmian." %}</p>
+  {% endif %}
+</div>

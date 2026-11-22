@@ -1,0 +1,76 @@
+{% load i18n %}
+{# Owner-only text editor of the preview (US-2.6): plain POST forms with CSRF, no inline script. #}
+<section class="editor" aria-labelledby="editor-h">
+  <h2 id="editor-h">{% translate "Edycja tekstów" %}</h2>
+  <p class="editor__hint">{% translate "Tekst, który zapiszesz, jest blokowany: ponowne generowanie go nie zmieni. Możesz go odblokować." %}</p>
+  {% include "profiles/_section_status.html" %}
+  {% for section in editor %}
+    <section class="editor__section" id="edit-{{ section.key }}" aria-labelledby="edit-{{ section.key }}-h">
+      <div class="editor__head">
+        <h3 id="edit-{{ section.key }}-h">{{ section.label }}</h3>
+        <form method="post" action="{% url 'profiles:regenerate_section' %}">
+          {% csrf_token %}
+          <input type="hidden" name="section" value="{{ section.key }}">
+          <button type="submit" class="editor__regen"{% if section_running %} disabled{% endif %}>{% translate "Wygeneruj od nowa" %}<span class="visually-hidden"> – {{ section.label }}</span></button>
+        </form>
+      </div>
+      {% for field in section.fields %}
+        <div class="editor__field" data-path="{{ field.path }}" data-locked="{{ field.locked|yesno:'true,false' }}">
+          <form method="post" action="{% url 'profiles:edit_field' %}">
+            {% csrf_token %}
+            <input type="hidden" name="path" value="{{ field.path }}">
+            <label for="f-{{ field.path }}">{{ field.label }}{% if field.locked %} <span class="editor__lock">🔒 {% translate "zablokowane" %}</span>{% endif %}</label>
+            {% if field.multiline %}
+              <textarea id="f-{{ field.path }}" name="value" rows="5">{{ field.value }}</textarea>
+            {% else %}
+              <input id="f-{{ field.path }}" type="text" name="value" value="{{ field.value }}">
+            {% endif %}
+            <button type="submit">{% translate "Zapisz" %}<span class="visually-hidden"> – {{ field.label }}</span></button>
+          </form>
+          {% if field.locked %}
+            <form method="post" action="{% url 'profiles:unlock_field' %}">
+              {% csrf_token %}
+              <input type="hidden" name="path" value="{{ field.path }}">
+              <button type="submit">{% translate "Odblokuj" %}<span class="visually-hidden"> – {{ field.label }}</span></button>
+            </form>
+          {% endif %}
+        </div>
+      {% empty %}
+        <p class="editor__empty">{% translate "Brak tekstu w tej sekcji. Wygeneruj ją, żeby coś się pojawiło." %}</p>
+      {% endfor %}
+    </section>
+  {% endfor %}
+
+  <section class="editor__versions" aria-labelledby="versions-h">
+    <h3 id="versions-h">{% translate "Wersje strony (ostatnie 10)" %}</h3>
+    {% if versions %}
+      <table>
+        <thead>
+          <tr><th scope="col">{% translate "Nr" %}</th><th scope="col">{% translate "Kiedy" %}</th><th scope="col">{% translate "Źródło" %}</th><th scope="col">{% translate "Akcja" %}</th></tr>
+        </thead>
+        <tbody>
+          {% for version in versions %}
+            <tr data-version="{{ version.number }}">
+              <th scope="row">{{ version.number }}</th>
+              <td>{{ version.created_at|date:"j.m.Y H:i" }}</td>
+              <td>{{ version.get_source_display }}</td>
+              <td>
+                {% if forloop.first %}
+                  <strong>{% translate "obecna" %}</strong>
+                {% else %}
+                  <form method="post" action="{% url 'profiles:restore_version' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="number" value="{{ version.number }}">
+                    <button type="submit">{% translate "Przywróć" %}<span class="visually-hidden"> {% blocktranslate with n=version.number %}wersję {{ n }}{% endblocktranslate %}</span></button>
+                  </form>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>{% translate "Nie ma jeszcze zapisanych wersji. Pojawią się po pierwszym wygenerowaniu profilu." %}</p>
+    {% endif %}
+  </section>
+</section>

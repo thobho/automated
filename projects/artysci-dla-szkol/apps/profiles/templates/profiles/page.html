@@ -12,6 +12,7 @@
 
 {% block content %}
   {% if theme_switch %}{% include "profiles/_theme_switch.html" %}{% endif %}
+  {% if editor is not None %}{% include "profiles/_editor.html" %}{% endif %}
   <div class="artist-root" data-theme="{{ content.theme }}">
   <div class="artist-page">
     {% include "profiles/_start.html" %}

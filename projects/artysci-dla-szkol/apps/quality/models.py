@@ -90,6 +90,7 @@ class Generation(models.Model):
         QUESTIONNAIRE = "questionnaire", _("ankieta")
         MANUAL = "manual", _("ręcznie")
         RERUN = "rerun", _("ponowne uruchomienie")
+        SECTION = "section", _("regeneracja sekcji")
 
     class Status(models.TextChoices):
         RUNNING = "running", _("trwa")
