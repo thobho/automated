@@ -1,0 +1,8 @@
+{% load i18n %}
+{% if percent is not None %}
+  <p data-completeness="{{ percent }}">
+    {% translate "Kompletność profilu" %}: <strong>{{ percent }}%</strong>
+    <progress max="100" value="{{ percent }}" aria-label="{% translate 'Kompletność profilu' %}">{{ percent }}%</progress>
+    <a href="{% url 'profiles:gaps' %}">{% translate "Zobacz braki" %}{% if open %} ({{ open }}){% endif %}</a>
+  </p>
+{% endif %}

@@ -14,8 +14,8 @@ from apps.accounts.permissions import role_required
 from apps.artists import services as artist_services
 from apps.quality.models import Generation
 
+from . import completeness, pages, sections, services
 from . import generation as generations
-from . import pages, sections, services
 from .models import PageVersion
 from .themes import Theme
 
@@ -39,6 +39,19 @@ def _context(request) -> dict:
 def generation_page(request):
     """The status of the latest generation and the button to start one."""
     return render(request, "profiles/generation.html", _context(request))
+
+
+@never_cache
+@require_http_methods(["GET", "HEAD"])
+@role_required("artist")
+def gaps(request):
+    """The artist's own missing items as a task list with the completeness percentage."""
+    artist = artist_services.artist_for(request.user)
+    context = {
+        "tasks": completeness.task_list(artist),
+        "percent": completeness.completeness_percent(artist),
+    }
+    return render(request, "profiles/gaps.html", context)
 
 
 @never_cache

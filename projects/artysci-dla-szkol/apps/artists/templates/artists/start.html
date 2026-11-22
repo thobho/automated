@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n statements %}
+{% load i18n statements completeness %}
 
 {% block title %}{% translate "Kreator profilu" %} – {% translate "Artyści dla szkół" %}{% endblock %}
 
@@ -28,6 +28,7 @@
       </li>
     {% endfor %}
   </ol>
+  {% completeness_summary artist %}
   <p><a href="{% url 'profiles:generation' %}">{% translate "Generowanie profilu" %}</a></p>
   {% artist_statement_badges artist %}
 {% endblock %}
