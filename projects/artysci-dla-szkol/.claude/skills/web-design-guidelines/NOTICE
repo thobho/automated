@@ -1,0 +1,3 @@
+Vendored from https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines at commit 5a37a6329fbad3666c3207392a6a7c0110e92efb (2026-11-21), unchanged.
+License: MIT, as declared in the repository README (the repository has no LICENSE file)
+Update: replace this folder with a newer commit through a reviewed PR; never install it globally or add its hooks.

@@ -47,7 +47,7 @@ skip_covered = true
 [tool.ruff]
 line-length = 100
 target-version = "py313"
-extend-exclude = ["*/migrations/*"]
+extend-exclude = ["*/migrations/*", ".claude"]  # vendored skills: third-party example code
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "DJ", "S", "SIM"]

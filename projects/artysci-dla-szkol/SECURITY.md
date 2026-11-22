@@ -235,6 +235,22 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
   as `offer_poster_orphan` without the key). Posters are malware-scanned like materials (T24:
   `poster_status`, an infected poster is deleted). Log lines carry a pseudonymised user and the
   offer id only.
+- **Artist page template and owner preview (T32, US-3.1, D9, D10, D11)**: `/panel/podglad/`
+  is artist-only (`role_required("artist")`, row in the permission matrix: anonymous -> login,
+  institution and admin -> 403) and shows only the logged-in user's own artist (no id in the
+  URL, so no IDOR). The response is `never_cache` with `X-Robots-Tag: noindex, nofollow` and a
+  `noindex` meta tag; nothing is published here. The template renders only `PageContent`
+  fields, all autoescaped (a test feeds HTML into every text field); no `|safe`, no inline
+  `<script>`, `<style>` or `style=""`, so the strict CSP stays unchanged. **No public contact
+  data (D9):** the page has no `mailto:` or `tel:`, only the "Sprawdź termin" anchor to the
+  inquiry section. **No external requests (D11):** CSS and fonts are served from `static/`,
+  images from the media origin; a YouTube/Vimeo video is a local thumbnail or placeholder plus
+  a link (no iframe, nothing requested from the provider before the click). Video links reach
+  the page only as `http(s)` URLs (`VideoItem` drops anything else, e.g. `javascript:`; the
+  builder uses the canonical URL rebuilt from the provider id, T24). A test scans the rendered
+  HTML for inline code and foreign hosts; the Playwright test
+  `tests/e2e/test_artist_page.py` checks the same in a browser, including that the browser makes
+  no request to another host. No testimonials are imported (D10).
 - **The one allowed token in a URL**: the login link `/logowanie/link/?t=<token>` (and, built the
   same way, the e-mail change link `/konto/email/link/?t=<token>`). The token
   is only in the query string, which the access log never contains (path only, `django.server`

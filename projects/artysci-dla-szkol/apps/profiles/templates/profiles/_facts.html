@@ -1,0 +1,6 @@
+{% load i18n %}
+<section class="facts" id="facts" aria-label="{% translate 'Informacje' %}">
+  <ul>
+    {% for fact in content.facts %}<li>{{ fact }}</li>{% endfor %}
+  </ul>
+</section>

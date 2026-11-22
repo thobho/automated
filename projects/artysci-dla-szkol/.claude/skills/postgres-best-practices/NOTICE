@@ -1,0 +1,4 @@
+Vendored from https://github.com/supabase/agent-skills/tree/main/skills/supabase-postgres-best-practices at commit c9be0e931b7930f7d02126d04774d904c381e7d7 (2026-11-21).
+Unchanged files. Left out: the RLS rules (security-rls-*; Django authorizes in the app), _contributing.md, _template.md, CHANGELOG.md.
+License: MIT, see LICENSE in this folder
+Update: replace with a newer commit through a reviewed PR; never install the upstream plugin, hooks or scripts.
