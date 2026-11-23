@@ -317,6 +317,19 @@ def material_delete(request, material_id):
 @role_required("artist")
 @require_POST
 @_basics_required
+def material_alt_text(request, material_id):
+    """POST saves the alternative text of the artist's own photo (US-3.6); other ids are 404."""
+    try:
+        materials.set_alt_text(_artist(request), material_id, request.POST.get("alt_text", ""))
+    except Material.DoesNotExist as exc:
+        raise Http404 from exc
+    messages.success(request, _("Zapisano opis zdjęcia."))
+    return redirect("artists:materials")
+
+
+@role_required("artist")
+@require_POST
+@_basics_required
 def frame_delete(request, frame_id):
     """POST deletes one of the artist's own video frames (and its file); another artist's id
     is 404."""

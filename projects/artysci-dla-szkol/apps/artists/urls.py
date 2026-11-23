@@ -40,6 +40,11 @@ urlpatterns = [
         name="upload_complete",
     ),
     path(
+        "artysta/profil/materialy/<int:material_id>/opis/",
+        views.material_alt_text,
+        name="material_alt_text",
+    ),
+    path(
         "artysta/profil/materialy/<int:material_id>/usun/",
         views.material_delete,
         name="material_delete",

@@ -1,9 +1,20 @@
 {% load i18n %}
 <section id="photos" aria-labelledby="photos-h">
   <h2 id="photos-h">{% translate "Zdjęcia" %}</h2>
-  <ul class="gallery">
+  {# Each photo is a link to the file; page.js opens it in the dialog below (Esc closes, focus is
+     trapped inside and returns to the link). Without script the link opens the photo itself. #}
+  <ul class="gallery" data-gallery>
     {% for photo in content.photos %}
-      <li><img src="{{ photo.url }}" alt="{{ photo.alt|default:content.hero.name }}"></li>
+      <li><a href="{{ photo.url }}" class="gallery__open"><img src="{{ photo.url }}" alt="{{ photo.alt|default:content.hero.name }}" loading="lazy"></a></li>
     {% endfor %}
   </ul>
+  <dialog class="lightbox" id="lightbox" aria-label="{% translate 'Galeria zdjęć' %}">
+    <div class="lightbox__frame"></div>
+    <p class="lightbox__counter" aria-live="polite"></p>
+    <div class="lightbox__controls">
+      <button type="button" class="button" data-lightbox="prev">{% translate "Poprzednie" %}</button>
+      <button type="button" class="button" data-lightbox="next">{% translate "Następne" %}</button>
+      <button type="button" class="button" data-lightbox="close">{% translate "Zamknij" %}</button>
+    </div>
+  </dialog>
 </section>

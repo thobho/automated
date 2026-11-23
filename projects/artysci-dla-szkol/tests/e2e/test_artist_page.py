@@ -68,9 +68,9 @@ def test_preview_page(browser, base_url, artist_session, shot_dir):
         assert not any(absent in h for h in headings), headings
     assert page.get_by_role("link", name="Sprawdź termin").count() >= 1
 
-    # 8 offers: 6 visible, 2 behind the native <details>; no "Cena na zapytanie" per item.
-    assert page.locator("details").count() == 1
-    assert page.locator("details li.offer").count() == 2
+    # 8 offers: 6 visible, 2 behind the "Pokaż pozostałe" button; no "Cena na zapytanie" per item.
+    assert page.locator("button.offers-more__toggle").count() == 1
+    assert page.locator(".offers-more li.offer").count() == 2
     assert page.locator("section#offer li.offer").count() == 8
     assert page.get_by_text("Cena na zapytanie").count() == 0
 

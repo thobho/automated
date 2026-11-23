@@ -12,6 +12,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 
+from .accessibility import photo_alt
 from .themes import DEFAULT_THEME, theme_or_default
 
 MIN_GALLERY_PHOTOS = 4  # US-3.1: a gallery needs at least four photos
@@ -185,7 +186,7 @@ def page_content_for(artist) -> PageContent:
     photos, videos = [], []
     for material in materials.ready_materials(artist):
         if material.kind == MaterialKind.PHOTO:
-            alt = _("%(name)s – zdjęcie %(n)d") % {"name": artist.name, "n": len(photos) + 1}
+            alt = photo_alt(material.alt_text, artist.name, len(photos) + 1)
             photos.append(PhotoItem(materials.file_url(material), alt))
         elif material.kind == MaterialKind.VIDEO and materials.file_url(material):
             videos.append(
