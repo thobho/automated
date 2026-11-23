@@ -26,6 +26,7 @@
   var links = Array.prototype.slice.call(gallery.querySelectorAll(".gallery__open"));
   var image = document.createElement("img"); /* made here: no empty-src image in the HTML */
   image.className = "lightbox__image";
+  image.alt = "";
   dialog.querySelector(".lightbox__frame").appendChild(image);
   var counter = dialog.querySelector(".lightbox__counter");
   var current = 0;
@@ -59,6 +60,19 @@
   dialog.addEventListener("keydown", function (event) {
     if (event.key === "ArrowRight") show(current + 1);
     else if (event.key === "ArrowLeft") show(current - 1);
+    else if (event.key === "Tab") {
+      /* A modal dialog lets Tab leave for the browser's own controls: keep it in a loop. */
+      var controls = dialog.querySelectorAll("button");
+      var first = controls[0];
+      var last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   });
 
   dialog.addEventListener("close", function () {
