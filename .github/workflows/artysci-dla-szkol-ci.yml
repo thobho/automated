@@ -39,7 +39,9 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
-      - run: uv sync
+          prune-cache: false
+          save-cache: false
+      - run: timeout 120 uv sync || uv sync
       - run: uv run ruff check --output-format=github .
       - run: uv run ruff format --check .
 
@@ -77,7 +79,8 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
-      - run: uv sync
+          prune-cache: false
+      - run: timeout 120 uv sync || uv sync
       - name: Install ffmpeg (video/audio tests run on generated samples)
         run: |
           sudo apt-get update -q
@@ -110,8 +113,7 @@ jobs:
           fetch-depth: 0
       - uses: astral-sh/setup-uv@v6
         with:
-          enable-cache: true
-          cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
+          enable-cache: false
       - name: pip-audit (locked dependencies)
         run: |
           uv export --no-emit-project --format requirements-txt > "$RUNNER_TEMP/requirements.txt"
@@ -174,7 +176,9 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
-      - run: uv sync --group e2e
+          prune-cache: false
+          cache-suffix: e2e
+      - run: timeout 120 uv sync --group e2e || uv sync --group e2e
       - name: Wait for MinIO
         run: |
           for i in $(seq 1 60); do
@@ -244,7 +248,9 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
-      - run: uv sync
+          prune-cache: false
+          save-cache: false
+      - run: timeout 120 uv sync || uv sync
       - name: Start the app with one artist
         run: |
           uv run python manage.py migrate --noinput
@@ -306,7 +312,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        n: [1, 2, 3, 4, 5, 6]
+        n: [1, 2, 3, 4, 5, 6, 7, 8]
     services:
       postgres:
         image: postgres:17
@@ -324,6 +330,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: false
       - run: uv sync
       - name: Start the app with one artist
         run: |
@@ -375,8 +383,11 @@ jobs:
             echo "RESULT $1 round=$round rc=$rc secs=$(( $(date +%s) - t )) lcp=$lcp"
             echo "TRACE $1 round=$round $nav"
           }
-          for round in 1 2 3 4; do
-            run lh12 12 "--headless=new --no-sandbox"
-            run lh13 13 "--headless=new --no-sandbox"
+          base="--headless=new --no-sandbox"
+          for round in 1 2 3 4 5 6; do
+            run lh12 12 "$base"
+            run lh12-limit1 12 "$base --renderer-process-limit=1"
+            run lh12-noiso 12 "$base --disable-site-isolation-trials --disable-features=SpareRendererForSitePerProcess,IsolateOrigins,site-per-process"
+            run lh13 13 "$base"
           done
           exit 0
