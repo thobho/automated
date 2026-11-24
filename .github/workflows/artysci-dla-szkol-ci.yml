@@ -298,3 +298,85 @@ jobs:
           name: lighthouse-report
           path: ${{ runner.temp }}/lighthouse.json
           if-no-files-found: warn
+
+  # TEMPORARY experiment for #181; removed before review.
+  lhexp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        n: [1, 2, 3, 4, 5, 6]
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: artysci
+          POSTGRES_PASSWORD: artysci
+          POSTGRES_DB: artysci
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U artysci" --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    env:
+      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DATABASE_URL: postgres://artysci:artysci@127.0.0.1:5432/artysci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync
+      - name: Start the app with one artist
+        run: |
+          uv run python manage.py migrate --noinput
+          uv run python manage.py shell -c "
+          from django.conf import settings
+          from django.contrib.auth import get_user_model
+          from django.test import Client
+          from apps.artists.models import Artist, Offer
+          user = get_user_model().objects.create_user(email='lighthouse@example.invalid')
+          artist = Artist.objects.create(user=user, name='Zespół Żółw', city='Wrocław')
+          for i in range(8):
+              Offer.objects.create(artist=artist, title=f'Spektakl {i + 1}', description='Opis', price_on_request=True, position=i)
+          client = Client()
+          client.force_login(user)
+          open('$RUNNER_TEMP/session', 'w').write(client.cookies[settings.SESSION_COOKIE_NAME].value)
+          "
+          nohup uv run python manage.py runserver 127.0.0.1:8000 --noreload \
+            > "$RUNNER_TEMP/server.log" 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fs http://127.0.0.1:8000/healthz && exit 0
+            sleep 1
+          done
+          exit 1
+      - name: Measure
+        run: |
+          set +e
+          headers=$(jq -nc --arg c "sessionid=$(cat "$RUNNER_TEMP/session")" '{Cookie: $c}')
+          lscpu | grep -E 'Model name|^CPU\(s\)'; google-chrome --version; node --version
+          npx --yes lighthouse@12 --version; npx --yes lighthouse@13 --version
+          mkdir -p "$RUNNER_TEMP/exp"
+          cd "$RUNNER_TEMP/exp"
+          run() { # name, lighthouse major, chrome flags
+            out="$1-$round"
+            t=$(date +%s)
+            npx --yes "lighthouse@$2" http://127.0.0.1:8000/panel/podglad/ \
+              --only-categories=performance --form-factor=mobile --quiet \
+              --extra-headers="$headers" --chrome-flags="$3" \
+              -GA="$out" --output=json --output-path="$out.json" > "$out.log" 2>&1
+            rc=$?
+            lcp=$(jq -c '[.audits["largest-contentful-paint"].numericValue, .runtimeError.code]' "$out.json")
+            ls "$out"
+            tr=$(ls "$out"/*trace*.json 2>/dev/null | head -n 1)
+            nav=$(jq -c '(.traceEvents // .) as $e | {events: ($e|length),
+              navStart: [$e[]|select(.name=="navigationStart")|[.pid,.args.data.documentLoaderURL]],
+              started: [$e[]|select(.name=="TracingStartedInBrowser")|.args.data.frames[]?|[.frame,.url,.processId]],
+              procs: [$e[]|select(.name=="process_name")|[.pid,.args.name]],
+              byPid: [$e|group_by(.pid)[]|[.[0].pid,length]]}' "$tr")
+            echo "RESULT $1 round=$round rc=$rc secs=$(( $(date +%s) - t )) lcp=$lcp"
+            echo "TRACE $1 round=$round $nav"
+          }
+          for round in 1 2 3 4; do
+            run lh12 12 "--headless=new --no-sandbox"
+            run lh13 13 "--headless=new --no-sandbox"
+          done
+          exit 0
