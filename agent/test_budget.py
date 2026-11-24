@@ -25,10 +25,10 @@ def plan(five_used, five_left, weekly_used=10, weekly_left=HALF_WEEK):
 
 class Base(unittest.TestCase):
     def setUp(self):
-        self.saved = budget.MODEL, budget.SLOT
+        self.saved = budget.MODEL, budget.SLOT, budget.TASK
 
     def tearDown(self):
-        budget.MODEL, budget.SLOT = self.saved
+        budget.MODEL, budget.SLOT, budget.TASK = self.saved
 
 
 class FiveHourPace(Base):
@@ -95,6 +95,19 @@ class ModelsAndSlots(Base):
         r = budget.decide(plan(0, timedelta(hours=5), 45), NOW)  # headroom 5
         self.assertEqual(r["decision"], "RUN")
         self.assertTrue(r["opus_ok"])
+
+    def test_opus_review_needs_one_point_build_keeps_five(self):
+        budget.MODEL = "opus"
+        for used, headroom in ((46, 4), (49, 1)):
+            budget.TASK = "review"
+            r = budget.decide(plan(0, timedelta(hours=5), used), NOW)
+            self.assertEqual((r["decision"], r["opus_ok"]), ("RUN", True), headroom)
+            budget.TASK = "build"
+            self.assertEqual(budget.decide(plan(0, timedelta(hours=5), used), NOW)["decision"], "WAIT", headroom)
+        budget.TASK = "review"
+        r = budget.decide(plan(0, timedelta(hours=5), 49.5), NOW)  # headroom 0.5
+        self.assertEqual(r["decision"], "WAIT")
+        self.assertIn("opus review needs 1 points", r["reason"])
 
     def test_sonnet_runs_with_little_headroom(self):
         r = budget.decide(plan(0, timedelta(hours=5), 46), NOW)

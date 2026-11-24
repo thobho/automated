@@ -90,6 +90,52 @@ def test_preview_page(browser, base_url, artist_session, shot_dir):
     context.close()
 
 
+def _owner_page(browser, base_url, artist_session, **context_args):
+    context = browser.new_context(**context_args)
+    name, value = artist_session
+    host = base_url.split("://", 1)[1].split("/")[0].split(":")[0]
+    context.add_cookies([{"name": name, "value": value, "domain": host, "path": "/"}])
+    return context, context.new_page()
+
+
+def test_phone_layout_360(browser, base_url, artist_session, shot_dir):
+    """US-3.3: from 360 px no horizontal scroll, the date button is pinned to the bottom."""
+    context, page = _owner_page(
+        browser, base_url, artist_session, viewport={"width": 360, "height": 740}, is_mobile=True
+    )
+    page.goto(base_url + PREVIEW)
+    assert page.evaluate("document.documentElement.scrollWidth") <= 360
+
+    pinned = page.locator(".pinned-cta .button")
+    assert pinned.is_visible()
+    box = pinned.bounding_box()
+    assert box["y"] + box["height"] <= 740 and box["y"] > 740 - 120
+    assert box["height"] >= 44  # comfortable touch target
+    # Still pinned after scrolling to the bottom of the page.
+    page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+    box = pinned.bounding_box()
+    assert box["y"] + box["height"] <= 740 and box["y"] > 740 - 120
+    assert page.evaluate("document.documentElement.scrollWidth") <= 360
+
+    pinned.click()
+    assert page.url.endswith("#inquiry")
+    page.screenshot(path=str(shot_dir / "artist-page-360.png"), full_page=True)
+    results = Axe().run(page)
+    bad = [v for v in results.response["violations"] if v["impact"] in ("critical", "serious")]
+    assert not bad, [f"{v['id']}: {v['help']}" for v in bad]
+    context.close()
+
+
+def test_desktop_has_no_pinned_button(browser, base_url, artist_session):
+    context, page = _owner_page(
+        browser, base_url, artist_session, viewport={"width": 1280, "height": 800}
+    )
+    page.goto(base_url + PREVIEW)
+    assert not page.locator(".pinned-cta .button").is_visible()
+    assert page.evaluate("document.documentElement.scrollWidth") <= 1280
+    context.close()
+
+
 def test_owner_switches_theme_in_preview(browser, base_url, artist_session, shot_dir):
     context = browser.new_context()
     name, value = artist_session

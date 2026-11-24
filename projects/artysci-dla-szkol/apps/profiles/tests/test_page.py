@@ -401,3 +401,48 @@ def test_seed_artist_preview_renders_only_existing_data(capsys):
     assert html.count('class="offer"') == 20
     assert html.split('class="offers-more"')[1].count('class="offer"') == 14
     assert "mailto:" not in html and "tel:" not in html
+
+
+# --- US-3.3: phone layout, pinned button, lazy responsive photos --------------------------------
+
+
+def test_gallery_images_are_lazy_sized_and_responsive():
+    photos = [
+        PhotoItem(f"/m/{i}.jpg", f"z{i}", srcset=f"/m/{i}-s.jpg 480w, /m/{i}.jpg 960w")
+        for i in range(4)
+    ]
+    html = render(full_content(photos=photos))
+    gallery = html.split('id="photos"', 1)[1].split("</section>", 1)[0]
+    assert gallery.count("<img") == 4
+    assert gallery.count('loading="lazy"') == 4
+    assert gallery.count('decoding="async"') == 4
+    assert gallery.count('width="800" height="600"') == 4
+    assert 'srcset="/m/0-s.jpg 480w, /m/0.jpg 960w"' in gallery
+    assert 'sizes="' in gallery
+
+
+def test_gallery_without_variants_has_no_empty_srcset():
+    assert "srcset" not in render(full_content())
+
+
+def test_main_photo_is_not_lazy_and_has_priority():
+    html = render(full_content())
+    hero = html.split('class="start__photo"', 1)[1].split(">", 1)[0]
+    assert "lazy" not in hero
+    assert 'fetchpriority="high"' in hero
+    assert 'width="800"' in hero
+
+
+def test_pinned_date_button_links_to_inquiry():
+    html = render(full_content())
+    pinned = html.split('class="pinned-cta"', 1)[1].split("</div>", 1)[0]
+    assert 'href="#inquiry"' in pinned and "Sprawdź termin" in pinned
+    assert 'id="inquiry"' in html
+
+
+def test_stylesheet_has_phone_rules():
+    from pathlib import Path
+
+    css = (Path(__file__).resolve().parents[3] / "static/profiles/page.css").read_text()
+    assert "@media (max-width: 40rem)" in css
+    assert "position: fixed" in css and ".pinned-cta" in css

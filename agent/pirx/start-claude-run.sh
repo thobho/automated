@@ -54,12 +54,15 @@ fi
 
 # Reviews come first: a reviewed PR is merged work, and waiting PRs hold back the queue (review limit).
 rev="$RUNTIME/state/review-next.json"
-if (cd "$RUNNER_DIR" && python3 agent/review_queue.py --next-json) > "$rev" 2>/dev/null; then
-  pr="$(json_get "$rev" pr)"; rmodel="$(json_get "$rev" model)"; fallback="$(json_get "$rev" fallback)"
-  if [[ "$rmodel" == "opus" ]]; then
-    AGENT_SLOT=$slot AGENT_MODEL=opus python3 "$RUNNER_DIR/agent/budget.py" < "$usage" > "$budget.opus"
-    [[ "$(json_get "$budget.opus" decision)" == "RUN" ]] || rmodel="$fallback"
-  fi
+# Without Opus headroom an Opus-only review waits but does not block the PRs behind it (--no-opus).
+# AGENT_TASK=review: budget.py's lower Opus threshold for a review (REVIEW_OPUS_HEADROOM).
+AGENT_TASK=review AGENT_SLOT=$slot AGENT_MODEL=opus python3 "$RUNNER_DIR/agent/budget.py" < "$usage" > "$budget.opus"
+noopus=(); [[ "$(json_get "$budget.opus" decision)" == "RUN" ]] || noopus=(--no-opus)
+found=false
+(cd "$RUNNER_DIR" && python3 agent/review_queue.py --next-json "${noopus[@]}") > "$rev" 2>/dev/null && found=true
+for w in $(json_get "$rev" waiting 2>/dev/null); do log "review of PR #$w waits for Opus headroom (Opus-only review)"; done
+if [[ "$found" == true ]]; then
+  pr="$(json_get "$rev" pr)"; rmodel="$(json_get "$rev" model)"
   if [[ -n "$rmodel" ]]; then
     unit="automated-review-$pr"
     if ! systemctl --user is-active -q "$unit"; then
@@ -68,8 +71,6 @@ if (cd "$RUNNER_DIR" && python3 agent/review_queue.py --next-json) > "$rev" 2>/d
       log "started $unit (model $rmodel, slot $slot)"
       echo "STARTED: review of PR #$pr with $rmodel on pirx (unit $unit)"; exit 0
     fi
-  else
-    log "review of PR #$pr waits for Opus headroom (security)"
   fi
 fi
 

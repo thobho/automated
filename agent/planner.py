@@ -43,6 +43,8 @@ STATE_FILE = os.path.join(RUNTIME, "state", "planner.json")
 
 MILESTONE = re.compile(r"^#{1,6}\s*(M\d+)\b[\s:.\-–—]*(.*)$")
 STORY = re.compile(r"^\s*[-*]\s*\**\s*(US-[\w.]+)\**\s*[:\-–—]\s*(.+?)\s*$")
+DEPENDS_ON_LINE = re.compile(r"depends\s+on", re.IGNORECASE)  # issue bodies: "Depends on: #12, #13"
+ISSUE_REF = re.compile(r"#(\d+)")
 DEPENDS = re.compile(r"\(\s*depends?\s*(?:on)?\s*:?\s*([^)]*)\)\s*$", re.IGNORECASE)
 STORY_LINE = re.compile(r"^\s*\**story\s*:\**\s*(.+)$", re.IGNORECASE | re.MULTILINE)
 STORY_ID = re.compile(r"US-[\w.]+", re.IGNORECASE)
@@ -79,11 +81,23 @@ def planned_ids(issues):
     return found
 
 
-def backlog_size(issues, project=None):
-    """Open issues the dispatcher can pick up soon: agent:todo or agent:doing, not agent:done.
+def open_dependencies(issue, open_numbers):
+    """Issue numbers on the body's `Depends on` lines that are still open."""
+    deps = []
+    for line in (issue.get("body") or "").splitlines():
+        if DEPENDS_ON_LINE.search(line):
+            deps += [int(n) for n in ISSUE_REF.findall(line)]
+    return [n for n in deps if n != issue.get("number") and n in open_numbers]
 
+
+def backlog_size(issues, project=None):
+    """Open issues the dispatcher can pick up soon: agent:doing, or agent:todo whose dependencies are closed.
+
+    A todo that waits on an open issue is not backlog: counting it let a chain T29 -> T30 -> T31 keep the
+    backlog "full" while nothing was ready, and the plan sat idle (36 idle hours in 2026-11-15..21).
     Closed issues are ignored (merged tasks can keep a stale agent:todo label), and with `project`
     only that project's issues count, so another project's queue does not stop the planner."""
+    open_numbers = {i.get("number") for i in issues if str(i.get("state", "OPEN")).upper() == "OPEN"}
     n = 0
     for issue in issues:
         if str(issue.get("state", "OPEN")).upper() != "OPEN":
@@ -92,6 +106,8 @@ def backlog_size(issues, project=None):
         if "agent:done" in labels or not labels & {"agent:todo", "agent:doing"}:
             continue
         if project and f"project:{project}" not in labels:
+            continue
+        if "agent:doing" not in labels and open_dependencies(issue, open_numbers):
             continue
         n += 1
     return n
