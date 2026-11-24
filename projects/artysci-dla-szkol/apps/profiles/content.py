@@ -77,6 +77,7 @@ class VideoItem:
 class PhotoItem:
     url: str
     alt: str = ""
+    srcset: str = ""  # "url 480w, url 960w" when several sizes are stored; empty = one size
 
 
 @dataclass

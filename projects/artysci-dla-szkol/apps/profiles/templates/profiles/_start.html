@@ -1,7 +1,9 @@
 {% load i18n %}
 <header class="start{% if not content.hero.photo_url %} start--typographic{% endif %}" id="start">
   {% if content.hero.photo_url %}
-    <img class="start__photo" src="{{ content.hero.photo_url }}"
+    {# Likely the LCP element: never lazy, fetched first. #}
+    <img class="start__photo" src="{{ content.hero.photo_url }}" width="800" height="600"
+         fetchpriority="high" decoding="async"
          alt="{{ content.hero.photo_alt|default:content.hero.name }}">
   {% else %}
     <div class="start__initial" aria-hidden="true">{{ content.hero.initial }}</div>

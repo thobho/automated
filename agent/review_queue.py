@@ -35,7 +35,8 @@ healer opens one `priority:high` fix task.
 
 Usage:
   agent/review_queue.py              list open agent PRs and their review state
-  agent/review_queue.py --next-json  the next PR to review as JSON; exit 1 if none
+  agent/review_queue.py --next-json [--no-opus]  the next PR to review as JSON; exit 1 if none. With --no-opus
+                     (no Opus headroom) Opus-only PRs are skipped and listed in "waiting", others get the fallback
   agent/review_queue.py --next-conflict-json  the next conflicting PR to resolve as JSON; exit 1 if none
   agent/review_queue.py --merge-ready-json    approved PRs updated with main whose CI finished (JSON list)
   agent/review_queue.py --policy <files.json>   diff-policy flags for a PR's file list (one per line)
@@ -219,6 +220,20 @@ def review_model(issue_labels, paths=()):
     return "opus", "sonnet"
 
 
+def next_review(todo, opus_ok=True):
+    """The PR to review now, or None, plus the Opus-only PRs passed over. Without Opus headroom an Opus-only
+    review (security, automation, Sonnet-built) waits, but it no longer blocks the PRs behind it."""
+    if opus_ok:
+        return (todo[0] if todo else None), []
+    waiting = [t["pr"] for t in todo if t["model"] == "opus" and not t["fallback"]]
+    for t in todo:
+        if t["model"] != "opus":
+            return t, waiting
+        if t["fallback"]:
+            return dict(t, model=t["fallback"]), waiting
+    return None, waiting
+
+
 def assess(pr, issue_labels):
     sha = pr["headRefOid"]
     bodies = [c.get("body") or "" for c in pr.get("comments") or []]
@@ -347,11 +362,9 @@ def main():
         print(json.dumps([t for t in q if t["needs_merge"]]))
         return
     if "--next-json" in sys.argv:
-        todo = [t for t in q if t["needs_review"]]
-        if not todo:
-            sys.exit(1)
-        print(json.dumps(todo[0]))
-        return
+        t, waiting = next_review([t for t in q if t["needs_review"]], "--no-opus" not in sys.argv)
+        print(json.dumps(dict(t or {"pr": None}, waiting=" ".join(map(str, waiting)))))
+        sys.exit(0 if t else 1)
     for t in q:
         state = ("conflict" if t["conflicting"] else "needs review" if t["needs_review"]
                  else "reviewed" if t["reviewed"] else f"CI {t['ci']}")
