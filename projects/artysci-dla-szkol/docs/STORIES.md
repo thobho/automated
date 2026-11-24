@@ -532,7 +532,7 @@ E7 jest zatwierdzony i zapisany. E8 ma dwie części: mechanizmy w kodzie (dla a
 ### Cztery decyzje do zatwierdzenia
 | # | Decyzja | Rekomendacja | Dlaczego |
 |---|---|---|---|
-| D30 | Kto pisze regulamin i politykę prywatności | **prawnik, zatwierdzasz Ty**; agenci budują tylko mechanizmy (wersje, akceptacje, wyświetlanie) i wstawiają gotowe teksty | błąd w regulaminie platformy dla szkół jest kosztowny, a model językowy nie zastąpi porady prawnej |
+| D30 | Kto pisze regulamin i politykę prywatności | **zmienione przez D116:** agent przygotowuje projekty tekstów na podstawie tego, co serwis faktycznie robi (US-8.10), **prawnik je przegląda, zatwierdzasz Ty**; bez przeglądu i akceptacji teksty nie są publikowane | błąd w regulaminie platformy dla szkół jest kosztowny, a model językowy nie zastąpi porady prawnej |
 | D31 | Jak pokazujemy zaufanie | **dwie osobne odznaki: „Oświadczenie artysty” i „Zweryfikowany przez serwis”, ze stroną opisującą dokładnie, co sprawdzamy**; nigdy nie sugerujemy sprawdzenia w rejestrach karnych | dyrektor nie może pomylić deklaracji artysty z naszą weryfikacją; przepisy o weryfikacji osób pracujących z dziećmi są niejasne ([Prawo.pl](https://www.prawo.pl/biznes/kogo-trzeba-sprawdzac-w-rejestrze-i-czy-mozna-przytulic-ucznia,529536.html)) |
 | D32 | Ciasteczka | **analityka bez ciasteczek i tylko ciasteczka niezbędne, więc bez banera zgody** (do potwierdzenia z prawnikiem); gdyby pojawiły się inne, baner z równorzędnym „Odrzuć” | prostsza i bardziej przyjazna strona, mniej ryzyka |
 | D33 | Usunięcie konta | **30 dni na cofnięcie, potem trwałe usunięcie danych i plików**; w historii drugiej strony zostaje „Użytkownik usunięty” | prawo do usunięcia danych, a jednocześnie szkoła nie traci historii swoich zapytań |
@@ -558,7 +558,7 @@ E7 jest zatwierdzony i zapisany. E8 ma dwie części: mechanizmy w kodzie (dla a
 
 **US-8.4 Pakiet dokumentów dla szkoły (M4).**
 - Po akceptacji oferty placówka może pobrać PDF z danymi artysty, jego oświadczeniami i zakresem weryfikacji, do włączenia do dokumentacji szkoły.
-- Treść wzoru oświadczenia zatwierdza prawnik (D30).
+- Wzór oświadczenia przygotowuje agent (US-8.10), przegląda prawnik, zatwierdzasz Ty (D30, D116).
 
 **US-8.5 Zgłaszanie treści (M4).**
 - Przy każdym profilu, ogłoszeniu i wiadomości jest „Zgłoś” z listą powodów. Zgłaszający dostaje potwierdzenie, a autor treści uzasadnienie decyzji.
@@ -577,12 +577,19 @@ E7 jest zatwierdzony i zapisany. E8 ma dwie części: mechanizmy w kodzie (dla a
 **US-8.8 Ciasteczka (M1).** Zgodnie z D32. Automatyczny test sprawdza, że strona nie ustawia ciasteczek innych niż niezbędne.
 
 **US-8.9 Zadania dla Ciebie poza kodem.**
-- Regulamin, polityka prywatności, wzór oświadczenia artysty i strona „Co oznacza weryfikacja”: przygotowanie przez prawnika i Twoja akceptacja.
+- Regulamin, polityka prywatności, wzór oświadczenia artysty i strona „Co oznacza weryfikacja”: projekty przygotowuje agent (US-8.10), Ty umawiasz jeden przegląd u prawnika (IT/RODO), poprawki wnosi agent, a ostateczną wersję akceptujesz Ty (D116).
 - Umowy powierzenia z dostawcami (hosting, e-mail, AI, wideo).
 - Rejestr czynności przetwarzania.
 - Wymóg kontaktu i wymagania DSA dla serwisu.
 
-Te zadania nie trafią do kolejki agentów, a M1 nie może wystartować publicznie bez pierwszych trzech dokumentów.
+Poza projektami dokumentów (US-8.10) te zadania nie trafią do kolejki agentów, a serwis nie może wystartować publicznie bez pierwszych trzech dokumentów po przeglądzie prawnika.
+
+**US-8.10 Projekty dokumentów prawnych do przeglądu (M4, D116).**
+- Agent przygotowuje po polsku: regulamin (z elementami DSA i P2B: punkt kontaktowy, zasady moderacji i zgłoszeń, uzasadnienia decyzji), politykę prywatności (administrator, cele, podstawy, odbiorcy, w tym OpenRouter i transfer poza UE z D59 i D60, okresy retencji z US-8.7, prawa osób), informację o ciasteczkach (D32), wzór oświadczenia artysty (US-8.2, D4, D6, D7), stronę „Co oznacza weryfikacja” (D31) i informację, że teksty profili generuje AI (AI Act, art. 50).
+- Każde zdanie wynika z faktycznego działania kodu: agent podaje przy każdej sekcji, z którego modułu lub decyzji pochodzi, a w osobnym pliku zbiera listę otwartych pytań do prawnika (m.in. D32 bez banera, ustawa o ochronie małoletnich, DSA dla małej platformy, umowy powierzenia, transfer poza UE).
+- Teksty trafiają do `apps/trust` jako wersje robocze, wyraźnie oznaczone „projekt, przed przeglądem prawnika”; publikacja wersji jest możliwa dopiero po akceptacji właściciela (D30).
+- Po przeglądzie agent wnosi poprawki prawnika jako nową wersję i podaje różnice.
+- Agent nie przedstawia projektów jako porady prawnej i nie usuwa uwag prawnika bez zgody właściciela.
 
 
 ---
@@ -791,7 +798,7 @@ Dane artystów (teksty, zdjęcia do analizy) trafiają do OpenRouter, firmy z US
 | **M2 „Szkoła znajduje i pyta”** | pirx, lokalnie | E4, E5, E7 (e-maile tylko do Mailpit) |
 | **M3 „Szkoła ogłasza”** | pirx, lokalnie | E6 |
 | **M-Chmura** | AWS | E0b: Terraform, wdrożenie, prawdziwe e-maile (SES), kopie, alarmy |
-| **M4 „Pilot”** | AWS, publicznie | reszta E8, E9, E10, dokumenty prawne od prawnika |
+| **M4 „Pilot”** | AWS, publicznie | reszta E8, E9, E10, dokumenty prawne: projekt agenta (US-8.10), przegląd prawnika, Twoja akceptacja (D116) |
 
 Do M-Chmura nie płacisz za AWS. Jedyny koszt to OpenRouter przy testach generatora (grosze na profil), a GitHub Actions w ramach darmowego limitu minut.
 
