@@ -31,6 +31,8 @@
     {% if content.show_gallery %}{% include "profiles/_photos.html" %}{% endif %}
     {% if content.faq %}{% include "profiles/_faq.html" %}{% endif %}
     {% include "profiles/_inquiry.html" %}
+    {# Phones only (page.css): the date button stays within thumb reach while scrolling. #}
+    <div class="pinned-cta"><a class="button" href="#inquiry">{% translate "Sprawdź termin" %}</a></div>
   </div>
   </div>
 {% endblock %}

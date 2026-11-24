@@ -60,6 +60,15 @@ class Planned(unittest.TestCase):
                   issue(labels=["agent:review"]), issue(labels=["agent:blocked"]), issue(labels=["agent:done"])]
         self.assertEqual(planner.backlog_size(issues), 2)
 
+    def test_backlog_skips_todo_waiting_on_an_open_issue(self):
+        t29 = dict(issue(labels=["agent:review"]), number=140, state="OPEN")
+        t30 = dict(issue("Depends on: #140", ["agent:todo"]), number=141, state="OPEN")
+        t31 = dict(issue("**Depends on:** #141", ["agent:todo"]), number=142, state="OPEN")
+        old = dict(issue("Depends on: #9", ["agent:todo"]), number=143, state="OPEN")
+        doing = dict(issue("Depends on: #140", ["agent:doing"]), number=144, state="OPEN")
+        self.assertEqual(planner.backlog_size([t29, t30, t31]), 0)
+        self.assertEqual(planner.backlog_size([t29, t30, t31, old, doing]), 2)
+
     def test_backlog_ignores_closed_done_and_other_projects(self):
         closed = dict(issue(labels=["agent:todo", "project:a"]), state="CLOSED")
         stale = issue(labels=["agent:todo", "agent:done", "project:a"])
