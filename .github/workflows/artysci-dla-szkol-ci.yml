@@ -271,11 +271,22 @@ jobs:
       - name: Lighthouse mobile, LCP <= 2.5 s
         run: |
           headers=$(jq -nc --arg c "sessionid=$(cat "$RUNNER_TEMP/session")" '{Cookie: $c}')
-          npx --yes lighthouse@12 http://127.0.0.1:8000/panel/podglad/ \
-            --only-categories=performance --form-factor=mobile --quiet \
-            --extra-headers="$headers" \
-            --chrome-flags="--headless=new --no-sandbox" \
-            --output=json --output-path="$RUNNER_TEMP/lighthouse.json"
+          # Lighthouse sometimes fails to record the trace (NO_NAVSTART) and
+          # exits non-zero without a report. Retry that up to 3 times; the
+          # LCP budget below stays strict and is never retried.
+          for attempt in 1 2 3; do
+            npx --yes lighthouse@12 http://127.0.0.1:8000/panel/podglad/ \
+              --only-categories=performance --form-factor=mobile --quiet \
+              --extra-headers="$headers" \
+              --chrome-flags="--headless=new --no-sandbox" \
+              --output=json --output-path="$RUNNER_TEMP/lighthouse.json" \
+              && jq -e '.audits["largest-contentful-paint"].numericValue != null' \
+                "$RUNNER_TEMP/lighthouse.json" >/dev/null \
+              && break
+            echo "Lighthouse run $attempt failed to produce a report"
+            [ "$attempt" = 3 ] && exit 1
+            sleep 5
+          done
           jq '.audits["largest-contentful-paint"].numericValue' "$RUNNER_TEMP/lighthouse.json"
           jq -e '.audits["largest-contentful-paint"].numericValue <= 2500' "$RUNNER_TEMP/lighthouse.json"
       - name: Server log

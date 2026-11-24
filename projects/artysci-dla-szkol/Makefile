@@ -96,6 +96,7 @@ deploy-pirx:
 	bash deploy/pirx/refresh-units.sh
 	$(PIRX_SH) uv sync --frozen --no-dev
 	systemctl --user start ads-lite
+	$(PIRX_SH) bash deploy/pirx/ensure-db.sh
 	$(PIRX_SH) uv run --frozen --no-dev python manage.py migrate --noinput
 	$(PIRX_SH) uv run --frozen --no-dev python manage.py collectstatic --noinput
 	$(PIRX_SH) uv run --frozen --no-dev python manage.py seed
@@ -109,6 +110,7 @@ rollback-pirx:
 	git checkout --detach $(ROLLBACK_REF)
 	$(PIRX_SH) uv sync --frozen --no-dev
 	systemctl --user start ads-lite
+	$(PIRX_SH) bash deploy/pirx/ensure-db.sh
 	$(PIRX_SH) uv run --frozen --no-dev python manage.py collectstatic --noinput
 	systemctl --user restart ads-web ads-worker ads-media
 

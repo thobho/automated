@@ -7,7 +7,7 @@
 #   failed.commit    "<sha> <count>" consecutive failed deploys of one commit (cap: 3)
 #   logs/redeploy.log
 #
-# Test hooks (env): MAKE, ARTYSCI_STATE_DIR, REDEPLOY_BRANCH, MAX_ATTEMPTS.
+# Test hooks (env): MAKE, ENSURE_DB, ARTYSCI_STATE_DIR, REDEPLOY_BRANCH, MAX_ATTEMPTS.
 set -uo pipefail
 
 PROJECT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -15,6 +15,7 @@ STATE_DIR="${ARTYSCI_STATE_DIR:-$HOME/runtime/artysci-dla-szkol}"
 BRANCH="${REDEPLOY_BRANCH:-main}"
 MAX_ATTEMPTS="${MAX_ATTEMPTS:-3}"
 MAKE="${MAKE:-make}"
+ENSURE_DB="${ENSURE_DB:-bash $PROJECT/deploy/pirx/ensure-db.sh}"
 
 mkdir -p "$STATE_DIR/logs"
 LOG="$STATE_DIR/logs/redeploy.log"
@@ -35,6 +36,11 @@ fi
 if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
     log "deployment checkout has local changes, not deploying (clean it: git status in $PROJECT)"
     exit 1
+fi
+# Self-heal first: a dead podman port forwarder leaves PostgreSQL unreachable although the
+# container is "Up" (see ensure-db.sh). Runs every timer tick, deploy or not.
+if ! $ENSURE_DB >>"$LOG" 2>&1; then
+    log "PostgreSQL is not reachable and ensure-db could not fix it, instance needs the owner"
 fi
 target="$(git rev-parse "origin/$BRANCH")" || exit 1
 good="$(cat "$DEPLOYED" 2>/dev/null || true)"
