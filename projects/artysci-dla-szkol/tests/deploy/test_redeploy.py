@@ -58,12 +58,13 @@ class Env:
         git(self.origin, "commit", "-q", "-m", name)
         return git(self.origin, "rev-parse", "HEAD")
 
-    def run(self):
+    def run(self, ensure_db="true"):
         env = {
             **os.environ,
             "STATE": str(self.state),
             "ARTYSCI_STATE_DIR": str(self.state),
             "MAKE": str(self.fake),
+            "ENSURE_DB": ensure_db,
         }
         return subprocess.run(
             ["bash", str(self.checkout / "deploy/pirx/redeploy.sh")],
@@ -154,6 +155,12 @@ def test_first_deploy_failing_has_nothing_to_roll_back(env):
     assert env.deployed is None
     assert not any(c.startswith("rollback") for c in env.calls)
     assert "nothing to roll back" in env.log
+
+
+def test_unfixable_database_is_logged_but_does_not_block_deploy(env):
+    assert env.run(ensure_db="false").returncode == 0
+    assert "PostgreSQL is not reachable" in env.log
+    assert env.deployed is not None
 
 
 def test_retry_cap_of_three(env):
