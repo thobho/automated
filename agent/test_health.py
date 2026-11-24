@@ -1,4 +1,6 @@
+import io
 import unittest
+import urllib.error
 from datetime import datetime, timezone
 
 import health
@@ -24,6 +26,39 @@ class StuckTest(unittest.TestCase):
     def test_todo_and_blocked_are_not_reported_here(self):
         items = [issue(1, "agent:todo", "2026-11-01T00:00:00Z"), issue(2, "agent:blocked", "2026-11-01T00:00:00Z")]
         self.assertEqual(health.stuck(items, NOW), [])
+
+
+class DevInstancesTest(unittest.TestCase):
+    SPEC = "app=http://127.0.0.1:8100/readyz"
+
+    def test_ready_instance_is_a_green_row_and_no_problem(self):
+        rows, problems = health.dev_instances(self.SPEC, lambda url: {"db": "ok", "migrations": "ok"})
+        self.assertEqual(rows, ["| Dev instance app | ✅ | db ok, migrations ok |"])
+        self.assertEqual(problems, [])
+
+    def test_db_error_is_a_problem(self):
+        rows, problems = health.dev_instances(self.SPEC, lambda url: {"db": "error", "migrations": "ok"})
+        self.assertIn("❌", rows[0])
+        self.assertEqual(len(problems), 1)
+        self.assertIn("db error", problems[0])
+        self.assertNotIn("migrations", problems[0])
+
+    def test_503_with_json_body_is_read(self):
+        def fetch(url):
+            raise urllib.error.HTTPError(url, 503, "x", {}, io.BytesIO(b'{"db": "error", "migrations": "error"}'))
+        rows, problems = health.dev_instances(self.SPEC, fetch)
+        self.assertIn("db error, migrations error", rows[0])
+        self.assertEqual(len(problems), 1)
+
+    def test_unreachable_is_a_problem(self):
+        def fetch(url):
+            raise urllib.error.URLError("refused")
+        rows, problems = health.dev_instances(self.SPEC, fetch)
+        self.assertEqual(rows, ["| Dev instance app | ❌ | not reachable |"])
+        self.assertIn("not reachable", problems[0])
+
+    def test_empty_spec_adds_nothing(self):
+        self.assertEqual(health.dev_instances("", lambda url: {}), ([], []))
 
 
 if __name__ == "__main__":
