@@ -17,6 +17,11 @@ done
 [ "$code" = 200 ] || fail "/healthz returned $code after 60s"
 echo "ok /healthz 200"
 
+# A green deploy needs a working database, not just a running web process.
+health=$(curl -s "$WEB/healthz" || true)
+[ "$(tr -d ' \n' <<<"$health")" = '{"db":"ok"}' ] || fail "/healthz is not {\"db\": \"ok\"}: $health"
+echo "ok /healthz db ok"
+
 for path in / /readyz; do
     code=$(curl -s -o /dev/null -w '%{http_code}' "$WEB$path")
     [ "$code" = 200 ] || fail "$path returned $code"

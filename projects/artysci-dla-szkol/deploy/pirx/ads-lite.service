@@ -8,6 +8,7 @@ RemainAfterExit=yes
 WorkingDirectory=@PROJECT@
 EnvironmentFile=%h/.config/artysci-dla-szkol/pirx.env
 ExecStart=/usr/bin/podman compose --profile lite up -d
+ExecStartPost=/usr/bin/bash @PROJECT@/deploy/pirx/ensure-db.sh
 ExecStop=/usr/bin/podman compose --profile lite stop
 TimeoutStartSec=300
 

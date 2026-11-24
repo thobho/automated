@@ -26,7 +26,7 @@
 - US-10.6: Contract tests for key events
 
 ## M1 Artist has a page (pirx)
-- US-8.1: Versioned legal documents and recorded acceptance (texts come from the owner's lawyer, D30) (depends: US-0.1)
+- US-8.1: Versioned legal documents and recorded acceptance (the mechanism; texts are drafted in US-8.10, reviewed by a lawyer and approved by the owner, D30, D116) (depends: US-0.1)
 - US-8.8: Only essential cookies, enforced by a test (D32) (depends: US-0.1)
 - US-1.3: E-mail login with link and 6-digit code, sessions and rate limits (D1) (depends: US-0.1)
 - US-1.1: Artist registration and e-mail confirmation (depends: US-1.3, US-8.1)
@@ -115,6 +115,7 @@
 - US-10.5: CSV export without personal data (depends: US-10.3)
 - US-11.5: Production signals report (depends: US-11.1, US-2.6)
 - US-11.6: Human rating and blind comparison in the panel (depends: US-9.1, US-11.4)
+- US-8.10: Draft legal documents for the lawyer's review: terms, privacy policy, cookie notice, artist statement template, "what verification means", AI-content notice, list of questions for the lawyer (D30, D116) (depends: US-8.3, US-8.5, US-8.6, US-8.7)
 
 ## M5 Hosting and launch (E0b)
 - US-0.13: Hosting comparison and decision request for the owner (D91) (depends: US-0.12)
