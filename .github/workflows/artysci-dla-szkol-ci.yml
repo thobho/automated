@@ -218,3 +218,72 @@ jobs:
           name: e2e-screenshots
           path: e2e-screenshots/
           if-no-files-found: warn
+
+  # US-3.3: Lighthouse mobile run (simulated slow 4G, phone viewport) of the owner preview.
+  # The main content (LCP) must paint within 2.5 s.
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: artysci
+          POSTGRES_PASSWORD: artysci
+          POSTGRES_DB: artysci
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U artysci" --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    env:
+      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DATABASE_URL: postgres://artysci:artysci@127.0.0.1:5432/artysci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
+      - run: uv sync
+      - name: Start the app with one artist
+        run: |
+          uv run python manage.py migrate --noinput
+          uv run python manage.py shell -c "
+          from django.conf import settings
+          from django.contrib.auth import get_user_model
+          from django.test import Client
+          from apps.artists.models import Artist, Offer
+          user = get_user_model().objects.create_user(email='lighthouse@example.invalid')
+          artist = Artist.objects.create(user=user, name='Zespół Żółw', city='Wrocław')
+          for i in range(8):
+              Offer.objects.create(artist=artist, title=f'Spektakl {i + 1}', description='Opis', price_on_request=True, position=i)
+          client = Client()
+          client.force_login(user)
+          open('$RUNNER_TEMP/session', 'w').write(client.cookies[settings.SESSION_COOKIE_NAME].value)
+          "
+          nohup uv run python manage.py runserver 127.0.0.1:8000 --noreload \
+            > "$RUNNER_TEMP/server.log" 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fs http://127.0.0.1:8000/healthz && exit 0
+            sleep 1
+          done
+          cat "$RUNNER_TEMP/server.log"; exit 1
+      - name: Lighthouse mobile, LCP <= 2.5 s
+        run: |
+          headers=$(jq -nc --arg c "sessionid=$(cat "$RUNNER_TEMP/session")" '{Cookie: $c}')
+          npx --yes lighthouse@12 http://127.0.0.1:8000/panel/podglad/ \
+            --only-categories=performance --form-factor=mobile --quiet \
+            --extra-headers="$headers" \
+            --chrome-flags="--headless=new --no-sandbox" \
+            --output=json --output-path="$RUNNER_TEMP/lighthouse.json"
+          jq '.audits["largest-contentful-paint"].numericValue' "$RUNNER_TEMP/lighthouse.json"
+          jq -e '.audits["largest-contentful-paint"].numericValue <= 2500' "$RUNNER_TEMP/lighthouse.json"
+      - name: Server log
+        if: failure()
+        run: cat "$RUNNER_TEMP/server.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-report
+          path: ${{ runner.temp }}/lighthouse.json
+          if-no-files-found: warn

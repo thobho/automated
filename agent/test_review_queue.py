@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Tests for review_queue.py. Run: python3 agent/test_review_queue.py"""
+import contextlib
+import io
+import json
+import sys
 import unittest
+from unittest import mock
 
 import review_queue as rq
 
@@ -280,6 +285,44 @@ class Models(unittest.TestCase):
 
     def test_default_prefers_opus(self):
         self.assertEqual(rq.review_model({"model:pirx"}), ("opus", "sonnet"))
+
+
+class NextReview(unittest.TestCase):
+    TODO = [{"pr": 154, "model": "opus", "fallback": None},
+            {"pr": 155, "model": "opus", "fallback": "sonnet"},
+            {"pr": 157, "model": "sonnet", "fallback": None}]
+
+    def test_with_opus_the_oldest_goes_first(self):
+        self.assertEqual(rq.next_review(self.TODO), (self.TODO[0], []))
+
+    def test_opus_only_pr_waits_without_blocking_the_rest(self):
+        t, waiting = rq.next_review(self.TODO, opus_ok=False)
+        self.assertEqual((t["pr"], t["model"], waiting), (155, "sonnet", [154]))
+
+    def test_nothing_runnable_lists_the_waiting(self):
+        self.assertEqual(rq.next_review(self.TODO[:1], opus_ok=False), (None, [154]))
+        self.assertEqual(rq.next_review([], opus_ok=False), (None, []))
+
+
+class NextJsonCli(unittest.TestCase):
+    """The JSON contract start-claude-run.sh reads: pr, model, waiting; exit 1 when nothing can run."""
+
+    def run_cli(self, todo, *flags):
+        out = io.StringIO()
+        with mock.patch.object(rq, "gh_json", return_value=[]), \
+             mock.patch.object(rq, "queue", return_value=[dict(t, needs_review=True) for t in todo]), \
+             mock.patch.object(sys, "argv", ["review_queue.py", "--next-json", *flags]), \
+             contextlib.redirect_stdout(out), self.assertRaises(SystemExit) as ex:
+            rq.main()
+        return json.loads(out.getvalue()), ex.exception.code
+
+    def test_no_opus_prints_the_runnable_pr_and_the_waiting(self):
+        out, code = self.run_cli(NextReview.TODO, "--no-opus")
+        self.assertEqual((out["pr"], out["model"], out["waiting"], code), (155, "sonnet", "154", 0))
+
+    def test_nothing_runnable_prints_waiting_and_exits_1(self):
+        out, code = self.run_cli(NextReview.TODO[:1], "--no-opus")
+        self.assertEqual((out["pr"], out["waiting"], code), (None, "154", 1))
 
 
 class Queue(unittest.TestCase):

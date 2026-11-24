@@ -72,3 +72,31 @@
 #schools { background: var(--band); color: var(--band-ink); margin-top: 3rem; padding: 1.5rem 1.5rem 1rem; border-radius: .5rem; }
 #schools h2 { margin-top: 0; border-bottom-color: var(--line); }
 #schools a { color: var(--band-link); }
+
+/* Never wider than the screen: long words wrap, media shrink, grids give way below their minimum. */
+.artist-page { overflow-wrap: anywhere; }
+.artist-page img, .artist-page video { max-width: 100%; height: auto; }
+.start__photo { height: auto; }
+.pinned-cta { display: none; }
+
+/* Phones (US-3.3): from 360 px, one column, pinned date button. */
+@media (max-width: 40rem) {
+  .artist-page { padding: 0 1rem 5.5rem; }
+  .artist-page h1 { font-size: 2rem; }
+  .artist-page h2 { font-size: 1.4rem; margin: 2rem 0 .75rem; }
+  .start { padding: 1.5rem 0 1rem; gap: 1rem; }
+  .start__photo { width: 100%; }
+  .start__initial { width: 6rem; height: 6rem; font-size: 3rem; }
+  /* The section links scroll sideways inside their own strip instead of widening the page. */
+  .page-nav ul { flex-wrap: nowrap; overflow-x: auto; gap: 1rem; white-space: nowrap; }
+  .page-nav a { display: inline-block; padding: .5rem 0; }
+  .gallery { grid-template-columns: 1fr; }
+  .videos { grid-template-columns: 1fr; }
+  #schools { padding: 1rem 1rem .5rem; }
+  .pinned-cta {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    padding: .75rem 1rem calc(.75rem + env(safe-area-inset-bottom));
+    background: var(--paper); border-top: 1px solid var(--line);
+  }
+  .pinned-cta .button { display: block; text-align: center; padding: .9rem 1rem; }
+}
