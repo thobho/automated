@@ -6,9 +6,12 @@
     withdraw(artist)                          # published -> withdrawn, effective at once
     page = public_page(slug)                  # PageContent of the snapshot, or None
 
-The public page shows the snapshot (`PublishedPage`), not the live current version, so edits stay
-private until the artist publishes again. Photos, videos and offers still come live from the
-artist's data (they are not part of the page version, see `PageVersion`).
+The public page shows the snapshot (`PublishedPage`), never live data: the texts and theme of the
+version, name, city, offers and the list of materials. Later edits and uploads stay private until
+the artist publishes again. Two things only ever *remove* something at once: a deleted material is
+gone, and without a current "Prawa do materiałów" statement (D4, D7) no photo, video or link shows.
+
+No e-mail or phone goes public (D9): `publication_blockers` refuses a page that has one.
 
 Slug rules: made once from the name on the first publication (Polish letters transliterated,
 lowercase, hyphens), unique by a numeric suffix, never changed by renames and never reused (the
@@ -25,14 +28,15 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from apps.analytics import services as analytics
-from apps.artists import services as artist_services
 from apps.artists.models import Artist, PublicationStatus
 from apps.trust import services as trust
 
 from . import completeness, pages
-from .content import page_content_for
+from .contact import contacts_in
+from .content import page_data, page_from_data, shown_materials
+from .inputs import materials_allowed
 from .models import PublishedPage
-from .themes import theme_or_default
+from .services import theme_for
 
 SLUG_BASE_MAX = 60
 RESERVED_SLUGS = frozenset(
@@ -63,20 +67,49 @@ class Blocker:
     url_name: str  # the screen where the artist fixes it
 
 
-# --- the D6 minimum ------------------------------------------------------------------------------
+# --- what publishing would show ------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class _Draft:
+    """What publishing would make public now. Checked and stored as one value, so an edit between
+    the check and the save cannot slip through."""
+
+    content: dict  # texts of the current version
+    data: dict  # `content.page_data`
+    theme: str
+    version_number: int | None  # None = no version yet
+
+
+def _draft(artist: Artist) -> _Draft:
+    version = pages.current_version(artist)
+    # Without the rights statement nothing is listed, so a later statement alone shows nothing.
+    materials = [m.pk for m in shown_materials(artist)] if materials_allowed(artist) else []
+    return _Draft(
+        content={**pages.empty_content(), **(version.content if version else {})},
+        data=page_data(artist, materials),
+        theme=theme_for(artist),
+        version_number=version.number if version else None,
+    )
+
+
+# --- the D6 minimum and D9 -----------------------------------------------------------------------
 
 
 def publication_blockers(artist: Artist) -> list[Blocker]:
-    """What is still missing for publication; an empty list means the artist may publish."""
+    """What stands in the way of publication; an empty list means the artist may publish."""
+    return _blockers(artist, _draft(artist))
+
+
+def _blockers(artist: Artist, draft: _Draft) -> list[Blocker]:
     blockers: list[Blocker] = []
-    if not artist.name.strip():
+    if not draft.data["name"].strip():
         blockers.append(Blocker("name", _("Brak nazwy artysty."), "accounts:settings"))
     if not artist.voivodeships.exists():
         blockers.append(
             Blocker("region", _("Brak regionu działania (województwa)."), "artists:basics")
         )
-    version = pages.current_version(artist)
-    if version is None:
+    if draft.version_number is None:
         blockers.append(
             Blocker(
                 "generation",
@@ -84,9 +117,9 @@ def publication_blockers(artist: Artist) -> list[Blocker]:
                 "profiles:generation",
             )
         )
-    elif not (version.content.get("about") or "").strip():
+    elif not (draft.content["about"] or "").strip():
         blockers.append(Blocker("about", _("Brak tekstu „O artyście”."), "profiles:preview"))
-    if not artist_services.has_offers(artist):
+    if not draft.data["offers"]:
         blockers.append(
             Blocker("offer", _("Brak oferty: dodaj co najmniej jedną."), "artists:offers")
         )
@@ -98,6 +131,29 @@ def publication_blockers(artist: Artist) -> list[Blocker]:
                 "artists:statements",
             )
         )
+    return blockers + _contact_blockers(artist, draft)
+
+
+def _contact_blockers(artist: Artist, draft: _Draft) -> list[Blocker]:
+    """Contact data in what would go public (D9): one reason per place, naming what was found
+    (only the artist sees it). Titles of recordings are handled in `content._video_title`."""
+    content, data = draft.content, draft.data
+    texts = [content["tagline"], content["about"], content["for_schools"], *content["facts"]]
+    texts += [text for item in content["faq"] for text in item.values()]
+    offers = [text for offer in data["offers"] for text in (offer["title"], offer["description"])]
+    places = (
+        ("contact_name", _("nazwa artysty"), "accounts:settings", [data["name"]]),
+        ("contact_city", _("miasto"), "artists:basics", [data["city"]]),
+        ("contact_texts", _("teksty strony"), "profiles:preview", texts),
+        ("contact_offers", _("oferty"), "artists:offers", offers),
+    )
+    reason = _("Dane kontaktowe nie mogą być publiczne (%(place)s). Usuń: %(found)s")
+    blockers = []
+    for key, place, url_name, values in places:
+        found = [hit for value in values for hit in contacts_in(value, artist.user.email)]
+        if found:
+            listed = ", ".join(dict.fromkeys(found))
+            blockers.append(Blocker(key, reason % {"place": place, "found": listed}, url_name))
     return blockers
 
 
@@ -149,23 +205,24 @@ def _locked(artist: Artist) -> Artist:
     return Artist.objects.select_for_update().get(pk=artist.pk)
 
 
-def _snapshot(artist: Artist) -> None:
-    version = pages.current_version(artist)
-    content, _locks = pages.current_content(artist)
+def _ready_draft(artist: Artist) -> _Draft:
+    draft = _draft(artist)
+    blockers = _blockers(artist, draft)
+    if blockers:
+        raise PublicationRefused(_("Strony nie można jeszcze opublikować."), blockers)
+    return draft
+
+
+def _save_snapshot(artist: Artist, draft: _Draft) -> None:
     PublishedPage.objects.update_or_create(
         artist=artist,
         defaults={
-            "content": content,
-            "theme": page_content_for(artist).theme,
-            "version_number": version.number,
+            "content": draft.content,
+            "data": draft.data,
+            "theme": draft.theme,
+            "version_number": draft.version_number,
         },
     )
-
-
-def _require_ready(artist: Artist) -> None:
-    blockers = publication_blockers(artist)
-    if blockers:
-        raise PublicationRefused(_("Strony nie można jeszcze opublikować."), blockers)
 
 
 def publish(artist: Artist, actor=None) -> Artist:
@@ -175,9 +232,9 @@ def publish(artist: Artist, actor=None) -> Artist:
         artist = _locked(artist)
         if artist.publication_status == PublicationStatus.PUBLISHED:
             raise PublicationRefused(_("Strona jest już opublikowana."))
-        _require_ready(artist)
+        draft = _ready_draft(artist)
         _assign_slug(artist)
-        _snapshot(artist)
+        _save_snapshot(artist, draft)
         artist.publication_status = PublicationStatus.PUBLISHED
         artist.published_at = timezone.now()
         artist.withdrawn_at = None
@@ -188,14 +245,13 @@ def publish(artist: Artist, actor=None) -> Artist:
 
 
 def update_published(artist: Artist) -> Artist:
-    """ "Opublikuj zmiany": replace the snapshot with the current version. Slug and `published_at`
-    stay. Refused unless the page is published."""
+    """ "Opublikuj zmiany": replace the snapshot with the current state. Slug and `published_at`
+    stay. Refused unless the page is published, and with the blockers like `publish`."""
     with transaction.atomic():
         artist = _locked(artist)
         if artist.publication_status != PublicationStatus.PUBLISHED:
             raise PublicationRefused(_("Strona nie jest opublikowana."))
-        _require_ready(artist)
-        _snapshot(artist)
+        _save_snapshot(artist, _ready_draft(artist))
     return artist
 
 
@@ -218,18 +274,34 @@ def completeness_percent(artist: Artist) -> int:
 
 
 def has_unpublished_changes(artist: Artist) -> bool:
-    """True when the current version or theme differs from what the public sees."""
+    """True when "Opublikuj zmiany" would change what the public sees."""
     snapshot = PublishedPage.objects.filter(artist=artist).first()
-    version = pages.current_version(artist)
-    if snapshot is None or version is None:
+    if snapshot is None:
         return False
+    draft = _draft(artist)
+    visible = [m.pk for m in _visible_materials(artist, snapshot)]
     return (
-        snapshot.version_number != version.number
-        or snapshot.theme != page_content_for(artist).theme
+        snapshot.version_number != draft.version_number
+        or snapshot.theme != draft.theme
+        or {**snapshot.data, "materials": visible} != draft.data
     )
 
 
+def materials_hidden(artist: Artist) -> bool:
+    """The artist has photos or videos that stay off the public page: no rights statement."""
+    return not materials_allowed(artist) and bool(shown_materials(artist))
+
+
 # --- public side ---------------------------------------------------------------------------------
+
+
+def _visible_materials(artist: Artist, snapshot: PublishedPage) -> list:
+    """The published materials that may be shown now: still there and ready, and the artist
+    currently confirms the rights to them (checked on every request)."""
+    if not materials_allowed(artist):
+        return []
+    published = set(snapshot.data["materials"])
+    return [m for m in shown_materials(artist) if m.pk in published]
 
 
 def public_page(slug: str):
@@ -239,9 +311,7 @@ def public_page(slug: str):
     snapshot = getattr(artist, "published_page", None) if artist else None
     if snapshot is None:
         return None
-    page = page_content_for(artist)
+    visible = _visible_materials(artist, snapshot)
+    page = page_from_data(artist.slug, snapshot.data, snapshot.theme, visible)
     pages.overlay_texts(page, snapshot.content)
-    page.slug = artist.slug
-    if snapshot.theme:
-        page.theme = theme_or_default(snapshot.theme)
     return page

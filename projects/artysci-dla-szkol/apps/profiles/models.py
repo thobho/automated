@@ -39,13 +39,15 @@ class PageVersion(models.Model):
 
 
 class PublishedPage(models.Model):
-    """The copy of the page texts the public sees (US-2.8): written only by publishing, so later
-    edits of the current version change nothing public until "Opublikuj zmiany"."""
+    """The copy of the page the public sees (US-2.8): written only by publishing, so later edits
+    change nothing public until "Opublikuj zmiany". `content` holds the texts of the version,
+    `data` the rest (`content.page_data`: name, city, offers and the ids of the materials shown)."""
 
     artist = models.OneToOneField(
         "artists.Artist", on_delete=models.CASCADE, related_name="published_page"
     )
     content = models.JSONField(default=dict)
+    data = models.JSONField()
     theme = models.CharField(max_length=32, blank=True)
     # The PageVersion.number this copy was taken from (for "there are unpublished changes").
     version_number = models.PositiveIntegerField()

@@ -52,6 +52,11 @@ def seeded(django_db_blocker):
         yield _seed()
 
 
+def _save(page):
+    page.get_by_role("button", name="Zapisz", exact=True).click()
+    page.wait_for_load_state()
+
+
 def test_publish_view_public_page_and_withdraw(browser, base_url, seeded, shot_dir):
     context = browser.new_context()
     host = base_url.split("://", 1)[1].split("/")[0].split(":")[0]
@@ -76,6 +81,35 @@ def test_publish_view_public_page_and_withdraw(browser, base_url, seeded, shot_d
     assert visitor.get_by_text("Opis do publikacji.").is_visible()
     assert "mailto:" not in visitor.content() and "tel:" not in visitor.content()
     visitor.screenshot(path=str(shot_dir / "publication-public.png"), full_page=True)
+
+    # An edited offer stays private until "Opublikuj zmiany"; a phone in it stops the publication.
+    page.goto(base_url + "/artysta/profil/oferty/")
+    page.get_by_role("link", name="Edytuj").first.click()
+    page.locator("[name=title]").fill("Dzwoń 600 700 800")
+    _save(page)
+    page.goto(base_url + "/panel/publikacja/")
+    assert page.locator("[data-unpublished]").is_visible()
+    blocker = page.locator("[data-blocker=contact_offers]")
+    assert "600 700 800" in blocker.inner_text()
+    assert page.get_by_role("button", name="Opublikuj zmiany").count() == 0
+    violations = Axe().run(page).response["violations"]
+    assert not [v for v in violations if v["impact"] in ("critical", "serious")]
+    page.screenshot(path=str(shot_dir / "publication-blocked.png"), full_page=True)
+    visitor.reload()
+    assert "600 700 800" not in visitor.content()
+    assert visitor.get_by_text("Kwiatowa opowieść").first.is_visible()
+
+    blocker.get_by_role("link", name="Popraw").click()
+    page.get_by_role("link", name="Edytuj").first.click()
+    page.locator("[name=title]").fill("Nowy spektakl")
+    _save(page)
+    page.goto(base_url + "/panel/publikacja/")
+    visitor.reload()
+    assert visitor.get_by_text("Nowy spektakl").count() == 0
+    page.get_by_role("button", name="Opublikuj zmiany").click()
+    assert page.locator("[data-unpublished]").count() == 0
+    visitor.reload()
+    assert visitor.get_by_text("Nowy spektakl").first.is_visible()
 
     # Withdraw with the confirmation page.
     page.get_by_role("link", name="Wycofaj stronę").click()

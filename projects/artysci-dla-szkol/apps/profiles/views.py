@@ -225,6 +225,7 @@ def publication_page(request):
         "artist": artist,
         "blockers": publication.publication_blockers(artist),
         "unpublished_changes": publication.has_unpublished_changes(artist),
+        "materials_hidden": publication.materials_hidden(artist),
     }
     return render(request, "profiles/publication.html", context)
 

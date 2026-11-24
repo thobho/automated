@@ -41,9 +41,10 @@ class PublicationStatus(models.TextChoices):
 
 class ArtistQuerySet(models.QuerySet):
     def published(self):
-        """The one definition of "publicly visible": drafts and withdrawn pages are excluded.
-        The public route and the future catalog (US-4.1) must both use this."""
-        return self.filter(publication_status=PublicationStatus.PUBLISHED)
+        """The one definition of "publicly visible": drafts, withdrawn pages and deactivated
+        accounts are excluded. The public route and the future catalog (US-4.1) must both use
+        this."""
+        return self.filter(publication_status=PublicationStatus.PUBLISHED, user__is_active=True)
 
 
 class Artist(models.Model):

@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.JSONField(default=dict)),
+                ('data', models.JSONField()),
                 ('theme', models.CharField(blank=True, max_length=32)),
                 ('version_number', models.PositiveIntegerField()),
                 ('updated_at', models.DateTimeField(auto_now=True)),

@@ -753,15 +753,21 @@ POST-only `opublikuj/`, `zmiany/` ("Opublikuj zmiany"), `wycofaj/`, and a GET co
 `wycofanie/`. Public page: `/artysci/<slug>/` (anonymous, server-rendered, T32 template).
 
 - `publication_blockers(artist)`: Polish reasons (name, region, generated page, "O artyście" text,
-  an offer, child-protection statement). Publishing is refused while the list is not empty.
-- Publishing copies the current page version (texts + theme) into `PublishedPage`; later edits stay
-  private until "Opublikuj zmiany". Photos, videos and offers are read live from the artist's data.
+  an offer, child-protection statement; an e-mail or phone in the name, city, texts or offers, D9,
+  found by `contact.py`). Publishing is refused while the list is not empty.
+- Publishing copies everything the page shows into `PublishedPage`: texts and theme of the current
+  version, name, city, offers and the ids of the materials. Later edits, uploads, offers and renames
+  stay private until "Opublikuj zmiany" (`has_unpublished_changes`).
+- Only removal is immediate: a deleted material disappears, and without a current "Prawa do
+  materiałów" statement (checked per request) no photo, video or link is shown.
+- Recordings never show the uploaded file's name ("Nagranie 1" instead).
 - Slug: made once on the first publication from the name (ASCII, lowercase, hyphens, `-2`, `-3` on
   collision), never changed by renames, kept after withdrawal (never reused, republication gives
   the same one); reserved words (`RESERVED_SLUGS`) are skipped.
 - Draft, withdrawn and unknown slugs give the same 404. `Cache-Control: no-cache` (a cache must
   revalidate, so a withdrawal is visible at once). Preview stays `noindex`; the public page is not.
-- `Artist.objects.published()` is the only definition of "publicly visible" (catalog, US-4.1).
+- `Artist.objects.published()` is the only definition of "publicly visible" (catalog, US-4.1); it
+  leaves out deactivated accounts.
 - Events `profile_published` (`profile_id`, `completeness_percent`) and `profile_withdrawn`.
 
 ## Page themes (US-3.2)
