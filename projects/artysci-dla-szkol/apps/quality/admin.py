@@ -218,9 +218,11 @@ class EvaluationRunAdmin(ReadOnlyAdmin):
         "finished_at",
         "generator_model",
         "reviewer_model",
+        "ai_client",
         "generator_components",
         "reviewer_components",
         "package_set_hash",
+        "abandoned_cost_usd",
         "cost_usd",
     )
     readonly_fields = fields

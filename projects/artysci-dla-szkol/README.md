@@ -578,8 +578,12 @@ uv run python manage.py evaluate_testset [--package <slug>]... [--level weak|med
   the review status `brak oceny` with the reason (never reply text); the package keeps its other
   results and the run goes on. On the kill switch or a cost cap the run stops, is marked
   `niekompletny` and no further call is made; `--resume <id>` evaluates only the missing packages
-  and refuses when a generator or reviewer component, the AI model or a package changed since the
-  run started.
+  and refuses when a generator or reviewer component, the AI model, the AI client (`ai_client`,
+  e.g. `fake` vs `openrouter`) or a package changed since the run started. A generation paid for
+  whose review was refused by the cap is redone on resume; its cost stays in the run's
+  `abandoned_cost_usd`, so `cost_usd` covers every call. An unexpected error closes the run as
+  `niekompletny` (note `przerwano błędem`) and is re-raised; a run left `trwa` by a killed process
+  can be resumed after `GENERATION_STALE_SECONDS` without activity.
 - **Storage.** `EvaluationRun` (component versions and hashes of the generator and the reviewer,
   AI models, package-set hash, times, cost, status `trwa` / `niekompletny` / `zakończony`) and
   `PackageEvaluation` (run, slug, package hash, generation, validator summary, expectation
@@ -589,7 +593,7 @@ uv run python manage.py evaluate_testset [--package <slug>]... [--level weak|med
   `/django-admin/quality/evaluationrun/` and `/django-admin/quality/packageevaluation/`.
 - **JSON report** (`--output`), format `evaluation-report/1`:
   `{"format", "run": {id, status, note, level, started_at, finished_at, generator_components,
-  reviewer_components, generator_model, reviewer_model, package_set_hash, packages, cost_usd},
+  reviewer_components, generator_model, reviewer_model, ai_client, package_set_hash, packages, cost_usd},
   "summary": {as printed, plus the failed expectations}, "packages": [{slug, level, package_hash,
   generation: {id, status, repair_rounds, duration_ms, cost_usd}, hard_pass, validator: {ok, hard,
   soft, repair_rounds, repair_stopped}, expectations: [{kind, detail, passed, message}], review:

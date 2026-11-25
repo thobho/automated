@@ -268,6 +268,12 @@ class EvaluationRun(models.Model):
     reviewer_components = models.JSONField(_("komponenty recenzenta"), default=dict)
     generator_model = models.CharField(_("model generatora"), max_length=500, blank=True)
     reviewer_model = models.CharField(_("model recenzenta"), max_length=500, blank=True)
+    ai_client = models.CharField(_("klient AI"), max_length=40, blank=True)
+    # Generations paid for whose package was left for `--resume` (the AI stopped before its
+    # review); added to `cost_usd` so the total is the cost of every call of the run.
+    abandoned_cost_usd = models.DecimalField(
+        _("koszt porzuconych generacji (USD)"), max_digits=16, decimal_places=10, default=0
+    )
     package_set_hash = models.CharField(_("odcisk zestawu pakietów"), max_length=64)
     slugs = models.JSONField(_("pakiety"), default=list)
     level = models.CharField(_("poziom"), max_length=10, blank=True)

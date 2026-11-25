@@ -12,6 +12,7 @@ whitespace normalisation) is kept and marked `unverified`.
 """
 
 import json
+import logging
 import re
 from dataclasses import dataclass, field
 from functools import cache
@@ -24,6 +25,8 @@ from apps.artists.models import Artist
 from apps.profiles import ai, inputs
 
 from .registry import Component, registry
+
+logger = logging.getLogger("apps.quality.reviewer")
 
 PURPOSE = "profile_review"
 REVIEW_VERSION = "0.1"
@@ -140,4 +143,7 @@ def review(artist: Artist, profile: dict) -> ReviewResult:
         return ReviewResult(MISSING, f"błąd odpowiedzi AI ({exc.code})")
     except ai.AIError:
         return ReviewResult(MISSING, "nie udało się wywołać AI")
+    except Exception:  # a dropped connection etc.: this package has no score, the run goes on
+        logger.exception("review call failed", extra={"event": "review_failed"})
+        return ReviewResult(MISSING, "nie udało się wywołać AI (błąd połączenia)")
     return parse_reply(result.data, profile)

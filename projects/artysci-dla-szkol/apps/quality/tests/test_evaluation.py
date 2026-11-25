@@ -281,6 +281,114 @@ def test_resume_refuses_a_changed_reviewer_model_or_package(script, settings, mo
     assert run.status == EvaluationRun.Status.INCOMPLETE
 
 
+def test_an_unexpected_error_in_the_review_gives_brak_oceny_and_the_run_goes_on(script):
+    def broken(request):
+        raise RuntimeError("connection reset")
+
+    script(review=[broken, good_review()])
+    run = run_with(*SLUGS[:2])
+    assert run.status == EvaluationRun.Status.COMPLETE
+    first, second = run.evaluations.order_by("slug")
+    assert first.review_status == "brak oceny" and "połączenia" in first.review_reason
+    assert "connection reset" not in first.review_reason
+    assert second.review_status == "ok"
+
+
+def test_a_crash_closes_the_run_as_resumable_and_resume_finishes_it(script, monkeypatch):
+    script()
+    real = testset.load_package
+
+    def flaky(slug):
+        if slug == SLUGS[1]:
+            raise testset.PackageError("unreadable")
+        return real(slug)
+
+    run = evaluation.start_run(SLUGS[:2])
+    monkeypatch.setattr(testset, "load_package", flaky)
+    with pytest.raises(testset.PackageError):
+        evaluation.evaluate(run)
+    run.refresh_from_db()
+    assert run.status == EvaluationRun.Status.INCOMPLETE and run.note
+    assert run.evaluations.count() == 1
+
+    monkeypatch.setattr(testset, "load_package", real)
+    resumed = evaluation.resume(run.pk)
+    assert resumed.status == EvaluationRun.Status.COMPLETE and resumed.evaluations.count() == 2
+    assert resumed.cost_usd == Decimal("0.008") == sum(c.cost_usd for c in AICall.objects.all())
+
+
+def test_a_stale_running_run_can_be_resumed_a_fresh_one_cannot(script, settings):
+    script()
+    run = evaluation.start_run(SLUGS[:1])  # `trwa`, as left by a killed process
+    with pytest.raises(evaluation.EvaluationRefused, match="not incomplete"):
+        evaluation.resume(run.pk)
+    settings.GENERATION_STALE_SECONDS = -1
+    resumed = evaluation.resume(run.pk)
+    assert resumed.status == EvaluationRun.Status.COMPLETE and resumed.evaluations.count() == 1
+
+
+def test_a_cap_between_generation_and_review_keeps_the_cost_and_resume_redoes_the_package(
+    script, settings
+):
+    fake = script()
+    settings.AI_PER_CALL_CAP_USD = "0.01"
+    settings.AI_DAILY_CAP_USD = "0.011"  # the generation fits, the review does not
+    run = run_with(SLUGS[0])
+    assert run.status == EvaluationRun.Status.INCOMPLETE
+    assert run.evaluations.count() == 0 and fake.review_requests == []
+    assert run.abandoned_cost_usd == Decimal("0.002")
+    assert run.cost_usd == Decimal("0.002") == sum(c.cost_usd for c in AICall.objects.all())
+
+    settings.AI_DAILY_CAP_USD = "5"
+    resumed = evaluation.resume(run.pk)
+    assert resumed.status == EvaluationRun.Status.COMPLETE and resumed.evaluations.count() == 1
+    assert resumed.cost_usd == Decimal("0.006") == sum(c.cost_usd for c in AICall.objects.all())
+
+
+def test_the_kill_switch_at_the_review_keeps_the_generation_cost(script, settings, monkeypatch):
+    script()
+    real = evaluation.profile_generation.run_generation
+
+    def generate_then_switch_off(pk):
+        generation = real(pk)
+        settings.AI_KILL_SWITCH = True
+        return generation
+
+    monkeypatch.setattr(evaluation.profile_generation, "run_generation", generate_then_switch_off)
+    run = run_with(SLUGS[0])
+    assert run.status == EvaluationRun.Status.INCOMPLETE and run.evaluations.count() == 0
+    assert run.cost_usd == Decimal("0.002") == sum(c.cost_usd for c in AICall.objects.all())
+
+
+def test_an_invalid_json_generation_that_uses_up_the_cap_is_stored_as_failed(script, settings):
+    script(draft=lambda data: "nie json")
+    settings.AI_PER_CALL_CAP_USD = "0.01"
+    settings.AI_DAILY_CAP_USD = "0.011"
+    run = run_with(SLUGS[0])
+    assert run.status == EvaluationRun.Status.COMPLETE
+    row = run.evaluations.get()
+    assert row.generation_status == "error" and row.hard_pass is False
+    assert row.review_call_ids == []
+    assert run.cost_usd == sum(c.cost_usd for c in AICall.objects.all())
+
+
+def test_resume_is_refused_when_the_ai_client_changed(script, settings):
+    fake = script()
+    settings.AI_CLIENT = "openrouter"  # the scripted client stands in for the real one
+    settings.AI_PER_CALL_CAP_USD = "0.01"
+    settings.AI_DAILY_CAP_USD = "0.012"
+    run = run_with(*SLUGS[:2])
+    assert run.status == EvaluationRun.Status.INCOMPLETE and run.ai_client == "openrouter"
+    assert evaluation.report(run)["run"]["ai_client"] == "openrouter"
+
+    settings.AI_CLIENT = "fake"
+    settings.AI_DAILY_CAP_USD = "5"
+    calls = len(fake.client.requests)
+    with pytest.raises(evaluation.EvaluationRefused, match="AI client"):
+        evaluation.resume(run.pk)
+    assert len(fake.client.requests) == calls
+
+
 def test_a_finished_run_and_its_rows_cannot_change(script):
     script()
     run = run_with(SLUGS[0])
