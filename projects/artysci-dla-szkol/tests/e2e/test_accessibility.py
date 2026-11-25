@@ -12,7 +12,33 @@ from axe_playwright_python.sync_playwright import Axe
 
 PREVIEW = "/panel/podglad/"
 THEMES = ["burgundy_light", "cream_green", "navy_gold", "coral_dark"]
-TABBABLE = "a[href], button:not([hidden]), input, select, textarea, summary, [tabindex='0']"
+TABBABLE = (
+    "a[href], button:not([disabled]), input:not([type=hidden]), select, textarea, summary, "
+    "[tabindex='0']"
+)
+
+# Remembers every tab stop of the page (a radio group is one stop: its checked radio) in DOM
+# order, which is the visual order here; returns their labels.
+TAB_STOPS = """(sel) => {
+  window.__stops = [...document.querySelectorAll(sel)].filter(e =>
+    e.checkVisibility({checkVisibilityCSS: true}) && !e.closest('dialog')
+    && !(e.type === 'radio' && !e.checked));
+  return window.__stops.map(e => e.getAttribute('href') || e.value || e.textContent.trim());
+}"""
+
+# The focused element: its index in the stops, its outline, and the first opaque background
+# behind the outline (the offset puts the outline outside the element, so on its parent).
+FOCUSED = """() => {
+  const e = document.activeElement, s = getComputedStyle(e);
+  let background = 'rgb(255, 255, 255)';
+  for (let p = e.parentElement; p; p = p.parentElement) {
+    const c = getComputedStyle(p).backgroundColor;
+    if (c !== 'rgba(0, 0, 0, 0)') { background = c; break; }
+  }
+  return {index: (window.__stops || []).indexOf(e), html: e.outerHTML.slice(0, 80),
+    cls: e.className, id: e.id, style: s.outlineStyle, width: parseFloat(s.outlineWidth),
+    offset: parseFloat(s.outlineOffset), color: s.outlineColor, background};
+}"""
 
 
 @pytest.fixture
@@ -79,6 +105,23 @@ def _open(browser, base_url, seeded, theme, **context_options):
     return context, page
 
 
+def _hex(css_colour):
+    parts = re.findall(r"[\d.]+", css_colour)
+    assert css_colour.startswith("rgb") and (len(parts) == 3 or float(parts[3]) == 1), css_colour
+    return "#{:02x}{:02x}{:02x}".format(*(int(p) for p in parts[:3]))
+
+
+def _assert_visible_outline(info):
+    """A solid outline of at least 2px, outside the element, at least 3:1 to what is behind it.
+    Returns the ratio."""
+    from apps.profiles.themes import AA_LARGE, contrast_ratio
+
+    assert info["style"] == "solid" and info["width"] >= 2 and info["offset"] > 0, info
+    ratio = contrast_ratio(_hex(info["color"]), _hex(info["background"]))
+    assert ratio >= AA_LARGE, (ratio, info)
+    return ratio
+
+
 @pytest.mark.parametrize("theme", THEMES)
 def test_axe_has_no_critical_or_serious_violations(browser, base_url, seeded, shot_dir, theme):
     context, page = _open(browser, base_url, seeded, theme)
@@ -106,42 +149,63 @@ def test_images_have_alt_and_structure_is_sound(browser, base_url, seeded):
     context.close()
 
 
+@pytest.mark.parametrize("theme", THEMES)
 def test_keyboard_walk_visits_skip_link_then_every_control_with_a_visible_outline(
-    browser, base_url, seeded
+    browser, base_url, seeded, shot_dir, theme
 ):
-    from apps.profiles.themes import AA_LARGE, THEME_TOKENS, contrast_ratio
+    context, page = _open(browser, base_url, seeded, theme)
+    stops = page.evaluate(TAB_STOPS, TABBABLE)
+    assert stops[0] == "#artist-page"  # the skip link
+    assert theme in stops and "Zapisz motyw" in stops  # the theme switch
+    assert len(stops) >= 25  # account, theme switch, editor, page, 4 photos, footer
+    lowest = 21.0
+    for index, label in enumerate(stops):
+        page.keyboard.press("Tab")
+        info = page.evaluate(FOCUSED)
+        assert info["index"] == index, (label, info)
+        lowest = min(lowest, _assert_visible_outline(info))
+        if index == 0:
+            assert info["cls"] == "skip-link"
+            page.screenshot(path=str(shot_dir / f"a11y-skip-link-{theme}.png"))
+    print(f"FOCUS {theme}: {len(stops)} tab stops, lowest outline contrast {lowest:.2f}:1")
+    context.close()
 
+
+def test_skip_link_jumps_to_the_content(browser, base_url, seeded):
     context, page = _open(browser, base_url, seeded, "navy_gold")
     page.keyboard.press("Tab")
-    assert page.evaluate("document.activeElement.className") == "skip-link"
-    page.keyboard.press("Enter")  # jumps to the content
+    page.keyboard.press("Enter")
     assert page.evaluate("document.activeElement.id") == "artist-page"
-
-    expected = page.evaluate(
-        """(sel) => [...document.querySelectorAll(
-              sel.split(', ').map(s => '.artist-root ' + s).join(', '))]
-            .filter(e => e.offsetParent !== null && !e.closest('dialog'))
-            .map(e => e.getAttribute('href') || e.textContent.trim().slice(0, 30))""",
-        TABBABLE,
+    page.keyboard.press("Tab")  # the next stop is the first control of the content
+    assert page.evaluate(
+        "document.activeElement === document.querySelector('.artist-page a, .artist-page button')"
     )
-    assert len(expected) >= 12  # nav, button, offers, video, 4 photos, inquiry...
-    seen = []
-    paper = THEME_TOKENS["navy_gold"]["paper"]
-    for _ in range(len(expected) + 1):
+    context.close()
+
+
+def test_theme_switch_works_with_the_keyboard_alone(browser, base_url, seeded, shot_dir):
+    context, page = _open(browser, base_url, seeded, "burgundy_light")
+    root = page.locator(".artist-root")
+    assert root.get_attribute("data-theme") == "burgundy_light"
+    for _ in range(6):
         page.keyboard.press("Tab")
-        info = page.evaluate(
-            """() => { const e = document.activeElement; const s = getComputedStyle(e);
-              return {inside: !!e.closest('.artist-root'), label: e.getAttribute('href') ||
-                e.textContent.trim().slice(0, 30), width: parseFloat(s.outlineWidth),
-                style: s.outlineStyle, color: s.outlineColor}; }"""
-        )
-        if not info["inside"]:
+        if page.evaluate("document.activeElement.name") == "theme":
             break
-        seen.append(info["label"])
-        assert info["style"] != "none" and info["width"] >= 2, info
-        rgb = [int(x) for x in re.findall(r"\d+", info["color"])[:3]]
-        assert contrast_ratio("#{:02x}{:02x}{:02x}".format(*rgb), paper) >= AA_LARGE, info
-    assert seen == expected
+    assert page.evaluate("document.activeElement.value") == "burgundy_light"  # the checked radio
+    _assert_visible_outline(page.evaluate(FOCUSED))
+    for _ in range(len(THEMES)):  # arrows move between the themes
+        if page.evaluate("document.activeElement.value") == "coral_dark":
+            break
+        page.keyboard.press("ArrowRight")
+        _assert_visible_outline(page.evaluate(FOCUSED))
+    assert page.locator("input[name=theme]:checked").get_attribute("value") == "coral_dark"
+    page.screenshot(path=str(shot_dir / "a11y-theme-switch-focus.png"))
+    page.keyboard.press("Tab")
+    assert page.evaluate("document.activeElement.textContent.trim()") == "Zapisz motyw"
+    _assert_visible_outline(page.evaluate(FOCUSED))
+    with page.expect_navigation():
+        page.keyboard.press("Enter")
+    assert root.get_attribute("data-theme") == "coral_dark"
     context.close()
 
 
@@ -176,6 +240,12 @@ def test_gallery_dialog_keyboard(browser, base_url, seeded, shot_dir):
     for _ in range(6):  # focus stays inside the dialog
         page.keyboard.press("Tab")
         assert page.evaluate("!!document.activeElement.closest('dialog#lightbox')")
+        _assert_visible_outline(page.evaluate(FOCUSED))
+    dialog.locator("[data-lightbox=prev]").focus()  # backwards from the first control: the last
+    page.keyboard.press("Shift+Tab")
+    assert page.evaluate("document.activeElement.dataset.lightbox") == "close"
+    page.keyboard.press("Shift+Tab")
+    assert page.evaluate("document.activeElement.dataset.lightbox") == "next"
     page.screenshot(path=str(shot_dir / "a11y-gallery-open.png"))
     page.keyboard.press("ArrowRight")
     assert dialog.locator("img").get_attribute("alt") == "Zespół Żółw – zdjęcie 3"
@@ -185,6 +255,14 @@ def test_gallery_dialog_keyboard(browser, base_url, seeded, shot_dir):
         "href"
     )
     assert page.evaluate("document.activeElement.className") == "gallery__open"
+    context.close()
+
+
+def test_modified_click_on_a_photo_is_left_to_the_browser(browser, base_url, seeded):
+    context, page = _open(browser, base_url, seeded, "cream_green")
+    with context.expect_page():  # a new tab with the photo, not the dialog
+        page.locator(".gallery__open").first.click(modifiers=["ControlOrMeta"])
+    assert page.locator("dialog#lightbox").get_attribute("open") is None
     context.close()
 
 

@@ -780,7 +780,9 @@ What the page and its preview guarantee, and where it is tested:
   focus returns to the photo); "Pokaż pozostałe" is a button with `aria-expanded`/`aria-controls`
   (without script the extra offers simply stay visible); FAQ is a plain `<dl>`.
 - **Focus:** `.artist-page :focus-visible` draws a 3 px `var(--focus)` outline; `LARGE_PAIRS` in
-  `themes.py` keeps it at 3:1 or more on paper, card and band in every theme.
+  `themes.py` keeps it at 3:1 or more on paper, card and band in every theme. Everything outside the
+  themed root (skip link, account links, theme switch, editor, footer) gets a `#111` outline. The
+  browser walk measures every tab stop in all four themes.
 - **Motion:** `page.css` ends with a `prefers-reduced-motion: reduce` block that shortens animations
   and transitions and turns smooth scrolling off; `test_accessibility.py` scans every
   `static/profiles/*.css` and fails on a `transition`, `animation` or `scroll-behavior` that is not

@@ -258,7 +258,8 @@ def set_alt_text(artist: Artist, material_id, text: str) -> Material:
     """Store the artist's own alternative text of one of their photos (blank clears it).
     Raises `Material.DoesNotExist` for another artist's id or a material that is not a photo."""
     material = Material.objects.get(artist=artist, pk=material_id, kind=MaterialKind.PHOTO)
-    material.alt_text = " ".join((text or "").split())[:200]
+    limit = Material._meta.get_field("alt_text").max_length
+    material.alt_text = " ".join((text or "").split())[:limit]
     material.save(update_fields=["alt_text"])
     _log("material_alt_text", artist, material_id)
     return material

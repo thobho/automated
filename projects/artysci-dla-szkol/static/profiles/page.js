@@ -42,6 +42,8 @@
 
   links.forEach(function (link, index) {
     link.addEventListener("click", function (event) {
+      /* A modified click keeps its own meaning (new tab, new window, download). */
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       opener = link;
       show(index);

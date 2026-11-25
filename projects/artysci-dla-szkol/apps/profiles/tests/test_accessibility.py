@@ -167,6 +167,17 @@ def test_page_stylesheet_draws_a_visible_focus_outline():
     assert "outline: none" not in css.replace(".artist-page:focus { outline: none; }", "")
 
 
+@pytest.mark.parametrize("selector", [r"\.skip-link:focus", r"(?m)^:focus-visible"])
+def test_focus_outline_outside_the_themed_root_contrasts_with_the_white_page(selector):
+    css = (STATIC / "profiles/page.css").read_text()
+    rule = re.search(selector + r"\s*\{([^}]*)\}", css).group(1)
+    width, colour = re.search(r"outline:\s*(\d+)px solid (#[0-9a-f]{3,6});", rule).groups()
+    if len(colour) == 4:
+        colour = "#" + "".join(c * 2 for c in colour[1:])
+    assert int(width) >= 2
+    assert themes.contrast_ratio(colour, "#ffffff") >= themes.AA_LARGE
+
+
 def _strip_comments(css):
     return re.sub(r"/\*.*?\*/", "", css, flags=re.S)
 
@@ -184,9 +195,12 @@ def _blocks(css):
     return out
 
 
+# `transition-duration` too: transition-property is `all` by default, so a duration alone moves.
 MOTION = re.compile(
-    r"(?<![\w-])(animation(?:-name)?|transition(?:-property)?|scroll-behavior)\s*:\s*([^;}]+)"
+    r"(?<![\w-])(animation(?:-name)?|transition(?:-property|-duration)?|scroll-behavior)"
+    r"\s*:\s*([^;}]+)"
 )
+MOTION_OFF = {"none", "auto", "0s", ".01ms"}  # the whole value, never just its start
 
 
 def _unguarded_motion(css):
@@ -194,9 +208,9 @@ def _unguarded_motion(css):
     for media, body in _blocks(css):
         for prop, value in MOTION.findall(body):
             value = value.strip()
-            if value.startswith(("none", "auto", "0s", ".01ms")) or "!important" in value:
+            if re.sub(r"\s*!\s*important$", "", value) in MOTION_OFF:
                 continue  # switching motion off
-            if "no-preference" in media:
+            if "prefers-reduced-motion: no-preference" in media:
                 continue
             bad.append(f"{prop}: {value}")
     return bad
@@ -211,6 +225,16 @@ def test_scan_fails_on_an_unguarded_animation():
     assert _unguarded_motion(".a { transition: color .3s ease; }") == ["transition: color .3s ease"]
     assert _unguarded_motion(".a { animation: spin 1s infinite; }")
     assert _unguarded_motion("html { scroll-behavior: smooth; }")
+    # `!important` is no excuse, nor is a value that only starts with an "off" keyword.
+    assert _unguarded_motion(".a { animation: spin 1s infinite !important; }") == [
+        "animation: spin 1s infinite !important"
+    ]
+    assert _unguarded_motion(".a { transition: color 3s !important; }")
+    assert _unguarded_motion(".a { transition: 0s color, 3s opacity; }")
+    assert _unguarded_motion(".a { animation: none 0s, spin 1s; }")
+    assert _unguarded_motion(".a { transition-duration: .3s; }")
+    for off in ("transition: none", "animation: none !important", "scroll-behavior: auto"):
+        assert _unguarded_motion(f".a {{ {off}; }}") == []
     guarded = "@media (prefers-reduced-motion: no-preference) { .a { transition: color .3s; } }"
     assert _unguarded_motion(guarded) == []
 
