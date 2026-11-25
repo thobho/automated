@@ -524,11 +524,11 @@ artist and runs through the existing generator. Code: `apps/quality/testset.py`;
   returns `Result(kind, detail, passed, message)` for each.
 - **Scripted profile.** `apps/quality/scripted.py: scripted_profile(input_data)` is a profile built
   from `build_input` data only (no AI): valid against the JSON Schema, clean for the validator and
-  meeting every expectation of the six packages. Use it as the `FakeClient` reply:
+  meeting every expectation of all packages. Use it as the `FakeClient` reply:
   `FakeClient(reply=json.dumps(scripted_profile(build_input(artist))))`.
 - **Adding a package.** Create `apps/quality/testset/<slug>/package.json` (copy a package of the
-  same level), run `testset_check`, (the tests pick it up by folder) and make sure the scripted profile meets its expectations (the parametrised test says which
-  fails). Packages are versioned in git; changing one changes its digest and the next
+  same level), run `testset_check` (the tests pick the folder up by themselves) and make sure the
+  scripted profile meets its expectations (the parametrised test says which one fails). Packages are versioned in git; changing one changes its digest and the next
   `testset_load` replaces the artist's materials.
 - **Synthetic only (D12, D57).** Names, towns, texts, offers and video titles are invented. No
   e-mail, phone, account number or real site: `check_package` runs the project scrubber over every

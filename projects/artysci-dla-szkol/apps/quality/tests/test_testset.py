@@ -128,7 +128,7 @@ def test_levels_have_the_content_their_names_promise():
             assert len(photos) >= 4 and len(p["offers"]) >= 3 and p["documents"], p["slug"]
             assert len(p["site_text"]) > 400, p["slug"]
         if p["level"] == "weak":
-            assert len(p["site_text"]) < 100 and len(photos) <= 1, p["slug"]
+            assert len(p["site_text"]) < 100 and not photos, p["slug"]
             assert not p["documents"], p["slug"]
 
 
