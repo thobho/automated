@@ -31,3 +31,6 @@ MALWARE_SCANNER = "fake"
 MALWARE_SCANNER_FAKE_RESULT = "clean"
 CLAMD_HOST = ""
 CLAMD_SOCKET = ""
+
+# Tests of the quality lab (test set) run with it on; tests of the switch turn it off.
+QUALITY_LAB_ENABLED = True

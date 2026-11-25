@@ -1,0 +1,66 @@
+{
+  "slug": "kwartet-allegretto",
+  "description": "Rich package: a string quartet with two concert programmes for schools, a price range, four photos (one a poster) and a film.",
+  "origin": "synthetic",
+  "level": "rich",
+  "artist": {
+    "type": "music",
+    "name": "Kwartet Smyczkowy Allegretto",
+    "city": "Kraków",
+    "voivodeships": ["malopolskie", "slaskie"],
+    "audiences": ["grades_0_3", "grades_4_6", "grades_7_8"]
+  },
+  "questionnaire": {
+    "q_age_from": 7,
+    "q_age_to": 14,
+    "q_duration_minutes": 40,
+    "q_max_audience": 200,
+    "q_tech_room": "Aula lub sala gimnastyczna, cztery krzesła bez podłokietników.",
+    "q_tech_power": "",
+    "q_tech_sound": "Nagłośnienie nie jest potrzebne.",
+    "q_price_from_pln": 1500,
+    "q_price_to_pln": 2400,
+    "q_price_on_request": false
+  },
+  "offers": [
+    {
+      "title": "Koncert „Cztery pory roku”",
+      "description": "Koncert kwartetu z komentarzem o instrumentach. Dzieci słuchają krótkich utworów i zgadują, jaka pora roku jest w muzyce.",
+      "age_from": 7,
+      "age_to": 11,
+      "duration_minutes": 40,
+      "price_pln": 1500
+    },
+    {
+      "title": "Lekcja muzyki na żywo",
+      "description": "Lekcja dla starszych klas: budowa kwartetu, różnice między instrumentami i pytania do muzyków.",
+      "age_from": 11,
+      "age_to": 14,
+      "duration_minutes": 45,
+      "price_pln": 2400
+    }
+  ],
+  "site_text": "Kwartet Smyczkowy Allegretto tworzą czworo muzyków z Krakowa. Grają w szkołach i domach kultury. Programy szkolne łączą muzykę klasyczną z krótką opowieścią o instrumentach. Po koncercie dzieci mogą z bliska obejrzeć skrzypce, altówkę i wiolonczelę.",
+  "documents": [
+    {
+      "name": "program-koncertu.pdf",
+      "text": "Program koncertu szkolnego: cztery krótkie utwory, komentarz o instrumentach, czas trwania 40 minut. Muzycy przyjeżdżają na godzinę przed występem."
+    }
+  ],
+  "videos": [
+    {"url": "https://youtu.be/kLmNoP67890", "title": "Koncert szkolny Allegretto – próba"}
+  ],
+  "photos": [
+    {"kind": "normal", "width": 1800, "height": 1200},
+    {"kind": "normal", "width": 1500, "height": 1000},
+    {"kind": "low_resolution"},
+    {"kind": "poster"}
+  ],
+  "expectations": [
+    {"kind": "field_not_empty", "path": "hero.main_photo_id"},
+    {"kind": "text_present", "text": "Kwartet Smyczkowy Allegretto"},
+    {"kind": "text_present", "text": "Kraków"},
+    {"kind": "field_not_empty", "path": "faq"},
+    {"kind": "text_absent", "text": "międzynarodowy konkurs"}
+  ]
+}

@@ -29,3 +29,6 @@ EMAIL_HOST = env.str("EMAIL_HOST", default="localhost")
 EMAIL_PORT = env.int("EMAIL_PORT", default=25)
 # Test-only loopback hatch of the website import (base.py); dev may set it in .env.
 SAFE_FETCH_ALLOW_LOOPBACK = env.bool("SAFE_FETCH_ALLOW_LOOPBACK", default=False)
+
+# The quality lab (synthetic test set, US-11.2) is on in development.
+QUALITY_LAB_ENABLED = env.bool("QUALITY_LAB_ENABLED", default=True)
