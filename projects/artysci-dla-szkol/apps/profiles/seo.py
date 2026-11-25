@@ -128,7 +128,9 @@ def json_ld_data(content) -> dict:
 
 def dump_json_ld(data: dict) -> SafeString:
     """JSON that is safe inside a `<script>` element: no `</script>` or `<!--` breakout."""
-    return mark_safe(json.dumps(data, ensure_ascii=False).translate(_JSON_ESCAPES))  # noqa: S308
+    text = json.dumps(data, ensure_ascii=False).translate(_JSON_ESCAPES)
+    # Reviewed: `text` has no `<`, `>` or `&` left; autoescaping would only break the JSON quotes.
+    return mark_safe(text)  # noqa: S308  # nosec B308 B703
 
 
 def sitemap_xml(entries) -> str:
