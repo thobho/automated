@@ -38,6 +38,15 @@ fail_count() {  # fail_count <issue> <executor-or-model>
   gh api "repos/$GH_REPO/issues/$1/comments?per_page=100" --jq "[.[] | select(.body | contains(\"<!-- automated:fail:$2 -->\"))] | length"
 }
 
+# Rescue round: after 3 review rounds without approval the task gets one more build on Opus with a larger
+# budget and agent/rescue-prompt.md (review-run.sh posts the marker, claude-run.sh reads it). A task whose
+# rescue round is also sent back goes to the owner.
+RESCUE_MARK="<!-- automated:rescue -->"
+rescue_used() {  # rescue_used <issue>: true when the issue already had its rescue round
+  [[ "$(gh api "repos/$GH_REPO/issues/$1/comments?per_page=100" \
+        --jq "[.[] | select(.body | contains(\"$RESCUE_MARK\"))] | length" 2>/dev/null)" -gt 0 ]]
+}
+
 beat() {  # beat <component>: record that a component ran just now (read by agent/health.py)
   date +%s > "$RUNTIME/state/beat-$1"
 }
@@ -68,6 +77,7 @@ run_budget() {  # run_budget <kind> <model>: --max-budget-usd cap of one `claude
   local var="CLAUDE_CAP_${1^^}_${2^^}" def
   case "$1:$2" in
     build:opus) def=15 ;; build:sonnet) def=6 ;; build:*) def=2 ;;
+    rescue:*) def=25 ;;   # the one rescue build of a task (see RESCUE_MARK), always on Opus
     review:opus) def=3 ;; review:*) def=1.5 ;;
     retro:*) def=1 ;; conflict:*) def=2 ;; *) def=3 ;;
   esac
