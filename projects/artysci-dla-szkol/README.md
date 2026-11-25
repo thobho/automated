@@ -554,7 +554,9 @@ uv run python manage.py evaluate_testset [--package <slug>]... [--level weak|med
   hard-rule pass share, failed expectations, mean per dimension overall and per level (missing
   scores are left out and their number is shown in brackets), cost. The AI client is `AI_CLIENT`;
   with `--key-file` the real OpenRouter client is used (spends money), the key is read like in
-  `ai_smoke` and is never printed or written anywhere.
+  `ai_smoke` and is never printed or written anywhere. A real run needs `AI_MAX_TOKENS` of about
+  8000: with the default 2048 the generator's reply is cut off and every package ends `błąd`
+  ("Odpowiedź AI nie jest poprawnym JSON-em").
 - **Same path as production.** Each package is loaded (`load_package`), then `start_generation`
   and `profiles.generation.run_generation` run in the foreground (first call, validator, up to 2
   repair rounds). A generation ending `błąd` counts as failed for the hard rules and has no
