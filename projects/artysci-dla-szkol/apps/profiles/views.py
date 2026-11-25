@@ -8,7 +8,12 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_control, never_cache
-from django.views.decorators.http import require_GET, require_http_methods, require_POST
+from django.views.decorators.http import (
+    require_GET,
+    require_http_methods,
+    require_POST,
+    require_safe,
+)
 
 from apps.accounts.permissions import role_required
 from apps.artists import services as artist_services
@@ -282,7 +287,7 @@ def withdraw(request):
 # `no-cache`: a cache may keep the page but must ask the server first, so a withdrawal is seen
 # at once. A draft, withdrawn or unknown slug gives the same 404.
 @cache_control(no_cache=True)
-@require_GET
+@require_safe
 def public_page(request, slug):
     content = publication.public_page(slug)
     if content is None:

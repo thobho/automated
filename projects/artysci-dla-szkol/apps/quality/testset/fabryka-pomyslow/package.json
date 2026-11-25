@@ -1,0 +1,247 @@
+{
+  "slug": "fabryka-pomyslow",
+  "description": "Rich package: craft workshops with a catalogue of 20 offers, two documents, one film and five good photos.",
+  "origin": "synthetic",
+  "level": "rich",
+  "artist": {
+    "type": "workshops",
+    "name": "Fabryka Pomysłów",
+    "city": "Poznań",
+    "voivodeships": [
+      "wielkopolskie"
+    ],
+    "audiences": [
+      "grades_0_3",
+      "grades_4_6",
+      "grades_7_8"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 6,
+    "q_age_to": 12,
+    "q_duration_minutes": 75,
+    "q_max_audience": 30,
+    "q_tech_room": "Ławki lub stoliki, dostęp do wody.",
+    "q_tech_power": "Jedno gniazdko.",
+    "q_price_from_pln": 400,
+    "q_price_to_pln": 480
+  },
+  "offers": [
+    {
+      "title": "Warsztat: Lepimy z gliny",
+      "description": "Dzieci lepią figurki z gliny.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 400
+    },
+    {
+      "title": "Warsztat: Papier i klej",
+      "description": "Papierowe kolaże z gazet.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 75,
+      "price_pln": 420
+    },
+    {
+      "title": "Warsztat: Szycie lalki",
+      "description": "Prosta lalka z filcu.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 90,
+      "price_pln": 440
+    },
+    {
+      "title": "Warsztat: Malowanie na szkle",
+      "description": "Kolorowe szklane witraże.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 460
+    },
+    {
+      "title": "Warsztat: Origami",
+      "description": "Składanie zwierząt z papieru.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 75,
+      "price_pln": 480
+    },
+    {
+      "title": "Warsztat: Biżuteria z koralików",
+      "description": "Bransoletki i naszyjniki.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 90,
+      "price_pln": 400
+    },
+    {
+      "title": "Warsztat: Maski karnawałowe",
+      "description": "Wykonanie masek z masy papierowej.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 420
+    },
+    {
+      "title": "Warsztat: Mydło własnej roboty",
+      "description": "Pachnące mydła w formach.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 75,
+      "price_pln": 440
+    },
+    {
+      "title": "Warsztat: Świeczki z wosku",
+      "description": "Zawijane świece z pszczelego wosku.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 90,
+      "price_pln": 460
+    },
+    {
+      "title": "Warsztat: Plecenie z papierowej wikliny",
+      "description": "Koszyczki z rolek papieru.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 480
+    },
+    {
+      "title": "Warsztat: Drukowanie stempli",
+      "description": "Stemple z ziemniaków i gumek.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 75,
+      "price_pln": 400
+    },
+    {
+      "title": "Warsztat: Haft dla początkujących",
+      "description": "Prosty haft na kanwie.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 90,
+      "price_pln": 420
+    },
+    {
+      "title": "Warsztat: Rzeźba z mydła",
+      "description": "Rzeźbienie w mydle.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 440
+    },
+    {
+      "title": "Warsztat: Wycinanki ludowe",
+      "description": "Wycinanki łowickie i kurpiowskie.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 75,
+      "price_pln": 460
+    },
+    {
+      "title": "Warsztat: Latawce",
+      "description": "Budowa latawca z papieru i patyczków.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 90,
+      "price_pln": 480
+    },
+    {
+      "title": "Warsztat: Pisanki",
+      "description": "Zdobienie pisanek woskiem.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 400
+    },
+    {
+      "title": "Warsztat: Ozdoby choinkowe",
+      "description": "Ozdoby z papieru i słomy.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 75,
+      "price_pln": 420
+    },
+    {
+      "title": "Warsztat: Makramy",
+      "description": "Węzły i sploty ze sznurka.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 90,
+      "price_pln": 440
+    },
+    {
+      "title": "Warsztat: Książka z własnymi rysunkami",
+      "description": "Zszywana książeczka z okładką.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 460
+    },
+    {
+      "title": "Warsztat: Kukiełki ze skarpet",
+      "description": "Kukiełki teatralne z kolorowych skarpet.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 75,
+      "price_pln": 480
+    }
+  ],
+  "site_text": "Fabryka Pomysłów prowadzi warsztaty rękodzieła dla szkół i świetlic w Poznaniu i okolicach. W katalogu mamy dwadzieścia pracowni, od gliny po haft.\n\nKażda pracownia jest zaplanowana na jedną lub dwie lekcje. Materiały przywozimy ze sobą, a dzieci zabierają swoje prace do domu.\n\nZajęcia prowadzą nauczyciele plastyki i instruktorzy rękodzieła. Grupa nie powinna przekraczać trzydziestu osób.\n\nNa życzenie układamy cykl kilku spotkań, na przykład jedną pracownię w miesiącu przez cały rok szkolny.",
+  "documents": [
+    {
+      "name": "katalog-warsztatow.pdf",
+      "text": "Katalog warsztatów. Dwadzieścia pracowni, każda trwa od 60 do 90 minut. Cena za warsztat jest podana w ofercie."
+    },
+    {
+      "name": "wymagania.pdf",
+      "text": "Wymagania. Sala z ławkami lub stolikami oraz dostęp do wody. Prosimy o przygotowanie fartuchów dla dzieci."
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=Fp1Ab2Cd3Ef",
+      "title": "Warsztaty w szkole – migawki"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Poznań"
+    },
+    {
+      "kind": "text_present",
+      "text": "Warsztat: Lepimy z gliny"
+    },
+    {
+      "kind": "text_absent",
+      "text": "dyplom"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "offers"
+    }
+  ]
+}

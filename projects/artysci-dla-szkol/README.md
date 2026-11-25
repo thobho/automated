@@ -489,6 +489,52 @@ can be reproduced and generator changes can be compared (D13, D14). Code: `apps/
   (US-3.1), re-running a stored generation and the evaluation set (US-11.2–11.4).
   `apps/quality/tests/fake_generator.py` is a test-only generator showing the full flow.
 
+## Generator test set (US-11.2)
+
+A versioned set of **synthetic** artist material packages in three quality levels (`weak` słabe,
+`medium` średnie, `rich` bogate), each with checkable expectations. A package loads as a test
+artist and runs through the existing generator. Code: `apps/quality/testset.py`; the 30 packages
+(6 from T41, 24 from T42: 10 per level, every artist type at least 3 times) live in
+`apps/quality/testset/<slug>/package.json`.
+
+- **Switch.** `QUALITY_LAB_ENABLED` (env, default off; on in the dev, test and pirx settings,
+  off in prod). With it off, `testset_check`, `testset_load` and `load_package` refuse and
+  create no rows, so test artists never appear in production.
+- **Commands** (from the project folder): `uv run python manage.py testset_check` validates every
+  package and prints a table (slug, origin, level, type, number of expectations); exit code 1 and
+  the package name plus the problem on an invalid one. `uv run python manage.py testset_load
+  [--package <slug>]` creates or updates `testset-<slug>@example.invalid` and prints materials,
+  offers and `input_fingerprint`; loading an unchanged package again changes nothing, a changed
+  one replaces the materials and offers (stored generations are never touched).
+- **Format.** `package.json`, checked against `apps/quality/testset/package.schema.json`:
+  `slug` (= folder name), `origin` (`synthetic`; `consented` is part of the format but the loader
+  refuses it: the service has no consent record for the test set yet, D12), `level`, `artist`
+  (type from the existing list, name, city, voivodeships, audiences), `questionnaire`, `offers`,
+  `site_text`, `documents` (`name`, `text`: as extracted from a PDF), `videos` (`url`, `title`:
+  the title comes from the package, no oEmbed), `photos` and `expectations`. No binary files:
+  a photo is drawn deterministically with Pillow at load time from `{"kind": "normal" |
+  "low_resolution" | "poster" | "screenshot", "width", "height"}` and goes through the real
+  upload, scan and quality checks, so `build_input` shows the real flags and `can_be_main`.
+- **Expectations**, a closed set (an unknown kind or a path not in the profile schema is an
+  error when the package is checked, never a silent pass): `field_empty` / `field_not_empty`
+  (`path`, dotted, e.g. `hero.main_photo_id`; `null`, `""`, `[]` count as empty), `text_present` /
+  `text_absent` (`text`, compared case-insensitively after whitespace normalisation, in the public
+  texts), `no_price` (no price such as "1 200 zł" or "cena: 900" in the public texts; fails with
+  the path), `gap_reported` (`code` in `gaps`). `check_expectations(package, profile_json)`
+  returns `Result(kind, detail, passed, message)` for each.
+- **Scripted profile.** `apps/quality/scripted.py: scripted_profile(input_data)` is a profile built
+  from `build_input` data only (no AI): valid against the JSON Schema, clean for the validator and
+  meeting every expectation of all packages. Use it as the `FakeClient` reply:
+  `FakeClient(reply=json.dumps(scripted_profile(build_input(artist))))`.
+- **Adding a package.** Create `apps/quality/testset/<slug>/package.json` (copy a package of the
+  same level), run `testset_check` (the tests pick the folder up by themselves) and make sure the
+  scripted profile meets its expectations (the parametrised test says which one fails). Packages are versioned in git; changing one changes its digest and the next
+  `testset_load` replaces the artist's materials.
+- **Synthetic only (D12, D57).** Names, towns, texts, offers and video titles are invented. No
+  e-mail, phone, account number or real site: `check_package` runs the project scrubber over every
+  text (it must change nothing) and allows only `example.invalid` hosts and YouTube/Vimeo links
+  (invented ids). Materials of real artists need the separate consent from D12, which is not built.
+
 ## Profile generation (US-2.5A)
 
 A background job turns an artist's ready materials, questionnaire and offers into a profile JSON
@@ -753,11 +799,12 @@ POST-only `opublikuj/`, `zmiany/` ("Opublikuj zmiany"), `wycofaj/`, and a GET co
 `wycofanie/`. Public page: `/artysci/<slug>/` (anonymous, server-rendered, T32 template).
 
 - `publication_blockers(artist)`: Polish reasons (name, region, generated page, "O artyście" text,
-  an offer, child-protection statement; an e-mail or phone in the name, city, texts or offers, D9,
-  found by `contact.py`). Publishing is refused while the list is not empty.
+  an offer, child-protection statement; an e-mail or phone in the name, city, texts, offers or photo
+  alt texts, D9, found by `contact.py`). Publishing is refused while the list is not empty.
 - Publishing copies everything the page shows into `PublishedPage`: texts and theme of the current
-  version, name, city, offers and the ids of the materials. Later edits, uploads, offers and renames
-  stay private until "Opublikuj zmiany" (`has_unpublished_changes`).
+  version, name, city, offers and the ids and alt texts of the materials. Later edits, uploads,
+  offers and renames stay private until "Opublikuj zmiany" (`has_unpublished_changes`).
+- Slug, state and dates are read-only in the Django admin: only `publication.py` writes them.
 - Only removal is immediate: a deleted material disappears, and without a current "Prawa do
   materiałów" statement (checked per request) no photo, video or link is shown.
 - Recordings never show the uploaded file's name ("Nagranie 1" instead).
@@ -791,6 +838,39 @@ the AI schema): `burgundy_light` (jasny burgund, the default), `cream_green` (kr
   accent-hover, focus, line), the matching `[data-theme]` and `[data-swatch]` block in
   `themes.css`, and add the slug to the AI schema enum (separate task: the schema is not changed
   here). The tests pick it up through `Theme`; they fail until the CSS matches and the contrast holds.
+
+## Accessibility of the public page (US-3.6)
+
+What the page and its preview guarantee, and where it is tested:
+- **Alt texts:** `Material.alt_text` (optional, set by the artist next to each photo on the materials
+  page, `POST artysta/profil/materialy/<id>/opis/`); without it `accessibility.photo_alt()` gives the
+  Polish fallback "<name> – zdjęcie <n>". No AI call. Decorative images (the initial frame, the video
+  placeholder) are `aria-hidden` / `alt=""`.
+- **Keyboard:** skip link "Przejdź do treści" first in the tab order; gallery photos are links that
+  `static/profiles/page.js` opens in a modal `<dialog>` (Esc closes, Tab loops inside, arrows move,
+  focus returns to the photo); "Pokaż pozostałe" is a button with `aria-expanded`/`aria-controls`
+  (without script the extra offers simply stay visible); FAQ is a plain `<dl>`.
+- **Focus:** `.artist-page :focus-visible` draws a 3 px `var(--focus)` outline; `LARGE_PAIRS` in
+  `themes.py` keeps it at 3:1 or more on paper, card and band in every theme. Everything outside the
+  themed root (skip link, account links, theme switch, editor, footer) gets a `#111` outline. The
+  browser walk measures every tab stop in all four themes.
+- **Motion:** `page.css` ends with a `prefers-reduced-motion: reduce` block that shortens animations
+  and transitions and turns smooth scrolling off; `test_accessibility.py` scans every
+  `static/profiles/*.css` and fails on a `transition`, `animation` or `scroll-behavior` that is not
+  inside `@media (prefers-reduced-motion: no-preference)`.
+- **Tests:** `apps/profiles/tests/test_accessibility.py` (service, template, stylesheets) and
+  `tests/e2e/test_accessibility.py` (axe in all four themes, keyboard walk, button, dialog, reduced
+  motion).
+
+**Checklist for a new section or control** (copy into the PR):
+1. Every `<img>` has `alt` (text from the service, or `""` when decorative).
+2. One `h1`; the section has an `h2` and `aria-labelledby`; no skipped heading levels.
+3. Everything clickable is a real `<a href>` or `<button>`; labels are visible or `aria-label`; link
+   texts make sense out of context.
+4. Tab order follows the visual order; a widget that opens (dialog, expander) manages focus and Esc.
+5. Colours come from theme tokens only; a new token pair goes into `TEXT_PAIRS`/`LARGE_PAIRS`.
+6. Any motion lives under `prefers-reduced-motion: no-preference`; no inline script or style.
+7. Add the section to the seeded data of `tests/e2e/test_accessibility.py` and run it.
 
 ## Decision log
 

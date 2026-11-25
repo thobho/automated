@@ -38,8 +38,9 @@ down:
 migrate:
 	uv run python manage.py migrate --noinput
 
+# runserver has a thread per connection; kept database connections would use up PostgreSQL's 100.
 web: migrate
-	uv run python manage.py runserver 127.0.0.1:$(WEB_NATIVE_PORT)
+	DATABASE_CONN_MAX_AGE=0 uv run python manage.py runserver 127.0.0.1:$(WEB_NATIVE_PORT)
 
 # Browser tests against `make web` (needs `uv sync --group e2e`); same DATABASE_URL as the server.
 e2e:

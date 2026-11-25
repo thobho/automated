@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('artists', '0008_artist_theme'),
+        ('artists', '0009_photo_alt_text'),
     ]
 
     operations = [

@@ -134,15 +134,15 @@ def test_gallery_needs_four_photos(count, shown):
 def test_nine_offers_collapse_three():
     page_html = render(full_content(offers=offers(9)))
     assert page_html.count('class="offer"') == 9
-    details = page_html.split("<details")[1]
+    details = page_html.split('class="offers-more"')[1]
     assert "Pokaż pozostałe" in details
     assert details.count('class="offer"') == 3
-    assert page_html.split("<details")[0].count('class="offer"') == 6
+    assert page_html.split('class="offers-more"')[0].count('class="offer"') == 6
 
 
 def test_six_offers_no_collapse():
     html = render(full_content(offers=offers(6)))
-    assert "<details" not in html and "Pokaż pozostałe" not in html
+    assert "offers-more" not in html and "Pokaż pozostałe" not in html
 
 
 def test_no_prices_shows_note_once():
@@ -399,7 +399,7 @@ def test_seed_artist_preview_renders_only_existing_data(capsys):
         print("SECTION HEADINGS:", page.h("h1"), page.h("h2"))
     assert page.h("h2") == ["Edycja tekstów", "Oferta", "Sprawdź termin"]
     assert html.count('class="offer"') == 20
-    assert html.split("<details")[1].count('class="offer"') == 14
+    assert html.split('class="offers-more"')[1].count('class="offer"') == 14
     assert "mailto:" not in html and "tel:" not in html
 
 

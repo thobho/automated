@@ -9,13 +9,17 @@
     {% for offer in block.visible %}{% include "profiles/_offer_card.html" %}{% endfor %}
   </ul>
   {% if block.more %}
-    {# <details> works without script (strict CSP). #}
-    <details class="offers-more">
-      <summary>{% translate "Pokaż pozostałe" %} ({{ block.more|length }})</summary>
-      <ul class="offers">
+    {# Without script the button stays hidden and the list open (strict CSP, no inline script);
+       page.js shows the button, collapses the list and keeps aria-expanded in step. #}
+    <div class="offers-more">
+      <button type="button" class="button offers-more__toggle" hidden
+              aria-expanded="false" aria-controls="offers-more-list">
+        {% translate "Pokaż pozostałe" %} ({{ block.more|length }})
+      </button>
+      <ul class="offers" id="offers-more-list">
         {% for offer in block.more %}{% include "profiles/_offer_card.html" %}{% endfor %}
       </ul>
-    </details>
+    </div>
   {% endif %}
 </section>
 {% endwith %}

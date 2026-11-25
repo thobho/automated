@@ -85,12 +85,12 @@ def test_publish_view_public_page_and_withdraw(browser, base_url, seeded, shot_d
     # An edited offer stays private until "Opublikuj zmiany"; a phone in it stops the publication.
     page.goto(base_url + "/artysta/profil/oferty/")
     page.get_by_role("link", name="Edytuj").first.click()
-    page.locator("[name=title]").fill("Dzwoń 600 700 800")
+    page.locator("[name=description]").fill("Telefony:\n600 700 800\n601 700 800")
     _save(page)
     page.goto(base_url + "/panel/publikacja/")
     assert page.locator("[data-unpublished]").is_visible()
     blocker = page.locator("[data-blocker=contact_offers]")
-    assert "600 700 800" in blocker.inner_text()
+    assert "600 700 800" in blocker.inner_text() and "601 700 800" in blocker.inner_text()
     assert page.get_by_role("button", name="Opublikuj zmiany").count() == 0
     violations = Axe().run(page).response["violations"]
     assert not [v for v in violations if v["impact"] in ("critical", "serious")]
@@ -102,6 +102,7 @@ def test_publish_view_public_page_and_withdraw(browser, base_url, seeded, shot_d
     blocker.get_by_role("link", name="Popraw").click()
     page.get_by_role("link", name="Edytuj").first.click()
     page.locator("[name=title]").fill("Nowy spektakl")
+    page.locator("[name=description]").fill("Opis bez danych kontaktowych.")
     _save(page)
     page.goto(base_url + "/panel/publikacja/")
     visitor.reload()

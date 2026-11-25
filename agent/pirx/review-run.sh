@@ -4,7 +4,8 @@
 # The reviewer model only writes a verdict (.agent/REVIEW.json); this script acts on it:
 #   approve + CI green (or no CI) + mergeable + not protected -> merge-ready.sh: merged against the current main
 #   approve + protected (automation money/permission rules) -> comment, the owner merges with one tap
-#   changes  -> comment with the points, issue back to agent:todo (after 3 rounds: agent:blocked)
+#   changes  -> comment with the points, issue back to agent:todo; after 3 rounds one rescue round
+#               (Opus, larger budget, agent/rescue-prompt.md); if that is sent back too: agent:blocked
 #   blocked  -> comment, issue to agent:blocked
 # Red CI goes straight back to the builder, without a model call.
 set -uo pipefail
@@ -31,14 +32,24 @@ EOF
 mark="<!-- automated:review:$sha -->"
 back_to_builder() {  # back_to_builder "<why>"
   [[ "$issue" -gt 0 ]] || return 0
-  if [[ "$rounds" -ge 2 ]]; then
+  if [[ "$rounds" -ge 2 ]] && ! rescue_used "$issue"; then
+    rescue_round "$1"
+  elif [[ "$rounds" -ge 2 ]]; then
     gh issue edit "$issue" --remove-label agent:review --add-label agent:blocked >/dev/null
-    gh issue comment "$issue" --body "🛑 Blocked after 3 review rounds without approval ($1). PR #$pr needs your decision." >/dev/null
+    gh issue comment "$issue" --body "🛑 Blocked after $((rounds + 1)) review rounds without approval, including the rescue round ($1). PR #$pr needs your decision." >/dev/null
   else
     gh issue edit "$issue" --remove-label agent:review --add-label agent:todo >/dev/null
     gh issue comment "$issue" --body "↩️ Back to the builder: $1. See the review on PR #$pr." >/dev/null
     escalate_on_changes
   fi
+}
+rescue_round() {  # rescue_round "<why>": one more build on Opus with agent/rescue-prompt.md, then the owner
+  local cur
+  cur="$(gh issue view "$issue" --json labels -q '[.labels[].name | select(startswith("model:"))] | join(" ")' 2>/dev/null)"
+  for l in $cur; do [[ "$l" != model:opus ]] && gh issue edit "$issue" --remove-label "$l" >/dev/null 2>&1; done
+  gh issue edit "$issue" --remove-label agent:review --add-label agent:todo --add-label model:opus >/dev/null
+  gh issue comment "$issue" --body "🚑 Rescue round after $((rounds + 1)) review rounds without approval ($1): one more build on Opus with a larger budget and a fresh analysis of every review point (agent/rescue-prompt.md). If its review asks for changes again, the task comes to you. See PR #$pr. $RESCUE_MARK" >/dev/null
+  log "review #$pr: issue #$issue gets its rescue round after $((rounds + 1)) round(s)"
 }
 escalate_on_changes() {  # Sonnet first: the next build runs on Opus after 1 round with changes (security) or 2 (others)
   local labels cur need=2
@@ -83,7 +94,7 @@ prompt="$(cat "$RUNNER_DIR/agent/review-prompt.md")
 - PR #$pr ($(json_get "$info" title)), head ${sha:0:7}, branch $branch
 - Linked issue: #$issue
 - CI: $ci$([[ "$prot" == yes ]] && echo "; this PR touches the automation's money or permission rules, so be strict: the owner merges it only on your approval")$([[ "$auto" == yes && "$prot" == no ]] && echo "; this PR changes the automation itself and is merged on your approval, so be strict: it must not weaken a budget gate, a permission or a check, and must keep the automation running")
-- Review round: $((rounds + 1)) of 3
+- Review round: $((rounds + 1)) of 3$( (( rounds >= 3 )) && echo " (after the builder's rescue round: if you ask for changes now, the task goes to the owner, so list every remaining point)")
 - You run on: $model$([[ -s "$flags" ]] && printf '\n\n## Diff-policy flags (judge each one in `policy`, copying the flag text exactly)\n%s' "$(sed 's/^/- /' "$flags")")"
 
 runlog="$RUNTIME/logs/review-$pr-$(date -u +%Y%m%dT%H%M%SZ).jsonl"

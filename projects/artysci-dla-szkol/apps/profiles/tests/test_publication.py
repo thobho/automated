@@ -3,6 +3,7 @@
 import re
 
 import pytest
+from django.contrib.auth import get_user_model
 from django.test import Client
 from django.urls import reverse
 
@@ -195,6 +196,65 @@ def test_contacts_in(text, found):
     assert contacts_in(text) == found
 
 
+TWO_PHONES = [
+    f"600 700 800{separator}601 700 800" for separator in ("\n", "\r\n", " ", " - ", " – ", ". ")
+]
+
+
+@pytest.mark.parametrize("text", TWO_PHONES)
+def test_two_phones_in_a_row_are_both_found(text):
+    assert contacts_in(text) == ["600 700 800", "601 700 800"]
+
+
+@pytest.mark.parametrize(
+    ("text", "found"),
+    [
+        ("600700800 601700800 602700800", ["600700800", "601700800", "602700800"]),
+        ("+48 600 700 800 - 0048 601 700 800", ["+48 600 700 800", "0048 601 700 800"]),
+        ("48 600 700 800 48 601 700 800", ["48 600 700 800", "48 601 700 800"]),
+        ("22 123 45 67\n22 123 45 68", ["22 123 45 67", "22 123 45 68"]),
+        ("600\n700 800", ["600 700 800"]),
+        ("600\n700 800\n601 700 800", ["600 700 800", "601 700 800"]),
+        ("tel600700800, 601 700 800zł", ["600700800", "601 700 800"]),
+        ("+49 170 123 456", ["+49 170 123 456"]),
+        ("konto 61 1090 1014 0000 0712 1981 2874", []),
+        ("2026-11-13 2026-11-14", []),
+        ("Ceny:\n1200 zł\n1500 zł\n10 000 zł", []),
+    ],
+)
+def test_phones_next_to_each_other_and_numbers_that_are_not_phones(text, found):
+    assert sorted(contacts_in(text)) == sorted(found)
+
+
+@pytest.mark.parametrize("text", TWO_PHONES)
+def test_two_phones_in_a_row_block_publish_and_update(text):
+    artist = make_ready()
+    publication.publish(artist)
+    pages.edit_field(artist, "about", f"Telefon:\n{text}")
+    (blocker,) = publication.publication_blockers(artist)
+    assert blocker.key == "contact_texts"
+    assert "600 700 800" in str(blocker.text) and "601 700 800" in str(blocker.text)
+    with pytest.raises(publication.PublicationRefused):
+        publication.update_published(artist)
+    html = Client().get(public_url(Artist.objects.get(pk=artist.pk).slug)).content.decode()
+    assert "600 700 800" not in html and "601 700 800" not in html
+    publication.withdraw(artist)
+    with pytest.raises(publication.PublicationRefused):
+        publication.publish(artist)
+
+
+def test_contact_data_in_a_photo_alt_text_blocks():
+    artist = make_ready()
+    photo = add_photos(artist)[0]
+    publication.publish(artist)
+    Material.objects.filter(pk=photo.pk).update(alt_text="Plakat, tel. 600 700 800")
+    (blocker,) = publication.publication_blockers(artist)
+    assert blocker.key == "contact_photos" and reverse(blocker.url_name)
+    with pytest.raises(publication.PublicationRefused):
+        publication.update_published(artist)
+    assert "600 700 800" not in repr(live(artist).photos)
+
+
 def test_a_price_after_a_phone_does_not_hide_it():
     assert "600 700 800" in contacts_in("tel. 600 700 800 - 900 zł")[0]
 
@@ -351,9 +411,14 @@ def _new_photo(artist):
     add_photos(artist, 1)
 
 
+def _new_alt_text(artist):
+    Material.objects.filter(artist=artist).update(alt_text="Dzieci na scenie")
+
+
 @pytest.mark.parametrize(
     "change",
     [
+        _new_alt_text,
         _new_offer,
         _edit_offer,
         _delete_offer,
@@ -581,6 +646,86 @@ def test_public_page_accepts_only_get():
     publication.publish(artist)
     url = public_url(Artist.objects.get(pk=artist.pk).slug)
     assert Client().post(url).status_code == 405
+    head = Client().head(url)  # link checkers and uptime monitors
+    assert head.status_code == 200 and head.content == b""
+
+
+# --- Django admin: only `publication` writes the publication fields ------------------------------
+
+PUBLICATION_FIELDS = ("slug", "publication_status", "published_at", "withdrawn_at")
+
+
+@pytest.fixture
+def admin_client():
+    root = get_user_model().objects.create_superuser(email="root@example.invalid", password="x")
+    return client_for_user(root)
+
+
+def admin_url(artist):
+    return reverse("admin:artists_artist_change", args=[artist.pk])
+
+
+def load_admin_form(client, artist) -> dict:
+    """The POST data of the change form as a browser would send it now, plus the values of the
+    publication fields at this moment (what an editable form would send back)."""
+    context = client.get(admin_url(artist)).context
+    forms = [context["adminform"].form]
+    for inline in context["inline_admin_formsets"]:
+        forms += [inline.formset.management_form, *inline.formset.initial_forms]
+    data = {}
+    for form in forms:
+        for field in form:
+            value = field.value()
+            data[field.html_name] = "" if value is None else value
+    stale = Artist.objects.get(pk=artist.pk)
+    for name in PUBLICATION_FIELDS:
+        value = getattr(stale, name)
+        data[name] = "" if value is None else str(value)
+        if name.endswith("_at"):
+            data[f"{name}_0"] = value.strftime("%Y-%m-%d") if value else ""
+            data[f"{name}_1"] = value.strftime("%H:%M:%S") if value else ""
+    # extra inline rows are left out, so the total is what was really sent
+    for inline in context["inline_admin_formsets"]:
+        formset = inline.formset
+        data[f"{formset.prefix}-TOTAL_FORMS"] = len(formset.initial_forms)
+    return data
+
+
+def publication_state(artist):
+    return Artist.objects.filter(pk=artist.pk).values(*PUBLICATION_FIELDS).get()
+
+
+def test_admin_form_has_no_publication_fields(admin_client):
+    artist = make_ready()
+    response = admin_client.get(admin_url(artist))
+    assert response.status_code == 200
+    assert not set(PUBLICATION_FIELDS) & set(response.context["adminform"].form.fields)
+
+
+def test_a_stale_admin_form_does_not_undo_a_publication(admin_client):
+    artist = make_ready()
+    form = load_admin_form(admin_client, artist)
+    publication.publish(artist)
+    before = publication_state(artist)
+    assert before["slug"] and before["publication_status"] == PublicationStatus.PUBLISHED
+    response = admin_client.post(admin_url(artist), {**form, "name": "Poprawiona nazwa"})
+    assert response.status_code == 302  # saved
+    assert Artist.objects.get(pk=artist.pk).name == "Poprawiona nazwa"
+    assert publication_state(artist) == before
+
+
+def test_a_stale_admin_form_does_not_undo_a_withdrawal(admin_client):
+    artist = make_ready()
+    publication.publish(artist)
+    form = load_admin_form(admin_client, artist)
+    publication.withdraw(artist)
+    before = publication_state(artist)
+    assert before["publication_status"] == PublicationStatus.WITHDRAWN
+    response = admin_client.post(admin_url(artist), {**form, "name": "Poprawiona nazwa"})
+    assert response.status_code == 302  # saved
+    assert Artist.objects.get(pk=artist.pk).name == "Poprawiona nazwa"
+    assert publication_state(artist) == before
+    assert not Artist.objects.published().filter(pk=artist.pk).exists()
 
 
 # --- panel actions -------------------------------------------------------------------------------

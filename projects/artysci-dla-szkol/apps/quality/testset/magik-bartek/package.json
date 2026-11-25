@@ -1,0 +1,48 @@
+{
+  "slug": "magik-bartek",
+  "description": "Weak package: a children's magician with one offer on request and no photos at all.",
+  "origin": "synthetic",
+  "level": "weak",
+  "artist": {
+    "type": "illusion",
+    "name": "Magik Bartek",
+    "city": "Bydgoszcz",
+    "voivodeships": [
+      "kujawsko-pomorskie"
+    ],
+    "audiences": [
+      "grades_0_3",
+      "grades_4_6"
+    ]
+  },
+  "questionnaire": {},
+  "offers": [
+    {
+      "title": "Magiczne popołudnie",
+      "description": "Sztuczki z chusteczkami i kartami.",
+      "price_on_request": true
+    }
+  ],
+  "site_text": "Magik Bartek występuje na urodzinach i w szkołach.",
+  "documents": [],
+  "videos": [],
+  "photos": [],
+  "expectations": [
+    {
+      "kind": "gap_reported",
+      "code": "no_photos"
+    },
+    {
+      "kind": "gap_reported",
+      "code": "no_main_photo"
+    },
+    {
+      "kind": "field_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_absent",
+      "text": "mistrz świata"
+    }
+  ]
+}

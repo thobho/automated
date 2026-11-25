@@ -1,0 +1,32 @@
+{
+  "slug": "iluzjonista-marek",
+  "description": "Weak package: an illusionist with one short text and a single photo that is a poster, so there is no usable main photo.",
+  "origin": "synthetic",
+  "level": "weak",
+  "artist": {
+    "type": "illusion",
+    "name": "Iluzjonista Marek",
+    "city": "Lublin",
+    "voivodeships": ["lubelskie"],
+    "audiences": ["grades_4_6"]
+  },
+  "questionnaire": {},
+  "offers": [
+    {
+      "title": "Pokaz iluzji",
+      "description": "Pokaz sztuczek.",
+      "price_on_request": true
+    }
+  ],
+  "site_text": "Iluzjonista Marek pokazuje sztuczki dla dzieci.",
+  "documents": [],
+  "videos": [],
+  "photos": [
+    {"kind": "poster"}
+  ],
+  "expectations": [
+    {"kind": "field_empty", "path": "hero.main_photo_id"},
+    {"kind": "gap_reported", "code": "no_main_photo"},
+    {"kind": "text_absent", "text": "nagrodzony"}
+  ]
+}

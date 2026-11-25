@@ -114,6 +114,17 @@ def test_pirx_may_run_unscanned(prod_env):
         _load("config.settings.pirx")
 
 
+def test_quality_lab_is_off_in_prod_and_on_in_dev_test_and_pirx(prod_env):
+    """The synthetic test set (US-11.2) must never run in production by default."""
+    prod_env.delenv("QUALITY_LAB_ENABLED", raising=False)
+    assert _load("config.settings.prod").QUALITY_LAB_ENABLED is False
+    assert _load("config.settings.pirx").QUALITY_LAB_ENABLED is True
+    assert _load("config.settings.dev").QUALITY_LAB_ENABLED is True
+    assert _load("config.settings.test").QUALITY_LAB_ENABLED is True
+    prod_env.setenv("QUALITY_LAB_ENABLED", "false")
+    assert _load("config.settings.pirx").QUALITY_LAB_ENABLED is False
+
+
 def test_dev_defaults_to_no_scanner(monkeypatch):
     monkeypatch.delenv("MALWARE_SCANNER", raising=False)
     sys.modules.pop("config.settings.base", None)

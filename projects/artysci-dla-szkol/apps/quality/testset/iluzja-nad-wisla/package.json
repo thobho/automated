@@ -1,0 +1,121 @@
+{
+  "slug": "iluzja-nad-wisla",
+  "description": "Rich package: an illusion show with long site text, three offers, three documents, two films and five good photos.",
+  "origin": "synthetic",
+  "level": "rich",
+  "artist": {
+    "type": "illusion",
+    "name": "Iluzja nad Wisłą",
+    "city": "Warszawa",
+    "voivodeships": [
+      "mazowieckie"
+    ],
+    "audiences": [
+      "kindergarten",
+      "grades_0_3",
+      "grades_4_6",
+      "grades_7_8"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 5,
+    "q_age_to": 14,
+    "q_duration_minutes": 50,
+    "q_max_audience": 250,
+    "q_tech_room": "Scena lub sala gimnastyczna, minimum 4 na 3 metry.",
+    "q_tech_power": "Trzy gniazda 230 V.",
+    "q_tech_sound": "Własny mikrofon, wystarczy jedno gniazdo.",
+    "q_price_from_pln": 1100,
+    "q_price_to_pln": 1800
+  },
+  "offers": [
+    {
+      "title": "Pokaz „Zniknięcia i pojawienia”",
+      "description": "Klasyczne sztuczki z zanikaniem przedmiotów, w których dzieci pomagają magikowi.",
+      "age_from": 5,
+      "age_to": 9,
+      "duration_minutes": 45,
+      "price_pln": 1100
+    },
+    {
+      "title": "Pokaz „Tajemnice umysłu”",
+      "description": "Pokaz iluzji psychologicznych: dzieci sprawdzają, jak łatwo oszukać wzrok i pamięć.",
+      "age_from": 9,
+      "age_to": 14,
+      "duration_minutes": 50,
+      "price_pln": 1500
+    },
+    {
+      "title": "Lekcja iluzji",
+      "description": "Godzinne zajęcia, na których klasa uczy się trzech prostych sztuczek.",
+      "age_from": 8,
+      "age_to": 14,
+      "duration_minutes": 60,
+      "price_pln": 1800
+    }
+  ],
+  "site_text": "Iluzja nad Wisłą to pokazy magii dla przedszkoli i szkół z Warszawy i okolic. Prowadzi je iluzjonista, który występuje przed dziećmi od wielu lat.\n\nKażdy pokaz jest dopasowany do wieku widzów. Młodsze dzieci oglądają kolorowe sztuczki z chustami i kapeluszem, starsze poznają iluzje oparte na wiedzy o wzroku i pamięci.\n\nPo pokazie iluzjonista wyjaśnia, że magia to ćwiczenie i spryt, a nie czary. Dzieci dowiadują się, jak powstaje wrażenie niemożliwego.",
+  "documents": [
+    {
+      "name": "opis-pokazu.pdf",
+      "text": "Opis pokazu. Pokaz trwa 50 minut. Potrzebna jest scena o wymiarach co najmniej 4 na 3 metry oraz jedno gniazdko."
+    },
+    {
+      "name": "opinia-szkoly.pdf",
+      "text": "Opinia szkoły. „Dzieci były zachwycone, a po pokazie jeszcze tydzień pokazywały sztuczki koleżankom.” – nauczycielka klas pierwszych."
+    },
+    {
+      "name": "informacje-dla-nauczyciela.pdf",
+      "text": "Informacje dla nauczyciela. Przed pokazem prosimy o ustawienie krzeseł w półkole. Na scenie nie powinno być innych osób."
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=Ilw1Ab3Cd5E",
+      "title": "Zniknięcia i pojawienia – fragment"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Ilw2Fg4Hi6J",
+      "title": "Tajemnice umysłu – zapowiedź"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Warszawa"
+    },
+    {
+      "kind": "text_present",
+      "text": "Zniknięcia i pojawienia"
+    },
+    {
+      "kind": "text_absent",
+      "text": "mistrz świata"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "gallery.photo_ids"
+    }
+  ]
+}

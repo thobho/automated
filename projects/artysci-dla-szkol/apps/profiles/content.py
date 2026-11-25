@@ -13,6 +13,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 
 from . import contact
+from .accessibility import photo_alt
 from .themes import DEFAULT_THEME, theme_or_default
 
 MIN_GALLERY_PHOTOS = 4  # US-3.1: a gallery needs at least four photos
@@ -200,14 +201,15 @@ def _video_title(material, number: int) -> str:
     return _("Nagranie %(n)d") % {"n": number}
 
 
-def _media_items(shown, name: str) -> tuple[list[PhotoItem], list[VideoItem]]:
+def _media_items(shown, name: str, alts: dict) -> tuple[list[PhotoItem], list[VideoItem]]:
+    """`alts` maps material ids to the artist's alt text (a missing one gives the fallback)."""
     from apps.artists import materials
     from apps.artists.models import MaterialKind
 
     photos, videos = [], []
     for material in shown:
         if material.kind == MaterialKind.PHOTO:
-            alt = _("%(name)s – zdjęcie %(n)d") % {"name": name, "n": len(photos) + 1}
+            alt = photo_alt(alts.get(material.pk, ""), name, len(photos) + 1)
             photos.append(PhotoItem(materials.file_url(material), alt))
         elif material.kind == MaterialKind.VIDEO and materials.file_url(material):
             videos.append(
@@ -233,7 +235,8 @@ def page_content_for(artist) -> PageContent:
     No AI, no main photo (US-2.6 chooses it), no texts (US-2.5 writes them)."""
     from .services import theme_for
 
-    photos, videos = _media_items(shown_materials(artist), artist.name)
+    shown = shown_materials(artist)
+    photos, videos = _media_items(shown, artist.name, {m.pk: m.alt_text for m in shown})
     return PageContent(
         slug=slugify(artist.name) or f"artysta-{artist.pk}",
         hero=Hero(name=artist.name, city=artist.city),
@@ -247,7 +250,7 @@ def page_content_for(artist) -> PageContent:
 # --- the published copy (US-2.8): everything the artist's data adds to the page, as JSON --------
 
 
-def page_data(artist, material_ids) -> dict:
+def page_data(artist, shown) -> dict:
     """The artist's data as it is now, in the form `PublishedPage.data` stores."""
     return {
         "name": artist.name,
@@ -261,13 +264,14 @@ def page_data(artist, material_ids) -> dict:
             }
             for o in _offer_items(artist)
         ],
-        "materials": list(material_ids),
+        "materials": [{"id": m.pk, "alt": m.alt_text} for m in shown],
     }
 
 
 def page_from_data(slug: str, data: dict, theme: str, shown) -> PageContent:
     """The page of a stored copy. `shown` are the materials that may be shown now."""
-    photos, videos = _media_items(shown, data["name"])
+    alts = {item["id"]: item["alt"] for item in data["materials"]}
+    photos, videos = _media_items(shown, data["name"], alts)
     return PageContent(
         slug=slug,
         hero=Hero(name=data["name"], city=data["city"]),

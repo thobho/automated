@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('artists', '0009_artist_publication_status_artist_published_at_and_more'),
+        ('artists', '0010_artist_publication'),
         ('profiles', '0003_page_versions'),
     ]
 

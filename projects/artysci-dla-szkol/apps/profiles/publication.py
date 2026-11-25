@@ -7,9 +7,10 @@
     page = public_page(slug)                  # PageContent of the snapshot, or None
 
 The public page shows the snapshot (`PublishedPage`), never live data: the texts and theme of the
-version, name, city, offers and the list of materials. Later edits and uploads stay private until
-the artist publishes again. Two things only ever *remove* something at once: a deleted material is
-gone, and without a current "Prawa do materiałów" statement (D4, D7) no photo, video or link shows.
+version, name, city, offers, the list of materials and their alt texts. Later edits and uploads
+stay private until the artist publishes again. Two things only ever *remove* something at once: a
+deleted material is gone, and without a current "Prawa do materiałów" statement (D4, D7) no photo,
+video or link shows.
 
 No e-mail or phone goes public (D9): `publication_blockers` refuses a page that has one.
 
@@ -84,7 +85,7 @@ class _Draft:
 def _draft(artist: Artist) -> _Draft:
     version = pages.current_version(artist)
     # Without the rights statement nothing is listed, so a later statement alone shows nothing.
-    materials = [m.pk for m in shown_materials(artist)] if materials_allowed(artist) else []
+    materials = shown_materials(artist) if materials_allowed(artist) else []
     return _Draft(
         content={**pages.empty_content(), **(version.content if version else {})},
         data=page_data(artist, materials),
@@ -141,11 +142,13 @@ def _contact_blockers(artist: Artist, draft: _Draft) -> list[Blocker]:
     texts = [content["tagline"], content["about"], content["for_schools"], *content["facts"]]
     texts += [text for item in content["faq"] for text in item.values()]
     offers = [text for offer in data["offers"] for text in (offer["title"], offer["description"])]
+    alts = [item["alt"] for item in data["materials"]]
     places = (
         ("contact_name", _("nazwa artysty"), "accounts:settings", [data["name"]]),
         ("contact_city", _("miasto"), "artists:basics", [data["city"]]),
         ("contact_texts", _("teksty strony"), "profiles:preview", texts),
         ("contact_offers", _("oferty"), "artists:offers", offers),
+        ("contact_photos", _("opisy zdjęć"), "artists:materials", alts),
     )
     reason = _("Dane kontaktowe nie mogą być publiczne (%(place)s). Usuń: %(found)s")
     blockers = []
@@ -279,7 +282,8 @@ def has_unpublished_changes(artist: Artist) -> bool:
     if snapshot is None:
         return False
     draft = _draft(artist)
-    visible = [m.pk for m in _visible_materials(artist, snapshot)]
+    ids = {m.pk for m in _visible_materials(artist, snapshot)}
+    visible = [item for item in snapshot.data["materials"] if item["id"] in ids]
     return (
         snapshot.version_number != draft.version_number
         or snapshot.theme != draft.theme
@@ -300,7 +304,7 @@ def _visible_materials(artist: Artist, snapshot: PublishedPage) -> list:
     currently confirms the rights to them (checked on every request)."""
     if not materials_allowed(artist):
         return []
-    published = set(snapshot.data["materials"])
+    published = {item["id"] for item in snapshot.data["materials"]}
     return [m for m in shown_materials(artist) if m.pk in published]
 
 

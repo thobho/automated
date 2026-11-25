@@ -631,6 +631,34 @@ def test_another_artists_material_is_404_and_stays(web, storage):
     assert Material.objects.filter(pk=material.pk).exists()
 
 
+def alt_url(pk):
+    return f"/artysta/profil/materialy/{pk}/opis/"
+
+
+def test_artist_saves_and_clears_a_photo_alt_text(web, artist, storage):
+    photo = upload(artist)
+    # the form is shown for ready photos only
+    Material.objects.filter(pk=photo.pk).update(status=ScanStatus.READY)
+    response = web.post(alt_url(photo.pk), {"alt_text": "  Dzieci   klaszczą "})
+    assert response.status_code == 302 and response["Location"] == PAGE
+    photo.refresh_from_db()
+    assert photo.alt_text == "Dzieci klaszczą"
+    assert "Dzieci klaszczą" in web.get(PAGE).content.decode()  # editable next to the photo
+    web.post(alt_url(photo.pk), {"alt_text": ""})
+    photo.refresh_from_db()
+    assert photo.alt_text == ""
+
+
+def test_alt_text_of_another_artists_photo_is_404_and_unchanged(web, storage):
+    other = make_artist("inny.alt@example.invalid")
+    services.save_basics(other, BASICS)
+    photo = upload(Artist.objects.get(user=other))
+    assert web.post(alt_url(photo.pk), {"alt_text": "x"}).status_code == 404
+    photo.refresh_from_db()
+    assert photo.alt_text == ""
+    assert web.get(alt_url(photo.pk)).status_code == 405
+
+
 def test_delete_needs_post(web, artist, storage):
     material = upload(artist)
     assert web.get(delete_url(material.pk)).status_code == 405

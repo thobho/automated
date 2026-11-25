@@ -1,0 +1,122 @@
+{
+  "slug": "magia-w-szkole-pana-kuby",
+  "description": "Rich package: a school illusionist with long site text, four offers, three documents, one film and four good photos.",
+  "origin": "synthetic",
+  "level": "rich",
+  "artist": {
+    "type": "illusion",
+    "name": "Magia w Szkole Pana Kuby",
+    "city": "Opole",
+    "voivodeships": [
+      "opolskie"
+    ],
+    "audiences": [
+      "grades_0_3",
+      "grades_4_6",
+      "grades_7_8",
+      "families"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 6,
+    "q_age_to": 14,
+    "q_duration_minutes": 45,
+    "q_max_audience": 200,
+    "q_tech_room": "Sala gimnastyczna lub aula.",
+    "q_tech_power": "Dwa gniazda 230 V.",
+    "q_tech_sound": "Mikrofon własny.",
+    "q_price_from_pln": 900,
+    "q_price_to_pln": 1500
+  },
+  "offers": [
+    {
+      "title": "Magia dla najmłodszych",
+      "description": "Kolorowe sztuczki z balonami i chustami.",
+      "age_from": 6,
+      "age_to": 8,
+      "duration_minutes": 40,
+      "price_pln": 900
+    },
+    {
+      "title": "Wielki pokaz iluzji",
+      "description": "Pokaz z udziałem uczniów i dużymi rekwizytami.",
+      "age_from": 8,
+      "age_to": 12,
+      "duration_minutes": 50,
+      "price_pln": 1300
+    },
+    {
+      "title": "Matematyka w magii",
+      "description": "Sztuczki oparte na liczbach i logice.",
+      "age_from": 10,
+      "age_to": 14,
+      "duration_minutes": 50,
+      "price_pln": 1200
+    },
+    {
+      "title": "Pokaz profilaktyczny",
+      "description": "Pokaz łączący sztuczki z rozmową o bezpieczeństwie.",
+      "age_from": 9,
+      "age_to": 14,
+      "duration_minutes": 45,
+      "price_pln": 1500
+    }
+  ],
+  "site_text": "Magia w Szkole Pana Kuby to pokazy iluzji prowadzone przez nauczyciela, który łączy sztuczki z nauką. Każdy pokaz ma jasny cel: uczniowie mają się dobrze bawić i czegoś nauczyć.\n\nW programie są pokazy dla najmłodszych, wielkie przedstawienia i zajęcia o matematyce ukrytej w sztuczkach. Starsi uczniowie poznają zasady, na których opiera się iluzja.\n\nPan Kuba występuje w szkołach w całym województwie opolskim i w sąsiednich regionach.",
+  "documents": [
+    {
+      "name": "program-pokazow.pdf",
+      "text": "Program pokazów. Każdy pokaz trwa od 40 do 50 minut. Pokaz dla najmłodszych trwa 40 minut."
+    },
+    {
+      "name": "wymagania.pdf",
+      "text": "Wymagania. Sala powinna mieć miejsce na scenę 4 na 3 metry. Potrzebne są dwa gniazda."
+    },
+    {
+      "name": "opis-pokazu-profilaktycznego.pdf",
+      "text": "Pokaz profilaktyczny. Pokaz zawiera rozmowę o bezpiecznym zachowaniu w internecie i na drodze."
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=Mk1Ab2Cd3Ef",
+      "title": "Wielki pokaz iluzji – zapis"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Opole"
+    },
+    {
+      "kind": "text_present",
+      "text": "Magia dla najmłodszych"
+    },
+    {
+      "kind": "text_absent",
+      "text": "rekord Guinnessa"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "gallery.photo_ids"
+    }
+  ]
+}

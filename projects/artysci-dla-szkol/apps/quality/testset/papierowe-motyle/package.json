@@ -1,0 +1,54 @@
+{
+  "slug": "papierowe-motyle",
+  "description": "Weak package: paper craft workshops with one duration, one offer with a price and one low-resolution photo.",
+  "origin": "synthetic",
+  "level": "weak",
+  "artist": {
+    "type": "workshops",
+    "name": "Papierowe Motyle",
+    "city": "Rzeszów",
+    "voivodeships": [
+      "podkarpackie"
+    ],
+    "audiences": [
+      "kindergarten",
+      "grades_0_3"
+    ]
+  },
+  "questionnaire": {
+    "q_duration_minutes": 60
+  },
+  "offers": [
+    {
+      "title": "Motyle z papieru",
+      "description": "Dzieci składają i malują motyle z kolorowego papieru.",
+      "price_pln": 250
+    }
+  ],
+  "site_text": "Papierowe Motyle prowadzą zajęcia plastyczne dla przedszkoli.",
+  "documents": [],
+  "videos": [],
+  "photos": [
+    {
+      "kind": "low_resolution"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "gap_reported",
+      "code": "no_video"
+    },
+    {
+      "kind": "text_present",
+      "text": "Rzeszów"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "hero.headline"
+    },
+    {
+      "kind": "text_absent",
+      "text": "nagrodzone"
+    }
+  ]
+}

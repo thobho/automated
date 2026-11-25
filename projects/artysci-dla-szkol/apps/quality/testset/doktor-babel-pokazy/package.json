@@ -1,0 +1,57 @@
+{
+  "slug": "doktor-babel-pokazy",
+  "description": "Weak package: a science show whose only photos are two screenshots, so there is no usable main photo.",
+  "origin": "synthetic",
+  "level": "weak",
+  "artist": {
+    "type": "science_show",
+    "name": "Doktor Bąbel",
+    "city": "Katowice",
+    "voivodeships": [
+      "slaskie"
+    ],
+    "audiences": [
+      "grades_4_6"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 7,
+    "q_age_to": 11
+  },
+  "offers": [
+    {
+      "title": "Pokaz baniek mydlanych",
+      "description": "Pokaz z wielkimi bańkami.",
+      "price_on_request": true
+    }
+  ],
+  "site_text": "",
+  "documents": [],
+  "videos": [],
+  "photos": [
+    {
+      "kind": "screenshot"
+    },
+    {
+      "kind": "screenshot"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "gap_reported",
+      "code": "no_main_photo"
+    },
+    {
+      "kind": "text_absent",
+      "text": "profesor"
+    },
+    {
+      "kind": "text_present",
+      "text": "Katowice"
+    }
+  ]
+}
