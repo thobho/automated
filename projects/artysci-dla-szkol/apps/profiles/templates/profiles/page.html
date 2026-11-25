@@ -4,7 +4,26 @@
 {% block title %}{{ content.hero.name }} – {% translate "Artyści dla szkół" %}{% endblock %}
 
 {% block head %}
-  {% if noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
+  {% if noindex %}
+    <meta name="robots" content="noindex, nofollow">
+  {% elif meta %}
+    {# Search and share previews (US-3.4): from the published snapshot only, no contact data. #}
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="{{ meta.description }}">
+    <link rel="canonical" href="{{ meta.canonical }}">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="{{ meta.title }}">
+    <meta property="og:description" content="{{ meta.description }}">
+    <meta property="og:url" content="{{ meta.canonical }}">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:image" content="{{ meta.image }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ meta.title }}">
+    <meta name="twitter:description" content="{{ meta.description }}">
+    <meta name="twitter:image" content="{{ meta.image }}">
+    {# Data, not a script: type application/ld+json is never executed, so the CSP needs no nonce. #}
+    <script type="application/ld+json">{{ meta.json_ld }}</script>
+  {% endif %}
   {# Fonts and CSS are served by us (D11): no CDN, no external request from the page. #}
   <link rel="stylesheet" href="{% static 'profiles/themes.css' %}">
   <link rel="stylesheet" href="{% static 'profiles/page.css' %}">

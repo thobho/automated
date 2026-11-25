@@ -5,8 +5,14 @@ HTTP, so login would break. Never use this module on a public host. Everything e
 env vars, storage, logging) is shared with prod through `hosted`.
 """
 
-from .env import env, scanner_from_env
-from .hosted import *  # noqa: F403
+import os
+
+# `hosted` requires SITE_URL. An instance installed before it existed has no such line in its
+# pirx.env, so this module (one known LAN address) fills it in; pirx.env still wins.
+os.environ.setdefault("SITE_URL", "http://192.168.68.62:8100")
+
+from .env import env, scanner_from_env  # noqa: E402
+from .hosted import *  # noqa: E402, F403
 
 # pirx in light mode has no RAM for clamd (D87): uploads are unscanned and logged as such.
 MALWARE_SCANNER = scanner_from_env(("clamd", "none"), default="none", module="config.settings.pirx")

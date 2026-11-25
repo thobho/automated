@@ -37,6 +37,8 @@ AI_CLIENT = env.str("AI_CLIENT", default="openrouter")
 
 # Public media must come from its own origin, never the app's: no localhost default in prod.
 MEDIA_PUBLIC_BASE_URL = require("MEDIA_PUBLIC_BASE_URL", _MODULE)
+# Absolute public URLs (canonical, sitemap, Open Graph) must never point at localhost.
+SITE_URL = require("SITE_URL", _MODULE).rstrip("/")
 STORAGES = build_storages(
     STORAGE_BACKEND,  # noqa: F405
     public_base_url=MEDIA_PUBLIC_BASE_URL,

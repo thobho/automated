@@ -41,6 +41,8 @@ ARGUMENTS = {
 #: URL name -> expected answer for (anonymous, artist, institution, admin)
 MATRIX = {
     "core:home": ("200", "200", "200", "200"),
+    "core:robots": ("200", "200", "200", "200"),  # public by design
+    "profiles:sitemap": ("200", "200", "200", "200"),  # public by design: published pages only
     "core:private-media": ("404", "404", "404", "404"),  # signed token is the permission
     "trust:terms": ("200", "200", "200", "200"),
     "trust:privacy": ("200", "200", "200", "200"),

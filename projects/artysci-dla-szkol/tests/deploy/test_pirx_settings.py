@@ -29,13 +29,16 @@ print(json.dumps({
     "hsts": settings.SECURE_HSTS_SECONDS,
     "hosts": settings.ALLOWED_HOSTS,
     "debug": settings.DEBUG,
+    "site_url": settings.SITE_URL,
     "static_view": resolve("/static/css/x.css").func.__name__,
 }))
 """
 
 
 def _run(extra_env):
-    env = {k: v for k, v in os.environ.items() if not k.startswith(("DJANGO_", "DATABASE_"))}
+    env = {
+        k: v for k, v in os.environ.items() if not k.startswith(("DJANGO_", "DATABASE_", "SITE_"))
+    }
     env.update(ENV)
     env.update(extra_env)
     return subprocess.run(  # noqa: S603
@@ -55,6 +58,18 @@ def test_pirx_is_prod_without_tls_only_bits():
     assert data["hosts"] == ["192.168.68.62", "localhost"]
     assert data["debug"] is False
     assert data["static_view"] == "serve"
+
+
+def test_pirx_site_url_defaults_to_the_lan_address_and_env_wins():
+    """An env file from before SITE_URL existed must still deploy."""
+    for extra, expected in (
+        ({}, "http://192.168.68.62:8100"),
+        ({"SITE_URL": "http://pirx.example/"}, "http://pirx.example"),
+    ):
+        result = _run(extra)
+        assert result.returncode == 0, result.stderr
+        assert json.loads(result.stdout.strip().splitlines()[-1])["site_url"] == expected
+    assert _run({"SITE_URL": " "}).returncode != 0  # set but empty: fail fast
 
 
 def test_pirx_still_requires_the_secret_key():

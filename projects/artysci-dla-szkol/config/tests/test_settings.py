@@ -15,6 +15,7 @@ PROD_VARS = {
     "DJANGO_ALLOWED_HOSTS": "example.pl, www.example.pl",
     "DATABASE_URL": "postgres://u:p@db.example:5432/app",
     "MEDIA_PUBLIC_BASE_URL": "https://media.example.pl/",
+    "SITE_URL": "https://example.pl/",
 }
 
 
@@ -45,6 +46,14 @@ def test_prod_fails_fast_naming_missing_var(prod_env, missing):
     prod_env.delenv(missing)
     with pytest.raises(ImproperlyConfigured, match=missing):
         _load("config.settings.prod")
+
+
+def test_prod_site_url_has_no_trailing_slash(prod_env):
+    assert _load("config.settings.prod").SITE_URL == "https://example.pl"
+
+
+def test_dev_site_url_defaults_to_localhost(settings):
+    assert settings.SITE_URL.startswith("http") and not settings.SITE_URL.endswith("/")
 
 
 def test_prod_treats_empty_var_as_missing(prod_env):
@@ -141,6 +150,7 @@ def test_check_deploy_is_clean_with_prod_settings():
         "DJANGO_ALLOWED_HOSTS": "artysci.example",
         "DATABASE_URL": PROD_VARS["DATABASE_URL"],
         "MEDIA_PUBLIC_BASE_URL": PROD_VARS["MEDIA_PUBLIC_BASE_URL"],
+        "SITE_URL": PROD_VARS["SITE_URL"],
     }
     result = subprocess.run(  # noqa: S603 - fixed argv, no shell
         [sys.executable, "manage.py", "check", "--deploy", "--fail-level", "WARNING"],

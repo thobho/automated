@@ -4,7 +4,7 @@ There is no id in the URLs: an artist only ever sees the status of their own lat
 """
 
 from django.contrib import messages
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_control, never_cache
@@ -19,7 +19,7 @@ from apps.accounts.permissions import role_required
 from apps.artists import services as artist_services
 from apps.quality.models import Generation
 
-from . import completeness, pages, publication, sections, services
+from . import completeness, pages, publication, sections, seo, services
 from . import generation as generations
 from .models import PageVersion
 from .themes import Theme
@@ -292,4 +292,14 @@ def public_page(request, slug):
     content = publication.public_page(slug)
     if content is None:
         raise Http404
-    return render(request, "profiles/page.html", {"content": content, "noindex": False})
+    context = {"content": content, "noindex": False, "meta": seo.page_meta(content)}
+    return render(request, "profiles/page.html", context)
+
+
+# Revalidated on every request, so a withdrawn page is gone from the sitemap at once.
+@cache_control(public=True, no_cache=True)
+@require_safe
+def sitemap(request):
+    """`/sitemap.xml`: the published pages only."""
+    xml = seo.sitemap_xml(publication.sitemap_entries())
+    return HttpResponse(xml, content_type="application/xml; charset=utf-8")

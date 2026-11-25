@@ -23,6 +23,7 @@ artist row keeps it after withdrawal and republication gives the same one). Rese
 import re
 import unicodedata
 from dataclasses import dataclass
+from datetime import datetime
 
 from django.db import IntegrityError, transaction
 from django.utils import timezone
@@ -319,3 +320,19 @@ def public_page(slug: str):
     page = page_from_data(artist.slug, snapshot.data, snapshot.theme, visible)
     pages.overlay_texts(page, snapshot.content)
     return page
+
+
+SITEMAP_MAX_URLS = 50_000  # the sitemap protocol's limit per file
+
+
+def sitemap_entries(limit: int = SITEMAP_MAX_URLS) -> list[tuple[str, datetime]]:
+    """`(slug, last publication time)` of every published page, oldest first, at most `limit`.
+    The time is when the snapshot last changed ("Opublikuj zmiany" counts). Drafts, withdrawn
+    pages and deactivated accounts are not listed (`published()`)."""
+    rows = (
+        Artist.objects.published()
+        .filter(slug__isnull=False, published_page__isnull=False)
+        .order_by("pk")
+        .values_list("slug", "published_page__updated_at")[:limit]
+    )
+    return list(rows)
