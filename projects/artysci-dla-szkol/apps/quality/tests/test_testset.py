@@ -22,14 +22,15 @@ from config.settings.storage import build_storages
 
 pytestmark = pytest.mark.django_db
 
-SLUGS = [
+T41_SLUGS = {
     "gliniane-ludki",
     "iluzjonista-marek",
     "kwartet-allegretto",
     "pracownia-eureka",
     "teatr-lalek-pod-debem",
     "zwierzaki-z-zagrody",
-]
+}
+SLUGS = sorted(p.parent.name for p in testset.TESTSET_DIR.glob("*/package.json"))
 
 
 @pytest.fixture(autouse=True)
@@ -77,16 +78,85 @@ def root_with(tmp_path, slug="zwierzaki-z-zagrody", **changes):
 # --- the shipped packages -------------------------------------------------------------------
 
 
-def test_the_set_has_six_valid_packages_two_per_level_for_six_types():
+def test_the_set_has_thirty_valid_packages_ten_per_level():
     report = testset.check_all()
     assert [folder for folder, _, _ in report] == SLUGS
+    assert len(SLUGS) == 30
     assert all(problems == [] for _, _, problems in report)
     items = [p for _, p, _ in report]
-    assert sorted(p["level"] for p in items) == ["medium", "medium", "rich", "rich", "weak", "weak"]
-    assert len({p["artist"]["type"] for p in items}) == 6
-    assert all(len(p["expectations"]) >= 2 for p in items)
+    assert {level: sum(p["level"] == level for p in items) for level in testset.LEVELS} == {
+        "weak": 10,
+        "medium": 10,
+        "rich": 10,
+    }
+    assert all(len(p["expectations"]) >= 3 for p in items)
     assert all(p["origin"] == "synthetic" for p in items)
     assert [p["slug"] for p in testset.packages()] == SLUGS
+
+
+ARTIST_TYPES = ("theatre", "illusion", "music", "science_show", "animal_show", "workshops", "other")
+
+
+def test_every_artist_type_has_three_packages_and_every_level_covers_five_types():
+    items = testset.packages()
+    for artist_type in ARTIST_TYPES:
+        assert sum(p["artist"]["type"] == artist_type for p in items) >= 3, artist_type
+    for level in testset.LEVELS:
+        types = {p["artist"]["type"] for p in items if p["level"] == level}
+        assert len(types) >= 5, (level, types)
+
+
+def test_every_expectation_kind_is_used_at_least_three_times():
+    kinds = [e["kind"] for p in testset.packages() for e in p["expectations"]]
+    for kind in testset.EXPECTATION_KINDS:
+        assert kinds.count(kind) >= 3, kind
+
+
+def test_no_two_packages_share_an_artist_name_or_site_text():
+    items = testset.packages()
+    names = [p["artist"]["name"].casefold() for p in items]
+    assert len(set(names)) == len(names)
+    texts = [" ".join(p["site_text"].split()).casefold() for p in items if p["site_text"].strip()]
+    assert len(set(texts)) == len(texts)
+
+
+def test_levels_have_the_content_their_names_promise():
+    # the six T41 packages are not changed by T42 and are exempt from the strict richness rule
+    for p in testset.packages():
+        photos = [s for s in p["photos"] if s["kind"] == "normal"]
+        if p["level"] == "rich" and p["slug"] not in T41_SLUGS:
+            assert len(photos) >= 4 and len(p["offers"]) >= 3 and p["documents"], p["slug"]
+            assert len(p["site_text"]) > 400, p["slug"]
+        if p["level"] == "weak":
+            assert len(p["site_text"]) < 100 and len(photos) <= 1, p["slug"]
+            assert not p["documents"], p["slug"]
+
+
+def test_the_set_covers_the_special_cases():
+    items = {p["slug"]: p for p in testset.packages()}
+    packages_ = list(items.values())
+    assert any(
+        not p["offers"] and any(e["kind"] == "no_price" for e in p["expectations"])
+        for p in packages_
+    )  # no price anywhere
+    assert any(  # a price in a document only
+        not any(o.get("price_pln") for o in p["offers"])
+        and p["questionnaire"].get("q_price_from_pln") is None
+        and any("zł" in d["text"] for d in p["documents"])
+        for p in packages_
+    )
+    assert any("„" in d["text"] and "”" in d["text"] for p in packages_ for d in p["documents"])
+    assert any(p["photos"] and all(s["kind"] == "poster" for s in p["photos"]) for p in packages_)
+    assert any(
+        p["photos"] and all(s["kind"] == "screenshot" for s in p["photos"]) for p in packages_
+    )
+    assert any(len(p["offers"]) == 20 for p in packages_)
+    contradictory = items["ferma-dziadka-stasia"]
+    assert contradictory["questionnaire"]["q_age_from"] != contradictory["offers"][0]["age_from"]
+    assert (
+        contradictory["questionnaire"]["q_duration_minutes"]
+        != (contradictory["offers"][0]["duration_minutes"])
+    )
 
 
 def test_the_set_covers_no_price_and_no_usable_main_photo():
@@ -467,8 +537,8 @@ def test_testset_check_prints_the_table_and_exits_zero():
     output = command("testset_check")
     lines = output.splitlines()
     assert lines[0].split() == ["slug", "origin", "level", "type", "expectations"]
-    assert [line.split()[0] for line in lines[1:7]] == SLUGS
-    assert "6 valid package(s) of 6" in lines[-1]
+    assert [line.split()[0] for line in lines[1:31]] == SLUGS
+    assert "30 valid package(s) of 30" in lines[-1]
     assert "teatr-lalek-pod-debem" in output and "rich" in output and "science_show" in output
 
 
@@ -495,8 +565,8 @@ def test_testset_load_loads_one_package_and_repeats_with_the_same_fingerprint():
 
 def test_testset_load_without_a_package_loads_them_all():
     output = command("testset_load")
-    assert len(output.strip().splitlines()) == 6
-    assert Artist.objects.count() == 6
+    assert len(output.strip().splitlines()) == 30
+    assert Artist.objects.count() == 30
 
 
 def test_testset_load_reports_a_refusal_as_an_error():

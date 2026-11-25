@@ -1,0 +1,64 @@
+{
+  "slug": "ferma-dziadka-stasia",
+  "description": "Medium package with contradictions: the questionnaire says ages 6 to 10 and 40 minutes, the offer ages 3 to 5 and 90 minutes, the PDF ages 12 and up and 30 minutes.",
+  "origin": "synthetic",
+  "level": "medium",
+  "artist": {
+    "type": "animal_show",
+    "name": "Ferma Dziadka Stasia",
+    "city": "Olsztyn",
+    "voivodeships": [
+      "warminsko-mazurskie"
+    ],
+    "audiences": [
+      "kindergarten",
+      "grades_0_3"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 6,
+    "q_age_to": 10,
+    "q_duration_minutes": 40,
+    "q_max_audience": 30
+  },
+  "offers": [
+    {
+      "title": "Wizyta na fermie",
+      "description": "Zwierzęta z gospodarstwa przyjeżdżają do szkoły.",
+      "age_from": 3,
+      "age_to": 5,
+      "duration_minutes": 90,
+      "price_pln": 500
+    }
+  ],
+  "site_text": "Ferma Dziadka Stasia zabiera dzieci na wieś bez wyjazdu z miasta. Przywozimy kucyka, owce i króliki.",
+  "documents": [
+    {
+      "name": "program.pdf",
+      "text": "Program wizyty. Wizyta jest przeznaczona dla dzieci od 12 lat. Czas trwania wizyty: 30 minut."
+    }
+  ],
+  "videos": [],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "gap_reported",
+      "code": "no_video"
+    },
+    {
+      "kind": "text_present",
+      "text": "Olsztyn"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "slug": "teatr-cieni-latarnia",
+  "description": "Weak package: a shadow theatre with a single sentence of text, no offers, no photos and no price anywhere.",
+  "origin": "synthetic",
+  "level": "weak",
+  "artist": {
+    "type": "theatre",
+    "name": "Teatr Cieni Latarnia",
+    "city": "Kraków",
+    "voivodeships": [
+      "malopolskie"
+    ],
+    "audiences": [
+      "grades_0_3"
+    ]
+  },
+  "questionnaire": {},
+  "offers": [],
+  "site_text": "Teatr Cieni Latarnia gra przedstawienia dla najmłodszych.",
+  "documents": [],
+  "videos": [],
+  "photos": [],
+  "expectations": [
+    {
+      "kind": "no_price"
+    },
+    {
+      "kind": "gap_reported",
+      "code": "no_price"
+    },
+    {
+      "kind": "gap_reported",
+      "code": "no_photos"
+    },
+    {
+      "kind": "field_empty",
+      "path": "hero.main_photo_id"
+    }
+  ]
+}

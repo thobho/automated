@@ -1,0 +1,82 @@
+{
+  "slug": "fizyka-na-wesolo",
+  "description": "Medium package: a physics show with two offers, three photos, one film and a PDF description.",
+  "origin": "synthetic",
+  "level": "medium",
+  "artist": {
+    "type": "science_show",
+    "name": "Fizyka na Wesoło",
+    "city": "Wrocław",
+    "voivodeships": [
+      "dolnoslaskie"
+    ],
+    "audiences": [
+      "grades_4_6",
+      "grades_7_8"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 9,
+    "q_age_to": 14,
+    "q_duration_minutes": 50,
+    "q_max_audience": 90,
+    "q_tech_room": "Sala z ciemnymi zasłonami.",
+    "q_tech_power": "Dwa gniazda."
+  },
+  "offers": [
+    {
+      "title": "Pokaz „Siła niewidzialna”",
+      "description": "Doświadczenia z magnesami, elektrycznością i ciśnieniem.",
+      "age_from": 9,
+      "age_to": 14,
+      "duration_minutes": 50,
+      "price_pln": 1000
+    },
+    {
+      "title": "Pokaz „Światło i dźwięk”",
+      "description": "Doświadczenia z falami świetlnymi i dźwiękowymi.",
+      "age_from": 9,
+      "age_to": 14,
+      "duration_minutes": 50,
+      "price_pln": 1000
+    }
+  ],
+  "site_text": "Fizyka na Wesoło pokazuje, że prawa natury da się zobaczyć na własne oczy. Pokazy prowadzi nauczyciel fizyki.",
+  "documents": [
+    {
+      "name": "opis-pokazow.pdf",
+      "text": "Opis pokazów. Pokaz trwa 50 minut. Potrzebny jest stół i zaciemnienie sali."
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=Pq8Lm2Vx5Ra",
+      "title": "Pokaz Siła niewidzialna – próbka"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Wrocław"
+    },
+    {
+      "kind": "text_absent",
+      "text": "nobel"
+    }
+  ]
+}

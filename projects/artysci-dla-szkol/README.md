@@ -493,8 +493,9 @@ can be reproduced and generator changes can be compared (D13, D14). Code: `apps/
 
 A versioned set of **synthetic** artist material packages in three quality levels (`weak` słabe,
 `medium` średnie, `rich` bogate), each with checkable expectations. A package loads as a test
-artist and runs through the existing generator. Code: `apps/quality/testset.py`; the 6 packages
-(T41) live in `apps/quality/testset/<slug>/package.json`, T42 brings the set to 30.
+artist and runs through the existing generator. Code: `apps/quality/testset.py`; the 30 packages
+(6 from T41, 24 from T42: 10 per level, every artist type at least 3 times) live in
+`apps/quality/testset/<slug>/package.json`.
 
 - **Switch.** `QUALITY_LAB_ENABLED` (env, default off; on in the dev, test and pirx settings,
   off in prod). With it off, `testset_check`, `testset_load` and `load_package` refuse and
@@ -526,8 +527,7 @@ artist and runs through the existing generator. Code: `apps/quality/testset.py`;
   meeting every expectation of the six packages. Use it as the `FakeClient` reply:
   `FakeClient(reply=json.dumps(scripted_profile(build_input(artist))))`.
 - **Adding a package.** Create `apps/quality/testset/<slug>/package.json` (copy a package of the
-  same level), run `testset_check`, add the slug to `SLUGS` in `apps/quality/tests/test_testset.py`
-  and make sure the scripted profile meets its expectations (the parametrised test says which
+  same level), run `testset_check`, (the tests pick it up by folder) and make sure the scripted profile meets its expectations (the parametrised test says which
   fails). Packages are versioned in git; changing one changes its digest and the next
   `testset_load` replaces the artist's materials.
 - **Synthetic only (D12, D57).** Names, towns, texts, offers and video titles are invented. No

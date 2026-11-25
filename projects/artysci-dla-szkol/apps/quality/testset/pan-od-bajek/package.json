@@ -1,0 +1,49 @@
+{
+  "slug": "pan-od-bajek",
+  "description": "Weak package: a storyteller with a single offer, a single normal photo and almost no text.",
+  "origin": "synthetic",
+  "level": "weak",
+  "artist": {
+    "type": "other",
+    "name": "Pan od Bajek",
+    "city": "Białystok",
+    "voivodeships": [
+      "podlaskie"
+    ],
+    "audiences": [
+      "kindergarten"
+    ]
+  },
+  "questionnaire": {
+    "q_duration_minutes": 30
+  },
+  "offers": [
+    {
+      "title": "Bajki na dywanie",
+      "description": "Opowieści czytane na głosy.",
+      "price_pln": 200
+    }
+  ],
+  "site_text": "Pan od Bajek opowiada dzieciom historie.",
+  "documents": [],
+  "videos": [],
+  "photos": [
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "gap_reported",
+      "code": "no_video"
+    },
+    {
+      "kind": "text_present",
+      "text": "Białystok"
+    }
+  ]
+}

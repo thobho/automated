@@ -1,0 +1,80 @@
+{
+  "slug": "teatr-na-walizce",
+  "description": "Medium package: a travelling puppet theatre with a questionnaire, two offers, two photos and one film; no documents.",
+  "origin": "synthetic",
+  "level": "medium",
+  "artist": {
+    "type": "theatre",
+    "name": "Teatr na Walizce",
+    "city": "Lublin",
+    "voivodeships": [
+      "lubelskie"
+    ],
+    "audiences": [
+      "kindergarten",
+      "grades_0_3"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 4,
+    "q_age_to": 9,
+    "q_duration_minutes": 40,
+    "q_max_audience": 80,
+    "q_tech_room": "Wolna przestrzeń 3 na 3 metry.",
+    "q_tech_power": "Jedno gniazdko.",
+    "q_price_from_pln": 700,
+    "q_price_to_pln": 900
+  },
+  "offers": [
+    {
+      "title": "Walizka pełna bajek",
+      "description": "Przedstawienie lalkowe oparte na ludowych bajkach.",
+      "age_from": 4,
+      "age_to": 9,
+      "duration_minutes": 40,
+      "price_pln": 700
+    },
+    {
+      "title": "Lalki opowiadają o bezpieczeństwie",
+      "description": "Krótki spektakl o zasadach bezpiecznej drogi do szkoły.",
+      "age_from": 5,
+      "age_to": 9,
+      "duration_minutes": 30,
+      "price_pln": 900
+    }
+  ],
+  "site_text": "Teatr na Walizce przyjeżdża do przedszkoli i szkół w Lublinie i okolicy. Wszystkie dekoracje mieszczą się w jednym samochodzie. Po przedstawieniu dzieci mogą obejrzeć lalki z bliska.",
+  "documents": [],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=LuBw4Kz9QaE",
+      "title": "Walizka pełna bajek – fragment"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Lublin"
+    },
+    {
+      "kind": "text_present",
+      "text": "Walizka pełna bajek"
+    },
+    {
+      "kind": "text_absent",
+      "text": "nagroda"
+    }
+  ]
+}

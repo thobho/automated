@@ -1,0 +1,69 @@
+{
+  "slug": "zespol-wesola-nuta",
+  "description": "Medium package: a children's band whose price appears only in a PDF price list; the offer itself is on request.",
+  "origin": "synthetic",
+  "level": "medium",
+  "artist": {
+    "type": "music",
+    "name": "Zespół Wesoła Nuta",
+    "city": "Kielce",
+    "voivodeships": [
+      "swietokrzyskie"
+    ],
+    "audiences": [
+      "grades_0_3",
+      "kindergarten"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 4,
+    "q_age_to": 10,
+    "q_duration_minutes": 45,
+    "q_max_audience": 120,
+    "q_tech_sound": "Własne nagłośnienie."
+  },
+  "offers": [
+    {
+      "title": "Koncert Wesoła Nuta",
+      "description": "Piosenki dla dzieci, zabawy ruchowe i wspólne śpiewanie.",
+      "age_from": 4,
+      "age_to": 10,
+      "duration_minutes": 45,
+      "price_on_request": true
+    }
+  ],
+  "site_text": "Zespół Wesoła Nuta gra dla dzieci w Kielcach i w całym regionie. Na koncertach śpiewamy razem z widownią.",
+  "documents": [
+    {
+      "name": "cennik.pdf",
+      "text": "Cennik koncertów. Koncert 45 minut: 700 zł. Dojazd do 50 km wliczony w cenę."
+    }
+  ],
+  "videos": [],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Kielce"
+    },
+    {
+      "kind": "gap_reported",
+      "code": "no_video"
+    },
+    {
+      "kind": "text_absent",
+      "text": "festiwal"
+    }
+  ]
+}

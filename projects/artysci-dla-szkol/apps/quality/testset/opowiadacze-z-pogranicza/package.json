@@ -1,0 +1,110 @@
+{
+  "slug": "opowiadacze-z-pogranicza",
+  "description": "Rich package: a storytelling and history troupe with long site text, three offers, two documents, two films and four good photos.",
+  "origin": "synthetic",
+  "level": "rich",
+  "artist": {
+    "type": "other",
+    "name": "Opowiadacze z Pogranicza",
+    "city": "Cieszyn",
+    "voivodeships": [
+      "slaskie"
+    ],
+    "audiences": [
+      "grades_4_6",
+      "grades_7_8",
+      "secondary"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 9,
+    "q_age_to": 18,
+    "q_duration_minutes": 50,
+    "q_max_audience": 120,
+    "q_tech_room": "Sala z krzesłami i wolnym miejscem przed publicznością.",
+    "q_tech_sound": "Mikrofon nauszny własny."
+  },
+  "offers": [
+    {
+      "title": "Legendy Śląska Cieszyńskiego",
+      "description": "Opowieść z rekwizytami o zamkach i granicy.",
+      "age_from": 9,
+      "age_to": 13,
+      "duration_minutes": 45,
+      "price_pln": 700
+    },
+    {
+      "title": "Historia lokalna na żywo",
+      "description": "Aktorzy w strojach przedstawiają sceny z dawnych lat.",
+      "age_from": 11,
+      "age_to": 16,
+      "duration_minutes": 50,
+      "price_pln": 900
+    },
+    {
+      "title": "Spotkanie z kronikarzem",
+      "description": "Rozmowa o dawnych wydarzeniach w regionie.",
+      "age_from": 12,
+      "age_to": 18,
+      "duration_minutes": 50,
+      "price_pln": 800
+    }
+  ],
+  "site_text": "Opowiadacze z Pogranicza to grupa aktorów i historyków, która od lat odwiedza szkoły na Śląsku Cieszyńskim. Opowiadamy o dawnych czasach tak, żeby uczniowie chcieli posłuchać więcej.\n\nSpotkania łączą opowieść, kostiumy i krótkie sceny. Uczniowie nie tylko słuchają, ale też odpowiadają na pytania i próbują ról.\n\nMateriał historyczny jest sprawdzany z lokalnymi muzeami. Dostosowujemy go do wieku widzów.",
+  "documents": [
+    {
+      "name": "program-spotkan.pdf",
+      "text": "Program spotkań. Każde spotkanie trwa od 45 do 50 minut. Potrzebne jest miejsce na krótką scenę."
+    },
+    {
+      "name": "materialy-dla-nauczyciela.pdf",
+      "text": "Materiały dla nauczyciela. Przed spotkaniem prosimy o zapoznanie uczniów z kilkoma datami podanymi w załączniku."
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=Op1Ab2Cd3Ef",
+      "title": "Legendy Śląska Cieszyńskiego – scena"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Op4Gh5Ij6Kl",
+      "title": "Historia lokalna na żywo – zapis"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Cieszyn"
+    },
+    {
+      "kind": "text_present",
+      "text": "Legendy Śląska Cieszyńskiego"
+    },
+    {
+      "kind": "text_absent",
+      "text": "laureat"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "gallery.video_ids"
+    }
+  ]
+}
