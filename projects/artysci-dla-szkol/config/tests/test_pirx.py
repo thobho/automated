@@ -9,6 +9,7 @@ ENV = {
     "DJANGO_ALLOWED_HOSTS": "192.168.68.62,localhost",
     "DATABASE_URL": "postgres://u:p@127.0.0.1:1/db",
     "MEDIA_PUBLIC_BASE_URL": "http://192.168.68.62:8101/",
+    "SITE_URL": "http://192.168.68.62:18001",
 }
 MODULES = ("config.settings.pirx", "config.settings.prod", "config.settings.hosted")
 

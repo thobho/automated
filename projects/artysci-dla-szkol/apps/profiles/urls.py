@@ -21,5 +21,6 @@ urlpatterns = [
     path("panel/publikacja/zmiany/", views.publish_changes, name="publish_changes"),
     path("panel/publikacja/wycofanie/", views.withdraw_confirm, name="withdraw_confirm"),
     path("panel/publikacja/wycofaj/", views.withdraw, name="withdraw"),
+    path("sitemap.xml", views.sitemap, name="sitemap"),
     path("artysci/<slug:slug>/", views.public_page, name="public"),
 ]

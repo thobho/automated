@@ -4,6 +4,7 @@ Seeds a ready artist (synthetic data, a fresh address per test) in the live data
 uses, then clicks through the panel like the artist does.
 """
 
+import json
 import uuid
 
 import pytest
@@ -82,6 +83,16 @@ def test_publish_view_public_page_and_withdraw(browser, base_url, seeded, shot_d
     assert "mailto:" not in visitor.content() and "tel:" not in visitor.content()
     visitor.screenshot(path=str(shot_dir / "publication-public.png"), full_page=True)
 
+    # Search visibility (US-3.4): head tags, JSON-LD that the strict CSP lets through, sitemap.
+    assert visitor.locator("link[rel=canonical]").get_attribute("href").endswith(public_path)
+    assert visitor.locator("meta[name=robots]").get_attribute("content") == "index,follow"
+    assert visitor.locator("meta[property='og:type']").get_attribute("content") == "profile"
+    ld = json.loads(visitor.locator("script[type='application/ld+json']").inner_text())
+    assert ld["@context"] == "https://schema.org" and ld["name"].startswith("Teatr Łąka")
+    sitemap = visitor.request.get(base_url + "/sitemap.xml")
+    assert sitemap.ok and public_path in sitemap.text()
+    assert "Disallow: /panel/" in visitor.request.get(base_url + "/robots.txt").text()
+
     # An edited offer stays private until "Opublikuj zmiany"; a phone in it stops the publication.
     page.goto(base_url + "/artysta/profil/oferty/")
     page.get_by_role("link", name="Edytuj").first.click()
@@ -119,4 +130,5 @@ def test_publish_view_public_page_and_withdraw(browser, base_url, seeded, shot_d
     page.get_by_role("button", name="Tak, wycofaj stronę").click()
     assert page.locator("[data-state=withdrawn]").is_visible()
     assert visitor.goto(base_url + public_path).status == 404
+    assert public_path not in visitor.request.get(base_url + "/sitemap.xml").text()
     context.close()

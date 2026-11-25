@@ -23,6 +23,7 @@ artist row keeps it after withdrawal and republication gives the same one). Rese
 import re
 import unicodedata
 from dataclasses import dataclass
+from datetime import datetime
 
 from django.db import IntegrityError, transaction
 from django.utils import timezone
@@ -308,9 +309,9 @@ def _visible_materials(artist: Artist, snapshot: PublishedPage) -> list:
     return [m for m in shown_materials(artist) if m.pk in published]
 
 
-def public_page(slug: str):
-    """`PageContent` of a published page, or None for an unknown, draft or withdrawn slug (the
-    caller cannot tell these apart)."""
+def public_page_of(slug: str):
+    """`(artist, PageContent)` of a published page, or None for an unknown, draft or withdrawn
+    slug (the caller cannot tell these apart)."""
     artist = Artist.objects.published().filter(slug=slug).select_related("published_page").first()
     snapshot = getattr(artist, "published_page", None) if artist else None
     if snapshot is None:
@@ -318,4 +319,26 @@ def public_page(slug: str):
     visible = _visible_materials(artist, snapshot)
     page = page_from_data(artist.slug, snapshot.data, snapshot.theme, visible)
     pages.overlay_texts(page, snapshot.content)
-    return page
+    return artist, page
+
+
+def public_page(slug: str):
+    """`PageContent` of a published page, or None (see `public_page_of`)."""
+    found = public_page_of(slug)
+    return found[1] if found else None
+
+
+SITEMAP_MAX_URLS = 50_000  # the sitemap protocol's limit per file
+
+
+def sitemap_entries(limit: int = SITEMAP_MAX_URLS) -> list[tuple[str, datetime]]:
+    """`(slug, last publication time)` of every published page, oldest first, at most `limit`.
+    The time is when the snapshot last changed ("Opublikuj zmiany" counts). Drafts, withdrawn
+    pages and deactivated accounts are not listed (`published()`)."""
+    rows = (
+        Artist.objects.published()
+        .filter(slug__isnull=False, published_page__isnull=False)
+        .order_by("pk")
+        .values_list("slug", "published_page__updated_at")[:limit]
+    )
+    return list(rows)

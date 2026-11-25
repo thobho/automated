@@ -225,6 +225,9 @@ USE_I18N = True
 USE_TZ = True
 LOCALE_PATHS = [BASE_DIR / "locale"]
 
+# Public origin of the site, no trailing slash: canonical links, Open Graph, sitemap (US-3.4).
+SITE_URL = env.str("SITE_URL", default="http://localhost:8000").strip().rstrip("/")
+
 # Static files (HTMX is vendored under static/vendor, never loaded from a CDN: D11) ---------
 
 STATIC_URL = env.str("DJANGO_STATIC_URL", default="/static/")

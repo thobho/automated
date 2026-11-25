@@ -605,9 +605,9 @@ def test_public_page_shows_snapshot_without_contact_data_or_inline_code():
         "kontakt@example.invalid",
     ):
         assert forbidden not in html
-    assert not re.search(r"<script(?![^>]*\bsrc=)", html)
+    assert not re.search(r"<script(?![^>]*(\bsrc=|application/ld\+json))", html)
     assert "<style" not in html and " style=" not in html
-    assert 'name="robots"' not in html
+    assert 'name="robots" content="index,follow"' in html
     assert "noindex" not in response.get("X-Robots-Tag", "")
     assert "no-cache" in response["Cache-Control"]
     assert (
