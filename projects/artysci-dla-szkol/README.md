@@ -272,7 +272,7 @@ App `apps/artists`, model `Offer`, logic in `services.py` (D103):
 
 ## Artist statements (US-8.2)
 
-App `apps/trust`, logic in `services.py` (D104). Wordings come from the owner's lawyer (D30);
+App `apps/trust`, logic in `services.py` (D104). Wordings are drafted by an agent (US-8.10), reviewed by a lawyer and approved by the owner (D30, D116);
 `make seed` publishes placeholders starting with "PROJEKT – tekst zastępczy".
 
 - Six statement kinds are `LegalDocument` kinds (versioned, immutable): `child_protection`,
@@ -374,7 +374,7 @@ Code in `apps/accounts/roles.py` (rules) and `apps/accounts/permissions.py` (vie
 
 ## Legal documents (US-8.1)
 
-App `apps/trust`. The texts come from the owner's lawyer (D30); agents only build the mechanism.
+App `apps/trust`. The texts are drafted by an agent (US-8.10), reviewed by a lawyer and approved by the owner (D30, D116).
 
 - `LegalDocument`: kind (`terms`, `privacy`, `cookies`), version (1, 2, ... per kind), plain-text
   body (rendered escaped with `linebreaks`), `published_at`, `material`. Published versions are

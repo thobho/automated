@@ -23,6 +23,9 @@ defaults:
   run:
     working-directory: projects/artysci-dla-szkol
 
+# uv cache: keep the wheels (prune-cache: false). setup-uv's default pruning drops
+# them, so every job would download them from PyPI again (#181). `test` saves the
+# cache that `lint` and `lighthouse` restore; `e2e` has its own (extra group).
 env:
   UV_FROZEN: '1'
   # Dev-only MinIO credentials for the throwaway CI service; not secrets.
@@ -39,7 +42,9 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
-      - run: uv sync
+          prune-cache: false
+          save-cache: false
+      - run: timeout 120 uv sync || uv sync
       - run: uv run ruff check --output-format=github .
       - run: uv run ruff format --check .
 
@@ -77,7 +82,8 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
-      - run: uv sync
+          prune-cache: false
+      - run: timeout 120 uv sync || uv sync
       - name: Install ffmpeg (video/audio tests run on generated samples)
         run: |
           sudo apt-get update -q
@@ -110,8 +116,7 @@ jobs:
           fetch-depth: 0
       - uses: astral-sh/setup-uv@v6
         with:
-          enable-cache: true
-          cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
+          enable-cache: false
       - name: pip-audit (locked dependencies)
         run: |
           uv export --no-emit-project --format requirements-txt > "$RUNNER_TEMP/requirements.txt"
@@ -174,7 +179,9 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
-      - run: uv sync --group e2e
+          prune-cache: false
+          cache-suffix: e2e
+      - run: timeout 120 uv sync --group e2e || uv sync --group e2e
       - name: Wait for MinIO
         run: |
           for i in $(seq 1 60); do
@@ -244,7 +251,9 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
-      - run: uv sync
+          prune-cache: false
+          save-cache: false
+      - run: timeout 120 uv sync || uv sync
       - name: Start the app with one artist
         run: |
           uv run python manage.py migrate --noinput
@@ -271,11 +280,25 @@ jobs:
       - name: Lighthouse mobile, LCP <= 2.5 s
         run: |
           headers=$(jq -nc --arg c "sessionid=$(cat "$RUNNER_TEMP/session")" '{Cookie: $c}')
-          npx --yes lighthouse@12 http://127.0.0.1:8000/panel/podglad/ \
-            --only-categories=performance --form-factor=mobile --quiet \
-            --extra-headers="$headers" \
-            --chrome-flags="--headless=new --no-sandbox" \
-            --output=json --output-path="$RUNNER_TEMP/lighthouse.json"
+          # Lighthouse sometimes fails to record the trace (NO_NAVSTART) and
+          # exits non-zero without a report. Retry that up to 3 times; the
+          # LCP budget below stays strict and is never retried.
+          # One renderer process: otherwise Chrome swaps processes between
+          # about:blank and the page, and the trace can miss the new process's
+          # navigationStart, which is what NO_NAVSTART means (#181).
+          for attempt in 1 2 3; do
+            npx --yes lighthouse@12 http://127.0.0.1:8000/panel/podglad/ \
+              --only-categories=performance --form-factor=mobile --quiet \
+              --extra-headers="$headers" \
+              --chrome-flags="--headless=new --no-sandbox --renderer-process-limit=1" \
+              --output=json --output-path="$RUNNER_TEMP/lighthouse.json" \
+              && jq -e '.audits["largest-contentful-paint"].numericValue != null' \
+                "$RUNNER_TEMP/lighthouse.json" >/dev/null \
+              && break
+            echo "Lighthouse run $attempt failed to produce a report"
+            [ "$attempt" = 3 ] && exit 1
+            sleep 5
+          done
           jq '.audits["largest-contentful-paint"].numericValue' "$RUNNER_TEMP/lighthouse.json"
           jq -e '.audits["largest-contentful-paint"].numericValue <= 2500' "$RUNNER_TEMP/lighthouse.json"
       - name: Server log
