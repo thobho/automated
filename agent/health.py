@@ -2,7 +2,8 @@
 """Health page of the automation: one pinned GitHub issue ("🩺 Automation health", label agent:status)
 that answers two questions at a glance:
   1. Is the automation alive and working?  (heartbeat of every component, last decisions)
-  2. Do I have blockers or errors?          (blocked tasks, failed runs, red CI, failed units, owner tasks)
+  2. Do I have blockers or errors?          (blocked tasks, failed runs, red CI, failed units, dev instances
+                                             not ready, owner tasks)
   3. How well is it working?                (last 7 days: agent/metrics.py, cached hourly)
 
 Runs on pirx as the `agent` user: after every runner event (status_update in agent/pirx/common.sh) and every
@@ -19,6 +20,8 @@ import re
 import subprocess
 import sys
 import time
+import urllib.error
+import urllib.request
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
@@ -96,6 +99,48 @@ def heartbeats(now):
         when = "never" if ts is None else f"{local(ts)} ({ago(age)})"
         rows.append(f"| {label} | {mark} | {when} |")
     return rows, problems, late_keys
+
+
+# Dev instances of the projects on pirx: "name=url" pairs (comma separated). The page calls each url
+# (a readiness endpoint returning JSON like {"db": "ok", "migrations": "ok"}) and lists anything not "ok".
+# localhost, not the LAN address: the agent user's network does not reach 192.168.68.62.
+DEV_INSTANCES = os.environ.get("AUTOMATED_DEV_INSTANCES", "artysci-dla-szkol=http://127.0.0.1:8100/readyz")
+
+
+def fetch_json(url, timeout=5):
+    with urllib.request.urlopen(url, timeout=timeout) as r:  # noqa: S310 - fixed local urls from config
+        return json.loads(r.read().decode() or "{}")
+
+
+def dev_instances(spec=DEV_INSTANCES, fetch=fetch_json):
+    """Rows for the "Is it alive?" table and problems for the blockers list."""
+    rows, problems = [], []
+    for item in filter(None, (x.strip() for x in spec.split(","))):
+        name, _, url = item.partition("=")
+        label = f"Dev instance {name}"
+        try:
+            data = fetch(url)
+        except urllib.error.HTTPError as e:  # readiness endpoints answer 503 with the JSON body
+            try:
+                data = json.loads(e.read().decode() or "{}")
+            except ValueError:
+                data = {}
+            if not data:
+                rows.append(f"| {label} | ❌ | HTTP {e.code} |")
+                problems.append(f"{label}: {url} answered HTTP {e.code}")
+                continue
+        except (OSError, ValueError) as e:
+            rows.append(f"| {label} | ❌ | not reachable |")
+            problems.append(f"{label}: {url} is not reachable ({type(e).__name__})")
+            continue
+        bad = {k: v for k, v in data.items() if v != "ok"} if isinstance(data, dict) else {"reply": "not JSON"}
+        detail = ", ".join(f"{k} {v}" for k, v in data.items()) if isinstance(data, dict) else "?"
+        if bad or not data:
+            rows.append(f"| {label} | ❌ | {detail or 'empty reply'} |")
+            problems.append(f"{label}: {', '.join(f'{k} {v}' for k, v in bad.items()) or 'empty reply'} ({url})")
+        else:
+            rows.append(f"| {label} | ✅ | {detail} |")
+    return rows, problems
 
 
 def track_week(claude, path=None):
@@ -183,6 +228,7 @@ def render(now):
     events = recent_events(now)
     errors = [(ts, n) for ts, n in events if ERROR_WORDS.search(n)]
     units = failed_units()
+    dev_rows, dev_problems = dev_instances()
 
     issues = [i for i in gh_json("api", f"repos/{REPO}/issues?state=open&per_page=100") if "pull_request" not in i]
     def has(i, label):
@@ -204,7 +250,7 @@ def render(now):
     if summary:
         last_decisions.append(summary)
 
-    problems = late + [f"Failed systemd unit: `{u}`" for u in units]
+    problems = late + [f"Failed systemd unit: `{u}`" for u in units] + dev_problems
     problems += [f"#{i['number']} {i['title']}: blocked, needs your answer" for i in blocked]
     problems += stuck(issues, now)
     problems += [f"PR #{p['number']} {p['title']}: CI is red" for p in red]
@@ -232,7 +278,7 @@ _Updated {datetime.fromtimestamp(now, TZ):%a %d %b %H:%M} (Warsaw). Refreshes ev
 ### 1. Is it alive?
 | Component | State | Last run |
 |---|---|---|
-{chr(10).join(beat_rows)}
+{chr(10).join(beat_rows + dev_rows)}
 
 {lst(last_decisions, '_No budget decision recorded yet._')}
 
