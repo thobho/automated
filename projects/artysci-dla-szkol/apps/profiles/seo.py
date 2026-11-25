@@ -1,6 +1,6 @@
 """What search engines and link previews see of a public artist page (US-3.4).
 
-    meta = page_meta(artist, content)   # title, description, canonical, Open Graph, JSON-LD
+    meta = page_meta(content)  # title, description, canonical, Open Graph, JSON-LD
 
 Everything comes from the published snapshot (`PageContent`), never from live data, and holds no
 e-mail, phone or street address (D9): publication already refuses a page with contact data, and
@@ -100,15 +100,15 @@ def image_url(content) -> str:
     return absolute_url(static(DEFAULT_IMAGE))
 
 
-def json_ld_data(artist, content) -> dict:
+def json_ld_data(content) -> dict:
     regions = [
         {"@type": "AdministrativeArea", "name": str(Voivodeship(code).label)}
-        for code in artist.voivodeships.values_list("voivodeship", flat=True)
+        for code in content.regions
         if code in Voivodeship.values
     ]
     data = {
         "@context": "https://schema.org",
-        "@type": schema_type(artist.artist_type),
+        "@type": schema_type(content.artist_type),
         "name": content.hero.name,
         "description": description_of(content),
         "image": image_url(content),
@@ -145,11 +145,11 @@ def sitemap_xml(entries) -> str:
     return "\n".join(lines) + "\n"
 
 
-def page_meta(artist, content) -> PageMeta:
+def page_meta(content) -> PageMeta:
     return PageMeta(
         title=content.hero.name,
         description=description_of(content),
         canonical=absolute_url(reverse("profiles:public", args=[content.slug])),
         image=image_url(content),
-        json_ld=dump_json_ld(json_ld_data(artist, content)),
+        json_ld=dump_json_ld(json_ld_data(content)),
     )

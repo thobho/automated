@@ -289,11 +289,10 @@ def withdraw(request):
 @cache_control(no_cache=True)
 @require_safe
 def public_page(request, slug):
-    found = publication.public_page_of(slug)
-    if found is None:
+    content = publication.public_page(slug)
+    if content is None:
         raise Http404
-    artist, content = found
-    context = {"content": content, "noindex": False, "meta": seo.page_meta(artist, content)}
+    context = {"content": content, "noindex": False, "meta": seo.page_meta(content)}
     return render(request, "profiles/page.html", context)
 
 

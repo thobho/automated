@@ -129,12 +129,13 @@ uv run python manage.py makemigrations --check --dry-run --settings=config.setti
 | `config.settings.prod` | `wsgi.py`/`asgi.py` default | `DATABASE_URL`, required |
 
 `prod` fails at startup with `Missing required environment variable <NAME>` when
-`DJANGO_SECRET_KEY`, `DJANGO_ALLOWED_HOSTS` or `DATABASE_URL` is missing. All variables are
-documented in [`.env.example`](.env.example).
+`DJANGO_SECRET_KEY`, `DJANGO_ALLOWED_HOSTS`, `DATABASE_URL`, `MEDIA_PUBLIC_BASE_URL` or `SITE_URL`
+is missing. All variables are documented in [`.env.example`](.env.example).
 
 `SITE_URL` (public origin, e.g. `https://artysci.example.pl`, no trailing slash) builds the
 absolute URLs of canonical links, Open Graph tags, JSON-LD and the sitemap. It is required in
-`prod` and `pirx` and defaults to `http://localhost:8000` in dev and test.
+`prod` (no default), defaults to the LAN address `http://192.168.68.62:8100` in `pirx` and to
+`http://localhost:8000` in dev and test.
 
 ## Search engine visibility (US-3.4)
 
@@ -145,7 +146,8 @@ text, at most 155 characters, cut at a word, no HTML), `<link rel="canonical">`,
 description, image, url, `areaServed` regions, `makesOffer` names without prices; never e-mail,
 phone or address). `og:image` is the main photo when the page has one, else
 `static/profiles/og-default.png`. All of it is built in `apps/profiles/seo.py` from the published
-snapshot. The JSON-LD is an `application/ld+json` data block: no inline script runs and the CSP
+snapshot, which also stores the artist type and regions (a page published before T39 gets them
+with the next "Opublikuj zmiany"). The JSON-LD is an `application/ld+json` data block: no inline script runs and the CSP
 is unchanged. `/sitemap.xml` lists published pages only (`lastmod` = last publication time, at most
 50,000 URLs, revalidated on every request so a withdrawal is gone at once); `/robots.txt` allows
 public pages, disallows `/panel/` (incl. the preview), `/admin/`, `/django-admin/` and `/artysta/`,

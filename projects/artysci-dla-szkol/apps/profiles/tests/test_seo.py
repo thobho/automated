@@ -7,7 +7,7 @@ import pytest
 from django.test import Client
 from django.urls import reverse
 
-from apps.artists.models import Artist, ArtistType, Offer
+from apps.artists.models import Artist, ArtistType, ArtistVoivodeship, Offer
 from apps.profiles import publication, seo
 from apps.profiles.content import Hero, OfferItem, PageContent
 
@@ -76,8 +76,8 @@ def test_json_ld_has_offers_regions_and_no_contact_data():
     artist.artist_type = ArtistType.THEATRE
     artist.save()
     publication.publish(artist)
-    _artist, content = publication.public_page_of(Artist.objects.get(pk=artist.pk).slug)
-    data = seo.json_ld_data(artist, content)
+    content = publication.public_page(Artist.objects.get(pk=artist.pk).slug)
+    data = seo.json_ld_data(content)
     assert data["@type"] == "PerformingGroup" and data["name"] == "Teatr Lalek"
     assert data["areaServed"] == [{"@type": "AdministrativeArea", "name": "dolnośląskie"}]
     names = [o["itemOffered"]["name"] for o in data["makesOffer"]]
@@ -87,17 +87,50 @@ def test_json_ld_has_offers_regions_and_no_contact_data():
 
 
 def test_json_ld_without_offers_or_regions_omits_the_keys():
-    artist = make_ready("bare@example.invalid")
-    artist.voivodeships.all().delete()
     content = PageContent(slug="x", hero=Hero(name="X"), offers=[OfferItem("  ")])
-    data = seo.json_ld_data(artist, content)
+    data = seo.json_ld_data(content)
     assert "areaServed" not in data and "makesOffer" not in data
+
+
+def test_type_and_regions_come_from_the_snapshot_not_live_data():
+    artist = make_ready("migawka@example.invalid", name="Teatr Lalek")
+    artist.artist_type = ArtistType.THEATRE
+    artist.save()
+    artist = publication.publish(artist)
+    Artist.objects.filter(pk=artist.pk).update(artist_type=ArtistType.ILLUSION)
+    ArtistVoivodeship.objects.create(artist=artist, voivodeship="mazowieckie")
+    artist = Artist.objects.get(pk=artist.pk)
+    data = seo.json_ld_data(publication.public_page(artist.slug))
+    assert data["@type"] == "PerformingGroup" and len(data["areaServed"]) == 1
+    assert publication.has_unpublished_changes(artist)
+    publication.update_published(artist)
+    data = seo.json_ld_data(publication.public_page(artist.slug))
+    assert data["@type"] == "Person"
+    assert [a["name"] for a in data["areaServed"]] == ["dolnośląskie", "mazowieckie"]
+
+
+def test_a_snapshot_from_before_t39_still_renders():
+    artist = published()
+    page = artist.published_page
+    page.data = {k: v for k, v in page.data.items() if k not in ("artist_type", "regions")}
+    page.save()
+    assert fetch(artist).status_code == 200
+    data = seo.json_ld_data(publication.public_page(artist.slug))
+    assert data["@type"] == "Organization" and "areaServed" not in data
+
+
+def test_main_photo_is_the_share_image_as_an_absolute_url(settings):
+    settings.SITE_URL = "https://artysci.example.pl"
+    hero = Hero(name="X", photo_url="/media/x.jpg")
+    assert seo.image_url(PageContent(slug="x", hero=hero)) == (
+        "https://artysci.example.pl/media/x.jpg"
+    )
 
 
 # --- the public page -----------------------------------------------------------------------------
 
 
-def published(name="Teatr Lalek", email="seo@example.invalid", about=None):
+def published(name="Teatr Lalek", email="seo@example.invalid"):
     artist = make_ready(email, name=name)
     publication.publish(artist)
     return Artist.objects.get(pk=artist.pk)
@@ -151,9 +184,10 @@ def test_markup_in_name_cannot_break_out_of_json_ld_or_attributes():
     # a stored name that slipped past publication (e.g. via old data) must still be inert
     page = artist.published_page
     page.data = {**page.data, "name": EVIL + '"><x'}
+    page.content = {**page.content, "about": 'Opis "><y ' + EVIL}
     page.save()
     html = fetch(artist).content.decode()
-    assert "<script>alert(1)" not in html and '"><x' not in html
+    assert "<script>alert(1)" not in html and '"><x' not in html and '"><y' not in html
     raw = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S).group(1)
     assert json.loads(raw)["name"] == EVIL + '"><x'
     assert html.count("</script>") == html.count("<script")

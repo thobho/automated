@@ -309,9 +309,9 @@ def _visible_materials(artist: Artist, snapshot: PublishedPage) -> list:
     return [m for m in shown_materials(artist) if m.pk in published]
 
 
-def public_page_of(slug: str):
-    """`(artist, PageContent)` of a published page, or None for an unknown, draft or withdrawn
-    slug (the caller cannot tell these apart)."""
+def public_page(slug: str):
+    """`PageContent` of a published page, or None for an unknown, draft or withdrawn slug (the
+    caller cannot tell these apart)."""
     artist = Artist.objects.published().filter(slug=slug).select_related("published_page").first()
     snapshot = getattr(artist, "published_page", None) if artist else None
     if snapshot is None:
@@ -319,13 +319,7 @@ def public_page_of(slug: str):
     visible = _visible_materials(artist, snapshot)
     page = page_from_data(artist.slug, snapshot.data, snapshot.theme, visible)
     pages.overlay_texts(page, snapshot.content)
-    return artist, page
-
-
-def public_page(slug: str):
-    """`PageContent` of a published page, or None (see `public_page_of`)."""
-    found = public_page_of(slug)
-    return found[1] if found else None
+    return page
 
 
 SITEMAP_MAX_URLS = 50_000  # the sitemap protocol's limit per file

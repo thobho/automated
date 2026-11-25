@@ -9,7 +9,7 @@ ENV = {
     "DJANGO_ALLOWED_HOSTS": "192.168.68.62,localhost",
     "DATABASE_URL": "postgres://u:p@127.0.0.1:1/db",
     "MEDIA_PUBLIC_BASE_URL": "http://192.168.68.62:8101/",
-    "SITE_URL": "http://192.168.68.62:18001",
+    "SITE_URL": "http://pirx.example:8100/",
 }
 MODULES = ("config.settings.pirx", "config.settings.prod", "config.settings.hosted")
 
@@ -36,6 +36,7 @@ def test_pirx_is_prod_without_tls_only_bits(pirx):
     assert pirx.SECURE_HSTS_SECONDS == 0
     assert pirx.ALLOWED_HOSTS == ["192.168.68.62", "localhost"]
     assert pirx.SERVE_STATIC is True
+    assert pirx.SITE_URL == "http://pirx.example:8100"
 
 
 def test_static_route_only_when_enabled(settings):
