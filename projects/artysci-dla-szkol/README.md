@@ -489,6 +489,52 @@ can be reproduced and generator changes can be compared (D13, D14). Code: `apps/
   (US-3.1), re-running a stored generation and the evaluation set (US-11.2–11.4).
   `apps/quality/tests/fake_generator.py` is a test-only generator showing the full flow.
 
+## Generator test set (US-11.2)
+
+A versioned set of **synthetic** artist material packages in three quality levels (`weak` słabe,
+`medium` średnie, `rich` bogate), each with checkable expectations. A package loads as a test
+artist and runs through the existing generator. Code: `apps/quality/testset.py`; the 6 packages
+(T41) live in `apps/quality/testset/<slug>/package.json`, T42 brings the set to 30.
+
+- **Switch.** `QUALITY_LAB_ENABLED` (env, default off; on in the dev, test and pirx settings,
+  off in prod). With it off, `testset_check`, `testset_load` and `load_package` refuse and
+  create no rows, so test artists never appear in production.
+- **Commands** (from the project folder): `uv run python manage.py testset_check` validates every
+  package and prints a table (slug, origin, level, type, number of expectations); exit code 1 and
+  the package name plus the problem on an invalid one. `uv run python manage.py testset_load
+  [--package <slug>]` creates or updates `testset-<slug>@example.invalid` and prints materials,
+  offers and `input_fingerprint`; loading an unchanged package again changes nothing, a changed
+  one replaces the materials and offers (stored generations are never touched).
+- **Format.** `package.json`, checked against `apps/quality/testset/package.schema.json`:
+  `slug` (= folder name), `origin` (`synthetic`; `consented` is part of the format but the loader
+  refuses it: the service has no consent record for the test set yet, D12), `level`, `artist`
+  (type from the existing list, name, city, voivodeships, audiences), `questionnaire`, `offers`,
+  `site_text`, `documents` (`name`, `text`: as extracted from a PDF), `videos` (`url`, `title`:
+  the title comes from the package, no oEmbed), `photos` and `expectations`. No binary files:
+  a photo is drawn deterministically with Pillow at load time from `{"kind": "normal" |
+  "low_resolution" | "poster" | "screenshot", "width", "height"}` and goes through the real
+  upload, scan and quality checks, so `build_input` shows the real flags and `can_be_main`.
+- **Expectations**, a closed set (an unknown kind or a path not in the profile schema is an
+  error when the package is checked, never a silent pass): `field_empty` / `field_not_empty`
+  (`path`, dotted, e.g. `hero.main_photo_id`; `null`, `""`, `[]` count as empty), `text_present` /
+  `text_absent` (`text`, compared case-insensitively after whitespace normalisation, in the public
+  texts), `no_price` (no price such as "1 200 zł" or "cena: 900" in the public texts; fails with
+  the path), `gap_reported` (`code` in `gaps`). `check_expectations(package, profile_json)`
+  returns `Result(kind, detail, passed, message)` for each.
+- **Scripted profile.** `apps/quality/scripted.py: scripted_profile(input_data)` is a profile built
+  from `build_input` data only (no AI): valid against the JSON Schema, clean for the validator and
+  meeting every expectation of the six packages. Use it as the `FakeClient` reply:
+  `FakeClient(reply=json.dumps(scripted_profile(build_input(artist))))`.
+- **Adding a package.** Create `apps/quality/testset/<slug>/package.json` (copy a package of the
+  same level), run `testset_check`, add the slug to `SLUGS` in `apps/quality/tests/test_testset.py`
+  and make sure the scripted profile meets its expectations (the parametrised test says which
+  fails). Packages are versioned in git; changing one changes its digest and the next
+  `testset_load` replaces the artist's materials.
+- **Synthetic only (D12, D57).** Names, towns, texts, offers and video titles are invented. No
+  e-mail, phone, account number or real site: `check_package` runs the project scrubber over every
+  text (it must change nothing) and allows only `example.invalid` hosts and YouTube/Vimeo links
+  (invented ids). Materials of real artists need the separate consent from D12, which is not built.
+
 ## Profile generation (US-2.5A)
 
 A background job turns an artist's ready materials, questionnaire and offers into a profile JSON
