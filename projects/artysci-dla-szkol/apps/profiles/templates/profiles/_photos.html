@@ -1,14 +1,25 @@
 {% load i18n %}
 <section id="photos" aria-labelledby="photos-h">
   <h2 id="photos-h">{% translate "Zdjęcia" %}</h2>
-  <ul class="gallery">
-    {# Below the fold: lazy and decoded off the main thread. width/height reserve the 4:3 box (no layout shift); #}
-    {# srcset lists the stored sizes when there are several (US-3.3), sizes matches the grid in page.css. #}
+  {# Each photo is a link to the file; page.js opens it in the dialog below (Esc closes, focus is
+     trapped inside and returns to the link). Without script the link opens the photo itself. #}
+  {# Below the fold: lazy and decoded off the main thread. width/height reserve the 4:3 box (no layout shift); #}
+  {# srcset lists the stored sizes when there are several (US-3.3), sizes matches the grid in page.css. #}
+  <ul class="gallery" data-gallery>
     {% for photo in content.photos %}
-      <li><img src="{{ photo.url }}"{% if photo.srcset %} srcset="{{ photo.srcset }}"{% endif %}
+      <li><a href="{{ photo.url }}" class="gallery__open"><img src="{{ photo.url }}"{% if photo.srcset %} srcset="{{ photo.srcset }}"{% endif %}
                sizes="(max-width: 40rem) 100vw, 14rem" width="800" height="600"
                loading="lazy" decoding="async"
-               alt="{{ photo.alt|default:content.hero.name }}"></li>
+               alt="{{ photo.alt|default:content.hero.name }}"></a></li>
     {% endfor %}
   </ul>
+  <dialog class="lightbox" id="lightbox" aria-label="{% translate 'Galeria zdjęć' %}">
+    <div class="lightbox__frame"></div>
+    <p class="lightbox__counter" aria-live="polite"></p>
+    <div class="lightbox__controls">
+      <button type="button" class="button" data-lightbox="prev">{% translate "Poprzednie" %}</button>
+      <button type="button" class="button" data-lightbox="next">{% translate "Następne" %}</button>
+      <button type="button" class="button" data-lightbox="close">{% translate "Zamknij" %}</button>
+    </div>
+  </dialog>
 </section>

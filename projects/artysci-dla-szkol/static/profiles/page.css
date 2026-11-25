@@ -51,7 +51,9 @@
 .offer p { margin: 0 0 .5rem; }
 .offer__price { font-weight: 600; color: var(--ink); }
 .offers-more { margin-top: 1rem; }
-.offers-more summary { cursor: pointer; font-weight: 600; margin-bottom: 1rem; }
+.offers-more__toggle { border: 0; cursor: pointer; font: inherit; font-weight: 600; margin-bottom: 1rem; }
+.offers-more__toggle[hidden], .offers-more [hidden] { display: none; }
+.offers-more .offers { margin-top: 0; }
 .tags { list-style: none; display: flex; gap: .4rem; flex-wrap: wrap; padding: 0; margin: 0 0 .5rem; font-size: .85rem; color: var(--muted); }
 .tags li { border: 1px solid var(--line); border-radius: 1rem; padding: .1rem .6rem; }
 .note { color: var(--muted); font-style: italic; }
@@ -61,10 +63,47 @@
 .video-link__placeholder { aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; background: #2b2630; color: #fff; font-size: 3rem; border-radius: .5rem; margin-bottom: .75rem; }
 
 .gallery { list-style: none; padding: 0; margin: 0; display: grid; gap: .75rem; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
-.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: .4rem; }
+.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: .4rem; display: block; }
+.gallery__open { display: block; border-radius: .4rem; }
+
+/* Gallery dialog (US-3.6): themed like the page; the backdrop dims what is behind it. */
+.lightbox { max-width: min(92vw, 62rem); max-height: 92vh; padding: 1rem; border: 2px solid var(--line);
+  border-radius: .5rem; background: var(--paper); color: var(--ink); text-align: center; }
+.lightbox::backdrop { background: rgb(0 0 0 / .75); }
+.lightbox__image { max-width: 100%; max-height: 68vh; object-fit: contain; }
+.lightbox__counter { margin: .5rem 0; color: var(--muted); }
+.lightbox__controls { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+.lightbox__controls .button { border: 0; cursor: pointer; font: inherit; font-weight: 600; }
+.lightbox :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
 .faq dt { font-weight: 700; margin-top: 1rem; }
 .faq dd { margin: .25rem 0 0; }
+
+/* Accessibility (US-3.6). Everything outside the themed root (skip link, account and footer links,
+   the owner's theme switch and editor) is on the white page: dark outline, 18.9:1. Inside the root
+   the more specific rule at the top of this file takes the theme's focus colour. */
+:focus-visible { outline: 3px solid #111; outline-offset: 2px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip-link { position: absolute; left: .5rem; top: -4rem; z-index: 10; background: #111; color: #fff;
+  padding: .75rem 1rem; border-radius: .4rem; font: 600 1rem "Helvetica Neue", Arial, sans-serif; }
+.skip-link:focus { top: .5rem; outline: 3px solid #111; outline-offset: 2px; }
+.artist-page:focus { outline: none; }
+
+/* Motion: nothing moves for people who ask for less. The only smooth scrolling is opt-in, and a
+   blanket reduce rule covers anything added later (a stylesheet scan test guards both). */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 #inquiry { text-align: center; margin-top: 3rem; padding: 2rem 0; border-top: 1px solid var(--line); }
 #inquiry h2 { border: 0; }

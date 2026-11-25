@@ -7,7 +7,7 @@
         {% if video.title %}<h3>{{ video.title }}</h3>{% endif %}
         {% if video.is_file %}
           {# Native player; the file comes from the media origin (T06). #}
-          <video controls preload="none"{% if video.poster_url %} poster="{{ video.poster_url }}"{% endif %}>
+          <video controls preload="none" aria-label="{{ video.title|default:content.hero.name }}"{% if video.poster_url %} poster="{{ video.poster_url }}"{% endif %}>
             <source src="{{ video.src }}" type="video/mp4">
           </video>
         {% else %}
@@ -19,7 +19,7 @@
               <div class="video-link__placeholder" aria-hidden="true">▶</div>
             {% endif %}
             <a class="button" href="{{ video.link_url }}" target="_blank" rel="noopener noreferrer">
-              {% translate "Obejrzyj film" %}{% if video.provider %} ({{ video.provider }}){% endif %}
+              {% translate "Obejrzyj film" %}{% if video.provider %} ({{ video.provider }}){% endif %}<span class="visually-hidden">: {{ video.title|default:content.hero.name }}, {% translate "otwiera się w nowej karcie" %}</span>
             </a>
           </div>
         {% endif %}

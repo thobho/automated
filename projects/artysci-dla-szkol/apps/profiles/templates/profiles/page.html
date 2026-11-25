@@ -8,13 +8,17 @@
   {# Fonts and CSS are served by us (D11): no CDN, no external request from the page. #}
   <link rel="stylesheet" href="{% static 'profiles/themes.css' %}">
   <link rel="stylesheet" href="{% static 'profiles/page.css' %}">
+  <script src="{% static 'profiles/page.js' %}" defer></script>
 {% endblock %}
+
+{# First thing in the tab order (US-3.6); the target takes focus without being a tab stop. #}
+{% block skip_link %}<a class="skip-link" href="#artist-page">{% translate "Przejdź do treści" %}</a>{% endblock %}
 
 {% block content %}
   {% if theme_switch %}{% include "profiles/_theme_switch.html" %}{% endif %}
   {% if editor is not None %}{% include "profiles/_editor.html" %}{% endif %}
   <div class="artist-root" data-theme="{{ content.theme }}">
-  <div class="artist-page">
+  <div class="artist-page" id="artist-page" tabindex="-1">
     {% include "profiles/_start.html" %}
     <nav class="page-nav" aria-label="{% translate 'Sekcje strony' %}">
       <ul>

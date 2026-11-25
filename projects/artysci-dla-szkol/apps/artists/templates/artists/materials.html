@@ -90,6 +90,14 @@
                 </ul>
               </div>
             {% endif %}
+            {% if material.kind == "photo" and material.status == "ready" %}
+              <form method="post" action="{% url 'artists:material_alt_text' material.pk %}">
+                {% csrf_token %}
+                <label for="alt-{{ material.pk }}">{% translate "Opis zdjęcia (dla osób niewidzących)" %}</label>
+                <input type="text" id="alt-{{ material.pk }}" name="alt_text" maxlength="200" value="{{ material.alt_text }}">
+                <button type="submit">{% translate "Zapisz opis" %}</button>
+              </form>
+            {% endif %}
             <form method="post" action="{% url 'artists:material_delete' material.pk %}">
               {% csrf_token %}
               <button type="submit">{% translate "Usuń" %}</button>

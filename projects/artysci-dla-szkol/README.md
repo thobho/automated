@@ -768,6 +768,39 @@ the AI schema): `burgundy_light` (jasny burgund, the default), `cream_green` (kr
   `themes.css`, and add the slug to the AI schema enum (separate task: the schema is not changed
   here). The tests pick it up through `Theme`; they fail until the CSS matches and the contrast holds.
 
+## Accessibility of the public page (US-3.6)
+
+What the page and its preview guarantee, and where it is tested:
+- **Alt texts:** `Material.alt_text` (optional, set by the artist next to each photo on the materials
+  page, `POST artysta/profil/materialy/<id>/opis/`); without it `accessibility.photo_alt()` gives the
+  Polish fallback "<name> – zdjęcie <n>". No AI call. Decorative images (the initial frame, the video
+  placeholder) are `aria-hidden` / `alt=""`.
+- **Keyboard:** skip link "Przejdź do treści" first in the tab order; gallery photos are links that
+  `static/profiles/page.js` opens in a modal `<dialog>` (Esc closes, Tab loops inside, arrows move,
+  focus returns to the photo); "Pokaż pozostałe" is a button with `aria-expanded`/`aria-controls`
+  (without script the extra offers simply stay visible); FAQ is a plain `<dl>`.
+- **Focus:** `.artist-page :focus-visible` draws a 3 px `var(--focus)` outline; `LARGE_PAIRS` in
+  `themes.py` keeps it at 3:1 or more on paper, card and band in every theme. Everything outside the
+  themed root (skip link, account links, theme switch, editor, footer) gets a `#111` outline. The
+  browser walk measures every tab stop in all four themes.
+- **Motion:** `page.css` ends with a `prefers-reduced-motion: reduce` block that shortens animations
+  and transitions and turns smooth scrolling off; `test_accessibility.py` scans every
+  `static/profiles/*.css` and fails on a `transition`, `animation` or `scroll-behavior` that is not
+  inside `@media (prefers-reduced-motion: no-preference)`.
+- **Tests:** `apps/profiles/tests/test_accessibility.py` (service, template, stylesheets) and
+  `tests/e2e/test_accessibility.py` (axe in all four themes, keyboard walk, button, dialog, reduced
+  motion).
+
+**Checklist for a new section or control** (copy into the PR):
+1. Every `<img>` has `alt` (text from the service, or `""` when decorative).
+2. One `h1`; the section has an `h2` and `aria-labelledby`; no skipped heading levels.
+3. Everything clickable is a real `<a href>` or `<button>`; labels are visible or `aria-label`; link
+   texts make sense out of context.
+4. Tab order follows the visual order; a widget that opens (dialog, expander) manages focus and Esc.
+5. Colours come from theme tokens only; a new token pair goes into `TEXT_PAIRS`/`LARGE_PAIRS`.
+6. Any motion lives under `prefers-reduced-motion: no-preference`; no inline script or style.
+7. Add the section to the seeded data of `tests/e2e/test_accessibility.py` and run it.
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python

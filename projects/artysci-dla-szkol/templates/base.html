@@ -13,6 +13,7 @@
 </head>
 {# Send the CSRF token with every HTMX request. #}
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  {% block skip_link %}{% endblock %}
   <header>
     <nav aria-label="{% translate 'Konto' %}">
       {% if user.is_authenticated %}
