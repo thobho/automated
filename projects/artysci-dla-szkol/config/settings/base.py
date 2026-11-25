@@ -292,3 +292,8 @@ WEBSITE_IMPORT_MAX_TEXT_CHARS = env.int("WEBSITE_IMPORT_MAX_TEXT_CHARS", default
 # Test only: lets the fetcher reach loopback addresses on any port, so a synthetic site served
 # locally can be imported in dev. Hosted settings (prod, pirx) refuse to start with it on.
 SAFE_FETCH_ALLOW_LOOPBACK = env.bool("SAFE_FETCH_ALLOW_LOOPBACK", default=False)
+
+# Quality lab (apps/quality/testset.py, US-11.2): synthetic test artists may be created and the
+# test-set commands run only where this is on (dev, test, pirx). Off everywhere else, so test
+# artists never appear in production.
+QUALITY_LAB_ENABLED = env.bool("QUALITY_LAB_ENABLED", default=False)

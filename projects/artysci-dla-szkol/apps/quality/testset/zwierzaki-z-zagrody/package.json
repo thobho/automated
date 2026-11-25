@@ -1,0 +1,35 @@
+{
+  "slug": "zwierzaki-z-zagrody",
+  "description": "Weak package: an animal show with almost no data, one low-resolution photo and no price anywhere in the materials (the only offer is on request).",
+  "origin": "synthetic",
+  "level": "weak",
+  "artist": {
+    "type": "animal_show",
+    "name": "Zwierzaki z Zagrody",
+    "city": "Opole",
+    "voivodeships": ["opolskie"],
+    "audiences": ["kindergarten"]
+  },
+  "questionnaire": {
+    "q_age_from": 3,
+    "q_age_to": 8
+  },
+  "offers": [
+    {
+      "title": "Wizyta małej zagrody",
+      "description": "Do przedszkola przyjeżdżają króliki, kury i koza. Dzieci mogą je pogłaskać pod opieką prowadzącego.",
+      "price_on_request": true
+    }
+  ],
+  "site_text": "Zwierzaki z Zagrody odwiedzają przedszkola z własnymi zwierzętami.",
+  "documents": [],
+  "videos": [],
+  "photos": [
+    {"kind": "low_resolution"}
+  ],
+  "expectations": [
+    {"kind": "no_price"},
+    {"kind": "gap_reported", "code": "no_video"},
+    {"kind": "text_absent", "text": "laureat"}
+  ]
+}

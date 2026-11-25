@@ -216,3 +216,25 @@ class GenerationReview(models.Model):
 
     def delete(self, *args, **kwargs):
         raise RegistryImmutable("review entries cannot be deleted")
+
+
+class TestsetLoad(models.Model):
+    """Which version (digest of the package JSON) of a test-set package is loaded for its
+    synthetic artist (US-11.2). Written only by `apps.quality.testset.load_package`; lets a
+    repeated load of an unchanged package change nothing."""
+
+    __test__ = False  # not a pytest class
+
+    slug = models.SlugField(_("pakiet"), max_length=80, unique=True)
+    artist = models.OneToOneField(
+        "artists.Artist", on_delete=models.CASCADE, related_name="testset_load"
+    )
+    digest = models.CharField(_("odcisk pakietu"), max_length=64)
+    loaded_at = models.DateTimeField(_("załadowano"))
+
+    class Meta:
+        verbose_name = _("załadowany pakiet testowy")
+        verbose_name_plural = _("załadowane pakiety testowe")
+
+    def __str__(self) -> str:
+        return f"Test set package {self.slug}"

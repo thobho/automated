@@ -1,0 +1,63 @@
+{
+  "slug": "pracownia-eureka",
+  "description": "Medium package: a science show with a questionnaire, two offers, two photos, one film and a PDF; no testimonials.",
+  "origin": "synthetic",
+  "level": "medium",
+  "artist": {
+    "type": "science_show",
+    "name": "Pracownia Doświadczeń Eureka",
+    "city": "Poznań",
+    "voivodeships": ["wielkopolskie"],
+    "audiences": ["grades_0_3", "grades_4_6"]
+  },
+  "questionnaire": {
+    "q_age_from": 6,
+    "q_age_to": 12,
+    "q_duration_minutes": 50,
+    "q_max_audience": 60,
+    "q_tech_room": "Sala z dostępem do wody i stołem na środku.",
+    "q_tech_power": "Dwa gniazda 230 V.",
+    "q_tech_sound": "",
+    "q_price_from_pln": 900,
+    "q_price_to_pln": 1300,
+    "q_price_on_request": false
+  },
+  "offers": [
+    {
+      "title": "Pokaz „Ogień i woda”",
+      "description": "Bezpieczne doświadczenia z wodą, powietrzem i ogniem. Dzieci obserwują reakcje i zgadują wyniki.",
+      "age_from": 6,
+      "age_to": 12,
+      "duration_minutes": 50,
+      "price_pln": 900
+    },
+    {
+      "title": "Laboratorium małego badacza",
+      "description": "Dzieci w małych grupach wykonują własne doświadczenia pod okiem prowadzącego.",
+      "age_from": 8,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 1300
+    }
+  ],
+  "site_text": "Pracownia Doświadczeń Eureka prowadzi pokazy naukowe w szkołach w Poznaniu i okolicach. Doświadczenia są dobrane do wieku dzieci, a prowadzący tłumaczy, co się dzieje i dlaczego.",
+  "documents": [
+    {
+      "name": "opis-pokazu.pdf",
+      "text": "Opis pokazu: Ogień i woda. Czas trwania 50 minut. Pokaz prowadzi jedna osoba, do przeprowadzenia potrzebny jest stół i dostęp do wody."
+    }
+  ],
+  "videos": [
+    {"url": "https://www.youtube.com/watch?v=Qr5StUv1234", "title": "Pokaz Ogień i woda w szkole"}
+  ],
+  "photos": [
+    {"kind": "normal", "width": 1700, "height": 1133},
+    {"kind": "low_resolution", "width": 900, "height": 600}
+  ],
+  "expectations": [
+    {"kind": "field_not_empty", "path": "hero.main_photo_id"},
+    {"kind": "text_present", "text": "Poznań"},
+    {"kind": "field_empty", "path": "testimonials"},
+    {"kind": "text_absent", "text": "wyróżnienie"}
+  ]
+}
