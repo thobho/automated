@@ -7,7 +7,14 @@ from django.utils.html import format_html_join
 from django.utils.translation import gettext_lazy as _
 
 from . import services
-from .models import Generation, GenerationReview, GeneratorComponentVersion, ReviewQueue
+from .models import (
+    EvaluationRun,
+    Generation,
+    GenerationReview,
+    GeneratorComponentVersion,
+    PackageEvaluation,
+    ReviewQueue,
+)
 
 
 class ReadOnlyAdmin(admin.ModelAdmin):
@@ -165,3 +172,116 @@ class GenerationReviewAdmin(ReadOnlyAdmin):
     list_display = ("created_at", "generation", "decision", "reviewer", "note")
     list_filter = ("decision",)
     readonly_fields = ("generation", "reviewer", "decision", "note", "created_at")
+
+
+class EvaluationRowInline(admin.TabularInline):
+    model = PackageEvaluation
+    extra = 0
+    can_delete = False
+    fields = (
+        "slug",
+        "level",
+        "generation_status",
+        "hard_pass",
+        "review_status",
+        "score_wiernosc",
+        "score_kompletnosc",
+        "score_przydatnosc",
+        "score_jezyk",
+        "score_ton",
+        "score_uczciwosc",
+        "cost_usd",
+    )
+    readonly_fields = fields
+    show_change_link = True
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(EvaluationRun)
+class EvaluationRunAdmin(ReadOnlyAdmin):
+    """Read-only list and detail of evaluation runs (US-11.3A)."""
+
+    list_display = ("id", "started_at", "status", "level", "package_count", "cost_usd")
+    list_filter = ("status",)
+    inlines = [EvaluationRowInline]
+    fields = (
+        "status",
+        "note",
+        "level",
+        "slugs",
+        "started_at",
+        "finished_at",
+        "generator_model",
+        "reviewer_model",
+        "generator_components",
+        "reviewer_components",
+        "package_set_hash",
+        "cost_usd",
+    )
+    readonly_fields = fields
+
+    @admin.display(description=_("pakiety"))
+    def package_count(self, obj):
+        return f"{obj.evaluations.count()}/{len(obj.slugs)}"
+
+
+@admin.register(PackageEvaluation)
+class PackageEvaluationAdmin(ReadOnlyAdmin):
+    list_display = (
+        "id",
+        "run",
+        "slug",
+        "level",
+        "generation_status",
+        "hard_pass",
+        "review_status",
+        "cost_usd",
+    )
+    list_filter = ("level", "review_status", "hard_pass")
+    list_select_related = ("run",)
+    fields = (
+        "run",
+        "slug",
+        "level",
+        "package_hash",
+        "generation",
+        "generation_status",
+        "hard_pass",
+        "validator_json",
+        "expectations_json",
+        "review_status",
+        "review_reason",
+        "score_wiernosc",
+        "score_kompletnosc",
+        "score_przydatnosc",
+        "score_jezyk",
+        "score_ton",
+        "score_uczciwosc",
+        "problems_json",
+        "review_call_ids",
+        "cost_usd",
+        "duration_ms",
+        "created_at",
+    )
+    readonly_fields = fields
+
+    @staticmethod
+    def _dump(value):
+        return json.dumps(value, ensure_ascii=False, indent=2)
+
+    @admin.display(description=_("wynik walidatora"))
+    def validator_json(self, obj):
+        return self._dump(obj.validator)
+
+    @admin.display(description=_("oczekiwania"))
+    def expectations_json(self, obj):
+        return self._dump(obj.expectations)
+
+    @admin.display(description=_("problemy"))
+    def problems_json(self, obj):
+        return self._dump(obj.problems)

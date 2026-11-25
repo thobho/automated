@@ -4,8 +4,14 @@
     "0.3": "e671165b1582cc8b06638b6e4fe21df600b110eff3f0544eaa084da55c180bfc",
     "0.4": "4c0cb706a9ec937f4088cf7076f717d82d75d296b4047dde90ab3c35d22c45fb"
   },
+  "instructions:profile_review": {
+    "0.1": "3a4d59bd9154cdccecb60dc1e381fdb24adfe34d93d60e0f11518d1ebf5f7280"
+  },
   "schema:profile": {
     "0.2": "f96a291649084135f53263e47f57d45311d62b7fe25c44496fd1c415bb54c230"
+  },
+  "schema:profile_review": {
+    "0.1": "8963cded7dfec073926ea4cdf8bebc538a5ed174df678e56c29507b382e7ad2b"
   },
   "validator:profile_checks": {
     "0.1": "939870e5a4d3bd68df108dd5c288173cf8397cfeb4d337ebd2e4b36da160b1ab",
