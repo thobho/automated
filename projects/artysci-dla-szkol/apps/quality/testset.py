@@ -46,6 +46,7 @@ from apps.artists.models import (
     WebsiteImport,
 )
 from apps.core.regions import Voivodeship
+from apps.core.uploads import UploadRejected
 from apps.profiles import inputs
 from apps.profiles.ai.scrub import scrub
 from apps.profiles.validation import profile_schema
@@ -241,6 +242,16 @@ def check_package(package: dict, *, folder: str | None = None) -> list[str]:
             seen.add((ref.provider, ref.video_id))
     for i, item in enumerate(package["expectations"]):
         problems += _expectation_problems(i, item)
+    for key, kind in (("photos", MaterialKind.PHOTO), ("documents", MaterialKind.PDF)):
+        if len(package[key]) > materials.limit_for(kind):
+            problems.append(
+                f"{key}: {len(package[key])} items, the limit is {materials.limit_for(kind)}"
+            )
+    if len(package["videos"]) > materials.limit_for(MaterialKind.VIDEO):
+        problems.append(
+            f"videos: {len(package['videos'])} items, "
+            f"the limit is {materials.limit_for(MaterialKind.VIDEO)}"
+        )
     if package["origin"] == "synthetic":
         problems += _synthetic_problems(package)
     return problems
@@ -253,7 +264,11 @@ def _synthetic_problems(package: dict) -> list[str]:
         if scrub(text) != text:
             problems.append(f"contact or personal data in a text: {text[:60]!r}…")
         for url in _URL.findall(text):
-            host = (urllib.parse.urlsplit(url.rstrip(".,;:!?")).hostname or "").lower()
+            try:
+                host = (urllib.parse.urlsplit(url.rstrip(".,;:!?")).hostname or "").lower()
+            except ValueError:
+                problems.append(f"malformed URL in a text: {url[:60]!r}")
+                continue
             if (
                 host != EMAIL_DOMAIN
                 and not host.endswith("." + EMAIL_DOMAIN)
@@ -279,9 +294,17 @@ class Result:
     message: str
 
 
+_CURRENCY = r"(?:zł|zl|pln|złotych|złote|złoty|zloty)"
 _PRICE = re.compile(
-    r"\d[\d\s.,]*\s*(?:zł|zl|pln|złotych|złote)(?!\w)"
-    r"|(?<!\w)(?:cena|ceny|cenie|koszt|kosztuje|cennik)(?!\w)[^.\n]{0,24}?\d",
+    # a number, an optional multiplier and a currency after it: "500 zł", "2 tys. zł"
+    rf"\d[\d\s.,]*(?:\s*(?:tys|mln)\.?)?\s*{_CURRENCY}(?!\w)"
+    r"|(?<!\w)\d[\d\s.]*,-"  # "500,-"
+    rf"|(?<!\w){_CURRENCY}\s*\d"  # "PLN 500"
+    # a price word, optional "to/od/do/wynosi/:", then a number that is not a measure
+    r"|(?<!\w)(?:cen[aęyieą]|cenach|cennik\w*|koszt\w*)(?!\w)"
+    r"(?:\s*(?::|to\b|od\b|do\b|wynosi\b|około\b|ok\.))*\s*"
+    r"\d+(?:[ .,]\d+)*(?!\d)"
+    r"(?!\s*(?:minut|min\b|dzieci|osób|osoby|km\b|lat\b|godzin|godz\b|uczni|sekund))",
     re.I,
 )
 
@@ -336,7 +359,12 @@ def _check_one(item: dict, profile: dict) -> Result:
         return Result(
             kind, code, passed, f"gap {code!r} " + ("reported" if passed else "not reported")
         )
-    found = [p for p, text in all_public_texts(profile) if _PRICE.search(text)]  # no_price
+    texts = all_public_texts(profile)
+    for i, fact in enumerate(profile.get("facts") or []):  # a label and its value read together
+        texts.append(
+            (f"$.facts[{i}].value", f"{fact.get('label') or ''} {fact.get('value') or ''}")
+        )
+    found = list(dict.fromkeys(p for p, text in texts if _PRICE.search(text)))  # no_price
     message = "no price in the public texts" if not found else f"price found at {', '.join(found)}"
     return Result(kind, ", ".join(found), not found, message)
 
@@ -483,9 +511,18 @@ def _add_photos(artist: Artist, package: dict) -> None:
     for index, spec in enumerate(package["photos"], start=1):
         data = draw_photo(spec, f"{package['slug']}:{index}")
         upload = SimpleUploadedFile(f"{package['slug']}-{index}.jpg", data, "image/jpeg")
-        material = materials.add_file(artist, MaterialKind.PHOTO, upload)
-        materials.scan_material(material.pk)
-        checks.check_material(material.pk)
+        try:
+            material = materials.add_file(artist, MaterialKind.PHOTO, upload)
+            materials.scan_material(material.pk)
+            checks.check_material(material.pk)
+        except (
+            materials.MaterialRejected,
+            UploadRejected,
+            materials.ScanNotFinished,
+        ) as error:
+            raise PackageError(
+                f"{package['slug']}: photo {index} was rejected: {type(error).__name__}"
+            ) from error
         material.refresh_from_db()
         if material.status != ScanStatus.READY or material.checks_version < 1:
             raise PackageError(f"{package['slug']}: photo {index} is not ready after the checks")

@@ -239,10 +239,22 @@ def test_no_price_fails_with_the_path_of_the_text_and_passes_without_a_price():
     assert not failing.passed and failing.detail == "$.description.paragraphs[0]"
     assert "$.description.paragraphs[0]" in failing.message
     assert run("no_price", profile(description={"paragraphs": ["Spektakl dla dzieci."]})).passed
-    for price in ("od 1 200 zł", "800 PLN", "cena: 900", "Koszt to 500"):
+    for price in (
+        "od 1 200 zł", "800 PLN", "cena: 900", "Koszt to 500", "PLN 500", "500,-",
+        "2 tys. zł", "1,5 tys. zł", "cenę 900", "500 złoty", "ceną od 700",
+    ):  # fmt: skip
         text = profile(description={"paragraphs": [f"Występ {price}."]})
         assert not run("no_price", text).passed, price
-    assert run("no_price", profile(description={"paragraphs": ["Występ trwa 45 minut."]})).passed
+    for clean in (
+        "Występ trwa 45 minut.",
+        "Cena na zapytanie dla 30 dzieci.",
+        "Cena na zapytanie, czas 45 minut.",
+        "Koszt dojazdu do 50 km wliczony.",
+    ):
+        assert run("no_price", profile(description={"paragraphs": [clean]})).passed, clean
+    fact = profile(description={"paragraphs": ["x"]}, facts=[{"label": "Cena", "value": "od 900"}])
+    result = run("no_price", fact)
+    assert not result.passed and result.detail == "$.facts[0].value"
 
 
 def test_gap_reported():
@@ -362,12 +374,10 @@ def test_a_poster_photo_shows_its_flag_and_cannot_be_main():
 def test_photo_kinds_get_their_flags():
     data = inputs.build_input(testset.load_package("teatr-lalek-pod-debem"))
     flags = [p["flags"] for p in data["photos"]]
-    assert (
-        [] in flags
-        and ["low_resolution"] in flags
-        and ["poster"] in flags
-        or any("poster" in f for f in flags)
-    )
+    assert flags[:3] == [[], [], []]
+    assert flags[3] == ["low_resolution"]
+    assert "poster" in flags[4]
+    assert [p["can_be_main"] for p in data["photos"]][4] is False
     assert sum(p["can_be_main"] for p in data["photos"]) == 4
 
 
@@ -502,3 +512,19 @@ def test_both_commands_refuse_when_the_lab_is_off(settings, name, args):
     with pytest.raises(CommandError, match="QUALITY_LAB_ENABLED"):
         command(name, *args)
     assert Artist.objects.count() == 0 and TestsetLoad.objects.count() == 0
+
+
+def test_a_package_above_the_material_limits_is_reported_not_half_loaded(tmp_path, settings):
+    settings.MATERIAL_MAX_PHOTOS = 2
+    problems = testset.check_package(package("teatr-lalek-pod-debem"))
+    assert any(p.startswith("photos:") and "limit is 2" in p for p in problems)
+    root = root_with(tmp_path, "teatr-lalek-pod-debem")
+    with pytest.raises(testset.PackageError, match="photos"):
+        testset.load_package("teatr-lalek-pod-debem", root=root)
+    assert Artist.objects.count() == 0
+
+
+def test_a_malformed_url_in_a_text_is_a_problem_not_a_crash():
+    data = copy.deepcopy(package("zwierzaki-z-zagrody"))
+    data["site_text"] += " Zobacz http://[x tutaj."
+    assert any("malformed URL" in p for p in testset.check_package(data))
