@@ -276,6 +276,8 @@ class Material(models.Model):
     video_id = models.CharField(_("id filmu"), max_length=32, blank=True)
     canonical_url = models.URLField(_("adres filmu"), max_length=200, blank=True)
     title = models.CharField(_("tytuł"), max_length=300, blank=True)
+    # Photos (US-3.6): the artist's own alternative text; empty = a generated Polish fallback.
+    alt_text = models.CharField(_("tekst alternatywny"), max_length=200, blank=True)
     # PDFs
     text = models.TextField(_("tekst z PDF"), blank=True)
     text_status = models.CharField(

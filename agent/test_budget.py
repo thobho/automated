@@ -127,5 +127,47 @@ class ModelsAndSlots(Base):
         self.assertTrue(budget.decide(plan(0, timedelta(hours=5), 40), NOW)["spillover_ok"])
 
 
+class FinalHours(Base):
+    """The last 30 h before the weekly reset: spend what would otherwise expire."""
+    LEFT = timedelta(hours=29)
+
+    def test_final_window_starts_30_hours_before_the_reset(self):
+        self.assertTrue(budget.decide(plan(0, timedelta(hours=5), 80, timedelta(hours=29)), NOW)["final_hours"])
+        r = budget.decide(plan(0, timedelta(hours=5), 80, timedelta(hours=31)), NOW)
+        self.assertFalse(r["final_hours"])
+        self.assertLess(r["weekly_allowed_now"], 98)
+
+    def test_five_hour_cap_rises_to_85(self):
+        r = budget.decide(plan(80, timedelta(minutes=10), 90, self.LEFT), NOW)
+        self.assertEqual((r["decision"], r["five_hour_cap"]), ("RUN", 85))
+        r = budget.decide(plan(86, timedelta(minutes=10), 90, self.LEFT), NOW)
+        self.assertEqual(r["decision"], "WAIT")
+        self.assertIn("cap 85", r["reason"])
+        # Outside the final hours the cap stays 70.
+        self.assertEqual(budget.decide(plan(72, timedelta(minutes=5)), NOW)["decision"], "WAIT")
+
+    def test_opus_build_needs_only_one_point(self):
+        budget.MODEL = "opus"
+        r = budget.decide(plan(0, timedelta(hours=5), 96.5, self.LEFT), NOW)  # headroom 1.5
+        self.assertEqual(r["decision"], "RUN")
+        self.assertTrue(r["opus_ok"])
+        self.assertIn("final hours", r["reason"])
+        self.assertEqual(budget.decide(plan(0, timedelta(hours=5), 97.5, self.LEFT), NOW)["decision"], "WAIT")
+
+    def test_second_slot_needs_three_points_and_window_below_65(self):
+        budget.SLOT = 2
+        self.assertEqual(budget.decide(plan(60, timedelta(minutes=30), 95, self.LEFT), NOW)["decision"], "RUN")
+        self.assertEqual(budget.decide(plan(60, timedelta(minutes=30), 95.5, self.LEFT), NOW)["decision"], "WAIT")
+        r = budget.decide(plan(66, timedelta(minutes=30), 80, self.LEFT), NOW)
+        self.assertEqual(r["decision"], "WAIT")
+        self.assertIn("below 65%", r["reason"])
+
+    def test_weekly_cap_still_holds(self):
+        budget.MODEL = "opus"
+        r = budget.decide(plan(0, timedelta(hours=5), 98, timedelta(hours=2)), NOW)
+        self.assertEqual(r["decision"], "WAIT")
+        self.assertIn("even line", r["reason"])
+
+
 if __name__ == "__main__":
     unittest.main()

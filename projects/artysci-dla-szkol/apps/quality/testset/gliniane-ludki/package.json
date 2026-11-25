@@ -1,0 +1,47 @@
+{
+  "slug": "gliniane-ludki",
+  "description": "Medium package: ceramics workshops, a price range, a normal photo and a poster, no film (the generator should report the gap).",
+  "origin": "synthetic",
+  "level": "medium",
+  "artist": {
+    "type": "workshops",
+    "name": "Pracownia Ceramiki Gliniane Ludki",
+    "city": "Gdańsk",
+    "voivodeships": ["pomorskie"],
+    "audiences": ["kindergarten", "grades_0_3", "families"]
+  },
+  "questionnaire": {
+    "q_age_from": 5,
+    "q_age_to": 10,
+    "q_duration_minutes": 90,
+    "q_max_audience": 25,
+    "q_tech_room": "Stoły przykryte ceratą i dostęp do wody.",
+    "q_tech_power": "",
+    "q_tech_sound": "",
+    "q_price_from_pln": 600,
+    "q_price_to_pln": 900,
+    "q_price_on_request": false
+  },
+  "offers": [
+    {
+      "title": "Warsztat lepienia z gliny",
+      "description": "Dzieci lepią z gliny małe figurki zwierząt. Gotowe prace zostają do wypalenia i wracają do szkoły po kilku tygodniach.",
+      "age_from": 5,
+      "age_to": 10,
+      "duration_minutes": 90,
+      "price_pln": 600
+    }
+  ],
+  "site_text": "Pracownia Ceramiki Gliniane Ludki prowadzi warsztaty w szkołach i przedszkolach w Gdańsku. Glinę, narzędzia i fartuszki przywozimy ze sobą.",
+  "documents": [],
+  "videos": [],
+  "photos": [
+    {"kind": "normal", "width": 1600, "height": 1200},
+    {"kind": "poster"}
+  ],
+  "expectations": [
+    {"kind": "gap_reported", "code": "no_video"},
+    {"kind": "field_not_empty", "path": "hero.main_photo_id"},
+    {"kind": "text_present", "text": "Warsztat lepienia z gliny"}
+  ]
+}

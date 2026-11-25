@@ -143,6 +143,38 @@ def dev_instances(spec=DEV_INSTANCES, fetch=fetch_json):
     return rows, problems
 
 
+def track_week(claude, path=None):
+    """Remember the last weekly usage seen before each reset, so the page can say how much of the
+    previous week's plan expired unused. claude-budget.json is refreshed hourly by the dispatcher, so the
+    stored value is at most about an hour older than the reset. Returns {"resets_at", "used"} or None."""
+    path = path or os.path.join(STATE, "claude-week.json")
+    try:
+        state = json.load(open(path))
+    except (OSError, ValueError):
+        state = {}
+    used, resets = claude.get("weekly_used"), claude.get("weekly_resets_at")
+    if used is None or not resets:
+        return state.get("previous")
+    old = state.get("resets_at")
+    if old and old[:13] != resets[:13] and state.get("last_used") is not None:  # a new week has started
+        state["previous"] = {"resets_at": old, "used": state["last_used"]}
+    state["resets_at"], state["last_used"] = resets, used
+    try:
+        with open(path, "w") as f:
+            json.dump(state, f)
+    except OSError:
+        pass
+    return state.get("previous")
+
+
+def week_summary(previous):
+    if not previous:
+        return None
+    used = float(previous["used"])
+    return (f"Last week (reset {previous['resets_at'][:10]}): {used:.0f}% of the Claude plan used, "
+            f"**{max(0.0, 100 - used):.0f}% expired unused**")
+
+
 def failed_units():
     try:
         out = subprocess.run(["systemctl", "--user", "list-units", "--failed", "--no-legend", "automated-*"],
@@ -214,6 +246,9 @@ def render(now):
         last_decisions.append(f"Claude: **{claude['decision']}**: {claude.get('reason', '')}")
     if opencode.get("decision"):
         last_decisions.append(f"OpenCode: **{opencode['decision']}**: {opencode.get('reason', '')}")
+    summary = week_summary(track_week(claude))
+    if summary:
+        last_decisions.append(summary)
 
     problems = late + [f"Failed systemd unit: `{u}`" for u in units] + dev_problems
     problems += [f"#{i['number']} {i['title']}: blocked, needs your answer" for i in blocked]

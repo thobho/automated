@@ -5,7 +5,7 @@ HTTP, so login would break. Never use this module on a public host. Everything e
 env vars, storage, logging) is shared with prod through `hosted`.
 """
 
-from .env import scanner_from_env
+from .env import env, scanner_from_env
 from .hosted import *  # noqa: F403
 
 # pirx in light mode has no RAM for clamd (D87): uploads are unscanned and logged as such.
@@ -22,3 +22,6 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 
 # No reverse proxy and no whitenoise here: the app serves collectstatic output itself (urls.py).
 SERVE_STATIC = True
+
+# Synthetic data only on pirx (D57): the quality lab (test set, US-11.2) is on here.
+QUALITY_LAB_ENABLED = env.bool("QUALITY_LAB_ENABLED", default=True)

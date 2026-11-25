@@ -1,4 +1,7 @@
 import io
+import json
+import os
+import tempfile
 import unittest
 import urllib.error
 from datetime import datetime, timezone
@@ -59,6 +62,25 @@ class DevInstancesTest(unittest.TestCase):
 
     def test_empty_spec_adds_nothing(self):
         self.assertEqual(health.dev_instances("", lambda url: {}), ([], []))
+
+
+class WeekTrackerTest(unittest.TestCase):
+    def setUp(self):
+        self.path = os.path.join(tempfile.mkdtemp(), "claude-week.json")
+
+    def test_previous_week_is_kept_after_the_reset(self):
+        self.assertIsNone(health.track_week({"weekly_used": 80, "weekly_resets_at": "2026-11-26T20:40:00Z"}, self.path))
+        self.assertIsNone(health.track_week({"weekly_used": 93, "weekly_resets_at": "2026-11-26T20:40:30Z"}, self.path))
+        prev = health.track_week({"weekly_used": 2, "weekly_resets_at": "2026-12-03T20:40:00Z"}, self.path)
+        self.assertEqual(prev, {"resets_at": "2026-11-26T20:40:30Z", "used": 93})
+        self.assertEqual(health.track_week({"weekly_used": 5, "weekly_resets_at": "2026-12-03T20:40:00Z"}, self.path), prev)
+        self.assertIn("7% expired unused", health.week_summary(prev))
+
+    def test_missing_budget_keeps_state(self):
+        health.track_week({"weekly_used": 50, "weekly_resets_at": "2026-11-26T20:40:00Z"}, self.path)
+        self.assertIsNone(health.track_week({}, self.path))
+        self.assertEqual(json.load(open(self.path))["last_used"], 50)
+        self.assertIsNone(health.week_summary(None))
 
 
 if __name__ == "__main__":

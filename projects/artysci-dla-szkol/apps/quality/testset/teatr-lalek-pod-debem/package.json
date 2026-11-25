@@ -1,0 +1,81 @@
+{
+  "slug": "teatr-lalek-pod-debem",
+  "description": "Rich package: a theatre with complete answers, three offers with prices, five photos, two films, two PDFs and a site text.",
+  "origin": "synthetic",
+  "level": "rich",
+  "artist": {
+    "type": "theatre",
+    "name": "Teatr Lalek Pod Dębem",
+    "city": "Wrocław",
+    "voivodeships": ["dolnoslaskie", "opolskie"],
+    "audiences": ["kindergarten", "grades_0_3"]
+  },
+  "questionnaire": {
+    "q_age_from": 4,
+    "q_age_to": 9,
+    "q_duration_minutes": 45,
+    "q_max_audience": 120,
+    "q_tech_room": "Sala min. 6 x 5 m, możliwość przyciemnienia okien.",
+    "q_tech_power": "Jedno gniazdo 230 V przy scenie.",
+    "q_tech_sound": "Własne nagłośnienie, dojazd samochodem dostawczym.",
+    "q_price_from_pln": 1200,
+    "q_price_to_pln": 1800,
+    "q_price_on_request": false
+  },
+  "offers": [
+    {
+      "title": "Kwiatowa opowieść",
+      "description": "Interaktywny spektakl lalkowy o ogrodniku i jego pierwszym kwiecie. Dzieci pomagają w przedstawieniu i uczą się nazw kwiatów.",
+      "age_from": 4,
+      "age_to": 7,
+      "duration_minutes": 45,
+      "price_pln": 1200
+    },
+    {
+      "title": "Wędrówka lalkowego kota",
+      "description": "Przedstawienie z cieniami i lalkami o kocie, który szuka domu. Po spektaklu krótka rozmowa o opiece nad zwierzętami.",
+      "age_from": 5,
+      "age_to": 9,
+      "duration_minutes": 50,
+      "price_pln": 1500
+    },
+    {
+      "title": "Warsztat robienia lalek",
+      "description": "Po spektaklu dzieci wykonują proste pacynki z materiałów przyniesionych przez teatr. Zajęcia dla jednej klasy.",
+      "age_from": 6,
+      "age_to": 9,
+      "duration_minutes": 60,
+      "price_pln": 1800
+    }
+  ],
+  "site_text": "Teatr Lalek Pod Dębem działa we Wrocławiu od wielu lat i gra dla przedszkoli i klas młodszych. Spektakle powstają w zespole czterech osób, a lalki wykonuje nasza pracownia. Przed występem prosimy szkołę o salę, w której można przyciemnić okna. Po każdym spektaklu zostajemy na rozmowę z dziećmi. Strona zespołu: https://teatr-lalek-pod-debem.example.invalid.",
+  "documents": [
+    {
+      "name": "oferta-teatru.pdf",
+      "text": "Oferta dla szkół. Kwiatowa opowieść trwa 45 minut i jest przeznaczona dla dzieci w wieku 4–7 lat. Wędrówka lalkowego kota trwa 50 minut. Zespół przyjeżdża własnym samochodem i potrzebuje około godziny na rozstawienie sceny."
+    },
+    {
+      "name": "opinia-przedszkola.pdf",
+      "text": "Opinia przedszkola: Dzieci bardzo chętnie brały udział w przedstawieniu, a pani dyrektor chwaliła spokojną organizację występu. Autor: Przedszkole Słoneczko, Wrocław."
+    }
+  ],
+  "videos": [
+    {"url": "https://www.youtube.com/watch?v=aBcDeF12345", "title": "Kwiatowa opowieść – fragment spektaklu"},
+    {"url": "https://vimeo.com/87654321", "title": "Wędrówka lalkowego kota – zapowiedź"}
+  ],
+  "photos": [
+    {"kind": "normal"},
+    {"kind": "normal", "width": 1800, "height": 1200},
+    {"kind": "normal", "width": 1500, "height": 1500},
+    {"kind": "low_resolution"},
+    {"kind": "poster"}
+  ],
+  "expectations": [
+    {"kind": "field_not_empty", "path": "hero.main_photo_id"},
+    {"kind": "field_not_empty", "path": "gallery.video_ids"},
+    {"kind": "text_present", "text": "Teatr Lalek Pod Dębem"},
+    {"kind": "text_present", "text": "Kwiatowa opowieść"},
+    {"kind": "text_absent", "text": "laureat"},
+    {"kind": "text_absent", "text": "gwarantujemy"}
+  ]
+}
