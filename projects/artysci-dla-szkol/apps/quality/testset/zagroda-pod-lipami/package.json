@@ -1,0 +1,113 @@
+{
+  "slug": "zagroda-pod-lipami",
+  "description": "Rich package: an animal show with long site text, three offers, two documents, two films and five good photos.",
+  "origin": "synthetic",
+  "level": "rich",
+  "artist": {
+    "type": "animal_show",
+    "name": "Zagroda pod Lipami",
+    "city": "Zielona Góra",
+    "voivodeships": [
+      "lubuskie"
+    ],
+    "audiences": [
+      "kindergarten",
+      "grades_0_3",
+      "families"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 3,
+    "q_age_to": 10,
+    "q_duration_minutes": 60,
+    "q_max_audience": 60,
+    "q_tech_room": "Trawnik lub boisko, w razie deszczu duża sala.",
+    "q_tech_power": "Nie potrzebujemy prądu."
+  },
+  "offers": [
+    {
+      "title": "Zagroda w przedszkolu",
+      "description": "Kucyk, owce i króliki odwiedzają przedszkole.",
+      "age_from": 3,
+      "age_to": 6,
+      "duration_minutes": 60,
+      "price_pln": 900
+    },
+    {
+      "title": "Dzień na wsi",
+      "description": "Wizyta z pokazem dojenia kozy i karmienia zwierząt.",
+      "age_from": 5,
+      "age_to": 9,
+      "duration_minutes": 90,
+      "price_pln": 1300
+    },
+    {
+      "title": "Opieka nad zwierzętami",
+      "description": "Lekcja o tym, jak troszczyć się o zwierzęta domowe.",
+      "age_from": 6,
+      "age_to": 10,
+      "duration_minutes": 45,
+      "price_pln": 800
+    }
+  ],
+  "site_text": "Zagroda pod Lipami to mała rodzinna zagroda edukacyjna, która odwiedza przedszkola i szkoły w województwie lubuskim. Zwierzęta są oswojone i przyzwyczajone do dzieci.\n\nKażda wizyta zaczyna się od zasad: jak podchodzić do zwierząt, jak je głaskać i jak myć ręce po zabawie. Dopiero potem dzieci mogą dotykać i karmić zwierzęta.\n\nO zwierzęta dbają właściciele zagrody. Weterynarz sprawdza je co roku, a po każdej wizycie zwierzęta odpoczywają.",
+  "documents": [
+    {
+      "name": "zasady-bezpieczenstwa.pdf",
+      "text": "Zasady bezpieczeństwa. Dzieci głaszczą zwierzęta tylko w obecności opiekuna. Po zabawie myją ręce mydłem."
+    },
+    {
+      "name": "karta-zdrowia.pdf",
+      "text": "Karta zdrowia zwierząt. Wszystkie zwierzęta są zaszczepione i badane raz w roku przez lekarza weterynarii."
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=Zg1Ab2Cd3Ef",
+      "title": "Wizyta w przedszkolu"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Zg4Gh5Ij6Kl",
+      "title": "Dzień na wsi – zapis wizyty"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Zagroda w przedszkolu"
+    },
+    {
+      "kind": "text_absent",
+      "text": "dzikie zwierzęta"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "gallery.photo_ids"
+    },
+    {
+      "kind": "text_present",
+      "text": "Zielona Góra"
+    }
+  ]
+}

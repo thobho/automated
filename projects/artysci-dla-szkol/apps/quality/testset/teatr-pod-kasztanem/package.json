@@ -1,0 +1,119 @@
+{
+  "slug": "teatr-pod-kasztanem",
+  "description": "Rich package: a theatre with a verbatim teacher's opinion in a document that should be quoted word for word, three offers, three documents, two films and five good photos.",
+  "origin": "synthetic",
+  "level": "rich",
+  "artist": {
+    "type": "theatre",
+    "name": "Teatr pod Kasztanem",
+    "city": "Sopot",
+    "voivodeships": [
+      "pomorskie"
+    ],
+    "audiences": [
+      "grades_0_3",
+      "grades_4_6"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 6,
+    "q_age_to": 12,
+    "q_duration_minutes": 55,
+    "q_max_audience": 150,
+    "q_tech_room": "Scena lub wolne miejsce 5 na 4 metry.",
+    "q_tech_power": "Dwa gniazda 230 V.",
+    "q_tech_sound": "Własne nagłośnienie.",
+    "q_price_from_pln": 1400,
+    "q_price_to_pln": 1800
+  },
+  "offers": [
+    {
+      "title": "Przedstawienie „Zaczarowany ogród”",
+      "description": "Spektakl o odwadze i przyjaźni dla młodszych klas.",
+      "age_from": 6,
+      "age_to": 9,
+      "duration_minutes": 45,
+      "price_pln": 1400
+    },
+    {
+      "title": "Przedstawienie „Tajemnica starego zegara”",
+      "description": "Spektakl z elementami zagadki.",
+      "age_from": 8,
+      "age_to": 12,
+      "duration_minutes": 55,
+      "price_pln": 1600
+    },
+    {
+      "title": "Warsztaty teatralne po spektaklu",
+      "description": "Godzina zajęć z aktorami po przedstawieniu.",
+      "age_from": 7,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 1800
+    }
+  ],
+  "site_text": "Teatr pod Kasztanem to zespół aktorów z Sopotu, którzy grają dla dzieci w szkołach i przedszkolach. Wszystkie spektakle powstają na podstawie własnych tekstów.\n\nPrzedstawienia trwają od 45 do 55 minut i mają prostą scenografię, którą ustawiamy w kilkanaście minut. Po spektaklu aktorzy rozmawiają z dziećmi o tym, co zobaczyły.\n\nW sezonie gramy w wielu szkołach, więc terminy warto rezerwować z wyprzedzeniem.",
+  "documents": [
+    {
+      "name": "opinie.pdf",
+      "text": "Opinia nauczycielki. „Teatr pod Kasztanem to przedstawienie, po którym dzieci jeszcze długo rozmawiały o odwadze. Aktorzy świetnie kontaktują się z widownią.” – pani Barbara, szkoła podstawowa w Gdyni."
+    },
+    {
+      "name": "scenariusz-skrot.pdf",
+      "text": "Skrót scenariusza. Przedstawienie Zaczarowany ogród składa się z trzech scen. Czas trwania 45 minut."
+    },
+    {
+      "name": "wymagania.pdf",
+      "text": "Wymagania. Potrzebne jest wolne miejsce na scenie i dwa gniazda. Garderobę zapewnia szkoła."
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=Tk1Ab2Cd3Ef",
+      "title": "Zaczarowany ogród – fragment"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Tk4Gh5Ij6Kl",
+      "title": "Tajemnica starego zegara – zapowiedź"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Sopot"
+    },
+    {
+      "kind": "text_present",
+      "text": "Zaczarowany ogród"
+    },
+    {
+      "kind": "text_absent",
+      "text": "Teatr Narodowy"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "gallery.photo_ids"
+    }
+  ]
+}

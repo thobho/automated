@@ -1,0 +1,68 @@
+{
+  "slug": "trio-smyczkowe-perelka",
+  "description": "Medium package: a string trio with one offer, a short film and two photos; the price is a range in the questionnaire.",
+  "origin": "synthetic",
+  "level": "medium",
+  "artist": {
+    "type": "music",
+    "name": "Trio Smyczkowe Perełka",
+    "city": "Zamość",
+    "voivodeships": [
+      "lubelskie"
+    ],
+    "audiences": [
+      "grades_4_6",
+      "grades_7_8",
+      "secondary"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 8,
+    "q_age_to": 18,
+    "q_duration_minutes": 45,
+    "q_max_audience": 200,
+    "q_tech_room": "Sala z krzesłami dla trzech muzyków.",
+    "q_price_from_pln": 800,
+    "q_price_to_pln": 1200
+  },
+  "offers": [
+    {
+      "title": "Koncert „Smyczki w szkole”",
+      "description": "Trzech muzyków pokazuje, jak brzmią skrzypce, altówka i wiolonczela.",
+      "age_from": 8,
+      "age_to": 18,
+      "duration_minutes": 45,
+      "price_pln": 800
+    }
+  ],
+  "site_text": "Trio Smyczkowe Perełka gra w szkołach w Zamościu i na Roztoczu. Opowiadamy o instrumentach i o muzyce klasycznej.",
+  "documents": [],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=St9Wq1Ee6Hn",
+      "title": "Smyczki w szkole – fragment koncertu"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Zamość"
+    },
+    {
+      "kind": "text_absent",
+      "text": "filharmonia"
+    }
+  ]
+}
