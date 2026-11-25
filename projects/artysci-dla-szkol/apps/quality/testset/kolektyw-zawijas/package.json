@@ -1,0 +1,50 @@
+{
+  "slug": "kolektyw-zawijas",
+  "description": "Weak package: a performance collective whose only photo is a poster, so there is no usable main photo.",
+  "origin": "synthetic",
+  "level": "weak",
+  "artist": {
+    "type": "other",
+    "name": "Kolektyw Zawijas",
+    "city": "Łódź",
+    "voivodeships": [
+      "lodzkie"
+    ],
+    "audiences": [
+      "secondary"
+    ]
+  },
+  "questionnaire": {},
+  "offers": [
+    {
+      "title": "Spotkanie z performerami",
+      "description": "Krótki występ i rozmowa z młodzieżą.",
+      "price_on_request": true
+    }
+  ],
+  "site_text": "Kolektyw Zawijas robi występy dla młodzieży.",
+  "documents": [],
+  "videos": [],
+  "photos": [
+    {
+      "kind": "poster"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "no_price"
+    },
+    {
+      "kind": "field_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "gap_reported",
+      "code": "no_main_photo"
+    },
+    {
+      "kind": "text_present",
+      "text": "Łódź"
+    }
+  ]
+}

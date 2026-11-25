@@ -1,0 +1,73 @@
+{
+  "slug": "biblioteka-zywych-opowiesci",
+  "description": "Medium package: storytelling meetings with two offers, two photos and one film.",
+  "origin": "synthetic",
+  "level": "medium",
+  "artist": {
+    "type": "other",
+    "name": "Biblioteka Żywych Opowieści",
+    "city": "Zielona Góra",
+    "voivodeships": [
+      "lubuskie"
+    ],
+    "audiences": [
+      "grades_4_6",
+      "grades_7_8"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 9,
+    "q_age_to": 14,
+    "q_duration_minutes": 45,
+    "q_max_audience": 40,
+    "q_tech_room": "Krzesła ustawione w półkole."
+  },
+  "offers": [
+    {
+      "title": "Opowieści z dawnych lat",
+      "description": "Opowiadacz przedstawia historie z regionu.",
+      "age_from": 9,
+      "age_to": 14,
+      "duration_minutes": 45,
+      "price_pln": 450
+    },
+    {
+      "title": "Warsztat własnej opowieści",
+      "description": "Dzieci układają i opowiadają własne historie.",
+      "age_from": 10,
+      "age_to": 14,
+      "duration_minutes": 60,
+      "price_pln": 550
+    }
+  ],
+  "site_text": "Biblioteka Żywych Opowieści odwiedza szkoły w województwie lubuskim. Opowieści są oparte na lokalnych legendach.",
+  "documents": [],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=ZgPo7tYuI3M",
+      "title": "Opowieści z dawnych lat – spotkanie w szkole"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Zielona Góra"
+    },
+    {
+      "kind": "text_absent",
+      "text": "bestseller"
+    }
+  ]
+}

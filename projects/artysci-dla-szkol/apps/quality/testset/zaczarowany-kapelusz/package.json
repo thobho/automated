@@ -1,0 +1,76 @@
+{
+  "slug": "zaczarowany-kapelusz",
+  "description": "Medium package: an illusion show with two offers and three photos, one of them a poster; no film, so the gap should be reported.",
+  "origin": "synthetic",
+  "level": "medium",
+  "artist": {
+    "type": "illusion",
+    "name": "Zaczarowany Kapelusz",
+    "city": "Gdynia",
+    "voivodeships": [
+      "pomorskie"
+    ],
+    "audiences": [
+      "grades_0_3",
+      "grades_4_6",
+      "families"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 6,
+    "q_age_to": 12,
+    "q_duration_minutes": 45,
+    "q_max_audience": 100,
+    "q_tech_room": "Scena lub wolny kawałek sali."
+  },
+  "offers": [
+    {
+      "title": "Pokaz iluzji dla młodszych klas",
+      "description": "Sztuczki z udziałem dzieci z widowni.",
+      "age_from": 6,
+      "age_to": 9,
+      "duration_minutes": 45,
+      "price_pln": 800
+    },
+    {
+      "title": "Wielki pokaz z gołębiem",
+      "description": "Większy pokaz z rekwizytami, o którym dzieci opowiadają przez tydzień.",
+      "age_from": 8,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 1200
+    }
+  ],
+  "site_text": "Zaczarowany Kapelusz występuje w szkołach nad morzem od kilku lat. Każdy pokaz dopasowujemy do wieku widzów.",
+  "documents": [],
+  "videos": [],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "poster"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "gap_reported",
+      "code": "no_video"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Gdynia"
+    },
+    {
+      "kind": "text_absent",
+      "text": "mistrz"
+    }
+  ]
+}

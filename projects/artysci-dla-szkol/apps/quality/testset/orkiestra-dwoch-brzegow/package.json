@@ -1,0 +1,110 @@
+{
+  "slug": "orkiestra-dwoch-brzegow",
+  "description": "Rich package: a children's orchestra with long site text, three offers, two documents, one film and four good photos.",
+  "origin": "synthetic",
+  "level": "rich",
+  "artist": {
+    "type": "music",
+    "name": "Orkiestra Dwóch Brzegów",
+    "city": "Przemyśl",
+    "voivodeships": [
+      "podkarpackie"
+    ],
+    "audiences": [
+      "kindergarten",
+      "grades_0_3",
+      "grades_4_6",
+      "families"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 4,
+    "q_age_to": 12,
+    "q_duration_minutes": 45,
+    "q_max_audience": 300,
+    "q_tech_room": "Scena lub aula szkolna.",
+    "q_tech_power": "Dwa gniazda 230 V.",
+    "q_tech_sound": "Własne nagłośnienie.",
+    "q_price_from_pln": 1500,
+    "q_price_to_pln": 2200
+  },
+  "offers": [
+    {
+      "title": "Koncert „Instrumenty z całego świata”",
+      "description": "Muzycy prezentują instrumenty z kilku kontynentów.",
+      "age_from": 4,
+      "age_to": 10,
+      "duration_minutes": 45,
+      "price_pln": 1500
+    },
+    {
+      "title": "Warsztat rytmu",
+      "description": "Dzieci grają na bębnach i dzwonkach razem z zespołem.",
+      "age_from": 5,
+      "age_to": 12,
+      "duration_minutes": 60,
+      "price_pln": 1800
+    },
+    {
+      "title": "Koncert noworoczny",
+      "description": "Koncert kolęd i piosenek zimowych.",
+      "age_from": 4,
+      "age_to": 12,
+      "duration_minutes": 40,
+      "price_pln": 1600
+    }
+  ],
+  "site_text": "Orkiestra Dwóch Brzegów to ośmioosobowy zespół muzyków z Przemyśla, który gra koncerty dla dzieci w przedszkolach, szkołach i domach kultury. Repertuar składa się z piosenek ludowych, jazzu i własnych utworów.\n\nNa koncertach dzieci mogą dotknąć instrumentów i spróbować zagrać prostą melodię. Każdy koncert kończy się wspólnym śpiewaniem.\n\nZespół przyjeżdża z własnym nagłośnieniem i potrzebuje około godziny na przygotowanie sceny.",
+  "documents": [
+    {
+      "name": "repertuar.pdf",
+      "text": "Repertuar. W programie koncertu znajdują się piosenki ludowe, melodie jazzowe i utwory własne zespołu. Koncert trwa 45 minut."
+    },
+    {
+      "name": "wymagania-techniczne.pdf",
+      "text": "Wymagania techniczne. Potrzebna jest scena o wymiarach co najmniej 5 na 3 metry i dwa gniazda. Czas montażu to około godzina."
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=Od1Ab2Cd3Ef",
+      "title": "Instrumenty z całego świata – koncert"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Przemyśl"
+    },
+    {
+      "kind": "text_present",
+      "text": "Instrumenty z całego świata"
+    },
+    {
+      "kind": "text_absent",
+      "text": "platynowa płyta"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "gallery.photo_ids"
+    }
+  ]
+}

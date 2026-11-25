@@ -82,6 +82,7 @@ def collect(now):
         "now": now, "issues": issues, "prs": prs, "merged": merged, "comments": comments,
         "milestones": milestones, "blocked": blocked, "runner_log": runner_log,
         "claude": load(os.path.join(RUNTIME, "state", "claude-budget.json")),
+        "claude_week": load(os.path.join(RUNTIME, "state", "claude-week.json")),  # written by health.py
         "openrouter": load(os.path.join(RUNTIME, "state", "openrouter-budget.json")),
     }
 
@@ -162,6 +163,9 @@ def analyse(d):
     budget = []
     if c.get("weekly_used") is not None:
         budget.append(f"Claude week {c['weekly_used']:.0f}% used, even line {c.get('weekly_allowed_now', '?')}% (resets {c.get('weekly_resets_at', '?')[:10]})")
+    prev = (d.get("claude_week") or {}).get("previous")
+    if prev and prev.get("used") is not None:
+        budget.append(f"last week ended at {float(prev['used']):.0f}% ({max(0.0, 100 - float(prev['used'])):.0f}% expired unused)")
     if o.get("usage_monthly_usd") is not None:
         budget.append(f"OpenRouter ${o['usage_monthly_usd']:.2f} of ${o.get('monthly_budget_usd', 10):.0f} this month")
     return {"actions": actions, "blockers": blockers, "progress": progress, "budget": budget,

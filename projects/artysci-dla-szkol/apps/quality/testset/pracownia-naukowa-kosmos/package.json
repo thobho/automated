@@ -1,0 +1,117 @@
+{
+  "slug": "pracownia-naukowa-kosmos",
+  "description": "Rich package: a science show about space with long site text, four offers, two documents, one film and four good photos.",
+  "origin": "synthetic",
+  "level": "rich",
+  "artist": {
+    "type": "science_show",
+    "name": "Pracownia Naukowa Kosmos",
+    "city": "Gdańsk",
+    "voivodeships": [
+      "pomorskie"
+    ],
+    "audiences": [
+      "grades_4_6",
+      "grades_7_8",
+      "secondary"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 8,
+    "q_age_to": 17,
+    "q_duration_minutes": 55,
+    "q_max_audience": 150,
+    "q_tech_room": "Sala z zaciemnieniem i ekranem.",
+    "q_tech_power": "Dwa gniazda 230 V.",
+    "q_tech_sound": "Mikrofon przynosimy ze sobą.",
+    "q_price_from_pln": 1200,
+    "q_price_to_pln": 2000
+  },
+  "offers": [
+    {
+      "title": "Pokaz „Układ Słoneczny”",
+      "description": "Model planet w skali i doświadczenia z grawitacją.",
+      "age_from": 8,
+      "age_to": 12,
+      "duration_minutes": 50,
+      "price_pln": 1200
+    },
+    {
+      "title": "Pokaz „Rakiety”",
+      "description": "Dzieci budują i odpalają rakiety na ciśnienie wody.",
+      "age_from": 9,
+      "age_to": 14,
+      "duration_minutes": 55,
+      "price_pln": 1500
+    },
+    {
+      "title": "Planetarium w plecaku",
+      "description": "Przenośna kopuła z pokazem gwiazd.",
+      "age_from": 8,
+      "age_to": 17,
+      "duration_minutes": 45,
+      "price_pln": 2000
+    },
+    {
+      "title": "Wykład „Czarne dziury”",
+      "description": "Wykład z pokazami dla starszej młodzieży.",
+      "age_from": 14,
+      "age_to": 17,
+      "duration_minutes": 50,
+      "price_on_request": true
+    }
+  ],
+  "site_text": "Pracownia Naukowa Kosmos opowiada o kosmosie dzieciom i młodzieży z Gdańska, Gdyni i Sopotu. Pokazy łączą doświadczenia z krótkimi opowieściami o odkryciach.\n\nPrzywozimy własny sprzęt: modele planet, wyrzutnie rakiet i przenośną kopułę. Szkoła zapewnia salę i dwa gniazdka.\n\nZespół tworzą nauczyciele fizyki i astronomii, którzy na co dzień pracują z uczniami. Dzięki temu pokazy są zgodne z podstawą programową.",
+  "documents": [
+    {
+      "name": "program-pokazow.pdf",
+      "text": "Program pokazów. Pokaz Układ Słoneczny trwa 50 minut. Pokaz Rakiety trwa 55 minut i wymaga dziedzińca lub boiska."
+    },
+    {
+      "name": "wymagania-techniczne.pdf",
+      "text": "Wymagania techniczne. Sala powinna mieć możliwość zaciemnienia. Kopuła wymaga wysokości sufitu 3 metry."
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=Ko5Sm0Ab1Cd",
+      "title": "Rakiety na wodę – pokaz w szkole"
+    }
+  ],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Gdańsk"
+    },
+    {
+      "kind": "text_present",
+      "text": "Pokaz „Układ Słoneczny”"
+    },
+    {
+      "kind": "text_absent",
+      "text": "NASA"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "gallery.photo_ids"
+    }
+  ]
+}

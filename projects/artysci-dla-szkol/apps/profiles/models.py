@@ -38,6 +38,25 @@ class PageVersion(models.Model):
         return f"{self.artist_id} v{self.number} {self.source}"
 
 
+class PublishedPage(models.Model):
+    """The copy of the page the public sees (US-2.8): written only by publishing, so later edits
+    change nothing public until "Opublikuj zmiany". `content` holds the texts of the version,
+    `data` the rest (`content.page_data`: name, city, offers and the ids of the materials shown)."""
+
+    artist = models.OneToOneField(
+        "artists.Artist", on_delete=models.CASCADE, related_name="published_page"
+    )
+    content = models.JSONField(default=dict)
+    data = models.JSONField()
+    theme = models.CharField(max_length=32, blank=True)
+    # The PageVersion.number this copy was taken from (for "there are unpublished changes").
+    version_number = models.PositiveIntegerField()
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.artist_id} published v{self.version_number}"
+
+
 class AICall(models.Model):
     """One request sent to an AI provider (apps/profiles/ai). Never stores prompt or reply text.
 

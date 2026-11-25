@@ -1,0 +1,50 @@
+{
+  "slug": "duo-trzy-kwadranse",
+  "description": "Weak package: a music duo with one short sentence, one offer on request and one low-resolution photo.",
+  "origin": "synthetic",
+  "level": "weak",
+  "artist": {
+    "type": "music",
+    "name": "Duo Trzy Kwadranse",
+    "city": "Toruń",
+    "voivodeships": [
+      "kujawsko-pomorskie"
+    ],
+    "audiences": [
+      "grades_4_6"
+    ]
+  },
+  "questionnaire": {},
+  "offers": [
+    {
+      "title": "Koncert dla szkoły",
+      "description": "Koncert piosenek z gitarą i skrzypcami.",
+      "price_on_request": true
+    }
+  ],
+  "site_text": "Duo Trzy Kwadranse gra koncerty w szkołach.",
+  "documents": [],
+  "videos": [],
+  "photos": [
+    {
+      "kind": "low_resolution"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "no_price"
+    },
+    {
+      "kind": "gap_reported",
+      "code": "no_video"
+    },
+    {
+      "kind": "text_present",
+      "text": "Toruń"
+    },
+    {
+      "kind": "text_absent",
+      "text": "festiwal"
+    }
+  ]
+}

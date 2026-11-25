@@ -9,7 +9,8 @@
 # user-namespace restriction, which the owner chose not to do.)
 # This script holds the slot and the claim, records the outcome and escalates:
 # 1 failed sonnet/haiku run -> model:opus (Sonnet first, see workspace/docs/agent-fleet-practices.md);
-# 3 failed opus runs -> agent:blocked. A run that hits its --max-budget-usd cap (run_budget) is a failed run.
+# 3 failed opus runs -> agent:blocked. After a rescue marker (review-run.sh) the build runs on Opus with
+# agent/rescue-prompt.md and the larger `rescue` budget. A run that hits its --max-budget-usd cap (run_budget) is a failed run.
 # Runs stopped by a usage limit do not count as failures.
 set -uo pipefail
 source "$(dirname "$0")/common.sh"
@@ -24,6 +25,8 @@ trap 'bash "$LOCK" release >/dev/null' EXIT
 if ! bash "$LOCK" claim "$num" >/dev/null; then log "#$num: already claimed"; exit 0; fi
 
 title="$(gh issue view "$num" --json title -q .title)"
+rescue=false; kind=build
+if rescue_used "$num"; then rescue=true; kind=rescue; model=opus; fi
 slug="$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | cut -c1-40 | sed 's/^-//; s/-$//')"
 work="$(bash "$RUNNER_DIR/scripts/task-worktree.sh" "$num" "$slug")" || { log "#$num: worktree failed"; exit 1; }
 
@@ -34,10 +37,13 @@ prompt="$(cat "$RUNNER_DIR/agent/worker-prompt.md")
 - Model: $model$([[ "$spillover" == "true" ]] && echo " (spillover: a simple OpenCode task, built by Claude)")
 - Working copy: $work (branch agent/$num-$slug). Work only there; scratch files go to $RUNTIME/scratch.
 - Machine: pirx (Linux, 11 GB RAM, up to 2 runs share the agent's 6 GB cap; headless Chromium for browser tests, D110). The slot and the claim are already held for you."
+[[ "$rescue" == true ]] && prompt="$prompt
 
-log "#$num: claude run starts (model $model, $work)"
+$(cat "$RUNNER_DIR/agent/rescue-prompt.md")"
+
+log "#$num: claude run starts (model $model, $kind, $work)"
 (cd "$work" && claude -p "$prompt" --model "$model" --output-format stream-json --verbose \
-   --max-budget-usd "$(run_budget build "$model")" \
+   --max-budget-usd "$(run_budget "$kind" "$model")" \
    --settings "$RUNNER_DIR/agent/pirx/claude-settings.json") > "$runlog" 2>&1
 rc=$?
 
@@ -53,7 +59,7 @@ elif [[ "$limited" == true ]]; then
   status_update "Claude ($model) paused on #$num by a usage limit; it resumes next run"
 else
   why="ended without a PR (exit $rc)"
-  [[ "$cap" == true ]] && why="stopped at its cost cap (\$$(run_budget build "$model"), API-equivalent) without a PR"
+  [[ "$cap" == true ]] && why="stopped at its cost cap (\$$(run_budget "$kind" "$model"), API-equivalent) without a PR"
   gh issue comment "$num" --body "❌ Claude run ($model) $why. Log on pirx: \`$runlog\`. <!-- automated:fail:$model -->" >/dev/null
   fails="$(fail_count "$num" "$model")"
   # Sonnet first, Opus on a checkable failure: one failed cheaper run escalates (a review "changes" round

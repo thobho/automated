@@ -1,0 +1,10 @@
+{% load i18n %}
+<p>{% translate "Do poprawy przed publikacją:" %}</p>
+<ul class="publication-blockers">
+  {% for blocker in blockers %}
+    <li data-blocker="{{ blocker.key }}">
+      {{ blocker.text }}
+      <a class="button" href="{% url blocker.url_name %}">{% translate "Popraw" %}</a>
+    </li>
+  {% endfor %}
+</ul>

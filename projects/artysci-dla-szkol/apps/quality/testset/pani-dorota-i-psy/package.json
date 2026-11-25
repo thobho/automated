@@ -1,0 +1,48 @@
+{
+  "slug": "pani-dorota-i-psy",
+  "description": "Weak package: a dog show with one offer and price, one poster photo (no good photo, so no main photo) and no site text.",
+  "origin": "synthetic",
+  "level": "weak",
+  "artist": {
+    "type": "animal_show",
+    "name": "Pani Dorota i Psy",
+    "city": "Szczecin",
+    "voivodeships": [
+      "zachodniopomorskie"
+    ],
+    "audiences": [
+      "grades_0_3",
+      "families"
+    ]
+  },
+  "questionnaire": {},
+  "offers": [
+    {
+      "title": "Psie sztuczki",
+      "description": "Wyszkolone psy pokazują proste sztuczki.",
+      "price_pln": 300
+    }
+  ],
+  "site_text": "",
+  "documents": [],
+  "videos": [],
+  "photos": [
+    {
+      "kind": "poster"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "field_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "gap_reported",
+      "code": "no_video"
+    },
+    {
+      "kind": "text_absent",
+      "text": "certyfikowany"
+    }
+  ]
+}

@@ -493,8 +493,9 @@ can be reproduced and generator changes can be compared (D13, D14). Code: `apps/
 
 A versioned set of **synthetic** artist material packages in three quality levels (`weak` słabe,
 `medium` średnie, `rich` bogate), each with checkable expectations. A package loads as a test
-artist and runs through the existing generator. Code: `apps/quality/testset.py`; the 6 packages
-(T41) live in `apps/quality/testset/<slug>/package.json`, T42 brings the set to 30.
+artist and runs through the existing generator. Code: `apps/quality/testset.py`; the 30 packages
+(6 from T41, 24 from T42: 10 per level, every artist type at least 3 times) live in
+`apps/quality/testset/<slug>/package.json`.
 
 - **Switch.** `QUALITY_LAB_ENABLED` (env, default off; on in the dev, test and pirx settings,
   off in prod). With it off, `testset_check`, `testset_load` and `load_package` refuse and
@@ -523,12 +524,11 @@ artist and runs through the existing generator. Code: `apps/quality/testset.py`;
   returns `Result(kind, detail, passed, message)` for each.
 - **Scripted profile.** `apps/quality/scripted.py: scripted_profile(input_data)` is a profile built
   from `build_input` data only (no AI): valid against the JSON Schema, clean for the validator and
-  meeting every expectation of the six packages. Use it as the `FakeClient` reply:
+  meeting every expectation of all packages. Use it as the `FakeClient` reply:
   `FakeClient(reply=json.dumps(scripted_profile(build_input(artist))))`.
 - **Adding a package.** Create `apps/quality/testset/<slug>/package.json` (copy a package of the
-  same level), run `testset_check`, add the slug to `SLUGS` in `apps/quality/tests/test_testset.py`
-  and make sure the scripted profile meets its expectations (the parametrised test says which
-  fails). Packages are versioned in git; changing one changes its digest and the next
+  same level), run `testset_check` (the tests pick the folder up by themselves) and make sure the
+  scripted profile meets its expectations (the parametrised test says which one fails). Packages are versioned in git; changing one changes its digest and the next
   `testset_load` replaces the artist's materials.
 - **Synthetic only (D12, D57).** Names, towns, texts, offers and video titles are invented. No
   e-mail, phone, account number or real site: `check_package` runs the project scrubber over every
@@ -857,6 +857,31 @@ App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
   statement, (5) a main-photo candidate, (6) any questionnaire answer. (1)–(4) are the D6
   publication minimum. `completeness_percent(artist)` is the function US-2.8 uses for the
   "published" event; no event is emitted here.
+
+## Publication and withdrawal (US-2.8)
+
+`apps/profiles/publication.py`. Panel: `/panel/publikacja/` (status, blockers with links),
+POST-only `opublikuj/`, `zmiany/` ("Opublikuj zmiany"), `wycofaj/`, and a GET confirmation page
+`wycofanie/`. Public page: `/artysci/<slug>/` (anonymous, server-rendered, T32 template).
+
+- `publication_blockers(artist)`: Polish reasons (name, region, generated page, "O artyście" text,
+  an offer, child-protection statement; an e-mail or phone in the name, city, texts, offers or photo
+  alt texts, D9, found by `contact.py`). Publishing is refused while the list is not empty.
+- Publishing copies everything the page shows into `PublishedPage`: texts and theme of the current
+  version, name, city, offers and the ids and alt texts of the materials. Later edits, uploads,
+  offers and renames stay private until "Opublikuj zmiany" (`has_unpublished_changes`).
+- Slug, state and dates are read-only in the Django admin: only `publication.py` writes them.
+- Only removal is immediate: a deleted material disappears, and without a current "Prawa do
+  materiałów" statement (checked per request) no photo, video or link is shown.
+- Recordings never show the uploaded file's name ("Nagranie 1" instead).
+- Slug: made once on the first publication from the name (ASCII, lowercase, hyphens, `-2`, `-3` on
+  collision), never changed by renames, kept after withdrawal (never reused, republication gives
+  the same one); reserved words (`RESERVED_SLUGS`) are skipped.
+- Draft, withdrawn and unknown slugs give the same 404. `Cache-Control: no-cache` (a cache must
+  revalidate, so a withdrawal is visible at once). Preview stays `noindex`; the public page is not.
+- `Artist.objects.published()` is the only definition of "publicly visible" (catalog, US-4.1); it
+  leaves out deactivated accounts.
+- Events `profile_published` (`profile_id`, `completeness_percent`) and `profile_withdrawn`.
 
 ## Page themes (US-3.2)
 

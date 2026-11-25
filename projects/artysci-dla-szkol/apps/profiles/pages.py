@@ -289,13 +289,18 @@ def page_content(artist: Artist) -> PageContent:
     page = page_content_for(artist)
     version = current_version(artist)
     if version is not None:
-        data = {**empty_content(), **version.content}
-        page.hero.tagline = data["tagline"]
-        page.facts = list(data["facts"])
-        page.about = data["about"]
-        page.for_schools = data["for_schools"]
-        page.faq = [FaqItem(i.get("question", ""), i.get("answer", "")) for i in data["faq"]]
+        overlay_texts(page, version.content)
     return page
+
+
+def overlay_texts(page, content: dict) -> None:
+    """Write the stored texts (`content` of a version or of a snapshot) into `page`."""
+    data = {**empty_content(), **content}
+    page.hero.tagline = data["tagline"]
+    page.facts = list(data["facts"])
+    page.about = data["about"]
+    page.for_schools = data["for_schools"]
+    page.faq = [FaqItem(i.get("question", ""), i.get("answer", "")) for i in data["faq"]]
 
 
 def editor_sections(artist: Artist) -> list[dict]:

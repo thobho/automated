@@ -1,0 +1,78 @@
+{
+  "slug": "kolorowa-kreda",
+  "description": "Medium package: drawing workshops with two offers, two photos and a PDF programme; no film.",
+  "origin": "synthetic",
+  "level": "medium",
+  "artist": {
+    "type": "workshops",
+    "name": "Atelier Kolorowa Kreda",
+    "city": "Radom",
+    "voivodeships": [
+      "mazowieckie"
+    ],
+    "audiences": [
+      "kindergarten",
+      "grades_0_3",
+      "grades_4_6"
+    ]
+  },
+  "questionnaire": {
+    "q_age_from": 5,
+    "q_age_to": 11,
+    "q_duration_minutes": 60,
+    "q_max_audience": 28,
+    "q_tech_room": "Ławki lub stoliki."
+  },
+  "offers": [
+    {
+      "title": "Rysujemy zwierzęta",
+      "description": "Dzieci uczą się rysować zwierzęta krok po kroku.",
+      "age_from": 5,
+      "age_to": 8,
+      "duration_minutes": 60,
+      "price_pln": 400
+    },
+    {
+      "title": "Komiks z klasą",
+      "description": "Klasa wspólnie tworzy krótki komiks.",
+      "age_from": 8,
+      "age_to": 11,
+      "duration_minutes": 90,
+      "price_pln": 600
+    }
+  ],
+  "site_text": "Atelier Kolorowa Kreda prowadzi zajęcia plastyczne w szkołach w Radomiu. Materiały dostarczamy na miejsce.",
+  "documents": [
+    {
+      "name": "program.pdf",
+      "text": "Program zajęć. Zajęcia trwają od 60 do 90 minut. Prace dzieci zostają w szkole."
+    }
+  ],
+  "videos": [],
+  "photos": [
+    {
+      "kind": "normal"
+    },
+    {
+      "kind": "normal"
+    }
+  ],
+  "expectations": [
+    {
+      "kind": "gap_reported",
+      "code": "no_video"
+    },
+    {
+      "kind": "field_not_empty",
+      "path": "hero.main_photo_id"
+    },
+    {
+      "kind": "text_present",
+      "text": "Radom"
+    },
+    {
+      "kind": "text_absent",
+      "text": "akredytacja"
+    }
+  ]
+}

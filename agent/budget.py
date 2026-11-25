@@ -10,9 +10,12 @@ Gates (all must pass):
      at its reset.
   2. Weekly even line: used% must stay below
         WEEKLY_BASE + WEEKLY_SLOPE x share of the week elapsed
-     (defaults 5 + 90 x elapsed). In the last WEEKLY_FINAL_HOURS (12) of the
+     (defaults 5 + 90 x elapsed). In the last WEEKLY_FINAL_HOURS (30) of the
      week the line opens up to WEEKLY_CAP (98), so nothing is wasted.
      headroom = line - used.
+     Final hours ("use it or lose it"): the 5-hour cap rises to FINAL_FIVE_HOUR_CAP (85) and the Opus
+     and parallel thresholds drop to FINAL_OPUS_HEADROOM (1), FINAL_PARALLEL_HEADROOM (3) and
+     FINAL_PARALLEL_CAP (65), so two runs can spend what would otherwise expire at the reset.
   3. Opus (AGENT_MODEL=opus): only with headroom >= OPUS_HEADROOM (5) for a build or the planner, or
      >= REVIEW_OPUS_HEADROOM (1) for a review (AGENT_TASK=review): a review costs about a tenth of an
      Opus build, and a security review has no fallback, so waiting for 5 points left the plan idle.
@@ -45,7 +48,11 @@ FIVE_HOUR_BUFFER = env("AGENT_FIVE_HOUR_BUFFER", 15)
 WEEKLY_BASE = env("AGENT_WEEKLY_BASE", 5)
 WEEKLY_SLOPE = env("AGENT_WEEKLY_SLOPE", 90)
 WEEKLY_CAP = env("AGENT_WEEKLY_CAP", 98)
-WEEKLY_FINAL_HOURS = env("AGENT_WEEKLY_FINAL_HOURS", 12)
+WEEKLY_FINAL_HOURS = env("AGENT_WEEKLY_FINAL_HOURS", 30)
+FINAL_FIVE_HOUR_CAP = env("AGENT_FINAL_FIVE_HOUR_CAP", 85)
+FINAL_OPUS_HEADROOM = env("AGENT_FINAL_OPUS_HEADROOM", 1)
+FINAL_PARALLEL_HEADROOM = env("AGENT_FINAL_PARALLEL_HEADROOM", 3)
+FINAL_PARALLEL_CAP = env("AGENT_FINAL_PARALLEL_CAP", 65)
 OPUS_HEADROOM = env("AGENT_OPUS_HEADROOM", 5)
 REVIEW_OPUS_HEADROOM = env("AGENT_OPUS_REVIEW_HEADROOM", 1)
 PARALLEL_HEADROOM = env("AGENT_PARALLEL_HEADROOM", 10)
@@ -70,13 +77,19 @@ def find_window(windows, *needles):
     return None
 
 
-def five_hour_allowance(resets_at, now):
+def five_hour_allowance(resets_at, now, cap=None):
     """Allowed used% now: rises evenly from the buffer at the window start to the cap at the reset."""
+    cap = FIVE_HOUR_CAP if cap is None else cap
     if not resets_at:  # no window open yet: the next use starts one
-        return min(FIVE_HOUR_BUFFER, FIVE_HOUR_CAP), 0.0
+        return min(FIVE_HOUR_BUFFER, cap), 0.0
     length = timedelta(hours=5)
     elapsed = min(max((now - (parse_time(resets_at) - length)) / length, 0.0), 1.0)
-    return min(FIVE_HOUR_CAP * elapsed + FIVE_HOUR_BUFFER, FIVE_HOUR_CAP), elapsed
+    return min(cap * elapsed + FIVE_HOUR_BUFFER, cap), elapsed
+
+
+def in_final_hours(resets_at, now):
+    """True in the last WEEKLY_FINAL_HOURS before the weekly reset."""
+    return bool(resets_at) and parse_time(resets_at) - now <= timedelta(hours=WEEKLY_FINAL_HOURS)
 
 
 def weekly_line(resets_at, now):
@@ -102,17 +115,24 @@ def decide(plan, now):
 
     five_used = float(five["percentUsed"])
     weekly_used = float(weekly["percentUsed"])
-    five_allowed, five_elapsed = five_hour_allowance(five.get("resetsAt"), now)
+    final = in_final_hours(weekly.get("resetsAt"), now)
+    five_cap = FINAL_FIVE_HOUR_CAP if final else FIVE_HOUR_CAP
+    parallel_need = FINAL_PARALLEL_HEADROOM if final else PARALLEL_HEADROOM
+    parallel_cap = FINAL_PARALLEL_CAP if final else PARALLEL_CAP
+    five_allowed, five_elapsed = five_hour_allowance(five.get("resetsAt"), now, five_cap)
     line, elapsed = weekly_line(weekly.get("resetsAt"), now)
     headroom = line - weekly_used
     opus_need = REVIEW_OPUS_HEADROOM if TASK == "review" else OPUS_HEADROOM
+    if final:
+        opus_need = min(opus_need, FINAL_OPUS_HEADROOM)
 
     result = {
         "model": MODEL,
         "slot": SLOT,
         "five_hour_used": five_used,
         "five_hour_allowed_now": round(five_allowed, 1),
-        "five_hour_cap": FIVE_HOUR_CAP,
+        "five_hour_cap": five_cap,
+        "final_hours": final,
         "five_hour_resets_at": five.get("resetsAt"),
         "five_hour_elapsed_pct": round(five_elapsed * 100, 1),
         "weekly_used": weekly_used,
@@ -125,18 +145,19 @@ def decide(plan, now):
         "opus_ok": headroom >= opus_need,
         "spillover_ok": headroom >= SPILLOVER_HEADROOM,
     }
-    if five_used >= FIVE_HOUR_CAP:
-        result.update(decision="WAIT", reason=f"5-hour window at {five_used:.0f}% (cap {FIVE_HOUR_CAP:.0f}%)")
+    if five_used >= five_cap:
+        result.update(decision="WAIT", reason=f"5-hour window at {five_used:.0f}% (cap {five_cap:.0f}%)")
     elif five_used >= five_allowed:
         result.update(decision="WAIT", reason=f"5-hour window at {five_used:.0f}%, ahead of pace ({five_allowed:.0f}% allowed so far)")
     elif headroom <= 0:
         result.update(decision="WAIT", reason=f"weekly at {weekly_used:.0f}%, ahead of the even line ({line:.0f}% allowed now)")
-    elif SLOT > 1 and (headroom < PARALLEL_HEADROOM or five_used >= PARALLEL_CAP):
-        result.update(decision="WAIT", reason=f"slot {SLOT}: needs {PARALLEL_HEADROOM:.0f} points of weekly headroom (has {headroom:.0f}) and the 5-hour window below {PARALLEL_CAP:.0f}% (at {five_used:.0f}%)")
+    elif SLOT > 1 and (headroom < parallel_need or five_used >= parallel_cap):
+        result.update(decision="WAIT", reason=f"slot {SLOT}: needs {parallel_need:.0f} points of weekly headroom (has {headroom:.0f}) and the 5-hour window below {parallel_cap:.0f}% (at {five_used:.0f}%)")
     elif MODEL == "opus" and headroom < opus_need:
         result.update(decision="WAIT", reason=f"opus {TASK} needs {opus_need:g} points of weekly headroom (has {headroom:.1f})")
     else:
-        result.update(decision="RUN", reason=f"within 5-hour pace and {headroom:.0f} points under the weekly line")
+        result.update(decision="RUN", reason=f"within 5-hour pace and {headroom:.0f} points under the weekly line"
+                      + (" (final hours: spending what expires at the reset)" if final else ""))
     return result
 
 
