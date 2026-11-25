@@ -35,6 +35,7 @@ ARGUMENTS = {
     "artists:upload_chunk": {"session_id": "00000000-0000-4000-8000-000000000000"},
     "artists:upload_complete": {"session_id": "00000000-0000-4000-8000-000000000000"},
     "artists:website_import_status": {"import_id": 999999},
+    "profiles:public": {"slug": "nie-ma-takiej"},
 }
 
 #: URL name -> expected answer for (anonymous, artist, institution, admin)
@@ -89,6 +90,12 @@ MATRIX = {
     "profiles:generation_status": ("login", "200", "403", "403"),
     "profiles:generation_start": ("login", "405", "403", "403"),  # POST only
     "profiles:gaps": ("login", "200", "403", "403"),
+    "profiles:publication": ("login", "200", "403", "403"),
+    "profiles:withdraw_confirm": ("login", "200", "403", "403"),
+    "profiles:publish": ("login", "405", "403", "403"),  # POST only
+    "profiles:publish_changes": ("login", "405", "403", "403"),  # POST only
+    "profiles:withdraw": ("login", "405", "403", "403"),  # POST only
+    "profiles:public": ("404", "404", "404", "404"),  # public by design; unknown slug = 404
     "institutions:register": ("200", "200", "200", "200"),
     "institutions:rspo_suggestions": ("200", "200", "200", "200"),
     "institutions:start": ("login", "403", "200", "403"),

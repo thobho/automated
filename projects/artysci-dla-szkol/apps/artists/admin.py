@@ -32,5 +32,14 @@ class ArtistAdmin(admin.ModelAdmin):
     list_display = ("name", "artist_type", "city", "created_at")
     list_filter = ("artist_type",)
     search_fields = ("name", "city")
-    readonly_fields = ("user", "created_at")
+    # The publication fields change only through `profiles.publication`: an editable form would also
+    # write back stale values (undo a withdrawal, free a slug).
+    readonly_fields = (
+        "user",
+        "created_at",
+        "slug",
+        "publication_status",
+        "published_at",
+        "withdrawn_at",
+    )
     inlines = (VoivodeshipInline, AudienceInline, OfferInline)

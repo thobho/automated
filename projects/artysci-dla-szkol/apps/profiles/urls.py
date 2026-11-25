@@ -16,4 +16,10 @@ urlpatterns = [
     path("panel/podglad/sekcja/", views.regenerate_section, name="regenerate_section"),
     path("panel/podglad/sekcja/status/", views.section_status, name="section_status"),
     path("panel/podglad/przywroc/", views.restore_version, name="restore_version"),
+    path("panel/publikacja/", views.publication_page, name="publication"),
+    path("panel/publikacja/opublikuj/", views.publish, name="publish"),
+    path("panel/publikacja/zmiany/", views.publish_changes, name="publish_changes"),
+    path("panel/publikacja/wycofanie/", views.withdraw_confirm, name="withdraw_confirm"),
+    path("panel/publikacja/wycofaj/", views.withdraw, name="withdraw"),
+    path("artysci/<slug:slug>/", views.public_page, name="public"),
 ]

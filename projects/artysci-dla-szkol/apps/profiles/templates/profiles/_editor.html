@@ -1,6 +1,7 @@
 {% load i18n %}
 {# Owner-only text editor of the preview (US-2.6): plain POST forms with CSRF, no inline script. #}
 <section class="editor" aria-labelledby="editor-h">
+  <p><a href="{% url 'profiles:publication' %}">{% translate "Publikacja strony" %}</a></p>
   <h2 id="editor-h">{% translate "Edycja tekstów" %}</h2>
   <p class="editor__hint">{% translate "Tekst, który zapiszesz, jest blokowany: ponowne generowanie go nie zmieni. Możesz go odblokować." %}</p>
   {% include "profiles/_section_status.html" %}

@@ -792,6 +792,31 @@ App `apps/analytics`. No cookies, no PII, no third party (D38, D39).
   publication minimum. `completeness_percent(artist)` is the function US-2.8 uses for the
   "published" event; no event is emitted here.
 
+## Publication and withdrawal (US-2.8)
+
+`apps/profiles/publication.py`. Panel: `/panel/publikacja/` (status, blockers with links),
+POST-only `opublikuj/`, `zmiany/` ("Opublikuj zmiany"), `wycofaj/`, and a GET confirmation page
+`wycofanie/`. Public page: `/artysci/<slug>/` (anonymous, server-rendered, T32 template).
+
+- `publication_blockers(artist)`: Polish reasons (name, region, generated page, "O artyście" text,
+  an offer, child-protection statement; an e-mail or phone in the name, city, texts, offers or photo
+  alt texts, D9, found by `contact.py`). Publishing is refused while the list is not empty.
+- Publishing copies everything the page shows into `PublishedPage`: texts and theme of the current
+  version, name, city, offers and the ids and alt texts of the materials. Later edits, uploads,
+  offers and renames stay private until "Opublikuj zmiany" (`has_unpublished_changes`).
+- Slug, state and dates are read-only in the Django admin: only `publication.py` writes them.
+- Only removal is immediate: a deleted material disappears, and without a current "Prawa do
+  materiałów" statement (checked per request) no photo, video or link is shown.
+- Recordings never show the uploaded file's name ("Nagranie 1" instead).
+- Slug: made once on the first publication from the name (ASCII, lowercase, hyphens, `-2`, `-3` on
+  collision), never changed by renames, kept after withdrawal (never reused, republication gives
+  the same one); reserved words (`RESERVED_SLUGS`) are skipped.
+- Draft, withdrawn and unknown slugs give the same 404. `Cache-Control: no-cache` (a cache must
+  revalidate, so a withdrawal is visible at once). Preview stays `noindex`; the public page is not.
+- `Artist.objects.published()` is the only definition of "publicly visible" (catalog, US-4.1); it
+  leaves out deactivated accounts.
+- Events `profile_published` (`profile_id`, `completeness_percent`) and `profile_withdrawn`.
+
 ## Page themes (US-3.2)
 
 Four themes, a closed list (`Theme` in `apps/profiles/themes.py`; slugs equal the `theme` enum of

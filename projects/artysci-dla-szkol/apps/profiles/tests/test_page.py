@@ -335,7 +335,7 @@ def test_builder_photos_and_video_files(artist_user):
     content = page_content_for(artist)
     assert len(content.photos) == 2 and not content.show_gallery
     assert content.videos[0].is_file and content.videos[0].poster_url
-    assert content.videos[0].title == "film.mov"
+    assert content.videos[0].title == "Nagranie 1"  # never the file name
 
 
 @pytest.mark.django_db

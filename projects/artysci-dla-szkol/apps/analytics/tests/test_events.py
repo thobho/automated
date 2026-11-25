@@ -15,6 +15,8 @@ EMITTERS: dict[str, str] = {
     "institution_verified": "apps.institutions.services.verify",
     "website_import_started": "apps.artists.website_import.start_import",
     "website_import_finished": "apps.artists.website_import._finish",
+    "profile_published": "apps.profiles.publication.publish",
+    "profile_withdrawn": "apps.profiles.publication.withdraw",
 }
 PENDING = set(EVENT_CATALOG) - set(EMITTERS)
 
@@ -29,6 +31,7 @@ def test_catalog_has_the_agreed_events():
         "website_import_finished",
         "profile_generated",
         "profile_published",
+        "profile_withdrawn",
         "inquiry_sent",
         "inquiry_answered",
         "offer_accepted",
@@ -124,3 +127,18 @@ def test_website_import_events_contract():
 
 def test_actor_id_anonymous_is_empty():
     assert services.actor_id(None) == ""
+
+
+def test_profile_publication_events_contract():
+    """US-2.8: ids and a percentage only; never the name, slug, e-mail or text."""
+    assert EVENT_CATALOG["profile_published"] == frozenset({"profile_id", "completeness_percent"})
+    assert EVENT_CATALOG["profile_withdrawn"] == frozenset({"profile_id"})
+    services.track("profile_published", profile_id=1, completeness_percent=80)
+    services.track("profile_withdrawn", profile_id=1)
+    for name, props in (
+        ("profile_published", {"slug": "teatr"}),
+        ("profile_withdrawn", {"artist_name": "Teatr"}),
+        ("profile_withdrawn", {"email": "a@example.invalid"}),
+    ):
+        with pytest.raises(services.DisallowedProperty):
+            services.track(name, **props)

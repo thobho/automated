@@ -14,7 +14,9 @@ EVENT_CATALOG: dict[str, frozenset[str]] = {
     "website_import_started": frozenset(),
     "website_import_finished": frozenset({"status", "page_count", "photo_count", "duration_ms"}),
     "profile_generated": frozenset({"duration_ms", "attempt"}),
-    "profile_published": frozenset({"profile_id"}),
+    # US-2.8: ids and a whole-number percentage only, no name or slug.
+    "profile_published": frozenset({"profile_id", "completeness_percent"}),
+    "profile_withdrawn": frozenset({"profile_id"}),
     "inquiry_sent": frozenset({"inquiry_id", "artist_count"}),
     "inquiry_answered": frozenset({"inquiry_id", "response_hours", "answer"}),
     "offer_accepted": frozenset({"inquiry_id", "response_hours"}),

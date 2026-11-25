@@ -12,6 +12,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 
+from . import contact
 from .accessibility import photo_alt
 from .themes import DEFAULT_THEME, theme_or_default
 
@@ -172,27 +173,48 @@ def _offer_tags(offer) -> tuple[str, ...]:
     return tuple(tags)
 
 
-def page_content_for(artist) -> PageContent:
-    """Build the page content from what exists: name, city, offers, ready photos/videos.
-    No AI, no main photo (US-2.6 chooses it), no texts (US-2.5 writes them)."""
-    from apps.artists import materials, services
-    from apps.artists.models import MaterialKind
+def _offer_items(artist) -> list[OfferItem]:
+    from apps.artists import services
 
-    from .services import theme_for
-
-    offers = [
+    return [
         OfferItem(o.title, o.description, _price_note(o), _offer_tags(o))
         for o in services.offers_for(artist)
     ]
+
+
+def shown_materials(artist) -> list:
+    """The ready materials a page can show (photos, video files, video links), in page order."""
+    from apps.artists import materials
+    from apps.artists.models import MaterialKind
+
+    kinds = (MaterialKind.PHOTO, MaterialKind.VIDEO, MaterialKind.LINK)
+    return list(
+        materials.ready_materials(artist).filter(kind__in=kinds).order_by("created_at", "pk")
+    )
+
+
+def _video_title(material, number: int) -> str:
+    """The title of a recording: never the uploaded file's name (it can carry personal data), and
+    no title with contact data in it (D9: a link's title comes from YouTube/Vimeo)."""
+    if material.title and not contact.contacts_in(material.title):
+        return material.title
+    return _("Nagranie %(n)d") % {"n": number}
+
+
+def _media_items(shown, name: str, alts: dict) -> tuple[list[PhotoItem], list[VideoItem]]:
+    """`alts` maps material ids to the artist's alt text (a missing one gives the fallback)."""
+    from apps.artists import materials
+    from apps.artists.models import MaterialKind
+
     photos, videos = [], []
-    for material in materials.ready_materials(artist):
+    for material in shown:
         if material.kind == MaterialKind.PHOTO:
-            alt = photo_alt(material.alt_text, artist.name, len(photos) + 1)
+            alt = photo_alt(alts.get(material.pk, ""), name, len(photos) + 1)
             photos.append(PhotoItem(materials.file_url(material), alt))
         elif material.kind == MaterialKind.VIDEO and materials.file_url(material):
             videos.append(
                 VideoItem(
-                    title=material.title or material.original_name,
+                    title=_video_title(material, len(videos) + 1),
                     src=materials.file_url(material),
                     poster_url=materials.thumbnail_url(material),
                 )
@@ -200,16 +222,64 @@ def page_content_for(artist) -> PageContent:
         elif material.kind == MaterialKind.LINK and material.canonical_url:
             videos.append(
                 VideoItem(
-                    title=material.title,
+                    title=_video_title(material, len(videos) + 1),
                     link_url=material.canonical_url,
                     provider=material.get_provider_display(),
                 )
             )
+    return photos, videos
+
+
+def page_content_for(artist) -> PageContent:
+    """Build the page content from what exists: name, city, offers, ready photos/videos.
+    No AI, no main photo (US-2.6 chooses it), no texts (US-2.5 writes them)."""
+    from .services import theme_for
+
+    shown = shown_materials(artist)
+    photos, videos = _media_items(shown, artist.name, {m.pk: m.alt_text for m in shown})
     return PageContent(
         slug=slugify(artist.name) or f"artysta-{artist.pk}",
         hero=Hero(name=artist.name, city=artist.city),
-        offers=offers,
+        offers=_offer_items(artist),
         videos=videos,
         photos=photos,
         theme=theme_for(artist),
+    )
+
+
+# --- the published copy (US-2.8): everything the artist's data adds to the page, as JSON --------
+
+
+def page_data(artist, shown) -> dict:
+    """The artist's data as it is now, in the form `PublishedPage.data` stores."""
+    return {
+        "name": artist.name,
+        "city": artist.city,
+        "offers": [
+            {
+                "title": o.title,
+                "description": o.description,
+                "price_note": o.price_note,
+                "tags": list(o.tags),
+            }
+            for o in _offer_items(artist)
+        ],
+        "materials": [{"id": m.pk, "alt": m.alt_text} for m in shown],
+    }
+
+
+def page_from_data(slug: str, data: dict, theme: str, shown) -> PageContent:
+    """The page of a stored copy. `shown` are the materials that may be shown now."""
+    alts = {item["id"]: item["alt"] for item in data["materials"]}
+    photos, videos = _media_items(shown, data["name"], alts)
+    return PageContent(
+        slug=slug,
+        hero=Hero(name=data["name"], city=data["city"]),
+        offers=[
+            OfferItem(o["title"], o["description"], o["price_note"], tuple(o["tags"]))
+            for o in data["offers"]
+        ],
+        videos=videos,
+        photos=photos,
+        theme=theme,
     )
