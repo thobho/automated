@@ -1,0 +1,33 @@
+/* Public catalog (US-4.1): one column on a phone, more columns as the screen grows.
+   System font stack and no external requests (D11). */
+main { max-width: 72rem; margin-inline: auto; padding: 0 1rem 3rem; }
+.catalog-grid {
+  list-style: none; margin: 1.5rem 0; padding: 0;
+  display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+}
+.catalog-card {
+  display: flex; flex-direction: column; border: 1px solid #c9c4b8; border-radius: .5rem;
+  background: #fffdf8; overflow: hidden; position: relative;
+}
+.catalog-card__photo { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.catalog-card__initial {
+  display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 3;
+  background: #efe9da; color: #5a3d00; font-size: 4rem; font-weight: 700;
+}
+.catalog-card__body { padding: .75rem 1rem 1rem; }
+.catalog-card__body p { margin: .25rem 0; color: #3d3a33; }
+.catalog-card__name { margin: 0 0 .25rem; font-size: 1.2rem; }
+.catalog-card__name a { color: #1b3a6b; }
+/* The whole card is clickable through the name link, which keeps one tab stop per card. */
+.catalog-card__name a::after { content: ""; position: absolute; inset: 0; }
+.catalog-card :focus-visible, .catalog-pagination :focus-visible { outline: 3px solid #1b3a6b; outline-offset: 2px; }
+.catalog-card__badge { font-weight: 600; color: #14532d; }
+.catalog-card__price { font-weight: 600; }
+.catalog-pagination { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.catalog-pagination a, .catalog-pagination span {
+  min-width: 2.75rem; min-height: 2.75rem; padding: 0 .75rem; box-sizing: border-box;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid #c9c4b8; border-radius: .4rem; text-decoration: none;
+}
+.catalog-pagination a { color: #1b3a6b; }
+.catalog-pagination [aria-current] { background: #1b3a6b; color: #fff; border-color: #1b3a6b; }

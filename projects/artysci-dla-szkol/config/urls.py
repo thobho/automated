@@ -9,6 +9,7 @@ urlpatterns = [
     path("", include("apps.accounts.urls")),
     path("", include("apps.artists.urls")),
     path("", include("apps.institutions.urls")),
+    path("", include("apps.catalog.urls")),
     path("", include("apps.profiles.urls")),
     path("django-admin/", admin.site.urls),
 ]

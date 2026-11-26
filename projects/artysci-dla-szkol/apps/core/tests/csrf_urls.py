@@ -19,4 +19,5 @@ urlpatterns = [
     path("", include("apps.accounts.urls")),  # ... and login / logout
     path("", include("apps.artists.urls")),  # the home page links both registrations
     path("", include("apps.institutions.urls")),
+    path("", include("apps.catalog.urls")),  # base.html links the catalog
 ]

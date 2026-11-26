@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% translate "Artyści" %}{% if page.number > 1 %} – {% blocktranslate with n=page.number %}strona {{ n }}{% endblocktranslate %}{% endif %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'catalog/catalog.css' %}">
+{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Artyści" %}</h1>
+  {% if page.cards %}
+    <ul class="catalog-grid" aria-label="{% translate 'Lista artystów' %}">
+      {% for card in page.cards %}
+        {% include "catalog/_card.html" %}
+      {% endfor %}
+    </ul>
+    {% if page.pages > 1 %}
+      {% include "catalog/_pagination.html" %}
+    {% endif %}
+  {% else %}
+    <p class="catalog-empty">{% translate "Nie ma jeszcze żadnych opublikowanych artystów. Zajrzyj tu wkrótce." %}</p>
+  {% endif %}
+{% endblock %}
