@@ -3,7 +3,7 @@
 {# button stays hidden and the field is the fallback: select the address and copy it. #}
 <div class="copy-field" data-copy>
   <label for="{{ field_id }}">{{ label }}</label>
-  <input id="{{ field_id }}" type="url" value="{{ url }}" readonly data-copy-source spellcheck="false" autocomplete="off">
+  <input id="{{ field_id }}" type="url" value="{{ url }}" readonly size="64" data-copy-source spellcheck="false" autocomplete="off">
   <button type="button" data-copy-button hidden>{% translate "Kopiuj link" %}</button>
   <span role="status" aria-live="polite" data-copy-status></span>
 </div>

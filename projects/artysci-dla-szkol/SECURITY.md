@@ -276,6 +276,27 @@ User files are served from a separate origin (D62, built in T06). Baseline set u
 Remediation time frames for vulnerable dependencies (ASVS 15.1.1): critical 7 days, high 30
 days, others with the next regular update; dependencies are reviewed at least monthly.
 
+## Private preview links (US-3.7, D121)
+
+`/podglad/<token>/` opens the artist's current page without login, so the token is the only
+secret. It is 32 random bytes from `secrets` (43 URL-safe characters), shown once in the answer
+to the POST that creates it (no session, no redirect URL, `Cache-Control: no-store`) and stored
+only as SHA-256 (`PreviewLink.token_hash`, unique index; a 256-bit random value needs no slow
+hash). Valid 7 days, at most 3 active per artist, revocable at once; it stops working when the
+page is withdrawn or the account deactivated or deleted, and a token only ever maps to its own
+artist. Unknown, expired, revoked and malformed tokens get the site's own 404 page (same body
+and headers). Wrong tokens count per client IP in `accounts.throttling` (`preview_ip`,
+`PREVIEW_LIMIT_PER_IP`/`PREVIEW_LIMIT_WINDOW`, default 20 per 15 minutes); at the limit the IP
+gets 429 and one `preview_rate_limited` log line without token or path. The token never reaches
+logs or analytics: `core.logs.redact()` turns `/podglad/<anything>` into `/podglad/[token]`
+(access log and `django.request` lines), and visit counting skips `/podglad/`. The page sends
+`noindex` (meta and `X-Robots-Tag: noindex, nofollow`), `Cache-Control: no-store` and
+`Referrer-Policy: no-referrer`, has no owner controls, shows photos and videos only with a
+current rights statement and replaces any e-mail or phone with "[ukryte]" (D9). Behind a
+reverse proxy all visitors share one REMOTE_ADDR bucket (as for the login limits, D91).
+Creating and revoking are POST-only, CSRF-protected and owner-only (the artist is the logged-in
+user; a foreign link id is simply not found).
+
 ## Artist statements (US-8.2, D104)
 
 Statements (child protection, rights to materials, image consents, billing form, OC with its
@@ -361,7 +382,7 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 12.2.1 | TLS for all external connections | partial (app redirects + HSTS; proxy at deployment, D91) |
 | 12.2.2 | Publicly trusted certificates | planned (deployment, D91) |
 | 13.4.1 | No `.git` in the deployment | done (`.dockerignore`) |
-| 14.2.1 | No sensitive data in URLs | partial (query strings never logged; the login link token is the one allowed exception, see "E-mail login") |
+| 14.2.1 | No sensitive data in URLs | partial (query strings never logged; the login link token is one allowed exception, see "E-mail login"; the preview link token in the path is the other, redacted in logs and kept out of analytics, see "Private preview links") |
 | 14.3.1 | Client storage cleared on logout | done (T12: `Clear-Site-Data: "cookies", "storage"`) |
 | 15.1.1 | Remediation time frames documented | done (above) |
 | 15.2.1 | Components within those time frames | planned (dependency audit in CI) |
