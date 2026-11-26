@@ -22,7 +22,7 @@ MAX_IMAGES_PER_CALL = 4
 MAX_PARTS_PER_MESSAGE = 16
 # Upper estimate of the prompt tokens one image costs. Providers resize large images (about 1.5k
 # tokens for a typical vision model, a few thousand for tall full-page screenshots); 4,000 is
-# deliberately pessimistic so the per-call and daily caps hold. Documented in decision D118.
+# deliberately pessimistic so the per-call and daily caps hold. Documented in decision D122.
 IMAGE_TOKENS_ESTIMATE = 4000
 
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"

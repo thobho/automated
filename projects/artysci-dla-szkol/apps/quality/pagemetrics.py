@@ -95,7 +95,7 @@ def capture(base_url: str, cookie: tuple[str, str]) -> dict[int, dict]:
             browser = playwright.chromium.launch()
             try:
                 for width in WIDTHS:
-                    out[width] = _capture_width(browser, base_url, cookie, width)
+                    out[width] = capture_width(browser, base_url, cookie, width)
             finally:
                 browser.close()
     except Exception as exc:  # browser missing or crashed
@@ -105,7 +105,7 @@ def capture(base_url: str, cookie: tuple[str, str]) -> dict[int, dict]:
     return out
 
 
-def _capture_width(browser, base_url: str, cookie: tuple[str, str], width: int) -> dict:
+def capture_width(browser, base_url: str, cookie: tuple[str, str], width: int) -> dict:
     context = browser.new_context(viewport={"width": width, "height": VIEWPORT_HEIGHT})
     try:
         context.add_cookies([{"name": cookie[0], "value": cookie[1], "url": base_url}])
