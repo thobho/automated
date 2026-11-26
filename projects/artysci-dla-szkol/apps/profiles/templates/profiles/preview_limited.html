@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Za dużo prób" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block head %}<meta name="robots" content="noindex, nofollow">{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Za dużo prób" %}</h1>
+  <p>{% translate "Z tego adresu otwarto zbyt wiele niedziałających linków. Spróbuj ponownie za kilkanaście minut." %}</p>
+{% endblock %}

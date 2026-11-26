@@ -1,7 +1,9 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% translate "Publikacja strony" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block head %}<script src="{% static 'js/copy-link.js' %}" defer></script>{% endblock %}
 
 {% block content %}
   <h1>{% translate "Publikacja strony" %}</h1>
@@ -9,8 +11,12 @@
   {% if artist.publication_status == "published" %}
     <p data-state="published">
       {% translate "Strona jest opublikowana" %}:
-      <a href="{% url 'profiles:public' artist.slug %}" data-public-link>{{ request.scheme }}://{{ request.get_host }}{% url 'profiles:public' artist.slug %}</a>
+      <a href="{% url 'profiles:public' artist.slug %}" data-public-link>{{ public_url }}</a>
     </p>
+    <div data-public-copy>
+      {% translate "Adres Twojej strony" as public_label %}
+      {% include "profiles/_copy_field.html" with field_id="public-url" label=public_label url=public_url %}
+    </div>
     {% if unpublished_changes %}
       <p data-unpublished>{% translate "Masz zmiany, których nie widać jeszcze publicznie." %}</p>
     {% endif %}
@@ -47,6 +53,11 @@
       <a href="{% url 'artists:statements' %}">{% translate "Złóż oświadczenie" %}</a>
     </p>
   {% endif %}
+
+  {% if preview_links_open %}
+    {% include "profiles/_preview_links.html" %}
+  {% endif %}
+
   <p><a href="{% url 'profiles:preview' %}">{% translate "Zobacz podgląd strony" %}</a></p>
   <p><a href="{% url 'artists:start' %}">{% translate "Wróć do kreatora" %}</a></p>
 {% endblock %}

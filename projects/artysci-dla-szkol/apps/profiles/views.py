@@ -6,6 +6,7 @@ There is no id in the URLs: an artist only ever sees the status of their own lat
 from django.contrib import messages
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_control, never_cache
 from django.views.decorators.http import (
@@ -14,12 +15,14 @@ from django.views.decorators.http import (
     require_POST,
     require_safe,
 )
+from django.views.defaults import page_not_found
 
 from apps.accounts.permissions import role_required
 from apps.artists import services as artist_services
+from apps.artists.models import PublicationStatus
 from apps.quality.models import Generation
 
-from . import completeness, pages, publication, sections, seo, services
+from . import completeness, pages, previews, publication, sections, seo, services
 from . import generation as generations
 from .models import PageVersion
 from .themes import Theme
@@ -221,18 +224,86 @@ def theme(request):
 # --- publication (US-2.8) ------------------------------------------------------------------------
 
 
+def _public_url(artist) -> str:
+    """The stable absolute address of the published page (SITE_URL, T39)."""
+    return f"{seo.site_url()}{reverse('profiles:public', args=[artist.slug])}"
+
+
+def _publication_response(request, *, new_link_url="", status=200):
+    artist = artist_services.artist_for(request.user)
+    published = artist.publication_status == PublicationStatus.PUBLISHED
+    context = {
+        "artist": artist,
+        "public_url": _public_url(artist) if published and artist.slug else "",
+        "blockers": publication.publication_blockers(artist),
+        "unpublished_changes": publication.has_unpublished_changes(artist),
+        "materials_hidden": publication.materials_hidden(artist),
+        "preview_links": previews.active_links(artist),
+        "preview_links_max": previews.MAX_ACTIVE,
+        "preview_links_open": artist.publication_status != PublicationStatus.WITHDRAWN,
+        "new_link_url": new_link_url,
+    }
+    return render(request, "profiles/publication.html", context, status=status)
+
+
 @never_cache
 @require_http_methods(["GET", "HEAD"])
 @role_required("artist")
 def publication_page(request):
+    return _publication_response(request)
+
+
+# The new link is shown in the answer to the POST itself: the token is never stored (no session,
+# no redirect URL), so it is visible exactly once. `never_cache` sends `no-store`.
+@never_cache
+@role_required("artist")
+@require_POST
+def preview_link_create(request):
     artist = artist_services.artist_for(request.user)
-    context = {
-        "artist": artist,
-        "blockers": publication.publication_blockers(artist),
-        "unpublished_changes": publication.has_unpublished_changes(artist),
-        "materials_hidden": publication.materials_hidden(artist),
-    }
-    return render(request, "profiles/publication.html", context)
+    try:
+        _link, token = previews.create_link(artist)
+    except previews.PreviewRefused as exc:
+        messages.error(request, exc.message)
+        return redirect("profiles:publication")
+    url = seo.absolute_url(reverse("profiles:shared_preview", args=[token]))
+    response = _publication_response(request, new_link_url=url)
+    response["Referrer-Policy"] = "no-referrer"
+    return response
+
+
+@never_cache
+@role_required("artist")
+@require_POST
+def preview_link_revoke(request):
+    artist = artist_services.artist_for(request.user)
+    if previews.revoke_link(artist, request.POST.get("link", "")):
+        messages.success(request, _("Link do podglądu został odwołany i już nie działa."))
+    else:
+        messages.error(request, _("Nie ma takiego aktywnego linku."))
+    return redirect("profiles:publication")
+
+
+def _private_headers(response):
+    response["X-Robots-Tag"] = "noindex, nofollow"
+    response["Cache-Control"] = "no-store"
+    response["Referrer-Policy"] = "no-referrer"  # the token must not leave in a Referer header
+    return response
+
+
+@require_safe
+def shared_preview(request, token):
+    """`/podglad/<token>/`: the read-only preview for anyone with the link (US-3.7). Unknown,
+    expired, revoked and malformed tokens get one and the same 404 page."""
+    opened = previews.open_preview(token, request.META.get("REMOTE_ADDR", ""))
+    if opened.outcome is previews.Outcome.LIMITED:
+        response = render(request, "profiles/preview_limited.html", status=429)
+    elif opened.outcome is previews.Outcome.NOT_FOUND:
+        # The site's own 404 page, as for an unknown address: nothing to tell the cases apart.
+        response = page_not_found(request, Http404())
+    else:
+        context = {"content": opened.page, "noindex": True, "shared_preview": True}
+        response = render(request, "profiles/page.html", context)
+    return _private_headers(response)
 
 
 @never_cache
