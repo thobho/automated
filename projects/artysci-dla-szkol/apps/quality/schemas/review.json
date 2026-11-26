@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ocena profilu v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["scores", "problems"],
+  "properties": {
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wiernosc", "kompletnosc", "przydatnosc", "jezyk", "ton", "uczciwosc"],
+      "properties": {
+        "wiernosc": {"enum": [1, 2, 3, 4, 5]},
+        "kompletnosc": {"enum": [1, 2, 3, 4, 5]},
+        "przydatnosc": {"enum": [1, 2, 3, 4, 5]},
+        "jezyk": {"enum": [1, 2, 3, 4, 5]},
+        "ton": {"enum": [1, 2, 3, 4, 5]},
+        "uczciwosc": {"enum": [1, 2, 3, 4, 5]}
+      }
+    },
+    "problems": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["dimension", "quote", "explanation"],
+        "properties": {
+          "dimension": {
+            "enum": ["wiernosc", "kompletnosc", "przydatnosc", "jezyk", "ton", "uczciwosc"]
+          },
+          "quote": {"type": "string"},
+          "explanation": {"type": "string"}
+        }
+      }
+    }
+  }
+}

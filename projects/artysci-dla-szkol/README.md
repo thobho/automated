@@ -556,6 +556,72 @@ artist and runs through the existing generator. Code: `apps/quality/testset.py`;
   text (it must change nothing) and allows only `example.invalid` hosts and YouTube/Vimeo links
   (invented ids). Materials of real artists need the separate consent from D12, which is not built.
 
+## Automatic evaluation of the test set, part 1 (US-11.3A)
+
+One command runs the generator on the test set and writes a report: for each package the validator
+result, the expectation results and an **independent AI review** with a 1 to 5 score in six
+dimensions and quotes of the problems. Code: `apps/quality/evaluation.py` (runner, summary,
+report) and `apps/quality/reviewer.py` (reviewer). Page metrics, screenshots, CI and the version
+gate are later stories (US-11.3B, US-11.4).
+
+```
+uv run python manage.py evaluate_testset [--package <slug>]... [--level weak|medium|rich] \
+    [--output report.json] [--resume <run id>] [--key-file ~/.config/automated/secrets.env]
+```
+
+- **Refuses** with `QUALITY_LAB_ENABLED` off (no AI call) and for a `consented` package. It prints
+  one line per package (generation id and status, hard rules, failed expectations, the six scores
+  or `brak oceny` with the reason, problems, unverified quotes, cost) and a summary: packages,
+  hard-rule pass share, failed expectations, mean per dimension overall and per level (missing
+  scores are left out and their number is shown in brackets), cost. The AI client is `AI_CLIENT`;
+  with `--key-file` the real OpenRouter client is used (spends money), the key is read like in
+  `ai_smoke` and is never printed or written anywhere. A real run needs `AI_MAX_TOKENS` of about
+  8000: with the default 2048 the generator's reply is cut off and every package ends `błąd`
+  ("Odpowiedź AI nie jest poprawnym JSON-em").
+- **Same path as production.** Each package is loaded (`load_package`), then `start_generation`
+  and `profiles.generation.run_generation` run in the foreground (first call, validator, up to 2
+  repair rounds). A generation ending `błąd` counts as failed for the hard rules and has no
+  review; one ending `do przeglądu` also fails them but is reviewed.
+- **The reviewer** (`purpose=profile_review`, one call per package, no retries) is a separate call
+  through `apps/profiles/ai`. It gets only `build_input` and the finished profile without its
+  `claims_audit`; never the generator instructions, the validator findings, earlier replies or the
+  repair history. Its instructions (`apps/quality/prompts/review_instructions.md`, with a Polish
+  description of 1, 3 and 5 for every dimension) and reply schema
+  (`apps/quality/schemas/review.json`) are registry components `instructions:profile_review` and
+  `schema:profile_review`, v0.1, not part of the generator's `COMPONENTS`; changing them needs a
+  version bump (`generator_manifest --write`).
+- **Rubric.** Dimensions (keys in the reply and in the report): `wiernosc`, `kompletnosc`,
+  `przydatnosc`, `jezyk`, `ton`, `uczciwosc` (wierność, kompletność, przydatność, język, ton,
+  uczciwość wobec braków), each an integer 1 to 5. A problem has `dimension`, `quote` (verbatim
+  from the profile) and `explanation`. A quote that is not a substring of the profile's public
+  texts (after whitespace normalisation) is kept with `"unverified": true` and counted.
+- **No invented scores.** Invalid JSON, a score of 6, a missing dimension or any AI error gives
+  the review status `brak oceny` with the reason (never reply text); the package keeps its other
+  results and the run goes on. On the kill switch or a cost cap the run stops, is marked
+  `niekompletny` and no further call is made; `--resume <id>` evaluates only the missing packages
+  and refuses when a generator or reviewer component, the AI model, the AI client (`ai_client`,
+  e.g. `fake` vs `openrouter`) or a package changed since the run started. A generation paid for
+  whose review was refused by the cap is redone on resume; its cost stays in the run's
+  `abandoned_cost_usd`, so `cost_usd` covers every call. An unexpected error closes the run as
+  `niekompletny` (note `przerwano błędem`) and is re-raised; a run left `trwa` by a killed process
+  can be resumed after `GENERATION_STALE_SECONDS` without activity.
+- **Storage.** `EvaluationRun` (component versions and hashes of the generator and the reviewer,
+  AI models, package-set hash, times, cost, status `trwa` / `niekompletny` / `zakończony`) and
+  `PackageEvaluation` (run, slug, package hash, generation, validator summary, expectation
+  results, six nullable scores, problems, review status and reason, review `AICall` ids, cost).
+  Cost is the generation plus the review calls (`AICall`). A finished run and every package row
+  are append-only (edits and deletes are refused, like `Generation`). Read-only, staff-only admin:
+  `/django-admin/quality/evaluationrun/` and `/django-admin/quality/packageevaluation/`.
+- **JSON report** (`--output`), format `evaluation-report/1`:
+  `{"format", "run": {id, status, note, level, started_at, finished_at, generator_components,
+  reviewer_components, generator_model, reviewer_model, ai_client, package_set_hash, packages, cost_usd},
+  "summary": {as printed, plus the failed expectations}, "packages": [{slug, level, package_hash,
+  generation: {id, status, repair_rounds, duration_ms, cost_usd}, hard_pass, validator: {ok, hard,
+  soft, repair_rounds, repair_stopped}, expectations: [{kind, detail, passed, message}], review:
+  {status, reason, scores: {<dimension>: 1-5 or null}, problems: [{dimension, quote, explanation,
+  unverified}]}, profile, cost_usd, duration_ms}]}`. Synthetic data only; no key, prompt or
+  instruction text.
+
 ## Profile generation (US-2.5A)
 
 A background job turns an artist's ready materials, questionnaire and offers into a profile JSON

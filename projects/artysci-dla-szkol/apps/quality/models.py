@@ -238,3 +238,147 @@ class TestsetLoad(models.Model):
 
     def __str__(self) -> str:
         return f"Test set package {self.slug}"
+
+
+class EvaluationRunQuerySet(models.QuerySet):
+    def update(self, **kwargs):
+        raise RegistryImmutable("evaluation runs cannot be updated in bulk")
+
+    def delete(self):
+        raise RegistryImmutable("evaluation runs cannot be deleted")
+
+
+class EvaluationRun(models.Model):
+    """One run of the generator test set with an AI review (US-11.3A, D13).
+
+    Written only by `apps.quality.evaluation`. A run is open (`trwa`, `niekompletny`) until it is
+    finished as `zakończony`; then it and its rows are append-only. `cost_usd` is the sum of the
+    package evaluations' costs (generation and review calls). No prompt or reply text is stored.
+    """
+
+    class Status(models.TextChoices):
+        RUNNING = "running", _("trwa")
+        INCOMPLETE = "incomplete", _("niekompletny")
+        COMPLETE = "complete", _("zakończony")
+
+    status = models.CharField(
+        _("status"), max_length=12, choices=Status.choices, default=Status.RUNNING
+    )
+    generator_components = models.JSONField(_("komponenty generatora"), default=dict)
+    reviewer_components = models.JSONField(_("komponenty recenzenta"), default=dict)
+    generator_model = models.CharField(_("model generatora"), max_length=500, blank=True)
+    reviewer_model = models.CharField(_("model recenzenta"), max_length=500, blank=True)
+    ai_client = models.CharField(_("klient AI"), max_length=40, blank=True)
+    # Generations paid for whose package was left for `--resume` (the AI stopped before its
+    # review); added to `cost_usd` so the total is the cost of every call of the run.
+    abandoned_cost_usd = models.DecimalField(
+        _("koszt porzuconych generacji (USD)"), max_digits=16, decimal_places=10, default=0
+    )
+    package_set_hash = models.CharField(_("odcisk zestawu pakietów"), max_length=64)
+    slugs = models.JSONField(_("pakiety"), default=list)
+    level = models.CharField(_("poziom"), max_length=10, blank=True)
+    started_at = models.DateTimeField(_("rozpoczęto"))
+    finished_at = models.DateTimeField(_("zakończono"), null=True, blank=True)
+    cost_usd = models.DecimalField(_("koszt (USD)"), max_digits=16, decimal_places=10, default=0)
+    note = models.CharField(_("uwaga"), max_length=200, blank=True)
+
+    objects = EvaluationRunQuerySet.as_manager()
+
+    class Meta:
+        verbose_name = _("przebieg oceny")
+        verbose_name_plural = _("przebiegi oceny")
+        ordering = ["-started_at", "-pk"]
+
+    def __str__(self) -> str:
+        return f"Evaluation run {self.pk} ({self.status})"
+
+    def save(self, *args, **kwargs):
+        # Integrity guard, not business logic: a finished run is never rewritten.
+        if self.pk is not None and not self._state.adding:
+            stored = type(self).objects.filter(pk=self.pk).values_list("status", flat=True).first()
+            if stored == self.Status.COMPLETE:
+                raise RegistryImmutable("finished evaluation runs cannot be edited")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise RegistryImmutable("evaluation runs cannot be deleted")
+
+    @property
+    def closed(self) -> bool:
+        return self.status == self.Status.COMPLETE
+
+
+class PackageEvaluationQuerySet(models.QuerySet):
+    def update(self, **kwargs):
+        raise RegistryImmutable("package evaluations cannot be updated")
+
+    def delete(self):
+        raise RegistryImmutable("package evaluations cannot be deleted")
+
+
+class PackageEvaluation(models.Model):
+    """The result for one test-set package in one run: validator result, expectations, the AI
+    review (six nullable scores, problems) and the cost. Written once, never edited or deleted."""
+
+    class ReviewStatus(models.TextChoices):
+        OK = "ok", _("oceniono")
+        MISSING = "brak oceny", _("brak oceny")
+
+    run = models.ForeignKey(
+        EvaluationRun,
+        on_delete=models.PROTECT,
+        related_name="evaluations",
+        verbose_name=_("przebieg"),
+    )
+    slug = models.SlugField(_("pakiet"), max_length=80)
+    level = models.CharField(_("poziom"), max_length=10)
+    package_hash = models.CharField(_("odcisk pakietu"), max_length=64)
+    generation = models.ForeignKey(
+        Generation,
+        on_delete=models.PROTECT,
+        null=True,
+        related_name="evaluations",
+        verbose_name=_("generacja"),
+    )
+    generation_status = models.CharField(_("status generacji"), max_length=10)
+    hard_pass = models.BooleanField(_("reguły twarde spełnione"))
+    validator = models.JSONField(_("wynik walidatora"), default=dict)
+    expectations = models.JSONField(_("oczekiwania"), default=list)
+    score_wiernosc = models.PositiveSmallIntegerField(_("wierność"), null=True)
+    score_kompletnosc = models.PositiveSmallIntegerField(_("kompletność"), null=True)
+    score_przydatnosc = models.PositiveSmallIntegerField(_("przydatność"), null=True)
+    score_jezyk = models.PositiveSmallIntegerField(_("język"), null=True)
+    score_ton = models.PositiveSmallIntegerField(_("ton"), null=True)
+    score_uczciwosc = models.PositiveSmallIntegerField(_("uczciwość wobec braków"), null=True)
+    problems = models.JSONField(_("problemy"), default=list)
+    review_status = models.CharField(
+        _("ocena recenzenta"), max_length=12, choices=ReviewStatus.choices
+    )
+    review_reason = models.CharField(_("powód braku oceny"), max_length=300, blank=True)
+    review_call_ids = models.JSONField(_("wywołania recenzenta (AICall)"), default=list)
+    cost_usd = models.DecimalField(_("koszt (USD)"), max_digits=16, decimal_places=10, default=0)
+    duration_ms = models.PositiveIntegerField(_("czas (ms)"), default=0)
+    created_at = models.DateTimeField(_("zapisano"))
+
+    objects = PackageEvaluationQuerySet.as_manager()
+
+    class Meta:
+        verbose_name = _("ocena pakietu")
+        verbose_name_plural = _("oceny pakietów")
+        ordering = ["run", "slug"]
+        constraints = [
+            models.UniqueConstraint(fields=["run", "slug"], name="quality_evaluation_once")
+        ]
+
+    def __str__(self) -> str:
+        return f"{self.slug} in run {self.run_id}"
+
+    def save(self, *args, **kwargs):
+        if self.pk is not None and not self._state.adding:
+            raise RegistryImmutable("package evaluations cannot be edited")
+        if self.run.closed:
+            raise RegistryImmutable("a finished evaluation run takes no more rows")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise RegistryImmutable("package evaluations cannot be deleted")
