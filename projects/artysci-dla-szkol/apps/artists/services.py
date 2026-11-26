@@ -21,6 +21,7 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.accounts import services as accounts
 from apps.analytics import services as analytics
+from apps.catalog import services as catalog
 from apps.core import media, uploads
 from apps.core.logs import pseudonymise_user
 from apps.core.regions import Voivodeship
@@ -180,7 +181,8 @@ def _clean(data) -> Basics:
 
 def save_basics(user, data) -> Artist:
     """Store step 1 for the artist of `user`, all or nothing. `data` has ``artist_type``,
-    ``name``, ``city``, ``voivodeships`` and ``audiences`` (lists of choice values).
+    ``name``, ``city``, ``voivodeships`` and ``audiences`` (lists of choice values), and
+    optionally ``topics`` and ``forms`` (catalog entries).
 
     Raises `InvalidBasics` (nothing saved) for a missing or unknown value and
     `Artist.DoesNotExist` if `user` is not an artist. The name goes through `rename_artist()`,
@@ -195,6 +197,14 @@ def save_basics(user, data) -> Artist:
         artist.save(update_fields=["artist_type", "city"])
         _replace(artist.voivodeships, "voivodeship", basics.voivodeships)
         _replace(artist.audiences, "audience", basics.audiences)
+        # Optional dictionaries (US-4.6): only the keys present are written, in the same
+        # transaction, so a refused entry leaves nothing changed.
+        for kind, key in ((catalog.EntryKind.TOPIC, "topics"), (catalog.EntryKind.FORM, "forms")):
+            if key in data:
+                try:
+                    catalog.set_artist_entries(artist, kind, data[key])
+                except catalog.EntryError as error:
+                    raise InvalidBasics(key) from error
     artist.refresh_from_db()
     profile_logger.info(
         "artist basics saved",

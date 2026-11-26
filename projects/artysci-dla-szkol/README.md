@@ -976,6 +976,21 @@ What the page and its preview guarantee, and where it is tested:
 6. Any motion lives under `prefers-reduced-motion: no-preference`; no inline script or style.
 7. Add the section to the seeded data of `tests/e2e/test_accessibility.py` and run it.
 
+## Catalog dictionaries: topics and forms (US-4.6)
+
+- Two closed dictionaries, "Tematyka" (`topic`) and "Forma" (`form`), live in `apps/catalog`
+  (`DictionaryEntry`, plus `ArtistEntry` for the artist ↔ entry assignment). Starting entries come from
+  a data migration (topics: uzależnienia, hejt, bezpieczeństwo, emocje, ekologia; forms: spektakl,
+  warsztaty, pokaz).
+- The administrator works in `/django-admin/` → "Pozycje słowników": add, rename, deactivate, and the
+  action "Połącz z inną pozycją" (confirmation page with the number of profiles to move; same dictionary
+  only). Kind and slug are read-only after creation; the slug is made once from the name and never changes,
+  so filter URLs stay stable. An entry with assignments cannot be deleted, only merged or deactivated.
+- All writes go through `apps/catalog/services.py` (`add_entry`, `rename_entry`, `deactivate_entry`,
+  `merge_entries`, `set_artist_entries`, `active_entries`). Step 1 of the wizard offers the active entries
+  as two optional checkbox groups and saves them in the same transaction as the basics.
+- Not yet: filters in the catalog (US-4.2), AI assignment, the admin panel outside django-admin (US-9.1).
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python
