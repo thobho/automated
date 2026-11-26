@@ -1,4 +1,7 @@
 {
+  "catalog:error_catalog": {
+    "0.1": "04daea7a94aa38ab132427d845a90e13e89fd23447422c90a090a872a04021e7"
+  },
   "instructions:profile_draft": {
     "0.2": "e481357844f1d8ff0a5b7f96293812368f20a51d6f81ae9bb6e7282797d30473",
     "0.3": "e671165b1582cc8b06638b6e4fe21df600b110eff3f0544eaa084da55c180bfc",

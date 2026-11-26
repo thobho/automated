@@ -3,7 +3,7 @@
     run = start_run(slugs)                  # a `trwa` run with the versions and models
     finish = evaluate(run)                  # every package: generate, validate, check, review
     summary(run)                            # the numbers printed and written in the report
-    report(run)                             # the JSON report (format `evaluation-report/1`)
+    report(run)                             # the JSON report (format `evaluation-report/2`)
 
 Each package goes through the same code path as the background job (`profiles.generation.
 run_generation`: first call, validator, up to 2 repair rounds), run in the foreground, and then
@@ -31,12 +31,12 @@ from apps.profiles.ai import budget
 from apps.profiles.ai.errors import AICapExceeded, AIDisabled
 from apps.profiles.generator_components import COMPONENTS as GENERATOR_COMPONENTS
 from apps.profiles.models import AICall
-from apps.quality import reviewer, services, testset
+from apps.quality import catalog, reviewer, services, testset
 from apps.quality.models import EvaluationRun, Generation, PackageEvaluation
 
 logger = logging.getLogger("apps.quality.evaluation")
 
-REPORT_FORMAT = "evaluation-report/1"
+REPORT_FORMAT = "evaluation-report/2"
 SCORE_FIELDS = {name: f"score_{name}" for name in reviewer.DIMENSIONS}
 
 
@@ -317,6 +317,7 @@ def summary(run: EvaluationRun) -> dict:
         else None,
         "expectations_failed": len(failed),
         "expectations_failed_list": failed,
+        "catalog_findings": catalog_findings(run),
         "unscored": sum(1 for r in rows if r.review_status != PackageEvaluation.ReviewStatus.OK),
         "unverified_quotes": sum(
             1 for r in rows for problem in r.problems if problem.get("unverified")
@@ -345,10 +346,36 @@ def package_line(evaluation: PackageEvaluation) -> str:
     )
 
 
+def _with_catalog(validator_summary: dict, codes: dict) -> dict:
+    """The validator summary with `catalog` (the error catalog code, or None) added to every
+    finding whose rule is in the catalog (US-11.7)."""
+    return {
+        **validator_summary,
+        **{
+            level: [{**f, "catalog": codes.get(f.get("rule"))} for f in validator_summary[level]]
+            for level in ("hard", "soft")
+        },
+    }
+
+
+def catalog_findings(run: EvaluationRun) -> list[dict]:
+    """Per package and catalog code, how many validator findings of the run carry that code."""
+    codes = catalog.codes_by_rule()
+    found = []
+    for row in run.evaluations.order_by("slug"):
+        counts: dict[str, int] = defaultdict(int)
+        for finding in [*row.validator.get("hard", []), *row.validator.get("soft", [])]:
+            if finding.get("rule") in codes:
+                counts[codes[finding["rule"]]] += 1
+        found += [{"slug": row.slug, "code": c, "count": n} for c, n in sorted(counts.items())]
+    return found
+
+
 def report(run: EvaluationRun) -> dict:
-    """The JSON report, format `evaluation-report/1` (see README). Synthetic data only; no key,
+    """The JSON report, format `evaluation-report/2` (see README). Synthetic data only; no key,
     prompt or instruction text."""
     packages = []
+    codes = catalog.codes_by_rule()
     for row in run.evaluations.select_related("generation").order_by("slug"):
         generation = row.generation
         packages.append(
@@ -364,7 +391,7 @@ def report(run: EvaluationRun) -> dict:
                     "cost_usd": str(generation.cost_usd) if generation else None,
                 },
                 "hard_pass": row.hard_pass,
-                "validator": row.validator,
+                "validator": _with_catalog(row.validator, codes),
                 "expectations": row.expectations,
                 "review": {
                     "status": row.review_status,

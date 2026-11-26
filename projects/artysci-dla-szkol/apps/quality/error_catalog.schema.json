@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Error catalog of the profile generator (US-11.7)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "errors"],
+  "properties": {
+    "format": {"const": "error-catalog/1"},
+    "errors": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/error"}
+    }
+  },
+  "$defs": {
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "name", "description", "found", "handling", "cases"],
+      "properties": {
+        "code": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+        "name": {"type": "string", "minLength": 1, "maxLength": 80},
+        "description": {"type": "string", "minLength": 1, "maxLength": 300},
+        "found": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+        "handling": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "rule"],
+              "properties": {
+                "kind": {"const": "validator_rule"},
+                "rule": {"type": "string", "pattern": "^RULE_[A-Z_]+$"}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "anchor"],
+              "properties": {
+                "kind": {"const": "instruction_example"},
+                "anchor": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"}
+              }
+            }
+          ]
+        },
+        "cases": {"type": "array", "items": {"$ref": "#/$defs/case"}}
+      }
+    },
+    "case": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "package", "fixture"],
+          "properties": {
+            "kind": {"const": "validator"},
+            "package": {"type": "string", "minLength": 1},
+            "fixture": {"type": "string", "pattern": "^[a-z0-9-]+/[a-z0-9-]+\\.json$"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "package", "expectation"],
+          "properties": {
+            "kind": {"const": "expectation"},
+            "package": {"type": "string", "minLength": 1},
+            "expectation": {
+              "type": "object",
+              "required": ["kind"],
+              "properties": {"kind": {"type": "string"}}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

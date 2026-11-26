@@ -25,7 +25,7 @@ from pathlib import Path
 
 from django.conf import settings
 
-KINDS = ("instructions", "schema", "validator", "template")
+KINDS = ("instructions", "schema", "validator", "template", "catalog")
 # Text kinds keep a full content snapshot in the database; code kinds point at git by hash.
 SNAPSHOT_KINDS = ("instructions", "schema")
 MANIFEST_PATH = Path(__file__).resolve().parent / "components.json"

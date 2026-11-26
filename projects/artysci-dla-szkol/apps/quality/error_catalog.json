@@ -1,0 +1,33 @@
+{
+  "format": "error-catalog/1",
+  "errors": [
+    {
+      "code": "jezyk-procesu",
+      "name": "Język procesu",
+      "description": "Tekst strony mówi o materiałach źródłowych („na podstawie przesłanych materiałów”) zamiast o artyście.",
+      "found": "2026-11-18",
+      "handling": {"kind": "validator_rule", "rule": "RULE_PHRASES"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "jezyk-procesu/gliniane-ludki.json"
+        }
+      ]
+    },
+    {
+      "code": "fakt-z-nawiasem",
+      "name": "Fakt z nawiasem",
+      "description": "Wartość lub etykieta faktu zawiera nawias, czyli dopisek zamiast krótkiej informacji.",
+      "found": "2026-11-18",
+      "handling": {"kind": "validator_rule", "rule": "RULE_FACTS"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "fakt-z-nawiasem/gliniane-ludki.json"
+        }
+      ]
+    }
+  ]
+}
