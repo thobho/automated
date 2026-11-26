@@ -52,3 +52,35 @@ class ArtistEntry(models.Model):
 
     def __str__(self) -> str:
         return f"{self.artist_id}: {self.entry_id}"
+
+
+class CatalogEntry(models.Model):
+    """The read model of the public catalog (US-4.1, D119): one row per publicly visible artist,
+    copied from the publication snapshot by `listing.sync`. Nothing here is edited by hand; a row
+    is written on publish and "Opublikuj zmiany", removed on withdrawal and deactivation, and
+    `rebuild_catalog` makes all rows again. Lists are JSON so the same code runs on SQLite and
+    PostgreSQL; the filters of US-4.2 can read `offers` and the lists from here."""
+
+    artist = models.OneToOneField(
+        "artists.Artist", on_delete=models.CASCADE, related_name="catalog_entry"
+    )
+    slug = models.SlugField(max_length=80, unique=True)
+    name = models.CharField(max_length=200)
+    artist_type = models.CharField(max_length=32, blank=True)
+    voivodeships = models.JSONField(default=list)  # Voivodeship codes
+    age_groups = models.JSONField(default=list)  # Audience codes
+    topics = models.JSONField(default=list)  # [{"slug", "name"}]
+    forms = models.JSONField(default=list)  # [{"slug", "name"}]
+    main_photo_id = models.PositiveBigIntegerField(null=True, blank=True)
+    main_photo_alt = models.CharField(max_length=200, blank=True)
+    price_from = models.PositiveIntegerField(null=True, blank=True)  # whole zł; None = no price
+    offers = models.JSONField(default=list)  # [{"price": int | None, "duration": int | None}]
+    published_at = models.DateTimeField()  # the last publication of the snapshot
+
+    class Meta:
+        verbose_name = _("wpis katalogu")
+        verbose_name_plural = _("wpisy katalogu")
+        indexes = [models.Index(fields=("-published_at", "-id"), name="catalog_entry_order_idx")]
+
+    def __str__(self) -> str:
+        return self.slug

@@ -994,6 +994,21 @@ What the page and its preview guarantee, and where it is tested:
   as two optional checkbox groups and saves them in the same transaction as the basics.
 - Not yet: filters in the catalog (US-4.2), AI assignment, the admin panel outside django-admin (US-9.1).
 
+## Public catalog (US-4.1)
+
+- `/artysci/` (anonymous, GET only, `Cache-Control: no-cache`): published artists as cards, 24 per page,
+  `?strona=N` with plain-link pagination; an invalid or out-of-range page is the site 404. A link
+  "Artyści" is in the header. Temporary order: latest publication first, then id (D16 comes with US-4.4).
+- Read model `CatalogEntry` (`apps/catalog/listing.py`): one row per publicly visible artist, copied from
+  the publication snapshot only (name, type, voivodeships, age groups, topics, forms, main photo id and alt,
+  lowest price in whole zł, each offer's price and duration, publication time). Age groups, topics, forms
+  and offer prices/durations are part of the snapshot since T52, so a change shows after "Opublikuj
+  zmiany"; an older snapshot gives a row without them.
+- `listing.sync` runs inside publish and "Opublikuj zmiany"; `listing.remove` on withdrawal. The list also
+  asks `Artist.objects.published()`, so a deactivated account disappears at once. After restoring data or
+  deploying: `uv run python manage.py rebuild_catalog` (idempotent; also drops stale rows).
+- The badge "zweryfikowany" depends on `listing.is_verified()`, which returns False until US-8.3.
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python

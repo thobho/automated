@@ -1,0 +1,16 @@
+{% load i18n %}
+<li class="catalog-card" data-catalog-card>
+  {% if card.photo_url %}
+    <img class="catalog-card__photo" src="{{ card.photo_url }}" alt="{{ card.photo_alt }}" width="{{ card.photo_width }}" height="{{ card.photo_height }}" loading="lazy">
+  {% else %}
+    <div class="catalog-card__initial" aria-hidden="true">{{ card.initial }}</div>
+  {% endif %}
+  <div class="catalog-card__body">
+    <h2 class="catalog-card__name"><a href="{% url 'profiles:public' card.slug %}">{{ card.name }}</a></h2>
+    {% if card.verified %}<p class="catalog-card__badge">{% translate "zweryfikowany" %}</p>{% endif %}
+    {% if card.type_label %}<p class="catalog-card__type">{{ card.type_label }}</p>{% endif %}
+    {% if card.regions %}<p class="catalog-card__regions">{{ card.regions|join:", " }}</p>{% endif %}
+    {% if card.age_groups %}<p class="catalog-card__ages">{{ card.age_groups|join:", " }}</p>{% endif %}
+    {% if card.price_from %}<p class="catalog-card__price">{% blocktranslate with price=card.price_from %}od {{ price }} zł{% endblocktranslate %}</p>{% endif %}
+  </div>
+</li>

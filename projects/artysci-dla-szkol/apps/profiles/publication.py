@@ -31,6 +31,7 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.analytics import services as analytics
 from apps.artists.models import Artist, PublicationStatus
+from apps.catalog import listing
 from apps.trust import services as trust
 
 from . import completeness, pages
@@ -243,6 +244,7 @@ def publish(artist: Artist, actor=None) -> Artist:
         artist.published_at = timezone.now()
         artist.withdrawn_at = None
         artist.save(update_fields=["publication_status", "published_at", "withdrawn_at"])
+        listing.sync(artist)
         props = {"profile_id": artist.pk, "completeness_percent": completeness_percent(artist)}
         analytics.track("profile_published", actor=actor, obj=artist, **props)
     return artist
@@ -256,6 +258,7 @@ def update_published(artist: Artist) -> Artist:
         if artist.publication_status != PublicationStatus.PUBLISHED:
             raise PublicationRefused(_("Strona nie jest opublikowana."))
         _save_snapshot(artist, _ready_draft(artist))
+        listing.sync(artist)
     return artist
 
 
@@ -269,6 +272,7 @@ def withdraw(artist: Artist, actor=None) -> Artist:
         artist.withdrawn_at = timezone.now()
         artist.save(update_fields=["publication_status", "withdrawn_at"])
         PublishedPage.objects.filter(artist=artist).delete()
+        listing.remove(artist)
         analytics.track("profile_withdrawn", actor=actor, obj=artist, profile_id=artist.pk)
     return artist
 
