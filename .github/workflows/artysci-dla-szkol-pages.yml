@@ -1,6 +1,3 @@
-# STAGED COPY: the worker may not write under .github/workflows/. Move it with
-#   git mv projects/artysci-dla-szkol/docs/ci/artysci-dla-szkol-pages.yml .github/workflows/
-# (T44, issue #187) and delete this comment.
 name: artysci-dla-szkol page metrics
 
 # US-11.3B: axe (360 and 1440 px) and Lighthouse mobile for every package page of the generator
