@@ -2,10 +2,26 @@
 
 import logging
 
+from django.conf import settings
 from django.db import DEFAULT_DB_ALIAS, DatabaseError, connections
 from django.db.migrations.executor import MigrationExecutor
 
 logger = logging.getLogger(__name__)
+
+ROBOTS_DISALLOW = (
+    "/panel/",
+    "/admin/",
+    "/django-admin/",
+    "/artysta/",
+)  # preview is /panel/podglad/
+
+
+def robots_txt() -> str:
+    """Body of `/robots.txt`: everything public is allowed, the private areas are not."""
+    lines = ["User-agent: *", "Allow: /", *(f"Disallow: {path}" for path in ROBOTS_DISALLOW)]
+    lines.append(f"Sitemap: {settings.SITE_URL.rstrip('/')}/sitemap.xml")
+    return "\n".join(lines) + "\n"
+
 
 OK = "ok"
 ERROR = "error"

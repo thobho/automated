@@ -13,6 +13,7 @@ def test_settings_pick_up_compose_env(monkeypatch):
     monkeypatch.setenv("DJANGO_SECRET_KEY", "k" * 50)
     monkeypatch.setenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1")
     monkeypatch.setenv("MEDIA_PUBLIC_BASE_URL", "http://127.0.0.1:19000/public/")
+    monkeypatch.setenv("SITE_URL", "http://localhost:8000")
     monkeypatch.setenv("STORAGE_BACKEND", "s3")
     monkeypatch.setenv("S3_ENDPOINT_URL", "http://minio:9000")
     for module in ("config.settings.base", "config.settings.hosted", "config.settings.prod"):

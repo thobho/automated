@@ -129,8 +129,29 @@ uv run python manage.py makemigrations --check --dry-run --settings=config.setti
 | `config.settings.prod` | `wsgi.py`/`asgi.py` default | `DATABASE_URL`, required |
 
 `prod` fails at startup with `Missing required environment variable <NAME>` when
-`DJANGO_SECRET_KEY`, `DJANGO_ALLOWED_HOSTS` or `DATABASE_URL` is missing. All variables are
-documented in [`.env.example`](.env.example).
+`DJANGO_SECRET_KEY`, `DJANGO_ALLOWED_HOSTS`, `DATABASE_URL`, `MEDIA_PUBLIC_BASE_URL` or `SITE_URL`
+is missing. All variables are documented in [`.env.example`](.env.example).
+
+`SITE_URL` (public origin, e.g. `https://artysci.example.pl`, no trailing slash) builds the
+absolute URLs of canonical links, Open Graph tags, JSON-LD and the sitemap. It is required in
+`prod` (no default), defaults to the LAN address `http://192.168.68.62:8100` in `pirx` and to
+`http://localhost:8000` in dev and test.
+
+## Search engine visibility (US-3.4)
+
+The public page `/artysci/<slug>/` is server-rendered with `<title>`, a meta description (about
+text, at most 155 characters, cut at a word, no HTML), `<link rel="canonical">`,
+`robots: index,follow`, Open Graph and Twitter card tags and schema.org JSON-LD
+(`PerformingGroup` for theatre and music, `Person` for illusion, `Organization` otherwise: name,
+description, image, url, `areaServed` regions, `makesOffer` names without prices; never e-mail,
+phone or address). `og:image` is the main photo when the page has one, else
+`static/profiles/og-default.png`. All of it is built in `apps/profiles/seo.py` from the published
+snapshot, which also stores the artist type and regions (a page published before T39 gets them
+with the next "Opublikuj zmiany"). The JSON-LD is an `application/ld+json` data block: no inline script runs and the CSP
+is unchanged. `/sitemap.xml` lists published pages only (`lastmod` = last publication time, at most
+50,000 URLs, revalidated on every request so a withdrawal is gone at once); `/robots.txt` allows
+public pages, disallows `/panel/` (incl. the preview), `/admin/`, `/django-admin/` and `/artysta/`,
+and names the sitemap. The preview keeps `noindex` and `X-Robots-Tag`.
 
 ## Security and logging
 
@@ -882,6 +903,23 @@ POST-only `opublikuj/`, `zmiany/` ("Opublikuj zmiany"), `wycofaj/`, and a GET co
 - `Artist.objects.published()` is the only definition of "publicly visible" (catalog, US-4.1); it
   leaves out deactivated accounts.
 - Events `profile_published` (`profile_id`, `completeness_percent`) and `profile_withdrawn`.
+- "Kopiuj link" on the panel of a published page copies the absolute public address (from
+  `SITE_URL`) with `static/js/copy-link.js`; without JavaScript the read-only field is the fallback.
+
+## Private preview links (US-3.7)
+
+`apps/profiles/previews.py`. On `/panel/publikacja/` the artist creates a link ("Utwórz link do
+podglądu", POST `podglad/utworz/`) and revokes one ("Odwołaj link", POST `podglad/odwolaj/`).
+`/podglad/<token>/` shows the current version read-only to anyone with the link, also before the
+D6 minimum; contact data is replaced by "[ukryte]", materials need the rights statement.
+
+- The full URL is shown once, in the answer to the create POST; the database holds only the
+  SHA-256 of the token. Valid 7 days, at most 3 active links, none while the page is withdrawn.
+- Expired, revoked, unknown and malformed tokens give the same 404. Wrong tokens are limited per
+  IP (`PREVIEW_LIMIT_PER_IP`, `PREVIEW_LIMIT_WINDOW`; then 429).
+- Headers: `noindex` meta, `X-Robots-Tag: noindex, nofollow`, `Cache-Control: no-store`,
+  `Referrer-Policy: no-referrer`. Logs show `/podglad/[token]/`; visits are not counted.
+- Daily job `profiles.purge_preview_links` (04:41) deletes links that ended over 30 days ago.
 
 ## Page themes (US-3.2)
 

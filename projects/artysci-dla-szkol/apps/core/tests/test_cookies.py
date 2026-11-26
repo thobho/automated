@@ -125,6 +125,7 @@ def test_prod_allowlist_is_host_prefixed(monkeypatch):
         "DJANGO_ALLOWED_HOSTS": "example.invalid",
         "DATABASE_URL": "sqlite://:memory:",
         "MEDIA_PUBLIC_BASE_URL": "https://media.example.invalid/",
+        "SITE_URL": "https://example.invalid",
     }.items():
         monkeypatch.setenv(key, value)
     monkeypatch.delitem(sys.modules, "config.settings.prod", raising=False)

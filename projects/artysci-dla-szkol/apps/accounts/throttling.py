@@ -16,6 +16,8 @@ Scopes and their settings:
 - ``change_user``: e-mail change requests per user id (EMAIL_CHANGE_LIMIT_PER_USER within
   LOGIN_EMAIL_WINDOW).
 - ``change_code``: failed e-mail change codes per user id (same limit and lock as ``code``).
+- ``preview_ip``: wrong preview-link tokens per client IP (US-3.7; PREVIEW_LIMIT_PER_IP within
+  PREVIEW_LIMIT_WINDOW). At the limit `/podglad/...` answers 429, even for a valid token.
 
 Every function takes an explicit ``now`` so tests control time without sleeping.
 
@@ -38,7 +40,8 @@ EMAIL_PER_ADDRESS = "email_addr"
 EMAIL_PER_IP = "email_ip"
 CHANGE_PER_USER = "change_user"
 CHANGE_CODE = "change_code"
-SCOPES = (CODE, EMAIL_PER_ADDRESS, EMAIL_PER_IP, CHANGE_PER_USER, CHANGE_CODE)
+PREVIEW_PER_IP = "preview_ip"
+SCOPES = (CODE, EMAIL_PER_ADDRESS, EMAIL_PER_IP, CHANGE_PER_USER, CHANGE_CODE, PREVIEW_PER_IP)
 
 
 @dataclass(frozen=True)
@@ -59,6 +62,8 @@ def limit_for(scope: str) -> Limit:
         return Limit(scope, settings.EMAIL_CHANGE_LIMIT_PER_USER, settings.LOGIN_EMAIL_WINDOW)
     if scope == CHANGE_CODE:
         return Limit(scope, settings.LOGIN_THROTTLE_LIMIT, settings.LOGIN_THROTTLE_WINDOW)
+    if scope == PREVIEW_PER_IP:
+        return Limit(scope, settings.PREVIEW_LIMIT_PER_IP, settings.PREVIEW_LIMIT_WINDOW)
     raise ValueError(f"unknown throttle scope {scope!r}")
 
 

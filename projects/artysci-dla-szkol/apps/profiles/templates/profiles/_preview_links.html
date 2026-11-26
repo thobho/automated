@@ -1,0 +1,43 @@
+{% load i18n %}
+<section class="preview-links" aria-labelledby="preview-links-title" data-preview-links>
+  <h2 id="preview-links-title">{% translate "Prywatny link do podglądu" %}</h2>
+  <p>
+    {% blocktranslate trimmed with max=preview_links_max %}
+      Wyślij link osobie, której chcesz pokazać stronę przed publikacją. Link działa 7 dni, bez logowania, i nie trafia do wyszukiwarek. Aktywne linki naraz: najwyżej {{ max }}.
+    {% endblocktranslate %}
+  </p>
+
+  {% if new_link_url %}
+    <div class="new-link" data-new-link>
+      <p><strong>{% translate "Nowy link jest gotowy. Skopiuj go teraz: później nie pokażemy go ponownie." %}</strong></p>
+      {% translate "Link do podglądu" as new_label %}
+      {% include "profiles/_copy_field.html" with field_id="new-preview-url" label=new_label url=new_link_url %}
+    </div>
+  {% endif %}
+
+  {% if preview_links %}
+    <ul class="link-list">
+      {% for link in preview_links %}
+        <li data-preview-link>
+          {% blocktranslate trimmed with created=link.created_at|date:"j E Y, H:i" expires=link.expires_at|date:"j E Y, H:i" %}
+            Aktywny, utworzony {{ created }}, działa do {{ expires }}
+          {% endblocktranslate %}
+          <form method="post" action="{% url 'profiles:preview_link_revoke' %}">
+            {% csrf_token %}
+            <input type="hidden" name="link" value="{{ link.pk }}">
+            <button type="submit">{% translate "Odwołaj link" %}</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p data-no-preview-links>{% translate "Nie masz aktywnych linków do podglądu." %}</p>
+  {% endif %}
+
+  {% if preview_links|length < preview_links_max %}
+    <form method="post" action="{% url 'profiles:preview_link_create' %}">
+      {% csrf_token %}
+      <button type="submit">{% translate "Utwórz link do podglądu" %}</button>
+    </form>
+  {% endif %}
+</section>

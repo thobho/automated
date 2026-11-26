@@ -107,6 +107,8 @@ class PageContent:
     photos: list[PhotoItem] = field(default_factory=list)
     faq: list[FaqItem] = field(default_factory=list)
     theme: str = DEFAULT_THEME.value  # slug; an unknown value falls back to the default
+    artist_type: str = ""  # `ArtistType` and `Voivodeship` codes: search data only (US-3.4)
+    regions: tuple[str, ...] = ()
 
     def __post_init__(self):
         self.theme = theme_or_default(self.theme)
@@ -255,6 +257,8 @@ def page_data(artist, shown) -> dict:
     return {
         "name": artist.name,
         "city": artist.city,
+        "artist_type": artist.artist_type,
+        "regions": sorted(artist.voivodeships.values_list("voivodeship", flat=True)),
         "offers": [
             {
                 "title": o.title,
@@ -282,4 +286,7 @@ def page_from_data(slug: str, data: dict, theme: str, shown) -> PageContent:
         videos=videos,
         photos=photos,
         theme=theme,
+        # Missing in copies stored before T39: filled by the next "Opublikuj zmiany".
+        artist_type=data.get("artist_type", ""),
+        regions=tuple(data.get("regions", ())),
     )

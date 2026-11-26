@@ -114,6 +114,9 @@ LOGIN_EMAIL_LIMIT_PER_IP = env.int("LOGIN_EMAIL_LIMIT_PER_IP", default=20)
 LOGIN_EMAIL_WINDOW = env.int("LOGIN_EMAIL_WINDOW", default=3600)  # seconds
 # E-mail change requests per user (US-1.6) within LOGIN_EMAIL_WINDOW; the per-IP limit is shared.
 EMAIL_CHANGE_LIMIT_PER_USER = env.int("EMAIL_CHANGE_LIMIT_PER_USER", default=5)
+# Wrong preview-link tokens (US-3.7) per client IP within the window; then /podglad/ gives 429.
+PREVIEW_LIMIT_PER_IP = env.int("PREVIEW_LIMIT_PER_IP", default=20)
+PREVIEW_LIMIT_WINDOW = env.int("PREVIEW_LIMIT_WINDOW", default=900)  # seconds
 
 # Sessions in the database (django.contrib.sessions default), 30 days of inactivity: every
 # request re-saves the session, which moves its expiry 30 days ahead.
@@ -224,6 +227,9 @@ TIME_ZONE = "Europe/Warsaw"
 USE_I18N = True
 USE_TZ = True
 LOCALE_PATHS = [BASE_DIR / "locale"]
+
+# Public origin of the site, no trailing slash: canonical links, Open Graph, sitemap (US-3.4).
+SITE_URL = env.str("SITE_URL", default="http://localhost:8000").strip().rstrip("/")
 
 # Static files (HTMX is vendored under static/vendor, never loaded from a CDN: D11) ---------
 

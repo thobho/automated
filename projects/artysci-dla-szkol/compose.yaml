@@ -23,6 +23,7 @@ x-app-env: &app-env
   S3_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-artysci}
   S3_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:-artysci-minio-dev}
   MEDIA_PUBLIC_BASE_URL: ${MEDIA_PUBLIC_BASE_URL:-http://127.0.0.1:19000/public/}
+  SITE_URL: ${SITE_URL:-http://localhost:18000}
 
 services:
   db:
