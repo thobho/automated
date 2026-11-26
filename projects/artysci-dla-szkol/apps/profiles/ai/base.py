@@ -17,8 +17,7 @@ from typing import Any
 from django.conf import settings
 from django.utils.crypto import salted_hmac
 
-from . import budget
-from . import images
+from . import budget, images
 from .errors import AIError, AIProviderError
 from .scrub import scrub_messages
 

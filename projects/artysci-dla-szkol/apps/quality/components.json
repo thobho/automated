@@ -1,4 +1,7 @@
 {
+  "instructions:page_screenshot_review": {
+    "0.1": "d8053691159862bb733d64897123d5cec6fc015ab00740c2ac6805690fb2801d"
+  },
   "instructions:profile_draft": {
     "0.2": "e481357844f1d8ff0a5b7f96293812368f20a51d6f81ae9bb6e7282797d30473",
     "0.3": "e671165b1582cc8b06638b6e4fe21df600b110eff3f0544eaa084da55c180bfc",
@@ -6,6 +9,9 @@
   },
   "instructions:profile_review": {
     "0.1": "3a4d59bd9154cdccecb60dc1e381fdb24adfe34d93d60e0f11518d1ebf5f7280"
+  },
+  "schema:page_screenshot_review": {
+    "0.1": "bb99fd2c8d701fccb8f75a70e76bbd59e6eaebe2c7d74f2989cc227b75ffcfa8"
   },
   "schema:profile": {
     "0.2": "f96a291649084135f53263e47f57d45311d62b7fe25c44496fd1c415bb54c230"

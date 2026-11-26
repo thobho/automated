@@ -45,7 +45,7 @@ def is_image_part(part) -> bool:
 def check_parts(parts) -> list[dict]:
     """Validated copy of a list of parts; raises AIError. Text parts keep only `text`."""
     if not isinstance(parts, list) or not parts or len(parts) > MAX_PARTS_PER_MESSAGE:
-        raise AIError("A message with parts needs 1 to %d parts." % MAX_PARTS_PER_MESSAGE)
+        raise AIError(f"A message with parts needs 1 to {MAX_PARTS_PER_MESSAGE} parts.")
     checked = []
     for part in parts:
         kind = part.get("type") if isinstance(part, dict) else None

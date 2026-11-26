@@ -382,3 +382,51 @@ class PackageEvaluation(models.Model):
 
     def delete(self, *args, **kwargs):
         raise RegistryImmutable("package evaluations cannot be deleted")
+
+
+class PageMetricsQuerySet(models.QuerySet):
+    def update(self, **kwargs):
+        raise RegistryImmutable("page metrics cannot be updated")
+
+    def delete(self):
+        raise RegistryImmutable("page metrics cannot be deleted")
+
+
+class PageMetrics(models.Model):
+    """Page metrics of one package evaluation (US-11.3B): axe result and screenshot per width,
+    the Lighthouse mobile result and the screenshot review. A missing measurement is stored as
+    `brak pomiaru` / `brak oceny` with the reason, never as a score. Written once (a package of a
+    run is measured once), never edited or deleted. Screenshots are files in the output folder:
+    nothing of them is stored here."""
+
+    evaluation = models.OneToOneField(
+        PackageEvaluation,
+        on_delete=models.PROTECT,
+        related_name="page_metrics",
+        verbose_name=_("ocena pakietu"),
+    )
+    axe = models.JSONField(_("axe"), default=dict)
+    lighthouse = models.JSONField(_("Lighthouse"), default=dict)
+    screenshot_review = models.JSONField(_("ocena zrzutów ekranu"), default=dict)
+    components = models.JSONField(_("komponenty oceny zrzutów"), default=dict)
+    review_call_ids = models.JSONField(_("wywołania AI (AICall)"), default=list)
+    cost_usd = models.DecimalField(_("koszt (USD)"), max_digits=16, decimal_places=10, default=0)
+    measured_at = models.DateTimeField(_("zmierzono"))
+
+    objects = PageMetricsQuerySet.as_manager()
+
+    class Meta:
+        verbose_name = _("pomiar strony")
+        verbose_name_plural = _("pomiary stron")
+        ordering = ["evaluation"]
+
+    def __str__(self) -> str:
+        return f"Page metrics of evaluation {self.evaluation_id}"
+
+    def save(self, *args, **kwargs):
+        if self.pk is not None and not self._state.adding:
+            raise RegistryImmutable("page metrics cannot be edited")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise RegistryImmutable("page metrics cannot be deleted")

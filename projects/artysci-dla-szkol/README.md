@@ -612,15 +612,56 @@ uv run python manage.py evaluate_testset [--package <slug>]... [--level weak|med
   Cost is the generation plus the review calls (`AICall`). A finished run and every package row
   are append-only (edits and deletes are refused, like `Generation`). Read-only, staff-only admin:
   `/django-admin/quality/evaluationrun/` and `/django-admin/quality/packageevaluation/`.
-- **JSON report** (`--output`), format `evaluation-report/1`:
+- **JSON report** (`--output`), format `evaluation-report/2` (/2 adds `page_metrics` per package:
+  `null` until `measure_testset_pages --run` measured it, see "Page metrics" below):
   `{"format", "run": {id, status, note, level, started_at, finished_at, generator_components,
   reviewer_components, generator_model, reviewer_model, ai_client, package_set_hash, packages, cost_usd},
   "summary": {as printed, plus the failed expectations}, "packages": [{slug, level, package_hash,
   generation: {id, status, repair_rounds, duration_ms, cost_usd}, hard_pass, validator: {ok, hard,
   soft, repair_rounds, repair_stopped}, expectations: [{kind, detail, passed, message}], review:
   {status, reason, scores: {<dimension>: 1-5 or null}, problems: [{dimension, quote, explanation,
-  unverified}]}, profile, cost_usd, duration_ms}]}`. Synthetic data only; no key, prompt or
-  instruction text.
+  unverified}]}, page_metrics, profile, cost_usd, duration_ms}]}`. Synthetic data only; no key,
+  prompt or instruction text.
+
+### Page metrics (US-11.3B)
+
+`uv run python manage.py measure_testset_pages --base-url http://127.0.0.1:8000 --output reports/
+[--run <id>] [--package <slug>]... [--level <level>] [--no-review] [--key-file <dotenv>]`
+measures each package page, the owner preview `/panel/podglad/` of the package artist, against a
+running server that uses the same database. Needs `QUALITY_LAB_ENABLED` and, for the browser,
+`uv sync --group e2e` plus `playwright install chromium`; Lighthouse needs Node (`npx`).
+
+- **Page shown.** With `--run` the profile of the package evaluation's generation; without it the
+  scripted profile (`apps/quality/scripted.py`). Code: `apps/quality/pagemetrics.py`.
+- **Per package.** At 360 px and 1440 px: a full-page screenshot (`<slug>-<width>.png` in the
+  `--output` folder: never in git or public storage) and the axe violations by impact; plus one
+  Lighthouse 12 mobile run (performance score, LCP), with up to 3 attempts as in the `lighthouse`
+  CI job. A missing tool or failed measurement is `brak pomiaru` with the reason, never a score.
+- **Screenshot review** (`apps/quality/screenshots.py`, purpose `page_screenshot_review`, one call
+  per package, components `instructions:page_screenshot_review` and `schema:page_screenshot_review`
+  v0.1): the two screenshots go to a vision model, per width a verdict `ok` / `problem` and
+  problems (`empty_place`, `cut_off_content`, `overlapping_content`, with description and place).
+  It sees no generator reasoning and no validator report. Only for `synthetic` packages (D59), the
+  call is refused in code otherwise. Invalid reply, AI error or cost cap: `brak oceny` with the
+  reason. Without `--key-file` the fake client answers (every verdict `ok`); `--key-file` uses
+  OpenRouter and spends money. `--no-review` skips it.
+- **Storage.** With `--run`, `PageMetrics` (one per `PackageEvaluation`, append-only, migration
+  `0008`) and `page_metrics` in the run's JSON report; measuring a package of a run twice is
+  refused. Without a run the results go only to `page-metrics.json` (format
+  `page-metrics-report/1`: `{format, run, components, failures, packages: [{slug, level, origin,
+  axe: {"360"|"1440": {status, violations: [{id, impact, help, nodes}], by_impact}}, lighthouse:
+  {status, performance, lcp_ms} or {status, reason}, screenshots, review: {status, reason,
+  viewports, call_ids, cost_usd}}]}`) and `summary.md` in the output folder.
+- **Exit code.** Non-zero when a package has no axe or Lighthouse result or a critical axe
+  violation. Scores below 85 are shown (⚠️), not enforced (US-3.8).
+- **CI.** `.github/workflows/artysci-dla-szkol-pages.yml` runs it with the fake AI client on pull
+  requests that touch `apps/profiles/`, `apps/quality/`, `static/profiles/` or `templates/base.html`
+  (and by hand): job summary table, JSON report and screenshots as an artifact.
+- **Images to AI** (`apps/profiles/ai/images.py`): a message `content` may be a list of parts
+  (`{"type": "text"}`, `{"type": "image", "data": <bytes>}`) only for a caller that passes
+  `allow_images=True`; PNG or JPEG sniffed from the bytes, at most 3 MB per image and 4 images per
+  call, counted at 4,000 tokens each in the cost plan so the per-call and daily caps hold. Image
+  bytes are not scrubbed, logged or stored in `AICall`.
 
 ## Profile generation (US-2.5A)
 

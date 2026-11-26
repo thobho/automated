@@ -3,7 +3,7 @@
     run = start_run(slugs)                  # a `trwa` run with the versions and models
     finish = evaluate(run)                  # every package: generate, validate, check, review
     summary(run)                            # the numbers printed and written in the report
-    report(run)                             # the JSON report (format `evaluation-report/1`)
+    report(run)                             # the JSON report (format `evaluation-report/2`)
 
 Each package goes through the same code path as the background job (`profiles.generation.
 run_generation`: first call, validator, up to 2 repair rounds), run in the foreground, and then
@@ -32,11 +32,11 @@ from apps.profiles.ai.errors import AICapExceeded, AIDisabled
 from apps.profiles.generator_components import COMPONENTS as GENERATOR_COMPONENTS
 from apps.profiles.models import AICall
 from apps.quality import reviewer, services, testset
-from apps.quality.models import EvaluationRun, Generation, PackageEvaluation
+from apps.quality.models import EvaluationRun, Generation, PackageEvaluation, PageMetrics
 
 logger = logging.getLogger("apps.quality.evaluation")
 
-REPORT_FORMAT = "evaluation-report/1"
+REPORT_FORMAT = "evaluation-report/2"  # /2: `page_metrics` per package (US-11.3B)
 SCORE_FIELDS = {name: f"score_{name}" for name in reviewer.DIMENSIONS}
 
 
@@ -80,6 +80,9 @@ def _selected(slugs, level) -> list[dict]:
     if not packages:
         raise EvaluationRefused("no package selected")
     return packages
+
+
+select_packages = _selected  # public name for `pagemetrics` and the commands
 
 
 def package_set_hash(packages: list[dict]) -> str:
@@ -345,8 +348,23 @@ def package_line(evaluation: PackageEvaluation) -> str:
     )
 
 
+def _page_metrics_of(row: PackageEvaluation) -> dict | None:
+    """Page metrics added by `measure_testset_pages --run` (US-11.3B); None until measured."""
+    metrics = PageMetrics.objects.filter(evaluation=row).first()
+    if metrics is None:
+        return None
+    return {
+        "axe": metrics.axe,
+        "lighthouse": metrics.lighthouse,
+        "screenshot_review": metrics.screenshot_review,
+        "components": metrics.components,
+        "cost_usd": str(metrics.cost_usd),
+        "measured_at": metrics.measured_at.isoformat(),
+    }
+
+
 def report(run: EvaluationRun) -> dict:
-    """The JSON report, format `evaluation-report/1` (see README). Synthetic data only; no key,
+    """The JSON report, format `evaluation-report/2` (see README). Synthetic data only; no key,
     prompt or instruction text."""
     packages = []
     for row in run.evaluations.select_related("generation").order_by("slug"):
@@ -372,6 +390,7 @@ def report(run: EvaluationRun) -> dict:
                     "scores": _scores_of(row),
                     "problems": row.problems,
                 },
+                "page_metrics": _page_metrics_of(row),
                 "profile": generation.result if generation else None,
                 "cost_usd": str(row.cost_usd),
                 "duration_ms": row.duration_ms,

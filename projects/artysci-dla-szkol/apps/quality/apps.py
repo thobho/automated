@@ -9,4 +9,5 @@ class QualityConfig(AppConfig):
     label = "quality"
 
     def ready(self):
-        from . import reviewer  # noqa: F401  (registers the reviewer components, v0.1)
+        # Registers the reviewer components (v0.1): the profile review and the screenshot review.
+        from . import reviewer, screenshots  # noqa: F401

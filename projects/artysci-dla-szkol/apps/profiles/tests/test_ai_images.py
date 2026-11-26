@@ -59,7 +59,9 @@ def test_too_many_images_refused():
 
 def test_type_is_sniffed_not_trusted():
     client = ai.FakeClient()
-    msgs = [{"role": "user", "content": [{"type": "image", "data": b"abc", "media_type": "image/png"}]}]
+    msgs = [
+        {"role": "user", "content": [{"type": "image", "data": b"abc", "media_type": "image/png"}]}
+    ]
     with pytest.raises(ai.AIError):
         send(client, msgs, allow_images=True)
 
@@ -94,7 +96,12 @@ def test_text_only_requests_unchanged_with_allow_images():
 def test_estimate_counts_images():
     text_only = budget.estimate_prompt_tokens([{"role": "user", "content": "abc"}])
     with_two = budget.estimate_prompt_tokens(
-        [{"role": "user", "content": [{"type": "text", "text": "abc"}] + [{"type": "image", "data": PNG}] * 2}]
+        [
+            {
+                "role": "user",
+                "content": [{"type": "text", "text": "abc"}] + [{"type": "image", "data": PNG}] * 2,
+            }
+        ]
     )
     assert with_two == text_only + 2 * images.IMAGE_TOKENS_ESTIMATE
 
@@ -108,7 +115,9 @@ def test_per_call_cap_counts_images_and_sends_nothing():
     assert client.requests == []
 
 
-@override_settings(AI_PRICE_PROMPT_USD_PER_MTOK="10", AI_PER_CALL_CAP_USD="0.5", AI_DAILY_CAP_USD="0.05")
+@override_settings(
+    AI_PRICE_PROMPT_USD_PER_MTOK="10", AI_PER_CALL_CAP_USD="0.5", AI_DAILY_CAP_USD="0.05"
+)
 def test_daily_cap_sends_nothing():
     client = ai.FakeClient()
     with pytest.raises(ai.AICapExceeded):
