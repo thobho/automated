@@ -16,6 +16,8 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods, require_POST
 
 from apps.accounts.permissions import role_required
+from apps.catalog import services as catalog
+from apps.catalog.models import DictionaryEntry, EntryKind
 from apps.core import media
 from apps.core.regions import Voivodeship
 from apps.core.uploads import KINDS, MB, UploadRejected
@@ -113,6 +115,28 @@ class BasicsForm(forms.Form):
         widget=forms.CheckboxSelectMultiple,
         error_messages={"required": _("Wybierz co najmniej jedną grupę odbiorców.")},
     )
+    topics = forms.ModelMultipleChoiceField(
+        label=_("Tematyka"),
+        queryset=DictionaryEntry.objects.none(),
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+    )
+    catalog_forms = forms.ModelMultipleChoiceField(
+        label=_("Forma"),
+        queryset=DictionaryEntry.objects.none(),
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Only the active entries, in position order; an entry that became inactive is not offered.
+        self.fields["topics"].queryset = DictionaryEntry.objects.filter(
+            kind=EntryKind.TOPIC, is_active=True
+        )
+        self.fields["catalog_forms"].queryset = DictionaryEntry.objects.filter(
+            kind=EntryKind.FORM, is_active=True
+        )
 
 
 def _artist(request):
@@ -136,12 +160,26 @@ def basics(request):
     artist = _artist(request)
     if request.method != "POST":
         initial = asdict(services.basics_of(artist))
-        form = BasicsForm(initial={k: v or None for k, v in initial.items()})
+        initial = {k: v or None for k, v in initial.items()}
+        initial["topics"] = catalog.entries_of(artist, EntryKind.TOPIC)
+        initial["catalog_forms"] = catalog.entries_of(artist, EntryKind.FORM)
+        form = BasicsForm(initial=initial)
         return render(request, "artists/basics.html", {"form": form})
     form = BasicsForm(request.POST)
     if not form.is_valid():
         return render(request, "artists/basics.html", {"form": form}, status=400)
-    services.save_basics(request.user, form.cleaned_data)
+    data = {
+        **form.cleaned_data,
+        "topics": form.cleaned_data["topics"],
+        "forms": form.cleaned_data["catalog_forms"],
+    }
+    try:
+        services.save_basics(request.user, data)
+    except services.InvalidBasics:  # an entry went inactive between the page and the save
+        form.add_error(
+            None, _("Lista tematyk lub form się zmieniła. Odśwież stronę i spróbuj ponownie.")
+        )
+        return render(request, "artists/basics.html", {"form": form}, status=400)
     messages.success(request, _("Zapisano dane podstawowe."))
     return redirect("artists:start")
 

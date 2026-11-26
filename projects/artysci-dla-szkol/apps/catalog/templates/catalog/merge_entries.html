@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+  <p>
+    {% blocktranslate with name=source.name kind=source.get_kind_display %}Pozycja „{{ name }}” ({{ kind }}) zostanie usunięta, a jej profile zostaną przeniesione do wskazanej pozycji.{% endblocktranslate %}
+  </p>
+  <p>{% translate "Profile do przeniesienia" %}: <strong id="merge-count">{{ count }}</strong></p>
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="{{ action_checkbox_name }}" value="{{ source.pk }}">
+    <input type="hidden" name="action" value="merge">
+    <input type="hidden" name="apply" value="1">
+    {{ form.as_p }}
+    <input type="submit" value="{% translate 'Połącz' %}">
+    <a href="{% url 'admin:catalog_dictionaryentry_changelist' %}">{% translate "Anuluj" %}</a>
+  </form>
+{% endblock %}
