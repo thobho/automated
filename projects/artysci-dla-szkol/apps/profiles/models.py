@@ -57,6 +57,26 @@ class PublishedPage(models.Model):
         return f"{self.artist_id} published v{self.version_number}"
 
 
+class PreviewLink(models.Model):
+    """A private link to the artist's preview (US-3.7). Only the SHA-256 of the token is stored;
+    the token itself is shown once, at creation (`previews.py`)."""
+
+    artist = models.ForeignKey(
+        "artists.Artist", on_delete=models.CASCADE, related_name="preview_links"
+    )
+    token_hash = models.CharField(max_length=64, unique=True)
+    created_at = models.DateTimeField()
+    expires_at = models.DateTimeField()
+    revoked_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [models.Index(fields=["artist", "expires_at"], name="profiles_prevlink_artist")]
+
+    def __str__(self):
+        return f"{self.artist_id} preview until {self.expires_at:%Y-%m-%d}"
+
+
 class AICall(models.Model):
     """One request sent to an AI provider (apps/profiles/ai). Never stores prompt or reply text.
 

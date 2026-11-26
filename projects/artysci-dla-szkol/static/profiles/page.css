@@ -89,6 +89,9 @@
   padding: .75rem 1rem; border-radius: .4rem; font: 600 1rem "Helvetica Neue", Arial, sans-serif; }
 .skip-link:focus { top: .5rem; outline: 3px solid #111; outline-offset: 2px; }
 .artist-page:focus { outline: none; }
+/* The private preview link (US-3.7): one plain line above the page, outside the theme. */
+.preview-banner { margin: 0; padding: .6rem 1rem; background: #fff4c2; color: #1d1a10;
+  border-bottom: 1px solid #c9b45a; font: 500 .95rem/1.4 "Helvetica Neue", Arial, sans-serif; }
 
 /* Motion: nothing moves for people who ask for less. The only smooth scrolling is opt-in, and a
    blanket reduce rule covers anything added later (a stylesheet scan test guards both). */

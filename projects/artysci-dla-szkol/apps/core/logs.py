@@ -61,6 +61,8 @@ _KEY_VALUE = re.compile(
 _AUTH_SCHEME = re.compile(r"(?i)\b(bearer|basic|token)\s+[A-Za-z0-9._~+/=-]{8,}")
 _IPV4 = re.compile(r"(?<![\d.])(?:\d{1,3}\.){3}\d{1,3}(?![\d.])")
 _IPV6_CANDIDATE = re.compile(r"(?<![\w:])[0-9A-Fa-f:]*:[0-9A-Fa-f:]*:[0-9A-Fa-f:.]*(?![\w:])")
+# Secrets that travel in the path: the private preview link `/podglad/<token>/` (US-3.7).
+_PATH_TOKEN = re.compile(r"(/podglad/)[^/\s\"'?#]+")
 
 
 def truncate_ip(value: str) -> str:
@@ -78,7 +80,9 @@ def _mask_ip(match: re.Match) -> str:
 
 
 def redact(text: str) -> str:
-    """Remove e-mails, secrets (key=value, auth headers) and the host part of IP addresses."""
+    """Remove e-mails, secrets (key=value, auth headers, path tokens) and the host part of IP
+    addresses."""
+    text = _PATH_TOKEN.sub(r"\1[token]", text)
     text = _EMAIL.sub("[email]", text)
     text = _AUTH_SCHEME.sub(lambda m: f"{m.group(1)} [redacted]", text)
     text = _KEY_VALUE.sub(lambda m: f"{m.group(1)}[redacted]", text)

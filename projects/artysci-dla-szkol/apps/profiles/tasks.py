@@ -2,9 +2,20 @@
 
 from procrastinate.contrib.django import app
 
-from apps.core.jobs import QUEUE_AI
+from apps.core.jobs import QUEUE_AI, QUEUE_DEFAULT
 
-from . import generation, sections
+from . import generation, previews, sections
+
+
+@app.periodic(cron="41 4 * * *")
+@app.task(
+    name="profiles.purge_preview_links",
+    queue=QUEUE_DEFAULT,
+    queueing_lock="profiles.purge_preview_links",
+)
+def purge_preview_links(timestamp: int) -> None:
+    """Daily: delete preview links (US-3.7) that expired or were revoked over 30 days ago."""
+    previews.purge()
 
 
 @app.task(name="profiles.generate_profile", queue=QUEUE_AI)

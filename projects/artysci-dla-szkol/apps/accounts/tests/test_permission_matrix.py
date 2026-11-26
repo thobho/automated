@@ -36,6 +36,7 @@ ARGUMENTS = {
     "artists:upload_complete": {"session_id": "00000000-0000-4000-8000-000000000000"},
     "artists:website_import_status": {"import_id": 999999},
     "profiles:public": {"slug": "nie-ma-takiej"},
+    "profiles:shared_preview": {"token": "nie-ma-takiego"},
 }
 
 #: URL name -> expected answer for (anonymous, artist, institution, admin)
@@ -98,6 +99,9 @@ MATRIX = {
     "profiles:publish_changes": ("login", "405", "403", "403"),  # POST only
     "profiles:withdraw": ("login", "405", "403", "403"),  # POST only
     "profiles:public": ("404", "404", "404", "404"),  # public by design; unknown slug = 404
+    "profiles:preview_link_create": ("login", "405", "403", "403"),  # POST only
+    "profiles:preview_link_revoke": ("login", "405", "403", "403"),  # POST only
+    "profiles:shared_preview": ("404", "404", "404", "404"),  # no login; unknown token = 404
     "institutions:register": ("200", "200", "200", "200"),
     "institutions:rspo_suggestions": ("200", "200", "200", "200"),
     "institutions:start": ("login", "403", "200", "403"),

@@ -34,6 +34,9 @@
 {% block skip_link %}<a class="skip-link" href="#artist-page">{% translate "Przejdź do treści" %}</a>{% endblock %}
 
 {% block content %}
+  {% if shared_preview %}
+    <p class="preview-banner" role="note" data-shared-preview>{% translate "Podgląd strony przed publikacją. Ten adres jest prywatny i wkrótce wygaśnie." %}</p>
+  {% endif %}
   {% if theme_switch %}{% include "profiles/_theme_switch.html" %}{% endif %}
   {% if editor is not None %}{% include "profiles/_editor.html" %}{% endif %}
   <div class="artist-root" data-theme="{{ content.theme }}">

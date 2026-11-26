@@ -19,7 +19,8 @@ BOT_RE = re.compile(
     r"preview|facebookexternalhit|lighthouse",
     re.IGNORECASE,
 )
-EXCLUDED_PREFIXES = ("/healthz", "/readyz", "/static/", "/django-admin/")
+# `/podglad/`: the private preview link carries its secret token in the path (US-3.7).
+EXCLUDED_PREFIXES = ("/healthz", "/readyz", "/static/", "/django-admin/", "/podglad/")
 MAX_PATH = 200
 
 
