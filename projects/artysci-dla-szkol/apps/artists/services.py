@@ -530,7 +530,47 @@ def seed_artists() -> int:
         if number == SEED_REPERTOIRE and not has_offers(artist):
             for data in _seed_repertoire():
                 create_offer(artist, data)
+        if number != SEED_EMPTY_BASICS:
+            _seed_catalog_entries(artist, number)
     return created
+
+
+# Fixed (not random) catalog choice per seed artist: slugs of the starting entries (T50/#203).
+SEED_TOPICS = {
+    1: ("uzaleznienia", "emocje"),
+    2: ("hejt",),
+    3: ("bezpieczenstwo", "hejt", "emocje"),
+    4: ("ekologia",),
+    5: ("emocje", "ekologia"),
+    6: ("uzaleznienia", "bezpieczenstwo"),
+    7: ("hejt", "ekologia", "emocje"),
+    8: ("bezpieczenstwo",),
+    9: ("uzaleznienia", "ekologia"),
+}
+SEED_FORMS = {
+    1: ("spektakl", "warsztaty"),
+    2: ("warsztaty",),
+    3: ("spektakl",),
+    4: ("pokaz", "warsztaty"),
+    5: ("warsztaty",),
+    6: ("spektakl", "pokaz"),
+    7: ("pokaz",),
+    8: ("warsztaty", "spektakl"),
+    9: ("spektakl",),
+}
+
+
+def _seed_catalog_entries(artist, number: int) -> None:
+    """Give a seed artist its topics and forms, only when it has none of either (D102: never
+    overwrite what the artist changed)."""
+    if catalog.ArtistEntry.objects.filter(artist=artist).exists():
+        return
+    for kind, table in (
+        (catalog.EntryKind.TOPIC, SEED_TOPICS),
+        (catalog.EntryKind.FORM, SEED_FORMS),
+    ):
+        entries = [e for e in catalog.active_entries(kind) if e.slug in table.get(number, ())]
+        catalog.set_artist_entries(artist, kind, entries)
 
 
 SEED_EMPTY_BASICS = accounts.ARTIST_COUNT  # artysta10 keeps empty basics (wizard demo)

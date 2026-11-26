@@ -270,6 +270,9 @@ App `apps/artists`, logic in `services.py` (D102):
   (materials is a placeholder until US-2.3A).
 - `make seed` fills basics for `artysta01`–`artysta09`; `artysta10@example.invalid` keeps empty
   basics to try the wizard.
+- `make seed` also gives `artysta01`–`artysta09` a fixed set of 1–3 catalog topics and 1–2 forms
+  (from the starting dictionary entries); `artysta10` gets none. An artist that already has any
+  topic or form is left unchanged, so the seed never overwrites the artist's choices.
 
 ## Artist profile wizard: offers and repertoire (US-2.9)
 
