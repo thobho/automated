@@ -59,7 +59,7 @@ def test_the_components_are_registered_with_version_and_hash():
     registered = {c.key: c for c in reg.registry.all()}
     for component in COMPONENTS:
         assert registered[component.key] is component
-        expected = {"validator": "0.1", "instructions": "0.4"}.get(component.kind, "0.2")
+        expected = {"validator": "0.3", "instructions": "0.5"}.get(component.kind, "0.2")
         assert component.version == expected
         assert len(component.content_hash) == 64
     assert (INSTRUCTIONS.kind, SCHEMA.kind, VALIDATOR.kind) == (
@@ -77,7 +77,7 @@ def test_the_manifest_records_the_current_hashes():
 
 
 def test_the_validator_is_v01_and_covers_the_rules_file():
-    assert VALIDATOR.version == "0.1" and "apps/profiles/validator.py" in VALIDATOR.files
+    assert VALIDATOR.version == "0.3" and "apps/profiles/validator.py" in VALIDATOR.files
 
 
 def test_validator_code_changed_without_a_version_bump_fails_the_manifest(tmp_path):

@@ -71,7 +71,13 @@ def run(path, **kw):
 def test_the_real_catalog_passes():
     """The same check as `manage.py error_catalog_check`: CI fails on a broken catalog."""
     results = catalog.check()
-    assert [r.code for r in results] == ["jezyk-procesu", "fakt-z-nawiasem"]
+    assert [r.code for r in results] == [
+        "jezyk-procesu",
+        "fakt-z-nawiasem",
+        "opinia-ucznia",
+        "liczba-spoza-zrodel",
+        "szacunek-bez-zastrzezenia",
+    ]
     assert all(r.ok and r.cases for r in results), [r.line() for r in results]
 
 
@@ -83,7 +89,12 @@ def test_the_command_prints_a_line_per_entry():
         "jezyk-procesu [validator_rule RULE_PHRASES] OK: case gliniane-ludki"
     )
     assert lines[1].startswith("fakt-z-nawiasem [validator_rule RULE_FACTS] OK")
-    assert lines[2] == "2 of 2 entries ok"
+    assert lines[2].startswith(
+        "opinia-ucznia [validator_rule RULE_PUPIL + instruction_example opinia-ucznia] OK"
+    )
+    assert lines[3].startswith("liczba-spoza-zrodel [validator_rule RULE_NUMBERS")
+    assert lines[4].startswith("szacunek-bez-zastrzezenia [validator_rule RULE_HEDGE")
+    assert lines[5] == "5 of 5 entries ok"
 
 
 def test_the_command_fails_and_names_the_entry(write):
@@ -225,8 +236,16 @@ def test_a_catalog_that_breaks_its_schema_fails_with_the_path(write):
     assert caught.value.problems[0].startswith("$.errors[0].code")
 
 
-def test_a_handling_with_both_rule_and_anchor_breaks_the_schema(write):
-    handling = {"kind": "validator_rule", "rule": "RULE_FACTS", "anchor": "a"}
+def test_a_rule_with_an_anchor_that_is_missing_in_the_instructions_fails(write, tmp_path):
+    instructions = tmp_path / "instructions.md"
+    instructions.write_text("Brak znacznika.", encoding="utf-8")
+    handling = {"kind": "validator_rule", "rule": "RULE_PHRASES", "anchor": "przyklad"}
+    [result] = run(write(entry(handling=handling)), instructions=instructions)
+    assert not result.ok and "<!-- katalog:przyklad --> is missing" in result.errors[0]
+
+
+def test_a_handling_with_an_unknown_field_breaks_the_schema(write):
+    handling = {"kind": "validator_rule", "rule": "RULE_FACTS", "extra": "a"}
     with pytest.raises(catalog.CatalogError):
         catalog.load(write(entry(handling=handling)))
 
@@ -257,6 +276,9 @@ def test_codes_by_rule(monkeypatch, tmp_path):
     assert catalog.codes_by_rule() == {
         "bez języka procesu i bez dodanych obietnic": "jezyk-procesu",
         "fakty": "fakt-z-nawiasem",
+        "opinie tylko od dorosłych i instytucji": "opinia-ucznia",
+        "liczby i ceny tylko ze źródła": "liczba-spoza-zrodel",
+        "zastrzeżenie ze źródła": "szacunek-bez-zastrzezenia",
     }
     monkeypatch.setattr(catalog, "CATALOG_FILE", tmp_path / "nie-ma.json")
     assert catalog.codes_by_rule() == {}
@@ -269,14 +291,14 @@ def test_the_catalog_is_a_registered_component_outside_the_generator():
     from apps.profiles.generator_components import COMPONENTS
 
     component = registry.registry.get("catalog", "error_catalog")
-    assert component.version == "0.1" and component not in COMPONENTS
+    assert component.version == "0.2" and component not in COMPONENTS
     assert not registry.manifest_errors([component], registry.load_manifest())
 
 
 def test_a_catalog_change_without_a_version_bump_fails_the_manifest(tmp_path):
     copy_path = tmp_path / "error_catalog.json"
     copy_path.write_text(catalog.CATALOG_FILE.read_text(encoding="utf-8") + " ", encoding="utf-8")
-    changed = registry.Component("catalog", "error_catalog", "0.1", files=(str(copy_path),))
+    changed = registry.Component("catalog", "error_catalog", "0.2", files=(str(copy_path),))
     errors = registry.manifest_errors([changed], registry.load_manifest())
     assert "changed without a version bump" in errors[0]
 

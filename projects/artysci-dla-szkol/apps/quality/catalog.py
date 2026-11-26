@@ -27,7 +27,7 @@ from apps.profiles import inputs, validation, validator
 from apps.quality import scripted, testset
 from apps.quality.registry import Component, registry
 
-CATALOG_VERSION = "0.1"
+CATALOG_VERSION = "0.2"
 HERE = Path(__file__).resolve().parent
 CATALOG_FILE = HERE / "error_catalog.json"
 SCHEMA_FILE = HERE / "error_catalog.schema.json"
@@ -122,7 +122,8 @@ def codes_by_rule() -> dict[str, str]:
 
 def _describe(handling: dict) -> str:
     if handling["kind"] == "validator_rule":
-        return f"validator_rule {handling['rule']}"
+        extra = f" + instruction_example {handling['anchor']}" if "anchor" in handling else ""
+        return f"validator_rule {handling['rule']}{extra}"
     return f"instruction_example {handling['anchor']}"
 
 
@@ -131,7 +132,8 @@ def _check_handling(handling: dict, instructions: Path) -> str | None:
     if handling["kind"] == "validator_rule":
         if handling["rule"] not in validator_rule_names():
             return f"rule {handling['rule']} is not defined in the validator"
-        return None
+        if "anchor" not in handling:
+            return None
     marker = ANCHOR_FORMAT.format(anchor=handling["anchor"])
     try:
         text = instructions.read_text(encoding="utf-8")
@@ -172,12 +174,13 @@ def _check_validator_case(entry, case, rule_value, cases_dir, root) -> str | Non
     artist = testset.load_package(case["package"], root=root)
     data = inputs.build_input(artist)
     sources = inputs.collect_sources(artist, data)
-    flagged = {f.rule for f in validator.validate_profile(fixture, sources).hard}
+    report = validator.validate_profile(fixture, sources)
+    flagged = {f.rule for f in (*report.hard, *report.soft)}
     if rule_value not in flagged:
         rule = entry["handling"]["rule"]
         return f"case {label}: the validator does not flag the fixture with {rule}"
     good = validator.validate_profile(scripted.scripted_profile(data), sources)
-    if rule_value in {f.rule for f in good.hard}:
+    if rule_value in {f.rule for f in (*good.hard, *good.soft)}:
         return (
             f"case {label}: the scripted good profile is flagged with {entry['handling']['rule']}"
         )

@@ -626,13 +626,17 @@ uv run python manage.py evaluate_testset [--package <slug>]... [--level weak|med
 
 Każdy znaleziony błąd generatora ma typ, sposób zapobiegania i przypadek regresji. Katalog:
 `apps/quality/error_catalog.json` (schemat: `error_catalog.schema.json`, kod: `catalog.py`),
-zarejestrowany jako komponent `catalog:error_catalog` (v0.1, poza `COMPONENTS` generatora): zmiana
+zarejestrowany jako komponent `catalog:error_catalog` (v0.2, poza `COMPONENTS` generatora): zmiana
 katalogu, schematu lub pliku w `error_cases/` bez podniesienia wersji nie przechodzi testu manifestu.
 
 Wpis: `code` (angielski, kebab-case), `name` i `description` po polsku, `found` (data), `handling`
 i `cases`. `handling` to `{"kind": "validator_rule", "rule": "RULE_PHRASES"}` (stała z
 `apps/profiles/validator.py`) albo `{"kind": "instruction_example", "anchor": "x"}` (w instrukcjach
-`apps/profiles/prompts/profile_instructions.md` stoi znacznik `<!-- katalog:x -->`). Przypadek:
+`apps/profiles/prompts/profile_instructions.md` stoi znacznik `<!-- katalog:x -->`). Reguła może
+mieć dodatkowo `"anchor"`: wtedy błąd jest zwalczany regułą i przykładem w instrukcjach (sprawdzane
+są oba). Wpisy z #201: `opinia-ucznia` (twarda `RULE_PUPIL`: autor to dziecko lub uczeń),
+`liczba-spoza-zrodel` (twarda `RULE_NUMBERS`), `szacunek-bez-zastrzezenia` (miękka `RULE_HEDGE`:
+„około/ponad/prawie/blisko/niemal/nawet” przed liczbą w źródle znika na stronie). Przypadek:
 - `validator`: paczka syntetyczna i plik `error_cases/<code>/<paczka>.json` z profilem zawierającym
   błąd (zgodnym ze schematem profilu); walidator musi go oznaczyć regułą wpisu, a skryptowy dobry
   profil paczki nie może;

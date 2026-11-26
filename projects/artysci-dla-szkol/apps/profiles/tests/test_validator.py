@@ -467,3 +467,65 @@ def test_soft_findings_become_warnings_and_do_not_block(artist, client):
     assert done.status == Generation.Status.READY
     assert any(SOFT_VAGUE in w for w in done.warnings)
     assert done.report["soft"] and done.report["ok"]
+
+
+# --- opinia ucznia (RULE_PUPIL) and szacunek bez zastrzeżenia (RULE_HEDGE), D125 ---------------
+
+
+def _testimonial(author):
+    return {"testimonials": [{"quote": QUOTE, "author": author, "source_material_id": 30}]}
+
+
+@pytest.mark.parametrize(
+    "author", ["Kasia, 3b", "Uczeń klasy 4", "uczennica", "Jaś, kl. 2", "dziecko z grupy"]
+)
+def test_pupil_author_is_hard(author):
+    findings = hard(clean_profile(**_testimonial(author)))
+    assert [f for f in findings if f.rule == validator.RULE_PUPIL][0].path == (
+        "$.testimonials[0].author"
+    )
+
+
+@pytest.mark.parametrize("author", ["wicedyrektor SP Nr 12", "Pani Anna", "Dyrektor przedszkola"])
+def test_adult_or_institution_author_is_not_pupil(author):
+    assert validator.RULE_PUPIL not in rules(hard(clean_profile(**_testimonial(author))))
+
+
+def soft(profile, **kw):
+    return validate_profile(profile, sources(**kw)).soft
+
+
+def _with_sentence(text):
+    return clean_profile(description={"paragraphs": [text]})
+
+
+HEDGED = {"texts": (SOURCE_TEXT + " Wystąpiliśmy w około 200 szkołach.",)}
+
+
+def test_dropped_hedge_is_soft_not_hard():
+    profile = _with_sentence(
+        "Teatr Kwiatki wystąpił w 200 szkołach we Wrocławiu, spektakl 45 minut."
+    )
+    assert validator.RULE_HEDGE in rules(soft(profile, **HEDGED))
+    assert validator.RULE_HEDGE not in rules(hard(profile, **HEDGED))
+
+
+@pytest.mark.parametrize(
+    "text", ["w około 200 szkołach", "w ponad 200 szkołach", "w ok. 200 szkołach"]
+)
+def test_kept_hedge_passes(text):
+    profile = _with_sentence(f"Teatr Kwiatki wystąpił {text} we Wrocławiu, spektakl 45 minut.")
+    assert validator.RULE_HEDGE not in rules(soft(profile, **HEDGED))
+
+
+def test_number_also_stated_exactly_in_source_is_not_a_hedge_error():
+    texts = (*HEDGED["texts"], "Dokładnie 200 szkół, w tym 3 przedszkola.")
+    profile = _with_sentence(
+        "Teatr Kwiatki wystąpił w 200 szkołach we Wrocławiu, spektakl 45 minut."
+    )
+    assert validator.RULE_HEDGE not in rules(soft(profile, texts=texts))
+
+
+def test_computed_number_is_hard_numbers_rule():
+    profile = _with_sentence("Teatr Kwiatki zagrał dla ponad 10 000 widzów we Wrocławiu.")
+    assert RULE_NUMBERS in rules(hard(profile))
