@@ -42,7 +42,9 @@ def users(django_db_blocker):
         yield artist.pk, admin.pk
 
 
-def test_artist_picks_entries_and_admin_merges(browser, base_url, users, shot, django_db_blocker):
+def test_artist_picks_entries_and_admin_merges(
+    browser, base_url, users, shot_dir, django_db_blocker
+):
     from apps.artists.models import Artist
     from apps.catalog import services
     from apps.catalog.models import ArtistEntry
@@ -58,7 +60,7 @@ def test_artist_picks_entries_and_admin_merges(browser, base_url, users, shot, d
     group.filter(has_text="Odbiorcy").get_by_label("przedszkola").check()
     group.filter(has_text="Tematyka").get_by_label("hejt").check()
     group.filter(has_text="Forma").get_by_label("warsztaty").check()
-    shot("catalog-step1")
+    page.screenshot(path=str(shot_dir / "catalog-step1.png"), full_page=True)
     assert not Axe().run(page).violations_count
     page.get_by_role("button", name="Zapisz").click()
     page.wait_for_url("**/artysta/kreator/")
@@ -66,6 +68,7 @@ def test_artist_picks_entries_and_admin_merges(browser, base_url, users, shot, d
         mine = ArtistEntry.objects.filter(artist=Artist.objects.get(user_id=artist_pk))
         assert set(mine.values_list("entry__slug", flat=True)) == {"hejt", "warsztaty"}
         source = services.add_entry("topic", f"E2E źródło {uuid.uuid4().hex[:6]}")
+        # the artist's only topic becomes the source, so the merge below moves exactly one profile
         services.set_artist_entries(mine[0].artist, "topic", [source])
 
     admin = _login(browser, base_url, admin_pk)
@@ -75,7 +78,7 @@ def test_artist_picks_entries_and_admin_merges(browser, base_url, users, shot, d
     admin.get_by_role("button", name="Wykonaj").click()
     assert admin.locator("#merge-count").inner_text() == "1"
     admin.get_by_label("Połącz z").select_option(label="hejt")
-    shot("catalog-merge-confirm")
+    admin.screenshot(path=str(shot_dir / "catalog-merge-confirm.png"), full_page=True)
     admin.get_by_role("button", name="Połącz").click()
     admin.wait_for_url("**/dictionaryentry/")
     with django_db_blocker.unblock():

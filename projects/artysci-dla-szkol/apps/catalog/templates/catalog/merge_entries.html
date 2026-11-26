@@ -3,7 +3,7 @@
 
 {% block content %}
   <p>
-    {% blocktranslate with name=source.name kind=source.get_kind_display %}Pozycja „{{ name }}” ({{ kind }}) zostanie usunięta, a jej profile przejdzie wskazana pozycja.{% endblocktranslate %}
+    {% blocktranslate with name=source.name kind=source.get_kind_display %}Pozycja „{{ name }}” ({{ kind }}) zostanie usunięta, a jej profile zostaną przeniesione do wskazanej pozycji.{% endblocktranslate %}
   </p>
   <p>{% translate "Profile do przeniesienia" %}: <strong id="merge-count">{{ count }}</strong></p>
   <form method="post">
