@@ -8,6 +8,7 @@ import uuid
 
 import pytest
 from axe_playwright_python.sync_playwright import Axe
+from playwright.sync_api import expect
 from test_publication import _seed  # same folder (no package): pytest puts it on sys.path
 
 
@@ -69,7 +70,7 @@ def test_create_open_revoke_and_copy_public_link(browser, base_url, seeded, shot
     public = page.get_by_label("Adres Twojej strony")
     assert "/artysci/teatr-laka-" in public.input_value()
     page.get_by_role("button", name="Kopiuj link").click()
-    assert page.get_by_text("Skopiowano link.").is_visible()
+    expect(page.locator("[data-public-copy] [data-copy-status]")).to_have_text("Skopiowano link.")
     assert page.evaluate("navigator.clipboard.readText()") == public.input_value()
     assert not _serious(page)
     page.screenshot(path=str(shot_dir / "preview-link-copy.png"), full_page=True)
