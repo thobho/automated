@@ -1,0 +1,16 @@
+{% load i18n %}
+<nav class="catalog-pagination" aria-label="{% translate 'Strony katalogu' %}">
+  {% if page.previous %}
+    <a href="{% url 'catalog:list' %}{% if page.previous > 1 %}?strona={{ page.previous }}{% endif %}" rel="prev">{% translate "Poprzednia" %}</a>
+  {% endif %}
+  {% for number in page.numbers %}
+    {% if number == page.number %}
+      <span aria-current="page">{{ number }}</span>
+    {% else %}
+      <a href="{% url 'catalog:list' %}{% if number > 1 %}?strona={{ number }}{% endif %}">{{ number }}</a>
+    {% endif %}
+  {% endfor %}
+  {% if page.next %}
+    <a href="{% url 'catalog:list' %}?strona={{ page.next }}" rel="next">{% translate "Następna" %}</a>
+  {% endif %}
+</nav>
