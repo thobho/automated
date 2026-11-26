@@ -175,13 +175,14 @@ def _offer_tags(offer) -> tuple[str, ...]:
     return tuple(tags)
 
 
+def _items_of(offers) -> list[OfferItem]:
+    return [OfferItem(o.title, o.description, _price_note(o), _offer_tags(o)) for o in offers]
+
+
 def _offer_items(artist) -> list[OfferItem]:
     from apps.artists import services
 
-    return [
-        OfferItem(o.title, o.description, _price_note(o), _offer_tags(o))
-        for o in services.offers_for(artist)
-    ]
+    return _items_of(services.offers_for(artist))
 
 
 def shown_materials(artist) -> list:
@@ -254,19 +255,33 @@ def page_content_for(artist) -> PageContent:
 
 def page_data(artist, shown) -> dict:
     """The artist's data as it is now, in the form `PublishedPage.data` stores."""
+    from apps.artists import services
+    from apps.catalog import services as dictionaries
+
+    offers = list(services.offers_for(artist))
     return {
         "name": artist.name,
         "city": artist.city,
         "artist_type": artist.artist_type,
         "regions": sorted(artist.voivodeships.values_list("voivodeship", flat=True)),
+        # T52 (catalog): age groups, topics and forms; a price (whole zł) and a duration per offer.
+        "age_groups": sorted(artist.audiences.values_list("audience", flat=True)),
+        "topics": [
+            {"slug": e.slug, "name": e.name} for e in dictionaries.entries_of(artist, "topic")
+        ],
+        "forms": [
+            {"slug": e.slug, "name": e.name} for e in dictionaries.entries_of(artist, "form")
+        ],
         "offers": [
             {
                 "title": o.title,
                 "description": o.description,
-                "price_note": o.price_note,
-                "tags": list(o.tags),
+                "price_note": item.price_note,
+                "tags": list(item.tags),
+                "price_pln": o.price_pln or None,
+                "duration_minutes": o.duration_minutes,
             }
-            for o in _offer_items(artist)
+            for o, item in zip(offers, _items_of(offers), strict=True)
         ],
         "materials": [{"id": m.pk, "alt": m.alt_text} for m in shown],
     }

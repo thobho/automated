@@ -16,6 +16,7 @@
   {% block skip_link %}{% endblock %}
   <header>
     <nav aria-label="{% translate 'Konto' %}">
+      <a href="{% url 'catalog:list' %}">{% translate "Artyści" %}</a>
       {% if user.is_authenticated %}
         <a href="{% url 'accounts:settings' %}">{% translate "Ustawienia konta" %}</a>
         {# Logout is POST-only (CSRF-protected); the server ends the session. #}

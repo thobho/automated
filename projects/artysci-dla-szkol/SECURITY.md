@@ -415,6 +415,15 @@ Status: **done**, **partial** (what is missing), **planned** (task), **n/a** (fe
 | 16.4.1 | Log injection prevented | done (JSON encoding) |
 | 16.5.1 | Generic error messages | done (`DEBUG = False` in prod) |
 | 8.2.1 (public profile exposure) | Only published pages are reachable; no contact data leaks | done (T39 adds: the search tags and JSON-LD come from the snapshot only and carry no e-mail, phone or address; JSON-LD escapes `<`, `>`, `&` so no `</script>` breakout, meta attributes are autoescaped, the `application/ld+json` block needs no CSP change; `/sitemap.xml` lists `published()` pages only and is revalidated on every request; `/robots.txt` disallows `/panel/`, `/admin/`, `/django-admin/`, `/artysta/`; the preview keeps `noindex` + `X-Robots-Tag`; `SITE_URL` is required in hosted settings so no localhost URL is published) (T36: `/artysci/<slug>/` serves the snapshot of `Artist.objects.published()`; draft, withdrawn and unknown slugs give one identical 404; the snapshot holds everything shown, nothing is read live, so nothing new goes public without a click; photos, videos and links only while the artist's "Prawa do materiałów" statement counts; publication is refused while a name, city, text, offer or photo alt text has an e-mail or phone; slug, state and dates are read-only in the Django admin; no upload file names, no inquiry data; deactivated accounts have no public page; publish/update/withdraw are POST-only, CSRF-protected, owner-only; `Cache-Control: no-cache` so a withdrawal is immediate; analytics events carry ids only) |
+| 8.2.1 (catalog dictionaries) | Only staff with the change permission edit or merge the dictionaries | done (T50: `/django-admin/` staff only, merge action needs the change permission and is a POST with CSRF; anonymous, artist and institution users get the login page or 403; an entry with assignments cannot be deleted, merge is one transaction within one kind; artists can only pick active entries of the right kind, checked again in the service; names are autoescaped) |
+
+## Public catalog (US-4.1, D123)
+
+The catalog `/artysci/` is public by design (D15). Data comes only from the publication snapshot
+(`CatalogEntry`), is filtered by `Artist.objects.published()` on every request (draft, withdrawn and
+deactivated accounts never appear), and carries no e-mail or phone (D9); tests assert no `mailto:`,
+`tel:`, `@`, inline script or style. Photos are short-lived signed links shown only while the artist
+confirms the rights (D4, D7). The `?strona` parameter is validated as ASCII digits (max 9) before use.
 
 ## Reporting a vulnerability
 

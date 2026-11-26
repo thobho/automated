@@ -5,9 +5,10 @@
 
 {% block content %}
   <h1>{% translate "Dane podstawowe" %}</h1>
-  <p>{% translate "Krok 1 kreatora profilu. Wszystkie pola są obowiązkowe." %}</p>
+  <p>{% translate "Krok 1 kreatora profilu. Wszystkie pola są obowiązkowe oprócz tematyki i formy." %}</p>
   <form method="post" action="{% url 'artists:basics' %}" novalidate>
     {% csrf_token %}
+    {% for error in form.non_field_errors %}<p role="alert">{{ error }}</p>{% endfor %}
     {% for field in form %}
       {% if field.name == "name" or field.name == "city" %}
         <p>
