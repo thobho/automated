@@ -15,6 +15,7 @@ from decimal import Decimal
 
 from django.conf import settings
 
+from . import images
 from .base import AIClient, Reply, Request
 from .errors import AIConfigError, AIProviderError
 
@@ -76,7 +77,7 @@ class OpenRouterClient(AIClient):
     def build_body(self, request: Request) -> dict:
         body = {
             "model": self.model,  # pinned: no `models` fallback list
-            "messages": request.messages,
+            "messages": images.for_provider(request.messages),
             "max_tokens": request.max_tokens,
             "user": request.user,
             "usage": {"include": True},

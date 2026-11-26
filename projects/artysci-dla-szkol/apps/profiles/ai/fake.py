@@ -35,6 +35,18 @@ def example_for(schema: dict, seed: str = "fake"):
     return None
 
 
+def _bytes_digest(value):
+    if isinstance(value, bytes):
+        return "bytes:" + hashlib.sha256(value).hexdigest()[:12]
+    raise TypeError(type(value))
+
+
+def _text_len(content) -> int:
+    if isinstance(content, str):
+        return len(content)
+    return sum(len(p.get("text", "")) for p in content if p.get("type") == "text")
+
+
 class FakeClient(AIClient):
     name = "fake"
 
@@ -52,7 +64,9 @@ class FakeClient(AIClient):
 
     def _send(self, request: Request) -> Reply:
         self.requests.append(request)
-        canonical = json.dumps([request.messages, request.schema], sort_keys=True)
+        canonical = json.dumps(
+            [request.messages, request.schema], sort_keys=True, default=_bytes_digest
+        )
         digest = hashlib.sha256(canonical.encode()).hexdigest()[:12]
         if callable(self.reply):
             text = self.reply(request)
@@ -67,7 +81,7 @@ class FakeClient(AIClient):
             model=self.model,
             provider="fake",
             generation_id=f"fake-{digest}",
-            prompt_tokens=sum(math.ceil(len(m["content"]) / 4) for m in request.messages),
+            prompt_tokens=sum(math.ceil(_text_len(m["content"]) / 4) for m in request.messages),
             completion_tokens=math.ceil(len(text) / 4),
             cost_usd=self.cost_usd,
         )

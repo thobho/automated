@@ -21,6 +21,7 @@ from django.db import connection, transaction
 from django.db.models import Sum
 from django.utils import timezone
 
+from . import images
 from .errors import AICapExceeded, AIConfigError, AIDisabled
 
 BUDGET_LOCK_ID = 0x41494341  # "AICA": advisory lock key for daily-cap reservations
@@ -58,8 +59,15 @@ def check_kill_switch() -> None:
 
 
 def estimate_prompt_tokens(messages: list[dict]) -> int:
-    chars = sum(len(m.get("content", "")) for m in messages)
-    return math.ceil(chars / CHARS_PER_TOKEN) + PER_MESSAGE_OVERHEAD_TOKENS * len(messages)
+    chars = 0
+    for message in messages:
+        content = message.get("content", "")
+        if isinstance(content, list):
+            chars += sum(len(p.get("text", "")) for p in content if p.get("type") == "text")
+        else:
+            chars += len(content)
+    tokens = math.ceil(chars / CHARS_PER_TOKEN) + PER_MESSAGE_OVERHEAD_TOKENS * len(messages)
+    return tokens + images.IMAGE_TOKENS_ESTIMATE * images.count_images(messages)
 
 
 def plan_call(messages: list[dict], max_cost_usd: Decimal, prices: Prices) -> Plan:
