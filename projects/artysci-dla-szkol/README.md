@@ -615,7 +615,7 @@ uv run python manage.py evaluate_testset [--package <slug>]... [--level weak|med
   Cost is the generation plus the review calls (`AICall`). A finished run and every package row
   are append-only (edits and deletes are refused, like `Generation`). Read-only, staff-only admin:
   `/django-admin/quality/evaluationrun/` and `/django-admin/quality/packageevaluation/`.
-- **JSON report** (`--output`), format `evaluation-report/1`:
+- **JSON report** (`--output`), format `evaluation-report/2` (v2 adds `catalog`, the error catalog code or null, to every validator finding, and `summary.catalog_findings`):
   `{"format", "run": {id, status, note, level, started_at, finished_at, generator_components,
   reviewer_components, generator_model, reviewer_model, ai_client, package_set_hash, packages, cost_usd},
   "summary": {as printed, plus the failed expectations}, "packages": [{slug, level, package_hash,
@@ -624,6 +624,41 @@ uv run python manage.py evaluate_testset [--package <slug>]... [--level weak|med
   {status, reason, scores: {<dimension>: 1-5 or null}, problems: [{dimension, quote, explanation,
   unverified}]}, profile, cost_usd, duration_ms}]}`. Synthetic data only; no key, prompt or
   instruction text.
+
+## Katalog błędów (US-11.7)
+
+Każdy znaleziony błąd generatora ma typ, sposób zapobiegania i przypadek regresji. Katalog:
+`apps/quality/error_catalog.json` (schemat: `error_catalog.schema.json`, kod: `catalog.py`),
+zarejestrowany jako komponent `catalog:error_catalog` (v0.2, poza `COMPONENTS` generatora): zmiana
+katalogu, schematu lub pliku w `error_cases/` bez podniesienia wersji nie przechodzi testu manifestu.
+
+Wpis: `code` (angielski, kebab-case), `name` i `description` po polsku, `found` (data), `handling`
+i `cases`. `handling` to `{"kind": "validator_rule", "rule": "RULE_PHRASES"}` (stała z
+`apps/profiles/validator.py`) albo `{"kind": "instruction_example", "anchor": "x"}` (w instrukcjach
+`apps/profiles/prompts/profile_instructions.md` stoi znacznik `<!-- katalog:x -->`). Reguła może
+mieć dodatkowo `"anchor"`: wtedy błąd jest zwalczany regułą i przykładem w instrukcjach (sprawdzane
+są oba). Wpisy z #201: `opinia-ucznia` (twarda `RULE_PUPIL`: autor to dziecko lub uczeń),
+`liczba-spoza-zrodel` (twarda `RULE_NUMBERS`), `szacunek-bez-zastrzezenia` (miękka `RULE_HEDGE`:
+„około/ok./ponad/prawie/niemal/blisko” przed liczbą w źródle znika na stronie albo zmienia
+się na inne). Przypadek:
+- `validator`: paczka syntetyczna i plik `error_cases/<code>/<paczka>.json` z profilem zawierającym
+  błąd (zgodnym ze schematem profilu); walidator musi go oznaczyć regułą wpisu, a skryptowy dobry
+  profil paczki nie może;
+- `expectation`: paczka syntetyczna i oczekiwanie z jej `package.json` (rodzaje z D118).
+
+Sprawdzenie: `uv run python manage.py error_catalog_check` (jedna linia na wpis; kod wyjścia ≠ 0
+i nazwa wpisu przy: schemacie, nieznanej regule, braku znacznika, braku przypadku, paczce
+nieistniejącej lub nie-syntetycznej, fixture, którego walidator nie oznacza, oczekiwaniu, którego
+paczka nie ma). Wymaga `QUALITY_LAB_ENABLED`. To samo robi `apps/quality/tests/test_catalog.py`,
+więc CI zawodzi przy zepsutym katalogu. Raport oceny (`evaluate_testset`) podaje kod katalogu przy
+uwadze walidatora, której reguła jest w katalogu.
+
+**Nowy błąd:** (1) nadaj typ i kod; (2) dodaj regułę walidatora albo przykład w instrukcjach ze
+znacznikiem; to zmiana generatora (D13, D14): podnieś wersję komponentu i zapisz ją
+`manage.py generator_manifest --write`; (3) dodaj przypadek: fixture w `error_cases/<code>/` albo
+oczekiwanie w paczce syntetycznej (D12, D57; nigdy dane prawdziwych artystów); (4) dodaj wpis do
+katalogu, podnieś `CATALOG_VERSION` w `catalog.py`, `generator_manifest --write`; (5) PR zatwierdza
+człowiek (D13, D14). Poza zakresem: wpisy dla pozostałych reguł, błędy z panelu (US-11.6).
 
 ## Profile generation (US-2.5A)
 

@@ -24,6 +24,8 @@ RULE_MEDIA = "zdjęcia i filmy tylko z materiałów artysty"
 RULE_PHRASES = "bez języka procesu i bez dodanych obietnic"
 RULE_FACTS = "fakty"
 RULE_LENGTHS = "limity długości"
+RULE_PUPIL = "opinie tylko od dorosłych i instytucji"  # D125: never a child's opinion
+RULE_HEDGE = "zastrzeżenie ze źródła"  # soft: "około 200" must not become "200" (D125)
 SOFT_VAGUE = "mało konkretny opis"
 SOFT_MISSING = "brak sekcji"
 
@@ -74,6 +76,31 @@ PROMISE_PHRASES = (
     "bez ryzyka",
     "na pewno się spodoba",
 )
+# An author that is a child or pupil: a pupil word ("uczeń", "uczniowie", "Samorząd Uczniowski"),
+# a class ("klasa 3", "klasy II", "kl. 3") or a trailing class mark (", 3b").
+PUPIL_AUTHOR = re.compile(
+    r"\bucze[nń]|\buczni|\bdziec[koi]|\bprzedszkolak|\bzerówk|\bklas[aęy]\b|\bkl\.|"
+    r"(?:^|[,\s])\d{1,2}\s?[a-z]\s*$",
+    re.I,
+)
+# An adult role wins over a pupil word ("wychowawczyni klasy 3b", "Rada Rodziców Uczniów").
+# Institutions ("SP 5 w Gdyni", "Przedszkole nr 4") have no pupil word and need no marker.
+ADULT_AUTHOR = re.compile(
+    r"nauczyciel|wychowaw|dyrektor|pedagog|organizator|rodzic|\brad[aay]\b|opiekun|koordynator|"
+    r"terapeut|bibliotekarz|animator|instruktor",
+    re.I,
+)
+# A hedge in front of a number: the page must keep the same one ("około 200" is neither "200"
+# nor "ponad 200"). Each word maps to its meaning, so "ok." keeps "około".
+HEDGE_WORDS = {
+    "około": "około",
+    "ok.": "około",
+    "ponad": "ponad",
+    "prawie": "prawie",
+    "niemal": "prawie",
+    "blisko": "blisko",
+}
+HEDGE_LOOKBACK_CHARS = 14  # how far before a number a hedge word may stand
 VALUE_PREVIEW_CHARS = 120  # an offending value is cut to this length in a finding
 VAGUE_MIN_CHARS = 80  # a description shorter than this is vague by itself
 
@@ -233,6 +260,63 @@ def _rule_quotes(profile: dict, sources: Sources) -> list[Finding]:
                     _preview(quote),
                 )
             )
+    return findings
+
+
+def _rule_pupil(profile: dict, sources: Sources) -> list[Finding]:
+    findings = []
+    for i, item in enumerate(profile.get("testimonials") or []):
+        author = item.get("author") or ""
+        if PUPIL_AUTHOR.search(author) and not ADULT_AUTHOR.search(author):
+            findings.append(
+                Finding(
+                    RULE_PUPIL,
+                    _path("testimonials", i, "author"),
+                    "Opinia pochodzi od dziecka lub ucznia. Na stronie są tylko opinie dorosłych "
+                    "i instytucji (nauczyciel, dyrekcja, organizator). Usuń tę opinię.",
+                    _preview(author),
+                )
+            )
+    return findings
+
+
+# --- hedges kept from the source (soft) -------------------------------------------------------
+
+
+def _hedges_before(text: str, start: int) -> set[str]:
+    """The meanings of the hedge words just before a number (empty: stated exactly)."""
+    before = text[max(0, start - HEDGE_LOOKBACK_CHARS) : start].lower()
+    return {meaning for word, meaning in HEDGE_WORDS.items() if word in before}
+
+
+def _rule_hedge(profile: dict, sources: Sources) -> list[Finding]:
+    """A number the source gives only with a hedge ("około 200") is written without it."""
+    hedged: dict[str, set[str]] = {}  # number -> the hedges the source uses with it
+    plain: set[str] = set()
+    for text in sources.texts:
+        for match in _NUMBER.finditer(text):
+            number = normalise_number(match.group())
+            if hedges := _hedges_before(text, match.start()):
+                hedged.setdefault(number, set()).update(hedges)
+            else:
+                plain.add(number)
+    for number in plain:  # the source also states it exactly somewhere
+        hedged.pop(number, None)
+    findings = []
+    for path, text in public_texts(profile):
+        flat = _LINK.sub(" ", text)
+        for match in _NUMBER.finditer(flat):
+            source_hedges = hedged.get(normalise_number(match.group()))
+            if source_hedges and not source_hedges & _hedges_before(flat, match.start()):
+                findings.append(
+                    Finding(
+                        RULE_HEDGE,
+                        path,
+                        f"Źródło podaje „{match.group()}” z zastrzeżeniem (np. „około”). "
+                        "Zachowaj to samo zastrzeżenie jak w źródle albo pomiń to twierdzenie.",
+                        _preview(match.group()),
+                    )
+                )
     return findings
 
 
@@ -451,12 +535,17 @@ def _rule_missing(profile: dict, sources: Sources) -> list[Finding]:
 HARD_RULES: tuple[Callable[[dict, Sources], list[Finding]], ...] = (
     _rule_numbers,
     _rule_quotes,
+    _rule_pupil,
     _rule_media,
     _rule_phrases,
     _rule_facts,
     _rule_lengths,
 )
-SOFT_RULES: tuple[Callable[[dict, Sources], list[Finding]], ...] = (_rule_vague, _rule_missing)
+SOFT_RULES: tuple[Callable[[dict, Sources], list[Finding]], ...] = (
+    _rule_vague,
+    _rule_missing,
+    _rule_hedge,
+)
 
 
 def validate_profile(result_json: dict, sources: Sources) -> ValidationReport:

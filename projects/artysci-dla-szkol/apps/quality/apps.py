@@ -9,4 +9,7 @@ class QualityConfig(AppConfig):
     label = "quality"
 
     def ready(self):
-        from . import reviewer  # noqa: F401  (registers the reviewer components, v0.1)
+        from . import (
+            catalog,  # noqa: F401  (registers the error catalog)
+            reviewer,  # noqa: F401  (registers the reviewer components, v0.1)
+        )
