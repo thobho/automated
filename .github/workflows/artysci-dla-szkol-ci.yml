@@ -277,29 +277,43 @@ jobs:
             sleep 1
           done
           cat "$RUNNER_TEMP/server.log"; exit 1
-      - name: Lighthouse mobile, LCP <= 2.5 s
+      - name: Lighthouse mobile, median LCP of 3 runs <= 2.5 s
         run: |
           headers=$(jq -nc --arg c "sessionid=$(cat "$RUNNER_TEMP/session")" '{Cookie: $c}')
+          # A single Lighthouse run on a shared runner is noisy: the same code
+          # measured 1468 ms and 2602 ms on two runs (#215). Take exactly 3
+          # samples and judge the median against the unchanged 2500 ms budget,
+          # as Lighthouse recommends. This is not retry-until-pass: a real
+          # regression slows down every sample and still fails.
           # Lighthouse sometimes fails to record the trace (NO_NAVSTART) and
-          # exits non-zero without a report. Retry that up to 3 times; the
-          # LCP budget below stays strict and is never retried.
+          # exits non-zero without a report. Retry only that, up to 3 times
+          # per sample.
           # One renderer process: otherwise Chrome swaps processes between
           # about:blank and the page, and the trace can miss the new process's
           # navigationStart, which is what NO_NAVSTART means (#181).
-          for attempt in 1 2 3; do
-            npx --yes lighthouse@12 http://127.0.0.1:8000/panel/podglad/ \
-              --only-categories=performance --form-factor=mobile --quiet \
-              --extra-headers="$headers" \
-              --chrome-flags="--headless=new --no-sandbox --renderer-process-limit=1" \
-              --output=json --output-path="$RUNNER_TEMP/lighthouse.json" \
-              && jq -e '.audits["largest-contentful-paint"].numericValue != null' \
-                "$RUNNER_TEMP/lighthouse.json" >/dev/null \
-              && break
-            echo "Lighthouse run $attempt failed to produce a report"
-            [ "$attempt" = 3 ] && exit 1
-            sleep 5
+          for sample in 1 2 3; do
+            out="$RUNNER_TEMP/lighthouse-$sample.json"
+            for attempt in 1 2 3; do
+              npx --yes lighthouse@12 http://127.0.0.1:8000/panel/podglad/ \
+                --only-categories=performance --form-factor=mobile --quiet \
+                --extra-headers="$headers" \
+                --chrome-flags="--headless=new --no-sandbox --renderer-process-limit=1" \
+                --output=json --output-path="$out" \
+                && jq -e '.audits["largest-contentful-paint"].numericValue != null' \
+                  "$out" >/dev/null \
+                && break
+              echo "Lighthouse sample $sample, run $attempt failed to produce a report"
+              [ "$attempt" = 3 ] && exit 1
+              sleep 5
+            done
+            echo "sample $sample LCP: $(jq '.audits["largest-contentful-paint"].numericValue' "$out") ms"
           done
-          jq '.audits["largest-contentful-paint"].numericValue' "$RUNNER_TEMP/lighthouse.json"
+          # Keep the median sample as the uploaded report.
+          median=$(for s in 1 2 3; do
+            echo "$(jq '.audits["largest-contentful-paint"].numericValue' "$RUNNER_TEMP/lighthouse-$s.json") $s"
+          done | sort -n | sed -n 2p)
+          cp "$RUNNER_TEMP/lighthouse-${median#* }.json" "$RUNNER_TEMP/lighthouse.json"
+          echo "median LCP: ${median% *} ms (budget 2500 ms)"
           jq -e '.audits["largest-contentful-paint"].numericValue <= 2500' "$RUNNER_TEMP/lighthouse.json"
       - name: Server log
         if: failure()
