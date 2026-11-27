@@ -87,3 +87,4 @@ yourself; do not rely on automatic skill loading, which is unreliable in a subfo
 
 ## Lessons from reviews
 - Account flows that take an e-mail address (change e-mail, register, reset) must leave the same state and show the same UI whether the address is free or taken: no early return that skips creating or closing the `EmailChangeRequest`. Add a test that compares both cases (PR #116).
+- Every user-visible task ships a Playwright test in `tests/e2e/` that seeds its own data (artist fixture like `artist_session` in `tests/e2e/test_artist_page.py`: `django_db_blocker` + `force_login`, cleanup afterwards). Never `pytest.skip` when a session or option is missing, so CI always runs it (PRs #154, #145).
