@@ -3,7 +3,7 @@
     run = start_run(slugs)                  # a `trwa` run with the versions and models
     finish = evaluate(run)                  # every package: generate, validate, check, review
     summary(run)                            # the numbers printed and written in the report
-    report(run)                             # the JSON report (format `evaluation-report/2`)
+    report(run)                             # the JSON report (format `evaluation-report/3`)
 
 Each package goes through the same code path as the background job (`profiles.generation.
 run_generation`: first call, validator, up to 2 repair rounds), run in the foreground, and then
@@ -36,7 +36,7 @@ from apps.quality.models import EvaluationRun, Generation, PackageEvaluation, Pa
 
 logger = logging.getLogger("apps.quality.evaluation")
 
-REPORT_FORMAT = "evaluation-report/2"  # /2: adds `page_metrics` and `catalog`
+REPORT_FORMAT = "evaluation-report/3"  # /2: adds `catalog` (T46); /3: adds `page_metrics` (T44)
 SCORE_FIELDS = {name: f"score_{name}" for name in reviewer.DIMENSIONS}
 
 
@@ -390,7 +390,7 @@ def catalog_findings(run: EvaluationRun) -> list[dict]:
 
 
 def report(run: EvaluationRun) -> dict:
-    """The JSON report, format `evaluation-report/2` (see README). Synthetic data only; no key,
+    """The JSON report, format `evaluation-report/3` (see README). Synthetic data only; no key,
     prompt or instruction text."""
     packages = []
     codes = catalog.codes_by_rule()

@@ -615,7 +615,7 @@ uv run python manage.py evaluate_testset [--package <slug>]... [--level weak|med
   Cost is the generation plus the review calls (`AICall`). A finished run and every package row
   are append-only (edits and deletes are refused, like `Generation`). Read-only, staff-only admin:
   `/django-admin/quality/evaluationrun/` and `/django-admin/quality/packageevaluation/`.
-- **JSON report** (`--output`), format `evaluation-report/2` (v2 adds `catalog`, the error catalog code or null, to every validator finding, and `summary.catalog_findings`; and `page_metrics` per package:
+- **JSON report** (`--output`), format `evaluation-report/3` (v2 adds `catalog`, the error catalog code or null, to every validator finding, and `summary.catalog_findings`; v3 adds `page_metrics` per package:
   `null` until `measure_testset_pages --run` measured it, see "Page metrics" below):
   `{"format", "run": {id, status, note, level, started_at, finished_at, generator_components,
   reviewer_components, generator_model, reviewer_model, ai_client, package_set_hash, packages, cost_usd},

@@ -297,7 +297,7 @@ def test_metrics_of_a_run_are_stored_once_and_appear_in_the_report(script, tmp_p
         metrics.components
     )
     report = evaluation.report(run)
-    assert report["format"] == "evaluation-report/2"
+    assert report["format"] == "evaluation-report/3"
     assert report["packages"][0]["page_metrics"]["lighthouse"]["lcp_ms"] == 1800
     with pytest.raises(pagemetrics.MeasureRefused, match="already measured"):
         pagemetrics.measure([package()], "http://x.test", tmp_path, run=run)
