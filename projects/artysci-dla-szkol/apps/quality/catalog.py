@@ -27,7 +27,7 @@ from apps.profiles import inputs, validation, validator
 from apps.quality import scripted, testset
 from apps.quality.registry import Component, registry
 
-CATALOG_VERSION = "0.2"
+CATALOG_VERSION = "0.3"
 HERE = Path(__file__).resolve().parent
 CATALOG_FILE = HERE / "error_catalog.json"
 SCHEMA_FILE = HERE / "error_catalog.schema.json"

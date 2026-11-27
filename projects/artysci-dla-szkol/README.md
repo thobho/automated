@@ -629,7 +629,7 @@ uv run python manage.py evaluate_testset [--package <slug>]... [--level weak|med
 
 Każdy znaleziony błąd generatora ma typ, sposób zapobiegania i przypadek regresji. Katalog:
 `apps/quality/error_catalog.json` (schemat: `error_catalog.schema.json`, kod: `catalog.py`),
-zarejestrowany jako komponent `catalog:error_catalog` (v0.2, poza `COMPONENTS` generatora): zmiana
+zarejestrowany jako komponent `catalog:error_catalog` (v0.3, poza `COMPONENTS` generatora): zmiana
 katalogu, schematu lub pliku w `error_cases/` bez podniesienia wersji nie przechodzi testu manifestu.
 
 Wpis: `code` (angielski, kebab-case), `name` i `description` po polsku, `found` (data), `handling`
@@ -640,7 +640,10 @@ mieć dodatkowo `"anchor"`: wtedy błąd jest zwalczany regułą i przykładem w
 są oba). Wpisy z #201: `opinia-ucznia` (twarda `RULE_PUPIL`: autor to dziecko lub uczeń),
 `liczba-spoza-zrodel` (twarda `RULE_NUMBERS`), `szacunek-bez-zastrzezenia` (miękka `RULE_HEDGE`:
 „około/ok./ponad/prawie/niemal/blisko” przed liczbą w źródle znika na stronie albo zmienia
-się na inne). Przypadek:
+się na inne). Wpisy z #197 (pozostałe twarde reguły; `RULE_NUMBERS` ma już `liczba-spoza-zrodel`):
+`opinia-nie-doslownie` (`RULE_QUOTES`), `media-spoza-materialow` (`RULE_MEDIA`),
+`obietnica-gwarancji` (część obietnic `RULE_PHRASES`) i `przekroczony-limit-dlugosci`
+(`RULE_LENGTHS`). Przypadek:
 - `validator`: paczka syntetyczna i plik `error_cases/<code>/<paczka>.json` z profilem zawierającym
   błąd (zgodnym ze schematem profilu); walidator musi go oznaczyć regułą wpisu, a skryptowy dobry
   profil paczki nie może;
