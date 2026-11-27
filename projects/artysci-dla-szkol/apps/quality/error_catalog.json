@@ -70,6 +70,62 @@
           "fixture": "szacunek-bez-zastrzezenia/gliniane-ludki.json"
         }
       ]
+    },
+    {
+      "code": "opinia-nie-doslownie",
+      "name": "Opinia nie dosłownie",
+      "description": "Opinia na stronie nie jest cytatem dosłownie z materiałów: przerobiona, skrócona albo wymyślona.",
+      "found": "2026-11-27",
+      "handling": {"kind": "validator_rule", "rule": "RULE_QUOTES"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "opinia-nie-doslownie/gliniane-ludki.json"
+        }
+      ]
+    },
+    {
+      "code": "media-spoza-materialow",
+      "name": "Zdjęcie lub film spoza materiałów",
+      "description": "Strona używa zdjęcia, filmu, materiału, oferty lub linku, których nie ma wśród materiałów artysty.",
+      "found": "2026-11-27",
+      "handling": {"kind": "validator_rule", "rule": "RULE_MEDIA"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "media-spoza-materialow/gliniane-ludki.json"
+        }
+      ]
+    },
+    {
+      "code": "obietnica-gwarancji",
+      "name": "Dodana obietnica",
+      "description": "Tekst obiecuje coś, czego nie ma w materiałach („gwarantujemy”, „bez ryzyka”, „na pewno się spodoba”).",
+      "found": "2026-11-27",
+      "handling": {"kind": "validator_rule", "rule": "RULE_PHRASES"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "obietnica-gwarancji/gliniane-ludki.json"
+        }
+      ]
+    },
+    {
+      "code": "przekroczony-limit-dlugosci",
+      "name": "Przekroczony limit długości",
+      "description": "Pole strony jest dłuższe niż dozwolony limit znaków (np. nagłówek powyżej 70 znaków).",
+      "found": "2026-11-27",
+      "handling": {"kind": "validator_rule", "rule": "RULE_LENGTHS"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "przekroczony-limit-dlugosci/gliniane-ludki.json"
+        }
+      ]
     }
   ]
 }
