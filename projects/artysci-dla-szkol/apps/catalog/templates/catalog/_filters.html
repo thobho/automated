@@ -1,0 +1,50 @@
+{% load i18n %}
+<form class="catalog-filters" method="get" action="{% url 'catalog:list' %}" aria-label="{% translate 'Filtry katalogu' %}">
+  <div class="catalog-filters__field">
+    <label for="f-wojewodztwo">{% translate "Województwo" %}</label>
+    <select id="f-wojewodztwo" name="wojewodztwo">
+      <option value="">{% translate "dowolne" %}</option>
+      {% for o in options.wojewodztwo %}<option value="{{ o.value }}"{% if o.selected %} selected{% endif %}>{{ o.label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="catalog-filters__field">
+    <label for="f-rodzaj">{% translate "Rodzaj" %}</label>
+    <select id="f-rodzaj" name="rodzaj">
+      <option value="">{% translate "dowolny" %}</option>
+      {% for o in options.rodzaj %}<option value="{{ o.value }}"{% if o.selected %} selected{% endif %}>{{ o.label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="catalog-filters__field">
+    <label for="f-wiek">{% translate "Grupa wiekowa" %}</label>
+    <select id="f-wiek" name="wiek">
+      <option value="">{% translate "dowolna" %}</option>
+      {% for o in options.wiek %}<option value="{{ o.value }}"{% if o.selected %} selected{% endif %}>{{ o.label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="catalog-filters__field">
+    <label for="f-tematyka">{% translate "Tematyka" %}</label>
+    <select id="f-tematyka" name="tematyka">
+      <option value="">{% translate "dowolna" %}</option>
+      {% for o in options.tematyka %}<option value="{{ o.value }}"{% if o.selected %} selected{% endif %}>{{ o.label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="catalog-filters__field">
+    <label for="f-forma">{% translate "Forma" %}</label>
+    <select id="f-forma" name="forma">
+      <option value="">{% translate "dowolna" %}</option>
+      {% for o in options.forma %}<option value="{{ o.value }}"{% if o.selected %} selected{% endif %}>{{ o.label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="catalog-filters__field">
+    <label for="f-cena">{% translate "Cena maksymalna (zł)" %}</label>
+    <input id="f-cena" name="cena_max" type="number" inputmode="numeric" min="1" step="1" placeholder="{% translate 'dowolna' %}"{% if filters.cena_max %} value="{{ filters.cena_max }}"{% endif %}>
+  </div>
+  <div class="catalog-filters__field">
+    <label for="f-czas">{% translate "Czas trwania maksymalnie (min)" %}</label>
+    <input id="f-czas" name="czas_max" type="number" inputmode="numeric" min="1" step="1" placeholder="{% translate 'dowolny' %}"{% if filters.czas_max %} value="{{ filters.czas_max }}"{% endif %}>
+  </div>
+  <div class="catalog-filters__actions">
+    <button type="submit">{% translate "Pokaż artystów" %}</button>
+    {% if filtered %}<a href="{% url 'catalog:list' %}">{% translate "Wyczyść filtry" %}</a>{% endif %}
+  </div>
+</form>

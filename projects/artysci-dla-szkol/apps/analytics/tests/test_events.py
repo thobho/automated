@@ -17,6 +17,9 @@ EMITTERS: dict[str, str] = {
     "website_import_finished": "apps.artists.website_import._finish",
     "profile_published": "apps.profiles.publication.publish",
     "profile_withdrawn": "apps.profiles.publication.withdraw",
+    "catalog_searched": "apps.catalog.filters.record_search",
+    "catalog_no_results": "apps.catalog.filters.record_search",
+    "catalog_notice_cta_clicked": "apps.catalog.filters.record_notice_click",
 }
 PENDING = set(EVENT_CATALOG) - set(EMITTERS)
 
@@ -38,6 +41,9 @@ def test_catalog_has_the_agreed_events():
         "performance_confirmed",
         "notice_published",
         "notice_applied",
+        "catalog_searched",
+        "catalog_no_results",
+        "catalog_notice_cta_clicked",
     }
 
 

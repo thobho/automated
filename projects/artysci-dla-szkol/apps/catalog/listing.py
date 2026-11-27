@@ -19,6 +19,8 @@ from django.db import transaction
 from apps.artists.models import Artist, ArtistType, Audience, Material, MaterialKind, ScanStatus
 from apps.core.regions import Voivodeship
 
+from . import filters as filters_module
+from .filters import Filters
 from .models import CatalogEntry
 
 PAGE_SIZE = 24
@@ -209,14 +211,14 @@ def public_entries():
     return entries.select_related("artist").order_by("-published_at", "-id")
 
 
-def cards_page(raw_number: str | None) -> CardsPage | None:
-    """The cards of one page; `raw_number` is the `?strona=` text (None = page 1). None for
-    anything that is not a page that exists."""
+def cards_page(raw_number: str | None, filters: Filters | None = None) -> CardsPage | None:
+    """The cards of one page; `raw_number` is the `?strona=` text (None = page 1), `filters` the
+    parsed filters of US-4.2. None for anything that is not a page that exists."""
     if raw_number is None:
         raw_number = "1"
     if not (raw_number.isascii() and raw_number.isdigit() and len(raw_number) <= 9):
         return None
-    paginator = Paginator(public_entries(), PAGE_SIZE)
+    paginator = Paginator(filters_module.apply(public_entries(), filters or Filters()), PAGE_SIZE)
     try:
         page = paginator.page(int(raw_number))
     except EmptyPage:

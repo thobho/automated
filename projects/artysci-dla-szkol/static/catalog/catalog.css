@@ -31,3 +31,28 @@ main { max-width: 72rem; margin-inline: auto; padding: 0 1rem 3rem; }
 }
 .catalog-pagination a { color: #1b3a6b; }
 .catalog-pagination [aria-current] { background: #1b3a6b; color: #fff; border-color: #1b3a6b; }
+
+/* Filters (US-4.2): a GET form that works without JavaScript. */
+.catalog-filters {
+  display: grid; gap: .75rem 1rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  align-items: end; margin: 1rem 0; padding: 1rem; border: 1px solid #c9c4b8; border-radius: .5rem;
+  background: #fffdf8;
+}
+.catalog-filters__field { display: flex; flex-direction: column; gap: .25rem; }
+.catalog-filters label { font-weight: 600; color: #3d3a33; }
+.catalog-filters select, .catalog-filters input {
+  min-height: 2.75rem; box-sizing: border-box; padding: 0 .5rem; font: inherit;
+  border: 1px solid #8a8576; border-radius: .4rem; background: #fff; color: #1f1d18;
+}
+.catalog-filters__actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+.catalog-filters button, .catalog-empty__cta {
+  min-height: 2.75rem; padding: 0 1.25rem; box-sizing: border-box; font: inherit; font-weight: 600;
+  display: inline-flex; align-items: center; border: 0; border-radius: .4rem;
+  background: #1b3a6b; color: #fff; text-decoration: none; cursor: pointer;
+}
+.catalog-filters a, .catalog-empty a { color: #1b3a6b; }
+.catalog-empty__cta { color: #fff !important; }
+.catalog-filters :focus-visible, .catalog-empty :focus-visible { outline: 3px solid #1b3a6b; outline-offset: 2px; }
+.catalog-count { font-weight: 600; margin: 1rem 0 0; }
+.catalog-empty__links { padding-left: 1.25rem; }
+.catalog-empty__links li { margin: .5rem 0; }

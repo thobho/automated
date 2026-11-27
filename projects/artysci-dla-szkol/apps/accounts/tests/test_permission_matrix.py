@@ -44,6 +44,7 @@ MATRIX = {
     "core:home": ("200", "200", "200", "200"),
     "core:robots": ("200", "200", "200", "200"),  # public by design
     "catalog:list": ("200", "200", "200", "200"),  # public by design: published artists only
+    "notices:new": ("200", "200", "200", "200"),  # placeholder until US-6.1, public, GET only
     "profiles:sitemap": ("200", "200", "200", "200"),  # public by design: published pages only
     "core:private-media": ("404", "404", "404", "404"),  # signed token is the permission
     "trust:terms": ("200", "200", "200", "200"),
