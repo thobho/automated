@@ -89,7 +89,12 @@ why="exit $rc"; [[ -n "$killed" ]] && why="stopped at the task budget (\$$task_b
 [[ "$commits" -eq 0 ]] && why="$why, no commits"
 [[ -s "$body_file" ]] && head -1 "$body_file" | grep -q '^INCOMPLETE:' && why="$why, $(head -1 "$body_file" | cut -c1-200)"
 [[ "$commits" -gt 0 ]] && git -C "$work" push -q -u origin "$branch" 2>>"$runlog"   # keep partial work for the next run
-gh issue comment "$num" --body "❌ OpenCode run failed: $why (about \$$spent). Log on pirx: \`$runlog\`. <!-- automated:fail:pirx -->" >/dev/null
+# Last error-looking line of the log (ANSI codes stripped, secrets redacted), so the comment says why, not only "exit N".
+errline="$(sed 's/\x1b\[[0-9;]*[A-Za-z]//g' "$runlog" 2>/dev/null | grep -iE 'error|unknown|invalid|unauthori|denied|not found|failed|usage:' | tail -1 \
+  | sed -E 's/(sk-[A-Za-z0-9_-]{8,}|Bearer +[A-Za-z0-9._-]+|(KEY|TOKEN|SECRET)[A-Za-z_]*[=:] *[^ ]+)/[redacted]/g' | cut -c1-300)"
+[[ -z "$errline" ]] && errline="$(sed 's/\x1b\[[0-9;]*[A-Za-z]//g' "$runlog" 2>/dev/null | grep -v '^[[:space:]]*$' | tail -1 | sed -E 's/(sk-[A-Za-z0-9_-]{8,}|Bearer +[A-Za-z0-9._-]+)/[redacted]/g' | cut -c1-300)"
+errmsg=""; [[ -n "$errline" ]] && errmsg=$'\n\nLast error line: `'"${errline//\`/\'}"'`'
+gh issue comment "$num" --body "❌ OpenCode run failed: $why (about \$$spent). Log on pirx: \`$runlog\`.$errmsg <!-- automated:fail:pirx -->" >/dev/null
 fails="$(fail_count "$num" pirx)"
 if [[ "$fails" -ge 2 ]]; then
   gh issue edit "$num" --remove-label model:pirx >/dev/null 2>&1
