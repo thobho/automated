@@ -39,6 +39,7 @@ main { max-width: 72rem; margin-inline: auto; padding: 0 1rem 3rem; }
   background: #fffdf8;
 }
 .catalog-filters__field { display: flex; flex-direction: column; gap: .25rem; }
+.catalog-filters__field--search { grid-column: 1 / -1; } /* US-4.3: the search box takes the full row */
 .catalog-filters label { font-weight: 600; color: #3d3a33; }
 .catalog-filters select, .catalog-filters input {
   min-height: 2.75rem; box-sizing: border-box; padding: 0 .5rem; font: inherit;

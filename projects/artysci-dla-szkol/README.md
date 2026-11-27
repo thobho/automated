@@ -1067,6 +1067,23 @@ a link per active filter that drops only it, "Wyczyść filtry" and the button t
 "wkrótce" placeholder until US-6.1) with the same filters and `zrodlo=katalog`. Events: `catalog_searched`,
 `catalog_no_results`, `catalog_notice_cta_clicked`. Code: `apps/catalog/filters.py`.
 
+### Catalog text search (US-4.3, D129)
+
+The "Szukaj" field (`q`, at most 100 characters) on `/artysci/` finds artists by name, published offer
+titles and topic names. It combines with the filters (AND), is kept by every pagination link, and
+works without JavaScript. Polish inflection ("hejcie" finds "Cena hejtu"), missing Polish letters
+("uzaleznieniach") and one typo in words of 5+ letters ("kerda" finds "Kreda") are handled; function
+words ("o", "w", "na", "dla", "i") are ignored. Any word may match (OR); results are ordered by match
+quality (name, then offer or topic, then typo-only), ties keep the normal order.
+
+How: no external service and no new dependency (D91). The read model stores stems without Polish letters
+(`search_name`, `search_other`, `search_fuzzy` on `CatalogEntry`), written with the row on publish, "Opublikuj
+zmiany", withdrawal and `rebuild_catalog`. On PostgreSQL migration 0004 enables `pg_trgm` and adds GIN indexes
+on those columns. After deploying this change run `uv run python manage.py rebuild_catalog` once so the
+existing rows get their search columns. The typed text is never logged, never stored in analytics (only
+`text_query` and `word_count` on `catalog_searched`) and never copied into the notice page link. Code:
+`apps/catalog/search.py`.
+
 ## Decision log
 
 Decisions referenced here: D11 (vendored front-end assets, no CDN), D42 and D68 (stack: Python
