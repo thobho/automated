@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Ogłoszenia" %} – {% translate "Artyści dla szkół" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Ogłoszenia" %}</h1>
+  <p>{% translate "Ogłoszenia dla artystów będą dostępne wkrótce." %}</p>
+  <p><a href="{{ back_url }}">{% translate "Wróć do katalogu" %}</a></p>
+{% endblock %}

@@ -245,7 +245,9 @@ def test_card_without_price_shows_none():
     Offer.objects.all().delete()
     Offer.objects.create(artist=artist, title="C", description="x", price_on_request=True)
     publication.publish(artist)
-    assert "zł" not in Client().get(URL).content.decode()
+    assert (
+        "catalog-card__price" not in Client().get(URL).content.decode()
+    )  # the filter form says zł
 
 
 def test_card_without_a_photo_shows_the_initial_and_no_img():
