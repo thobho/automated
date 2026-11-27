@@ -486,7 +486,19 @@ def test_pupil_author_is_hard(author):
     )
 
 
-@pytest.mark.parametrize("author", ["wicedyrektor SP Nr 12", "Pani Anna", "Dyrektor przedszkola"])
+@pytest.mark.parametrize(
+    "author",
+    [
+        "wicedyrektor SP Nr 12",
+        "Pani Anna",
+        "Dyrektor przedszkola",
+        "Dyrektor SP 5 w Gdyni",
+        "wychowawczyni klasy 3b",
+        "Przedszkole nr 4 w Gdańsku",
+        "Rada Rodziców Uczniów",
+        "SP nr 7 w Sopocie",
+    ],
+)
 def test_adult_or_institution_author_is_not_pupil(author):
     assert validator.RULE_PUPIL not in rules(hard(clean_profile(**_testimonial(author))))
 

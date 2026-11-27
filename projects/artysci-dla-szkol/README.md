@@ -657,8 +657,7 @@ znacznikiem; to zmiana generatora (D13, D14): podnieś wersję komponentu i zapi
 `manage.py generator_manifest --write`; (3) dodaj przypadek: fixture w `error_cases/<code>/` albo
 oczekiwanie w paczce syntetycznej (D12, D57; nigdy dane prawdziwych artystów); (4) dodaj wpis do
 katalogu, podnieś `CATALOG_VERSION` w `catalog.py`, `generator_manifest --write`; (5) PR zatwierdza
-człowiek (D13, D14). Poza zakresem: wpisy dla pozostałych reguł, typy „opinia ucznia” i „szacunek
-jako fakt”, błędy z panelu (US-11.6).
+człowiek (D13, D14). Poza zakresem: wpisy dla pozostałych reguł, błędy z panelu (US-11.6).
 
 ## Profile generation (US-2.5A)
 

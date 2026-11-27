@@ -76,9 +76,16 @@ PROMISE_PHRASES = (
     "bez ryzyka",
     "na pewno się spodoba",
 )
-# An author that is a child or pupil: a class mark ("3b", "kl. 3"), or a word for a pupil.
+# An author that is a child or pupil: a pupil word, or a class mark ("kl. 3", a trailing ", 3b").
 PUPIL_AUTHOR = re.compile(
-    r"\b\d{1,2}\s?[a-z]\b|\bkl\.|\bklas[aya]\b|\bucze[nń]|\buczni|\bdziec[koi]|\bprzedszkolak|\bzerówk",
+    r"\bucze[nń]|\bdziec[koi]|\bprzedszkolak|\bzerówk|\bkl\.|(?:^|[,\s])\d{1,2}\s?[a-z]\s*$",
+    re.I,
+)
+# An adult role wins over a pupil word ("wychowawczyni klasy 3b", "Rada Rodziców Uczniów").
+# Institutions ("SP 5 w Gdyni", "Przedszkole nr 4") have no pupil word and need no marker.
+ADULT_AUTHOR = re.compile(
+    r"nauczyciel|wychowaw|dyrektor|pedagog|organizator|rodzic|\brad[aay]\b|opiekun|koordynator|"
+    r"terapeut|bibliotekarz|animator|instruktor",
     re.I,
 )
 # A hedge in front of a number: the page must keep it ("około 200" is not "200").
@@ -250,7 +257,7 @@ def _rule_pupil(profile: dict, sources: Sources) -> list[Finding]:
     findings = []
     for i, item in enumerate(profile.get("testimonials") or []):
         author = item.get("author") or ""
-        if PUPIL_AUTHOR.search(author):
+        if PUPIL_AUTHOR.search(author) and not ADULT_AUTHOR.search(author):
             findings.append(
                 Finding(
                     RULE_PUPIL,
