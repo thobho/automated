@@ -178,13 +178,14 @@ def test_ensure_db_runs_every_tick_and_down_db_fails_the_run(env, tmp_path):
 def test_children_do_not_inherit_the_lock_fd(env, tmp_path):
     # #216: aardvark-dns started inside a deploy kept fd 9, so every later run skipped
     probe = tmp_path / "probe"
-    probe.write_text(f"#!/usr/bin/env bash\n[ -e /dev/fd/9 ] && echo LEAK >> {tmp_path}/leak\nexit 0\n")
+    leak = tmp_path / "leak"
+    probe.write_text(f"#!/usr/bin/env bash\n[ -e /dev/fd/9 ] && echo LEAK >> {leak}\nexit 0\n")
     probe.chmod(0o755)
     fake = env.fake.read_text().replace('echo "$*"', f'"{probe}"; echo "$*"', 1)
     env.fake.write_text(fake)
     assert env.run(ensure_db=str(probe)).returncode == 0
     assert env.calls  # the probe ran inside make too
-    assert not (tmp_path / "leak").exists()
+    assert not leak.exists()
 
 
 def test_retry_cap_of_three(env):
