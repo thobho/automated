@@ -77,6 +77,10 @@ def test_the_real_catalog_passes():
         "opinia-ucznia",
         "liczba-spoza-zrodel",
         "szacunek-bez-zastrzezenia",
+        "opinia-nie-doslownie",
+        "media-spoza-materialow",
+        "obietnica-gwarancji",
+        "przekroczony-limit-dlugosci",
     ]
     assert all(r.ok and r.cases for r in results), [r.line() for r in results]
 
@@ -94,7 +98,11 @@ def test_the_command_prints_a_line_per_entry():
     )
     assert lines[3].startswith("liczba-spoza-zrodel [validator_rule RULE_NUMBERS")
     assert lines[4].startswith("szacunek-bez-zastrzezenia [validator_rule RULE_HEDGE")
-    assert lines[5] == "5 of 5 entries ok"
+    assert lines[5].startswith("opinia-nie-doslownie [validator_rule RULE_QUOTES] OK")
+    assert lines[6].startswith("media-spoza-materialow [validator_rule RULE_MEDIA] OK")
+    assert lines[7].startswith("obietnica-gwarancji [validator_rule RULE_PHRASES] OK")
+    assert lines[8].startswith("przekroczony-limit-dlugosci [validator_rule RULE_LENGTHS] OK")
+    assert lines[9] == "9 of 9 entries ok"
 
 
 def test_the_command_fails_and_names_the_entry(write):
@@ -279,6 +287,9 @@ def test_codes_by_rule(monkeypatch, tmp_path):
         "opinie tylko od dorosłych i instytucji": "opinia-ucznia",
         "liczby i ceny tylko ze źródła": "liczba-spoza-zrodel",
         "zastrzeżenie ze źródła": "szacunek-bez-zastrzezenia",
+        "opinie dosłownie": "opinia-nie-doslownie",
+        "zdjęcia i filmy tylko z materiałów artysty": "media-spoza-materialow",
+        "limity długości": "przekroczony-limit-dlugosci",
     }
     monkeypatch.setattr(catalog, "CATALOG_FILE", tmp_path / "nie-ma.json")
     assert catalog.codes_by_rule() == {}
@@ -291,7 +302,7 @@ def test_the_catalog_is_a_registered_component_outside_the_generator():
     from apps.profiles.generator_components import COMPONENTS
 
     component = registry.registry.get("catalog", "error_catalog")
-    assert component.version == "0.2" and component not in COMPONENTS
+    assert component.version == "0.3" and component not in COMPONENTS
     assert not registry.manifest_errors([component], registry.load_manifest())
 
 

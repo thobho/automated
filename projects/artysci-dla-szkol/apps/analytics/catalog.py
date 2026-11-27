@@ -5,6 +5,8 @@ recorded, so personal data cannot slip in through a free-form property. Never ad
 that carry e-mails, names, free text or IPs; use ids, counts, enums and durations.
 """
 
+_FILTERS = {"wojewodztwo", "rodzaj", "wiek", "tematyka", "forma", "cena_max", "czas_max"}
+
 EVENT_CATALOG: dict[str, frozenset[str]] = {
     "artist_registered": frozenset({"source"}),
     "institution_registered": frozenset({"institution_type", "rspo_matched", "linked_existing"}),
@@ -21,6 +23,10 @@ EVENT_CATALOG: dict[str, frozenset[str]] = {
     "inquiry_answered": frozenset({"inquiry_id", "response_hours", "answer"}),
     "offer_accepted": frozenset({"inquiry_id", "response_hours"}),
     "performance_confirmed": frozenset({"inquiry_id"}),
+    # US-4.2: closed-list filter values and whole numbers only, never free text.
+    "catalog_searched": frozenset(_FILTERS | {"result_count", "page"}),
+    "catalog_no_results": frozenset(_FILTERS),
+    "catalog_notice_cta_clicked": frozenset(_FILTERS),
     "notice_published": frozenset({"notice_id"}),
     "notice_applied": frozenset({"notice_id"}),
 }

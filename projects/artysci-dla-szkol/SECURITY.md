@@ -426,6 +426,13 @@ deactivated accounts never appear), and carries no e-mail or phone (D9); tests a
 `tel:`, `@`, inline script or style. Photos are short-lived signed links shown only while the artist
 confirms the rights (D4, D7). The `?strona` parameter is validated as ASCII digits (max 9) before use.
 
+Filters (US-4.2, D127): every URL parameter is checked against a closed list (voivodeships, artist
+types, age groups, active dictionary entries) or parsed as ASCII digits (max 6, at least 1); anything else
+is dropped, never echoed and never an error, so there is no reflected input. Filter matching runs on the
+read model in code (no raw SQL, no user text in queries). The analytics events carry only these checked
+values and numbers (no IP, user id or e-mail; the actor is empty). `/ogloszenia/nowe/` is a public GET-only
+placeholder that reads no data.
+
 ## Reporting a vulnerability
 
 Open a private security advisory on the GitHub repository, or contact the owner directly. Do not

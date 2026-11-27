@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "headline": "Pracownia Ceramiki Gliniane Ludki: warsztaty lepienia z gliny dla szkół i przedszkoli w Gdańsku",
+    "subheadline": "Warsztaty · Gdańsk",
+    "main_photo_id": 1,
+    "button_label": "Sprawdź termin"
+  },
+  "facts": [
+    {"label": "Miasto", "value": "Gdańsk"},
+    {"label": "Czas", "value": "90 min"}
+  ],
+  "description": {
+    "paragraphs": [
+      "Pracownia Ceramiki Gliniane Ludki to warsztaty z miejscowości Gdańsk."
+    ]
+  },
+  "schools": {
+    "headline": "Dla szkół i przedszkoli",
+    "points": ["Dla: przedszkola, rodziny"],
+    "age_range": "5–10 lat",
+    "requirements": ["Stoły przykryte ceratą i dostęp do wody."]
+  },
+  "offers": [{"offer_id": 1, "tagline": "Warsztat lepienia z gliny"}],
+  "gallery": {
+    "photo_ids": [1],
+    "video_ids": [],
+    "captions": [
+      {"material_id": 1, "alt": "Zdjęcie z występu: Pracownia Ceramiki Gliniane Ludki"}
+    ]
+  },
+  "testimonials": [],
+  "faq": [{"question": "Ile trwa występ?", "answer": "Około 90 minut."}],
+  "theme": "cream_green",
+  "seo": {
+    "title": "Pracownia Ceramiki Gliniane Ludki",
+    "description": "Pracownia Ceramiki Gliniane Ludki to warsztaty z miejscowości Gdańsk. Oferta dla szkół i przedszkoli."
+  },
+  "gaps": [{"code": "no_video", "message": "Dodaj link do filmu z występu."}],
+  "claims_audit": [
+    {"claim": "Pracownia Ceramiki Gliniane Ludki", "source": "basics", "source_id": null}
+  ]
+}

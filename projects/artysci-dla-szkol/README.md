@@ -670,7 +670,7 @@ running server that uses the same database. Needs `QUALITY_LAB_ENABLED` and, for
 
 Każdy znaleziony błąd generatora ma typ, sposób zapobiegania i przypadek regresji. Katalog:
 `apps/quality/error_catalog.json` (schemat: `error_catalog.schema.json`, kod: `catalog.py`),
-zarejestrowany jako komponent `catalog:error_catalog` (v0.2, poza `COMPONENTS` generatora): zmiana
+zarejestrowany jako komponent `catalog:error_catalog` (v0.3, poza `COMPONENTS` generatora): zmiana
 katalogu, schematu lub pliku w `error_cases/` bez podniesienia wersji nie przechodzi testu manifestu.
 
 Wpis: `code` (angielski, kebab-case), `name` i `description` po polsku, `found` (data), `handling`
@@ -681,7 +681,10 @@ mieć dodatkowo `"anchor"`: wtedy błąd jest zwalczany regułą i przykładem w
 są oba). Wpisy z #201: `opinia-ucznia` (twarda `RULE_PUPIL`: autor to dziecko lub uczeń),
 `liczba-spoza-zrodel` (twarda `RULE_NUMBERS`), `szacunek-bez-zastrzezenia` (miękka `RULE_HEDGE`:
 „około/ok./ponad/prawie/niemal/blisko” przed liczbą w źródle znika na stronie albo zmienia
-się na inne). Przypadek:
+się na inne). Wpisy z #197 (pozostałe twarde reguły; `RULE_NUMBERS` ma już `liczba-spoza-zrodel`):
+`opinia-nie-doslownie` (`RULE_QUOTES`), `media-spoza-materialow` (`RULE_MEDIA`),
+`obietnica-gwarancji` (część obietnic `RULE_PHRASES`) i `przekroczony-limit-dlugosci`
+(`RULE_LENGTHS`). Przypadek:
 - `validator`: paczka syntetyczna i plik `error_cases/<code>/<paczka>.json` z profilem zawierającym
   błąd (zgodnym ze schematem profilu); walidator musi go oznaczyć regułą wpisu, a skryptowy dobry
   profil paczki nie może;
@@ -1068,7 +1071,7 @@ What the page and its preview guarantee, and where it is tested:
 - All writes go through `apps/catalog/services.py` (`add_entry`, `rename_entry`, `deactivate_entry`,
   `merge_entries`, `set_artist_entries`, `active_entries`). Step 1 of the wizard offers the active entries
   as two optional checkbox groups and saves them in the same transaction as the basics.
-- Not yet: filters in the catalog (US-4.2), AI assignment, the admin panel outside django-admin (US-9.1).
+- Not yet: AI assignment, the admin panel outside django-admin (US-9.1).
 
 ## Public catalog (US-4.1)
 
@@ -1084,6 +1087,26 @@ What the page and its preview guarantee, and where it is tested:
   asks `Artist.objects.published()`, so a deactivated account disappears at once. After restoring data or
   deploying: `uv run python manage.py rebuild_catalog` (idempotent; also drops stale rows).
 - The badge "zweryfikowany" depends on `listing.is_verified()`, which returns False until US-8.3.
+
+### Catalog filters (US-4.2)
+
+A GET form on `/artysci/` (works without JavaScript); the filters live in the URL, so a result link can be
+shared, and pagination links keep them. One value per parameter, combined with AND:
+
+| Parameter | Value |
+|---|---|
+| `wojewodztwo` | voivodeship code, matched against the artist's area of operation (not the city) |
+| `rodzaj` | artist type (`theatre`, `music`, ...) |
+| `wiek` | age group (`kindergarten`, `grades_0_3`, ...) |
+| `tematyka`, `forma` | slug of an active dictionary entry |
+| `cena_max` | whole zł; an artist matches when one offer costs at most this (an offer "na zapytanie" never matches) |
+| `czas_max` | minutes; with `cena_max` the same offer must satisfy both; an offer without duration never matches |
+| `strona` | page number |
+
+Unknown values and non-numbers are ignored ("dowolny") and never shown back. No results: the page offers
+a link per active filter that drops only it, "Wyczyść filtry" and the button to `/ogloszenia/nowe/` (a
+"wkrótce" placeholder until US-6.1) with the same filters and `zrodlo=katalog`. Events: `catalog_searched`,
+`catalog_no_results`, `catalog_notice_cta_clicked`. Code: `apps/catalog/filters.py`.
 
 ## Decision log
 

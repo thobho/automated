@@ -9,7 +9,9 @@
 
 {% block content %}
   <h1>{% translate "Artyści" %}</h1>
+  {% include "catalog/_filters.html" %}
   {% if page.cards %}
+    <p class="catalog-count" role="status">{{ found }}</p>
     <ul class="catalog-grid" aria-label="{% translate 'Lista artystów' %}">
       {% for card in page.cards %}
         {% include "catalog/_card.html" %}
@@ -18,6 +20,19 @@
     {% if page.pages > 1 %}
       {% include "catalog/_pagination.html" %}
     {% endif %}
+  {% elif filtered %}
+    <p class="catalog-count" role="status">{{ found }}</p>
+    <section class="catalog-empty" aria-labelledby="empty-title">
+      <h2 id="empty-title">{% translate "Żaden artysta nie pasuje do tych filtrów" %}</h2>
+      <p>{% translate "Spróbuj szerszych filtrów, usuń wybrany filtr:" %}</p>
+      <ul class="catalog-empty__links">
+        {% for item in active_links %}
+          <li><a href="{{ item.url }}">{% blocktranslate with label=item.label %}Usuń filtr: {{ label }}{% endblocktranslate %}</a></li>
+        {% endfor %}
+      </ul>
+      <p><a href="{% url 'catalog:list' %}">{% translate "Wyczyść filtry" %}</a></p>
+      <p><a class="catalog-empty__cta" href="{{ notice_url }}">{% translate "Opublikuj ogłoszenie, a artyści zgłoszą się sami" %}</a></p>
+    </section>
   {% else %}
     <p class="catalog-empty">{% translate "Nie ma jeszcze żadnych opublikowanych artystów. Zajrzyj tu wkrótce." %}</p>
   {% endif %}
