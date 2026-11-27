@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quality', '0007_evaluation_client_and_abandoned_cost'),
+        ('quality', '0008_generatorcomponentversion_kind_catalog'),
     ]
 
     operations = [

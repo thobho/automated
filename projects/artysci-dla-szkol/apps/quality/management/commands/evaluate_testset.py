@@ -61,6 +61,10 @@ class Command(BaseCommand):
             f"{data['expectations_failed']}, reviews missing: {data['unscored']}, "
             f"unverified quotes: {data['unverified_quotes']}"
         )
+        for item in data["catalog_findings"]:
+            self.stdout.write(
+                f"catalog {item['code']}: {item['slug']} ({item['count']} finding(s))"
+            )
         self.stdout.write("mean per dimension (scored packages): " + _means(data["means"]))
         for level, means in data["means_by_level"].items():
             self.stdout.write(f"  {level}: " + _means(means))

@@ -218,6 +218,30 @@ def test_a_generation_for_review_fails_the_hard_rules_but_is_reviewed(script):
     assert Generation.objects.get(pk=row.generation_id).repair_rounds == 2
 
 
+def test_the_report_names_the_catalog_code_next_to_a_validator_finding(script):
+    def bad(data):
+        profile = scripted.scripted_profile(data)
+        profile["facts"] = [{"label": "Czas", "value": "45 min (ok)"}]
+        profile["seo"]["description"] = "Na podstawie przesłanych materiałów."
+        return json.dumps(profile)
+
+    script(draft=bad)
+    run = run_with(SLUGS[0])
+    report = evaluation.report(run)
+    assert report["format"] == "evaluation-report/2"
+    hard = report["packages"][0]["validator"]["hard"]
+    by_rule = {f["rule"]: f["catalog"] for f in hard}
+    assert by_rule["fakty"] == "fakt-z-nawiasem"
+    assert by_rule["bez języka procesu i bez dodanych obietnic"] == "jezyk-procesu"
+    summary = evaluation.summary(run)
+    assert {"slug": SLUGS[0], "code": "jezyk-procesu", "count": 1} in summary["catalog_findings"]
+
+
+def test_a_finding_whose_rule_is_not_in_the_catalog_has_no_code():
+    validator = {"ok": False, "hard": [{"rule": "limity długości", "path": "$"}], "soft": []}
+    assert evaluation._with_catalog(validator, {"fakty": "x"})["hard"][0]["catalog"] is None
+
+
 def test_the_daily_cap_stops_the_run_and_resume_does_the_missing_ones(script, settings):
     fake = script()
     settings.AI_PER_CALL_CAP_USD = "0.01"

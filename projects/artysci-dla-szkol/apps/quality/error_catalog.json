@@ -1,0 +1,75 @@
+{
+  "format": "error-catalog/1",
+  "errors": [
+    {
+      "code": "jezyk-procesu",
+      "name": "Język procesu",
+      "description": "Tekst strony mówi o materiałach źródłowych („na podstawie przesłanych materiałów”) zamiast o artyście.",
+      "found": "2026-11-18",
+      "handling": {"kind": "validator_rule", "rule": "RULE_PHRASES"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "jezyk-procesu/gliniane-ludki.json"
+        }
+      ]
+    },
+    {
+      "code": "fakt-z-nawiasem",
+      "name": "Fakt z nawiasem",
+      "description": "Wartość lub etykieta faktu zawiera nawias, czyli dopisek zamiast krótkiej informacji.",
+      "found": "2026-11-18",
+      "handling": {"kind": "validator_rule", "rule": "RULE_FACTS"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "fakt-z-nawiasem/gliniane-ludki.json"
+        }
+      ]
+    },
+    {
+      "code": "opinia-ucznia",
+      "name": "Opinia ucznia",
+      "description": "Opinia przypisana dziecku lub uczniowi (wymyślona albo z materiałów). Dozwolone są tylko opinie dorosłych i instytucji.",
+      "found": "2026-11-26",
+      "handling": {"kind": "validator_rule", "rule": "RULE_PUPIL", "anchor": "opinia-ucznia"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "opinia-ucznia/gliniane-ludki.json"
+        }
+      ]
+    },
+    {
+      "code": "liczba-spoza-zrodel",
+      "name": "Liczba spoza materiałów",
+      "description": "Liczba, której nie ma w materiałach: wyliczona przez generator albo wymyślona (np. „ponad 10 000 widzów” z „200 pokazów”).",
+      "found": "2026-11-26",
+      "handling": {"kind": "validator_rule", "rule": "RULE_NUMBERS", "anchor": "liczba-spoza-zrodel"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "liczba-spoza-zrodel/gliniane-ludki.json"
+        }
+      ]
+    },
+    {
+      "code": "szacunek-bez-zastrzezenia",
+      "name": "Szacunek podany jako fakt",
+      "description": "Źródło podaje liczbę z zastrzeżeniem („około”, „ponad”), a strona pisze ją dokładnie. Zastrzeżenie zostaje albo twierdzenie wypada.",
+      "found": "2026-11-26",
+      "handling": {"kind": "validator_rule", "rule": "RULE_HEDGE", "anchor": "szacunek-bez-zastrzezenia"},
+      "cases": [
+        {
+          "kind": "validator",
+          "package": "gliniane-ludki",
+          "fixture": "szacunek-bez-zastrzezenia/gliniane-ludki.json"
+        }
+      ]
+    }
+  ]
+}
