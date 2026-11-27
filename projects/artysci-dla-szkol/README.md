@@ -639,7 +639,8 @@ i `cases`. `handling` to `{"kind": "validator_rule", "rule": "RULE_PHRASES"}` (s
 mieć dodatkowo `"anchor"`: wtedy błąd jest zwalczany regułą i przykładem w instrukcjach (sprawdzane
 są oba). Wpisy z #201: `opinia-ucznia` (twarda `RULE_PUPIL`: autor to dziecko lub uczeń),
 `liczba-spoza-zrodel` (twarda `RULE_NUMBERS`), `szacunek-bez-zastrzezenia` (miękka `RULE_HEDGE`:
-„około/ponad/prawie/blisko/niemal/nawet” przed liczbą w źródle znika na stronie). Przypadek:
+„około/ok./ponad/prawie/niemal/blisko” przed liczbą w źródle znika na stronie albo zmienia
+się na inne). Przypadek:
 - `validator`: paczka syntetyczna i plik `error_cases/<code>/<paczka>.json` z profilem zawierającym
   błąd (zgodnym ze schematem profilu); walidator musi go oznaczyć regułą wpisu, a skryptowy dobry
   profil paczki nie może;

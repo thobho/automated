@@ -24,8 +24,9 @@ SCHEMA = registry.register(
 )
 # Schema check plus the hard-rule validator (US-2.5B). Its own version: v0.1 is the first
 # validator with hard rules; the 0.2 entry of the schema-only file stays in the manifest.
+# v0.5: RULE_PUPIL catches plural pupils and "klasa 3" again, RULE_HEDGE wants the source's hedge;
 # v0.4: RULE_PUPIL spares adult and institution authors; v0.3: RULE_PUPIL, RULE_HEDGE (soft).
-VALIDATOR_VERSION = "0.4"
+VALIDATOR_VERSION = "0.5"
 VALIDATOR = registry.register(
     Component(
         "validator",

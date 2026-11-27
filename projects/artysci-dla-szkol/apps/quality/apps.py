@@ -10,6 +10,6 @@ class QualityConfig(AppConfig):
 
     def ready(self):
         from . import (
-            catalog,  # noqa: F401  (registers the error catalog, v0.1)
+            catalog,  # noqa: F401  (registers the error catalog)
             reviewer,  # noqa: F401  (registers the reviewer components, v0.1)
         )

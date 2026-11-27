@@ -76,9 +76,11 @@ PROMISE_PHRASES = (
     "bez ryzyka",
     "na pewno się spodoba",
 )
-# An author that is a child or pupil: a pupil word, or a class mark ("kl. 3", a trailing ", 3b").
+# An author that is a child or pupil: a pupil word ("uczeń", "uczniowie", "Samorząd Uczniowski"),
+# a class ("klasa 3", "klasy II", "kl. 3") or a trailing class mark (", 3b").
 PUPIL_AUTHOR = re.compile(
-    r"\bucze[nń]|\bdziec[koi]|\bprzedszkolak|\bzerówk|\bkl\.|(?:^|[,\s])\d{1,2}\s?[a-z]\s*$",
+    r"\bucze[nń]|\buczni|\bdziec[koi]|\bprzedszkolak|\bzerówk|\bklas[aęy]\b|\bkl\.|"
+    r"(?:^|[,\s])\d{1,2}\s?[a-z]\s*$",
     re.I,
 )
 # An adult role wins over a pupil word ("wychowawczyni klasy 3b", "Rada Rodziców Uczniów").
@@ -88,8 +90,16 @@ ADULT_AUTHOR = re.compile(
     r"terapeut|bibliotekarz|animator|instruktor",
     re.I,
 )
-# A hedge in front of a number: the page must keep it ("około 200" is not "200").
-HEDGE_WORDS = ("około", "ok.", "ponad", "prawie", "blisko", "niemal", "nawet")
+# A hedge in front of a number: the page must keep the same one ("około 200" is neither "200"
+# nor "ponad 200"). Each word maps to its meaning, so "ok." keeps "około".
+HEDGE_WORDS = {
+    "około": "około",
+    "ok.": "około",
+    "ponad": "ponad",
+    "prawie": "prawie",
+    "niemal": "prawie",
+    "blisko": "blisko",
+}
 HEDGE_LOOKBACK_CHARS = 14  # how far before a number a hedge word may stand
 VALUE_PREVIEW_CHARS = 120  # an offending value is cut to this length in a finding
 VAGUE_MIN_CHARS = 80  # a description shorter than this is vague by itself
@@ -273,31 +283,37 @@ def _rule_pupil(profile: dict, sources: Sources) -> list[Finding]:
 # --- hedges kept from the source (soft) -------------------------------------------------------
 
 
-def _hedge_before(text: str, start: int) -> bool:
+def _hedges_before(text: str, start: int) -> set[str]:
+    """The meanings of the hedge words just before a number (empty: stated exactly)."""
     before = text[max(0, start - HEDGE_LOOKBACK_CHARS) : start].lower()
-    return any(word in before for word in HEDGE_WORDS)
+    return {meaning for word, meaning in HEDGE_WORDS.items() if word in before}
 
 
 def _rule_hedge(profile: dict, sources: Sources) -> list[Finding]:
     """A number the source gives only with a hedge ("około 200") is written without it."""
-    hedged: set[str] = set()
+    hedged: dict[str, set[str]] = {}  # number -> the hedges the source uses with it
     plain: set[str] = set()
     for text in sources.texts:
         for match in _NUMBER.finditer(text):
             number = normalise_number(match.group())
-            (hedged if _hedge_before(text, match.start()) else plain).add(number)
-    hedged -= plain  # the source also states it exactly somewhere
+            if hedges := _hedges_before(text, match.start()):
+                hedged.setdefault(number, set()).update(hedges)
+            else:
+                plain.add(number)
+    for number in plain:  # the source also states it exactly somewhere
+        hedged.pop(number, None)
     findings = []
     for path, text in public_texts(profile):
         flat = _LINK.sub(" ", text)
         for match in _NUMBER.finditer(flat):
-            if normalise_number(match.group()) in hedged and not _hedge_before(flat, match.start()):
+            source_hedges = hedged.get(normalise_number(match.group()))
+            if source_hedges and not source_hedges & _hedges_before(flat, match.start()):
                 findings.append(
                     Finding(
                         RULE_HEDGE,
                         path,
                         f"Źródło podaje „{match.group()}” z zastrzeżeniem (np. „około”). "
-                        "Zachowaj je jak w źródle albo pomiń to twierdzenie.",
+                        "Zachowaj to samo zastrzeżenie jak w źródle albo pomiń to twierdzenie.",
                         _preview(match.group()),
                     )
                 )

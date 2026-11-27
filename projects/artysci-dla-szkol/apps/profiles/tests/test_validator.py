@@ -477,7 +477,18 @@ def _testimonial(author):
 
 
 @pytest.mark.parametrize(
-    "author", ["Kasia, 3b", "Uczeń klasy 4", "uczennica", "Jaś, kl. 2", "dziecko z grupy"]
+    "author",
+    [
+        "Kasia, 3b",
+        "Uczeń klasy 4",
+        "uczennica",
+        "Jaś, kl. 2",
+        "dziecko z grupy",
+        "Uczniowie SP 12",
+        "Uczniowie klasy II",
+        "Ola, klasa 3",
+        "Samorząd Uczniowski SP 3",
+    ],
 )
 def test_pupil_author_is_hard(author):
     findings = hard(clean_profile(**_testimonial(author)))
@@ -497,6 +508,10 @@ def test_pupil_author_is_hard(author):
         "Przedszkole nr 4 w Gdańsku",
         "Rada Rodziców Uczniów",
         "SP nr 7 w Sopocie",
+        "Szkoła Podstawowa nr 7 w Sopocie",
+        "Nauczycielka edukacji przedszkolnej, Przedszkole nr 4 w Gdańsku",
+        "Rada Rodziców Uczniów SP 3",
+        "Anna Nowak, wychowawczyni klasy 3b",
     ],
 )
 def test_adult_or_institution_author_is_not_pupil(author):
@@ -522,12 +537,22 @@ def test_dropped_hedge_is_soft_not_hard():
     assert validator.RULE_HEDGE not in rules(hard(profile, **HEDGED))
 
 
-@pytest.mark.parametrize(
-    "text", ["w około 200 szkołach", "w ponad 200 szkołach", "w ok. 200 szkołach"]
-)
+@pytest.mark.parametrize("text", ["w około 200 szkołach", "w ok. 200 szkołach"])
 def test_kept_hedge_passes(text):
     profile = _with_sentence(f"Teatr Kwiatki wystąpił {text} we Wrocławiu, spektakl 45 minut.")
     assert validator.RULE_HEDGE not in rules(soft(profile, **HEDGED))
+
+
+@pytest.mark.parametrize("text", ["w ponad 200 szkołach", "w prawie 200 szkołach"])
+def test_a_different_hedge_than_the_source_is_soft(text):
+    profile = _with_sentence(f"Teatr Kwiatki wystąpił {text} we Wrocławiu, spektakl 45 minut.")
+    assert validator.RULE_HEDGE in rules(soft(profile, **HEDGED))
+
+
+def test_nawet_is_emphasis_not_a_hedge():
+    texts = (SOURCE_TEXT + " Na spektakl przychodzi nawet 30 dzieci.",)
+    profile = _with_sentence("Teatr Kwiatki gra dla 30 dzieci we Wrocławiu, spektakl 45 minut.")
+    assert validator.RULE_HEDGE not in rules(soft(profile, texts=texts))
 
 
 def test_number_also_stated_exactly_in_source_is_not_a_hedge_error():
