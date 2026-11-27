@@ -24,12 +24,17 @@ FAILED="$STATE_DIR/failed.commit"
 
 log() { printf '%s redeploy: %s\n' "$(date -Is)" "$*" >>"$LOG"; }
 
+# fd 9 holds the lock. Every child gets `9>&-`: a long-lived process that inherits it (#216:
+# aardvark-dns started by `podman compose up` inside a deploy) would block all later runs.
 exec 9>"$STATE_DIR/redeploy.lock"
-flock -n 9 || exit 0   # another deploy is running
+if ! flock -n 9; then
+    log "skipped: redeploy.lock is held (a deploy is running, or a leaked process: fuser -v $STATE_DIR/redeploy.lock)"
+    exit 0
+fi
 
 cd "$PROJECT" || exit 1
 
-if ! git fetch -q origin >>"$LOG" 2>&1; then
+if ! git fetch -q origin 9>&- >>"$LOG" 2>&1; then
     log "git fetch failed, will try again next run"
     exit 1
 fi
@@ -37,24 +42,27 @@ if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
     log "deployment checkout has local changes, not deploying (clean it: git status in $PROJECT)"
     exit 1
 fi
-# Self-heal first: a dead podman port forwarder leaves PostgreSQL unreachable although the
-# container is "Up" (see ensure-db.sh). Runs every timer tick, deploy or not.
-if ! $ENSURE_DB >>"$LOG" 2>&1; then
-    log "PostgreSQL is not reachable and ensure-db could not fix it, instance needs the owner"
+# Self-heal first: a dead port forwarder, or a stopped or missing db container (see ensure-db.sh).
+# Runs every timer tick, deploy or not. While the db stays down every run ends non-zero, so
+# ads-redeploy.service shows as failed (systemctl --user --failed), not only /readyz.
+db_down=0
+if ! $ENSURE_DB 9>&- >>"$LOG" 2>&1; then
+    db_down=1
+    log "DB DOWN: PostgreSQL is not reachable and ensure-db could not fix it, instance needs the owner"
 fi
 target="$(git rev-parse "origin/$BRANCH")" || exit 1
 good="$(cat "$DEPLOYED" 2>/dev/null || true)"
 
-[ "$target" = "$good" ] && exit 0
+[ "$target" = "$good" ] && exit "$db_down"
 
 failed_sha="" failed_count=0
 [ -f "$FAILED" ] && read -r failed_sha failed_count <"$FAILED"
 if [ "$failed_sha" = "$target" ] && [ "${failed_count:-0}" -ge "$MAX_ATTEMPTS" ]; then
-    exit 0   # already gave up on this commit (logged when the cap was hit)
+    exit "$db_down"   # already gave up on this commit (logged when the cap was hit)
 fi
 
 log "deploying ${target:0:12} (last good: ${good:0:12})"
-if $MAKE deploy-pirx DEPLOY_REF="$BRANCH" >>"$LOG" 2>&1 && $MAKE smoke-pirx >>"$LOG" 2>&1; then
+if $MAKE deploy-pirx DEPLOY_REF="$BRANCH" 9>&- >>"$LOG" 2>&1 && $MAKE smoke-pirx 9>&- >>"$LOG" 2>&1; then
     deployed="$(git rev-parse HEAD)"   # what is really checked out and smoke-tested
     echo "$deployed" >"$DEPLOYED"
     rm -f "$FAILED"
@@ -72,7 +80,7 @@ if [ "$failed_count" -ge "$MAX_ATTEMPTS" ]; then
 fi
 
 if [ -n "$good" ]; then
-    if $MAKE rollback-pirx ROLLBACK_REF="$good" >>"$LOG" 2>&1 && $MAKE smoke-pirx >>"$LOG" 2>&1; then
+    if $MAKE rollback-pirx ROLLBACK_REF="$good" 9>&- >>"$LOG" 2>&1 && $MAKE smoke-pirx 9>&- >>"$LOG" 2>&1; then
         log "rolled back to ${good:0:12}, smoke test green"
     else
         log "ROLLBACK to ${good:0:12} FAILED, instance needs the owner"
