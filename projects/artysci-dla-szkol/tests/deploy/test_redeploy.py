@@ -158,9 +158,33 @@ def test_first_deploy_failing_has_nothing_to_roll_back(env):
 
 
 def test_unfixable_database_is_logged_but_does_not_block_deploy(env):
-    assert env.run(ensure_db="false").returncode == 0
-    assert "PostgreSQL is not reachable" in env.log
+    assert env.run(ensure_db="false").returncode == 0  # the green smoke test proves the db
+    assert "DB DOWN" in env.log
     assert env.deployed is not None
+
+
+def test_ensure_db_runs_every_tick_and_down_db_fails_the_run(env, tmp_path):
+    env.run()
+    counter = tmp_path / "ensure.calls"
+    ensure = tmp_path / "ensure"
+    ensure.write_text(f"#!/usr/bin/env bash\necho x >> {counter}\nexit 1\n")
+    ensure.chmod(0o755)
+    for _ in range(2):  # nothing to deploy: ensure-db still runs, the unit shows as failed
+        assert env.run(ensure_db=str(ensure)).returncode == 1
+    assert len(counter.read_text().splitlines()) == 2
+    assert env.log.count("DB DOWN") == 2
+
+
+def test_children_do_not_inherit_the_lock_fd(env, tmp_path):
+    # #216: aardvark-dns started inside a deploy kept fd 9, so every later run skipped
+    probe = tmp_path / "probe"
+    probe.write_text(f"#!/usr/bin/env bash\n[ -e /dev/fd/9 ] && echo LEAK >> {tmp_path}/leak\nexit 0\n")
+    probe.chmod(0o755)
+    fake = env.fake.read_text().replace('echo "$*"', f'"{probe}"; echo "$*"', 1)
+    env.fake.write_text(fake)
+    assert env.run(ensure_db=str(probe)).returncode == 0
+    assert env.calls  # the probe ran inside make too
+    assert not (tmp_path / "leak").exists()
 
 
 def test_retry_cap_of_three(env):
@@ -194,6 +218,7 @@ def test_lock_held_means_no_deploy(env):
         assert env.run().returncode == 0
     assert env.calls == []
     assert env.deployed is None
+    assert "redeploy.lock is held" in env.log
 
 
 def test_records_checked_out_head_not_fetched_target(env):
