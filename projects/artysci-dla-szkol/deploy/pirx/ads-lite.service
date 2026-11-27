@@ -7,6 +7,9 @@ Type=oneshot
 RemainAfterExit=yes
 WorkingDirectory=@PROJECT@
 EnvironmentFile=%h/.config/artysci-dla-szkol/pirx.env
+# ensure-db.sh repairs in place here; everywhere else it restarts this unit (containers must
+# live in this unit's cgroup, see ensure-db.sh)
+Environment=ENSURE_DB_IN_UNIT=1
 ExecStart=/usr/bin/podman compose --profile lite up -d
 ExecStartPost=/usr/bin/bash @PROJECT@/deploy/pirx/ensure-db.sh
 ExecStop=/usr/bin/podman compose --profile lite stop
