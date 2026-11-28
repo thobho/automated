@@ -3,6 +3,7 @@
 These tests run on whatever database the run uses; with `DATABASE_URL` they run on PostgreSQL (CI).
 """
 
+import io
 import logging
 
 import pytest
@@ -158,6 +159,27 @@ def test_row_is_refreshed_with_the_snapshot_and_rebuild():
     assert found("iskra") == []
     listing.rebuild_all()
     assert found("iskra") == ["Teatr Iskra"]
+
+
+def test_rebuild_catalog_command_makes_rows_without_search_columns_searchable():
+    from django.core.management import call_command
+
+    artist = publish("b@example.invalid", "Teatr Iskra", offers=["Cena hejtu"])
+    CatalogEntry.objects.filter(artist=artist).update(
+        search_name="", search_other="", search_fuzzy=""
+    )
+    assert found("hejcie") == []
+    call_command("rebuild_catalog", stdout=io.StringIO())
+    assert found("hejcie") == ["Teatr Iskra"]
+
+
+def test_deploy_paths_run_rebuild_catalog_after_migrate():
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[3]
+    for name in ("Makefile", "compose.yaml"):
+        text = (root / name).read_text()
+        assert text.index("migrate --noinput") < text.index("rebuild_catalog"), name
 
 
 # --- the page ------------------------------------------------------------------------------------
