@@ -1,8 +1,8 @@
 [Unit]
-Description=automated: hourly OpenCode worker check
+Description=automated: OpenCode worker check every 20 minutes
 
 [Timer]
-OnCalendar=*-*-* *:17:00
+OnCalendar=*-*-* *:17/20:00
 RandomizedDelaySec=120
 Persistent=false
 

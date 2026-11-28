@@ -24,12 +24,20 @@ Plan exactly those stories: one main issue per story, plus chore issues split of
    - Labels: `agent:todo`, `project:<project>`, `model:<same as Model>`, and `area:security` for
      anything touching auth, uploads, personal data, e-mail or payments.
    - Milestone: the one named in the run section (it already exists).
-3. **Chores go to OpenCode (cheap models, separate budget).** When a story contains work that needs no design or
-   security decision and follows an existing pattern, split it into its own issue with `**Model:** pirx` and the
-   label `model:pirx`: seed or demo data, adding dictionary entries, copy and template text changes, extra tests for
-   behaviour that already exists, docs and README updates. Give it the same `**Story:**` line, `Depends on:` the main
-   issue, its own `Uses:` line and Given/When/Then criteria. Never `model:pirx` for anything labelled
-   `area:security`, migrations, permissions or AI generation. When in doubt, keep it in the main issue.
+3. **Delegate to OpenCode whenever it makes sense (cheap models, separate daily budget).** Owner decision
+   2026-11-28: routine work goes to OpenCode by default, so the Claude plan is kept for design and hard problems.
+   When a story contains work that follows an existing pattern and needs no design or security decision, split it
+   into its own issue with `**Model:** pirx` and the label `model:pirx`. Typical cases:
+   seed or demo data and fixtures; dictionary and choice entries; copy, template text and translation changes;
+   docs, README and docstring updates; extra tests for behaviour that already exists; a new admin list column,
+   filter or search field; a small view or template change that copies an existing one; lint, typing and
+   formatting fixes; a bug fix whose failing case is already described in the issue; renames and other
+   mechanical refactors inside one app.
+   Give it the same `**Story:**` line, `Depends on:` the main issue, its own `Uses:` line and Given/When/Then
+   criteria, written so precisely that a small model can follow them (name the files and the pattern to copy).
+   Never `model:pirx` for anything labelled `area:security`, migrations, permissions, AI generation, CI
+   workflows or the automation itself (`agent/`). When it is routine and well specified, prefer `model:pirx`:
+   a failed OpenCode run falls back to a Claude run automatically, so trying costs little.
 4. Keep each issue small enough for one agent run (under about 3 hours) and one phone-sized PR. If a story
    is bigger, still write one issue for it: it must say in **Out of scope** what is left for a later story,
    and you mention it in your final reply so the owner sees it.
