@@ -1,0 +1,114 @@
+name: artysci-dla-szkol page metrics
+
+# US-11.3B: axe (360 and 1440 px) and Lighthouse mobile for every package page of the generator
+# test set, rendered as the owner preview with the scripted profile. The AI review of the
+# screenshots uses the fake client here: no secret, no real AI key in CI.
+on:
+  pull_request:
+    paths:
+      - 'projects/artysci-dla-szkol/apps/profiles/**'
+      - 'projects/artysci-dla-szkol/apps/quality/**'
+      - 'projects/artysci-dla-szkol/static/profiles/**'
+      - 'projects/artysci-dla-szkol/templates/base.html'
+      - '.github/workflows/artysci-dla-szkol-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: artysci-pages-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: projects/artysci-dla-szkol
+
+env:
+  UV_FROZEN: '1'
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        level: [weak, medium, rich]  # the 30 packages split over three parallel jobs
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: artysci
+          POSTGRES_PASSWORD: artysci
+          POSTGRES_DB: artysci
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U artysci" --health-interval 5s
+          --health-timeout 5s --health-retries 10
+      minio:
+        image: bitnamilegacy/minio:latest
+        env:
+          MINIO_ROOT_USER: artysci
+          MINIO_ROOT_PASSWORD: artysci-minio-ci
+        ports: ['9000:9000']
+    env:
+      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DATABASE_URL: postgres://artysci:artysci@127.0.0.1:5432/artysci
+      S3_ENDPOINT_URL: http://127.0.0.1:9000
+      S3_ACCESS_KEY_ID: artysci
+      S3_SECRET_ACCESS_KEY: artysci-minio-ci
+      QUALITY_LAB_ENABLED: 'true'
+      AI_CLIENT: fake
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: projects/artysci-dla-szkol/uv.lock
+          prune-cache: false
+          cache-suffix: e2e
+      - run: timeout 120 uv sync --group e2e || uv sync --group e2e
+      - name: Wait for MinIO
+        run: |
+          for i in $(seq 1 60); do
+            curl -fs http://127.0.0.1:9000/minio/health/live && exit 0
+            sleep 1
+          done
+          echo "MinIO did not start"; exit 1
+      - name: Install Chromium
+        run: uv run playwright install --with-deps chromium
+      - name: Start the app
+        run: |
+          uv run python manage.py migrate --noinput
+          nohup uv run python manage.py runserver 127.0.0.1:8000 --noreload \
+            > "$RUNNER_TEMP/server.log" 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fs http://127.0.0.1:8000/healthz && exit 0
+            sleep 1
+          done
+          cat "$RUNNER_TEMP/server.log"; exit 1
+      # Loads the packages, shows the scripted profile, runs axe at both widths and Lighthouse
+      # (3 attempts) for each package. Exits non-zero when a package has no axe or Lighthouse
+      # result or a critical axe violation; scores below 85 are shown, not enforced.
+      - name: Measure the pages
+        run: >-
+          uv run python manage.py measure_testset_pages
+          --base-url http://127.0.0.1:8000 --level ${{ matrix.level }}
+          --output "${{ github.workspace }}/page-metrics"
+      - name: Job summary
+        if: always()
+        run: |
+          if [ -f "${{ github.workspace }}/page-metrics/summary.md" ]; then
+            echo "### Page metrics: ${{ matrix.level }}" >> "$GITHUB_STEP_SUMMARY"
+            cat "${{ github.workspace }}/page-metrics/summary.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Server log
+        if: failure()
+        run: cat "$RUNNER_TEMP/server.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: page-metrics-${{ matrix.level }}
+          path: page-metrics/
+          if-no-files-found: warn

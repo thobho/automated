@@ -1,4 +1,7 @@
 {
+  "instructions:page_screenshot_review": {
+    "0.1": "d8053691159862bb733d64897123d5cec6fc015ab00740c2ac6805690fb2801d"
+  },
   "catalog:error_catalog": {
     "0.1": "04daea7a94aa38ab132427d845a90e13e89fd23447422c90a090a872a04021e7",
     "0.2": "aab42622203830e46c0689733b67232b4455dd456e9afd2b399b390234fc829a",
@@ -12,6 +15,9 @@
   },
   "instructions:profile_review": {
     "0.1": "3a4d59bd9154cdccecb60dc1e381fdb24adfe34d93d60e0f11518d1ebf5f7280"
+  },
+  "schema:page_screenshot_review": {
+    "0.1": "bb99fd2c8d701fccb8f75a70e76bbd59e6eaebe2c7d74f2989cc227b75ffcfa8"
   },
   "schema:profile": {
     "0.2": "f96a291649084135f53263e47f57d45311d62b7fe25c44496fd1c415bb54c230"

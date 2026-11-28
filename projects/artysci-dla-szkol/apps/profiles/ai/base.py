@@ -17,7 +17,7 @@ from typing import Any
 from django.conf import settings
 from django.utils.crypto import salted_hmac
 
-from . import budget
+from . import budget, images
 from .errors import AIError, AIProviderError
 from .scrub import scrub_messages
 
@@ -67,12 +67,15 @@ def pseudonymous_user(user_ref) -> str:
     return "u-" + salted_hmac("ai.user", str(user_ref)).hexdigest()[:16]
 
 
-def _checked(messages) -> list[dict]:
+def _checked(messages, allow_images: bool = False) -> list[dict]:
     if not messages:
         raise AIError("messages must not be empty.")
     checked = []
     for message in messages:
         role, content = message.get("role"), message.get("content")
+        if allow_images and isinstance(content, list) and role in ROLES:
+            checked.append({"role": role, "content": images.check_parts(content)})
+            continue
         if role not in ROLES or not isinstance(content, str):
             # Only plain-text messages: anything else could bypass the scrubber.
             raise AIError("Each message needs a role (system/user/assistant) and text content.")
@@ -99,6 +102,7 @@ class AIClient:
         user_ref=None,
         scrub_names=(),
         generation=None,
+        allow_images: bool = False,
     ) -> AIResult:
         """Send chat `messages` and return the reply.
 
@@ -107,6 +111,9 @@ class AIClient:
         output; the parsed object is in `AIResult.data`. `user_ref` (e.g. the artist's pk) is
         sent only as an HMAC pseudonym. `scrub_names` adds names to remove for this call.
         `generation` (a running `quality.Generation`) links the AICall row to that run.
+
+        Image parts in a message are refused unless `allow_images=True` (see `images.py`: type
+        sniffed, size and count limited, counted in the cost plan, never logged or stored).
 
         Raises AIDisabled, AICapExceeded (nothing sent), AIProviderError or AIError.
         """
@@ -117,7 +124,9 @@ class AIClient:
         try:
             budget.check_kill_switch()
             names = [*settings.AI_SCRUB_NAMES, *scrub_names]
-            clean = scrub_messages(_checked(messages), names)
+            clean = scrub_messages(_checked(messages, allow_images), names)
+            if images.count_images(clean) > images.MAX_IMAGES_PER_CALL:
+                raise AIError(f"At most {images.MAX_IMAGES_PER_CALL} images per call.")
             max_cost = Decimal(str(max_cost_usd))
             plan = budget.plan_call(clean, max_cost, self.prices)
             call = budget.reserve(

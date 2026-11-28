@@ -12,4 +12,5 @@ class QualityConfig(AppConfig):
         from . import (
             catalog,  # noqa: F401  (registers the error catalog)
             reviewer,  # noqa: F401  (registers the reviewer components, v0.1)
+            screenshots,  # noqa: F401  (registers the screenshot review component)
         )

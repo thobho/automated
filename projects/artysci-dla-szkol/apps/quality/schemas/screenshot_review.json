@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ocena wyglądu strony v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["viewports"],
+  "properties": {
+    "viewports": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["360", "1440"],
+      "properties": {
+        "360": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["verdict", "problems"],
+          "properties": {
+            "verdict": {"enum": ["ok", "problem"]},
+            "problems": {
+              "type": "array",
+              "maxItems": 20,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "description", "place"],
+                "properties": {
+                  "kind": {"enum": ["empty_place", "cut_off_content", "overlapping_content"]},
+                  "description": {"type": "string", "maxLength": 200},
+                  "place": {"type": "string", "maxLength": 100}
+                }
+              }
+            }
+          }
+        },
+        "1440": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["verdict", "problems"],
+          "properties": {
+            "verdict": {"enum": ["ok", "problem"]},
+            "problems": {
+              "type": "array",
+              "maxItems": 20,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "description", "place"],
+                "properties": {
+                  "kind": {"enum": ["empty_place", "cut_off_content", "overlapping_content"]},
+                  "description": {"type": "string", "maxLength": 200},
+                  "place": {"type": "string", "maxLength": 100}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

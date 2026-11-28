@@ -117,7 +117,13 @@ def scrub_messages(messages: list[dict], names: Iterable[str] = ()) -> list[dict
     cleaned = []
     for message in messages:
         message = dict(message)
-        if isinstance(message.get("content"), str):
-            message["content"] = scrub(message["content"], names)
+        content = message.get("content")
+        if isinstance(content, str):
+            message["content"] = scrub(content, names)
+        elif isinstance(content, list):  # parts: text is scrubbed, images pass through
+            message["content"] = [
+                {**part, "text": scrub(part["text"], names)} if part.get("type") == "text" else part
+                for part in content
+            ]
         cleaned.append(message)
     return cleaned

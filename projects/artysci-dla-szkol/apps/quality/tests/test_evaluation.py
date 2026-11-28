@@ -228,7 +228,7 @@ def test_the_report_names_the_catalog_code_next_to_a_validator_finding(script):
     script(draft=bad)
     run = run_with(SLUGS[0])
     report = evaluation.report(run)
-    assert report["format"] == "evaluation-report/2"
+    assert report["format"] == "evaluation-report/3"
     hard = report["packages"][0]["validator"]["hard"]
     by_rule = {f["rule"]: f["catalog"] for f in hard}
     assert by_rule["fakty"] == "fakt-z-nawiasem"
@@ -479,7 +479,7 @@ def test_the_command_prints_a_line_per_package_a_summary_and_writes_the_report(
 
     text = report_file.read_text(encoding="utf-8")
     report = json.loads(text)
-    assert report["format"] == "evaluation-report/2"
+    assert report["format"] == "evaluation-report/3"
     assert [p["slug"] for p in report["packages"]] == SLUGS[:2]
     package = report["packages"][0]
     assert package["profile"]["hero"] and package["review"]["scores"]["wiernosc"] == 5
