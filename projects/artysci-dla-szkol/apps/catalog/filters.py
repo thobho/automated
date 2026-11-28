@@ -18,7 +18,7 @@ from django.utils.translation import gettext as _
 from apps.artists.models import ArtistType, Audience
 from apps.core.regions import Voivodeship
 
-from . import services
+from . import search, services
 from .models import EntryKind
 
 MAX_NUMBER_DIGITS = 6  # a price in złoty or a time in minutes never needs more
@@ -33,6 +33,7 @@ class Filters:
     forma: str = ""
     cena_max: int | None = None
     czas_max: int | None = None
+    q: str = ""  # free text (US-4.3): kept in links, never in events or logs
 
     def active(self) -> dict[str, str | int]:
         """The set filters in a fixed order: URL parameter -> value."""
@@ -54,7 +55,7 @@ class Filters:
 
     def event_properties(self) -> dict[str, str | int]:
         """Names and closed-list values, numbers for price and time (no free text can get in)."""
-        return self.active()
+        return {k: v for k, v in self.active().items() if k != "q"}
 
 
 def _number(raw: str | None) -> int | None:
@@ -80,6 +81,7 @@ def parse(params) -> Filters:
         forma=_choice(params.get("forma"), forms),
         cena_max=_number(params.get("cena_max")),
         czas_max=_number(params.get("czas_max")),
+        q=search.clean(params.get("q")),
     )
 
 
@@ -162,6 +164,8 @@ def _label(filters: Filters, name: str) -> str:
     opts = options(filters)
     if name in opts:
         shown = next((o.label for o in opts[name] if o.value == value), "")
+    elif name == "q":
+        return _("szukaj: %(text)s") % {"text": value}
     elif name == "cena_max":
         return _("cena do %(n)s zł") % {"n": value}
     else:
@@ -194,7 +198,8 @@ def found_text(count: int) -> str:
 def notice_url(filters: Filters) -> str:
     """The "Opublikuj ogłoszenie" button: the notice page with the filters and the marker that
     tells the page it was opened from empty results (`catalog_notice_cta_clicked`)."""
-    return filters.url(base="/ogloszenia/nowe/", zrodlo=NOTICE_SOURCE)
+    # The typed text may be personal data: it does not travel into another page's URL.
+    return filters.without("q").url(base="/ogloszenia/nowe/", zrodlo=NOTICE_SOURCE)
 
 
 NOTICE_SOURCE = "katalog"
@@ -210,7 +215,11 @@ def record_search(filters: Filters, total: int, page_number: int) -> None:
     if not filters.active():
         return
     props = filters.event_properties()
-    analytics.track("catalog_searched", result_count=total, page=page_number, **props)
+    # The typed text itself is never recorded: only whether there was one and how many words.
+    text = (
+        {"text_query": True, "word_count": search.Query(filters.q).word_count} if filters.q else {}
+    )
+    analytics.track("catalog_searched", result_count=total, page=page_number, **props, **text)
     if total == 0:
         analytics.track("catalog_no_results", **props)
 

@@ -20,6 +20,7 @@ from apps.artists.models import Artist, ArtistType, Audience, Material, Material
 from apps.core.regions import Voivodeship
 
 from . import filters as filters_module
+from . import search
 from .filters import Filters
 from .models import CatalogEntry
 
@@ -76,6 +77,11 @@ def _values(artist: Artist, snapshot) -> dict:
         "price_from": _lowest_price(offers),
         "offers": offers,
         "published_at": snapshot.updated_at,
+        **search.index_terms(
+            data["name"],
+            [o.get("title", "") for o in data.get("offers", [])],
+            [t.get("name", "") for t in data.get("topics", [])],
+        ),
     }
 
 
@@ -218,7 +224,10 @@ def cards_page(raw_number: str | None, filters: Filters | None = None) -> CardsP
         raw_number = "1"
     if not (raw_number.isascii() and raw_number.isdigit() and len(raw_number) <= 9):
         return None
-    paginator = Paginator(filters_module.apply(public_entries(), filters or Filters()), PAGE_SIZE)
+    filters = filters or Filters()
+    narrowed = filters_module.apply(public_entries(), filters)
+    ranked = search.search(narrowed, filters.q) if filters.q else None
+    paginator = Paginator(narrowed if ranked is None else ranked, PAGE_SIZE)
     try:
         page = paginator.page(int(raw_number))
     except EmptyPage:

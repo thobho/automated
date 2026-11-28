@@ -81,6 +81,7 @@ services:
     environment: *app-env
     command: >
       sh -c "python manage.py migrate --noinput &&
+             python manage.py rebuild_catalog &&
              python manage.py ensure_buckets &&
              python manage.py collectstatic --noinput &&
              exec gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 2"
