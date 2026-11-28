@@ -51,10 +51,15 @@ prompt="$(cat "$RUNNER_DIR/agent/opencode-prompt.md")
 $(gh issue view "$num" --json body -q .body)"
 
 runlog="$RUNTIME/logs/opencode-$num-$(date -u +%Y%m%dT%H%M%SZ).log"
+# `--standalone` (a private server per run) exists only in newer OpenCode releases; 1.x runs its own local
+# server anyway and exits 1 on the unknown flag (#210). Add it only when the installed version knows it.
+oc_flags=(--auto)
+opencode run --help 2>&1 | grep -q -- '--standalone' && oc_flags=(--standalone --auto)
+log "opencode: $(opencode --version 2>/dev/null | head -1), flags ${oc_flags[*]}"
 start_usage="$(usage_now)"
 log "opencode: #$num starts ($model, budget \$$task_budget)"
 ( cd "$work" && OPENROUTER_API_KEY="$(cat "$keyfile")" OPENCODE_CONFIG="$RUNNER_DIR/agent/pirx/opencode.json" \
-    timeout "${OPENCODE_TIMEOUT_MIN:-40}m" opencode run --standalone --auto --model "$model" "$prompt" ) > "$runlog" 2>&1 &
+    timeout "${OPENCODE_TIMEOUT_MIN:-40}m" opencode run "${oc_flags[@]}" --model "$model" "$prompt" ) > "$runlog" 2>&1 &
 pid=$!
 killed=""
 while kill -0 "$pid" 2>/dev/null; do
@@ -89,7 +94,15 @@ why="exit $rc"; [[ -n "$killed" ]] && why="stopped at the task budget (\$$task_b
 [[ "$commits" -eq 0 ]] && why="$why, no commits"
 [[ -s "$body_file" ]] && head -1 "$body_file" | grep -q '^INCOMPLETE:' && why="$why, $(head -1 "$body_file" | cut -c1-200)"
 [[ "$commits" -gt 0 ]] && git -C "$work" push -q -u origin "$branch" 2>>"$runlog"   # keep partial work for the next run
-gh issue comment "$num" --body "❌ OpenCode run failed: $why (about \$$spent). Log on pirx: \`$runlog\`. <!-- automated:fail:pirx -->" >/dev/null
+# Last error-looking line of the log (ANSI codes stripped, secrets redacted), so the comment says why, not only "exit N".
+# CLI argument errors come first (the help text after them mentions "ERROR" as a log level), so check those first.
+errline="$(sed 's/\x1b\[[0-9;]*[A-Za-z]//g' "$runlog" 2>/dev/null | grep -m1 -iE '^(unknown argument|not enough arguments|error:)|^[^ ].*(unknown argument|user not found|unauthori|invalid api key)' \
+  | sed -E 's/(sk-[A-Za-z0-9_-]{8,}|Bearer +[A-Za-z0-9._-]+|(KEY|TOKEN|SECRET)[A-Za-z_]*[=:] *[^ ]+)/[redacted]/g' | cut -c1-300)"
+[[ -z "$errline" ]] && errline="$(sed 's/\x1b\[[0-9;]*[A-Za-z]//g' "$runlog" 2>/dev/null | grep -iE 'error|unknown|invalid|unauthori|denied|not found|failed' | grep -v -- '--log-level' | tail -1 \
+  | sed -E 's/(sk-[A-Za-z0-9_-]{8,}|Bearer +[A-Za-z0-9._-]+|(KEY|TOKEN|SECRET)[A-Za-z_]*[=:] *[^ ]+)/[redacted]/g' | cut -c1-300)"
+[[ -z "$errline" ]] && errline="$(sed 's/\x1b\[[0-9;]*[A-Za-z]//g' "$runlog" 2>/dev/null | grep -v '^[[:space:]]*$' | tail -1 | sed -E 's/(sk-[A-Za-z0-9_-]{8,}|Bearer +[A-Za-z0-9._-]+)/[redacted]/g' | cut -c1-300)"
+errmsg=""; [[ -n "$errline" ]] && errmsg=$'\n\nLast error line: `'"${errline//\`/\'}"'`'
+gh issue comment "$num" --body "❌ OpenCode run failed: $why (about \$$spent). Log on pirx: \`$runlog\`.$errmsg <!-- automated:fail:pirx -->" >/dev/null
 fails="$(fail_count "$num" pirx)"
 if [[ "$fails" -ge 2 ]]; then
   gh issue edit "$num" --remove-label model:pirx >/dev/null 2>&1
