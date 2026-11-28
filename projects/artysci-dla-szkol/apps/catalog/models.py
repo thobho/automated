@@ -76,6 +76,8 @@ class CatalogEntry(models.Model):
     price_from = models.PositiveIntegerField(null=True, blank=True)  # whole zł; None = no price
     offers = models.JSONField(default=list)  # [{"price": int | None, "duration": int | None}]
     published_at = models.DateTimeField()  # the last publication of the snapshot
+    # Profile completeness rounded down to tens (0-100), written with the row (US-4.4, D16).
+    completeness_bucket = models.PositiveSmallIntegerField(default=0)
     # Text search (US-4.3, `search.py`): stems without Polish letters, space-separated and padded.
     search_name = models.TextField(blank=True, default="")
     search_other = models.TextField(blank=True, default="")  # offer titles and topic names

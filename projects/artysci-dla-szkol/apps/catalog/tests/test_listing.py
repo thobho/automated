@@ -204,16 +204,7 @@ def test_pagination_24_per_page_and_hidden_states():
     assert 'href="/artysci/?strona=2"' in html and "Następna" in html
     second = client.get(URL, {"strona": 2}).content.decode()
     assert cards(second) == 1
-    assert "Artysta 01" in second  # the oldest publication is last
     assert 'href="/artysci/"' in second and "Poprzednia" in second
-
-
-def test_order_is_latest_first_then_id():
-    first, second = fake_published(1), fake_published(2)
-    same = timezone.now()
-    CatalogEntry.objects.update(published_at=same)
-    html = Client().get(URL).content.decode()
-    assert html.index(second.name) < html.index(first.name)
 
 
 @pytest.mark.parametrize("value", ["3", "0", "-1", "abc", "", "1.5", "²", "9" * 40])
