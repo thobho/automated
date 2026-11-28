@@ -151,6 +151,15 @@ class Query:
         return total
 
 
+def scored(entries, text: str) -> list[tuple[int, object]] | None:
+    """`(score, row)` of the rows matching any word of `text`, in the queryset order. None when the
+    text has no searchable word. The catalog order (D16) sorts on the score."""
+    query = Query(text)
+    if not query.terms:
+        return None
+    return [(query.score(e), e) for e in entries.filter(query.condition())]
+
+
 def search(entries, text: str) -> list | None:
     """Rows of the queryset matching any word of `text`, best first; ties keep the queryset order.
     None when the text has no searchable word (empty, or only function words): no search then."""

@@ -1105,3 +1105,13 @@ Added with T26: no new dependency; D106 (website import: SSRF-safe fetcher, limi
 PESEL and ID card numbers, contact data kept for the artist only).
 New dependencies or structural choices need a line in the decision log first
 (see [CLAUDE.md](CLAUDE.md)).
+
+## Catalog order (US-4.4, D16, D130)
+
+`/artysci/` lists artists in one order for everyone on a given Europe/Warsaw day: match (the `q`
+score, D129), then verified, then profile completeness in buckets of 10 points, then a daily
+shuffle (SHA-256 of the date and the artist id; no cookie, no stored randomness). Completeness is
+stored in `CatalogEntry.completeness_bucket` only when the page is published or "Opublikuj zmiany"
+is used; `rebuild_catalog` (every deploy) keeps the stored value, so draft edits move nobody. There is no boost, priority or paid field, by design. Code:
+`apps/catalog/ordering.py` and `listing.ranked_ids()`. Rows that existed before migration 0005 have
+bucket 0 until their artist next publishes.

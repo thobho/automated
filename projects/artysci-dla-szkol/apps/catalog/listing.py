@@ -20,7 +20,7 @@ from apps.artists.models import Artist, ArtistType, Audience, Material, Material
 from apps.core.regions import Voivodeship
 
 from . import filters as filters_module
-from . import search
+from . import ordering, search
 from .filters import Filters
 from .models import CatalogEntry
 
@@ -57,7 +57,7 @@ def _main_photo(data: dict) -> tuple[int | None, str]:
     return None, ""
 
 
-def _values(artist: Artist, snapshot) -> dict:
+def _values(artist: Artist, snapshot, bucket: int) -> dict:
     data = snapshot.data
     offers = [
         {"price": o.get("price_pln"), "duration": o.get("duration_minutes")}
@@ -77,6 +77,7 @@ def _values(artist: Artist, snapshot) -> dict:
         "price_from": _lowest_price(offers),
         "offers": offers,
         "published_at": snapshot.updated_at,
+        "completeness_bucket": bucket,
         **search.index_terms(
             data["name"],
             [o.get("title", "") for o in data.get("offers", [])],
@@ -85,9 +86,14 @@ def _values(artist: Artist, snapshot) -> dict:
     }
 
 
-def sync(artist: Artist) -> bool:
+def sync(artist: Artist, *, refresh_completeness: bool = False) -> bool:
     """Make the artist's row match the snapshot: written when the artist is publicly visible and
-    has a snapshot, removed otherwise. Returns whether a row exists afterwards."""
+    has a snapshot, removed otherwise. Returns whether a row exists afterwards.
+
+    The completeness bucket is taken from the live data only with `refresh_completeness` (publish,
+    "Opublikuj zmiany"). Otherwise (rebuild, deploy) an existing row keeps its stored bucket, so
+    draft edits never move the artist (D16, D130); a missing row gets it computed."""
+    from apps.profiles.completeness import completeness_percent
     from apps.profiles.models import PublishedPage
 
     with transaction.atomic():
@@ -97,7 +103,12 @@ def sync(artist: Artist) -> bool:
             CatalogEntry.objects.filter(artist_id=artist.pk).delete()
             return False
         artist = current
-        values = _values(artist, snapshot)
+        existing = CatalogEntry.objects.filter(artist_id=artist.pk).first()
+        if existing is not None and not refresh_completeness:
+            bucket = existing.completeness_bucket
+        else:
+            bucket = ordering.completeness_bucket(completeness_percent(artist))
+        values = _values(artist, snapshot, bucket)
         # Slugs are never reused; still clear a stale row holding it so the unique index is safe.
         CatalogEntry.objects.filter(slug=values["slug"]).exclude(artist_id=artist.pk).delete()
         CatalogEntry.objects.update_or_create(artist=artist, defaults=values)
@@ -211,10 +222,34 @@ def _card(entry: CatalogEntry, photos: dict) -> Card:
 
 
 def public_entries():
-    """Rows of the publicly visible artists, in the temporary order: the latest publication first,
-    then the highest id (stable across pages). D16 ordering comes with US-4.4."""
-    entries = CatalogEntry.objects.filter(artist__in=Artist.objects.published())
-    return entries.select_related("artist").order_by("-published_at", "-id")
+    """Rows of the publicly visible artists (unordered: `ranked_ids` gives the D16 order)."""
+    return CatalogEntry.objects.filter(artist__in=Artist.objects.published())
+
+
+def ranked_ids(narrowed, text: str = "") -> list[int]:
+    """Row ids in the D16 order of today (Warsaw): match, verified, completeness, daily shuffle
+    (`ordering.py`). With a searchable `text` only the matching rows are listed."""
+    day = ordering.today()
+    scored = search.scored(narrowed, text) if text else None
+    if scored is None:
+        scored = [
+            (0, row)
+            for row in narrowed.only("id", "artist_id", "completeness_bucket").order_by("id")
+        ]
+    keyed = sorted(
+        (
+            ordering.order_key(
+                score=score,
+                verified=is_verified(row.artist_id),
+                bucket=row.completeness_bucket,
+                artist_id=row.artist_id,
+                day=day,
+            ),
+            row.pk,
+        )
+        for score, row in scored
+    )
+    return [pk for _, pk in keyed]
 
 
 def cards_page(raw_number: str | None, filters: Filters | None = None) -> CardsPage | None:
@@ -226,13 +261,13 @@ def cards_page(raw_number: str | None, filters: Filters | None = None) -> CardsP
         return None
     filters = filters or Filters()
     narrowed = filters_module.apply(public_entries(), filters)
-    ranked = search.search(narrowed, filters.q) if filters.q else None
-    paginator = Paginator(narrowed if ranked is None else ranked, PAGE_SIZE)
+    paginator = Paginator(ranked_ids(narrowed, filters.q), PAGE_SIZE)
     try:
         page = paginator.page(int(raw_number))
     except EmptyPage:
         return None
-    entries = list(page.object_list)
+    rows = CatalogEntry.objects.select_related("artist").in_bulk(page.object_list)
+    entries = [rows[pk] for pk in page.object_list if pk in rows]
     photos = _photos(entries)
     return CardsPage(
         cards=[_card(entry, photos) for entry in entries],
