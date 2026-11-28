@@ -244,7 +244,7 @@ def publish(artist: Artist, actor=None) -> Artist:
         artist.published_at = timezone.now()
         artist.withdrawn_at = None
         artist.save(update_fields=["publication_status", "published_at", "withdrawn_at"])
-        listing.sync(artist)
+        listing.sync(artist, refresh_completeness=True)
         props = {"profile_id": artist.pk, "completeness_percent": completeness_percent(artist)}
         analytics.track("profile_published", actor=actor, obj=artist, **props)
     return artist
@@ -258,7 +258,7 @@ def update_published(artist: Artist) -> Artist:
         if artist.publication_status != PublicationStatus.PUBLISHED:
             raise PublicationRefused(_("Strona nie jest opublikowana."))
         _save_snapshot(artist, _ready_draft(artist))
-        listing.sync(artist)
+        listing.sync(artist, refresh_completeness=True)
     return artist
 
 

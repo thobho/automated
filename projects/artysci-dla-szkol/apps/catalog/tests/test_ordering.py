@@ -156,20 +156,36 @@ def test_completeness_moves_only_after_publishing_changes():
 
     artist = publication.publish(make_ready("kompletnosc@example.invalid"))
     before = CatalogEntry.objects.get(artist=artist).completeness_bucket
-    add_material(artist, MaterialKind.PHOTO, storage_key="p/9.jpg", alt_text="Scena")
+    add_material(
+        artist, MaterialKind.PHOTO, storage_key="p/9.jpg", alt_text="Scena", checks_version=1
+    )
     assert CatalogEntry.objects.get(artist=artist).completeness_bucket == before  # draft only
     publication.update_published(artist)
-    assert CatalogEntry.objects.get(artist=artist).completeness_bucket >= before
+    assert CatalogEntry.objects.get(artist=artist).completeness_bucket > before
     assert CatalogEntry.objects.get(artist=artist).completeness_bucket % 10 == 0
 
 
-def test_rebuild_writes_the_bucket():
+def test_rebuild_computes_the_bucket_of_a_missing_row():
     from apps.profiles.tests.test_publication import make_ready
 
     artist = publication.publish(make_ready("przebudowa@example.invalid"))
-    CatalogEntry.objects.filter(artist=artist).update(completeness_bucket=0)
+    CatalogEntry.objects.filter(artist=artist).delete()
     listing.rebuild_all()
     assert CatalogEntry.objects.get(artist=artist).completeness_bucket > 0
+
+
+def test_rebuild_keeps_the_published_bucket_after_a_draft_edit():
+    from apps.profiles.tests.test_publication import make_ready
+
+    artist = publication.publish(make_ready("deploy@example.invalid"))
+    before = CatalogEntry.objects.get(artist=artist).completeness_bucket
+    position = listing.ranked_ids(listing.public_entries())
+    add_material(
+        artist, MaterialKind.PHOTO, storage_key="p/10.jpg", alt_text="Scena", checks_version=1
+    )
+    listing.rebuild_all()  # what every deploy does
+    assert CatalogEntry.objects.get(artist=artist).completeness_bucket == before
+    assert listing.ranked_ids(listing.public_entries()) == position
 
 
 # --- no paid boosts --------------------------------------------------------------------------

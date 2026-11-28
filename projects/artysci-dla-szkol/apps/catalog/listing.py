@@ -57,9 +57,7 @@ def _main_photo(data: dict) -> tuple[int | None, str]:
     return None, ""
 
 
-def _values(artist: Artist, snapshot) -> dict:
-    from apps.profiles.completeness import completeness_percent
-
+def _values(artist: Artist, snapshot, bucket: int) -> dict:
     data = snapshot.data
     offers = [
         {"price": o.get("price_pln"), "duration": o.get("duration_minutes")}
@@ -79,9 +77,7 @@ def _values(artist: Artist, snapshot) -> dict:
         "price_from": _lowest_price(offers),
         "offers": offers,
         "published_at": snapshot.updated_at,
-        # Taken when the row is written (publish, "Opublikuj zmiany", rebuild), so draft edits
-        # do not move the artist in the order (D16).
-        "completeness_bucket": ordering.completeness_bucket(completeness_percent(artist)),
+        "completeness_bucket": bucket,
         **search.index_terms(
             data["name"],
             [o.get("title", "") for o in data.get("offers", [])],
@@ -90,9 +86,14 @@ def _values(artist: Artist, snapshot) -> dict:
     }
 
 
-def sync(artist: Artist) -> bool:
+def sync(artist: Artist, *, refresh_completeness: bool = False) -> bool:
     """Make the artist's row match the snapshot: written when the artist is publicly visible and
-    has a snapshot, removed otherwise. Returns whether a row exists afterwards."""
+    has a snapshot, removed otherwise. Returns whether a row exists afterwards.
+
+    The completeness bucket is taken from the live data only with `refresh_completeness` (publish,
+    "Opublikuj zmiany"). Otherwise (rebuild, deploy) an existing row keeps its stored bucket, so
+    draft edits never move the artist (D16, D130); a missing row gets it computed."""
+    from apps.profiles.completeness import completeness_percent
     from apps.profiles.models import PublishedPage
 
     with transaction.atomic():
@@ -102,7 +103,12 @@ def sync(artist: Artist) -> bool:
             CatalogEntry.objects.filter(artist_id=artist.pk).delete()
             return False
         artist = current
-        values = _values(artist, snapshot)
+        existing = CatalogEntry.objects.filter(artist_id=artist.pk).first()
+        if existing is not None and not refresh_completeness:
+            bucket = existing.completeness_bucket
+        else:
+            bucket = ordering.completeness_bucket(completeness_percent(artist))
+        values = _values(artist, snapshot, bucket)
         # Slugs are never reused; still clear a stale row holding it so the unique index is safe.
         CatalogEntry.objects.filter(slug=values["slug"]).exclude(artist_id=artist.pk).delete()
         CatalogEntry.objects.update_or_create(artist=artist, defaults=values)

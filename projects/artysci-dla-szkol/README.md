@@ -1111,7 +1111,7 @@ New dependencies or structural choices need a line in the decision log first
 `/artysci/` lists artists in one order for everyone on a given Europe/Warsaw day: match (the `q`
 score, D129), then verified, then profile completeness in buckets of 10 points, then a daily
 shuffle (SHA-256 of the date and the artist id; no cookie, no stored randomness). Completeness is
-stored in `CatalogEntry.completeness_bucket` when the row is written, so draft edits move nobody
-until "Opublikuj zmiany". There is no boost, priority or paid field, by design. Code:
-`apps/catalog/ordering.py` and `listing.ranked_ids()`. After `migrate`, `manage.py rebuild_catalog`
-fills the buckets of existing rows.
+stored in `CatalogEntry.completeness_bucket` only when the page is published or "Opublikuj zmiany"
+is used; `rebuild_catalog` (every deploy) keeps the stored value, so draft edits move nobody. There is no boost, priority or paid field, by design. Code:
+`apps/catalog/ordering.py` and `listing.ranked_ids()`. Rows that existed before migration 0005 have
+bucket 0 until their artist next publishes.
