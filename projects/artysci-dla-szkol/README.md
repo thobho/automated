@@ -1043,8 +1043,8 @@ What the page and its preview guarantee, and where it is tested:
   and offer prices/durations are part of the snapshot since T52, so a change shows after "Opublikuj
   zmiany"; an older snapshot gives a row without them.
 - `listing.sync` runs inside publish and "Opublikuj zmiany"; `listing.remove` on withdrawal. The list also
-  asks `Artist.objects.published()`, so a deactivated account disappears at once. After restoring data or
-  deploying: `uv run python manage.py rebuild_catalog` (idempotent; also drops stale rows).
+  asks `Artist.objects.published()`, so a deactivated account disappears at once. After restoring data:
+  `uv run python manage.py rebuild_catalog` (idempotent; also drops stale rows).
 - The badge "zweryfikowany" depends on `listing.is_verified()`, which returns False until US-8.3.
 
 ### Catalog filters (US-4.2)
@@ -1066,6 +1066,23 @@ Unknown values and non-numbers are ignored ("dowolny") and never shown back. No 
 a link per active filter that drops only it, "Wyczyść filtry" and the button to `/ogloszenia/nowe/` (a
 "wkrótce" placeholder until US-6.1) with the same filters and `zrodlo=katalog`. Events: `catalog_searched`,
 `catalog_no_results`, `catalog_notice_cta_clicked`. Code: `apps/catalog/filters.py`.
+
+### Catalog text search (US-4.3, D129)
+
+The "Szukaj" field (`q`, at most 100 characters) on `/artysci/` finds artists by name, published offer
+titles and topic names. It combines with the filters (AND), is kept by every pagination link, and
+works without JavaScript. Polish inflection ("hejcie" finds "Cena hejtu"), missing Polish letters
+("uzaleznieniach") and one typo in words of 5+ letters ("kerda" finds "Kreda") are handled; function
+words ("o", "w", "na", "dla", "i") are ignored. Any word may match (OR); results are ordered by match
+quality (name, then offer or topic, then typo-only), ties keep the normal order.
+
+How: no external service and no new dependency (D91). The read model stores stems without Polish letters
+(`search_name`, `search_other`, `search_fuzzy` on `CatalogEntry`), written with the row on publish, "Opublikuj
+zmiany", withdrawal and `rebuild_catalog`. On PostgreSQL migration 0004 enables `pg_trgm` and adds GIN indexes
+on those columns. `make deploy-pirx` and the compose `web` service run `rebuild_catalog` right after `migrate`, so rows that
+existed before migration 0004 get their search columns without a manual step. The typed text is never logged, never stored in analytics (only
+`text_query` and `word_count` on `catalog_searched`) and never copied into the notice page link. Code:
+`apps/catalog/search.py`.
 
 ## Decision log
 

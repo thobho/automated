@@ -432,6 +432,13 @@ read model in code (no raw SQL, no user text in queries). The analytics events c
 values and numbers (no IP, user id or e-mail; the actor is empty). `/ogloszenia/nowe/` is a public GET-only
 placeholder that reads no data.
 
+Text search (US-4.3, D129): `q` is free text, so it is the one reflected input of the catalog. It is cut to
+100 characters, reduced to `[a-z0-9]` words (at most 8) before it reaches the database (ORM `contains`
+lookups, no raw SQL, so no injection and no LIKE wildcard), and shown back only through Django autoescaping
+(a test posts `<script>`). Because it may hold personal data it is never logged (the access log records the
+path without the query string), never stored in an analytics event (`catalog_searched` gets only
+`text_query` and `word_count`) and not passed on to the notice page link.
+
 ## Reporting a vulnerability
 
 Open a private security advisory on the GitHub repository, or contact the owner directly. Do not

@@ -1,5 +1,9 @@
 {% load i18n %}
 <form class="catalog-filters" method="get" action="{% url 'catalog:list' %}" aria-label="{% translate 'Filtry katalogu' %}">
+  <div class="catalog-filters__field catalog-filters__field--search">
+    <label for="f-q">{% translate "Szukaj" %}</label>
+    <input id="f-q" name="q" type="search" maxlength="100" autocomplete="off" placeholder="{% translate 'np. spektakl o hejcie' %}" value="{{ filters.q }}">
+  </div>
   <div class="catalog-filters__field">
     <label for="f-wojewodztwo">{% translate "Województwo" %}</label>
     <select id="f-wojewodztwo" name="wojewodztwo">

@@ -24,7 +24,8 @@ EVENT_CATALOG: dict[str, frozenset[str]] = {
     "offer_accepted": frozenset({"inquiry_id", "response_hours"}),
     "performance_confirmed": frozenset({"inquiry_id"}),
     # US-4.2: closed-list filter values and whole numbers only, never free text.
-    "catalog_searched": frozenset(_FILTERS | {"result_count", "page"}),
+    # US-4.3: a flag and a word count for the typed text, never the text.
+    "catalog_searched": frozenset(_FILTERS | {"result_count", "page", "text_query", "word_count"}),
     "catalog_no_results": frozenset(_FILTERS),
     "catalog_notice_cta_clicked": frozenset(_FILTERS),
     "notice_published": frozenset({"notice_id"}),
