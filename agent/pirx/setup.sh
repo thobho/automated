@@ -8,7 +8,7 @@
 #     depends on which branch the shared checkout is on;
 #   - the slot lock in ~/.config/automated/ with PIRX_SLOTS slots (2 since the RAM upgrade to 11 GB; 1 on the old 4 GB);
 #   - ~/.config/automated/pirx.env with defaults (kept if it exists);
-#   - systemd user timers: dispatcher (:07), OpenCode worker (:17), health page (:05/:35), healer (:20/:50)
+#   - systemd user timers: dispatcher (:07), OpenCode worker (:17, :37, :57), health page (:05/:35), healer (:20/:50)
 #     and the daily report (07:45 Warsaw).
 # The owner's side (sending the report via Hermes) is installed separately, see agent/pirx/README.md.
 set -euo pipefail
