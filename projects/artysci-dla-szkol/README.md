@@ -1045,6 +1045,8 @@ What the page and its preview guarantee, and where it is tested:
 - `listing.sync` runs inside publish and "Opublikuj zmiany"; `listing.remove` on withdrawal. The list also
   asks `Artist.objects.published()`, so a deactivated account disappears at once. After restoring data:
   `uv run python manage.py rebuild_catalog` (idempotent; also drops stale rows).
+- Load-test data (dev/test only): `uv run python manage.py catalog_fake_entries --count 200` (`--seed`
+  defaults to 0; `--delete` removes only the synthetic `fake-*@example.invalid` users and their rows).
 - The badge "zweryfikowany" depends on `listing.is_verified()`, which returns False until US-8.3.
 
 ### Catalog filters (US-4.2)
